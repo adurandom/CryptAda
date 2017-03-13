@@ -120,7 +120,7 @@ package CryptAda.Names is
    type Random_Generator_Id is
       (
          RG_NONE,                -- No random generator.
-         RG_CryptAda,            -- CryptAda experimental PRNG.
+         RG_CAPRNG,              -- CryptAda experimental PRNG.
          RG_RSAREF               -- RSA Ref RPRNG.
       );
 

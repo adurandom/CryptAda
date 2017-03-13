@@ -39,11 +39,12 @@ PRAGMADIR   =  $(SRCDIR)/pragmatics
 UTILSDIR    =  $(SRCDIR)/utils
 ENCSDIR     =  $(SRCDIR)/encoders
 DIGDIR      =  $(SRCDIR)/digests
+RNDDIR      =  $(SRCDIR)/random
 
 #>>>[Compilation]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 ADACC       =  gnatmake -c 
-SOURCEDIRS  =  -I$(BASEDIR)/ -I$(NAMESDIR)/ -I$(PRAGMADIR)/ -I$(ENCSDIR)/ -I$(DIGDIR)/
+SOURCEDIRS  =  -I$(BASEDIR)/ -I$(NAMESDIR)/ -I$(PRAGMADIR)/ -I$(ENCSDIR)/ -I$(DIGDIR)/ -I$(RNDDIR)/
 CFLAGS      =  $(SOURCEDIRS) -D $(OBJDIR) -O3 -gnat05 -gnata -gnatn -gnatwa
 
 #>>>[Delete command]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -88,7 +89,11 @@ OBJS     =  cryptada.o \
             cryptada-digests-algorithms-snefru.o \
             cryptada-digests-algorithms-tiger.o \
             cryptada-digests-algorithms-haval.o \
-            cryptada-digests-algorithms-whirlpool.o 
+            cryptada-digests-algorithms-whirlpool.o \
+            cryptada-random.o \
+            cryptada-random-generators.o \
+            cryptada-random-generators-rsaref.o \
+            cryptada-random-generators-caprng.o 
 
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -245,6 +250,24 @@ cryptada-digests-algorithms-haval.o: $(DIGDIR)/cryptada-digests-algorithms-haval
 	$(ADACC) $(CFLAGS) $<
 
 cryptada-digests-algorithms-whirlpool.o: $(DIGDIR)/cryptada-digests-algorithms-whirlpool.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+# Random packages
+
+cryptada-random.o: $(RNDDIR)/cryptada-random.ads
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-random-generators.o: $(RNDDIR)/cryptada-random-generators.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-random-generators-rsaref.o: $(RNDDIR)/cryptada-random-generators-rsaref.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-random-generators-caprng.o: $(RNDDIR)/cryptada-random-generators-caprng.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
     
