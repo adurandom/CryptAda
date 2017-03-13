@@ -77,7 +77,16 @@ UNITDRV  =  $(TBIN)/ut_utils.exe \
             $(TBIN)/ut_b64enc.exe \
             $(TBIN)/ut_mimeenc.exe \
             $(TBIN)/ut_count.exe \
-            $(TBIN)/ut_md2.exe
+            $(TBIN)/ut_md2.exe \
+            $(TBIN)/ut_md4.exe \
+            $(TBIN)/ut_md5.exe \
+            $(TBIN)/ut_ripemd_128.exe \
+            $(TBIN)/ut_ripemd_160.exe \
+            $(TBIN)/ut_sha_1.exe \
+            $(TBIN)/ut_sha_224.exe \
+            $(TBIN)/ut_sha_256.exe \
+            $(TBIN)/ut_sha_384.exe \
+            $(TBIN)/ut_sha_512.exe
             
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -118,6 +127,42 @@ $(TBIN)/ut_count.exe: $(TSRCUDRV)ut_count.adb
 	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
 
 $(TBIN)/ut_md2.exe: $(TSRCUDRV)ut_md2.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_md4.exe: $(TSRCUDRV)ut_md4.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_md5.exe: $(TSRCUDRV)ut_md5.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_ripemd_128.exe: $(TSRCUDRV)ut_ripemd_128.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_ripemd_160.exe: $(TSRCUDRV)ut_ripemd_160.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_sha_1.exe: $(TSRCUDRV)ut_sha_1.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_sha_224.exe: $(TSRCUDRV)ut_sha_224.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_sha_256.exe: $(TSRCUDRV)ut_sha_256.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_sha_384.exe: $(TSRCUDRV)ut_sha_384.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_sha_512.exe: $(TSRCUDRV)ut_sha_512.adb
 	@echo Building $<
 	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
     
