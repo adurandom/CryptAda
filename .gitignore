@@ -1,0 +1,4 @@
+*.ali
+obj/cryptada-encoders-base16_encoders.o
+*.o
+*.exe
