@@ -1,0 +1,2007 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.1.a (2017/03/31)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Tiger
+Description              : Unit test driver for CryptAda.Digests.Algorithms.Tiger functionality.
+Started                  : 2017/03/13 - 16:50:56
+================================================================================
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : CryptAda message digest basic operation
+Started         : 2017/03/13 - 16:50:56
+--------------------------------------------------------------------------------
+[I] Tiger digest parameters:
+    Passes                        : " 3"
+    Hash size id                  : "TIGER_128"
+[I] Digest object information before Digest_Start()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_192_4"
+    Digest algorithm SCAN name    : "Tiger(24,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Passes                        :  4
+    Hash size id                  : TIGER_192
+[I] Digest object information after Digest_Start()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_128_3"
+    Digest algorithm SCAN name    : "Tiger(16,3)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  16
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  16
+    Processed bit count           : ( 0,  0)
+    Passes                        :  3
+    Hash size id                  : TIGER_128
+[I] Digesting string              : "CryptAda By TCantos Software"
+[I] Digest object information after Digest()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_128_3"
+    Digest algorithm SCAN name    : "Tiger(16,3)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  16
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  16
+    Processed bit count           : ( 224,  0)
+    Passes                        :  3
+    Hash size id                  : TIGER_128
+[I] Ending digest processing and obtaining hash
+    Obtained hash                 : "679c01c3c8da712720faaa4322d973d4"
+[I] Digest object information after Digest_End()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_192_4"
+    Digest algorithm SCAN name    : "Tiger(24,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Passes                        :  4
+    Hash size id                  : TIGER_192
+[I] Tiger digest parameters:
+    Passes                        : " 3"
+    Hash size id                  : "TIGER_160"
+[I] Digest object information before Digest_Start()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_192_4"
+    Digest algorithm SCAN name    : "Tiger(24,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Passes                        :  4
+    Hash size id                  : TIGER_192
+[I] Digest object information after Digest_Start()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_160_3"
+    Digest algorithm SCAN name    : "Tiger(20,3)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  20
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  20
+    Processed bit count           : ( 0,  0)
+    Passes                        :  3
+    Hash size id                  : TIGER_160
+[I] Digesting string              : "CryptAda By TCantos Software"
+[I] Digest object information after Digest()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_160_3"
+    Digest algorithm SCAN name    : "Tiger(20,3)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  20
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  20
+    Processed bit count           : ( 224,  0)
+    Passes                        :  3
+    Hash size id                  : TIGER_160
+[I] Ending digest processing and obtaining hash
+    Obtained hash                 : "679c01c3c8da712720faaa4322d973d441140399"
+[I] Digest object information after Digest_End()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_192_4"
+    Digest algorithm SCAN name    : "Tiger(24,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Passes                        :  4
+    Hash size id                  : TIGER_192
+[I] Tiger digest parameters:
+    Passes                        : " 3"
+    Hash size id                  : "TIGER_192"
+[I] Digest object information before Digest_Start()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_192_4"
+    Digest algorithm SCAN name    : "Tiger(24,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Passes                        :  4
+    Hash size id                  : TIGER_192
+[I] Digest object information after Digest_Start()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_192_3"
+    Digest algorithm SCAN name    : "Tiger(24,3)"
+    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.11591.12.2"
+    Digest algorithm OpenPGP name : "OpenPGP.Digest.6"
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Passes                        :  3
+    Hash size id                  : TIGER_192
+[I] Digesting string              : "CryptAda By TCantos Software"
+[I] Digest object information after Digest()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_192_3"
+    Digest algorithm SCAN name    : "Tiger(24,3)"
+    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.11591.12.2"
+    Digest algorithm OpenPGP name : "OpenPGP.Digest.6"
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 224,  0)
+    Passes                        :  3
+    Hash size id                  : TIGER_192
+[I] Ending digest processing and obtaining hash
+    Obtained hash                 : "679c01c3c8da712720faaa4322d973d441140399071275d9"
+[I] Digest object information after Digest_End()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_192_4"
+    Digest algorithm SCAN name    : "Tiger(24,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Passes                        :  4
+    Hash size id                  : TIGER_192
+[I] Tiger digest parameters:
+    Passes                        : " 4"
+    Hash size id                  : "TIGER_128"
+[I] Digest object information before Digest_Start()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_192_4"
+    Digest algorithm SCAN name    : "Tiger(24,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Passes                        :  4
+    Hash size id                  : TIGER_192
+[I] Digest object information after Digest_Start()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_128_4"
+    Digest algorithm SCAN name    : "Tiger(16,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  16
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  16
+    Processed bit count           : ( 0,  0)
+    Passes                        :  4
+    Hash size id                  : TIGER_128
+[I] Digesting string              : "CryptAda By TCantos Software"
+[I] Digest object information after Digest()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_128_4"
+    Digest algorithm SCAN name    : "Tiger(16,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  16
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  16
+    Processed bit count           : ( 224,  0)
+    Passes                        :  4
+    Hash size id                  : TIGER_128
+[I] Ending digest processing and obtaining hash
+    Obtained hash                 : "e2b4e265d4357bc1f03d8b4d5e18fc9d"
+[I] Digest object information after Digest_End()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_192_4"
+    Digest algorithm SCAN name    : "Tiger(24,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Passes                        :  4
+    Hash size id                  : TIGER_192
+[I] Tiger digest parameters:
+    Passes                        : " 4"
+    Hash size id                  : "TIGER_160"
+[I] Digest object information before Digest_Start()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_192_4"
+    Digest algorithm SCAN name    : "Tiger(24,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Passes                        :  4
+    Hash size id                  : TIGER_192
+[I] Digest object information after Digest_Start()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_160_4"
+    Digest algorithm SCAN name    : "Tiger(20,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  20
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  20
+    Processed bit count           : ( 0,  0)
+    Passes                        :  4
+    Hash size id                  : TIGER_160
+[I] Digesting string              : "CryptAda By TCantos Software"
+[I] Digest object information after Digest()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_160_4"
+    Digest algorithm SCAN name    : "Tiger(20,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  20
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  20
+    Processed bit count           : ( 224,  0)
+    Passes                        :  4
+    Hash size id                  : TIGER_160
+[I] Ending digest processing and obtaining hash
+    Obtained hash                 : "e2b4e265d4357bc1f03d8b4d5e18fc9d7449cd7d"
+[I] Digest object information after Digest_End()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_192_4"
+    Digest algorithm SCAN name    : "Tiger(24,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Passes                        :  4
+    Hash size id                  : TIGER_192
+[I] Tiger digest parameters:
+    Passes                        : " 4"
+    Hash size id                  : "TIGER_192"
+[I] Digest object information before Digest_Start()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_192_4"
+    Digest algorithm SCAN name    : "Tiger(24,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Passes                        :  4
+    Hash size id                  : TIGER_192
+[I] Digest object information after Digest_Start()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_192_4"
+    Digest algorithm SCAN name    : "Tiger(24,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Passes                        :  4
+    Hash size id                  : TIGER_192
+[I] Digesting string              : "CryptAda By TCantos Software"
+[I] Digest object information after Digest()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_192_4"
+    Digest algorithm SCAN name    : "Tiger(24,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 224,  0)
+    Passes                        :  4
+    Hash size id                  : TIGER_192
+[I] Ending digest processing and obtaining hash
+    Obtained hash                 : "e2b4e265d4357bc1f03d8b4d5e18fc9d7449cd7d276c0382"
+[I] Digest object information after Digest_End()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_192_4"
+    Digest algorithm SCAN name    : "Tiger(24,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Passes                        :  4
+    Hash size id                  : TIGER_192
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/03/13 - 16:50:56
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Standard Tiger test vectors (192-bit, 3 passes)
+Started         : 2017/03/13 - 16:50:56
+--------------------------------------------------------------------------------
+[I] Using test vectors obtained from http://www.cs.technion.ac.il/~biham/Reports/Tiger/test-vectors-nessie-format.dat
+    Number of vectors to test:  8
+[I] Computing hash for a test vector:
+    Vector string                 : ""
+    Vector length                 :  0
+    Vector array                  : 
+
+[I] Digest results
+    Expected bit count (Low, High): ( 0,  0)
+    Obtained bit count (Low, High): ( 0,  0)
+    Expected hash (String)        : "3293ac630c13f0245f92bbb1766e16167a4e58492dde73f3"
+    Obtained hash (String)        : "3293ac630c13f0245f92bbb1766e16167a4e58492dde73f3"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 test passed.
+[I] Computing hash for a test vector:
+    Vector string                 : "a"
+    Vector length                 :  1
+    Vector array                  : 
+16#61#
+[I] Digest results
+    Expected bit count (Low, High): ( 8,  0)
+    Obtained bit count (Low, High): ( 8,  0)
+    Expected hash (String)        : "77befbef2e7ef8ab2ec8f93bf587a7fc613e247f5f247809"
+    Obtained hash (String)        : "77befbef2e7ef8ab2ec8f93bf587a7fc613e247f5f247809"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 test passed.
+[I] Computing hash for a test vector:
+    Vector string                 : "abc"
+    Vector length                 :  3
+    Vector array                  : 
+16#61#, 16#62#, 16#63#
+[I] Digest results
+    Expected bit count (Low, High): ( 24,  0)
+    Obtained bit count (Low, High): ( 24,  0)
+    Expected hash (String)        : "2aab1484e8c158f2bfb8c5ff41b57a525129131c957b5f93"
+    Obtained hash (String)        : "2aab1484e8c158f2bfb8c5ff41b57a525129131c957b5f93"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 test passed.
+[I] Computing hash for a test vector:
+    Vector string                 : "message digest"
+    Vector length                 :  14
+    Vector array                  : 
+16#6D#, 16#65#, 16#73#, 16#73#, 16#61#, 16#67#, 16#65#, 16#20#, 16#64#, 16#69#, 
+16#67#, 16#65#, 16#73#, 16#74#
+[I] Digest results
+    Expected bit count (Low, High): ( 112,  0)
+    Obtained bit count (Low, High): ( 112,  0)
+    Expected hash (String)        : "d981f8cb78201a950dcf3048751e441c517fca1aa55a29f6"
+    Obtained hash (String)        : "d981f8cb78201a950dcf3048751e441c517fca1aa55a29f6"
+[I] Counters match
+[I] Hashes match
+[I] Vector  4 test passed.
+[I] Computing hash for a test vector:
+    Vector string                 : "abcdefghijklmnopqrstuvwxyz"
+    Vector length                 :  26
+    Vector array                  : 
+16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 
+16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 
+16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#
+[I] Digest results
+    Expected bit count (Low, High): ( 208,  0)
+    Obtained bit count (Low, High): ( 208,  0)
+    Expected hash (String)        : "1714a472eee57d30040412bfcc55032a0b11602ff37beee9"
+    Obtained hash (String)        : "1714a472eee57d30040412bfcc55032a0b11602ff37beee9"
+[I] Counters match
+[I] Hashes match
+[I] Vector  5 test passed.
+[I] Computing hash for a test vector:
+    Vector string                 : "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq"
+    Vector length                 :  56
+    Vector array                  : 
+16#61#, 16#62#, 16#63#, 16#64#, 16#62#, 16#63#, 16#64#, 16#65#, 16#63#, 16#64#, 
+16#65#, 16#66#, 16#64#, 16#65#, 16#66#, 16#67#, 16#65#, 16#66#, 16#67#, 16#68#, 
+16#66#, 16#67#, 16#68#, 16#69#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#68#, 16#69#, 
+16#6A#, 16#6B#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 
+16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 16#6D#, 16#6E#, 
+16#6F#, 16#70#, 16#6E#, 16#6F#, 16#70#, 16#71#
+[I] Digest results
+    Expected bit count (Low, High): ( 448,  0)
+    Obtained bit count (Low, High): ( 448,  0)
+    Expected hash (String)        : "0f7bf9a19b9c58f2b7610df7e84f0ac3a71c631e7b53f78e"
+    Obtained hash (String)        : "0f7bf9a19b9c58f2b7610df7e84f0ac3a71c631e7b53f78e"
+[I] Counters match
+[I] Hashes match
+[I] Vector  6 test passed.
+[I] Computing hash for a test vector:
+    Vector string                 : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    Vector length                 :  62
+    Vector array                  : 
+16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 
+16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 
+16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#61#, 16#62#, 16#63#, 16#64#, 
+16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 
+16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 
+16#79#, 16#7A#, 16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 
+16#38#, 16#39#
+[I] Digest results
+    Expected bit count (Low, High): ( 496,  0)
+    Obtained bit count (Low, High): ( 496,  0)
+    Expected hash (String)        : "8dcea680a17583ee502ba38a3c368651890ffbccdc49a8cc"
+    Obtained hash (String)        : "8dcea680a17583ee502ba38a3c368651890ffbccdc49a8cc"
+[I] Counters match
+[I] Hashes match
+[I] Vector  7 test passed.
+[I] Computing hash for a test vector:
+    Vector string                 : "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
+    Vector length                 :  80
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#
+[I] Digest results
+    Expected bit count (Low, High): ( 640,  0)
+    Obtained bit count (Low, High): ( 640,  0)
+    Expected hash (String)        : "1c14795529fd9f207a958f84c52f11e887fa0cabdfd91bfd"
+    Obtained hash (String)        : "1c14795529fd9f207a958f84c52f11e887fa0cabdfd91bfd"
+[I] Counters match
+[I] Hashes match
+[I] Vector  8 test passed.
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/03/13 - 16:50:56
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : CryptAda Tiger (128-bit, 3 passes) test vectors
+Started         : 2017/03/13 - 16:50:56
+--------------------------------------------------------------------------------
+[I] Obtained hashes are checked against values obtained by using several online tools
+    Number of vectors to test:  9
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_128_3
+    Test vector index             :  1
+    Vector string                 : ""
+    Vector length                 :  0
+    Vector array                  : 
+
+[I] Digest results for vector     :  1
+    Expected bit count (Low, High): ( 0,  0)
+    Obtained bit count (Low, High): ( 0,  0)
+    Expected hash (String)        : "3293ac630c13f0245f92bbb1766e1616"
+    Obtained hash (String)        : "3293ac630c13f0245f92bbb1766e1616"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_128_3
+    Test vector index             :  2
+    Vector string                 : "a"
+    Vector length                 :  1
+    Vector array                  : 
+16#61#
+[I] Digest results for vector     :  2
+    Expected bit count (Low, High): ( 8,  0)
+    Obtained bit count (Low, High): ( 8,  0)
+    Expected hash (String)        : "77befbef2e7ef8ab2ec8f93bf587a7fc"
+    Obtained hash (String)        : "77befbef2e7ef8ab2ec8f93bf587a7fc"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_128_3
+    Test vector index             :  3
+    Vector string                 : "abc"
+    Vector length                 :  3
+    Vector array                  : 
+16#61#, 16#62#, 16#63#
+[I] Digest results for vector     :  3
+    Expected bit count (Low, High): ( 24,  0)
+    Obtained bit count (Low, High): ( 24,  0)
+    Expected hash (String)        : "2aab1484e8c158f2bfb8c5ff41b57a52"
+    Obtained hash (String)        : "2aab1484e8c158f2bfb8c5ff41b57a52"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_128_3
+    Test vector index             :  4
+    Vector string                 : "message digest"
+    Vector length                 :  14
+    Vector array                  : 
+16#6D#, 16#65#, 16#73#, 16#73#, 16#61#, 16#67#, 16#65#, 16#20#, 16#64#, 16#69#, 
+16#67#, 16#65#, 16#73#, 16#74#
+[I] Digest results for vector     :  4
+    Expected bit count (Low, High): ( 112,  0)
+    Obtained bit count (Low, High): ( 112,  0)
+    Expected hash (String)        : "d981f8cb78201a950dcf3048751e441c"
+    Obtained hash (String)        : "d981f8cb78201a950dcf3048751e441c"
+[I] Counters match
+[I] Hashes match
+[I] Vector  4 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_128_3
+    Test vector index             :  5
+    Vector string                 : "abcdefghijklmnopqrstuvwxyz"
+    Vector length                 :  26
+    Vector array                  : 
+16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 
+16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 
+16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#
+[I] Digest results for vector     :  5
+    Expected bit count (Low, High): ( 208,  0)
+    Obtained bit count (Low, High): ( 208,  0)
+    Expected hash (String)        : "1714a472eee57d30040412bfcc55032a"
+    Obtained hash (String)        : "1714a472eee57d30040412bfcc55032a"
+[I] Counters match
+[I] Hashes match
+[I] Vector  5 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_128_3
+    Test vector index             :  6
+    Vector string                 : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    Vector length                 :  62
+    Vector array                  : 
+16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 
+16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 
+16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#61#, 16#62#, 16#63#, 16#64#, 
+16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 
+16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 
+16#79#, 16#7A#, 16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 
+16#38#, 16#39#
+[I] Digest results for vector     :  6
+    Expected bit count (Low, High): ( 496,  0)
+    Obtained bit count (Low, High): ( 496,  0)
+    Expected hash (String)        : "8dcea680a17583ee502ba38a3c368651"
+    Obtained hash (String)        : "8dcea680a17583ee502ba38a3c368651"
+[I] Counters match
+[I] Hashes match
+[I] Vector  6 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_128_3
+    Test vector index             :  7
+    Vector string                 : "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
+    Vector length                 :  80
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#
+[I] Digest results for vector     :  7
+    Expected bit count (Low, High): ( 640,  0)
+    Obtained bit count (Low, High): ( 640,  0)
+    Expected hash (String)        : "1c14795529fd9f207a958f84c52f11e8"
+    Obtained hash (String)        : "1c14795529fd9f207a958f84c52f11e8"
+[I] Counters match
+[I] Hashes match
+[I] Vector  7 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_128_3
+    Test vector index             :  8
+    Vector string                 : "The quick brown fox jumps over the lazy dog"
+    Vector length                 :  43
+    Vector array                  : 
+16#54#, 16#68#, 16#65#, 16#20#, 16#71#, 16#75#, 16#69#, 16#63#, 16#6B#, 16#20#, 
+16#62#, 16#72#, 16#6F#, 16#77#, 16#6E#, 16#20#, 16#66#, 16#6F#, 16#78#, 16#20#, 
+16#6A#, 16#75#, 16#6D#, 16#70#, 16#73#, 16#20#, 16#6F#, 16#76#, 16#65#, 16#72#, 
+16#20#, 16#74#, 16#68#, 16#65#, 16#20#, 16#6C#, 16#61#, 16#7A#, 16#79#, 16#20#, 
+16#64#, 16#6F#, 16#67#
+[I] Digest results for vector     :  8
+    Expected bit count (Low, High): ( 344,  0)
+    Obtained bit count (Low, High): ( 344,  0)
+    Expected hash (String)        : "6d12a41e72e644f017b6f0e2f7b44c62"
+    Obtained hash (String)        : "6d12a41e72e644f017b6f0e2f7b44c62"
+[I] Counters match
+[I] Hashes match
+[I] Vector  8 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_128_3
+    Test vector index             :  9
+    Vector string                 : "CryptAda By TCantos Software"
+    Vector length                 :  28
+    Vector array                  : 
+16#43#, 16#72#, 16#79#, 16#70#, 16#74#, 16#41#, 16#64#, 16#61#, 16#20#, 16#42#, 
+16#79#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 16#73#, 16#20#, 
+16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+[I] Digest results for vector     :  9
+    Expected bit count (Low, High): ( 224,  0)
+    Obtained bit count (Low, High): ( 224,  0)
+    Expected hash (String)        : "679c01c3c8da712720faaa4322d973d4"
+    Obtained hash (String)        : "679c01c3c8da712720faaa4322d973d4"
+[I] Counters match
+[I] Hashes match
+[I] Vector  9 test passed.
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/03/13 - 16:50:56
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : CryptAda Tiger (160-bit, 3 passes) test vectors
+Started         : 2017/03/13 - 16:50:56
+--------------------------------------------------------------------------------
+[I] Obtained hashes are checked against values obtained by using several online tools
+    Number of vectors to test:  9
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_160_3
+    Test vector index             :  1
+    Vector string                 : ""
+    Vector length                 :  0
+    Vector array                  : 
+
+[I] Digest results for vector     :  1
+    Expected bit count (Low, High): ( 0,  0)
+    Obtained bit count (Low, High): ( 0,  0)
+    Expected hash (String)        : "3293ac630c13f0245f92bbb1766e16167a4e5849"
+    Obtained hash (String)        : "3293ac630c13f0245f92bbb1766e16167a4e5849"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_160_3
+    Test vector index             :  2
+    Vector string                 : "a"
+    Vector length                 :  1
+    Vector array                  : 
+16#61#
+[I] Digest results for vector     :  2
+    Expected bit count (Low, High): ( 8,  0)
+    Obtained bit count (Low, High): ( 8,  0)
+    Expected hash (String)        : "77befbef2e7ef8ab2ec8f93bf587a7fc613e247f"
+    Obtained hash (String)        : "77befbef2e7ef8ab2ec8f93bf587a7fc613e247f"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_160_3
+    Test vector index             :  3
+    Vector string                 : "abc"
+    Vector length                 :  3
+    Vector array                  : 
+16#61#, 16#62#, 16#63#
+[I] Digest results for vector     :  3
+    Expected bit count (Low, High): ( 24,  0)
+    Obtained bit count (Low, High): ( 24,  0)
+    Expected hash (String)        : "2aab1484e8c158f2bfb8c5ff41b57a525129131c"
+    Obtained hash (String)        : "2aab1484e8c158f2bfb8c5ff41b57a525129131c"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_160_3
+    Test vector index             :  4
+    Vector string                 : "message digest"
+    Vector length                 :  14
+    Vector array                  : 
+16#6D#, 16#65#, 16#73#, 16#73#, 16#61#, 16#67#, 16#65#, 16#20#, 16#64#, 16#69#, 
+16#67#, 16#65#, 16#73#, 16#74#
+[I] Digest results for vector     :  4
+    Expected bit count (Low, High): ( 112,  0)
+    Obtained bit count (Low, High): ( 112,  0)
+    Expected hash (String)        : "d981f8cb78201a950dcf3048751e441c517fca1a"
+    Obtained hash (String)        : "d981f8cb78201a950dcf3048751e441c517fca1a"
+[I] Counters match
+[I] Hashes match
+[I] Vector  4 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_160_3
+    Test vector index             :  5
+    Vector string                 : "abcdefghijklmnopqrstuvwxyz"
+    Vector length                 :  26
+    Vector array                  : 
+16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 
+16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 
+16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#
+[I] Digest results for vector     :  5
+    Expected bit count (Low, High): ( 208,  0)
+    Obtained bit count (Low, High): ( 208,  0)
+    Expected hash (String)        : "1714a472eee57d30040412bfcc55032a0b11602f"
+    Obtained hash (String)        : "1714a472eee57d30040412bfcc55032a0b11602f"
+[I] Counters match
+[I] Hashes match
+[I] Vector  5 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_160_3
+    Test vector index             :  6
+    Vector string                 : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    Vector length                 :  62
+    Vector array                  : 
+16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 
+16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 
+16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#61#, 16#62#, 16#63#, 16#64#, 
+16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 
+16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 
+16#79#, 16#7A#, 16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 
+16#38#, 16#39#
+[I] Digest results for vector     :  6
+    Expected bit count (Low, High): ( 496,  0)
+    Obtained bit count (Low, High): ( 496,  0)
+    Expected hash (String)        : "8dcea680a17583ee502ba38a3c368651890ffbcc"
+    Obtained hash (String)        : "8dcea680a17583ee502ba38a3c368651890ffbcc"
+[I] Counters match
+[I] Hashes match
+[I] Vector  6 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_160_3
+    Test vector index             :  7
+    Vector string                 : "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
+    Vector length                 :  80
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#
+[I] Digest results for vector     :  7
+    Expected bit count (Low, High): ( 640,  0)
+    Obtained bit count (Low, High): ( 640,  0)
+    Expected hash (String)        : "1c14795529fd9f207a958f84c52f11e887fa0cab"
+    Obtained hash (String)        : "1c14795529fd9f207a958f84c52f11e887fa0cab"
+[I] Counters match
+[I] Hashes match
+[I] Vector  7 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_160_3
+    Test vector index             :  8
+    Vector string                 : "The quick brown fox jumps over the lazy dog"
+    Vector length                 :  43
+    Vector array                  : 
+16#54#, 16#68#, 16#65#, 16#20#, 16#71#, 16#75#, 16#69#, 16#63#, 16#6B#, 16#20#, 
+16#62#, 16#72#, 16#6F#, 16#77#, 16#6E#, 16#20#, 16#66#, 16#6F#, 16#78#, 16#20#, 
+16#6A#, 16#75#, 16#6D#, 16#70#, 16#73#, 16#20#, 16#6F#, 16#76#, 16#65#, 16#72#, 
+16#20#, 16#74#, 16#68#, 16#65#, 16#20#, 16#6C#, 16#61#, 16#7A#, 16#79#, 16#20#, 
+16#64#, 16#6F#, 16#67#
+[I] Digest results for vector     :  8
+    Expected bit count (Low, High): ( 344,  0)
+    Obtained bit count (Low, High): ( 344,  0)
+    Expected hash (String)        : "6d12a41e72e644f017b6f0e2f7b44c6285f06dd5"
+    Obtained hash (String)        : "6d12a41e72e644f017b6f0e2f7b44c6285f06dd5"
+[I] Counters match
+[I] Hashes match
+[I] Vector  8 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_160_3
+    Test vector index             :  9
+    Vector string                 : "CryptAda By TCantos Software"
+    Vector length                 :  28
+    Vector array                  : 
+16#43#, 16#72#, 16#79#, 16#70#, 16#74#, 16#41#, 16#64#, 16#61#, 16#20#, 16#42#, 
+16#79#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 16#73#, 16#20#, 
+16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+[I] Digest results for vector     :  9
+    Expected bit count (Low, High): ( 224,  0)
+    Obtained bit count (Low, High): ( 224,  0)
+    Expected hash (String)        : "679c01c3c8da712720faaa4322d973d441140399"
+    Obtained hash (String)        : "679c01c3c8da712720faaa4322d973d441140399"
+[I] Counters match
+[I] Hashes match
+[I] Vector  9 test passed.
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/03/13 - 16:50:56
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 5
+Description     : CryptAda Tiger (192-bit, 3 passes) test vectors
+Started         : 2017/03/13 - 16:50:56
+--------------------------------------------------------------------------------
+[I] Obtained hashes are checked against values obtained by using several online tools
+    Number of vectors to test:  9
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_192_3
+    Test vector index             :  1
+    Vector string                 : ""
+    Vector length                 :  0
+    Vector array                  : 
+
+[I] Digest results for vector     :  1
+    Expected bit count (Low, High): ( 0,  0)
+    Obtained bit count (Low, High): ( 0,  0)
+    Expected hash (String)        : "3293ac630c13f0245f92bbb1766e16167a4e58492dde73f3"
+    Obtained hash (String)        : "3293ac630c13f0245f92bbb1766e16167a4e58492dde73f3"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_192_3
+    Test vector index             :  2
+    Vector string                 : "a"
+    Vector length                 :  1
+    Vector array                  : 
+16#61#
+[I] Digest results for vector     :  2
+    Expected bit count (Low, High): ( 8,  0)
+    Obtained bit count (Low, High): ( 8,  0)
+    Expected hash (String)        : "77befbef2e7ef8ab2ec8f93bf587a7fc613e247f5f247809"
+    Obtained hash (String)        : "77befbef2e7ef8ab2ec8f93bf587a7fc613e247f5f247809"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_192_3
+    Test vector index             :  3
+    Vector string                 : "abc"
+    Vector length                 :  3
+    Vector array                  : 
+16#61#, 16#62#, 16#63#
+[I] Digest results for vector     :  3
+    Expected bit count (Low, High): ( 24,  0)
+    Obtained bit count (Low, High): ( 24,  0)
+    Expected hash (String)        : "2aab1484e8c158f2bfb8c5ff41b57a525129131c957b5f93"
+    Obtained hash (String)        : "2aab1484e8c158f2bfb8c5ff41b57a525129131c957b5f93"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_192_3
+    Test vector index             :  4
+    Vector string                 : "message digest"
+    Vector length                 :  14
+    Vector array                  : 
+16#6D#, 16#65#, 16#73#, 16#73#, 16#61#, 16#67#, 16#65#, 16#20#, 16#64#, 16#69#, 
+16#67#, 16#65#, 16#73#, 16#74#
+[I] Digest results for vector     :  4
+    Expected bit count (Low, High): ( 112,  0)
+    Obtained bit count (Low, High): ( 112,  0)
+    Expected hash (String)        : "d981f8cb78201a950dcf3048751e441c517fca1aa55a29f6"
+    Obtained hash (String)        : "d981f8cb78201a950dcf3048751e441c517fca1aa55a29f6"
+[I] Counters match
+[I] Hashes match
+[I] Vector  4 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_192_3
+    Test vector index             :  5
+    Vector string                 : "abcdefghijklmnopqrstuvwxyz"
+    Vector length                 :  26
+    Vector array                  : 
+16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 
+16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 
+16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#
+[I] Digest results for vector     :  5
+    Expected bit count (Low, High): ( 208,  0)
+    Obtained bit count (Low, High): ( 208,  0)
+    Expected hash (String)        : "1714a472eee57d30040412bfcc55032a0b11602ff37beee9"
+    Obtained hash (String)        : "1714a472eee57d30040412bfcc55032a0b11602ff37beee9"
+[I] Counters match
+[I] Hashes match
+[I] Vector  5 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_192_3
+    Test vector index             :  6
+    Vector string                 : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    Vector length                 :  62
+    Vector array                  : 
+16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 
+16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 
+16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#61#, 16#62#, 16#63#, 16#64#, 
+16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 
+16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 
+16#79#, 16#7A#, 16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 
+16#38#, 16#39#
+[I] Digest results for vector     :  6
+    Expected bit count (Low, High): ( 496,  0)
+    Obtained bit count (Low, High): ( 496,  0)
+    Expected hash (String)        : "8dcea680a17583ee502ba38a3c368651890ffbccdc49a8cc"
+    Obtained hash (String)        : "8dcea680a17583ee502ba38a3c368651890ffbccdc49a8cc"
+[I] Counters match
+[I] Hashes match
+[I] Vector  6 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_192_3
+    Test vector index             :  7
+    Vector string                 : "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
+    Vector length                 :  80
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#
+[I] Digest results for vector     :  7
+    Expected bit count (Low, High): ( 640,  0)
+    Obtained bit count (Low, High): ( 640,  0)
+    Expected hash (String)        : "1c14795529fd9f207a958f84c52f11e887fa0cabdfd91bfd"
+    Obtained hash (String)        : "1c14795529fd9f207a958f84c52f11e887fa0cabdfd91bfd"
+[I] Counters match
+[I] Hashes match
+[I] Vector  7 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_192_3
+    Test vector index             :  8
+    Vector string                 : "The quick brown fox jumps over the lazy dog"
+    Vector length                 :  43
+    Vector array                  : 
+16#54#, 16#68#, 16#65#, 16#20#, 16#71#, 16#75#, 16#69#, 16#63#, 16#6B#, 16#20#, 
+16#62#, 16#72#, 16#6F#, 16#77#, 16#6E#, 16#20#, 16#66#, 16#6F#, 16#78#, 16#20#, 
+16#6A#, 16#75#, 16#6D#, 16#70#, 16#73#, 16#20#, 16#6F#, 16#76#, 16#65#, 16#72#, 
+16#20#, 16#74#, 16#68#, 16#65#, 16#20#, 16#6C#, 16#61#, 16#7A#, 16#79#, 16#20#, 
+16#64#, 16#6F#, 16#67#
+[I] Digest results for vector     :  8
+    Expected bit count (Low, High): ( 344,  0)
+    Obtained bit count (Low, High): ( 344,  0)
+    Expected hash (String)        : "6d12a41e72e644f017b6f0e2f7b44c6285f06dd5d2c5b075"
+    Obtained hash (String)        : "6d12a41e72e644f017b6f0e2f7b44c6285f06dd5d2c5b075"
+[I] Counters match
+[I] Hashes match
+[I] Vector  8 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_192_3
+    Test vector index             :  9
+    Vector string                 : "CryptAda By TCantos Software"
+    Vector length                 :  28
+    Vector array                  : 
+16#43#, 16#72#, 16#79#, 16#70#, 16#74#, 16#41#, 16#64#, 16#61#, 16#20#, 16#42#, 
+16#79#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 16#73#, 16#20#, 
+16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+[I] Digest results for vector     :  9
+    Expected bit count (Low, High): ( 224,  0)
+    Obtained bit count (Low, High): ( 224,  0)
+    Expected hash (String)        : "679c01c3c8da712720faaa4322d973d441140399071275d9"
+    Obtained hash (String)        : "679c01c3c8da712720faaa4322d973d441140399071275d9"
+[I] Counters match
+[I] Hashes match
+[I] Vector  9 test passed.
+--------------------------------------------------------------------------------
+Test Case Number: 5
+Test Case Result: PASSED
+Finished        : 2017/03/13 - 16:50:56
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 6
+Description     : CryptAda Tiger (128-bit, 4 passes) test vectors
+Started         : 2017/03/13 - 16:50:56
+--------------------------------------------------------------------------------
+[I] Obtained hashes are checked against values obtained by using several online tools
+    Number of vectors to test:  9
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_128_4
+    Test vector index             :  1
+    Vector string                 : ""
+    Vector length                 :  0
+    Vector array                  : 
+
+[I] Digest results for vector     :  1
+    Expected bit count (Low, High): ( 0,  0)
+    Obtained bit count (Low, High): ( 0,  0)
+    Expected hash (String)        : "24cc78a7f6ff3546e7984e59695ca13d"
+    Obtained hash (String)        : "24cc78a7f6ff3546e7984e59695ca13d"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_128_4
+    Test vector index             :  2
+    Vector string                 : "a"
+    Vector length                 :  1
+    Vector array                  : 
+16#61#
+[I] Digest results for vector     :  2
+    Expected bit count (Low, High): ( 8,  0)
+    Obtained bit count (Low, High): ( 8,  0)
+    Expected hash (String)        : "e2a0e5e38b778421cceafbfe9a37068b"
+    Obtained hash (String)        : "e2a0e5e38b778421cceafbfe9a37068b"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_128_4
+    Test vector index             :  3
+    Vector string                 : "abc"
+    Vector length                 :  3
+    Vector array                  : 
+16#61#, 16#62#, 16#63#
+[I] Digest results for vector     :  3
+    Expected bit count (Low, High): ( 24,  0)
+    Obtained bit count (Low, High): ( 24,  0)
+    Expected hash (String)        : "538883c8fc5f28250299018e66bdf4fd"
+    Obtained hash (String)        : "538883c8fc5f28250299018e66bdf4fd"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_128_4
+    Test vector index             :  4
+    Vector string                 : "message digest"
+    Vector length                 :  14
+    Vector array                  : 
+16#6D#, 16#65#, 16#73#, 16#73#, 16#61#, 16#67#, 16#65#, 16#20#, 16#64#, 16#69#, 
+16#67#, 16#65#, 16#73#, 16#74#
+[I] Digest results for vector     :  4
+    Expected bit count (Low, High): ( 112,  0)
+    Obtained bit count (Low, High): ( 112,  0)
+    Expected hash (String)        : "a310058241bab4fd815e08a5afef6488"
+    Obtained hash (String)        : "a310058241bab4fd815e08a5afef6488"
+[I] Counters match
+[I] Hashes match
+[I] Vector  4 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_128_4
+    Test vector index             :  5
+    Vector string                 : "abcdefghijklmnopqrstuvwxyz"
+    Vector length                 :  26
+    Vector array                  : 
+16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 
+16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 
+16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#
+[I] Digest results for vector     :  5
+    Expected bit count (Low, High): ( 208,  0)
+    Obtained bit count (Low, High): ( 208,  0)
+    Expected hash (String)        : "758fbb6c5ae68a0aa85d2739bcdd9e43"
+    Obtained hash (String)        : "758fbb6c5ae68a0aa85d2739bcdd9e43"
+[I] Counters match
+[I] Hashes match
+[I] Vector  5 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_128_4
+    Test vector index             :  6
+    Vector string                 : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    Vector length                 :  62
+    Vector array                  : 
+16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 
+16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 
+16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#61#, 16#62#, 16#63#, 16#64#, 
+16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 
+16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 
+16#79#, 16#7A#, 16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 
+16#38#, 16#39#
+[I] Digest results for vector     :  6
+    Expected bit count (Low, High): ( 496,  0)
+    Obtained bit count (Low, High): ( 496,  0)
+    Expected hash (String)        : "ac2ca58530529697d1ca33b191203d11"
+    Obtained hash (String)        : "ac2ca58530529697d1ca33b191203d11"
+[I] Counters match
+[I] Hashes match
+[I] Vector  6 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_128_4
+    Test vector index             :  7
+    Vector string                 : "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
+    Vector length                 :  80
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#
+[I] Digest results for vector     :  7
+    Expected bit count (Low, High): ( 640,  0)
+    Obtained bit count (Low, High): ( 640,  0)
+    Expected hash (String)        : "22005ec0a937bb4d5c5bac7c86cdde41"
+    Obtained hash (String)        : "22005ec0a937bb4d5c5bac7c86cdde41"
+[I] Counters match
+[I] Hashes match
+[I] Vector  7 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_128_4
+    Test vector index             :  8
+    Vector string                 : "The quick brown fox jumps over the lazy dog"
+    Vector length                 :  43
+    Vector array                  : 
+16#54#, 16#68#, 16#65#, 16#20#, 16#71#, 16#75#, 16#69#, 16#63#, 16#6B#, 16#20#, 
+16#62#, 16#72#, 16#6F#, 16#77#, 16#6E#, 16#20#, 16#66#, 16#6F#, 16#78#, 16#20#, 
+16#6A#, 16#75#, 16#6D#, 16#70#, 16#73#, 16#20#, 16#6F#, 16#76#, 16#65#, 16#72#, 
+16#20#, 16#74#, 16#68#, 16#65#, 16#20#, 16#6C#, 16#61#, 16#7A#, 16#79#, 16#20#, 
+16#64#, 16#6F#, 16#67#
+[I] Digest results for vector     :  8
+    Expected bit count (Low, High): ( 344,  0)
+    Obtained bit count (Low, High): ( 344,  0)
+    Expected hash (String)        : "c1f3a704e9f6267e9f75fa47191f83c3"
+    Obtained hash (String)        : "c1f3a704e9f6267e9f75fa47191f83c3"
+[I] Counters match
+[I] Hashes match
+[I] Vector  8 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_128_4
+    Test vector index             :  9
+    Vector string                 : "CryptAda By TCantos Software"
+    Vector length                 :  28
+    Vector array                  : 
+16#43#, 16#72#, 16#79#, 16#70#, 16#74#, 16#41#, 16#64#, 16#61#, 16#20#, 16#42#, 
+16#79#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 16#73#, 16#20#, 
+16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+[I] Digest results for vector     :  9
+    Expected bit count (Low, High): ( 224,  0)
+    Obtained bit count (Low, High): ( 224,  0)
+    Expected hash (String)        : "e2b4e265d4357bc1f03d8b4d5e18fc9d"
+    Obtained hash (String)        : "e2b4e265d4357bc1f03d8b4d5e18fc9d"
+[I] Counters match
+[I] Hashes match
+[I] Vector  9 test passed.
+--------------------------------------------------------------------------------
+Test Case Number: 6
+Test Case Result: PASSED
+Finished        : 2017/03/13 - 16:50:56
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 7
+Description     : CryptAda Tiger (160-bit, 4 passes) test vectors
+Started         : 2017/03/13 - 16:50:56
+--------------------------------------------------------------------------------
+[I] Obtained hashes are checked against values obtained by using several online tools
+    Number of vectors to test:  9
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_160_4
+    Test vector index             :  1
+    Vector string                 : ""
+    Vector length                 :  0
+    Vector array                  : 
+
+[I] Digest results for vector     :  1
+    Expected bit count (Low, High): ( 0,  0)
+    Obtained bit count (Low, High): ( 0,  0)
+    Expected hash (String)        : "24cc78a7f6ff3546e7984e59695ca13d804e0b68"
+    Obtained hash (String)        : "24cc78a7f6ff3546e7984e59695ca13d804e0b68"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_160_4
+    Test vector index             :  2
+    Vector string                 : "a"
+    Vector length                 :  1
+    Vector array                  : 
+16#61#
+[I] Digest results for vector     :  2
+    Expected bit count (Low, High): ( 8,  0)
+    Obtained bit count (Low, High): ( 8,  0)
+    Expected hash (String)        : "e2a0e5e38b778421cceafbfe9a37068b032093fd"
+    Obtained hash (String)        : "e2a0e5e38b778421cceafbfe9a37068b032093fd"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_160_4
+    Test vector index             :  3
+    Vector string                 : "abc"
+    Vector length                 :  3
+    Vector array                  : 
+16#61#, 16#62#, 16#63#
+[I] Digest results for vector     :  3
+    Expected bit count (Low, High): ( 24,  0)
+    Obtained bit count (Low, High): ( 24,  0)
+    Expected hash (String)        : "538883c8fc5f28250299018e66bdf4fdb5ef7b65"
+    Obtained hash (String)        : "538883c8fc5f28250299018e66bdf4fdb5ef7b65"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_160_4
+    Test vector index             :  4
+    Vector string                 : "message digest"
+    Vector length                 :  14
+    Vector array                  : 
+16#6D#, 16#65#, 16#73#, 16#73#, 16#61#, 16#67#, 16#65#, 16#20#, 16#64#, 16#69#, 
+16#67#, 16#65#, 16#73#, 16#74#
+[I] Digest results for vector     :  4
+    Expected bit count (Low, High): ( 112,  0)
+    Obtained bit count (Low, High): ( 112,  0)
+    Expected hash (String)        : "a310058241bab4fd815e08a5afef648874b91fc8"
+    Obtained hash (String)        : "a310058241bab4fd815e08a5afef648874b91fc8"
+[I] Counters match
+[I] Hashes match
+[I] Vector  4 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_160_4
+    Test vector index             :  5
+    Vector string                 : "abcdefghijklmnopqrstuvwxyz"
+    Vector length                 :  26
+    Vector array                  : 
+16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 
+16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 
+16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#
+[I] Digest results for vector     :  5
+    Expected bit count (Low, High): ( 208,  0)
+    Obtained bit count (Low, High): ( 208,  0)
+    Expected hash (String)        : "758fbb6c5ae68a0aa85d2739bcdd9e434e2af40f"
+    Obtained hash (String)        : "758fbb6c5ae68a0aa85d2739bcdd9e434e2af40f"
+[I] Counters match
+[I] Hashes match
+[I] Vector  5 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_160_4
+    Test vector index             :  6
+    Vector string                 : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    Vector length                 :  62
+    Vector array                  : 
+16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 
+16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 
+16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#61#, 16#62#, 16#63#, 16#64#, 
+16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 
+16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 
+16#79#, 16#7A#, 16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 
+16#38#, 16#39#
+[I] Digest results for vector     :  6
+    Expected bit count (Low, High): ( 496,  0)
+    Obtained bit count (Low, High): ( 496,  0)
+    Expected hash (String)        : "ac2ca58530529697d1ca33b191203d111b73ab18"
+    Obtained hash (String)        : "ac2ca58530529697d1ca33b191203d111b73ab18"
+[I] Counters match
+[I] Hashes match
+[I] Vector  6 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_160_4
+    Test vector index             :  7
+    Vector string                 : "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
+    Vector length                 :  80
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#
+[I] Digest results for vector     :  7
+    Expected bit count (Low, High): ( 640,  0)
+    Obtained bit count (Low, High): ( 640,  0)
+    Expected hash (String)        : "22005ec0a937bb4d5c5bac7c86cdde41561c4ddb"
+    Obtained hash (String)        : "22005ec0a937bb4d5c5bac7c86cdde41561c4ddb"
+[I] Counters match
+[I] Hashes match
+[I] Vector  7 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_160_4
+    Test vector index             :  8
+    Vector string                 : "The quick brown fox jumps over the lazy dog"
+    Vector length                 :  43
+    Vector array                  : 
+16#54#, 16#68#, 16#65#, 16#20#, 16#71#, 16#75#, 16#69#, 16#63#, 16#6B#, 16#20#, 
+16#62#, 16#72#, 16#6F#, 16#77#, 16#6E#, 16#20#, 16#66#, 16#6F#, 16#78#, 16#20#, 
+16#6A#, 16#75#, 16#6D#, 16#70#, 16#73#, 16#20#, 16#6F#, 16#76#, 16#65#, 16#72#, 
+16#20#, 16#74#, 16#68#, 16#65#, 16#20#, 16#6C#, 16#61#, 16#7A#, 16#79#, 16#20#, 
+16#64#, 16#6F#, 16#67#
+[I] Digest results for vector     :  8
+    Expected bit count (Low, High): ( 344,  0)
+    Obtained bit count (Low, High): ( 344,  0)
+    Expected hash (String)        : "c1f3a704e9f6267e9f75fa47191f83c354100a04"
+    Obtained hash (String)        : "c1f3a704e9f6267e9f75fa47191f83c354100a04"
+[I] Counters match
+[I] Hashes match
+[I] Vector  8 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_160_4
+    Test vector index             :  9
+    Vector string                 : "CryptAda By TCantos Software"
+    Vector length                 :  28
+    Vector array                  : 
+16#43#, 16#72#, 16#79#, 16#70#, 16#74#, 16#41#, 16#64#, 16#61#, 16#20#, 16#42#, 
+16#79#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 16#73#, 16#20#, 
+16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+[I] Digest results for vector     :  9
+    Expected bit count (Low, High): ( 224,  0)
+    Obtained bit count (Low, High): ( 224,  0)
+    Expected hash (String)        : "e2b4e265d4357bc1f03d8b4d5e18fc9d7449cd7d"
+    Obtained hash (String)        : "e2b4e265d4357bc1f03d8b4d5e18fc9d7449cd7d"
+[I] Counters match
+[I] Hashes match
+[I] Vector  9 test passed.
+--------------------------------------------------------------------------------
+Test Case Number: 7
+Test Case Result: PASSED
+Finished        : 2017/03/13 - 16:50:56
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 8
+Description     : CryptAda Tiger (192-bit, 4 passes) test vectors
+Started         : 2017/03/13 - 16:50:56
+--------------------------------------------------------------------------------
+[I] Obtained hashes are checked against values obtained by using several online tools
+    Number of vectors to test:  9
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_192_4
+    Test vector index             :  1
+    Vector string                 : ""
+    Vector length                 :  0
+    Vector array                  : 
+
+[I] Digest results for vector     :  1
+    Expected bit count (Low, High): ( 0,  0)
+    Obtained bit count (Low, High): ( 0,  0)
+    Expected hash (String)        : "24cc78a7f6ff3546e7984e59695ca13d804e0b686e255194"
+    Obtained hash (String)        : "24cc78a7f6ff3546e7984e59695ca13d804e0b686e255194"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_192_4
+    Test vector index             :  2
+    Vector string                 : "a"
+    Vector length                 :  1
+    Vector array                  : 
+16#61#
+[I] Digest results for vector     :  2
+    Expected bit count (Low, High): ( 8,  0)
+    Obtained bit count (Low, High): ( 8,  0)
+    Expected hash (String)        : "e2a0e5e38b778421cceafbfe9a37068b032093fd36be1635"
+    Obtained hash (String)        : "e2a0e5e38b778421cceafbfe9a37068b032093fd36be1635"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_192_4
+    Test vector index             :  3
+    Vector string                 : "abc"
+    Vector length                 :  3
+    Vector array                  : 
+16#61#, 16#62#, 16#63#
+[I] Digest results for vector     :  3
+    Expected bit count (Low, High): ( 24,  0)
+    Obtained bit count (Low, High): ( 24,  0)
+    Expected hash (String)        : "538883c8fc5f28250299018e66bdf4fdb5ef7b65f2e91753"
+    Obtained hash (String)        : "538883c8fc5f28250299018e66bdf4fdb5ef7b65f2e91753"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_192_4
+    Test vector index             :  4
+    Vector string                 : "message digest"
+    Vector length                 :  14
+    Vector array                  : 
+16#6D#, 16#65#, 16#73#, 16#73#, 16#61#, 16#67#, 16#65#, 16#20#, 16#64#, 16#69#, 
+16#67#, 16#65#, 16#73#, 16#74#
+[I] Digest results for vector     :  4
+    Expected bit count (Low, High): ( 112,  0)
+    Obtained bit count (Low, High): ( 112,  0)
+    Expected hash (String)        : "a310058241bab4fd815e08a5afef648874b91fc8be4ed87d"
+    Obtained hash (String)        : "a310058241bab4fd815e08a5afef648874b91fc8be4ed87d"
+[I] Counters match
+[I] Hashes match
+[I] Vector  4 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_192_4
+    Test vector index             :  5
+    Vector string                 : "abcdefghijklmnopqrstuvwxyz"
+    Vector length                 :  26
+    Vector array                  : 
+16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 
+16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 
+16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#
+[I] Digest results for vector     :  5
+    Expected bit count (Low, High): ( 208,  0)
+    Obtained bit count (Low, High): ( 208,  0)
+    Expected hash (String)        : "758fbb6c5ae68a0aa85d2739bcdd9e434e2af40f6aa305ed"
+    Obtained hash (String)        : "758fbb6c5ae68a0aa85d2739bcdd9e434e2af40f6aa305ed"
+[I] Counters match
+[I] Hashes match
+[I] Vector  5 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_192_4
+    Test vector index             :  6
+    Vector string                 : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    Vector length                 :  62
+    Vector array                  : 
+16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 
+16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 
+16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#61#, 16#62#, 16#63#, 16#64#, 
+16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 
+16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 
+16#79#, 16#7A#, 16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 
+16#38#, 16#39#
+[I] Digest results for vector     :  6
+    Expected bit count (Low, High): ( 496,  0)
+    Obtained bit count (Low, High): ( 496,  0)
+    Expected hash (String)        : "ac2ca58530529697d1ca33b191203d111b73ab1884f16e06"
+    Obtained hash (String)        : "ac2ca58530529697d1ca33b191203d111b73ab1884f16e06"
+[I] Counters match
+[I] Hashes match
+[I] Vector  6 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_192_4
+    Test vector index             :  7
+    Vector string                 : "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
+    Vector length                 :  80
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#
+[I] Digest results for vector     :  7
+    Expected bit count (Low, High): ( 640,  0)
+    Obtained bit count (Low, High): ( 640,  0)
+    Expected hash (String)        : "22005ec0a937bb4d5c5bac7c86cdde41561c4ddbe9fd3926"
+    Obtained hash (String)        : "22005ec0a937bb4d5c5bac7c86cdde41561c4ddbe9fd3926"
+[I] Counters match
+[I] Hashes match
+[I] Vector  7 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_192_4
+    Test vector index             :  8
+    Vector string                 : "The quick brown fox jumps over the lazy dog"
+    Vector length                 :  43
+    Vector array                  : 
+16#54#, 16#68#, 16#65#, 16#20#, 16#71#, 16#75#, 16#69#, 16#63#, 16#6B#, 16#20#, 
+16#62#, 16#72#, 16#6F#, 16#77#, 16#6E#, 16#20#, 16#66#, 16#6F#, 16#78#, 16#20#, 
+16#6A#, 16#75#, 16#6D#, 16#70#, 16#73#, 16#20#, 16#6F#, 16#76#, 16#65#, 16#72#, 
+16#20#, 16#74#, 16#68#, 16#65#, 16#20#, 16#6C#, 16#61#, 16#7A#, 16#79#, 16#20#, 
+16#64#, 16#6F#, 16#67#
+[I] Digest results for vector     :  8
+    Expected bit count (Low, High): ( 344,  0)
+    Obtained bit count (Low, High): ( 344,  0)
+    Expected hash (String)        : "c1f3a704e9f6267e9f75fa47191f83c354100a04c4f1dc6f"
+    Obtained hash (String)        : "c1f3a704e9f6267e9f75fa47191f83c354100a04c4f1dc6f"
+[I] Counters match
+[I] Hashes match
+[I] Vector  8 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_TIGER_192_4
+    Test vector index             :  9
+    Vector string                 : "CryptAda By TCantos Software"
+    Vector length                 :  28
+    Vector array                  : 
+16#43#, 16#72#, 16#79#, 16#70#, 16#74#, 16#41#, 16#64#, 16#61#, 16#20#, 16#42#, 
+16#79#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 16#73#, 16#20#, 
+16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+[I] Digest results for vector     :  9
+    Expected bit count (Low, High): ( 224,  0)
+    Obtained bit count (Low, High): ( 224,  0)
+    Expected hash (String)        : "e2b4e265d4357bc1f03d8b4d5e18fc9d7449cd7d276c0382"
+    Obtained hash (String)        : "e2b4e265d4357bc1f03d8b4d5e18fc9d7449cd7d276c0382"
+[I] Counters match
+[I] Hashes match
+[I] Vector  9 test passed.
+--------------------------------------------------------------------------------
+Test Case Number: 8
+Test Case Result: PASSED
+Finished        : 2017/03/13 - 16:50:56
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 9
+Description     : Testing Tiger operation (128-bit, 3 passes) at counter offset and block boundary.
+Started         : 2017/03/13 - 16:50:56
+--------------------------------------------------------------------------------
+[I] Obtained hashes are checked against values obtained by using several online tools
+[I] Checking at counter offset boundary.
+    Number of vectors to test:  3
+[I] Vector   :  1
+Vector length:  55
+[I] Digest result for test vector:  1
+    Expected bit count (Low, High): ( 440,  0)
+    Obtained bit count (Low, High): ( 440,  0)
+    Expected hash (String)        : "ec03564f7ff39bfba848b5ab3ecdf21a"
+    Obtained hash (String)        : "ec03564f7ff39bfba848b5ab3ecdf21a"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 results match
+[I] Vector   :  2
+Vector length:  56
+[I] Digest result for test vector:  2
+    Expected bit count (Low, High): ( 448,  0)
+    Obtained bit count (Low, High): ( 448,  0)
+    Expected hash (String)        : "45fdd791e96900f7ec26c2923a86f810"
+    Obtained hash (String)        : "45fdd791e96900f7ec26c2923a86f810"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 results match
+[I] Vector   :  3
+Vector length:  57
+[I] Digest result for test vector:  3
+    Expected bit count (Low, High): ( 456,  0)
+    Obtained bit count (Low, High): ( 456,  0)
+    Expected hash (String)        : "c6b54b166ac10f0903d8f90c7fefa683"
+    Obtained hash (String)        : "c6b54b166ac10f0903d8f90c7fefa683"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 results match
+[I] Checking at block boundary.
+    Number of vectors to test:  3
+[I] Vector   :  1
+Vector length:  63
+[I] Digest result for test vector:  1
+    Expected bit count (Low, High): ( 504,  0)
+    Obtained bit count (Low, High): ( 504,  0)
+    Expected hash (String)        : "9366604ea109e48ed763caabb2d5633b"
+    Obtained hash (String)        : "9366604ea109e48ed763caabb2d5633b"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 results match
+[I] Vector   :  2
+Vector length:  64
+[I] Digest result for test vector:  2
+    Expected bit count (Low, High): ( 512,  0)
+    Obtained bit count (Low, High): ( 512,  0)
+    Expected hash (String)        : "7503f313bbea92eddca90c5d3fcc4368"
+    Obtained hash (String)        : "7503f313bbea92eddca90c5d3fcc4368"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 results match
+[I] Vector   :  3
+Vector length:  65
+[I] Digest result for test vector:  3
+    Expected bit count (Low, High): ( 520,  0)
+    Obtained bit count (Low, High): ( 520,  0)
+    Expected hash (String)        : "cbda40c307784ada92118d491e32b87b"
+    Obtained hash (String)        : "cbda40c307784ada92118d491e32b87b"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 results match
+--------------------------------------------------------------------------------
+Test Case Number: 9
+Test Case Result: PASSED
+Finished        : 2017/03/13 - 16:50:56
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 10
+Description     : Testing Tiger operation (160-bit, 3 passes) at counter offset and block boundary.
+Started         : 2017/03/13 - 16:50:56
+--------------------------------------------------------------------------------
+[I] Obtained hashes are checked against values obtained by using several online tools
+[I] Checking at counter offset boundary.
+    Number of vectors to test:  3
+[I] Vector   :  1
+Vector length:  55
+[I] Digest result for test vector:  1
+    Expected bit count (Low, High): ( 440,  0)
+    Obtained bit count (Low, High): ( 440,  0)
+    Expected hash (String)        : "ec03564f7ff39bfba848b5ab3ecdf21a1ea37154"
+    Obtained hash (String)        : "ec03564f7ff39bfba848b5ab3ecdf21a1ea37154"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 results match
+[I] Vector   :  2
+Vector length:  56
+[I] Digest result for test vector:  2
+    Expected bit count (Low, High): ( 448,  0)
+    Obtained bit count (Low, High): ( 448,  0)
+    Expected hash (String)        : "45fdd791e96900f7ec26c2923a86f8109a67fb45"
+    Obtained hash (String)        : "45fdd791e96900f7ec26c2923a86f8109a67fb45"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 results match
+[I] Vector   :  3
+Vector length:  57
+[I] Digest result for test vector:  3
+    Expected bit count (Low, High): ( 456,  0)
+    Obtained bit count (Low, High): ( 456,  0)
+    Expected hash (String)        : "c6b54b166ac10f0903d8f90c7fefa68317139a93"
+    Obtained hash (String)        : "c6b54b166ac10f0903d8f90c7fefa68317139a93"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 results match
+[I] Checking at block boundary.
+    Number of vectors to test:  3
+[I] Vector   :  1
+Vector length:  63
+[I] Digest result for test vector:  1
+    Expected bit count (Low, High): ( 504,  0)
+    Obtained bit count (Low, High): ( 504,  0)
+    Expected hash (String)        : "9366604ea109e48ed763caabb2d5633b4946eb29"
+    Obtained hash (String)        : "9366604ea109e48ed763caabb2d5633b4946eb29"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 results match
+[I] Vector   :  2
+Vector length:  64
+[I] Digest result for test vector:  2
+    Expected bit count (Low, High): ( 512,  0)
+    Obtained bit count (Low, High): ( 512,  0)
+    Expected hash (String)        : "7503f313bbea92eddca90c5d3fcc4368237457df"
+    Obtained hash (String)        : "7503f313bbea92eddca90c5d3fcc4368237457df"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 results match
+[I] Vector   :  3
+Vector length:  65
+[I] Digest result for test vector:  3
+    Expected bit count (Low, High): ( 520,  0)
+    Obtained bit count (Low, High): ( 520,  0)
+    Expected hash (String)        : "cbda40c307784ada92118d491e32b87bbb8ddc8b"
+    Obtained hash (String)        : "cbda40c307784ada92118d491e32b87bbb8ddc8b"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 results match
+--------------------------------------------------------------------------------
+Test Case Number: 10
+Test Case Result: PASSED
+Finished        : 2017/03/13 - 16:50:56
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 11
+Description     : Testing Tiger operation (192-bit, 3 passes) at counter offset and block boundary.
+Started         : 2017/03/13 - 16:50:56
+--------------------------------------------------------------------------------
+[I] Obtained hashes are checked against values obtained by using several online tools
+[I] Checking at counter offset boundary.
+    Number of vectors to test:  3
+[I] Vector   :  1
+Vector length:  55
+[I] Digest result for test vector:  1
+    Expected bit count (Low, High): ( 440,  0)
+    Obtained bit count (Low, High): ( 440,  0)
+    Expected hash (String)        : "ec03564f7ff39bfba848b5ab3ecdf21a1ea371549a7a62e3"
+    Obtained hash (String)        : "ec03564f7ff39bfba848b5ab3ecdf21a1ea371549a7a62e3"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 results match
+[I] Vector   :  2
+Vector length:  56
+[I] Digest result for test vector:  2
+    Expected bit count (Low, High): ( 448,  0)
+    Obtained bit count (Low, High): ( 448,  0)
+    Expected hash (String)        : "45fdd791e96900f7ec26c2923a86f8109a67fb45e50c16c9"
+    Obtained hash (String)        : "45fdd791e96900f7ec26c2923a86f8109a67fb45e50c16c9"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 results match
+[I] Vector   :  3
+Vector length:  57
+[I] Digest result for test vector:  3
+    Expected bit count (Low, High): ( 456,  0)
+    Obtained bit count (Low, High): ( 456,  0)
+    Expected hash (String)        : "c6b54b166ac10f0903d8f90c7fefa68317139a9388339d54"
+    Obtained hash (String)        : "c6b54b166ac10f0903d8f90c7fefa68317139a9388339d54"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 results match
+[I] Checking at block boundary.
+    Number of vectors to test:  3
+[I] Vector   :  1
+Vector length:  63
+[I] Digest result for test vector:  1
+    Expected bit count (Low, High): ( 504,  0)
+    Obtained bit count (Low, High): ( 504,  0)
+    Expected hash (String)        : "9366604ea109e48ed763caabb2d5633b4946eb295ef5781a"
+    Obtained hash (String)        : "9366604ea109e48ed763caabb2d5633b4946eb295ef5781a"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 results match
+[I] Vector   :  2
+Vector length:  64
+[I] Digest result for test vector:  2
+    Expected bit count (Low, High): ( 512,  0)
+    Obtained bit count (Low, High): ( 512,  0)
+    Expected hash (String)        : "7503f313bbea92eddca90c5d3fcc4368237457df366fb76e"
+    Obtained hash (String)        : "7503f313bbea92eddca90c5d3fcc4368237457df366fb76e"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 results match
+[I] Vector   :  3
+Vector length:  65
+[I] Digest result for test vector:  3
+    Expected bit count (Low, High): ( 520,  0)
+    Obtained bit count (Low, High): ( 520,  0)
+    Expected hash (String)        : "cbda40c307784ada92118d491e32b87bbb8ddc8b4f465682"
+    Obtained hash (String)        : "cbda40c307784ada92118d491e32b87bbb8ddc8b4f465682"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 results match
+--------------------------------------------------------------------------------
+Test Case Number: 11
+Test Case Result: PASSED
+Finished        : 2017/03/13 - 16:50:56
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 12
+Description     : Testing Tiger operation (128-bit, 4 passes) at counter offset and block boundary.
+Started         : 2017/03/13 - 16:50:56
+--------------------------------------------------------------------------------
+[I] Obtained hashes are checked against values obtained by using several online tools
+[I] Checking at counter offset boundary.
+    Number of vectors to test:  3
+[I] Vector   :  1
+Vector length:  55
+[I] Digest result for test vector:  1
+    Expected bit count (Low, High): ( 440,  0)
+    Obtained bit count (Low, High): ( 440,  0)
+    Expected hash (String)        : "e862bbc0ebb68d34240f18f1b1f65d19"
+    Obtained hash (String)        : "e862bbc0ebb68d34240f18f1b1f65d19"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 results match
+[I] Vector   :  2
+Vector length:  56
+[I] Digest result for test vector:  2
+    Expected bit count (Low, High): ( 448,  0)
+    Obtained bit count (Low, High): ( 448,  0)
+    Expected hash (String)        : "5bfae3fcd687a1835c27cce47c5df02d"
+    Obtained hash (String)        : "5bfae3fcd687a1835c27cce47c5df02d"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 results match
+[I] Vector   :  3
+Vector length:  57
+[I] Digest result for test vector:  3
+    Expected bit count (Low, High): ( 456,  0)
+    Obtained bit count (Low, High): ( 456,  0)
+    Expected hash (String)        : "f19302ba6021e07dd2d91ad496dea7a2"
+    Obtained hash (String)        : "f19302ba6021e07dd2d91ad496dea7a2"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 results match
+[I] Checking at block boundary.
+    Number of vectors to test:  3
+[I] Vector   :  1
+Vector length:  63
+[I] Digest result for test vector:  1
+    Expected bit count (Low, High): ( 504,  0)
+    Obtained bit count (Low, High): ( 504,  0)
+    Expected hash (String)        : "fe897ca63f7389d73c025b32f4bdce50"
+    Obtained hash (String)        : "fe897ca63f7389d73c025b32f4bdce50"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 results match
+[I] Vector   :  2
+Vector length:  64
+[I] Digest result for test vector:  2
+    Expected bit count (Low, High): ( 512,  0)
+    Obtained bit count (Low, High): ( 512,  0)
+    Expected hash (String)        : "03346632cc7d78562193f6863e20dcaa"
+    Obtained hash (String)        : "03346632cc7d78562193f6863e20dcaa"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 results match
+[I] Vector   :  3
+Vector length:  65
+[I] Digest result for test vector:  3
+    Expected bit count (Low, High): ( 520,  0)
+    Obtained bit count (Low, High): ( 520,  0)
+    Expected hash (String)        : "507a8f807e3871bddae5229f041b3062"
+    Obtained hash (String)        : "507a8f807e3871bddae5229f041b3062"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 results match
+--------------------------------------------------------------------------------
+Test Case Number: 12
+Test Case Result: PASSED
+Finished        : 2017/03/13 - 16:50:56
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 13
+Description     : Testing Tiger operation (160-bit, 4 passes) at counter offset and block boundary.
+Started         : 2017/03/13 - 16:50:56
+--------------------------------------------------------------------------------
+[I] Obtained hashes are checked against values obtained by using several online tools
+[I] Checking at counter offset boundary.
+    Number of vectors to test:  3
+[I] Vector   :  1
+Vector length:  55
+[I] Digest result for test vector:  1
+    Expected bit count (Low, High): ( 440,  0)
+    Obtained bit count (Low, High): ( 440,  0)
+    Expected hash (String)        : "e862bbc0ebb68d34240f18f1b1f65d19d3733b95"
+    Obtained hash (String)        : "e862bbc0ebb68d34240f18f1b1f65d19d3733b95"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 results match
+[I] Vector   :  2
+Vector length:  56
+[I] Digest result for test vector:  2
+    Expected bit count (Low, High): ( 448,  0)
+    Obtained bit count (Low, High): ( 448,  0)
+    Expected hash (String)        : "5bfae3fcd687a1835c27cce47c5df02dabeb3d78"
+    Obtained hash (String)        : "5bfae3fcd687a1835c27cce47c5df02dabeb3d78"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 results match
+[I] Vector   :  3
+Vector length:  57
+[I] Digest result for test vector:  3
+    Expected bit count (Low, High): ( 456,  0)
+    Obtained bit count (Low, High): ( 456,  0)
+    Expected hash (String)        : "f19302ba6021e07dd2d91ad496dea7a2e615c95e"
+    Obtained hash (String)        : "f19302ba6021e07dd2d91ad496dea7a2e615c95e"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 results match
+[I] Checking at block boundary.
+    Number of vectors to test:  3
+[I] Vector   :  1
+Vector length:  63
+[I] Digest result for test vector:  1
+    Expected bit count (Low, High): ( 504,  0)
+    Obtained bit count (Low, High): ( 504,  0)
+    Expected hash (String)        : "fe897ca63f7389d73c025b32f4bdce503a48d310"
+    Obtained hash (String)        : "fe897ca63f7389d73c025b32f4bdce503a48d310"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 results match
+[I] Vector   :  2
+Vector length:  64
+[I] Digest result for test vector:  2
+    Expected bit count (Low, High): ( 512,  0)
+    Obtained bit count (Low, High): ( 512,  0)
+    Expected hash (String)        : "03346632cc7d78562193f6863e20dcaa648dd427"
+    Obtained hash (String)        : "03346632cc7d78562193f6863e20dcaa648dd427"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 results match
+[I] Vector   :  3
+Vector length:  65
+[I] Digest result for test vector:  3
+    Expected bit count (Low, High): ( 520,  0)
+    Obtained bit count (Low, High): ( 520,  0)
+    Expected hash (String)        : "507a8f807e3871bddae5229f041b30629cc5dbe3"
+    Obtained hash (String)        : "507a8f807e3871bddae5229f041b30629cc5dbe3"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 results match
+--------------------------------------------------------------------------------
+Test Case Number: 13
+Test Case Result: PASSED
+Finished        : 2017/03/13 - 16:50:56
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 14
+Description     : Testing Tiger operation (192-bit, 4 passes) at counter offset and block boundary.
+Started         : 2017/03/13 - 16:50:56
+--------------------------------------------------------------------------------
+[I] Obtained hashes are checked against values obtained by using several online tools
+[I] Checking at counter offset boundary.
+    Number of vectors to test:  3
+[I] Vector   :  1
+Vector length:  55
+[I] Digest result for test vector:  1
+    Expected bit count (Low, High): ( 440,  0)
+    Obtained bit count (Low, High): ( 440,  0)
+    Expected hash (String)        : "e862bbc0ebb68d34240f18f1b1f65d19d3733b953e4da5c8"
+    Obtained hash (String)        : "e862bbc0ebb68d34240f18f1b1f65d19d3733b953e4da5c8"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 results match
+[I] Vector   :  2
+Vector length:  56
+[I] Digest result for test vector:  2
+    Expected bit count (Low, High): ( 448,  0)
+    Obtained bit count (Low, High): ( 448,  0)
+    Expected hash (String)        : "5bfae3fcd687a1835c27cce47c5df02dabeb3d788860067d"
+    Obtained hash (String)        : "5bfae3fcd687a1835c27cce47c5df02dabeb3d788860067d"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 results match
+[I] Vector   :  3
+Vector length:  57
+[I] Digest result for test vector:  3
+    Expected bit count (Low, High): ( 456,  0)
+    Obtained bit count (Low, High): ( 456,  0)
+    Expected hash (String)        : "f19302ba6021e07dd2d91ad496dea7a2e615c95e630be0e7"
+    Obtained hash (String)        : "f19302ba6021e07dd2d91ad496dea7a2e615c95e630be0e7"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 results match
+[I] Checking at block boundary.
+    Number of vectors to test:  3
+[I] Vector   :  1
+Vector length:  63
+[I] Digest result for test vector:  1
+    Expected bit count (Low, High): ( 504,  0)
+    Obtained bit count (Low, High): ( 504,  0)
+    Expected hash (String)        : "fe897ca63f7389d73c025b32f4bdce503a48d310a20f7211"
+    Obtained hash (String)        : "fe897ca63f7389d73c025b32f4bdce503a48d310a20f7211"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 results match
+[I] Vector   :  2
+Vector length:  64
+[I] Digest result for test vector:  2
+    Expected bit count (Low, High): ( 512,  0)
+    Obtained bit count (Low, High): ( 512,  0)
+    Expected hash (String)        : "03346632cc7d78562193f6863e20dcaa648dd42738427129"
+    Obtained hash (String)        : "03346632cc7d78562193f6863e20dcaa648dd42738427129"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 results match
+[I] Vector   :  3
+Vector length:  65
+[I] Digest result for test vector:  3
+    Expected bit count (Low, High): ( 520,  0)
+    Obtained bit count (Low, High): ( 520,  0)
+    Expected hash (String)        : "507a8f807e3871bddae5229f041b30629cc5dbe3c41b2742"
+    Obtained hash (String)        : "507a8f807e3871bddae5229f041b30629cc5dbe3c41b2742"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 results match
+--------------------------------------------------------------------------------
+Test Case Number: 14
+Test Case Result: PASSED
+Finished        : 2017/03/13 - 16:50:56
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 5
+Description     : Another standard Tiger (192-bit, 3 passes) test vector: 1,000,000 repetitions of 'a'
+Started         : 2017/03/13 - 16:50:56
+--------------------------------------------------------------------------------
+[I] Performng 1,000 iteratios with a 1,000 bytes buffer
+    Expected bit count (Low, High): ( 8000000,  0)
+    Expected hash                 : "6db0e2729cbead93d715c6a7d36302e9b3cee0d2bc314b41"
+    Obtained bit count (Low, High): ( 8000000,  0)
+    Obtained hash                 : "6db0e2729cbead93d715c6a7d36302e9b3cee0d2bc314b41"
+[I] Counters match
+[I] Hashes match
+--------------------------------------------------------------------------------
+Test Case Number: 15
+Test Case Result: PASSED
+Finished        : 2017/03/13 - 16:50:56
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Tiger
+Finished                 : 2017/03/13 - 16:50:56
+================================================================================

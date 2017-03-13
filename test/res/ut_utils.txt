@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Utils
 Description              : Unit test driver for CryptAda.Tests.Utils functionality.
-Started                  : 2017/03/13 - 15:36:31
+Started                  : 2017/03/13 - 16:50:55
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Printing messages
-Started         : 2017/03/13 - 15:36:31
+Started         : 2017/03/13 - 16:50:55
 --------------------------------------------------------------------------------
 [I] This is an information message.
 [E] This is an error message.
@@ -22,11 +22,11 @@ Another simple message.
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/13 - 15:36:31
+Finished        : 2017/03/13 - 16:50:55
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Utils
-Finished                 : 2017/03/13 - 15:36:31
+Finished                 : 2017/03/13 - 16:50:55
 ================================================================================

@@ -70,6 +70,7 @@ DELCMD = rm -f
 #>>>[Objects]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 UNITDRV  =  $(TBIN)/ut_utils.exe \
+            $(TBIN)/ut_format.exe \
             $(TBIN)/ut_pragmatics.exe \
             $(TBIN)/ut_bvectors.exe \
             $(TBIN)/ut_hexenc.exe \
@@ -86,7 +87,11 @@ UNITDRV  =  $(TBIN)/ut_utils.exe \
             $(TBIN)/ut_sha_224.exe \
             $(TBIN)/ut_sha_256.exe \
             $(TBIN)/ut_sha_384.exe \
-            $(TBIN)/ut_sha_512.exe
+            $(TBIN)/ut_sha_512.exe \
+            $(TBIN)/ut_snefru.exe \
+            $(TBIN)/ut_tiger.exe \
+            $(TBIN)/ut_haval.exe \
+            $(TBIN)/ut_whirlpool.exe
             
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -95,6 +100,10 @@ UNITDRV  =  $(TBIN)/ut_utils.exe \
 #>>>[Building Unit Test Drivers]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 $(TBIN)/ut_utils.exe: $(TSRCUDRV)ut_utils.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_format.exe: $(TSRCUDRV)ut_format.adb
 	@echo Building $<
 	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
 
@@ -163,6 +172,22 @@ $(TBIN)/ut_sha_384.exe: $(TSRCUDRV)ut_sha_384.adb
 	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
 
 $(TBIN)/ut_sha_512.exe: $(TSRCUDRV)ut_sha_512.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_snefru.exe: $(TSRCUDRV)ut_snefru.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+    
+$(TBIN)/ut_tiger.exe: $(TSRCUDRV)ut_tiger.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_haval.exe: $(TSRCUDRV)ut_haval.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+    
+$(TBIN)/ut_whirlpool.exe: $(TSRCUDRV)ut_whirlpool.adb
 	@echo Building $<
 	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
     

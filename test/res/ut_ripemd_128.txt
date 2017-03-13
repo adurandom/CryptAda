@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.RIPEMD_128
 Description              : Unit test driver for CryptAda.Digests.Algorithms.RIPEMD_128 functionality.
-Started                  : 2017/03/13 - 15:36:31
+Started                  : 2017/03/13 - 16:50:56
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : CryptAda message digest basic operation
-Started         : 2017/03/13 - 15:36:31
+Started         : 2017/03/13 - 16:50:56
 --------------------------------------------------------------------------------
 [I] Digest object information before Digest_Start()
 [I] Information of digest object:
@@ -65,13 +65,13 @@ Started         : 2017/03/13 - 15:36:31
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/13 - 15:36:31
+Finished        : 2017/03/13 - 16:50:56
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Standard RIPEMD-128 test vectors
-Started         : 2017/03/13 - 15:36:31
+Started         : 2017/03/13 - 16:50:56
 --------------------------------------------------------------------------------
 [I] Standard test vectors obtained from https://homes.esat.kuleuven.be/~bosselae/ripemd160.html
     Number of vectors to test:  8
@@ -203,13 +203,13 @@ Started         : 2017/03/13 - 15:36:31
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/13 - 15:36:31
+Finished        : 2017/03/13 - 16:50:56
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : CryptAda RIPEMD-128 test vectors
-Started         : 2017/03/13 - 15:36:31
+Started         : 2017/03/13 - 16:50:56
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
     Number of vectors to test:  9
@@ -373,13 +373,13 @@ Started         : 2017/03/13 - 15:36:31
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/13 - 15:36:31
+Finished        : 2017/03/13 - 16:50:56
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Testing RIPEMD-128 operation at counter offset and block boundary.
-Started         : 2017/03/13 - 15:36:31
+Started         : 2017/03/13 - 16:50:56
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at counter offset boundary.
@@ -449,13 +449,13 @@ Vector length:  65
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/13 - 15:36:31
+Finished        : 2017/03/13 - 16:50:56
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Another standard RIPEMD-128 test vector: 1,000,000 repetitions of 'a'
-Started         : 2017/03/13 - 15:36:31
+Started         : 2017/03/13 - 16:50:56
 --------------------------------------------------------------------------------
 [I] Performng 1,000 iteratios with a 1,000 bytes buffer
     Expected bit count (Low, High): ( 8000000,  0)
@@ -467,11 +467,11 @@ Started         : 2017/03/13 - 15:36:31
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/03/13 - 15:36:31
+Finished        : 2017/03/13 - 16:50:56
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.RIPEMD_128
-Finished                 : 2017/03/13 - 15:36:31
+Finished                 : 2017/03/13 - 16:50:56
 ================================================================================

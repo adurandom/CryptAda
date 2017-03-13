@@ -1,0 +1,428 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.1.a (2017/03/31)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Format
+Description              : Unit test driver for CryptAda.Utils.Format functionality.
+Started                  : 2017/03/13 - 16:50:55
+================================================================================
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Formating byte values
+Started         : 2017/03/13 - 16:50:55
+--------------------------------------------------------------------------------
+[I] Interfaces Tested: 
+- To_Hex_String(Byte)
+[I] Performing 20 iterations
+[I] Byte value:  177
+Formatted value (Ada Style): "16#B1#"
+Formatted value (C Style)  : "0xb1"
+[I] Byte value:  156
+Formatted value (Ada Style): "16#9C#"
+Formatted value (C Style)  : "0x9c"
+[I] Byte value:  219
+Formatted value (Ada Style): "16#DB#"
+Formatted value (C Style)  : "0xdb"
+[I] Byte value:  143
+Formatted value (Ada Style): "16#8F#"
+Formatted value (C Style)  : "0x8f"
+[I] Byte value:  248
+Formatted value (Ada Style): "16#F8#"
+Formatted value (C Style)  : "0xf8"
+[I] Byte value:  180
+Formatted value (Ada Style): "16#B4#"
+Formatted value (C Style)  : "0xb4"
+[I] Byte value:  245
+Formatted value (Ada Style): "16#F5#"
+Formatted value (C Style)  : "0xf5"
+[I] Byte value:  165
+Formatted value (Ada Style): "16#A5#"
+Formatted value (C Style)  : "0xa5"
+[I] Byte value:  49
+Formatted value (Ada Style): "16#31#"
+Formatted value (C Style)  : "0x31"
+[I] Byte value:  156
+Formatted value (Ada Style): "16#9C#"
+Formatted value (C Style)  : "0x9c"
+[I] Byte value:  83
+Formatted value (Ada Style): "16#53#"
+Formatted value (C Style)  : "0x53"
+[I] Byte value:  57
+Formatted value (Ada Style): "16#39#"
+Formatted value (C Style)  : "0x39"
+[I] Byte value:  228
+Formatted value (Ada Style): "16#E4#"
+Formatted value (C Style)  : "0xe4"
+[I] Byte value:  164
+Formatted value (Ada Style): "16#A4#"
+Formatted value (C Style)  : "0xa4"
+[I] Byte value:  94
+Formatted value (Ada Style): "16#5E#"
+Formatted value (C Style)  : "0x5e"
+[I] Byte value:  23
+Formatted value (Ada Style): "16#17#"
+Formatted value (C Style)  : "0x17"
+[I] Byte value:  37
+Formatted value (Ada Style): "16#25#"
+Formatted value (C Style)  : "0x25"
+[I] Byte value:  211
+Formatted value (Ada Style): "16#D3#"
+Formatted value (C Style)  : "0xd3"
+[I] Byte value:  161
+Formatted value (Ada Style): "16#A1#"
+Formatted value (C Style)  : "0xa1"
+[I] Byte value:  63
+Formatted value (Ada Style): "16#3F#"
+Formatted value (C Style)  : "0x3f"
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/03/13 - 16:50:55
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Formating Two_Bytes values
+Started         : 2017/03/13 - 16:50:55
+--------------------------------------------------------------------------------
+[I] Interfaces Tested: 
+- To_Hex_String(Two_Bytes)
+[I] Performing 20 iterations
+[I] Two_Bytes value:  9919
+Formatted value (Ada Style): "16#26BF#"
+Formatted value (C Style)  : "0x26bf"
+[I] Two_Bytes value:  45976
+Formatted value (Ada Style): "16#B398#"
+Formatted value (C Style)  : "0xb398"
+[I] Two_Bytes value:  53010
+Formatted value (Ada Style): "16#CF12#"
+Formatted value (C Style)  : "0xcf12"
+[I] Two_Bytes value:  62181
+Formatted value (Ada Style): "16#F2E5#"
+Formatted value (C Style)  : "0xf2e5"
+[I] Two_Bytes value:  45731
+Formatted value (Ada Style): "16#B2A3#"
+Formatted value (C Style)  : "0xb2a3"
+[I] Two_Bytes value:  63923
+Formatted value (Ada Style): "16#F9B3#"
+Formatted value (C Style)  : "0xf9b3"
+[I] Two_Bytes value:  53046
+Formatted value (Ada Style): "16#CF36#"
+Formatted value (C Style)  : "0xcf36"
+[I] Two_Bytes value:  38234
+Formatted value (Ada Style): "16#955A#"
+Formatted value (C Style)  : "0x955a"
+[I] Two_Bytes value:  34139
+Formatted value (Ada Style): "16#855B#"
+Formatted value (C Style)  : "0x855b"
+[I] Two_Bytes value:  5467
+Formatted value (Ada Style): "16#155B#"
+Formatted value (C Style)  : "0x155b"
+[I] Two_Bytes value:  22981
+Formatted value (Ada Style): "16#59C5#"
+Formatted value (C Style)  : "0x59c5"
+[I] Two_Bytes value:  2684
+Formatted value (Ada Style): "16#0A7C#"
+Formatted value (C Style)  : "0x0a7c"
+[I] Two_Bytes value:  42903
+Formatted value (Ada Style): "16#A797#"
+Formatted value (C Style)  : "0xa797"
+[I] Two_Bytes value:  42359
+Formatted value (Ada Style): "16#A577#"
+Formatted value (C Style)  : "0xa577"
+[I] Two_Bytes value:  16362
+Formatted value (Ada Style): "16#3FEA#"
+Formatted value (C Style)  : "0x3fea"
+[I] Two_Bytes value:  62417
+Formatted value (Ada Style): "16#F3D1#"
+Formatted value (C Style)  : "0xf3d1"
+[I] Two_Bytes value:  36106
+Formatted value (Ada Style): "16#8D0A#"
+Formatted value (C Style)  : "0x8d0a"
+[I] Two_Bytes value:  63643
+Formatted value (Ada Style): "16#F89B#"
+Formatted value (C Style)  : "0xf89b"
+[I] Two_Bytes value:  56871
+Formatted value (Ada Style): "16#DE27#"
+Formatted value (C Style)  : "0xde27"
+[I] Two_Bytes value:  52018
+Formatted value (Ada Style): "16#CB32#"
+Formatted value (C Style)  : "0xcb32"
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/03/13 - 16:50:55
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Formating Four_Bytes values
+Started         : 2017/03/13 - 16:50:55
+--------------------------------------------------------------------------------
+[I] Interfaces Tested: 
+- To_Hex_String(Four_Bytes)
+[I] Performing 20 iterations
+[I] Four_Bytes value:  2603868455
+Formatted value (Ada Style): "16#9B33E127#"
+Formatted value (C Style)  : "0x9b33e127"
+[I] Four_Bytes value:  3651092758
+Formatted value (Ada Style): "16#D99F4116#"
+Formatted value (C Style)  : "0xd99f4116"
+[I] Four_Bytes value:  376075480
+Formatted value (Ada Style): "16#166A74D8#"
+Formatted value (C Style)  : "0x166a74d8"
+[I] Four_Bytes value:  560166704
+Formatted value (Ada Style): "16#21637730#"
+Formatted value (C Style)  : "0x21637730"
+[I] Four_Bytes value:  555086796
+Formatted value (Ada Style): "16#2115F3CC#"
+Formatted value (C Style)  : "0x2115f3cc"
+[I] Four_Bytes value:  2829684403
+Formatted value (Ada Style): "16#A8A98EB3#"
+Formatted value (C Style)  : "0xa8a98eb3"
+[I] Four_Bytes value:  2296984706
+Formatted value (Ada Style): "16#88E93482#"
+Formatted value (C Style)  : "0x88e93482"
+[I] Four_Bytes value:  4120783304
+Formatted value (Ada Style): "16#F59E29C8#"
+Formatted value (C Style)  : "0xf59e29c8"
+[I] Four_Bytes value:  2911437711
+Formatted value (Ada Style): "16#AD89038F#"
+Formatted value (C Style)  : "0xad89038f"
+[I] Four_Bytes value:  2616671594
+Formatted value (Ada Style): "16#9BF73D6A#"
+Formatted value (C Style)  : "0x9bf73d6a"
+[I] Four_Bytes value:  1702737811
+Formatted value (Ada Style): "16#657DB793#"
+Formatted value (C Style)  : "0x657db793"
+[I] Four_Bytes value:  3837561936
+Formatted value (Ada Style): "16#E4BC8C50#"
+Formatted value (C Style)  : "0xe4bc8c50"
+[I] Four_Bytes value:  669073166
+Formatted value (Ada Style): "16#27E13F0E#"
+Formatted value (C Style)  : "0x27e13f0e"
+[I] Four_Bytes value:  476806075
+Formatted value (Ada Style): "16#1C6B7BBB#"
+Formatted value (C Style)  : "0x1c6b7bbb"
+[I] Four_Bytes value:  1213615696
+Formatted value (Ada Style): "16#48564E50#"
+Formatted value (C Style)  : "0x48564e50"
+[I] Four_Bytes value:  323775484
+Formatted value (Ada Style): "16#134C6BFC#"
+Formatted value (C Style)  : "0x134c6bfc"
+[I] Four_Bytes value:  2335496063
+Formatted value (Ada Style): "16#8B34D77F#"
+Formatted value (C Style)  : "0x8b34d77f"
+[I] Four_Bytes value:  1692596864
+Formatted value (Ada Style): "16#64E2FA80#"
+Formatted value (C Style)  : "0x64e2fa80"
+[I] Four_Bytes value:  3981254410
+Formatted value (Ada Style): "16#ED4D1F0A#"
+Formatted value (C Style)  : "0xed4d1f0a"
+[I] Four_Bytes value:  748128235
+Formatted value (Ada Style): "16#2C9787EB#"
+Formatted value (C Style)  : "0x2c9787eb"
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/03/13 - 16:50:55
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : Formating Eight_Bytes values
+Started         : 2017/03/13 - 16:50:55
+--------------------------------------------------------------------------------
+[I] Interfaces Tested: 
+- To_Hex_String(Eight_Bytes)
+[I] Performing 20 iterations
+[I] Eight_Bytes value:  1290461023782601117
+Formatted value (Ada Style): "16#11E8A376C70C819D#"
+Formatted value (C Style)  : "0x11e8a376c70c819d"
+[I] Eight_Bytes value:  10753425570654649731
+Formatted value (Ada Style): "16#953BD7951978FD83#"
+Formatted value (C Style)  : "0x953bd7951978fd83"
+[I] Eight_Bytes value:  16563241884799076917
+Formatted value (Ada Style): "16#E5DC74BD08520A35#"
+Formatted value (C Style)  : "0xe5dc74bd08520a35"
+[I] Eight_Bytes value:  16832212425475838454
+Formatted value (Ada Style): "16#E9980805246751F6#"
+Formatted value (C Style)  : "0xe9980805246751f6"
+[I] Eight_Bytes value:  2945385799600913906
+Formatted value (Ada Style): "16#28E01CC787B13DF2#"
+Formatted value (C Style)  : "0x28e01cc787b13df2"
+[I] Eight_Bytes value:  2173259518959156787
+Formatted value (Ada Style): "16#1E28F804A04BFE33#"
+Formatted value (C Style)  : "0x1e28f804a04bfe33"
+[I] Eight_Bytes value:  12448965042999040248
+Formatted value (Ada Style): "16#ACC39BBFC93698F8#"
+Formatted value (C Style)  : "0xacc39bbfc93698f8"
+[I] Eight_Bytes value:  14674412952365857511
+Formatted value (Ada Style): "16#CBA5FCD4F1287AE7#"
+Formatted value (C Style)  : "0xcba5fcd4f1287ae7"
+[I] Eight_Bytes value:  3363947310314800874
+Formatted value (Ada Style): "16#2EAF24417A71C6EA#"
+Formatted value (C Style)  : "0x2eaf24417a71c6ea"
+[I] Eight_Bytes value:  12765175787970897378
+Formatted value (Ada Style): "16#B12703BF116C25E2#"
+Formatted value (C Style)  : "0xb12703bf116c25e2"
+[I] Eight_Bytes value:  2051577660205938533
+Formatted value (Ada Style): "16#1C78AB0321B3B765#"
+Formatted value (C Style)  : "0x1c78ab0321b3b765"
+[I] Eight_Bytes value:  56254921423426970
+Formatted value (Ada Style): "16#00C7DB8D904F959A#"
+Formatted value (C Style)  : "0x00c7db8d904f959a"
+[I] Eight_Bytes value:  16516078085821002666
+Formatted value (Ada Style): "16#E534E5835BF973AA#"
+Formatted value (C Style)  : "0xe534e5835bf973aa"
+[I] Eight_Bytes value:  10958927790854305868
+Formatted value (Ada Style): "16#9815EEC34D06F84C#"
+Formatted value (C Style)  : "0x9815eec34d06f84c"
+[I] Eight_Bytes value:  9166082222969029418
+Formatted value (Ada Style): "16#7F347737C217832A#"
+Formatted value (C Style)  : "0x7f347737c217832a"
+[I] Eight_Bytes value:  14207787387898880905
+Formatted value (Ada Style): "16#C52C335A6BFCE389#"
+Formatted value (C Style)  : "0xc52c335a6bfce389"
+[I] Eight_Bytes value:  10444662636848069920
+Formatted value (Ada Style): "16#90F2E5547C1FBD20#"
+Formatted value (C Style)  : "0x90f2e5547c1fbd20"
+[I] Eight_Bytes value:  10878548250325746874
+Formatted value (Ada Style): "16#96F85DFF249D04BA#"
+Formatted value (C Style)  : "0x96f85dff249d04ba"
+[I] Eight_Bytes value:  3635521831845241095
+Formatted value (Ada Style): "16#3273F7D820502107#"
+Formatted value (C Style)  : "0x3273f7d820502107"
+[I] Eight_Bytes value:  1104116772647679964
+Formatted value (Ada Style): "16#0F529C5AD83737DC#"
+Formatted value (C Style)  : "0x0f529c5ad83737dc"
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/03/13 - 16:50:55
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 5
+Description     : Formating Byte_Array values
+Started         : 2017/03/13 - 16:50:55
+--------------------------------------------------------------------------------
+[I] Interfaces Tested: 
+- To_Hex_String(Byte_Array)
+[I] Formatting 10 arrays with 6 elements per line
+[I] Array  1, Length:  0
+Formatted array:
+
+[I] Array  2, Length:  5
+Formatted array:
+16#BE#, 16#17#, 16#15#, 16#18#, 16#20#
+[I] Array  3, Length:  10
+Formatted array:
+16#1E#, 16#8F#, 16#08#, 16#CC#, 16#00#, 16#D7#, 
+16#BE#, 16#4E#, 16#29#, 16#89#
+[I] Array  4, Length:  15
+Formatted array:
+16#1F#, 16#35#, 16#AF#, 16#CF#, 16#98#, 16#D7#, 
+16#EC#, 16#C2#, 16#F5#, 16#2C#, 16#AF#, 16#61#, 
+16#8F#, 16#87#, 16#7B#
+[I] Array  5, Length:  20
+Formatted array:
+16#49#, 16#9C#, 16#78#, 16#4C#, 16#11#, 16#23#, 
+16#63#, 16#28#, 16#0E#, 16#9A#, 16#54#, 16#E8#, 
+16#CA#, 16#39#, 16#D2#, 16#D3#, 16#A1#, 16#FB#, 
+16#2B#, 16#84#
+[I] Array  6, Length:  25
+Formatted array:
+16#91#, 16#67#, 16#49#, 16#74#, 16#21#, 16#F8#, 
+16#BE#, 16#DE#, 16#E3#, 16#57#, 16#DE#, 16#73#, 
+16#5E#, 16#38#, 16#23#, 16#15#, 16#E3#, 16#B4#, 
+16#C5#, 16#65#, 16#75#, 16#24#, 16#72#, 16#AF#, 
+16#D4#
+[I] Array  7, Length:  30
+Formatted array:
+16#9E#, 16#69#, 16#89#, 16#DB#, 16#38#, 16#D1#, 
+16#58#, 16#E3#, 16#39#, 16#C2#, 16#B3#, 16#CD#, 
+16#43#, 16#D2#, 16#68#, 16#9E#, 16#6A#, 16#88#, 
+16#41#, 16#12#, 16#97#, 16#EC#, 16#BA#, 16#95#, 
+16#ED#, 16#CA#, 16#3B#, 16#96#, 16#6E#, 16#0C#
+[I] Array  8, Length:  35
+Formatted array:
+16#5D#, 16#08#, 16#5C#, 16#B6#, 16#EB#, 16#DC#, 
+16#6D#, 16#06#, 16#D8#, 16#FC#, 16#F0#, 16#FB#, 
+16#E9#, 16#B3#, 16#24#, 16#5D#, 16#5F#, 16#C1#, 
+16#A1#, 16#03#, 16#FA#, 16#F7#, 16#92#, 16#AC#, 
+16#E9#, 16#C4#, 16#2A#, 16#ED#, 16#F7#, 16#70#, 
+16#66#, 16#5F#, 16#1E#, 16#7B#, 16#D7#
+[I] Array  9, Length:  40
+Formatted array:
+16#B4#, 16#BD#, 16#AE#, 16#6C#, 16#AB#, 16#65#, 
+16#A8#, 16#1E#, 16#40#, 16#09#, 16#72#, 16#A5#, 
+16#69#, 16#39#, 16#7C#, 16#AC#, 16#A3#, 16#AF#, 
+16#9D#, 16#3D#, 16#A8#, 16#97#, 16#B9#, 16#1A#, 
+16#79#, 16#31#, 16#AE#, 16#25#, 16#B4#, 16#A3#, 
+16#05#, 16#61#, 16#20#, 16#35#, 16#89#, 16#E6#, 
+16#40#, 16#C7#, 16#65#, 16#EC#
+[I] Array  10, Length:  45
+Formatted array:
+16#59#, 16#27#, 16#44#, 16#28#, 16#F7#, 16#9B#, 
+16#25#, 16#4C#, 16#E1#, 16#6A#, 16#D6#, 16#3E#, 
+16#4A#, 16#3E#, 16#13#, 16#59#, 16#91#, 16#21#, 
+16#98#, 16#23#, 16#41#, 16#8C#, 16#25#, 16#B5#, 
+16#51#, 16#CE#, 16#05#, 16#87#, 16#19#, 16#58#, 
+16#A8#, 16#3A#, 16#17#, 16#DF#, 16#4B#, 16#E4#, 
+16#9C#, 16#68#, 16#C4#, 16#FE#, 16#CC#, 16#09#, 
+16#3C#, 16#13#, 16#2B#
+[I] Formatting 10 arrays with 16 elements per line
+[I] Array  1, Length:  0
+Formatted array:
+
+[I] Array  2, Length:  5
+Formatted array:
+16#25#, 16#C0#, 16#60#, 16#C9#, 16#EC#
+[I] Array  3, Length:  10
+Formatted array:
+16#79#, 16#EC#, 16#B6#, 16#3D#, 16#0F#, 16#A4#, 16#A5#, 16#62#, 16#1B#, 16#B4#
+[I] Array  4, Length:  15
+Formatted array:
+16#E5#, 16#42#, 16#EA#, 16#A2#, 16#E6#, 16#A9#, 16#EB#, 16#E9#, 16#53#, 16#39#, 16#A6#, 16#B3#, 16#6D#, 16#FB#, 16#4D#
+[I] Array  5, Length:  20
+Formatted array:
+16#39#, 16#B8#, 16#DD#, 16#C4#, 16#61#, 16#8E#, 16#41#, 16#6B#, 16#84#, 16#B7#, 16#D3#, 16#09#, 16#73#, 16#DB#, 16#02#, 16#E4#, 
+16#37#, 16#E8#, 16#72#, 16#28#
+[I] Array  6, Length:  25
+Formatted array:
+16#4D#, 16#1B#, 16#7F#, 16#B8#, 16#32#, 16#4C#, 16#93#, 16#14#, 16#98#, 16#9A#, 16#E4#, 16#CE#, 16#50#, 16#6D#, 16#76#, 16#6A#, 
+16#E2#, 16#85#, 16#57#, 16#5A#, 16#CF#, 16#DB#, 16#A6#, 16#1D#, 16#5F#
+[I] Array  7, Length:  30
+Formatted array:
+16#00#, 16#EE#, 16#A6#, 16#97#, 16#BF#, 16#1F#, 16#3E#, 16#57#, 16#40#, 16#21#, 16#9C#, 16#73#, 16#6F#, 16#69#, 16#04#, 16#92#, 
+16#7B#, 16#6E#, 16#B7#, 16#24#, 16#60#, 16#EC#, 16#2B#, 16#DD#, 16#6D#, 16#79#, 16#7B#, 16#34#, 16#B4#, 16#8E#
+[I] Array  8, Length:  35
+Formatted array:
+16#2D#, 16#02#, 16#1A#, 16#76#, 16#C8#, 16#B9#, 16#90#, 16#7F#, 16#E4#, 16#85#, 16#80#, 16#F1#, 16#01#, 16#AA#, 16#42#, 16#B8#, 
+16#75#, 16#B2#, 16#12#, 16#95#, 16#58#, 16#55#, 16#CB#, 16#70#, 16#56#, 16#29#, 16#D4#, 16#49#, 16#76#, 16#DC#, 16#31#, 16#13#, 
+16#B7#, 16#A3#, 16#9C#
+[I] Array  9, Length:  40
+Formatted array:
+16#4D#, 16#FF#, 16#5E#, 16#B4#, 16#25#, 16#A0#, 16#07#, 16#5C#, 16#55#, 16#BF#, 16#4D#, 16#F4#, 16#9D#, 16#29#, 16#A6#, 16#16#, 
+16#87#, 16#5D#, 16#19#, 16#05#, 16#CD#, 16#30#, 16#54#, 16#45#, 16#50#, 16#3E#, 16#72#, 16#80#, 16#FA#, 16#64#, 16#44#, 16#33#, 
+16#A2#, 16#9E#, 16#67#, 16#B3#, 16#16#, 16#A2#, 16#F2#, 16#26#
+[I] Array  10, Length:  45
+Formatted array:
+16#CF#, 16#C6#, 16#38#, 16#09#, 16#3C#, 16#AF#, 16#50#, 16#45#, 16#B9#, 16#F9#, 16#D8#, 16#04#, 16#41#, 16#8C#, 16#E6#, 16#0A#, 
+16#CA#, 16#22#, 16#5F#, 16#74#, 16#D1#, 16#0C#, 16#E5#, 16#7D#, 16#B8#, 16#4A#, 16#DA#, 16#04#, 16#52#, 16#30#, 16#C6#, 16#BA#, 
+16#07#, 16#84#, 16#D4#, 16#15#, 16#19#, 16#3D#, 16#1D#, 16#0F#, 16#77#, 16#11#, 16#8F#, 16#47#, 16#BD#
+--------------------------------------------------------------------------------
+Test Case Number: 5
+Test Case Result: PASSED
+Finished        : 2017/03/13 - 16:50:55
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Format
+Finished                 : 2017/03/13 - 16:50:55
+================================================================================
