@@ -72,6 +72,10 @@ DELCMD = rm -f
 UNITDRV  =  $(TBIN)/ut_utils.exe \
             $(TBIN)/ut_pragmatics.exe \
             $(TBIN)/ut_bvectors.exe \
+            $(TBIN)/ut_hexenc.exe \
+            $(TBIN)/ut_b16enc.exe \
+            $(TBIN)/ut_b64enc.exe \
+            $(TBIN)/ut_mimeenc.exe 
             
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -88,6 +92,22 @@ $(TBIN)/ut_pragmatics.exe: $(TSRCUDRV)ut_pragmatics.adb
 	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
 
 $(TBIN)/ut_bvectors.exe: $(TSRCUDRV)ut_bvectors.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_hexenc.exe: $(TSRCUDRV)ut_hexenc.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_b16enc.exe: $(TSRCUDRV)ut_b16enc.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_b64enc.exe: $(TSRCUDRV)ut_b64enc.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_mimeenc.exe: $(TSRCUDRV)ut_mimeenc.adb
 	@echo Building $<
 	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
     
