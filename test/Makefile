@@ -19,7 +19,7 @@
 # Author         : ADD
 # Creaton date   : February 11th, 2017
 # Current version: 1.0
-# Purpose        : Makefile for testing AdaCrypt library.
+# Purpose        : Makefile for testing CryptAda library.
 #
 # Ver   Date     Author          Reason
 # ----- -------- --------------- -----------------------------------------------
@@ -75,7 +75,9 @@ UNITDRV  =  $(TBIN)/ut_utils.exe \
             $(TBIN)/ut_hexenc.exe \
             $(TBIN)/ut_b16enc.exe \
             $(TBIN)/ut_b64enc.exe \
-            $(TBIN)/ut_mimeenc.exe 
+            $(TBIN)/ut_mimeenc.exe \
+            $(TBIN)/ut_count.exe \
+            $(TBIN)/ut_md2.exe
             
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -108,6 +110,14 @@ $(TBIN)/ut_b64enc.exe: $(TSRCUDRV)ut_b64enc.adb
 	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
 
 $(TBIN)/ut_mimeenc.exe: $(TSRCUDRV)ut_mimeenc.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_count.exe: $(TSRCUDRV)ut_count.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_md2.exe: $(TSRCUDRV)ut_md2.adb
 	@echo Building $<
 	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
     

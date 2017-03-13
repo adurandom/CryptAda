@@ -38,11 +38,12 @@ NAMESDIR    =  $(SRCDIR)/names
 PRAGMADIR   =  $(SRCDIR)/pragmatics
 UTILSDIR    =  $(SRCDIR)/utils
 ENCSDIR     =  $(SRCDIR)/encoders
+DIGDIR      =  $(SRCDIR)/digests
 
 #>>>[Compilation]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 ADACC       =  gnatmake -c 
-SOURCEDIRS  =  -I$(BASEDIR)/ -I$(NAMESDIR)/ -I$(PRAGMADIR)/ -I$(ENCSDIR)/
+SOURCEDIRS  =  -I$(BASEDIR)/ -I$(NAMESDIR)/ -I$(PRAGMADIR)/ -I$(ENCSDIR)/ -I$(DIGDIR)/
 CFLAGS      =  $(SOURCEDIRS) -D $(OBJDIR) -O3 -gnat05 -gnata -gnatn -gnatwa
 
 #>>>[Delete command]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -68,7 +69,12 @@ OBJS     =  cryptada.o \
             cryptada-encoders-hex_encoders.o \
             cryptada-encoders-base16_encoders.o \
             cryptada-encoders-base64_encoders.o \
-            cryptada-encoders-base64_encoders-mime_encoders.o
+            cryptada-encoders-base64_encoders-mime_encoders.o \
+            cryptada-digests.o \
+            cryptada-digests-hashes.o \
+            cryptada-digests-counters.o \
+            cryptada-digests-algorithms.o \
+            cryptada-digests-algorithms-md2.o
 
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -147,6 +153,28 @@ cryptada-encoders-base64_encoders.o: $(ENCSDIR)/cryptada-encoders-base64_encoder
 	$(ADACC) $(CFLAGS) $<
 
 cryptada-encoders-base64_encoders-mime_encoders.o: $(ENCSDIR)/cryptada-encoders-base64_encoders-mime_encoders.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+# Digests packages
+
+cryptada-digests.o: $(DIGDIR)/cryptada-digests.ads
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-digests-hashes.o: $(DIGDIR)/cryptada-digests-hashes.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-digests-counters.o: $(DIGDIR)/cryptada-digests-counters.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-digests-algorithms.o: $(DIGDIR)/cryptada-digests-algorithms.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-digests-algorithms-md2.o: $(DIGDIR)/cryptada-digests-algorithms-md2.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
     

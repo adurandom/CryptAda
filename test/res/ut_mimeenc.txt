@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.MIME_Encoders
 Description              : Unit test driver for CryptAda.Encoders.Base64_Encoders.MIME_Encoders functionality.
-Started                  : 2017/03/13 - 12:10:43
+Started                  : 2017/03/13 - 13:21:12
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Testing state and counters during encoding.
-Started         : 2017/03/13 - 12:10:43
+Started         : 2017/03/13 - 13:21:12
 --------------------------------------------------------------------------------
 [I] Initial state of encoder object ...
 [I] Checking encoder state:
@@ -74,13 +74,13 @@ cnN0dXZ3eHl6e3x9fn8="
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/13 - 12:10:43
+Finished        : 2017/03/13 - 13:21:12
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Testing CryptAda_Bad_Operation_Error raising in Idle_State
-Started         : 2017/03/13 - 12:10:43
+Started         : 2017/03/13 - 13:21:12
 --------------------------------------------------------------------------------
 [I] Initial state of encoder object is State_Idle
 [I] Checking encoder state:
@@ -103,13 +103,13 @@ Obtained Code Count:  0
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/13 - 12:10:43
+Finished        : 2017/03/13 - 13:21:12
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Testing CryptAda_Bad_Operation_Error raising in Encoding_State
-Started         : 2017/03/13 - 12:10:43
+Started         : 2017/03/13 - 13:21:12
 --------------------------------------------------------------------------------
 [I] Initial state of encoder object is State_Idle
 [I] Checking encoder state:
@@ -143,13 +143,13 @@ Obtained Code Count:  0
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/13 - 12:10:43
+Finished        : 2017/03/13 - 13:21:12
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Testing state and counters during decoding.
-Started         : 2017/03/13 - 12:10:43
+Started         : 2017/03/13 - 13:21:12
 --------------------------------------------------------------------------------
 [I] Initial state of encoder object ...
 [I] Checking encoder state:
@@ -217,13 +217,13 @@ Obtained decoded array:
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/13 - 12:10:43
+Finished        : 2017/03/13 - 13:21:12
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Testing CryptAda_Bad_Operation_Error raising in Decoding_State
-Started         : 2017/03/13 - 12:10:43
+Started         : 2017/03/13 - 13:21:12
 --------------------------------------------------------------------------------
 [I] Initial state of encoder object is State_Idle
 [I] Checking encoder state:
@@ -257,13 +257,13 @@ Obtained Code Count:  0
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/03/13 - 12:10:43
+Finished        : 2017/03/13 - 13:21:12
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : Testing MIME encoding/decoding with different line lengths
-Started         : 2017/03/13 - 12:10:43
+Started         : 2017/03/13 - 13:21:12
 --------------------------------------------------------------------------------
 [I] Encoding with line length =  2147483647
 Must use line length =  76
@@ -346,13 +346,13 @@ BxcnN0dXZ3eHl6e3x9fn8="
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/03/13 - 12:10:43
+Finished        : 2017/03/13 - 13:21:12
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
 Description     : Encoding and decoding one byte/code at a time.
-Started         : 2017/03/13 - 12:10:43
+Started         : 2017/03/13 - 13:21:12
 --------------------------------------------------------------------------------
 [I] Encoding byte by byte using line length of 3
 Byte array to encode
@@ -453,13 +453,13 @@ Fy"
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/03/13 - 12:10:43
+Finished        : 2017/03/13 - 13:21:12
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 8
 Description     : Testing encoding/decoding RFC 4648 test vectors
-Started         : 2017/03/13 - 12:10:43
+Started         : 2017/03/13 - 13:21:12
 --------------------------------------------------------------------------------
 [I] Encoding test vectors
 [I] Decoded (as string)     : ""
@@ -558,13 +558,13 @@ Obtained decoded (as byte array) :
 --------------------------------------------------------------------------------
 Test Case Number: 8
 Test Case Result: PASSED
-Finished        : 2017/03/13 - 12:10:43
+Finished        : 2017/03/13 - 13:21:12
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 9
 Description     : Testing Base64 syntactic erroneous strings that must be accepted by MIME encoder
-Started         : 2017/03/13 - 12:10:43
+Started         : 2017/03/13 - 13:21:12
 --------------------------------------------------------------------------------
 [I] Trying to decode: "==Zm9vYmFy"
 Calling to Decode
@@ -650,11 +650,11 @@ Obtained byte array:
 --------------------------------------------------------------------------------
 Test Case Number: 9
 Test Case Result: PASSED
-Finished        : 2017/03/13 - 12:10:43
+Finished        : 2017/03/13 - 13:21:12
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.MIME_Encoders
-Finished                 : 2017/03/13 - 12:10:43
+Finished                 : 2017/03/13 - 13:21:12
 ================================================================================
