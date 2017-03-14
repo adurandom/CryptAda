@@ -40,11 +40,12 @@ UTILSDIR    =  $(SRCDIR)/utils
 ENCSDIR     =  $(SRCDIR)/encoders
 DIGDIR      =  $(SRCDIR)/digests
 RNDDIR      =  $(SRCDIR)/random
+BNDIR       =  $(SRCDIR)/bn
 
 #>>>[Compilation]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 ADACC       =  gnatmake -c 
-SOURCEDIRS  =  -I$(BASEDIR)/ -I$(NAMESDIR)/ -I$(PRAGMADIR)/ -I$(ENCSDIR)/ -I$(DIGDIR)/ -I$(RNDDIR)/
+SOURCEDIRS  =  -I$(BASEDIR)/ -I$(NAMESDIR)/ -I$(PRAGMADIR)/ -I$(ENCSDIR)/ -I$(DIGDIR)/ -I$(RNDDIR)/ -I$(BNDIR)/
 CFLAGS      =  $(SOURCEDIRS) -D $(OBJDIR) -O3 -gnat05 -gnata -gnatn -gnatwa
 
 #>>>[Delete command]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -93,7 +94,8 @@ OBJS     =  cryptada.o \
             cryptada-random.o \
             cryptada-random-generators.o \
             cryptada-random-generators-rsaref.o \
-            cryptada-random-generators-caprng.o 
+            cryptada-random-generators-caprng.o \
+            cryptada-big_naturals.o 
 
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -270,7 +272,13 @@ cryptada-random-generators-rsaref.o: $(RNDDIR)/cryptada-random-generators-rsaref
 cryptada-random-generators-caprng.o: $(RNDDIR)/cryptada-random-generators-caprng.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
-    
+
+# Big naturals pakages
+
+cryptada-big_naturals.o: $(BNDIR)/cryptada-big_naturals.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
 #>>>[Targets]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 all: objs

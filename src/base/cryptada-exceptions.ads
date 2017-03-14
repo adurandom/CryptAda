@@ -48,6 +48,9 @@ package CryptAda.Exceptions is
    CryptAda_Bad_Operation_Error           : exception;   -- Invalid operation invocation.
    CryptAda_Index_Error                   : exception;   -- Indexed operation error.
    CryptAda_Syntax_Error                  : exception;   -- Syntax error.
+   CryptAda_Overflow_Error                : exception;   -- Overflow condition.
+   CryptAda_Underflow_Error               : exception;   -- Underflow condition.
+   CryptAda_Division_By_Zero_Error        : exception;   -- Zero divisor.
    CryptAda_Unexpected_Error              : exception;   -- Any unexpected error condition.
 
    --[Random Number Generation Exceptions]--------------------------------------

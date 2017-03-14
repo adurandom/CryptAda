@@ -1,3 +1,5 @@
 *.ali
 *.o
 *.exe
+test/src/other/test_bn_1.adb
+test/src/other/Makefile
