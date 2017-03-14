@@ -91,7 +91,9 @@ UNITDRV  =  $(TBIN)/ut_utils.exe \
             $(TBIN)/ut_snefru.exe \
             $(TBIN)/ut_tiger.exe \
             $(TBIN)/ut_haval.exe \
-            $(TBIN)/ut_whirlpool.exe
+            $(TBIN)/ut_whirlpool.exe \
+            $(TBIN)/ut_rsaref.exe \
+            $(TBIN)/ut_caprng.exe 
             
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -188,6 +190,14 @@ $(TBIN)/ut_haval.exe: $(TSRCUDRV)ut_haval.adb
 	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
     
 $(TBIN)/ut_whirlpool.exe: $(TSRCUDRV)ut_whirlpool.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_rsaref.exe: $(TSRCUDRV)ut_rsaref.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_caprng.exe: $(TSRCUDRV)ut_caprng.adb
 	@echo Building $<
 	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
     
