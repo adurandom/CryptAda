@@ -43,16 +43,18 @@ ACUTILS     =  $(ACSRC)/utils
 ACENCODERS  =  $(ACSRC)/encoders
 ACDIGESTS   =  $(ACSRC)/digests
 ACRANDOM    =  $(ACSRC)/random
+ACBN        =  $(ACSRC)/bn
 
 TSRCBASE    =  $(TSRC)/base/
 TSRCUPKG    =  $(TSRC)/upkg/
 TSRCUDRV    =  $(TSRC)/udrv/
+TSRCBNPKG   =  $(TSRC)/bnpkg/
 
 #>>>[Compilation]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 CC          =  gcc
 CFLAGS      =  -c -O3 -gnat05 -gnata -gnatn -gnatwa
-SOURCEDIRS  =  -I$(TSRCBASE) -I$(TSRCUPKG) -I$(ACBASE) -I$(ACNAMES) -I$(ACPRAGMA) -I$(ACUTILS) -I$(ACENCODERS) -I$(ACDIGESTS) -I$(ACRANDOM)
+SOURCEDIRS  =  -I$(TSRCBASE) -I$(TSRCUPKG) -I$(TSRCBNPKG) -I$(ACBASE) -I$(ACNAMES) -I$(ACPRAGMA) -I$(ACUTILS) -I$(ACENCODERS) -I$(ACDIGESTS) -I$(ACRANDOM) -I$(ACBN)
 
 ADAMAKER    = gnatmake
 ADAFLAGS    = -O3 -gnatn -gnatwa -D $(TOBJ)
@@ -93,7 +95,8 @@ UNITDRV  =  $(TBIN)/ut_utils.exe \
             $(TBIN)/ut_haval.exe \
             $(TBIN)/ut_whirlpool.exe \
             $(TBIN)/ut_rsaref.exe \
-            $(TBIN)/ut_caprng.exe 
+            $(TBIN)/ut_caprng.exe \
+            $(TBIN)/ut_bn.exe 
             
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -198,6 +201,10 @@ $(TBIN)/ut_rsaref.exe: $(TSRCUDRV)ut_rsaref.adb
 	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
 
 $(TBIN)/ut_caprng.exe: $(TSRCUDRV)ut_caprng.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_bn.exe: $(TSRCUDRV)ut_bn.adb
 	@echo Building $<
 	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
     
