@@ -16,29 +16,21 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  ut_bn.adb
+--    Filename          :  cryptada-big_naturals-tests-mult.ads
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
---    Creation date     :  March 15th, 2017
+--    Creation date     :  March 16th, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Unit test driver for CryptAda.Big_Naturals.
+--    Exercises the multiplication functionality of CryptAda.Big_Naturals.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
---    1.0   20170315 ADD   Initial implementation.
+--    1.0   20170316 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with CryptAda.Big_Naturals.Tests.Basic;
-with CryptAda.Big_Naturals.Tests.AddSub;
-with CryptAda.Big_Naturals.Tests.Conv;
-
-procedure UT_BN   
-is
-begin
-   CryptAda.Big_Naturals.Tests.Basic.Test_Driver;
-   CryptAda.Big_Naturals.Tests.AddSub.Test_Driver;
-   CryptAda.Big_Naturals.Tests.Conv.Test_Driver;
-end UT_BN;
+package CryptAda.Big_Naturals.Tests.Mult is
+      procedure   Test_Driver;
+end CryptAda.Big_Naturals.Tests.Mult;

@@ -77,6 +77,7 @@
 --    1.0   20170314 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
+with Ada.Strings.Unbounded;
 with CryptAda.Pragmatics;
 
 package CryptAda.Big_Naturals is
@@ -219,6 +220,62 @@ private
    --[Subprogram Specifications]------------------------------------------------
    -----------------------------------------------------------------------------
 
+   --[1. Conversions from/to string numeric literals]---------------------------
+
+   --[String_2_Digit_Sequence]--------------------------------------------------
+   -- Purpose:
+   -- Converts a string numeric literal in any base supported into the 
+   -- corresponding Digit_Sequence.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_String           String containing the numeric literal to convert.
+   --                      Next syntactic conventions will apply:
+   --                      -  Leading and trailing whitespace are ignored.
+   --                      -  Digit case (for bases > 10) is ignored.
+   --                      -  No characters other than valid digits are allowed
+   --                         inside the sequence.
+   -- Base                 Literal_Base with the base sequence.
+   -- Sequence             Digit_Sequence resulting from conversion.
+   -- SD                   Number of significant digits in Sequence.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CryptAda_Syntax_Error if The_String is not syntactically correct.
+   -- CryptAda_Overflow_Error if Sequence can not hold the digit sequence .
+   -----------------------------------------------------------------------------
+
+   procedure   String_2_Digit_Sequence(
+                  The_String     : in     String;
+                  Base           : in     Literal_Base;
+                  Sequence       :    out Digit_Sequence;
+                  SD             :    out Natural);
+
+   --[Digit_Sequence_2_String]--------------------------------------------------
+   -- Purpose:
+   -- Converts a Digit_Sequence into a string numeric literal in any base 
+   -- supported.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Sequence         Digit sequence to convert to string form.
+   -- SD                   Significant digits in The_Sequence.
+   -- Base                 Literal_Base with the base used for conversion.
+   -- The_String           Unbounded_String object with the conversion result.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   procedure   Digit_Sequence_2_String(
+                  The_Sequence      : in     Digit_Sequence;
+                  SD                : in     Natural;
+                  Base              : in     Literal_Base;
+                  The_String        :    out Ada.Strings.Unbounded.Unbounded_String);
+   
    --[1. Obtaining information from digit sequences]----------------------------
    
    --[Significant_Digits]-------------------------------------------------------
@@ -258,8 +315,8 @@ private
    -----------------------------------------------------------------------------
 
    function    Significant_Bits(
-                  In_Sequence    : in     Digit_Sequence;
-                  In_Sequence_SD : in     Natural)
+                  In_Sequence       : in     Digit_Sequence;
+                  In_Sequence_SD    : in     Natural)
       return   Natural;
    pragma Inline(Significant_Bits);
 
@@ -279,12 +336,70 @@ private
    -----------------------------------------------------------------------------
 
    function    Is_Even(
-                  The_Sequence   : in     Digit_Sequence;
-                  The_Sequence_SD: in     Natural)
+                  The_Sequence      : in     Digit_Sequence;
+                  The_Sequence_SD   : in     Natural)
       return   Boolean;
    pragma Inline(Is_Even);
+
+   --[2. Setting to special values]---------------------------------------------
    
-   --[2. Comparing Digit_Sequences]---------------------------------------------
+   --[Set_To_Zero]--------------------------------------------------------------
+   -- Purpose:
+   -- Sets a digit sequence to Zero value.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Sequence         Digit_Sequence to set.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   procedure   Set_To_Zero(
+                  The_Sequence      : in out Digit_Sequence);
+                  
+   --[Set_To_One]---------------------------------------------------------------
+   -- Purpose:
+   -- Sets a digit sequence to One value.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Sequence         Digit_Sequence to set.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   procedure   Set_To_One(
+                  The_Sequence      : in out Digit_Sequence);
+                  
+   --[Set_To_Max]---------------------------------------------------------------
+   -- Purpose:
+   -- Sets the specified number of digits, starting from the lest significant
+   -- digit, to Digit_Last value.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Sequence         Digit_Sequence to set.
+   -- For_SD               Number of significant digits to set. If For_SD is 
+   --                      greater than The_Sequence'Length, all 
+   --                      The_Sequence'Length digits will be set to Digit_Last.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   procedure   Set_To_Max(
+                  The_Sequence      : in out Digit_Sequence;
+                  For_SD            : in     Natural);
+                  
+   --[3. Comparing Digit_Sequences]---------------------------------------------
    
    --[Compare]------------------------------------------------------------------
    -- Purpose:
@@ -310,7 +425,7 @@ private
                   Right_SD       : in     Natural)
       return   Compare_Result;
    
-   --[3. Basic arithmetic operations]-------------------------------------------
+   --[4. Addition and subtraction]----------------------------------------------
 
    --[Add]----------------------------------------------------------------------
    -- Purpose:
@@ -423,6 +538,8 @@ private
                   Difference     :    out Digit_Sequence;
                   Difference_SD  :    out Natural);
 
+   --[5. Multiply]--------------------------------------------------------------
+
    --[Multiply]-----------------------------------------------------------------
    -- Purpose:
    -- Computes and returns the product of two digit sequences.
@@ -477,6 +594,8 @@ private
                   Product        :    out Digit_Sequence;
                   Product_SD     :    out Natural);
 
+   --[6. Division]--------------------------------------------------------------
+                  
    --[Divide_And_Remainder]-----------------------------------------------------
    -- Purpose:
    -- Performs the following operations on Digit_Sequences:
@@ -574,6 +693,39 @@ private
                   Divisor_SD     : in     Natural;
                   Remainder      :    out Digit_Sequence;
                   Remainder_SD   :    out Natural);
+
+   --[Divide_Digit_And_Remainder]-----------------------------------------------
+   -- Purpose:
+   -- Performs the following operation on Digit_Sequences:
+   --    Quotient    := Dividend / Divisor
+   --    Remainder   := Dividend mod Divisor
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- Dividend             Digit_Sequence dividend of operation.
+   -- Dividend_SD          Significant digits in Dividend.
+   -- Divisor              Digit divisor of operation.
+   -- Quotient             Digit_Sequence that is the obtained quotient.
+   -- Quotient_SD          Significant digits in Quotient.
+   -- Remainder            Digit_Sequence that is the obtained remainder.
+   -- Remainder_SD         Significant digits in Remainder.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CryptAda_Division_By_Zero_Error if divisor is zero.
+   -- CryptAda_Overflow_Error if the number of significant digits of either 
+   -- Quotient or Remainder is greater than the respective lengths of the
+   -- arguments provided.
+   -----------------------------------------------------------------------------
+                  
+   procedure   Divide_Digit_And_Remainder(
+                  Dividend       : in     Digit_Sequence;
+                  Dividend_SD    : in     Natural;
+                  Divisor        : in     Digit;
+                  Quotient       :    out Digit_Sequence;
+                  Quotient_SD    :    out Natural;
+                  Remainder      :    out Digit);
                   
    --[Square]-------------------------------------------------------------------
    -- Purpose:
@@ -598,47 +750,6 @@ private
                   Left_SD        : in     Natural;
                   Result         :    out Digit_Sequence;
                   Result_SD      :    out Natural);
-                  
-   --[Conversions among different representations]------------------------------
-
-   --[String_2_Digit_Sequence]--------------------------------------------------
-   -- Purpose:
-   -- Converts a string numeric literal in any base supported into the 
-   -- corresponding Digit_Sequence. Two forms are provided, a procedure and
-   -- function form.
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- The_String           String containing the numeric literal to convert.
-   --                      Next syntactic conventions will apply:
-   --                      -  Leading and trailing whitespace are ignored.
-   --                      -  Digit case (for bases > 10) is ignored.
-   --                      -  No characters other than valid digits are allowed
-   --                         inside the sequence.
-   -- Base                 Literal_Base with the base sequence.
-   -- Sequence             (Procedure form) Digit_Sequence resulting from
-   --                      conversion.
-   -- SD                   (Procedure form) Number of significant digits in 
-   --                      Sequence.
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- Digit_Sequence value with the result of conversion.
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- CryptAda_Syntax_Error if The_String is not syntactically correct.
-   -- CryptAda_Overflow_Error if Sequence can not hold the digit sequence 
-   -- (procedure form).
-   -----------------------------------------------------------------------------
-
-   function    String_2_Digit_Sequence(
-                  The_String     : in     String;
-                  Base           : in     Literal_Base)
-      return   Digit_Sequence;
-   
-   procedure   String_2_Digit_Sequence(
-                  The_String     : in     String;
-                  Base           : in     Literal_Base;
-                  Sequence       :    out Digit_Sequence;
-                  SD             :    out Natural);
-      
+                                    
 end CryptAda.Big_Naturals;
 

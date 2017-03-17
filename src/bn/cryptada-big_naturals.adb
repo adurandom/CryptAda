@@ -31,9 +31,9 @@
 --    1.0   20170314 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with Ada.Text_IO;                      use Ada.Text_IO;
 with Ada.Strings;                      use Ada.Strings;
 with Ada.Strings.Fixed;                use Ada.Strings.Fixed;
+with Ada.Strings.Unbounded;            use Ada.Strings.Unbounded;
 
 with CryptAda.Pragmatics;              use CryptAda.Pragmatics;
 with CryptAda.Exceptions;              use CryptAda.Exceptions;
@@ -427,6 +427,7 @@ package body CryptAda.Big_Naturals is
    -- Sum_Mult_Digits   => (A + B) * C
    -- Mult_Sum_Digits   => (A * B) + C + D
    -- Subt_Digits       => A - B (With Borrow)
+   -- Div_Digits        => A / B (Quotient and Remainder)
    -----------------------------------------------------------------------------
 
    procedure   Sum_Digits(
@@ -475,6 +476,13 @@ package body CryptAda.Big_Naturals is
                   Result         :    out Digit);
    pragma Inline(Subt_Digits);
 
+   procedure   Div_Digits(
+                  Dividend       : in     Digit;
+                  Divisor        : in     Digit;
+                  Remainder      : in out Digit;
+                  Quotient       :    out Digit);
+   pragma Inline(Div_Digits);
+   
    -----------------------------------------------------------------------------
    --[Body declared subprogram bodies]------------------------------------------
    -----------------------------------------------------------------------------
@@ -587,6 +595,7 @@ package body CryptAda.Big_Naturals is
    -- Sum_Mult_Digits   => (A + B) * C
    -- Mult_Sum_Digits   => (A * B) + C + D
    -- Subt_Digits       => A - B (With Borrow)
+   -- Div_Digits        => A / B (Quotient and Remainder)
    -----------------------------------------------------------------------------
 
    --[Sum_Digits]---------------------------------------------------------------
@@ -691,11 +700,175 @@ package body CryptAda.Big_Naturals is
       end if;
    end Subt_Digits;
 
+   --[Div_Digits]---------------------------------------------------------------
+
+   procedure   Div_Digits(
+                  Dividend       : in     Digit;
+                  Divisor        : in     Digit;
+                  Remainder      : in out Digit;
+                  Quotient       :    out Digit)
+   is
+      T              : constant Double_Digit := Make_Double_Digit(Dividend, Remainder);
+   begin
+      Quotient    := Lo_Digit(T / Double_Digit(Divisor));
+      Remainder   := Lo_Digit(T mod Double_Digit(Divisor));
+   end Div_Digits;
+   
    -----------------------------------------------------------------------------
    --[Spec declared subprogram bodies]------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[1. Obtaining information from digit sequences]----------------------------
+   --[1. Conversions To/From numeric string literals]---------------------------
+
+   --[String_2_Digit_Sequence]--------------------------------------------------
+
+   procedure   String_2_Digit_Sequence(
+                  The_String     : in     String;
+                  Base           : in     Literal_Base;
+                  Sequence       :    out Digit_Sequence;
+                  SD             :    out Natural)
+   is
+      S              : constant String := Trim(The_String, Both);
+      L              : Positive;
+   begin
+   
+      -- Output sequence must have length.
+      
+      if Sequence'Length = 0 then
+         raise CryptAda_Overflow_Error;
+      end if;
+      
+      Sequence := (others => 0);
+      
+      -- If zero length return a zero digit sequence.
+
+      if S'Length = 0 then
+         SD := 0;
+         return;
+      end if;
+
+      -- Input contains characters other than blanks. Compute the necessary
+      -- length for the resulting Digit_Sequence.
+      -- The necessary length L will be:
+      --
+      --    L = S'Length * log2(Base) / Digit_Bits
+      --
+      -- Since: 2 <= Base <= 16
+      --
+      --    (S / Digit_Bits) <= L <= 4 * (S / Digit_Bits)
+      --
+      -- I'll pick for L the upper limit (increased in 1).
+
+      L := 1 + ((4 * S'Length) / Digit_Bits);
+
+      declare
+         R           : Digit_Sequence(1 .. L) := (others => 0);
+         R_SD        : Natural := 0;
+         B           : constant Digit := Digit(Base);
+         T           : Digit;
+      begin
+
+         -- Traverse string. In string, most significant digit is the left-most
+         -- (lower index) digit. As an example, assume "432" in Base = 10 the
+         -- loop will do:
+         --
+         --    I        Literal           Digit Sequence
+         --    1        '4'               4
+         --    2        '3'               4 * 10 + 3 = 43
+         --    3        '2'               43 * 10 + 2 = 432
+
+         for I in S'Range loop
+            -- Get value corresponding to literal. If is greater than the Base
+            -- means a syntax error.
+
+            T := Literal_Value(S(I));
+
+            if T >= B then
+               raise CryptAda_Syntax_Error;
+            end if;
+
+            -- Perform Base multiplication.
+
+            if R_SD > 0 then
+               Multiply_Digit(R, R_SD, B, R, R_SD);
+            end if;
+
+            -- Add digit
+
+            if T > 0 then
+               Add_Digit(R, R_SD, T, R, R_SD);
+            end if;
+         end loop;
+
+         -- Now return result.
+
+         SD := R_SD;
+        
+         if R_SD > 0 then
+            if Sequence'Length < R_SD then
+               raise CryptAda_Overflow_Error;
+            else
+               Sequence(Sequence'First .. Sequence'First + R_SD - 1) := R(1 .. R_SD);
+            end if;
+         end if;
+      end;
+   end String_2_Digit_Sequence;
+
+   --[Digit_Sequence_2_String]--------------------------------------------------
+
+   procedure   Digit_Sequence_2_String(
+                  The_Sequence      : in     Digit_Sequence;
+                  SD                : in     Natural;
+                  Base              : in     Literal_Base;
+                  The_String        :    out Unbounded_String)
+   is
+      B              : constant Digit := Digit(Base);
+      T              : Digit_Sequence(1 .. SD);
+      R              : Digit;
+      T_SD           : Natural;
+      S              : Unbounded_String;
+   begin
+
+      -- Argument assertions.
+
+      pragma Assert(The_Sequence'Length >= SD, "Invalid Input length.");
+
+      -- Initialize out value.
+      
+      Set_Unbounded_String(The_String, "");
+      
+      -- Check input significant digits.
+
+      if SD = 0 then
+         Append(The_String, '0');
+         return;
+      end if;
+
+      -- Initialize temporary and remainder.
+
+      T     := The_Sequence(The_Sequence'First .. The_Sequence'First + SD - 1);
+      T_SD  := SD;
+      R     := 0;
+
+      -- Perform Base division.
+
+      while T_SD > 0 loop
+         Divide_Digit_And_Remainder(T, T_SD, B, T, T_SD, R);
+         Append(S, Digit_Literal(R));
+      end loop;
+         
+      -- Now we must reverse the string obtained.
+
+      declare
+         S1       : constant String := To_String(S);
+      begin
+         for I in reverse S1'Range loop
+            Append(The_String, S1(I));
+         end loop;
+      end;
+   end Digit_Sequence_2_String;
+     
+   --[2. Obtaining information from digit sequences]----------------------------
 
    --[Significant_Digits]-------------------------------------------------------
 
@@ -752,7 +925,49 @@ package body CryptAda.Big_Naturals is
       end if;
    end Is_Even;
 
-   --[2. Comparing Digit_Sequences]---------------------------------------------
+   --[2. Setting to special values]---------------------------------------------
+   
+   --[Set_To_Zero]--------------------------------------------------------------
+
+   procedure   Set_To_Zero(
+                  The_Sequence      : in out Digit_Sequence)
+   is
+   begin
+      if The_Sequence'Length > 0 then
+         The_Sequence := (others => 0);
+      end if;
+   end Set_To_Zero;
+                  
+   --[Set_To_One]---------------------------------------------------------------
+
+   procedure   Set_To_One(
+                  The_Sequence      : in out Digit_Sequence)
+   is
+   begin
+      if The_Sequence'Length > 0 then
+         The_Sequence := (others => 0);
+         The_Sequence(The_Sequence'First) := 1;
+      end if;
+   end Set_To_One;
+   
+   --[Set_To_Max]---------------------------------------------------------------
+
+   procedure   Set_To_Max(
+                  The_Sequence      : in out Digit_Sequence;
+                  For_SD            : in     Natural)
+   is
+   begin
+      if The_Sequence'Length > 0 then
+         if For_SD > The_Sequence'Length then
+            The_Sequence := (others => Digit_Last);
+         else
+            The_Sequence := (others => 0);
+            The_Sequence(The_Sequence'First .. The_Sequence'First + For_SD - 1) := (others => Digit_Last);
+         end if;
+      end if;
+   end Set_To_Max;
+   
+   --[3. Comparing Digit_Sequences]---------------------------------------------
 
    --[Compare]------------------------------------------------------------------
 
@@ -800,7 +1015,7 @@ package body CryptAda.Big_Naturals is
       end if;
    end Compare;
 
-   --[3. Basic arithmetic operations]-------------------------------------------
+   --[4. Addition and subtraction]----------------------------------------------
 
    --[Add]----------------------------------------------------------------------
 
@@ -1033,6 +1248,8 @@ package body CryptAda.Big_Naturals is
 
       Set_Result(T, Difference, Difference_SD);
    end Subtract_Digit;
+
+   --[5. Multiply]--------------------------------------------------------------
 
    --[Multiply]-----------------------------------------------------------------
 
@@ -1522,6 +1739,82 @@ package body CryptAda.Big_Naturals is
       Divide_And_Remainder(Dividend, Dividend_SD, Divisor, Divisor_SD, Q, Q_SD, Remainder, Remainder_SD);
    end Remainder;
 
+   --[Divide_Digit_And_Remainder]-----------------------------------------------
+                  
+   procedure   Divide_Digit_And_Remainder(
+                  Dividend       : in     Digit_Sequence;
+                  Dividend_SD    : in     Natural;
+                  Divisor        : in     Digit;
+                  Quotient       :    out Digit_Sequence;
+                  Quotient_SD    :    out Natural;
+                  Remainder      :    out Digit)
+   is
+      Q              : Digit_Sequence(1 .. Dividend_SD) := (others => 0);
+      R              : Digit := 0;
+      J              : Natural;
+   begin
+
+      -- Argument assertions.
+
+      pragma Assert(Dividend'Length >= Dividend_SD, "Invalid Dividend length.");
+
+      -- Check for 0 Divisor.
+
+      if Divisor = 0 then
+         raise CryptAda_Division_By_Zero_Error;
+      end if;
+
+      -- Check for special cases:
+      -- 1.    Dividend_SD = 0 (Dividend = 0):
+      --            Quotient    => 0
+      --            Remainder   => 0
+      -- 2.    Dividend_SD = 1;
+      -- 2.1.  Dividend > Divisor:
+      --            Perform single digit divission.
+      -- 2.2.  Dividend = Divisor
+      --            Quotient => 1
+      --            Modulo   => 0
+      -- 2.2.  Dividend < Divisor
+      --            Quotient => 0
+      --            Modulo   => Dividend
+      -- For Dividend_SD >= 2 => Perform divission.
+
+      if Dividend_SD = 0 then
+         Remainder := 0;
+         Set_Result(Zero_Digit_Sequence, Quotient, Quotient_SD);
+         return;
+      end if;
+
+      if Dividend_SD = 1 then
+         if Dividend(1) > Divisor then
+            Q(1)        := Dividend(1) / Divisor;
+            Remainder   := Dividend(1) mod Divisor;
+         elsif Dividend(Dividend'First) = Divisor then
+            Q(1)        := 1;
+            Remainder   := 0;
+         else
+            Remainder   := Dividend(1);
+         end if;
+
+         Set_Result(Q, Quotient, Quotient_SD);
+         return;
+      end if;
+
+      -- Dividend has 2 or more significant digits, we must perform division.
+
+      J := Q'Last;
+      
+      for I in reverse Dividend'First .. Dividend'First + Dividend_SD - 1 loop
+         Div_Digits(Dividend(I), Divisor, R, Q(J));
+         J := J - 1;
+      end loop;
+
+      --|   Set result.
+
+      Remainder := R;
+      Set_Result(Q, Quotient, Quotient_SD);
+   end Divide_Digit_And_Remainder;
+   
    --[Square]-------------------------------------------------------------------
 
    procedure   Square(
@@ -1642,99 +1935,5 @@ package body CryptAda.Big_Naturals is
 
       Set_Result(T, Result, Result_SD);
    end Square;
-
-   --[n. Conversions To/From Digit Sequences]-----------------------------------
-
-   --[String_2_Digit_Sequence]--------------------------------------------------
-
-   function    String_2_Digit_Sequence(
-                  The_String     : in     String;
-                  Base           : in     Literal_Base)
-      return   Digit_Sequence
-   is
-      S              : constant String := Trim(The_String, Both);
-      L              : Positive;
-   begin
-
-      -- If zero length return a Zero_Digit_Sequence.
-
-      if S'Length = 0 then
-         return Zero_Digit_Sequence;
-      end if;
-
-      -- Input contains characters other than blanks. Compute the necessary
-      -- length for the resulting Digit_Sequence.
-      -- The necessary length L will be:
-      --
-      --    L = S'Length * log2(Base) / Digit_Bits
-      --
-      -- Since: 2 <= Base <= 16
-      --
-      --    (S / Digit_Bits) <= L <= 4 * (S / Digit_Bits)
-      --
-      -- I'll pick for L the upper limit (increased in 1).
-
-      L := 1 + ((4 * S'Length) / Digit_Bits);
-
-      declare
-         R           : Digit_Sequence(1 .. L) := (others => 0);
-         SD          : Natural := 0;
-         B           : constant Digit := Digit(Base);
-         T           : Digit;
-      begin
-
-         -- Traverse string. In string, most significant digit is the left-most
-         -- (lower index) digit. As an example, assume "432" in Base = 10 the
-         -- loop will do:
-         --
-         --    I        Literal           Digit Sequence
-         --    1        '4'               4
-         --    2        '3'               4 * 10 + 3 = 43
-         --    3        '2'               43 * 10 + 2 = 432
-
-         for I in S'Range loop
-            -- Get value corresponding to literal. If is greater than the Base
-            -- means a syntax error.
-
-            T := Literal_Value(S(I));
-
-            if T >= B then
-               raise CryptAda_Syntax_Error;
-            end if;
-
-            -- Perform Base multiplication.
-
-            if SD > 0 then
-               Multiply_Digit(R, SD, B, R, SD);
-            end if;
-
-            -- Add digit
-
-            if T > 0 then
-               Add_Digit(R, SD, T, R, SD);
-            end if;
-         end loop;
-
-         -- Now return result.
-
-         if SD = 0 then
-            return Zero_Digit_Sequence;
-         else
-            return R(1 .. SD);
-         end if;
-      end;
-   end String_2_Digit_Sequence;
-
-   --[String_2_Digit_Sequence]--------------------------------------------------
-
-   procedure   String_2_Digit_Sequence(
-                  The_String     : in     String;
-                  Base           : in     Literal_Base;
-                  Sequence       :    out Digit_Sequence;
-                  SD             :    out Natural)
-   is
-   begin
-      Set_Result(String_2_Digit_Sequence(The_String, Base), Sequence, SD);
-   end String_2_Digit_Sequence;
 
 end CryptAda.Big_Naturals;

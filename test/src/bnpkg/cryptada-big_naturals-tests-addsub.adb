@@ -35,9 +35,7 @@
 with Ada.Exceptions;                   use Ada.Exceptions;
 
 with CryptAda.Tests.Utils;             use CryptAda.Tests.Utils;
-with CryptAda.Pragmatics;              use CryptAda.Pragmatics;
 with CryptAda.Exceptions;              use CryptAda.Exceptions;
-with CryptAda.Utils.Format;            use CryptAda.Utils.Format;
 
 package body CryptAda.Big_Naturals.Tests.AddSub is
 
@@ -60,6 +58,8 @@ package body CryptAda.Big_Naturals.Tests.AddSub is
    procedure   Case_6;
    procedure   Case_7;
    procedure   Case_8;
+   procedure   Case_9;
+   procedure   Case_10;
          
    -----------------------------------------------------------------------------
    --[Test Case Bodies]---------------------------------------------------------
@@ -807,6 +807,175 @@ package body CryptAda.Big_Naturals.Tests.AddSub is
          End_Test_Case(8, Failed);
          raise CryptAda_Test_Error;
    end Case_8;
+
+   --[Case_9]-------------------------------------------------------------------
+
+   procedure   Case_9
+   is
+      A_DS              : Test_DS;
+      A_SD              : Test_SD;
+      B_DS              : Test_DS;
+      B_SD              : Test_SD;
+      C_DS              : Test_DS;
+      C_SD              : Natural;
+      S1_DS             : Test_DS;
+      S1_SD             : Natural;
+      S2_DS             : Test_DS;
+      S2_SD             : Natural;
+   begin
+      Begin_Test_Case(9, "Testing Add and Subtract");
+
+      Print_Information_Message("Perform a A + B = C operations and check it with A = C - B and B = C - A.");
+      Print_Information_Message("Interfaces exercised:");
+      Print_Message("- Add");
+      Print_Message("- Subtract()");
+      
+      Print_Information_Message("Performing " & Positive'Image(Iterations) & " iterations with random digit sequences");
+
+      for I in 1 .. Iterations loop
+         Full_Random_DS(A_SD, A_DS);
+         Full_Random_DS(B_SD, B_DS);
+         Add(A_DS, A_SD, B_DS, B_SD, C_DS, C_SD);
+         Subtract(C_DS, C_SD, A_DS, A_SD, S1_DS, S1_SD);
+         Subtract(C_DS, C_SD, B_DS, B_SD, S2_DS, S2_SD);
+   
+         if Compare(S1_DS, S1_SD, B_DS, B_SD) /= Equal then
+            Print_Error_Message("Results don't match");
+            Print_Message("A + B = C");
+            Print_Message("A:");
+            Print_DS(A_SD, A_DS);
+            Print_Message("B:");
+            Print_DS(B_SD, B_DS);
+            Print_Message("C:");
+            Print_DS(C_SD, C_DS);
+            Print_Message("D = C - A");
+            Print_Message("D:");
+            Print_DS(S1_SD, S1_DS);
+            Print_Message("E = C - B");
+            Print_Message("E:");
+            Print_DS(S2_SD, S2_DS);
+            
+            raise CryptAda_Test_Error;
+         end if;
+
+         if Compare(S2_DS, S2_SD, A_DS, A_SD) /= Equal then
+            Print_Error_Message("Results don't match");
+            Print_Message("A + B = C");
+            Print_Message("A:");
+            Print_DS(A_SD, A_DS);
+            Print_Message("B:");
+            Print_DS(B_SD, B_DS);
+            Print_Message("C:");
+            Print_DS(C_SD, C_DS);
+            Print_Message("D = C - A");
+            Print_Message("D:");
+            Print_DS(S1_SD, S1_DS);
+            Print_Message("E = C - B");
+            Print_Message("E:");
+            Print_DS(S2_SD, S2_DS);
+            
+            raise CryptAda_Test_Error;
+         end if;
+
+      end loop;
+            
+      Print_Information_Message("Test case OK.");
+      End_Test_Case(9, Passed);
+   exception
+      when CryptAda_Test_Error =>
+         End_Test_Case(9, Failed);
+         raise;
+      when X: others =>
+         Print_Error_Message(
+            "Exception: """ & Exception_Name(X) & """");
+         Print_Message(
+            "Message  : """ & Exception_Message(X) & """");
+         End_Test_Case(9, Failed);
+         raise CryptAda_Test_Error;
+   end Case_9;
+
+   --[Case_10]------------------------------------------------------------------
+
+   procedure   Case_10
+   is
+      A_DS              : Test_DS;
+      A_SD              : Test_SD;
+      B                 : Digit;
+      C_DS              : Test_DS;
+      C_SD              : Natural;
+      S1_DS             : Test_DS;
+      S1_SD             : Natural;
+      S2_DS             : Test_DS;
+      S2_SD             : Natural;
+   begin
+      Begin_Test_Case(10, "Testing Add_Digit and Subtract_Digit");
+
+      Print_Information_Message("Perform a A + Digit = C operations and check it with A = C - Digit and Digit = C - A.");
+      Print_Information_Message("Interfaces exercised:");
+      Print_Message("- Add_Digit");
+      Print_Message("- Subtract_Digit()");
+      
+      Print_Information_Message("Performing " & Positive'Image(Iterations) & " iterations with random digit sequences");
+
+      for I in 1 .. Iterations loop
+         Full_Random_DS(A_SD, A_DS);
+         B := Digit(Random_Four_Bytes);
+         Add_Digit(A_DS, A_SD, B, C_DS, C_SD);
+         Subtract_Digit(C_DS, C_SD, B, S1_DS, S1_SD);
+         Subtract(C_DS, C_SD, A_DS, A_SD, S2_DS, S2_SD);
+   
+         if Compare(S1_DS, S1_SD, A_DS, A_SD) /= Equal then
+            Print_Error_Message("Results don't match");
+            Print_Message("A + Digit = C");
+            Print_Message("A:");
+            Print_DS(A_SD, A_DS);
+            Print_Message("Digit: " & Digit'Image(B));
+            Print_Message("C:");
+            Print_DS(C_SD, C_DS);
+            Print_Message("D = C - Digit");
+            Print_Message("D:");
+            Print_DS(S1_SD, S1_DS);
+            Print_Message("E = C - A");
+            Print_Message("E:");
+            Print_DS(S2_SD, S2_DS);
+            
+            raise CryptAda_Test_Error;
+         end if;
+
+         if (B = 0 and S2_SD /= 0) or else (B /= S2_DS(1)) then
+            Print_Error_Message("Results don't match");
+            Print_Message("A + Digit = C");
+            Print_Message("A:");
+            Print_DS(A_SD, A_DS);
+            Print_Message("Digit: " & Digit'Image(B));
+            Print_Message("C:");
+            Print_DS(C_SD, C_DS);
+            Print_Message("D = C - Digit");
+            Print_Message("D:");
+            Print_DS(S1_SD, S1_DS);
+            Print_Message("E = C - A");
+            Print_Message("E:");
+            Print_DS(S2_SD, S2_DS);
+            
+            raise CryptAda_Test_Error;
+         end if;
+         
+      end loop;
+            
+      Print_Information_Message("Test case OK.");
+      End_Test_Case(10, Passed);
+   exception
+      when CryptAda_Test_Error =>
+         End_Test_Case(10, Failed);
+         raise;
+      when X: others =>
+         Print_Error_Message(
+            "Exception: """ & Exception_Name(X) & """");
+         Print_Message(
+            "Message  : """ & Exception_Message(X) & """");
+         End_Test_Case(10, Failed);
+         raise CryptAda_Test_Error;
+   end Case_10;
    
    -----------------------------------------------------------------------------
    --[Spec Declared Subprogram Bodies]------------------------------------------
@@ -827,6 +996,8 @@ package body CryptAda.Big_Naturals.Tests.AddSub is
       Case_6;
       Case_7;
       Case_8;
+      Case_9;
+      Case_10;
       
       End_Test_Driver(Driver_Name);
    exception
