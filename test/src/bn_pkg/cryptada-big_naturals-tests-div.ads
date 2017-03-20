@@ -16,14 +16,14 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  ut_bn_subt.adb
+--    Filename          :  cryptada-big_naturals-tests-div.ads
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 20th, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Unit test driver for CryptAda.Big_Naturals Digit_Sequence subtraction.
+--    Exercises the division functionality of CryptAda.Big_Naturals.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
@@ -31,10 +31,6 @@
 --    1.0   20170320 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with CryptAda.Big_Naturals.Tests.Subt;
-
-procedure UT_BN_Subt
-is
-begin
-   CryptAda.Big_Naturals.Tests.Subt.Test_Driver;
-end UT_BN_Subt;
+package CryptAda.Big_Naturals.Tests.Div is
+      procedure   Test_Driver;
+end CryptAda.Big_Naturals.Tests.Div;

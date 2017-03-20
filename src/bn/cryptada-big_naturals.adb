@@ -427,6 +427,7 @@ package body CryptAda.Big_Naturals is
    -- Sum_Mult_Digits   => (A + B) * C
    -- Mult_Sum_Digits   => (A * B) + C + D
    -- Subt_Digits       => A - B (With Borrow)
+   -- Subt_Mult_Digits  => A - (B * C) (With Borrow)
    -- Div_Digits        => A / B (Quotient and Remainder)
    -----------------------------------------------------------------------------
 
@@ -475,6 +476,14 @@ package body CryptAda.Big_Naturals is
                   Borrow         : in out Digit;
                   Result         :    out Digit);
    pragma Inline(Subt_Digits);
+
+   procedure   Subt_Mult_Digits(
+                  A              : in     Digit;
+                  B              : in     Digit;
+                  C              : in     Digit;
+                  Borrow         : in out Digit;
+                  Result         :    out Digit);
+   pragma Inline(Subt_Mult_Digits);
 
    procedure   Div_Digits(
                   Dividend       : in     Digit;
@@ -700,6 +709,41 @@ package body CryptAda.Big_Naturals is
       end if;
    end Subt_Digits;
 
+   --[Subt_Mult_Digits]---------------------------------------------------------
+
+   procedure   Subt_Mult_Digits(
+                  A              : in     Digit;
+                  B              : in     Digit;
+                  C              : in     Digit;
+                  Borrow         : in out Digit;
+                  Result         :    out Digit)
+   is
+      T              : Double_Digit;
+      LT             : Digit;
+   begin
+   
+      -- A - (B * C)
+      
+      T        := (Double_Digit(B) * Double_Digit(C));
+      LT       := Lo_Digit(T);
+      
+      Result   := A - Borrow;
+      
+      if Result > (Digit_Last - Borrow) then
+         Borrow := 1;
+      else
+         Borrow := 0;
+      end if;
+
+      Result   := Result - LT;
+      
+      if Result > (Digit_Last - LT) then
+         Borrow := Borrow + 1;
+      end if;
+      
+      Borrow   := Borrow + Hi_Digit(T);
+   end Subt_Mult_Digits;
+   
    --[Div_Digits]---------------------------------------------------------------
 
    procedure   Div_Digits(
@@ -1492,6 +1536,8 @@ package body CryptAda.Big_Naturals is
       Set_Result(T, Result, Result_SD);
    end Square;
    
+   --[7. Division]--------------------------------------------------------------
+
    --[Divide_And_Remainder]-----------------------------------------------------
 
    procedure   Divide_And_Remainder(
@@ -1506,131 +1552,23 @@ package body CryptAda.Big_Naturals is
    is
       CR             : Compare_Result;
       S              : Digit_Shift_Amount;
-      LL             : Digit_Sequence(1 .. 1 + (2 * Dividend_SD)) := (others => 0);
+      LL             : Digit_Sequence(1 .. Dividend_SD + 1) := (others => 0);
+      LL_SD          : Natural;
       RR             : Digit_Sequence(1 .. Divisor_SD) := (others => 0);
-      C              : Digit;
+      SC             : Digit;
       T              : Digit;
       DD             : Double_Digit;
       Q              : Digit_Sequence(1 .. Dividend_SD) := (others => 0);
-      R              : Digit_Sequence(1 .. Divisor_SD) := (others => 0);
-      Tmp            : Digit_Sequence(1 .. Divisor_SD) := (others => 0);
-
+      R              : Digit_Sequence(1 .. Dividend_SD) := (others => 0);
+      Tmp            : Digit_Sequence(1 .. Divisor_SD + 1) := (others => 0);
+      Tmp_SD         : Natural;
+      
       --[Internal Operations]---------------------------------------------------
       -- Next internal Digit_Sequence operations are only used in division body.
       -- The Digit_Sequences that accept as input parameters have always the
       -- same length.
       --------------------------------------------------------------------------
-
-      --[Internal_Compare]------------------------------------------------------
-
-      function    Internal_Compare(
-                     Left        : in     Digit_Sequence;
-                     Right       : in     Digit_Sequence)
-         return   Compare_Result
-      is
-         J              : Natural := Right'Last;
-      begin
-         for I in reverse Left'Range loop
-            if Left(I) > Right(J) then
-               return Greater;
-            elsif Left(I) < Right(J) then
-               return Lower;
-            end if;
-
-            J := J - 1;
-         end loop;
-
-         return Equal;
-      end Internal_Compare;
-
-      --[Internal_Subtract_Digit_Multiply]--------------------------------------
-
-      procedure   Internal_Subtract_Digit_Multiply(
-                     Left        : in     Digit_Sequence;
-                     Factor      : in     Digit;
-                     Right       : in     Digit_Sequence;
-                     Result      :    out Digit_Sequence;
-                     Borrow      :    out Digit)
-      is
-         T              : Double_Digit;
-         LT             : Digit;
-         B              : Digit := 0;
-         I              : Positive := Left'First;
-         J              : Positive := Right'First;
-      begin
-         Result   := (others => 0);
-
-         -- Do the stuff.
-
-         for K in Result'Range loop
-            T  := Double_Digit(Factor * Right(J));
-            LT := Lo_Digit(T);
-
-            Result(K) := Left(I) - B;
-
-            if Result(K) > (Digit_Last - B) then
-               B := 1;
-            else
-               B := 0;
-            end if;
-
-            Result(K) := Result(K) - LT;
-
-            if Result(K) > (Digit_Last - LT) then
-               B := B + 1;
-            end if;
-
-            B := B + Hi_Digit(T);
-            I := I + 1;
-            J := J + 1;
-         end loop;
-
-         -- Update borrow.
-
-         Borrow := B;
-      end Internal_Subtract_Digit_Multiply;
-
-      --[Internal_Subtract]-----------------------------------------------------
-
-      procedure   Internal_Subtract(
-                     Left        : in     Digit_Sequence;
-                     Right       : in     Digit_Sequence;
-                     Diff        :    out Digit_Sequence;
-                     Borrow      :    out Digit)
-      is
-         B              : Digit := 0;
-         I              : Positive := Left'First;
-         J              : Positive := Right'First;
-      begin
-
-         -- Initialize result.
-
-         Diff := (others => 0);
-
-         for K in Diff'Range loop
-            Diff(K) := Left(I) - B;
-
-            if Diff(K) = Digit_Last then
-               Diff(K) := Digit_Last - Right(J);
-            else
-               Diff(K) := Diff(K) - Right(J);
-
-               if Diff(K) > (Digit_Last - Right(J)) then
-                  B := 1;
-               else
-                  B := 0;
-               end if;
-            end if;
-
-            I := I + 1;
-            J := J + 1;
-         end loop;
-
-         -- Set borrow.
-
-         Borrow := B;
-      end Internal_Subtract;
-
+      
       --[Shift_Left_Digit]------------------------------------------------------
 
       procedure   Shift_Left_Digit(
@@ -1696,17 +1634,17 @@ package body CryptAda.Big_Naturals is
       pragma Assert(Dividend'Length >= Dividend_SD, "Invalid Dividend length.");
       pragma Assert(Divisor'Length >= Divisor_SD, "Invalid Divisor length.");
 
-      -- Check for 0 divisor.
-
+      -- Argument special case:
+      -- Divisor = 0         => Raise CryptAda_Division_By_Zero_Error
+      -- Dividend = 0        => Quotient := 0, Remainder := 0
+      -- Dividend = 1        => Quotient := Dividend, Remainder := 0
+      -- Dividend < Divisor  => Quotient := 0, Remainder := Dividend
+      -- Dividend = Divisor  => Quotient := 1, Remainder := 0
+      -- Divisor_SD = 1      => Perform Divide_Digit_And_Remainder
+      
       if Divisor_SD = 0 then
          raise CryptAda_Division_By_Zero_Error;
       end if;
-
-      -- Check for some operands special values:
-
-      -- Check for 0 dividend:
-      -- Quotient    => 0.
-      -- Remainder   => 0.
 
       if Dividend_SD = 0 then
          Set_Result(Zero_Digit_Sequence, Quotient, Quotient_SD);
@@ -1714,23 +1652,28 @@ package body CryptAda.Big_Naturals is
          return;
       end if;
 
-      -- Check for 1 divissor:
-      -- Quotient    => Dividend.
-      -- Remainder   => 0.
+      if Divisor_SD = 1 then
+         if Divisor(Divisor'First) = 1 then
+            Set_Result(Dividend, Quotient, Quotient_SD);
+            Set_Result(Zero_Digit_Sequence, Remainder, Remainder_SD);
+         else
+            declare
+               R        : Digit;
+            begin
+               Divide_Digit_And_Remainder(Dividend, Dividend_SD, Divisor(Divisor'First), Quotient, Quotient_SD, R);
+               Remainder := (others => 0);
+               
+               if R = 0 then
+                  Remainder_SD := 0;
+               else
+                  Remainder_SD := 1;
+                  Remainder(Remainder'First) := R;
+               end if;
+            end;
+         end if;
 
-      if Divisor_SD = 1 and Divisor(1) = 1 then
-         Set_Result(Dividend, Quotient, Quotient_SD);
-         Set_Result(Zero_Digit_Sequence, Remainder, Remainder_SD);
          return;
       end if;
-
-      -- Compare dividend and divissor
-      -- Dividend < Divisor.
-      --    Quotient    => 0
-      --    Remainder   => Dividend.
-      -- Dividend = Divisor.
-      --    Quotient    => 1
-      --    Remainder   => 0
 
       CR := Compare(Dividend, Dividend_SD, Divisor, Divisor_SD);
 
@@ -1744,36 +1687,50 @@ package body CryptAda.Big_Naturals is
          return;
       end if;
 
-      -- No way, we must do the stuff. The process is:
-      -- 1. Normalize operands:
-      --    We need to compute the amount we need to left shift in order to make
-      --    1 the most significant bit of divisor.
+      -- Perform division, this is my own implementation of the Knuth Algorithm
+      -- D.
+
+      -- Step 1. Normalize Operands
+      --    Left shift both, dividend and divisor so that the most significant 
+      --    bit of the most significant digit of the divisor be 1. So we compute
+      --    the shift amount (S) as the Digit_Size minus the number of 
+      --    significant bits in the most significant digit of divisor.
+      --
+      --    This normalization step is, according to Knuth, necessary to make it
+      --    easy to guess the quotient digit with accuracy in each division 
+      --    step.
+      --
+      --    We perform the same left shift in both, dividend and divisor, so 
+      --    quotient will not be affected (we are multiplying both factors by
+      --    2 ** S) but remainder needs to be de-normalized in a later step.
+      --
+      --    When we left shift the dividend it is possible that we need to add a
+      --    new significant digit to the dividend (the carry of the left shift).
+      --
+      --    We'll store the normalized dividend in LL and the normalized divisor
+      --    in RR.
 
       S := Digit_Bits - Digit_Significant_Bits(Divisor(Divisor_SD));
 
-      -- 2. Now we perform the actual shifting. We store the  normalized
-      --    dividend in LL and the normalized divisor in RR.
+      if S = 0 then
+         LL(1 .. Dividend_SD) := Dividend(Dividend'First .. Dividend'First + Dividend_SD - 1);
+         RR(1 .. Divisor_SD)  := Divisor(Divisor'First .. Divisor'First + Divisor_SD - 1);
+      else
+         Shift_Left_Digit(Dividend(Dividend'First .. Dividend'First + Dividend_SD - 1), S, LL(1 .. Dividend_SD), LL(Dividend_SD + 1));
+         Shift_Left_Digit(Divisor(Divisor'First .. Divisor'First + Divisor_SD - 1), S, RR, SC);
+      end if;
 
-      Shift_Left_Digit(Dividend(Dividend'First .. Dividend'First + Dividend_SD - 1), S, LL(1 .. Dividend_SD), LL(Dividend_SD + 1));
-      Shift_Left_Digit(Divisor(Divisor'First .. Divisor'First + Divisor_SD - 1), S, RR, C);
-
-      -- 3. Set T to the most significant digit of the normalized divisor.
+      -- Step 2. Main division loop
 
       T := RR(Divisor_SD);
 
-      -- 4. Once dividend and divisor are normalized quotient is still valid (we
-      --    have multiplied both operands by 2 ** S) but the actual remainder
-      --    will be the result of the dividing the resulting remainder by 2 ** S
-      --    (a right shift of S positions (see step 5 below).
-      --
-      --    Now we go on computing quotient digits one after another.
-
       for I in reverse 1 .. 1 + Dividend_SD - Divisor_SD loop
 
-         -- 4.1.  Underestimate quotient digit and subtract. If we've got a T
-         --       such as T + 1 is 0, estimate is the first significant digit of
-         --       the normalized dividend. Otherwise estimate is the quotient of
-         --       the two first digits of the normalized dividend and (T + 1).
+         -- 3.1.  Underestimate quotient digit and subtract: 
+         --       If we've got a T such as T + 1 is 0, estimate is the first 
+         --       significant digit of the normalized dividend. 
+         --       Otherwise estimate is the quotient of the two first digits of 
+         --       the normalized dividend and (T + 1).
 
          if T = Digit_Last then
             Q(I)  := LL(I + Divisor_SD);
@@ -1782,27 +1739,34 @@ package body CryptAda.Big_Naturals is
             Q(I)  := Lo_Digit(DD / Double_Digit(T + 1));
          end if;
 
-         -- 4.2.  Subtract from dividend.
+         -- 3.2.  Multiply estimated quotient digit by normalized dividend.
 
-         Internal_Subtract_Digit_Multiply(LL(I .. I + Divisor_SD - 1), Q(I), RR(1 .. Divisor_SD), Tmp(1 .. Divisor_SD), C);
-         LL(I .. I + Divisor_SD - 1) := Tmp(1 .. Divisor_SD);
-         LL(I + Divisor_SD) := LL(I + Divisor_SD) - C;
+         Multiply_Digit(RR, Divisor_SD, Q(I), Tmp, Tmp_SD);
+         
+         -- 3.3.  Subtract from divisor the result of previous multiplication.
+         
+         LL_SD := Significant_Digits(LL(I .. I + Divisor_SD));
+         Subtract(LL(I .. I + Divisor_SD), LL_SD, Tmp, Tmp_SD, Tmp, Tmp_SD);
+         LL(I .. I + Divisor_SD) := Tmp;
+         
+         -- 3.4.  Correct initial estimate (if necessary) increasing quotient
+         --       digit and subtracting divisor.
 
-         -- 4.3.  Correct initial estimate increasing estimation.
-
-         while ((LL(I + Divisor_SD) /= 0) or else (Internal_Compare(LL(I .. I + Divisor_SD - 1), RR(1 .. Divisor_SD)) /= Lower)) loop
-            Q(I) := Q(I) + 1;
-            Internal_Subtract(LL(I .. I + Divisor_SD - 1), RR(1 .. Divisor_SD), Tmp(1 .. Divisor_SD), C);
-            LL(I .. I + Divisor_SD - 1)   := Tmp(1 .. Divisor_SD);
-            LL(I + Divisor_SD)            := LL(I + Divisor_SD) - C;
+         LL_SD := Significant_Digits(LL(I .. I + Divisor_SD));
+         
+         while ((LL(I + Divisor_SD) /= 0) or else (Compare(LL(I .. I + Divisor_SD), LL_SD, RR(1 .. Divisor_SD), Divisor_SD) /= Lower)) loop
+            Q(I) := Q(I) + 1;            
+            Subtract(LL(I .. I + Divisor_SD), LL_SD, RR(1 .. Divisor_SD), Divisor_SD, Tmp, Tmp_SD);
+            LL(I .. I + Divisor_SD) := Tmp;
+            LL_SD := Significant_Digits(LL(I .. I + Divisor_SD));
          end loop;
       end loop;
 
-      -- 5. What we've got in LL is the remainder. We must divide it by the
+      -- 4. What we've got in LL is the remainder. We must divide it by the
       --    factor using in normalization (2 ** S) this is performed through a
       --    right shift.
 
-      Shift_Right_Digit(LL(1 .. Divisor_SD), S, R, C);
+      Shift_Right_Digit(LL(1 .. Dividend_SD), S, R, SC);
 
       -- Set result
 

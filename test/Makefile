@@ -103,7 +103,8 @@ BNDRV   =   $(TBIN)/ut_bn_basic.exe \
             $(TBIN)/ut_bn_add.exe \
             $(TBIN)/ut_bn_subt.exe \
             $(TBIN)/ut_bn_addsub.exe \
-            $(TBIN)/ut_bn_mult.exe
+            $(TBIN)/ut_bn_mult.exe \
+            $(TBIN)/ut_bn_div.exe
             
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -234,6 +235,10 @@ $(TBIN)/ut_bn_addsub.exe: $(TSRCBNDRV)ut_bn_addsub.adb
 	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
 
 $(TBIN)/ut_bn_mult.exe: $(TSRCBNDRV)ut_bn_mult.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_bn_div.exe: $(TSRCBNDRV)ut_bn_div.adb
 	@echo Building $<
 	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
     

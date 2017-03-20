@@ -44,8 +44,8 @@ package body CryptAda.Big_Naturals.Tests.Subt is
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   Driver_Name                   : constant String := "CryptAda.Big_Naturals.Tests.AddSub";
-   Driver_Description            : constant String := "Unit test driver for CryptAda.Big_Naturals addition and subtraction functionality.";
+   Driver_Name                   : constant String := "CryptAda.Big_Naturals.Tests.Subt";
+   Driver_Description            : constant String := "Unit test driver for CryptAda.Big_Naturals subtraction functionality.";
 
    -----------------------------------------------------------------------------
    --[Test Case Specification]--------------------------------------------------

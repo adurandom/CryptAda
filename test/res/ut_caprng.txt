@@ -1,0 +1,367 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.1.a (2017/03/31)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.PRNG_CAPRNG
+Description              : Unit test driver for CryptAda.Random.Generators.CAPRNG functionality.
+Started                  : 2017/03/20 - 11:08:21
+================================================================================
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Trying to call operations without starting the PRNG
+Started         : 2017/03/20 - 11:08:21
+--------------------------------------------------------------------------------
+[I] Random generator not started
+Operations must raise CryptAda_Generator_Not_Started_Error
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "FALSE"
+    Is seeded                     : "FALSE"
+[I] Trying Random_Seed
+[I] Raised CryptAda_Generator_Not_Started_Error
+[I] Trying Random_Mix
+[I] Raised CryptAda_Generator_Not_Started_Error
+[I] Trying Random_Generate
+[I] Raised CryptAda_Generator_Not_Started_Error
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:21
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Trying to call operations without seeding the PRNG
+Started         : 2017/03/20 - 11:08:21
+--------------------------------------------------------------------------------
+[I] Operations must raise CryptAda_Generator_Need_Seeding_Error
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "FALSE"
+    Is seeded                     : "FALSE"
+[I] Calling Random_Start
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "TRUE"
+    Is seeded                     : "FALSE"
+    Seed bytes needed             : " 256"
+[I] Trying Random_Mix
+[I] Raised CryptAda_Generator_Need_Seeding_Error
+[I] Trying Random_Generate
+[I] Raised CryptAda_Generator_Need_Seeding_Error
+[I] Calling Random_Stop
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "FALSE"
+    Is seeded                     : "FALSE"
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:21
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Seeding with external seeder.
+Started         : 2017/03/20 - 11:08:21
+--------------------------------------------------------------------------------
+[I] Seeding random generator with external seeder ...
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "FALSE"
+    Is seeded                     : "FALSE"
+[I] Calling Random_Start
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "TRUE"
+    Is seeded                     : "FALSE"
+    Seed bytes needed             : " 256"
+[I] Seeding loop ...
+Random_Seed call  1
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "TRUE"
+    Is seeded                     : "FALSE"
+    Seed bytes needed             : " 236"
+Random_Seed call  2
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "TRUE"
+    Is seeded                     : "FALSE"
+    Seed bytes needed             : " 216"
+Random_Seed call  3
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "TRUE"
+    Is seeded                     : "FALSE"
+    Seed bytes needed             : " 196"
+Random_Seed call  4
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "TRUE"
+    Is seeded                     : "FALSE"
+    Seed bytes needed             : " 176"
+Random_Seed call  5
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "TRUE"
+    Is seeded                     : "FALSE"
+    Seed bytes needed             : " 156"
+Random_Seed call  6
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "TRUE"
+    Is seeded                     : "FALSE"
+    Seed bytes needed             : " 136"
+Random_Seed call  7
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "TRUE"
+    Is seeded                     : "FALSE"
+    Seed bytes needed             : " 116"
+Random_Seed call  8
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "TRUE"
+    Is seeded                     : "FALSE"
+    Seed bytes needed             : " 96"
+Random_Seed call  9
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "TRUE"
+    Is seeded                     : "FALSE"
+    Seed bytes needed             : " 76"
+Random_Seed call  10
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "TRUE"
+    Is seeded                     : "FALSE"
+    Seed bytes needed             : " 56"
+Random_Seed call  11
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "TRUE"
+    Is seeded                     : "FALSE"
+    Seed bytes needed             : " 36"
+Random_Seed call  12
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "TRUE"
+    Is seeded                     : "FALSE"
+    Seed bytes needed             : " 16"
+Random_Seed call  13
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "TRUE"
+    Is seeded                     : "TRUE"
+    Seed bytes needed             : " 0"
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "TRUE"
+    Is seeded                     : "TRUE"
+    Seed bytes needed             : " 0"
+[I] Getting a random byte array ...
+[I] Obtained byte array:
+16#38#, 16#68#, 16#84#, 16#22#, 16#75#, 16#C3#, 16#AF#, 16#91#, 16#61#, 16#F3#, 
+16#0D#, 16#62#, 16#4D#, 16#B4#, 16#97#, 16#C5#, 16#F3#, 16#9D#, 16#0B#, 16#BE#
+[I] Calling Random_Stop
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "FALSE"
+    Is seeded                     : "FALSE"
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:21
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : Seeding with internal seeder.
+Started         : 2017/03/20 - 11:08:21
+--------------------------------------------------------------------------------
+[I] Seeding random generator with internal seeder ...
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "FALSE"
+    Is seeded                     : "FALSE"
+[I] Calling Random_Start_And_Seed
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "TRUE"
+    Is seeded                     : "TRUE"
+    Seed bytes needed             : " 0"
+[I] Getting a random byte array ...
+[I] Obtained byte array:
+16#E7#, 16#EF#, 16#72#, 16#78#, 16#FA#, 16#8E#, 16#1E#, 16#01#, 16#38#, 16#CB#, 
+16#CE#, 16#99#, 16#07#, 16#5B#, 16#F9#, 16#2C#, 16#E4#, 16#CB#, 16#41#, 16#CD#
+[I] Calling Random_Stop
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "FALSE"
+    Is seeded                     : "FALSE"
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:21
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 5
+Description     : Chi-square test
+Started         : 2017/03/20 - 11:08:21
+--------------------------------------------------------------------------------
+[I] Running Chi-Square test for random generator:
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "FALSE"
+    Is seeded                     : "FALSE"
+    This test case performs the standard randomness chi-square
+    test of the pseudo-random number generator. This test case
+    uses internal seeding.
+
+    The test is also run on Ada.Numerics.Discrete_Random.
+
+[I] Random bytes to generate:  10485760
+    Acceptable bounds:
+    Lower => 224.000
+    Upper => 288.000
+[I] Running test ...
+[I] Test completed.
+[I] Running test on Ada.Numerics.Discrete_Random ...
+[I] Test completed.
+[I] Chi-Square test results for CryptAda PRNG:
+    - Computed chi-square: 276.000. Test result => OK
+[I] Chi-Square test results for Ada.Numerics.Discrete_Random:
+    - Computed chi-square: 254.000. Test result => OK
+--------------------------------------------------------------------------------
+Test Case Number: 5
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:22
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 6
+Description     : FIPS PUB 140-2 RNG statistical tests
+Started         : 2017/03/20 - 11:08:22
+--------------------------------------------------------------------------------
+[I] Running FIPS PUB 140-2 tests for random generator:
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
+    CryptAda random generator id  : "RG_CAPRNG"
+    Is started                    : "FALSE"
+    Is seeded                     : "FALSE"
+
+[I] This procedure performs the statistical tests for random
+    number generators described in the FIPS PUB 140-2.
+    FIPS PUB 140-2 describes four statistical tests:
+
+    1. Monobit test. Number of 1's in 20,000 random bits.
+
+    2. Poker test. Chi-square test for Nibbles over 5,000 nibbles
+       (20,000 bits).
+
+    3. Runs test. Computes the number of runs (sequences of
+       consecutive bits with the same value) and classifies them
+       in six cathegories (1, 2, 3, 4, 5, or 6 to 25 consecutive
+       bits).
+
+    4. Long Run test. Computes the number of runs having a length
+       equal or greater than 26 consecutive bits.
+
+[I] FIPS PUB 140-2 Statistical Tests Results:
+    1. Monobit test
+       - Acceptable bounds:
+         Lower =>  9725
+         Upper =>  10275
+       - Obtained result: 9919. Test result => OK
+    2. Poker test
+       - Acceptable bounds:
+         Lower =>  2.160
+         Upper => 46.170
+       - Obtained result: 13.658. Test result => OK
+    3. Runs test
+       * Run length:  1
+       - Acceptable bounds:
+         Lower =>  2315
+         Upper =>  2685
+       - Obtained result (bit 0):  2460. Test result => OK
+       - Obtained result (bit 1):  2529. Test result => OK
+       * Run length:  2
+       - Acceptable bounds:
+         Lower =>  1114
+         Upper =>  1386
+       - Obtained result (bit 0):  1299. Test result => OK
+       - Obtained result (bit 1):  1287. Test result => OK
+       * Run length:  3
+       - Acceptable bounds:
+         Lower =>  527
+         Upper =>  723
+       - Obtained result (bit 0):  629. Test result => OK
+       - Obtained result (bit 1):  597. Test result => OK
+       * Run length:  4
+       - Acceptable bounds:
+         Lower =>  240
+         Upper =>  384
+       - Obtained result (bit 0):  319. Test result => OK
+       - Obtained result (bit 1):  305. Test result => OK
+       * Run length:  5
+       - Acceptable bounds:
+         Lower =>  103
+         Upper =>  209
+       - Obtained result (bit 0):  150. Test result => OK
+       - Obtained result (bit 1):  147. Test result => OK
+       * Run length:  6
+       - Acceptable bounds:
+         Lower =>  103
+         Upper =>  209
+       - Obtained result (bit 0):  160. Test result => OK
+       - Obtained result (bit 1):  152. Test result => OK
+
+    4. Long runs test
+       - Acceptable result: 0
+       - Obtained result (bit 0):  0. Test result => OK
+       - Obtained result (bit 1):  0. Test result => OK
+--------------------------------------------------------------------------------
+Test Case Number: 6
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:22
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.PRNG_CAPRNG
+Finished                 : 2017/03/20 - 11:08:22
+================================================================================

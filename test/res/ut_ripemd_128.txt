@@ -1,0 +1,477 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.1.a (2017/03/31)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.RIPEMD_128
+Description              : Unit test driver for CryptAda.Digests.Algorithms.RIPEMD_128 functionality.
+Started                  : 2017/03/20 - 11:08:19
+================================================================================
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : CryptAda message digest basic operation
+Started         : 2017/03/20 - 11:08:19
+--------------------------------------------------------------------------------
+[I] Digest object information before Digest_Start()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.RIPEMD_128.RIPEMD_128_DIGEST"
+    CryptAda digest algorithm id  : "MD_RIPEMD_128"
+    Digest algorithm SCAN name    : "RIPEMD-128"
+    Digest algorithm ASN1 OID     : "1.0.10118.3.0.50"
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  16
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  16
+    Processed bit count           : ( 0,  0)
+[I] Digest object information after Digest_Start()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.RIPEMD_128.RIPEMD_128_DIGEST"
+    CryptAda digest algorithm id  : "MD_RIPEMD_128"
+    Digest algorithm SCAN name    : "RIPEMD-128"
+    Digest algorithm ASN1 OID     : "1.0.10118.3.0.50"
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  16
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  16
+    Processed bit count           : ( 0,  0)
+[I] Digesting string              : "CryptAda By TCantos Software"
+[I] Digest object information after Digest()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.RIPEMD_128.RIPEMD_128_DIGEST"
+    CryptAda digest algorithm id  : "MD_RIPEMD_128"
+    Digest algorithm SCAN name    : "RIPEMD-128"
+    Digest algorithm ASN1 OID     : "1.0.10118.3.0.50"
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  16
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  16
+    Processed bit count           : ( 224,  0)
+[I] Ending digest processing and obtaining hash
+    Obtained hash                 : "b34a84e5264f923e265a164dba1f75e4"
+    Expected hash                 : "b34a84e5264f923e265a164dba1f75e4"
+[I] Digest object information after Digest_End()
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.RIPEMD_128.RIPEMD_128_DIGEST"
+    CryptAda digest algorithm id  : "MD_RIPEMD_128"
+    Digest algorithm SCAN name    : "RIPEMD-128"
+    Digest algorithm ASN1 OID     : "1.0.10118.3.0.50"
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  16
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  16
+    Processed bit count           : ( 0,  0)
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:19
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Standard RIPEMD-128 test vectors
+Started         : 2017/03/20 - 11:08:19
+--------------------------------------------------------------------------------
+[I] Standard test vectors obtained from https://homes.esat.kuleuven.be/~bosselae/ripemd160.html
+    Number of vectors to test:  8
+[I] Computing hash for a test vector:
+    Vector string                 : ""
+    Vector length                 :  0
+    Vector array                  : 
+
+[I] Digest results
+    Expected bit count (Low, High): ( 0,  0)
+    Obtained bit count (Low, High): ( 0,  0)
+    Expected hash (String)        : "cdf26213a150dc3ecb610f18f6b38b46"
+    Obtained hash (String)        : "cdf26213a150dc3ecb610f18f6b38b46"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 test passed.
+[I] Computing hash for a test vector:
+    Vector string                 : "a"
+    Vector length                 :  1
+    Vector array                  : 
+16#61#
+[I] Digest results
+    Expected bit count (Low, High): ( 8,  0)
+    Obtained bit count (Low, High): ( 8,  0)
+    Expected hash (String)        : "86be7afa339d0fc7cfc785e72f578d33"
+    Obtained hash (String)        : "86be7afa339d0fc7cfc785e72f578d33"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 test passed.
+[I] Computing hash for a test vector:
+    Vector string                 : "abc"
+    Vector length                 :  3
+    Vector array                  : 
+16#61#, 16#62#, 16#63#
+[I] Digest results
+    Expected bit count (Low, High): ( 24,  0)
+    Obtained bit count (Low, High): ( 24,  0)
+    Expected hash (String)        : "c14a12199c66e4ba84636b0f69144c77"
+    Obtained hash (String)        : "c14a12199c66e4ba84636b0f69144c77"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 test passed.
+[I] Computing hash for a test vector:
+    Vector string                 : "message digest"
+    Vector length                 :  14
+    Vector array                  : 
+16#6D#, 16#65#, 16#73#, 16#73#, 16#61#, 16#67#, 16#65#, 16#20#, 16#64#, 16#69#, 
+16#67#, 16#65#, 16#73#, 16#74#
+[I] Digest results
+    Expected bit count (Low, High): ( 112,  0)
+    Obtained bit count (Low, High): ( 112,  0)
+    Expected hash (String)        : "9e327b3d6e523062afc1132d7df9d1b8"
+    Obtained hash (String)        : "9e327b3d6e523062afc1132d7df9d1b8"
+[I] Counters match
+[I] Hashes match
+[I] Vector  4 test passed.
+[I] Computing hash for a test vector:
+    Vector string                 : "abcdefghijklmnopqrstuvwxyz"
+    Vector length                 :  26
+    Vector array                  : 
+16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 
+16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 
+16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#
+[I] Digest results
+    Expected bit count (Low, High): ( 208,  0)
+    Obtained bit count (Low, High): ( 208,  0)
+    Expected hash (String)        : "fd2aa607f71dc8f510714922b371834e"
+    Obtained hash (String)        : "fd2aa607f71dc8f510714922b371834e"
+[I] Counters match
+[I] Hashes match
+[I] Vector  5 test passed.
+[I] Computing hash for a test vector:
+    Vector string                 : "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq"
+    Vector length                 :  56
+    Vector array                  : 
+16#61#, 16#62#, 16#63#, 16#64#, 16#62#, 16#63#, 16#64#, 16#65#, 16#63#, 16#64#, 
+16#65#, 16#66#, 16#64#, 16#65#, 16#66#, 16#67#, 16#65#, 16#66#, 16#67#, 16#68#, 
+16#66#, 16#67#, 16#68#, 16#69#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#68#, 16#69#, 
+16#6A#, 16#6B#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 
+16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 16#6D#, 16#6E#, 
+16#6F#, 16#70#, 16#6E#, 16#6F#, 16#70#, 16#71#
+[I] Digest results
+    Expected bit count (Low, High): ( 448,  0)
+    Obtained bit count (Low, High): ( 448,  0)
+    Expected hash (String)        : "a1aa0689d0fafa2ddc22e88b49133a06"
+    Obtained hash (String)        : "a1aa0689d0fafa2ddc22e88b49133a06"
+[I] Counters match
+[I] Hashes match
+[I] Vector  6 test passed.
+[I] Computing hash for a test vector:
+    Vector string                 : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    Vector length                 :  62
+    Vector array                  : 
+16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 
+16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 
+16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#61#, 16#62#, 16#63#, 16#64#, 
+16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 
+16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 
+16#79#, 16#7A#, 16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 
+16#38#, 16#39#
+[I] Digest results
+    Expected bit count (Low, High): ( 496,  0)
+    Obtained bit count (Low, High): ( 496,  0)
+    Expected hash (String)        : "d1e959eb179c911faea4624c60c5c702"
+    Obtained hash (String)        : "d1e959eb179c911faea4624c60c5c702"
+[I] Counters match
+[I] Hashes match
+[I] Vector  7 test passed.
+[I] Computing hash for a test vector:
+    Vector string                 : "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
+    Vector length                 :  80
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#
+[I] Digest results
+    Expected bit count (Low, High): ( 640,  0)
+    Obtained bit count (Low, High): ( 640,  0)
+    Expected hash (String)        : "3f45ef194732c2dbb2c4a2c769795fa3"
+    Obtained hash (String)        : "3f45ef194732c2dbb2c4a2c769795fa3"
+[I] Counters match
+[I] Hashes match
+[I] Vector  8 test passed.
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:19
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : CryptAda RIPEMD-128 test vectors
+Started         : 2017/03/20 - 11:08:19
+--------------------------------------------------------------------------------
+[I] Obtained hashes are checked against values obtained by using several online tools
+    Number of vectors to test:  9
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_RIPEMD_128
+    Test vector index             :  1
+    Vector string                 : ""
+    Vector length                 :  0
+    Vector array                  : 
+
+[I] Digest results for vector     :  1
+    Expected bit count (Low, High): ( 0,  0)
+    Obtained bit count (Low, High): ( 0,  0)
+    Expected hash (String)        : "cdf26213a150dc3ecb610f18f6b38b46"
+    Obtained hash (String)        : "cdf26213a150dc3ecb610f18f6b38b46"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_RIPEMD_128
+    Test vector index             :  2
+    Vector string                 : "a"
+    Vector length                 :  1
+    Vector array                  : 
+16#61#
+[I] Digest results for vector     :  2
+    Expected bit count (Low, High): ( 8,  0)
+    Obtained bit count (Low, High): ( 8,  0)
+    Expected hash (String)        : "86be7afa339d0fc7cfc785e72f578d33"
+    Obtained hash (String)        : "86be7afa339d0fc7cfc785e72f578d33"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_RIPEMD_128
+    Test vector index             :  3
+    Vector string                 : "abc"
+    Vector length                 :  3
+    Vector array                  : 
+16#61#, 16#62#, 16#63#
+[I] Digest results for vector     :  3
+    Expected bit count (Low, High): ( 24,  0)
+    Obtained bit count (Low, High): ( 24,  0)
+    Expected hash (String)        : "c14a12199c66e4ba84636b0f69144c77"
+    Obtained hash (String)        : "c14a12199c66e4ba84636b0f69144c77"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_RIPEMD_128
+    Test vector index             :  4
+    Vector string                 : "message digest"
+    Vector length                 :  14
+    Vector array                  : 
+16#6D#, 16#65#, 16#73#, 16#73#, 16#61#, 16#67#, 16#65#, 16#20#, 16#64#, 16#69#, 
+16#67#, 16#65#, 16#73#, 16#74#
+[I] Digest results for vector     :  4
+    Expected bit count (Low, High): ( 112,  0)
+    Obtained bit count (Low, High): ( 112,  0)
+    Expected hash (String)        : "9e327b3d6e523062afc1132d7df9d1b8"
+    Obtained hash (String)        : "9e327b3d6e523062afc1132d7df9d1b8"
+[I] Counters match
+[I] Hashes match
+[I] Vector  4 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_RIPEMD_128
+    Test vector index             :  5
+    Vector string                 : "abcdefghijklmnopqrstuvwxyz"
+    Vector length                 :  26
+    Vector array                  : 
+16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 
+16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 
+16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#
+[I] Digest results for vector     :  5
+    Expected bit count (Low, High): ( 208,  0)
+    Obtained bit count (Low, High): ( 208,  0)
+    Expected hash (String)        : "fd2aa607f71dc8f510714922b371834e"
+    Obtained hash (String)        : "fd2aa607f71dc8f510714922b371834e"
+[I] Counters match
+[I] Hashes match
+[I] Vector  5 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_RIPEMD_128
+    Test vector index             :  6
+    Vector string                 : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    Vector length                 :  62
+    Vector array                  : 
+16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 
+16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 
+16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#61#, 16#62#, 16#63#, 16#64#, 
+16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 
+16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 
+16#79#, 16#7A#, 16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 
+16#38#, 16#39#
+[I] Digest results for vector     :  6
+    Expected bit count (Low, High): ( 496,  0)
+    Obtained bit count (Low, High): ( 496,  0)
+    Expected hash (String)        : "d1e959eb179c911faea4624c60c5c702"
+    Obtained hash (String)        : "d1e959eb179c911faea4624c60c5c702"
+[I] Counters match
+[I] Hashes match
+[I] Vector  6 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_RIPEMD_128
+    Test vector index             :  7
+    Vector string                 : "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
+    Vector length                 :  80
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#
+[I] Digest results for vector     :  7
+    Expected bit count (Low, High): ( 640,  0)
+    Obtained bit count (Low, High): ( 640,  0)
+    Expected hash (String)        : "3f45ef194732c2dbb2c4a2c769795fa3"
+    Obtained hash (String)        : "3f45ef194732c2dbb2c4a2c769795fa3"
+[I] Counters match
+[I] Hashes match
+[I] Vector  7 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_RIPEMD_128
+    Test vector index             :  8
+    Vector string                 : "The quick brown fox jumps over the lazy dog"
+    Vector length                 :  43
+    Vector array                  : 
+16#54#, 16#68#, 16#65#, 16#20#, 16#71#, 16#75#, 16#69#, 16#63#, 16#6B#, 16#20#, 
+16#62#, 16#72#, 16#6F#, 16#77#, 16#6E#, 16#20#, 16#66#, 16#6F#, 16#78#, 16#20#, 
+16#6A#, 16#75#, 16#6D#, 16#70#, 16#73#, 16#20#, 16#6F#, 16#76#, 16#65#, 16#72#, 
+16#20#, 16#74#, 16#68#, 16#65#, 16#20#, 16#6C#, 16#61#, 16#7A#, 16#79#, 16#20#, 
+16#64#, 16#6F#, 16#67#
+[I] Digest results for vector     :  8
+    Expected bit count (Low, High): ( 344,  0)
+    Obtained bit count (Low, High): ( 344,  0)
+    Expected hash (String)        : "3fa9b57f053c053fbe2735b2380db596"
+    Obtained hash (String)        : "3fa9b57f053c053fbe2735b2380db596"
+[I] Counters match
+[I] Hashes match
+[I] Vector  8 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_RIPEMD_128
+    Test vector index             :  9
+    Vector string                 : "CryptAda By TCantos Software"
+    Vector length                 :  28
+    Vector array                  : 
+16#43#, 16#72#, 16#79#, 16#70#, 16#74#, 16#41#, 16#64#, 16#61#, 16#20#, 16#42#, 
+16#79#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 16#73#, 16#20#, 
+16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+[I] Digest results for vector     :  9
+    Expected bit count (Low, High): ( 224,  0)
+    Obtained bit count (Low, High): ( 224,  0)
+    Expected hash (String)        : "b34a84e5264f923e265a164dba1f75e4"
+    Obtained hash (String)        : "b34a84e5264f923e265a164dba1f75e4"
+[I] Counters match
+[I] Hashes match
+[I] Vector  9 test passed.
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:19
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : Testing RIPEMD-128 operation at counter offset and block boundary.
+Started         : 2017/03/20 - 11:08:19
+--------------------------------------------------------------------------------
+[I] Obtained hashes are checked against values obtained by using several online tools
+[I] Checking at counter offset boundary.
+    Number of vectors to test:  3
+[I] Vector   :  1
+Vector length:  55
+[I] Digest result for test vector:  1
+    Expected bit count (Low, High): ( 440,  0)
+    Obtained bit count (Low, High): ( 440,  0)
+    Expected hash (String)        : "418486955c126b27903aa01fef5d5d15"
+    Obtained hash (String)        : "418486955c126b27903aa01fef5d5d15"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 results match
+[I] Vector   :  2
+Vector length:  56
+[I] Digest result for test vector:  2
+    Expected bit count (Low, High): ( 448,  0)
+    Obtained bit count (Low, High): ( 448,  0)
+    Expected hash (String)        : "6356ebd92cd62ee084789c6ec8eb3de3"
+    Obtained hash (String)        : "6356ebd92cd62ee084789c6ec8eb3de3"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 results match
+[I] Vector   :  3
+Vector length:  57
+[I] Digest result for test vector:  3
+    Expected bit count (Low, High): ( 456,  0)
+    Obtained bit count (Low, High): ( 456,  0)
+    Expected hash (String)        : "d6a7de242c383193285db1de0459c32c"
+    Obtained hash (String)        : "d6a7de242c383193285db1de0459c32c"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 results match
+[I] Checking at block boundary.
+    Number of vectors to test:  3
+[I] Vector   :  1
+Vector length:  63
+[I] Digest result for test vector:  1
+    Expected bit count (Low, High): ( 504,  0)
+    Obtained bit count (Low, High): ( 504,  0)
+    Expected hash (String)        : "f90233a12d38ee10c156db5554feefd2"
+    Obtained hash (String)        : "f90233a12d38ee10c156db5554feefd2"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 results match
+[I] Vector   :  2
+Vector length:  64
+[I] Digest result for test vector:  2
+    Expected bit count (Low, High): ( 512,  0)
+    Obtained bit count (Low, High): ( 512,  0)
+    Expected hash (String)        : "680716ac638f0d601982c696d37e5e56"
+    Obtained hash (String)        : "680716ac638f0d601982c696d37e5e56"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 results match
+[I] Vector   :  3
+Vector length:  65
+[I] Digest result for test vector:  3
+    Expected bit count (Low, High): ( 520,  0)
+    Obtained bit count (Low, High): ( 520,  0)
+    Expected hash (String)        : "e30ba165def257801f43c080912bd9e0"
+    Obtained hash (String)        : "e30ba165def257801f43c080912bd9e0"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 results match
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:19
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 5
+Description     : Another standard RIPEMD-128 test vector: 1,000,000 repetitions of 'a'
+Started         : 2017/03/20 - 11:08:19
+--------------------------------------------------------------------------------
+[I] Performng 1,000 iteratios with a 1,000 bytes buffer
+    Expected bit count (Low, High): ( 8000000,  0)
+    Expected hash                 : "4a7f5723f954eba1216c9d8f6320431f"
+    Obtained bit count (Low, High): ( 8000000,  0)
+    Obtained hash                 : "4a7f5723f954eba1216c9d8f6320431f"
+[I] Counters match
+[I] Hashes match
+--------------------------------------------------------------------------------
+Test Case Number: 5
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:19
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.RIPEMD_128
+Finished                 : 2017/03/20 - 11:08:19
+================================================================================

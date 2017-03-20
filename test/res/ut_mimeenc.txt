@@ -1,0 +1,660 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.1.a (2017/03/31)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.MIME_Encoders
+Description              : Unit test driver for CryptAda.Encoders.Base64_Encoders.MIME_Encoders functionality.
+Started                  : 2017/03/20 - 11:08:18
+================================================================================
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Testing state and counters during encoding.
+Started         : 2017/03/20 - 11:08:18
+--------------------------------------------------------------------------------
+[I] Initial state of encoder object ...
+[I] Checking encoder state:
+Expected State     : "STATE_IDLE"
+Obtained State     : "STATE_IDLE"
+Expected Byte Count:  0
+Obtained Byte Count:  0
+Expected Code Count:  0
+Obtained Code Count:  0
+[I] State matches
+[I] After Start_Encoding ...
+[I] Checking encoder state:
+Expected State     : "STATE_ENCODING"
+Obtained State     : "STATE_ENCODING"
+Expected Byte Count:  0
+Obtained Byte Count:  0
+Expected Code Count:  0
+Obtained Code Count:  0
+[I] State matches
+[I] Encoding an array
+Array to encode :
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+Array Length    :  128
+[I] Checking encoder state:
+Expected State     : "STATE_ENCODING"
+Obtained State     : "STATE_ENCODING"
+Expected Byte Count:  126
+Obtained Byte Count:  126
+Expected Code Count:  172
+Obtained Code Count:  172
+[I] State matches
+Encoding results: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4
+OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx
+"
+[I] End encoding
+[I] Checking encoder state:
+Expected State     : "STATE_IDLE"
+Obtained State     : "STATE_IDLE"
+Expected Byte Count:  128
+Obtained Byte Count:  128
+Expected Code Count:  176
+Obtained Code Count:  176
+[I] State matches
+[I] Encoding results:
+Expected: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4
+OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx
+cnN0dXZ3eHl6e3x9fn8="
+Obtained: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4
+OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx
+cnN0dXZ3eHl6e3x9fn8="
+[I] Result matches
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:18
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Testing CryptAda_Bad_Operation_Error raising in Idle_State
+Started         : 2017/03/20 - 11:08:18
+--------------------------------------------------------------------------------
+[I] Initial state of encoder object is State_Idle
+[I] Checking encoder state:
+Expected State     : "STATE_IDLE"
+Obtained State     : "STATE_IDLE"
+Expected Byte Count:  0
+Obtained Byte Count:  0
+Expected Code Count:  0
+Obtained Code Count:  0
+[I] State matches
+[I] Trying Encode (must raise CryptAda_Bad_Operation_Error)
+[I] Raised CryptAda_Bad_Operation_Error
+[I] Trying End_Encoding (must raise CryptAda_Bad_Operation_Error)
+[I] Raised CryptAda_Bad_Operation_Error
+[I] Trying Decode (must raise CryptAda_Bad_Operation_Error)
+[I] Raised CryptAda_Bad_Operation_Error
+[I] Trying End_Decoding (must raise CryptAda_Bad_Operation_Error)
+[I] Raised CryptAda_Bad_Operation_Error
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:18
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Testing CryptAda_Bad_Operation_Error raising in Encoding_State
+Started         : 2017/03/20 - 11:08:18
+--------------------------------------------------------------------------------
+[I] Initial state of encoder object is State_Idle
+[I] Checking encoder state:
+Expected State     : "STATE_IDLE"
+Obtained State     : "STATE_IDLE"
+Expected Byte Count:  0
+Obtained Byte Count:  0
+Expected Code Count:  0
+Obtained Code Count:  0
+[I] State matches
+[I] After Start_Encoding state must be State_Encoding
+[I] Checking encoder state:
+Expected State     : "STATE_ENCODING"
+Obtained State     : "STATE_ENCODING"
+Expected Byte Count:  0
+Obtained Byte Count:  0
+Expected Code Count:  0
+Obtained Code Count:  0
+[I] State matches
+[I] Trying Encode (must not raise CryptAda_Bad_Operation_Error)
+[I] No exception raised
+[I] Trying Start_Encoding (must raise CryptAda_Bad_Operation_Error)
+[I] Raised CryptAda_Bad_Operation_Error
+[I] Trying Decode (must raise CryptAda_Bad_Operation_Error)
+[I] Raised CryptAda_Bad_Operation_Error
+[I] Trying End_Decoding (must raise CryptAda_Bad_Operation_Error)
+[I] Raised CryptAda_Bad_Operation_Error
+[I] Trying End_Encoding (must not raise CryptAda_Bad_Operation_Error)
+[I] No exception raised
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:18
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : Testing state and counters during decoding.
+Started         : 2017/03/20 - 11:08:18
+--------------------------------------------------------------------------------
+[I] Initial state of encoder object ...
+[I] Checking encoder state:
+Expected State     : "STATE_IDLE"
+Obtained State     : "STATE_IDLE"
+Expected Byte Count:  0
+Obtained Byte Count:  0
+Expected Code Count:  0
+Obtained Code Count:  0
+[I] State matches
+[I] After Start_Decoding ...
+[I] Checking encoder state:
+Expected State     : "STATE_DECODING"
+Obtained State     : "STATE_DECODING"
+Expected Byte Count:  0
+Obtained Byte Count:  0
+Expected Code Count:  0
+Obtained Code Count:  0
+[I] State matches
+[I] Decoding an encoded string
+String to decode: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4
+OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx
+cnN0dXZ3eHl6e3x9fn8="
+[I] Checking encoder state:
+Expected State     : "STATE_DECODING"
+Obtained State     : "STATE_DECODING"
+Expected Byte Count:  128
+Obtained Byte Count:  128
+Expected Code Count:  172
+Obtained Code Count:  172
+[I] State matches
+[I] Encoder must be stopped
+Decoding_Stopped = TRUE
+[I] End decoding
+[I] Checking encoder state:
+Expected State     : "STATE_IDLE"
+Obtained State     : "STATE_IDLE"
+Expected Byte Count:  128
+Obtained Byte Count:  128
+Expected Code Count:  172
+Obtained Code Count:  172
+[I] State matches
+[I] Decoding results:
+Expected array length :  128
+Obtained array length :  128
+Expected decoded array: 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+Obtained decoded array: 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+[I] Result matches
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:18
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 5
+Description     : Testing CryptAda_Bad_Operation_Error raising in Decoding_State
+Started         : 2017/03/20 - 11:08:18
+--------------------------------------------------------------------------------
+[I] Initial state of encoder object is State_Idle
+[I] Checking encoder state:
+Expected State     : "STATE_IDLE"
+Obtained State     : "STATE_IDLE"
+Expected Byte Count:  0
+Obtained Byte Count:  0
+Expected Code Count:  0
+Obtained Code Count:  0
+[I] State matches
+[I] After Start_Decoding state must be State_Decoding
+[I] Checking encoder state:
+Expected State     : "STATE_DECODING"
+Obtained State     : "STATE_DECODING"
+Expected Byte Count:  0
+Obtained Byte Count:  0
+Expected Code Count:  0
+Obtained Code Count:  0
+[I] State matches
+[I] Trying Decode (must not raise CryptAda_Bad_Operation_Error)
+[I] No exception raised
+[I] Trying Start_Decoding (must raise CryptAda_Bad_Operation_Error)
+[I] Raised CryptAda_Bad_Operation_Error
+[I] Trying Encode (must raise CryptAda_Bad_Operation_Error)
+[I] Raised CryptAda_Bad_Operation_Error
+[I] Trying End_Encoding (must raise CryptAda_Bad_Operation_Error)
+[I] Raised CryptAda_Bad_Operation_Error
+[I] Trying End_Decoding (must not raise CryptAda_Bad_Operation_Error)
+[I] No exception raised
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 5
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:18
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 6
+Description     : Testing MIME encoding/decoding with different line lengths
+Started         : 2017/03/20 - 11:08:18
+--------------------------------------------------------------------------------
+[I] Encoding with line length =  2147483647
+Must use line length =  76
+Encoding array   : 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+Expected encoding: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4
+OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx
+cnN0dXZ3eHl6e3x9fn8="
+Expected line length:  76
+Obtained line length:  76
+[I] Result matches
+Obtained encoding: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4
+OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx
+cnN0dXZ3eHl6e3x9fn8="
+[I] Result matches
+[I] Decoding previous encoded byte array
+[I] Result matches
+[I] Encoding with line length =  50
+Encoding array   : 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+Expected encoding: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJC
+UmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0BBQkNERUZHSElK
+S0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3
+BxcnN0dXZ3eHl6e3x9fn8="
+Expected line length:  50
+Obtained line length:  50
+[I] Result matches
+Obtained encoding: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJC
+UmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0BBQkNERUZHSElK
+S0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3
+BxcnN0dXZ3eHl6e3x9fn8="
+[I] Result matches
+[I] Decoding previous encoded byte array
+[I] Result matches
+[I] Encoding with line length =  25
+Encoding array   : 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+Expected encoding: "AAECAwQFBgcICQoLDA0ODxARE
+hMUFRYXGBkaGxwdHh8gISIjJC
+UmJygpKissLS4vMDEyMzQ1Njc
+4OTo7PD0+P0BBQkNERUZHSElK
+S0xNTk9QUVJTVFVWV1hZWltcX
+V5fYGFiY2RlZmdoaWprbG1ub3
+BxcnN0dXZ3eHl6e3x9fn8="
+Expected line length:  25
+Obtained line length:  25
+[I] Result matches
+Obtained encoding: "AAECAwQFBgcICQoLDA0ODxARE
+hMUFRYXGBkaGxwdHh8gISIjJC
+UmJygpKissLS4vMDEyMzQ1Njc
+4OTo7PD0+P0BBQkNERUZHSElK
+S0xNTk9QUVJTVFVWV1hZWltcX
+V5fYGFiY2RlZmdoaWprbG1ub3
+BxcnN0dXZ3eHl6e3x9fn8="
+[I] Result matches
+[I] Decoding previous encoded byte array
+[I] Result matches
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 6
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:18
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 7
+Description     : Encoding and decoding one byte/code at a time.
+Started         : 2017/03/20 - 11:08:18
+--------------------------------------------------------------------------------
+[I] Encoding byte by byte using line length of 3
+Byte array to encode
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Expected encoding: "Zm9vYmFy"
+>>> Encoding byte  1 => 16#66#
+>>> Byte count    :  0
+>>> Code count    :  0
+>>> Buffered codes:  0
+>>> Encoding      : ""
+>>> Encoding byte  2 => 16#6F#
+>>> Byte count    :  0
+>>> Code count    :  0
+>>> Buffered codes:  0
+>>> Encoding      : ""
+>>> Encoding byte  3 => 16#6F#
+>>> Byte count    :  3
+>>> Code count    :  6
+>>> Buffered codes:  1
+>>> Encoding      : "Zm9
+"
+>>> Encoding byte  4 => 16#62#
+>>> Byte count    :  3
+>>> Code count    :  6
+>>> Buffered codes:  1
+>>> Encoding      : "Zm9
+"
+>>> Encoding byte  5 => 16#61#
+>>> Byte count    :  3
+>>> Code count    :  6
+>>> Buffered codes:  1
+>>> Encoding      : "Zm9
+"
+>>> Encoding byte  6 => 16#72#
+>>> Byte count    :  6
+>>> Code count    :  12
+>>> Buffered codes:  2
+>>> Encoding      : "Zm9
+vYm
+"
+>>> End_Encoding
+>>> Byte count:  6
+>>> Code count:  12
+>>> Encoding  : "Zm9
+vYm
+Fy"
+[I] Decoding code by code
+[I] String to decode: "Zm9vYmFy"
+[I] Expected byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+>>> Decoding code  1 => 'Z'
+>>> Byte count:  0
+>>> Code count:  0
+>>> Decoded   : 
+
+>>> Decoding code  2 => 'm'
+>>> Byte count:  0
+>>> Code count:  0
+>>> Decoded   : 
+
+>>> Decoding code  3 => '9'
+>>> Byte count:  0
+>>> Code count:  0
+>>> Decoded   : 
+
+>>> Decoding code  4 => 'v'
+>>> Byte count:  3
+>>> Code count:  4
+>>> Decoded   : 
+16#66#, 16#6F#, 16#6F#
+>>> Decoding code  5 => 'Y'
+>>> Byte count:  3
+>>> Code count:  4
+>>> Decoded   : 
+16#66#, 16#6F#, 16#6F#
+>>> Decoding code  6 => 'm'
+>>> Byte count:  3
+>>> Code count:  4
+>>> Decoded   : 
+16#66#, 16#6F#, 16#6F#
+>>> Decoding code  7 => 'F'
+>>> Byte count:  3
+>>> Code count:  4
+>>> Decoded   : 
+16#66#, 16#6F#, 16#6F#
+>>> Decoding code  8 => 'y'
+>>> Byte count:  6
+>>> Code count:  8
+>>> Decoded   : 
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+>>> End_Decoding
+>>> Byte count:  6
+>>> Code count:  8
+>>> Decoded   : 
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Result matches
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 7
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:18
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 8
+Description     : Testing encoding/decoding RFC 4648 test vectors
+Started         : 2017/03/20 - 11:08:18
+--------------------------------------------------------------------------------
+[I] Encoding test vectors
+[I] Decoded (as string)     : ""
+Decoded (as byte array) :
+
+Expected encoding result: ""
+Obtained encoding result: ""
+[I] Result matches
+[I] Decoded (as string)     : "f"
+Decoded (as byte array) :
+16#66#
+Expected encoding result: "Zg=="
+Obtained encoding result: "Zg=="
+[I] Result matches
+[I] Decoded (as string)     : "fo"
+Decoded (as byte array) :
+16#66#, 16#6F#
+Expected encoding result: "Zm8="
+Obtained encoding result: "Zm8="
+[I] Result matches
+[I] Decoded (as string)     : "foo"
+Decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#
+Expected encoding result: "Zm9v"
+Obtained encoding result: "Zm9v"
+[I] Result matches
+[I] Decoded (as string)     : "foob"
+Decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#
+Expected encoding result: "Zm9vYg=="
+Obtained encoding result: "Zm9vYg=="
+[I] Result matches
+[I] Decoded (as string)     : "fooba"
+Decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#
+Expected encoding result: "Zm9vYmE="
+Obtained encoding result: "Zm9vYmE="
+[I] Result matches
+[I] Decoded (as string)     : "foobar"
+Decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Expected encoding result: "Zm9vYmFy"
+Obtained encoding result: "Zm9vYmFy"
+[I] Result matches
+[I] Decoding test vectors
+[I] Encoded                          : ""
+Expected decoded (as string)     : ""
+Expected decoded (as byte array) :
+
+Obtained decoded (as byte array) :
+
+[I] Result matches
+[I] Encoded                          : "Zg=="
+Expected decoded (as string)     : "f"
+Expected decoded (as byte array) :
+16#66#
+Obtained decoded (as byte array) :
+16#66#
+[I] Result matches
+[I] Encoded                          : "Zm8="
+Expected decoded (as string)     : "fo"
+Expected decoded (as byte array) :
+16#66#, 16#6F#
+Obtained decoded (as byte array) :
+16#66#, 16#6F#
+[I] Result matches
+[I] Encoded                          : "Zm9v"
+Expected decoded (as string)     : "foo"
+Expected decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#
+Obtained decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#
+[I] Result matches
+[I] Encoded                          : "Zm9vYg=="
+Expected decoded (as string)     : "foob"
+Expected decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#
+Obtained decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#
+[I] Result matches
+[I] Encoded                          : "Zm9vYmE="
+Expected decoded (as string)     : "fooba"
+Expected decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#
+Obtained decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#
+[I] Result matches
+[I] Encoded                          : "Zm9vYmFy"
+Expected decoded (as string)     : "foobar"
+Expected decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Result matches
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 8
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:18
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 9
+Description     : Testing Base64 syntactic erroneous strings that must be accepted by MIME encoder
+Started         : 2017/03/20 - 11:08:18
+--------------------------------------------------------------------------------
+[I] Trying to decode: "==Zm9vYmFy"
+Calling to Decode
+Calling to End_Decoding
+Expected byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Result matches
+[I] Trying to decode: "**Zm9vYmFy"
+Calling to Decode
+Calling to End_Decoding
+Expected byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Result matches
+[I] Trying to decode: "                      Z m 9 v Y m F* y"
+Calling to Decode
+Calling to End_Decoding
+Expected byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Result matches
+[I] Trying to decode: " Z.m.9.vY..mF..y"
+Calling to Decode
+Calling to End_Decoding
+Expected byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Result matches
+[I] Trying to decode: "@Zm9v@YmFy@"
+Calling to Decode
+Calling to End_Decoding
+Expected byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Result matches
+[I] Trying to decode: "Zm9vYmFy"
+Calling to Decode
+Calling to End_Decoding
+Expected byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Result matches
+[I] Trying to decode: "Z=m9vYmFy"
+Calling to Decode
+Calling to End_Decoding
+Expected byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Result matches
+[I] Trying to decode: "Zm9v=YmFy"
+Calling to Decode
+Calling to End_Decoding
+Expected byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Result matches
+[I] Trying to decode: "Zm9vYmFy"
+Calling to Decode
+Calling to End_Decoding
+Expected byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Result matches
+[I] Trying to decode: "Zm9vYm=Fy"
+Calling to Decode
+Calling to End_Decoding
+Expected byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Result matches
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 9
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:18
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.MIME_Encoders
+Finished                 : 2017/03/20 - 11:08:18
+================================================================================

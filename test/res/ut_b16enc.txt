@@ -1,0 +1,305 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.1.a (2017/03/31)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Base16_Encoders
+Description              : Unit test driver for CryptAda.Encoders.Base16_Encoders functionality.
+Started                  : 2017/03/20 - 11:08:18
+================================================================================
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Testing state and counters during encoding.
+Started         : 2017/03/20 - 11:08:18
+--------------------------------------------------------------------------------
+[I] Initial state of encoder object ...
+[I] Checking encoder state:
+Expected State     : "STATE_IDLE"
+Obtained State     : "STATE_IDLE"
+Expected Byte Count:  0
+Obtained Byte Count:  0
+Expected Code Count:  0
+Obtained Code Count:  0
+[I] State matches
+[I] After Start_Encoding ...
+[I] Checking encoder state:
+Expected State     : "STATE_ENCODING"
+Obtained State     : "STATE_ENCODING"
+Expected Byte Count:  0
+Obtained Byte Count:  0
+Expected Code Count:  0
+Obtained Code Count:  0
+[I] State matches
+[I] Encoding an array
+Array to encode :
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
+Array Length    :  16
+[I] Checking encoder state:
+Expected State     : "STATE_ENCODING"
+Obtained State     : "STATE_ENCODING"
+Expected Byte Count:  16
+Obtained Byte Count:  16
+Expected Code Count:  32
+Obtained Code Count:  32
+[I] State matches
+Encoding results: "000102030405060708090A0B0C0D0E0F"
+[I] End encoding
+[I] Checking encoder state:
+Expected State     : "STATE_IDLE"
+Obtained State     : "STATE_IDLE"
+Expected Byte Count:  16
+Obtained Byte Count:  16
+Expected Code Count:  32
+Obtained Code Count:  32
+[I] State matches
+[I] Encoding results:
+Expected: "000102030405060708090A0B0C0D0E0F"
+Obtained: "000102030405060708090A0B0C0D0E0F"
+[I] Result matches
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:18
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Testing CryptAda_Bad_Operation_Error raising in Idle_State
+Started         : 2017/03/20 - 11:08:18
+--------------------------------------------------------------------------------
+[I] Initial state of encoder object is State_Idle
+[I] Checking encoder state:
+Expected State     : "STATE_IDLE"
+Obtained State     : "STATE_IDLE"
+Expected Byte Count:  0
+Obtained Byte Count:  0
+Expected Code Count:  0
+Obtained Code Count:  0
+[I] State matches
+[I] Trying Encode (must raise CryptAda_Bad_Operation_Error)
+[I] Raised CryptAda_Bad_Operation_Error
+[I] Trying End_Encoding (must raise CryptAda_Bad_Operation_Error)
+[I] Raised CryptAda_Bad_Operation_Error
+[I] Trying Decode (must raise CryptAda_Bad_Operation_Error)
+[I] Raised CryptAda_Bad_Operation_Error
+[I] Trying End_Decoding (must raise CryptAda_Bad_Operation_Error)
+[I] Raised CryptAda_Bad_Operation_Error
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:18
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Testing CryptAda_Bad_Operation_Error raising in Encoding_State
+Started         : 2017/03/20 - 11:08:18
+--------------------------------------------------------------------------------
+[I] Initial state of encoder object is State_Idle
+[I] Checking encoder state:
+Expected State     : "STATE_IDLE"
+Obtained State     : "STATE_IDLE"
+Expected Byte Count:  0
+Obtained Byte Count:  0
+Expected Code Count:  0
+Obtained Code Count:  0
+[I] State matches
+[I] After Start_Encoding state must be State_Encoding
+[I] Checking encoder state:
+Expected State     : "STATE_ENCODING"
+Obtained State     : "STATE_ENCODING"
+Expected Byte Count:  0
+Obtained Byte Count:  0
+Expected Code Count:  0
+Obtained Code Count:  0
+[I] State matches
+[I] Trying Encode (must not raise CryptAda_Bad_Operation_Error)
+[I] No exception raised
+[I] Trying Start_Encoding (must raise CryptAda_Bad_Operation_Error)
+[I] Raised CryptAda_Bad_Operation_Error
+[I] Trying Decode (must raise CryptAda_Bad_Operation_Error)
+[I] Raised CryptAda_Bad_Operation_Error
+[I] Trying End_Decoding (must raise CryptAda_Bad_Operation_Error)
+[I] Raised CryptAda_Bad_Operation_Error
+[I] Trying End_Encoding (must not raise CryptAda_Bad_Operation_Error)
+[I] No exception raised
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:18
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : Testing state and counters during decoding.
+Started         : 2017/03/20 - 11:08:18
+--------------------------------------------------------------------------------
+[I] Initial state of encoder object ...
+[I] Checking encoder state:
+Expected State     : "STATE_IDLE"
+Obtained State     : "STATE_IDLE"
+Expected Byte Count:  0
+Obtained Byte Count:  0
+Expected Code Count:  0
+Obtained Code Count:  0
+[I] State matches
+[I] After Start_Decoding ...
+[I] Checking encoder state:
+Expected State     : "STATE_DECODING"
+Obtained State     : "STATE_DECODING"
+Expected Byte Count:  0
+Obtained Byte Count:  0
+Expected Code Count:  0
+Obtained Code Count:  0
+[I] State matches
+[I] Decoding an encoded string
+String to decode: "000102030405060708090A0B0C0D0E0F"
+[I] Checking encoder state:
+Expected State     : "STATE_DECODING"
+Obtained State     : "STATE_DECODING"
+Expected Byte Count:  16
+Obtained Byte Count:  16
+Expected Code Count:  32
+Obtained Code Count:  32
+[I] State matches
+[I] End decoding
+[I] Checking encoder state:
+Expected State     : "STATE_IDLE"
+Obtained State     : "STATE_IDLE"
+Expected Byte Count:  16
+Obtained Byte Count:  16
+Expected Code Count:  32
+Obtained Code Count:  32
+[I] State matches
+[I] Decoding results:
+Expected array length :  16
+Obtained array length :  16
+Expected decoded array: 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
+Obtained decoded array: 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
+[I] Result matches
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:18
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 5
+Description     : Testing CryptAda_Bad_Operation_Error raising in Decoding_State
+Started         : 2017/03/20 - 11:08:18
+--------------------------------------------------------------------------------
+[I] Initial state of encoder object is State_Idle
+[I] Checking encoder state:
+Expected State     : "STATE_IDLE"
+Obtained State     : "STATE_IDLE"
+Expected Byte Count:  0
+Obtained Byte Count:  0
+Expected Code Count:  0
+Obtained Code Count:  0
+[I] State matches
+[I] After Start_Decoding state must be State_Decoding
+[I] Checking encoder state:
+Expected State     : "STATE_DECODING"
+Obtained State     : "STATE_DECODING"
+Expected Byte Count:  0
+Obtained Byte Count:  0
+Expected Code Count:  0
+Obtained Code Count:  0
+[I] State matches
+[I] Trying Decode (must not raise CryptAda_Bad_Operation_Error)
+[I] No exception raised
+[I] Trying Start_Decoding (must raise CryptAda_Bad_Operation_Error)
+[I] Raised CryptAda_Bad_Operation_Error
+[I] Trying Encode (must raise CryptAda_Bad_Operation_Error)
+[I] Raised CryptAda_Bad_Operation_Error
+[I] Trying End_Encoding (must raise CryptAda_Bad_Operation_Error)
+[I] Raised CryptAda_Bad_Operation_Error
+[I] Trying End_Decoding (must not raise CryptAda_Bad_Operation_Error)
+[I] No exception raised
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 5
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:18
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 6
+Description     : Testing CryptAda_Syntax_Error raising during decoding
+Started         : 2017/03/20 - 11:08:18
+--------------------------------------------------------------------------------
+[I] Testing  6 invalid encoded strings
+[I] String to decode: "    "
+Start_Decoding
+Decode
+[I] Raised CryptAda_Syntax_Error
+[I] String to decode: "010203040"
+Start_Decoding
+Decode
+End_Decoding
+[I] Raised CryptAda_Syntax_Error
+[I] String to decode: "0000000000000A0B0C0G"
+Start_Decoding
+Decode
+[I] Raised CryptAda_Syntax_Error
+[I] String to decode: "0102030405 060708090a"
+Start_Decoding
+Decode
+[I] Raised CryptAda_Syntax_Error
+[I] String to decode: "000000000000000000000"
+Start_Decoding
+Decode
+End_Decoding
+[I] Raised CryptAda_Syntax_Error
+[I] String to decode: "0102030405060708090a0b"
+Start_Decoding
+Decode
+[I] Raised CryptAda_Syntax_Error
+[I] Odd length chunks must not cause CryptAda_Syntax_Error during decoding
+Decoding: "00010203040506070"
+[I] Checking encoder state:
+Expected State     : "STATE_DECODING"
+Obtained State     : "STATE_DECODING"
+Expected Byte Count:  8
+Obtained Byte Count:  8
+Expected Code Count:  16
+Obtained Code Count:  16
+[I] State matches
+Decoding: "8090A0B0C0D0E0F"
+[I] Checking encoder state:
+Expected State     : "STATE_DECODING"
+Obtained State     : "STATE_DECODING"
+Expected Byte Count:  16
+Obtained Byte Count:  16
+Expected Code Count:  32
+Obtained Code Count:  32
+[I] State matches
+End_Decoding
+[I] Checking encoder state:
+Expected State     : "STATE_IDLE"
+Obtained State     : "STATE_IDLE"
+Expected Byte Count:  16
+Obtained Byte Count:  16
+Expected Code Count:  32
+Obtained Code Count:  32
+[I] State matches
+Expected Decoded => ( 16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#)
+Obtained Decoded => ( 16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#)
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 6
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:08:18
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Base16_Encoders
+Finished                 : 2017/03/20 - 11:08:18
+================================================================================

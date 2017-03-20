@@ -1,0 +1,604 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.1.a (2017/03/31)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.Div
+Description              : Unit test driver for CryptAda.Big_Naturals division functionality.
+Started                  : 2017/03/20 - 21:38:07
+================================================================================
+[I] This test driver will validate Digit_Sequences division
+Next elements will be tested:
+    - Divide_And_Remainder()
+    - Divide()
+    - Remainder()
+    - Divide_Digit_And_Remainder()
+    - Divide_Digit()
+    - Remainder_Digit()
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Overflow conditions in division
+Started         : 2017/03/20 - 21:38:07
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Divide_And_Remainder()
+- Divide()
+- Remainder()
+[I] Check that CryptAda_Overflow_Error is raised when quotien or remainder
+    Digit_Sequences are not long enough to hold the respective results.
+[I] Testing Divide_And_Remainder
+[I] Digit_Sequence for quotient not long enough.
+Shall raise CryptAda_Overflow_Error
+[I] Raised CryptAda_Overflow_Error
+[I] Digit_Sequence for remainder not long enough.
+Shall raise CryptAda_Overflow_Error
+[I] Raised CryptAda_Overflow_Error
+[I] Testing Divide
+[I] Digit_Sequence for quotient not long enough.
+Shall raise CryptAda_Overflow_Error
+[I] Raised CryptAda_Overflow_Error
+[I] Testing Remainder
+[I] Digit_Sequence for remainder not long enough.
+Shall raise CryptAda_Overflow_Error
+[I] Raised CryptAda_Overflow_Error
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 21:38:07
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Division by zero
+Started         : 2017/03/20 - 21:38:07
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Divide_And_Remainder()
+- Divide()
+- Remainder()
+[I] Check that CryptAda_Division_By_Zero_Error is raised when divisor is zero
+[I] Testing Divide_And_Remainder
+[I] Divisor is Zero_Digit_Sequence
+Shall raise CryptAda_Division_By_Zero_Error
+[I] Raised CryptAda_Division_By_Zero_Error
+[I] Testing Divide
+[I] Divisor is Zero_Digit_Sequence
+Shall raise CryptAda_Division_By_Zero_Error
+[I] Raised CryptAda_Division_By_Zero_Error
+[I] Testing Remainder
+[I] Divisor is Zero_Digit_Sequence
+Shall raise CryptAda_Division_By_Zero_Error
+[I] Raised CryptAda_Division_By_Zero_Error
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 21:38:07
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Division by one
+Started         : 2017/03/20 - 21:38:07
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Divide_And_Remainder()
+- Divide()
+- Remainder()
+[I] Check that division by one renders quotient = divisor, remainder = 0
+[I] Testing Divide_And_Remainder
+[I] Testing Divide
+[I] Testing Remainder
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 21:38:07
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : Division by self
+Started         : 2017/03/20 - 21:38:07
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Divide_And_Remainder()
+- Divide()
+- Remainder()
+[I] Check that division by self renders quotient = 1, remainder = 0
+[I] Testing Divide_And_Remainder
+[I] Testing Divide
+[I] Testing Remainder
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 21:38:07
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 5
+Description     : Divisor greater than dividend
+Started         : 2017/03/20 - 21:38:07
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Divide_And_Remainder()
+- Divide()
+- Remainder()
+[I] Check that when divisor is greater than dividend quotient = 0, remainder = dividend
+[I] Testing Divide_And_Remainder
+[I] Testing Divide
+[I] Testing Remainder
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 5
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 21:38:07
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 6
+Description     : Testing correctness of division by using RSA known products
+Started         : 2017/03/20 - 21:38:07
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Divide_And_Remainder()
+[I] This test will use a number of known RSA numbers (semiprimes).
+    Remainder will always be Zero
+Number of known factors to test:  7
+[I] Test vector                   :  1
+    Test vector name              : RSA 100 decial digits (330 bits)
+    Dividend (decimal)            : 1522605027922533360535618378132637429718068114961380688657908494580122963258952897654000350692006139
+   Dividend                      : 
+Length            :  40
+Significant Digits:  11
+000002C8 D59AF47C 81AB3725 B472BE41 7E3BF7AB 85439AF7 26ED3DFD F66489D1 55DC0B77 1C7A50EF 7C5E58FB 
+    Divisor 1 (decimal)           : 37975227936943673922808872755445627854565536638199
+    Divisor 1                     : 
+Length            :  20
+Significant Digits:  6
+00000019 FBD41D69 AA3D8600 9A967DB3 379C63CD 501F24F7 
+    Expected quotient 1 (decimal) : 40094690950920881030683735292761468389214899724061
+    Expected quotient 1           : 
+Length            :  20
+Significant Digits:  6
+0000001B 6F141F98 EEB619BC 03602201 60A5F75E A07CDF1D 
+    Expected remainder 1 (decimal): 0
+    Expected remainder 1          : 
+Length            :  1
+Significant Digits:  0
+00000000
+    Obtained quotient 1 (decimal) : 40094690950920881030683735292761468389214899724061
+    Obtained quotient 1           : 
+Length            :  20
+Significant Digits:  6
+0000001B 6F141F98 EEB619BC 03602201 60A5F75E A07CDF1D 
+    Expected remainder 1 (decimal): 0
+    Expected remainder 1          : 
+Length            :  20
+Significant Digits:  0
+00000000
+    Test vector name              : RSA 100 decial digits (330 bits)
+    Dividend (decimal)            : 1522605027922533360535618378132637429718068114961380688657908494580122963258952897654000350692006139
+   Dividend                      : 
+Length            :  40
+Significant Digits:  11
+000002C8 D59AF47C 81AB3725 B472BE41 7E3BF7AB 85439AF7 26ED3DFD F66489D1 55DC0B77 1C7A50EF 7C5E58FB 
+    Divisor 2 (decimal)           : 40094690950920881030683735292761468389214899724061
+    Divisor 2                     : 
+Length            :  20
+Significant Digits:  6
+0000001B 6F141F98 EEB619BC 03602201 60A5F75E A07CDF1D 
+    Expected quotient 2 (decimal) : 37975227936943673922808872755445627854565536638199
+    Expected quotient 2           : 
+Length            :  20
+Significant Digits:  6
+00000019 FBD41D69 AA3D8600 9A967DB3 379C63CD 501F24F7 
+    Expected remainder 2 (decimal): 0
+    Expected remainder 2          : 
+Length            :  1
+Significant Digits:  0
+00000000
+    Obtained quotient 2 (decimal) : 37975227936943673922808872755445627854565536638199
+    Obtained quotient 2           : 
+Length            :  20
+Significant Digits:  6
+00000019 FBD41D69 AA3D8600 9A967DB3 379C63CD 501F24F7 
+    Obtained remainder 2 (decimal): 0
+    Obtained remainder 2          : 
+Length            :  20
+Significant Digits:  0
+00000000
+[I] Test vector                   :  2
+    Test vector name              : RSA 110 decial digits (364 bits)
+    Dividend (decimal)            : 35794234179725868774991807832568455403003778024228226193532908190484670252364677411513516111204504060317568667
+   Dividend                      : 
+Length            :  40
+Significant Digits:  12
+00000F3D B4DFACD9 CA1D1C77 CDA2C23E 8826C929 130886E2 FFFA6E21 271CA6F3 E2A5A57D E621EEC5 B14FF581 A6368E9B 
+    Divisor 1 (decimal)           : 6122421090493547576937037317561418841225758554253106999
+    Divisor 1                     : 
+Length            :  20
+Significant Digits:  6
+003FEBCA 8101DF11 AC67AFB5 42E1A814 060D859A 41071F37 
+    Expected quotient 1 (decimal) : 5846418214406154678836553182979162384198610505601062333
+    Expected quotient 1           : 
+Length            :  20
+Significant Digits:  6
+003D0A19 AC34BC48 3C5475A5 2B9A1F59 CD5C5CFD B54315BD 
+    Expected remainder 1 (decimal): 0
+    Expected remainder 1          : 
+Length            :  1
+Significant Digits:  0
+00000000
+    Obtained quotient 1 (decimal) : 5846418214406154678836553182979162384198610505601062333
+    Obtained quotient 1           : 
+Length            :  20
+Significant Digits:  6
+003D0A19 AC34BC48 3C5475A5 2B9A1F59 CD5C5CFD B54315BD 
+    Expected remainder 1 (decimal): 0
+    Expected remainder 1          : 
+Length            :  20
+Significant Digits:  0
+00000000
+    Test vector name              : RSA 110 decial digits (364 bits)
+    Dividend (decimal)            : 35794234179725868774991807832568455403003778024228226193532908190484670252364677411513516111204504060317568667
+   Dividend                      : 
+Length            :  40
+Significant Digits:  12
+00000F3D B4DFACD9 CA1D1C77 CDA2C23E 8826C929 130886E2 FFFA6E21 271CA6F3 E2A5A57D E621EEC5 B14FF581 A6368E9B 
+    Divisor 2 (decimal)           : 5846418214406154678836553182979162384198610505601062333
+    Divisor 2                     : 
+Length            :  20
+Significant Digits:  6
+003D0A19 AC34BC48 3C5475A5 2B9A1F59 CD5C5CFD B54315BD 
+    Expected quotient 2 (decimal) : 6122421090493547576937037317561418841225758554253106999
+    Expected quotient 2           : 
+Length            :  20
+Significant Digits:  6
+003FEBCA 8101DF11 AC67AFB5 42E1A814 060D859A 41071F37 
+    Expected remainder 2 (decimal): 0
+    Expected remainder 2          : 
+Length            :  1
+Significant Digits:  0
+00000000
+    Obtained quotient 2 (decimal) : 6122421090493547576937037317561418841225758554253106999
+    Obtained quotient 2           : 
+Length            :  20
+Significant Digits:  6
+003FEBCA 8101DF11 AC67AFB5 42E1A814 060D859A 41071F37 
+    Obtained remainder 2 (decimal): 0
+    Obtained remainder 2          : 
+Length            :  20
+Significant Digits:  0
+00000000
+[I] Test vector                   :  3
+    Test vector name              : RSA 120 decial digits (397 bits)
+    Dividend (decimal)            : 227010481295437363334259960947493668895875336466084780038173258247009162675779735389791151574049166747880487470296548479
+   Dividend                      : 
+Length            :  40
+Significant Digits:  13
+00001681 64DBDDB0 7AFE12E5 BE8CABEC FC694EFF 9643D51F 533915EE 55B21769 7CC78256 503276EE 00AF4DFE 166C0725 FDC1447F 
+    Divisor 1 (decimal)           : 327414555693498015751146303749141488063642403240171463406883
+    Divisor 1                     : 
+Length            :  20
+Significant Digits:  7
+00000034 28FF7607 3161F57D F3E24286 AB153158 C9BEBD62 2D667523 
+    Expected quotient 1 (decimal) : 693342667110830181197325401899700641361965863127336680673013
+    Expected quotient 1           : 
+Length            :  20
+Significant Digits:  7
+0000006E 74B334A7 AFE5EB24 BC33197D DF8FE4C1 9811829D 875BCEF5 
+    Expected remainder 1 (decimal): 0
+    Expected remainder 1          : 
+Length            :  1
+Significant Digits:  0
+00000000
+    Obtained quotient 1 (decimal) : 693342667110830181197325401899700641361965863127336680673013
+    Obtained quotient 1           : 
+Length            :  20
+Significant Digits:  7
+0000006E 74B334A7 AFE5EB24 BC33197D DF8FE4C1 9811829D 875BCEF5 
+    Expected remainder 1 (decimal): 0
+    Expected remainder 1          : 
+Length            :  20
+Significant Digits:  0
+00000000
+    Test vector name              : RSA 120 decial digits (397 bits)
+    Dividend (decimal)            : 227010481295437363334259960947493668895875336466084780038173258247009162675779735389791151574049166747880487470296548479
+   Dividend                      : 
+Length            :  40
+Significant Digits:  13
+00001681 64DBDDB0 7AFE12E5 BE8CABEC FC694EFF 9643D51F 533915EE 55B21769 7CC78256 503276EE 00AF4DFE 166C0725 FDC1447F 
+    Divisor 2 (decimal)           : 693342667110830181197325401899700641361965863127336680673013
+    Divisor 2                     : 
+Length            :  20
+Significant Digits:  7
+0000006E 74B334A7 AFE5EB24 BC33197D DF8FE4C1 9811829D 875BCEF5 
+    Expected quotient 2 (decimal) : 327414555693498015751146303749141488063642403240171463406883
+    Expected quotient 2           : 
+Length            :  20
+Significant Digits:  7
+00000034 28FF7607 3161F57D F3E24286 AB153158 C9BEBD62 2D667523 
+    Expected remainder 2 (decimal): 0
+    Expected remainder 2          : 
+Length            :  1
+Significant Digits:  0
+00000000
+    Obtained quotient 2 (decimal) : 327414555693498015751146303749141488063642403240171463406883
+    Obtained quotient 2           : 
+Length            :  20
+Significant Digits:  7
+00000034 28FF7607 3161F57D F3E24286 AB153158 C9BEBD62 2D667523 
+    Obtained remainder 2 (decimal): 0
+    Obtained remainder 2          : 
+Length            :  20
+Significant Digits:  0
+00000000
+[I] Test vector                   :  4
+    Test vector name              : RSA 129 decial digits (426 bits)
+    Dividend (decimal)            : 114381625757888867669235779976146612010218296721242362562561842935706935245733897830597123563958705058989075147599290026879543541
+   Dividend                      : 
+Length            :  40
+Significant Digits:  14
+000002A3 E4A7E967 464D174F 174C2825 1D97BD37 5C607ACE 8FAE4156 30B45733 C2259D2A FC68DD6F 447AC5BA FB686CA5 A4DC6245 D5E2E8F5 
+    Divisor 1 (decimal)           : 3490529510847650949147849619903898133417764638493387843990820577
+    Divisor 1                     : 
+Length            :  20
+Significant Digits:  7
+00087C29 6ED480F9 AB17885D ECD31197 D617779C 0DAC70C3 234996E1 
+    Expected quotient 1 (decimal) : 32769132993266709549961988190834461413177642967992942539798288533
+    Expected quotient 1           : 
+Length            :  20
+Significant Digits:  7
+004FA848 12157119 ACC8ECCA 98C404B2 E5EE24CE 18F60EA8 18091895 
+    Expected remainder 1 (decimal): 0
+    Expected remainder 1          : 
+Length            :  1
+Significant Digits:  0
+00000000
+    Obtained quotient 1 (decimal) : 32769132993266709549961988190834461413177642967992942539798288533
+    Obtained quotient 1           : 
+Length            :  20
+Significant Digits:  7
+004FA848 12157119 ACC8ECCA 98C404B2 E5EE24CE 18F60EA8 18091895 
+    Expected remainder 1 (decimal): 0
+    Expected remainder 1          : 
+Length            :  20
+Significant Digits:  0
+00000000
+    Test vector name              : RSA 129 decial digits (426 bits)
+    Dividend (decimal)            : 114381625757888867669235779976146612010218296721242362562561842935706935245733897830597123563958705058989075147599290026879543541
+   Dividend                      : 
+Length            :  40
+Significant Digits:  14
+000002A3 E4A7E967 464D174F 174C2825 1D97BD37 5C607ACE 8FAE4156 30B45733 C2259D2A FC68DD6F 447AC5BA FB686CA5 A4DC6245 D5E2E8F5 
+    Divisor 2 (decimal)           : 32769132993266709549961988190834461413177642967992942539798288533
+    Divisor 2                     : 
+Length            :  20
+Significant Digits:  7
+004FA848 12157119 ACC8ECCA 98C404B2 E5EE24CE 18F60EA8 18091895 
+    Expected quotient 2 (decimal) : 3490529510847650949147849619903898133417764638493387843990820577
+    Expected quotient 2           : 
+Length            :  20
+Significant Digits:  7
+00087C29 6ED480F9 AB17885D ECD31197 D617779C 0DAC70C3 234996E1 
+    Expected remainder 2 (decimal): 0
+    Expected remainder 2          : 
+Length            :  1
+Significant Digits:  0
+00000000
+    Obtained quotient 2 (decimal) : 3490529510847650949147849619903898133417764638493387843990820577
+    Obtained quotient 2           : 
+Length            :  20
+Significant Digits:  7
+00087C29 6ED480F9 AB17885D ECD31197 D617779C 0DAC70C3 234996E1 
+    Obtained remainder 2 (decimal): 0
+    Obtained remainder 2          : 
+Length            :  20
+Significant Digits:  0
+00000000
+[I] Test vector                   :  5
+    Test vector name              : RSA 130 decial digits (430 bits)
+    Dividend (decimal)            : 1807082088687404805951656164405905566278102516769401349170127021450056662540244048387341127590812303371781887966563182013214880557
+   Dividend                      : 
+Length            :  40
+Significant Digits:  14
+000029B6 3D7C9CAB 219CA873 7A1449BC 8FC7FB00 37DC04EF 40868B48 75B1BEA3 E0D9B992 F9E86798 AC66E9A7 0D21E55B 58C1CF20 C647F32D 
+    Divisor 1 (decimal)           : 39685999459597454290161126162883786067576449112810064832555157243
+    Divisor 1                     : 
+Length            :  20
+Significant Digits:  7
+006078A8 78F11E05 E3085333 FF1B5B29 C99AEFC2 1420A6C2 87DC86FB 
+    Expected quotient 1 (decimal) : 45534498646735972188403686897274408864356301263205069600999044599
+    Expected quotient 1           : 
+Length            :  20
+Significant Digits:  7
+006EB030 25AC30BE E4B23E5B AB9A3EC1 3457E80D 83C3860B CFA375F7 
+    Expected remainder 1 (decimal): 0
+    Expected remainder 1          : 
+Length            :  1
+Significant Digits:  0
+00000000
+    Obtained quotient 1 (decimal) : 45534498646735972188403686897274408864356301263205069600999044599
+    Obtained quotient 1           : 
+Length            :  20
+Significant Digits:  7
+006EB030 25AC30BE E4B23E5B AB9A3EC1 3457E80D 83C3860B CFA375F7 
+    Expected remainder 1 (decimal): 0
+    Expected remainder 1          : 
+Length            :  20
+Significant Digits:  0
+00000000
+    Test vector name              : RSA 130 decial digits (430 bits)
+    Dividend (decimal)            : 1807082088687404805951656164405905566278102516769401349170127021450056662540244048387341127590812303371781887966563182013214880557
+   Dividend                      : 
+Length            :  40
+Significant Digits:  14
+000029B6 3D7C9CAB 219CA873 7A1449BC 8FC7FB00 37DC04EF 40868B48 75B1BEA3 E0D9B992 F9E86798 AC66E9A7 0D21E55B 58C1CF20 C647F32D 
+    Divisor 2 (decimal)           : 45534498646735972188403686897274408864356301263205069600999044599
+    Divisor 2                     : 
+Length            :  20
+Significant Digits:  7
+006EB030 25AC30BE E4B23E5B AB9A3EC1 3457E80D 83C3860B CFA375F7 
+    Expected quotient 2 (decimal) : 39685999459597454290161126162883786067576449112810064832555157243
+    Expected quotient 2           : 
+Length            :  20
+Significant Digits:  7
+006078A8 78F11E05 E3085333 FF1B5B29 C99AEFC2 1420A6C2 87DC86FB 
+    Expected remainder 2 (decimal): 0
+    Expected remainder 2          : 
+Length            :  1
+Significant Digits:  0
+00000000
+    Obtained quotient 2 (decimal) : 39685999459597454290161126162883786067576449112810064832555157243
+    Obtained quotient 2           : 
+Length            :  20
+Significant Digits:  7
+006078A8 78F11E05 E3085333 FF1B5B29 C99AEFC2 1420A6C2 87DC86FB 
+    Obtained remainder 2 (decimal): 0
+    Obtained remainder 2          : 
+Length            :  20
+Significant Digits:  0
+00000000
+[I] Test vector                   :  6
+    Test vector name              : RSA 140 decial digits (463 bits)
+    Dividend (decimal)            : 21290246318258757547497882016271517497806703963277216278233383215381949984056495911366573853021918316783107387995317230889569230873441936471
+   Dividend                      : 
+Length            :  40
+Significant Digits:  15
+0000726B 918C8FAF BD62E6EE 45CA374F 5A1428F3 47403944 D0AADD54 021CC36F 1556263F A6B26414 D0C520E5 6C6B9ABE 3FAB5031 666BCB53 C9B52457 
+    Divisor 1 (decimal)           : 3398717423028438554530123627613875835633986495969597423490929302771479
+    Divisor 1                     : 
+Length            :  20
+Significant Digits:  8
+0000007E 10C064DD 27625BD1 1547EF43 E5008922 8A4F116D A694D9C4 CD851717 
+    Expected quotient 1 (decimal) : 6264200187401285096151654948264442219302037178623509019111660653946049
+    Expected quotient 1           : 
+Length            :  20
+Significant Digits:  8
+000000E8 5A2322FA 56807579 67384160 2492CF7B AE2C24B2 7021853D D38CA4C1 
+    Expected remainder 1 (decimal): 0
+    Expected remainder 1          : 
+Length            :  1
+Significant Digits:  0
+00000000
+    Obtained quotient 1 (decimal) : 6264200187401285096151654948264442219302037178623509019111660653946049
+    Obtained quotient 1           : 
+Length            :  20
+Significant Digits:  8
+000000E8 5A2322FA 56807579 67384160 2492CF7B AE2C24B2 7021853D D38CA4C1 
+    Expected remainder 1 (decimal): 0
+    Expected remainder 1          : 
+Length            :  20
+Significant Digits:  0
+00000000
+    Test vector name              : RSA 140 decial digits (463 bits)
+    Dividend (decimal)            : 21290246318258757547497882016271517497806703963277216278233383215381949984056495911366573853021918316783107387995317230889569230873441936471
+   Dividend                      : 
+Length            :  40
+Significant Digits:  15
+0000726B 918C8FAF BD62E6EE 45CA374F 5A1428F3 47403944 D0AADD54 021CC36F 1556263F A6B26414 D0C520E5 6C6B9ABE 3FAB5031 666BCB53 C9B52457 
+    Divisor 2 (decimal)           : 6264200187401285096151654948264442219302037178623509019111660653946049
+    Divisor 2                     : 
+Length            :  20
+Significant Digits:  8
+000000E8 5A2322FA 56807579 67384160 2492CF7B AE2C24B2 7021853D D38CA4C1 
+    Expected quotient 2 (decimal) : 3398717423028438554530123627613875835633986495969597423490929302771479
+    Expected quotient 2           : 
+Length            :  20
+Significant Digits:  8
+0000007E 10C064DD 27625BD1 1547EF43 E5008922 8A4F116D A694D9C4 CD851717 
+    Expected remainder 2 (decimal): 0
+    Expected remainder 2          : 
+Length            :  1
+Significant Digits:  0
+00000000
+    Obtained quotient 2 (decimal) : 3398717423028438554530123627613875835633986495969597423490929302771479
+    Obtained quotient 2           : 
+Length            :  20
+Significant Digits:  8
+0000007E 10C064DD 27625BD1 1547EF43 E5008922 8A4F116D A694D9C4 CD851717 
+    Obtained remainder 2 (decimal): 0
+    Obtained remainder 2          : 
+Length            :  20
+Significant Digits:  0
+00000000
+[I] Test vector                   :  7
+    Test vector name              : RSA 150 decial digits (496 bits)
+    Dividend (decimal)            : 155089812478348440509606754370011861770654545830995430655466945774312632703463465954363335027577729025391453996787414027003501631772186840890795964683
+   Dividend                      : 
+Length            :  40
+Significant Digits:  16
+0000C210 6E418C49 23F9C5D1 4B17DA64 FF3E0664 38E94025 F36DB001 D3A7C5BA 4DFE0232 C54AA1FB 20542BF3 E84833E8 812078AA A11B7825 EBFB4F1C F059390B 
+    Divisor 1 (decimal)           : 348009867102283695483970451047593424831012817350385456889559637548278410717
+    Divisor 1                     : 
+Length            :  20
+Significant Digits:  8
+00C4F773 654339B2 6C429FDC E5ADA9D5 7D75C22C 02C59945 2C616859 FC5EEDDD 
+    Expected quotient 1 (decimal) : 445647744903640741533241125787086176005442536297766153493419724532460296199
+    Expected quotient 1           : 
+Length            :  20
+Significant Digits:  8
+00FC3A49 907A441B D5CF264C 6ACEBA57 F9D03316 8771AA1F 55A22F33 5C041807 
+    Expected remainder 1 (decimal): 0
+    Expected remainder 1          : 
+Length            :  1
+Significant Digits:  0
+00000000
+    Obtained quotient 1 (decimal) : 445647744903640741533241125787086176005442536297766153493419724532460296199
+    Obtained quotient 1           : 
+Length            :  20
+Significant Digits:  8
+00FC3A49 907A441B D5CF264C 6ACEBA57 F9D03316 8771AA1F 55A22F33 5C041807 
+    Expected remainder 1 (decimal): 0
+    Expected remainder 1          : 
+Length            :  20
+Significant Digits:  0
+00000000
+    Test vector name              : RSA 150 decial digits (496 bits)
+    Dividend (decimal)            : 155089812478348440509606754370011861770654545830995430655466945774312632703463465954363335027577729025391453996787414027003501631772186840890795964683
+   Dividend                      : 
+Length            :  40
+Significant Digits:  16
+0000C210 6E418C49 23F9C5D1 4B17DA64 FF3E0664 38E94025 F36DB001 D3A7C5BA 4DFE0232 C54AA1FB 20542BF3 E84833E8 812078AA A11B7825 EBFB4F1C F059390B 
+    Divisor 2 (decimal)           : 445647744903640741533241125787086176005442536297766153493419724532460296199
+    Divisor 2                     : 
+Length            :  20
+Significant Digits:  8
+00FC3A49 907A441B D5CF264C 6ACEBA57 F9D03316 8771AA1F 55A22F33 5C041807 
+    Expected quotient 2 (decimal) : 348009867102283695483970451047593424831012817350385456889559637548278410717
+    Expected quotient 2           : 
+Length            :  20
+Significant Digits:  8
+00C4F773 654339B2 6C429FDC E5ADA9D5 7D75C22C 02C59945 2C616859 FC5EEDDD 
+    Expected remainder 2 (decimal): 0
+    Expected remainder 2          : 
+Length            :  1
+Significant Digits:  0
+00000000
+    Obtained quotient 2 (decimal) : 348009867102283695483970451047593424831012817350385456889559637548278410717
+    Obtained quotient 2           : 
+Length            :  20
+Significant Digits:  8
+00C4F773 654339B2 6C429FDC E5ADA9D5 7D75C22C 02C59945 2C616859 FC5EEDDD 
+    Obtained remainder 2 (decimal): 0
+    Obtained remainder 2          : 
+Length            :  20
+Significant Digits:  0
+00000000
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 6
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 21:38:07
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.Div
+Finished                 : 2017/03/20 - 21:38:07
+================================================================================
