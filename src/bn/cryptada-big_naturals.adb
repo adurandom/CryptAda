@@ -950,9 +950,9 @@ package body CryptAda.Big_Naturals is
       end if;
    end Set_To_One;
    
-   --[Set_To_Max]---------------------------------------------------------------
+   --[Set_To_Last]--------------------------------------------------------------
 
-   procedure   Set_To_Max(
+   procedure   Set_To_Last(
                   The_Sequence      : in out Digit_Sequence;
                   For_SD            : in     Natural)
    is
@@ -965,7 +965,7 @@ package body CryptAda.Big_Naturals is
             The_Sequence(The_Sequence'First .. The_Sequence'First + For_SD - 1) := (others => Digit_Last);
          end if;
       end if;
-   end Set_To_Max;
+   end Set_To_Last;
    
    --[3. Comparing Digit_Sequences]---------------------------------------------
 
@@ -1249,7 +1249,7 @@ package body CryptAda.Big_Naturals is
       Set_Result(T, Difference, Difference_SD);
    end Subtract_Digit;
 
-   --[5. Multiply]--------------------------------------------------------------
+   --[6. Multiplication & Squaring]---------------------------------------------
 
    --[Multiply]-----------------------------------------------------------------
 
@@ -1383,6 +1383,115 @@ package body CryptAda.Big_Naturals is
       Set_Result(T, Product, Product_SD);
    end Multiply_Digit;
 
+   --[Square]-------------------------------------------------------------------
+
+   procedure   Square(
+                  Left           : in     Digit_Sequence;
+                  Left_SD        : in     Natural;
+                  Result         :    out Digit_Sequence;
+                  Result_SD      :    out Natural)
+   is
+      T              : Digit_Sequence(1 .. 2 * Left_SD) := (others => 0);
+      C              : Digit := 0;
+      I              : Positive := Left'First;
+      J              : Positive := Left'First;
+      K              : Positive := T'First;
+   begin
+
+      -- Argument assertions.
+
+      pragma Assert(Left'Length >= Left_SD, "Invalid Left length.");
+
+      -- Check for 0 factor.
+
+      if Left_SD = 0 then
+         Set_Result(Zero_Digit_Sequence, Result, Result_SD);
+         return;
+      end if;
+
+      -- Faster squaring for 1 digit Digit_Sequence.
+
+      if Left_SD = 1 then
+         Mult_Digits(Left(Left'First), Left(Left'First), T(1), T(2));
+         Set_Result(T, Result, Result_SD);
+         return;
+      end if;
+
+      -- Perform the squaring.
+      -- Step #1. Calculate product of digits of unequal index.
+
+      for L in 1 .. Left_SD - 1 loop
+
+      -- Set first index over Left and initialize carry.
+
+         I := Left'First + L - 1;
+         C := 0;
+
+         -- Only multiply if current digit is greater than 0.
+
+         if Left(I) > 0 then
+
+            -- Set index for result digit.
+
+            K := 2 * L;
+
+            -- Perform digit multiplications.
+
+            for M in L + 1 .. Left_SD loop
+               -- Set second index over Left.
+
+               J := Left'First + M - 1;
+               Mult_Sum_Digits(Left(I), Left(J), T(K), C, T(K), C);
+
+               -- Increment index over T
+
+               K := K + 1;
+            end loop;
+
+            -- Update with the carry the next index in Product.
+
+            T(K) := C;
+         end if;
+      end loop;
+
+      -- Step #2. Multiply inner products by 2.
+
+      C := 0;
+
+      for L in 2 .. T'Last - 1 loop
+         Mult_Sum_Digits(T(L), 2, 0, C, T(L), C);
+      end loop;
+
+      -- Update Square's most significant digit with carry.
+
+      T(T'Last) := T(T'Last) + C;
+
+      -- Step #3. Compute main diagonal.
+
+      C := 0;
+      K := T'First;
+
+      for L in 1 .. Left_SD loop
+         I := Left'First + L - 1;
+
+         Mult_Sum_Digits(Left(I), Left(I), T(K), C, T(K), C);
+         
+         -- Increment Square's next digit with the carry.
+
+         K := K + 1;
+         
+         Sum_Digits(T(K), C, T(K), C);
+
+         -- Increment square's index.
+
+         K := K + 1;
+      end loop;
+
+      -- Set result
+
+      Set_Result(T, Result, Result_SD);
+   end Square;
+   
    --[Divide_And_Remainder]-----------------------------------------------------
 
    procedure   Divide_And_Remainder(
@@ -1815,125 +1924,4 @@ package body CryptAda.Big_Naturals is
       Set_Result(Q, Quotient, Quotient_SD);
    end Divide_Digit_And_Remainder;
    
-   --[Square]-------------------------------------------------------------------
-
-   procedure   Square(
-                  Left           : in     Digit_Sequence;
-                  Left_SD        : in     Natural;
-                  Result         :    out Digit_Sequence;
-                  Result_SD      :    out Natural)
-   is
-      T              : Digit_Sequence(1 .. 2 * Left_SD) := (others => 0);
-      X              : Double_Digit;
-      C              : Digit := 0;
-      I              : Positive := Left'First;
-      J              : Positive := Left'First;
-      K              : Positive := T'First;
-   begin
-
-      -- Argument assertions.
-
-      pragma Assert(Left'Length >= Left_SD, "Invalid Left length.");
-
-      -- Check for 0 factor.
-
-      if Left_SD = 0 then
-         Set_Result(Zero_Digit_Sequence, Result, Result_SD);
-         return;
-      end if;
-
-      -- Faster squaring for 1 digit Digit_Sequence.
-
-      if Left_SD = 1 then
-         X     := Double_Digit(Left(Left'First) * Left(Left'First));
-         T(1)  := Lo_Digit(X);
-         T(2)  := Hi_Digit(X);
-         Set_Result(T, Result, Result_SD);
-         return;
-      end if;
-
-      -- Perform the squaring.
-      -- Step #1. Calculate product of digits of unequal index.
-
-      for L in 1 .. Left_SD - 1 loop
-
-      -- Set first index over Left and initialize carry.
-
-         I := Left'First + L - 1;
-         C := 0;
-
-         -- Only multiply if current digit is greater than 0.
-
-         if Left(I) > 0 then
-
-            -- Set index for result digit.
-
-            K := 2 * L;
-
-            -- Perform digit multiplications.
-
-            for M in L + 1 .. Left_SD loop
-
-               -- Set second index over Left.
-
-               J := Left'First + M - 1;
-
-               X     := Double_Digit(C + T(K) + Left(I) * Left(J));
-               T(K)  := Lo_Digit(X);
-               C     := Hi_Digit(X);
-
-               -- Increment index.
-
-               K := K + 1;
-            end loop;
-
-            -- Update with the carry the next index in Product.
-
-            T(K) := C;
-         end if;
-      end loop;
-
-      -- Step #2. Multiply inner products by 2.
-
-      C := 0;
-
-      for L in 2 .. T'Last - 1 loop
-         X     := Double_Digit(C + 2 * T(L));
-         T(L)  := Lo_Digit(X);
-         C     := Hi_Digit(X);
-      end loop;
-
-      -- Update Square's most significant digit with carry.
-
-      T(T'Last) := T(T'Last) + C;
-
-      -- Step #3. Compute main diagonal.
-
-      C := 0;
-      K := T'First;
-
-      for L in 1 .. Left_SD loop
-         I := Left'First + L - 1;
-
-         X     := Double_Digit(C + T(K) + Left(I) * Left(I));
-         T(K)  := Lo_Digit(X);
-         C     := Hi_Digit(X);
-
-         -- Increment Square's next digit with the carry.
-
-         K := K + 1;
-         X     := Double_Digit(C + T(K));
-         T(K)  := Lo_Digit(X);
-         C     := Hi_Digit(X);
-
-         -- Increment square's index.
-
-         K := K + 1;
-      end loop;
-
-      -- Set result
-
-      Set_Result(T, Result, Result_SD);
-   end Square;
-
 end CryptAda.Big_Naturals;

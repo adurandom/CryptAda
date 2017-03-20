@@ -466,7 +466,10 @@ package body CryptAda.Big_Naturals.Tests.Conv is
       Print_Information_Message("Interfaces exercised:");
       Print_Message("- Digit_Sequence_2_String()");
       Print_Message("- String_2_Digit_Sequence()");
-            
+      Print_Information_Message("This test case will obtain a random Digit_Sequence, convert it to string");
+      Print_Message("reconvert back to Digit_Sequence and check that both Digit_Sequences are equal.", "    ");
+      Print_Message("The case will be executed " & Positive'Image(Iters) & " times for all supported bases.", "    ");
+      
       for I in Literal_Base'Range loop
          Print_Information_Message("Performing " & Positive'Image(Iters) & " iterations for base: " & Literal_Base'Image(I));
          
@@ -515,6 +518,10 @@ package body CryptAda.Big_Naturals.Tests.Conv is
    is
    begin
       Begin_Test_Driver(Driver_Name, Driver_Description);
+      Print_Information_Message("This test driver will validate conversion from/to string literals to/from Digit_Sequences");
+      Print_Message("Next elements will be tested:");
+      Print_Message("- String_2_Digit_Sequence()", "    ");
+      Print_Message("- Digit_Sequence_2_String()", "    ");
       
       Case_1;
       Case_2;

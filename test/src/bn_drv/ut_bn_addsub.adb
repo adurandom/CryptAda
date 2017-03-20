@@ -16,29 +16,26 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  ut_bn.adb
+--    Filename          :  ut_bn_addsub.adb
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
---    Creation date     :  March 15th, 2017
+--    Creation date     :  March 19th, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Unit test driver for CryptAda.Big_Naturals.
+--    Unit test driver for CryptAda.Big_Naturals Digit_Sequence addition and 
+--    subtraction as inverse operations.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
---    1.0   20170315 ADD   Initial implementation.
+--    1.0   20170319 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with CryptAda.Big_Naturals.Tests.Basic;
 with CryptAda.Big_Naturals.Tests.AddSub;
-with CryptAda.Big_Naturals.Tests.Conv;
 
-procedure UT_BN   
+procedure UT_BN_AddSub
 is
 begin
-   CryptAda.Big_Naturals.Tests.Basic.Test_Driver;
    CryptAda.Big_Naturals.Tests.AddSub.Test_Driver;
-   CryptAda.Big_Naturals.Tests.Conv.Test_Driver;
-end UT_BN;
+end UT_BN_AddSub;

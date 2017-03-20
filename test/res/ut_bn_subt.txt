@@ -1,0 +1,242 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.1.a (2017/03/31)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.AddSub
+Description              : Unit test driver for CryptAda.Big_Naturals addition and subtraction functionality.
+Started                  : 2017/03/20 - 11:01:41
+================================================================================
+[I] This test driver will validate Digit_Sequences subtraction
+Next elements will be tested:
+    - Subtract()
+    - Subtract_Digit()
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Overflow and Underflow conditions in subtraction
+Started         : 2017/03/20 - 11:01:41
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Subtract()
+[I] Using a Digit_Sequence for the subtraction result not long enough.
+Shall raise CryptAda_Overflow_Error
+[I] Raised CryptAda_Overflow_Error
+[I] Subtrahend greater than Minuend
+Shall raise CryptAda_Underflow_Error
+[I] Raised CryptAda_Underflow_Error
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:01:41
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Basic subtraction operations
+Started         : 2017/03/20 - 11:01:41
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Subtract()
+[I] Subtracting Zero from One
+Minuend: 
+Length            :  1
+Significant Digits:  1
+00000001 
+Subtrahend: 
+Length            :  1
+Significant Digits:  0
+00000000
+Expected Result: 
+Length            :  1
+Significant Digits:  1
+00000001 
+Obtained Result: 
+Length            :  20
+Significant Digits:  1
+00000001 
+Values match
+[I] Subtracting One from One
+Minuend: 
+Length            :  1
+Significant Digits:  1
+00000001 
+Subtrahend: 
+Length            :  1
+Significant Digits:  1
+00000001 
+Expected Result: 
+Length            :  1
+Significant Digits:  0
+00000000
+Obtained Result: 
+Length            :  20
+Significant Digits:  0
+00000000
+Values match
+[I] Testing subtraction borrow
+Minuend: 
+Length            :  20
+Significant Digits:  5
+00000001 00000000 00000000 00000000 00000000 
+Subtrahend: 
+Length            :  1
+Significant Digits:  1
+00000001 
+Expected Result: 
+Length            :  20
+Significant Digits:  4
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+Obtained Result: 
+Length            :  20
+Significant Digits:  4
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+Values match
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:01:41
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Testing subtraction identity
+Started         : 2017/03/20 - 11:01:41
+--------------------------------------------------------------------------------
+[I] Subprogams tested:
+- Subtract()
+[I] Performing  100000 iterations, subtracting Zero_Digit_Sequence from random digit sequences
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:01:41
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : Testing subtraction associative property
+Started         : 2017/03/20 - 11:01:41
+--------------------------------------------------------------------------------
+[I] Subprogams tested:
+- Subtract()
+[I] Testing A - B - C = A - (B + C)
+Performing  100000 iterations, subtracting Zero_Digit_Sequence from random digit sequences
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:01:41
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 5
+Description     : Overflow and Underflow conditions in Subtract_Digit
+Started         : 2017/03/20 - 11:01:41
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Subtract_Digit()
+[I] Using a Digit_Sequence for the subtraction result not long enough.
+Shall raise CryptAda_Overflow_Error
+[I] Raised CryptAda_Overflow_Error
+[I] Subtrahend greater than Minuend
+Shall raise CryptAda_Underflow_Error
+Minuend: 
+Length            :  20
+Significant Digits:  1
+0000000A 
+Subtrahend:  11
+[I] Raised CryptAda_Underflow_Error
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 5
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:01:41
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 6
+Description     : Basic Subtract_Digit operations
+Started         : 2017/03/20 - 11:01:41
+--------------------------------------------------------------------------------
+[I] Subprograms tested
+- Subtract_Digit()
+[I] Subtracting 0 from One_Digit_Sequence
+Minuend: 
+Length            :  1
+Significant Digits:  1
+00000001 
+Subtrahend:  0
+Expected Result: 
+Length            :  1
+Significant Digits:  1
+00000001 
+Obtained Result: 
+Length            :  20
+Significant Digits:  1
+00000001 
+Values match
+[I] Subtracting 1 from One_Digit_Sequence
+Minuend: 
+Length            :  1
+Significant Digits:  1
+00000001 
+Subtrahend:  1
+Expected Result: 
+Length            :  1
+Significant Digits:  0
+00000000
+Obtained Result: 
+Length            :  20
+Significant Digits:  0
+00000000
+Values match
+[I] Testing subtraction borrow
+Minuend: 
+Length            :  20
+Significant Digits:  5
+00000001 00000000 00000000 00000000 00000000 
+Subtrahend:  1
+Expected Result: 
+Length            :  20
+Significant Digits:  4
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+Obtained Result: 
+Length            :  20
+Significant Digits:  4
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+Values match
+[I] Testing subtraction neutral element
+Performing  100000 iterations, subtracting 0 to random digit sequences
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 6
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:01:41
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 7
+Description     : Bulk Subtract_Digit operations
+Started         : 2017/03/20 - 11:01:41
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Subtract_Digit()
+- Subtract()
+[I] Testing Subtract_Digit checking results with Subtract using random digit sequences and digits
+Performing  100000 iterations.
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 7
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:01:41
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.AddSub
+Finished                 : 2017/03/20 - 11:01:41
+================================================================================

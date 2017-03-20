@@ -4,618 +4,19 @@ Version: 0.1.a (2017/03/31)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
-CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.Basic
-Description              : Unit test driver for CryptAda.Big_Naturals basic functionality.
-Started                  : 2017/03/17 - 21:25:18
-================================================================================
-
---[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 1
-Description     : Constants
-Started         : 2017/03/17 - 21:25:18
---------------------------------------------------------------------------------
-[I] Viewing declared package constants
-    Digit_Bits:  32
-    Digit_Last: 16#FFFFFFFF#
-    Zero_Digit_Sequence: 
-Length:  1
-00000000 
-    One_Digit_Sequence: 
-Length:  1
-00000001 
-[I] Test case OK.
---------------------------------------------------------------------------------
-Test Case Number: 1
-Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:18
---[End Test Case]---------------------------------------------------------------
-
---[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 2
-Description     : Computing significant digits
-Started         : 2017/03/17 - 21:25:18
---------------------------------------------------------------------------------
-[I] Interfaces exercised:
-- Significant_Digits()
-[I] Significant digits of Zero_Digit_Sequence
-Expected:  0
-Obtained:  0
-Values match
-[I] Significant digits of One_Digit_Sequence
-Expected:  1
-Obtained:  1
-Values match
-[I] Significant digits of next digit sequence: 
-Length:  20
-00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001 FFFFFFFF FFFFFFFF FFFFFFFF 
-Expected:  4
-Obtained:  4
-Values match
-[I] Performing  100000 iterations with random digit sequences
-[I] Test case OK.
---------------------------------------------------------------------------------
-Test Case Number: 2
-Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:18
---[End Test Case]---------------------------------------------------------------
-
---[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 3
-Description     : Computing significant bits
-Started         : 2017/03/17 - 21:25:18
---------------------------------------------------------------------------------
-[I] Interfaces exercised:
-- Significant_Bits()
-[I] Significant bits of Zero_Digit_Sequence
-Expected:  0
-Obtained:  0
-Values match
-[I] Significant bits of One_Digit_Sequence
-Expected:  1
-Obtained:  1
-Values match
-[I] Significant bits of digit sequence:
-Length:  20
-00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001 FFFFFFFF FFFFFFFF FFFFFFFF 
-Expected:  97
-Obtained:  97
-Values match
-[I] Performing  100000 iterations wirh random digit sequences
-[I] Test case OK.
---------------------------------------------------------------------------------
-Test Case Number: 3
-Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:18
---[End Test Case]---------------------------------------------------------------
-
---[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 4
-Description     : Basic comparison
-Started         : 2017/03/17 - 21:25:18
---------------------------------------------------------------------------------
-[I] Interfaces exercised:
-- Compare()
-[I] 1. 0 = 0
-Expected result: EQUAL
-Obtained result: EQUAL
-Values match
-[I] 2. 1 > 0
-Expected result: GREATER
-Obtained result: GREATER
-Values match
-[I] 3. 0 < 1
-Expected result: LOWER
-Obtained result: LOWER
-Values match
-[I] 4. 1 = 1
-Expected result: EQUAL
-Obtained result: EQUAL
-Values match
-[I] Test case OK.
---------------------------------------------------------------------------------
-Test Case Number: 4
-Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:18
---[End Test Case]---------------------------------------------------------------
-
---[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 5
-Description     : Advanced comparison
-Started         : 2017/03/17 - 21:25:18
---------------------------------------------------------------------------------
-[I] Interfaces exercised:
-- Compare()
-[I] Different significant digits Digit_Sequences to compare: 
-A :
-Length            :  20
-Significant Digits:  5
-51B41445 F554413C FB4A2964 A836F453 7818C970 
-B :
-Length            :  20
-Significant Digits:  4
-48621BAA A03549CA A2D87793 384FAAF7 
-[I] Comparing:
-[I] 1. A = A
-Expected result: EQUAL
-Obtained result: EQUAL
-Values match
-[I] 2. A > B
-Expected result: GREATER
-Obtained result: GREATER
-Values match
-[I] 3. B < A
-Expected result: LOWER
-Obtained result: LOWER
-Values match
-[I] 4. B = B
-Expected result: EQUAL
-Obtained result: EQUAL
-Values match
-[I] Same significant digits Digit_Sequences to compare: 
-A :
-Length            :  20
-Significant Digits:  5
-51B41445 F554413C FB4A2964 A836F453 7818C970 
-C :
-Length            :  20
-Significant Digits:  5
-51B41445 F554413C FB4A2964 A836F453 7818C96F 
-[I] Comparing:
-[I] 1. A = A
-Expected result: EQUAL
-Obtained result: EQUAL
-Values match
-[I] 2. A > C
-Expected result: GREATER
-Obtained result: GREATER
-Values match
-[I] 3. C < A
-Expected result: LOWER
-Obtained result: LOWER
-Values match
-[I] 4. C = C
-Expected result: EQUAL
-Obtained result: EQUAL
-Values match
-[I] Test case OK.
---------------------------------------------------------------------------------
-Test Case Number: 5
-Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:18
---[End Test Case]---------------------------------------------------------------
-
---[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 6
-Description     : Checked if even/odd
-Started         : 2017/03/17 - 21:25:18
---------------------------------------------------------------------------------
-[I] Interfaces exercised:
-- Is_Even()
-[I] Performing  100000 iterations wirh random digit sequences
-[I] Results shall be approx 50% even, 50% odd
-Digit_Sequences tested:  100000
-Even Digit_Sequences  :  54663
-Odd Digit_Sequences   :  45337
-[I] Test case OK.
---------------------------------------------------------------------------------
-Test Case Number: 6
-Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:18
---[End Test Case]---------------------------------------------------------------
-
-================================================================================
-CryptAda Test Driver End
-CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.Basic
-Finished                 : 2017/03/17 - 21:25:18
-================================================================================
-================================================================================
-TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.a (2017/03/31)
-Copyright (c) 2017, Antonio Duran
-================================================================================
-CryptAda Test Driver Begin
-CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.AddSub
-Description              : Unit test driver for CryptAda.Big_Naturals addition and subtraction functionality.
-Started                  : 2017/03/17 - 21:25:18
-================================================================================
-
---[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 1
-Description     : Overflow conditions in addition
-Started         : 2017/03/17 - 21:25:18
---------------------------------------------------------------------------------
-[I] Interfaces exercised:
-- Add()
-[I] Using a Digit_Sequence for the sum result not long enough.
-Shall raise CryptAda_Overflow_Error
-[I] Raised CryptAda_Overflow_Error
-[I] Test case OK.
---------------------------------------------------------------------------------
-Test Case Number: 1
-Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:18
---[End Test Case]---------------------------------------------------------------
-
---[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 2
-Description     : Basic addition operations
-Started         : 2017/03/17 - 21:25:18
---------------------------------------------------------------------------------
-[I] Interfaces exercised:
-- Add()
-[I] Adding One to Zero
-Left: 
-Length            :  1
-Significant Digits:  1
-00000001 
-Right: 
-Length            :  1
-Significant Digits:  0
-00000000
-Expected Result: 
-Length            :  1
-Significant Digits:  1
-00000001 
-Obtained Result: 
-Length            :  20
-Significant Digits:  1
-00000001 
-Values match
-[I] Adding Zero to One
-Left: 
-Length            :  1
-Significant Digits:  0
-00000000
-Right: 
-Length            :  1
-Significant Digits:  1
-00000001 
-Expected Result: 
-Length            :  1
-Significant Digits:  1
-00000001 
-Obtained Result: 
-Length            :  20
-Significant Digits:  1
-00000001 
-Values match
-[I] Testing addition carry
-Left: 
-Length            :  20
-Significant Digits:  4
-FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
-Right: 
-Length            :  1
-Significant Digits:  1
-00000001 
-Expected Result: 
-Length            :  20
-Significant Digits:  5
-00000001 00000000 00000000 00000000 00000000 
-Obtained Result: 
-Length            :  20
-Significant Digits:  5
-00000001 00000000 00000000 00000000 00000000 
-Values match
-[I] Testing addition neutral element
-Performing  100000 iterations, adding Zero_Digit_Sequence to random digit sequences
-[I] Testing addition conmutative property
-Performing  100000 iterations with random digit sequences
-[I] Test case OK.
---------------------------------------------------------------------------------
-Test Case Number: 2
-Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:18
---[End Test Case]---------------------------------------------------------------
-
---[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 3
-Description     : Overflow conditions in Add_Digit
-Started         : 2017/03/17 - 21:25:18
---------------------------------------------------------------------------------
-[I] Interfaces exercised:
-- Add_Digit()
-[I] Using a Digit_Sequence for the sum result not long enough.
-Shall raise CryptAda_Overflow_Error
-[I] Raised CryptAda_Overflow_Error
-[I] Test case OK.
---------------------------------------------------------------------------------
-Test Case Number: 3
-Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:18
---[End Test Case]---------------------------------------------------------------
-
---[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 4
-Description     : Basic Add_Digit operations
-Started         : 2017/03/17 - 21:25:18
---------------------------------------------------------------------------------
-[I] Interfaces exercised:
-- Add_Digit()
-[I] Adding One_Digit_Sequence to 0
-Left: 
-Length            :  1
-Significant Digits:  1
-00000001 
-Right:  0
-Expected Result: 
-Length            :  1
-Significant Digits:  1
-00000001 
-Obtained Result: 
-Length            :  20
-Significant Digits:  1
-00000001 
-Values match
-[I] Adding Zero_Digit_Sequence to 1
-Left: 
-Length            :  1
-Significant Digits:  0
-00000000
-Right:  1
-Expected Result: 
-Length            :  1
-Significant Digits:  1
-00000001 
-Obtained Result: 
-Length            :  20
-Significant Digits:  1
-00000001 
-Values match
-[I] Testing addition carry
-Left: 
-Length            :  20
-Significant Digits:  4
-FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
-Right:  1
-Expected Result: 
-Length            :  20
-Significant Digits:  5
-00000001 00000000 00000000 00000000 00000000 
-Obtained Result: 
-Length            :  20
-Significant Digits:  5
-00000001 00000000 00000000 00000000 00000000 
-Values match
-[I] Testing addition neutral element
-Performing  100000 iterations, adding 0 to random digit sequences
-[I] Test case OK.
---------------------------------------------------------------------------------
-Test Case Number: 4
-Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:18
---[End Test Case]---------------------------------------------------------------
-
---[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 5
-Description     : Overflow and Underflow conditions in subtraction
-Started         : 2017/03/17 - 21:25:18
---------------------------------------------------------------------------------
-[I] Interfaces exercised:
-- Subtract()
-[I] Using a Digit_Sequence for the subtraction result not long enough.
-Shall raise CryptAda_Overflow_Error
-[I] Raised CryptAda_Overflow_Error
-[I] Subtrahend greater than Minuend
-Shall raise CryptAda_Underflow_Error
-[I] Raised CryptAda_Underflow_Error
-[I] Test case OK.
---------------------------------------------------------------------------------
-Test Case Number: 5
-Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:18
---[End Test Case]---------------------------------------------------------------
-
---[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 6
-Description     : Basic subtraction operations
-Started         : 2017/03/17 - 21:25:18
---------------------------------------------------------------------------------
-[I] Interfaces exercised:
-- Subtract()
-[I] Subtracting Zero from One
-Minuend: 
-Length            :  1
-Significant Digits:  1
-00000001 
-Subtrahend: 
-Length            :  1
-Significant Digits:  0
-00000000
-Expected Result: 
-Length            :  1
-Significant Digits:  1
-00000001 
-Obtained Result: 
-Length            :  20
-Significant Digits:  1
-00000001 
-Values match
-[I] Subtracting One from One
-Minuend: 
-Length            :  1
-Significant Digits:  1
-00000001 
-Subtrahend: 
-Length            :  1
-Significant Digits:  1
-00000001 
-Expected Result: 
-Length            :  1
-Significant Digits:  0
-00000000
-Obtained Result: 
-Length            :  20
-Significant Digits:  0
-00000000
-Values match
-[I] Testing subtraction borrow
-Minuend: 
-Length            :  20
-Significant Digits:  5
-00000001 00000000 00000000 00000000 00000000 
-Subtrahend: 
-Length            :  1
-Significant Digits:  1
-00000001 
-Expected Result: 
-Length            :  20
-Significant Digits:  4
-FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
-Obtained Result: 
-Length            :  20
-Significant Digits:  4
-FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
-Values match
-[I] Testing subtraction neutral element
-Performing  100000 iterations, subtracting Zero_Digit_Sequence from random digit sequences
-[I] Test case OK.
---------------------------------------------------------------------------------
-Test Case Number: 6
-Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:18
---[End Test Case]---------------------------------------------------------------
-
---[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 7
-Description     : Overflow and Underflow conditions in Subtract_Digit
-Started         : 2017/03/17 - 21:25:18
---------------------------------------------------------------------------------
-[I] Interfaces exercised:
-- Subtract_Digit()
-[I] Using a Digit_Sequence for the subtraction result not long enough.
-Shall raise CryptAda_Overflow_Error
-[I] Raised CryptAda_Overflow_Error
-[I] Subtrahend greater than Minuend
-Shall raise CryptAda_Underflow_Error
-Minuend: 
-Length            :  20
-Significant Digits:  1
-0000000A 
-Subtrahend:  11
-[I] Raised CryptAda_Underflow_Error
-[I] Test case OK.
---------------------------------------------------------------------------------
-Test Case Number: 7
-Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:18
---[End Test Case]---------------------------------------------------------------
-
---[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 8
-Description     : Basic Subtract_Digit operations
-Started         : 2017/03/17 - 21:25:18
---------------------------------------------------------------------------------
-[I] Interfaces exercised:
-- Subtract_Digit()
-[I] Subtracting 0 from One_Digit_Sequence
-Minuend: 
-Length            :  1
-Significant Digits:  1
-00000001 
-Subtrahend:  0
-Expected Result: 
-Length            :  1
-Significant Digits:  1
-00000001 
-Obtained Result: 
-Length            :  20
-Significant Digits:  1
-00000001 
-Values match
-[I] Subtracting 1 from One_Digit_Sequence
-Minuend: 
-Length            :  1
-Significant Digits:  1
-00000001 
-Subtrahend:  1
-Expected Result: 
-Length            :  1
-Significant Digits:  0
-00000000
-Obtained Result: 
-Length            :  20
-Significant Digits:  0
-00000000
-Values match
-[I] Testing subtraction borrow
-Minuend: 
-Length            :  20
-Significant Digits:  5
-00000001 00000000 00000000 00000000 00000000 
-Subtrahend:  1
-Expected Result: 
-Length            :  20
-Significant Digits:  4
-FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
-Obtained Result: 
-Length            :  20
-Significant Digits:  4
-FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
-Values match
-[I] Testing subtraction neutral element
-Performing  100000 iterations, subtracting 0 to random digit sequences
-[I] Test case OK.
---------------------------------------------------------------------------------
-Test Case Number: 8
-Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:18
---[End Test Case]---------------------------------------------------------------
-
---[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 9
-Description     : Testing Add and Subtract
-Started         : 2017/03/17 - 21:25:18
---------------------------------------------------------------------------------
-[I] Perform a A + B = C operations and check it with A = C - B and B = C - A.
-[I] Interfaces exercised:
-- Add
-- Subtract()
-[I] Performing  100000 iterations with random digit sequences
-[I] Test case OK.
---------------------------------------------------------------------------------
-Test Case Number: 9
-Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:18
---[End Test Case]---------------------------------------------------------------
-
---[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 10
-Description     : Testing Add_Digit and Subtract_Digit
-Started         : 2017/03/17 - 21:25:18
---------------------------------------------------------------------------------
-[I] Perform a A + Digit = C operations and check it with A = C - Digit and Digit = C - A.
-[I] Interfaces exercised:
-- Add_Digit
-- Subtract_Digit()
-[I] Performing  100000 iterations with random digit sequences
-[I] Test case OK.
---------------------------------------------------------------------------------
-Test Case Number: 10
-Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:18
---[End Test Case]---------------------------------------------------------------
-
-================================================================================
-CryptAda Test Driver End
-CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.AddSub
-Finished                 : 2017/03/17 - 21:25:18
-================================================================================
-================================================================================
-TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.a (2017/03/31)
-Copyright (c) 2017, Antonio Duran
-================================================================================
-CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.Conv
 Description              : Unit test driver for CryptAda.Big_Naturals string conversion functionality.
-Started                  : 2017/03/17 - 21:25:18
+Started                  : 2017/03/20 - 11:01:39
 ================================================================================
+[I] This test driver will validate conversion from/to string literals to/from Digit_Sequences
+Next elements will be tested:
+    - String_2_Digit_Sequence()
+    - Digit_Sequence_2_String()
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Testing CryptAda_Syntax_Error conditions
-Started         : 2017/03/17 - 21:25:18
+Started         : 2017/03/20 - 11:01:39
 --------------------------------------------------------------------------------
 [I] Interfaces exercised:
 - String_2_Digit_Sequence()
@@ -790,13 +191,13 @@ Started         : 2017/03/17 - 21:25:18
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:18
+Finished        : 2017/03/20 - 11:01:39
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Testing CryptAda_Syntax_Error conditions
-Started         : 2017/03/17 - 21:25:18
+Started         : 2017/03/20 - 11:01:39
 --------------------------------------------------------------------------------
 [I] Interfaces exercised:
 - String_2_Digit_Sequence()
@@ -1391,13 +792,13 @@ Must be valid in remaining bases
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:18
+Finished        : 2017/03/20 - 11:01:39
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Getting Zero_Digit_Sequence string literals
-Started         : 2017/03/17 - 21:25:18
+Started         : 2017/03/20 - 11:01:39
 --------------------------------------------------------------------------------
 [I] Interfaces exercised:
 - String_2_Digit_Sequence()
@@ -1795,13 +1196,13 @@ Significant Digits:  0
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:18
+Finished        : 2017/03/20 - 11:01:39
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Getting One_Digit_Sequence string literals
-Started         : 2017/03/17 - 21:25:18
+Started         : 2017/03/20 - 11:01:39
 --------------------------------------------------------------------------------
 [I] Interfaces exercised:
 - String_2_Digit_Sequence()
@@ -2199,13 +1600,13 @@ Significant Digits:  1
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:18
+Finished        : 2017/03/20 - 11:01:39
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Converting test string literals in all bases
-Started         : 2017/03/17 - 21:25:18
+Started         : 2017/03/20 - 11:01:39
 --------------------------------------------------------------------------------
 [I] Interfaces exercised:
 - String_2_Digit_Sequence()
@@ -2378,13 +1779,13 @@ Significant Digits:  2
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:18
+Finished        : 2017/03/20 - 11:01:39
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : Converting digit sequences to string literals in all bases
-Started         : 2017/03/17 - 21:25:18
+Started         : 2017/03/20 - 11:01:39
 --------------------------------------------------------------------------------
 [I] Interfaces exercised:
 - Digit_Sequence_2_String()
@@ -2512,17 +1913,20 @@ Significant Digits:  2
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:18
+Finished        : 2017/03/20 - 11:01:39
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
 Description     : Converting random digit sequence to literal strings
-Started         : 2017/03/17 - 21:25:18
+Started         : 2017/03/20 - 11:01:39
 --------------------------------------------------------------------------------
 [I] Interfaces exercised:
 - Digit_Sequence_2_String()
 - String_2_Digit_Sequence()
+[I] This test case will obtain a random Digit_Sequence, convert it to string
+    reconvert back to Digit_Sequence and check that both Digit_Sequences are equal.
+    The case will be executed  1000 times for all supported bases.
 [I] Performing  1000 iterations for base:  2
 Finished test for base:  2
 [I] Performing  1000 iterations for base:  3
@@ -2557,11 +1961,11 @@ Finished test for base:  16
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/03/17 - 21:25:19
+Finished        : 2017/03/20 - 11:01:40
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.Conv
-Finished                 : 2017/03/17 - 21:25:19
+Finished                 : 2017/03/20 - 11:01:40
 ================================================================================

@@ -48,7 +48,8 @@ ACBN        =  $(ACSRC)/bn
 TSRCBASE    =  $(TSRC)/base/
 TSRCUPKG    =  $(TSRC)/upkg/
 TSRCUDRV    =  $(TSRC)/udrv/
-TSRCBNPKG   =  $(TSRC)/bnpkg/
+TSRCBNPKG   =  $(TSRC)/bn_pkg/
+TSRCBNDRV   =  $(TSRC)/bn_drv/
 
 #>>>[Compilation]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -71,7 +72,7 @@ DELCMD = rm -f
 
 #>>>[Objects]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-UNITDRV  =  $(TBIN)/ut_utils.exe \
+UNITDRV =   $(TBIN)/ut_utils.exe \
             $(TBIN)/ut_format.exe \
             $(TBIN)/ut_pragmatics.exe \
             $(TBIN)/ut_bvectors.exe \
@@ -95,8 +96,14 @@ UNITDRV  =  $(TBIN)/ut_utils.exe \
             $(TBIN)/ut_haval.exe \
             $(TBIN)/ut_whirlpool.exe \
             $(TBIN)/ut_rsaref.exe \
-            $(TBIN)/ut_caprng.exe \
-            $(TBIN)/ut_bn.exe 
+            $(TBIN)/ut_caprng.exe
+
+BNDRV   =   $(TBIN)/ut_bn_basic.exe \
+            $(TBIN)/ut_bn_conv.exe \
+            $(TBIN)/ut_bn_add.exe \
+            $(TBIN)/ut_bn_subt.exe \
+            $(TBIN)/ut_bn_addsub.exe \
+            $(TBIN)/ut_bn_mult.exe
             
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -204,7 +211,29 @@ $(TBIN)/ut_caprng.exe: $(TSRCUDRV)ut_caprng.adb
 	@echo Building $<
 	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_bn.exe: $(TSRCUDRV)ut_bn.adb
+#>>>[Building Big_Naturals Unit Test Drivers]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+$(TBIN)/ut_bn_basic.exe: $(TSRCBNDRV)ut_bn_basic.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_bn_conv.exe: $(TSRCBNDRV)ut_bn_conv.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_bn_add.exe: $(TSRCBNDRV)ut_bn_add.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_bn_subt.exe: $(TSRCBNDRV)ut_bn_subt.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_bn_addsub.exe: $(TSRCBNDRV)ut_bn_addsub.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
+$(TBIN)/ut_bn_mult.exe: $(TSRCBNDRV)ut_bn_mult.adb
 	@echo Building $<
 	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
     
@@ -212,7 +241,7 @@ $(TBIN)/ut_bn.exe: $(TSRCUDRV)ut_bn.adb
 
 all: unit time
 
-unit: $(UNITDRV)
+unit: $(UNITDRV) $(BNDRV)
 
 time: $(TIMEDRV)
 
@@ -222,7 +251,7 @@ clean:
 	$(DELCMD) $(TBIN)/*.exe
 	$(DELCMD) $(TRES)/*.txt
 
-run: run_unit run_time
+run: run_unit run_bnunit run_time
 
 run_unit: $(UNITDRV)
 	for testdriver in $(basename $(notdir $^)); do \
@@ -230,6 +259,12 @@ run_unit: $(UNITDRV)
 		$(TBIN)/$$testdriver.exe > $(TRES)/$$testdriver.txt ;\
 	done
 
+run_bnunit: $(BNDRV)
+	for testdriver in $(basename $(notdir $^)); do \
+		echo Running big naturals test driver: $$testdriver ... ; \
+		$(TBIN)/$$testdriver.exe > $(TRES)/$$testdriver.txt ;\
+	done
+    
 run_time: $(TIMEDRV)
 	for testdriver in $(basename $(notdir $^)); do \
 		echo Running test driver: $$testdriver ... ; \

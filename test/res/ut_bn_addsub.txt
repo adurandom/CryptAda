@@ -1,0 +1,57 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.1.a (2017/03/31)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.AddSub
+Description              : Unit test driver for CryptAda.Big_Naturals addition and subtraction as inverse operations.
+Started                  : 2017/03/20 - 11:01:41
+================================================================================
+[I] This test driver will validate Digit_Sequences addition and subtraction
+    as inverse operations:
+Next subprograms will be tested:
+    - Add()
+    - Add_Digit()
+    - Subtract()
+    - Subtract_Digit()
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Testing Add and Subtract as inverse operations
+Started         : 2017/03/20 - 11:01:41
+--------------------------------------------------------------------------------
+[I] Perform a A + B = C operations and check it with A = C - B and B = C - A.
+[I] Subprograms tested:
+- Add
+- Subtract()
+[I] Performing  100000 iterations with random digit sequences
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:01:41
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Testing Add_Digit and Subtract_Digit as inverse operations
+Started         : 2017/03/20 - 11:01:41
+--------------------------------------------------------------------------------
+[I] Perform a A + Digit = C operations and check it with A = C - Digit and Digit = C - A.
+[I] Subprograms tested:
+- Add_Digit
+- Subtract_Digit()
+[I] Performing  100000 iterations with random digit sequences
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/03/20 - 11:01:41
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.AddSub
+Finished                 : 2017/03/20 - 11:01:41
+================================================================================

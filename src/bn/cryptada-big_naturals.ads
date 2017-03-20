@@ -276,7 +276,7 @@ private
                   Base              : in     Literal_Base;
                   The_String        :    out Ada.Strings.Unbounded.Unbounded_String);
    
-   --[1. Obtaining information from digit sequences]----------------------------
+   --[2. Obtaining information from digit sequences]----------------------------
    
    --[Significant_Digits]-------------------------------------------------------
    -- Purpose:
@@ -341,7 +341,7 @@ private
       return   Boolean;
    pragma Inline(Is_Even);
 
-   --[2. Setting to special values]---------------------------------------------
+   --[3. Setting to special values]---------------------------------------------
    
    --[Set_To_Zero]--------------------------------------------------------------
    -- Purpose:
@@ -377,7 +377,7 @@ private
    procedure   Set_To_One(
                   The_Sequence      : in out Digit_Sequence);
                   
-   --[Set_To_Max]---------------------------------------------------------------
+   --[Set_To_Last]--------------------------------------------------------------
    -- Purpose:
    -- Sets the specified number of digits, starting from the lest significant
    -- digit, to Digit_Last value.
@@ -395,11 +395,11 @@ private
    -- None.
    -----------------------------------------------------------------------------
 
-   procedure   Set_To_Max(
+   procedure   Set_To_Last(
                   The_Sequence      : in out Digit_Sequence;
                   For_SD            : in     Natural);
                   
-   --[3. Comparing Digit_Sequences]---------------------------------------------
+   --[4. Comparing Digit_Sequences]---------------------------------------------
    
    --[Compare]------------------------------------------------------------------
    -- Purpose:
@@ -425,7 +425,7 @@ private
                   Right_SD       : in     Natural)
       return   Compare_Result;
    
-   --[4. Addition and subtraction]----------------------------------------------
+   --[5. Addition and subtraction]----------------------------------------------
 
    --[Add]----------------------------------------------------------------------
    -- Purpose:
@@ -538,7 +538,7 @@ private
                   Difference     :    out Digit_Sequence;
                   Difference_SD  :    out Natural);
 
-   --[5. Multiply]--------------------------------------------------------------
+   --[6. Multiplication & Squaring]---------------------------------------------
 
    --[Multiply]-----------------------------------------------------------------
    -- Purpose:
@@ -594,6 +594,30 @@ private
                   Product        :    out Digit_Sequence;
                   Product_SD     :    out Natural);
 
+   --[Square]-------------------------------------------------------------------
+   -- Purpose:
+   -- Squares a Digit_Sequence (Left ** 2).
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- Left                 Digit_Sequence to square.     
+   -- Left_SD              Significant digits in Left.
+   -- Result               Resulting Digit_Sequence.
+   -- Result_SD            Significant digits in Result.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CryptAda_Overflow_Error if the number of significant digits of the 
+   -- resulting digit sequence is greater than Result'Length.
+   -----------------------------------------------------------------------------
+
+   procedure   Square(
+                  Left           : in     Digit_Sequence;
+                  Left_SD        : in     Natural;
+                  Result         :    out Digit_Sequence;
+                  Result_SD      :    out Natural);
+                  
    --[6. Division]--------------------------------------------------------------
                   
    --[Divide_And_Remainder]-----------------------------------------------------
@@ -726,30 +750,6 @@ private
                   Quotient       :    out Digit_Sequence;
                   Quotient_SD    :    out Natural;
                   Remainder      :    out Digit);
-                  
-   --[Square]-------------------------------------------------------------------
-   -- Purpose:
-   -- Squares a Digit_Sequence (Left ** 2).
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- Left                 Digit_Sequence to square.     
-   -- Left_SD              Significant digits in Left.
-   -- Result               Resulting Digit_Sequence.
-   -- Result_SD            Significant digits in Result.
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- N/A.
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- CryptAda_Overflow_Error if the number of significant digits of the 
-   -- resulting digit sequence is greater than Result'Length.
-   -----------------------------------------------------------------------------
-
-   procedure   Square(
-                  Left           : in     Digit_Sequence;
-                  Left_SD        : in     Natural;
-                  Result         :    out Digit_Sequence;
-                  Result_SD      :    out Natural);
-                                    
+                                                      
 end CryptAda.Big_Naturals;
 
