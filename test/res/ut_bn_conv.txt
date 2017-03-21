@@ -6,7 +6,7 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.Conv
 Description              : Unit test driver for CryptAda.Big_Naturals string conversion functionality.
-Started                  : 2017/03/20 - 21:38:04
+Started                  : 2017/03/21 - 07:34:54
 ================================================================================
 [I] This test driver will validate conversion from/to string literals to/from Digit_Sequences
 Next elements will be tested:
@@ -16,7 +16,7 @@ Next elements will be tested:
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Testing CryptAda_Syntax_Error conditions
-Started         : 2017/03/20 - 21:38:04
+Started         : 2017/03/21 - 07:34:54
 --------------------------------------------------------------------------------
 [I] Interfaces exercised:
 - String_2_Digit_Sequence()
@@ -191,13 +191,13 @@ Started         : 2017/03/20 - 21:38:04
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:04
+Finished        : 2017/03/21 - 07:34:54
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Testing CryptAda_Syntax_Error conditions
-Started         : 2017/03/20 - 21:38:04
+Started         : 2017/03/21 - 07:34:54
 --------------------------------------------------------------------------------
 [I] Interfaces exercised:
 - String_2_Digit_Sequence()
@@ -792,13 +792,13 @@ Must be valid in remaining bases
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:04
+Finished        : 2017/03/21 - 07:34:54
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Getting Zero_Digit_Sequence string literals
-Started         : 2017/03/20 - 21:38:04
+Started         : 2017/03/21 - 07:34:54
 --------------------------------------------------------------------------------
 [I] Interfaces exercised:
 - String_2_Digit_Sequence()
@@ -1196,13 +1196,13 @@ Significant Digits:  0
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:04
+Finished        : 2017/03/21 - 07:34:54
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Getting One_Digit_Sequence string literals
-Started         : 2017/03/20 - 21:38:04
+Started         : 2017/03/21 - 07:34:54
 --------------------------------------------------------------------------------
 [I] Interfaces exercised:
 - String_2_Digit_Sequence()
@@ -1600,13 +1600,13 @@ Significant Digits:  1
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:04
+Finished        : 2017/03/21 - 07:34:54
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Converting test string literals in all bases
-Started         : 2017/03/20 - 21:38:04
+Started         : 2017/03/21 - 07:34:54
 --------------------------------------------------------------------------------
 [I] Interfaces exercised:
 - String_2_Digit_Sequence()
@@ -1779,13 +1779,13 @@ Significant Digits:  2
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:04
+Finished        : 2017/03/21 - 07:34:54
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : Converting digit sequences to string literals in all bases
-Started         : 2017/03/20 - 21:38:04
+Started         : 2017/03/21 - 07:34:54
 --------------------------------------------------------------------------------
 [I] Interfaces exercised:
 - Digit_Sequence_2_String()
@@ -1913,13 +1913,13 @@ Significant Digits:  2
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:04
+Finished        : 2017/03/21 - 07:34:54
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
 Description     : Converting random digit sequence to literal strings
-Started         : 2017/03/20 - 21:38:04
+Started         : 2017/03/21 - 07:34:54
 --------------------------------------------------------------------------------
 [I] Interfaces exercised:
 - Digit_Sequence_2_String()
@@ -1961,11 +1961,11 @@ Finished test for base:  16
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:05
+Finished        : 2017/03/21 - 07:34:55
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.Conv
-Finished                 : 2017/03/20 - 21:38:05
+Finished                 : 2017/03/21 - 07:34:55
 ================================================================================

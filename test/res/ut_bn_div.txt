@@ -6,7 +6,7 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.Div
 Description              : Unit test driver for CryptAda.Big_Naturals division functionality.
-Started                  : 2017/03/20 - 21:38:07
+Started                  : 2017/03/21 - 07:34:57
 ================================================================================
 [I] This test driver will validate Digit_Sequences division
 Next elements will be tested:
@@ -20,7 +20,7 @@ Next elements will be tested:
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Overflow conditions in division
-Started         : 2017/03/20 - 21:38:07
+Started         : 2017/03/21 - 07:34:57
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Divide_And_Remainder()
@@ -47,13 +47,13 @@ Shall raise CryptAda_Overflow_Error
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:07
+Finished        : 2017/03/21 - 07:34:57
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Division by zero
-Started         : 2017/03/20 - 21:38:07
+Started         : 2017/03/21 - 07:34:57
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Divide_And_Remainder()
@@ -76,13 +76,13 @@ Shall raise CryptAda_Division_By_Zero_Error
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:07
+Finished        : 2017/03/21 - 07:34:57
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Division by one
-Started         : 2017/03/20 - 21:38:07
+Started         : 2017/03/21 - 07:34:57
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Divide_And_Remainder()
@@ -96,13 +96,13 @@ Started         : 2017/03/20 - 21:38:07
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:07
+Finished        : 2017/03/21 - 07:34:57
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Division by self
-Started         : 2017/03/20 - 21:38:07
+Started         : 2017/03/21 - 07:34:57
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Divide_And_Remainder()
@@ -116,13 +116,13 @@ Started         : 2017/03/20 - 21:38:07
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:07
+Finished        : 2017/03/21 - 07:34:57
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Divisor greater than dividend
-Started         : 2017/03/20 - 21:38:07
+Started         : 2017/03/21 - 07:34:57
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Divide_And_Remainder()
@@ -136,13 +136,13 @@ Started         : 2017/03/20 - 21:38:07
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:07
+Finished        : 2017/03/21 - 07:34:57
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : Testing correctness of division by using RSA known products
-Started         : 2017/03/20 - 21:38:07
+Started         : 2017/03/21 - 07:34:57
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Divide_And_Remainder()
@@ -150,7 +150,7 @@ Started         : 2017/03/20 - 21:38:07
     Remainder will always be Zero
 Number of known factors to test:  7
 [I] Test vector                   :  1
-    Test vector name              : RSA 100 decial digits (330 bits)
+    Test vector name              : RSA 100 decimal digits (330 bits)
     Dividend (decimal)            : 1522605027922533360535618378132637429718068114961380688657908494580122963258952897654000350692006139
    Dividend                      : 
 Length            :  40
@@ -181,7 +181,7 @@ Significant Digits:  6
 Length            :  20
 Significant Digits:  0
 00000000
-    Test vector name              : RSA 100 decial digits (330 bits)
+    Test vector name              : RSA 100 decimal digits (330 bits)
     Dividend (decimal)            : 1522605027922533360535618378132637429718068114961380688657908494580122963258952897654000350692006139
    Dividend                      : 
 Length            :  40
@@ -213,7 +213,7 @@ Length            :  20
 Significant Digits:  0
 00000000
 [I] Test vector                   :  2
-    Test vector name              : RSA 110 decial digits (364 bits)
+    Test vector name              : RSA 110 decimal digits (364 bits)
     Dividend (decimal)            : 35794234179725868774991807832568455403003778024228226193532908190484670252364677411513516111204504060317568667
    Dividend                      : 
 Length            :  40
@@ -244,7 +244,7 @@ Significant Digits:  6
 Length            :  20
 Significant Digits:  0
 00000000
-    Test vector name              : RSA 110 decial digits (364 bits)
+    Test vector name              : RSA 110 decimal digits (364 bits)
     Dividend (decimal)            : 35794234179725868774991807832568455403003778024228226193532908190484670252364677411513516111204504060317568667
    Dividend                      : 
 Length            :  40
@@ -276,7 +276,7 @@ Length            :  20
 Significant Digits:  0
 00000000
 [I] Test vector                   :  3
-    Test vector name              : RSA 120 decial digits (397 bits)
+    Test vector name              : RSA 120 decimal digits (397 bits)
     Dividend (decimal)            : 227010481295437363334259960947493668895875336466084780038173258247009162675779735389791151574049166747880487470296548479
    Dividend                      : 
 Length            :  40
@@ -307,7 +307,7 @@ Significant Digits:  7
 Length            :  20
 Significant Digits:  0
 00000000
-    Test vector name              : RSA 120 decial digits (397 bits)
+    Test vector name              : RSA 120 decimal digits (397 bits)
     Dividend (decimal)            : 227010481295437363334259960947493668895875336466084780038173258247009162675779735389791151574049166747880487470296548479
    Dividend                      : 
 Length            :  40
@@ -339,7 +339,7 @@ Length            :  20
 Significant Digits:  0
 00000000
 [I] Test vector                   :  4
-    Test vector name              : RSA 129 decial digits (426 bits)
+    Test vector name              : RSA 129 decimal digits (426 bits)
     Dividend (decimal)            : 114381625757888867669235779976146612010218296721242362562561842935706935245733897830597123563958705058989075147599290026879543541
    Dividend                      : 
 Length            :  40
@@ -370,7 +370,7 @@ Significant Digits:  7
 Length            :  20
 Significant Digits:  0
 00000000
-    Test vector name              : RSA 129 decial digits (426 bits)
+    Test vector name              : RSA 129 decimal digits (426 bits)
     Dividend (decimal)            : 114381625757888867669235779976146612010218296721242362562561842935706935245733897830597123563958705058989075147599290026879543541
    Dividend                      : 
 Length            :  40
@@ -402,7 +402,7 @@ Length            :  20
 Significant Digits:  0
 00000000
 [I] Test vector                   :  5
-    Test vector name              : RSA 130 decial digits (430 bits)
+    Test vector name              : RSA 130 decimal digits (430 bits)
     Dividend (decimal)            : 1807082088687404805951656164405905566278102516769401349170127021450056662540244048387341127590812303371781887966563182013214880557
    Dividend                      : 
 Length            :  40
@@ -433,7 +433,7 @@ Significant Digits:  7
 Length            :  20
 Significant Digits:  0
 00000000
-    Test vector name              : RSA 130 decial digits (430 bits)
+    Test vector name              : RSA 130 decimal digits (430 bits)
     Dividend (decimal)            : 1807082088687404805951656164405905566278102516769401349170127021450056662540244048387341127590812303371781887966563182013214880557
    Dividend                      : 
 Length            :  40
@@ -465,7 +465,7 @@ Length            :  20
 Significant Digits:  0
 00000000
 [I] Test vector                   :  6
-    Test vector name              : RSA 140 decial digits (463 bits)
+    Test vector name              : RSA 140 decimal digits (463 bits)
     Dividend (decimal)            : 21290246318258757547497882016271517497806703963277216278233383215381949984056495911366573853021918316783107387995317230889569230873441936471
    Dividend                      : 
 Length            :  40
@@ -496,7 +496,7 @@ Significant Digits:  8
 Length            :  20
 Significant Digits:  0
 00000000
-    Test vector name              : RSA 140 decial digits (463 bits)
+    Test vector name              : RSA 140 decimal digits (463 bits)
     Dividend (decimal)            : 21290246318258757547497882016271517497806703963277216278233383215381949984056495911366573853021918316783107387995317230889569230873441936471
    Dividend                      : 
 Length            :  40
@@ -528,7 +528,7 @@ Length            :  20
 Significant Digits:  0
 00000000
 [I] Test vector                   :  7
-    Test vector name              : RSA 150 decial digits (496 bits)
+    Test vector name              : RSA 150 decimal digits (496 bits)
     Dividend (decimal)            : 155089812478348440509606754370011861770654545830995430655466945774312632703463465954363335027577729025391453996787414027003501631772186840890795964683
    Dividend                      : 
 Length            :  40
@@ -559,7 +559,7 @@ Significant Digits:  8
 Length            :  20
 Significant Digits:  0
 00000000
-    Test vector name              : RSA 150 decial digits (496 bits)
+    Test vector name              : RSA 150 decimal digits (496 bits)
     Dividend (decimal)            : 155089812478348440509606754370011861770654545830995430655466945774312632703463465954363335027577729025391453996787414027003501631772186840890795964683
    Dividend                      : 
 Length            :  40
@@ -594,11 +594,119 @@ Significant Digits:  0
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:07
+Finished        : 2017/03/21 - 07:34:57
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 7
+Description     : Cross checking division with multiplication and addition
+Started         : 2017/03/21 - 07:34:57
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Divide_And_Remainder()
+- Divide()
+- Remainder()
+[I] Performing  100000 iterations with random digit sequences
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 7
+Test Case Result: PASSED
+Finished        : 2017/03/21 - 07:34:58
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 8
+Description     : Overflow conditions in division by digits
+Started         : 2017/03/21 - 07:34:58
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Divide_Digit_And_Remainder()
+- Divide_Digit()
+[I] Check that CryptAda_Overflow_Error is raised when quotient
+    Digit_Sequences are not long enough to hold the respective results.
+[I] Testing Divide_Digit_And_Remainder
+[I] Digit_Sequence for quotient not long enough.
+Shall raise CryptAda_Overflow_Error
+[I] Raised CryptAda_Overflow_Error
+[I] Testing Divide_Digit
+[I] Digit_Sequence for quotient not long enough.
+Shall raise CryptAda_Overflow_Error
+[I] Raised CryptAda_Overflow_Error
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 8
+Test Case Result: PASSED
+Finished        : 2017/03/21 - 07:34:58
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 9
+Description     : Division by zero
+Started         : 2017/03/21 - 07:34:58
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Divide_Digit_And_Remainder()
+- Divide_Digit()
+- Remainder_Digit()
+[I] Check that CryptAda_Division_By_Zero_Error is raised when divisor is zero
+[I] Testing Divide_Digit_And_Remainder
+[I] Divisor is 0
+Shall raise CryptAda_Division_By_Zero_Error
+[I] Raised CryptAda_Division_By_Zero_Error
+[I] Testing Divide_Digit
+[I] Divisor is 0
+Shall raise CryptAda_Division_By_Zero_Error
+[I] Raised CryptAda_Division_By_Zero_Error
+[I] Testing Remainder_Digit
+[I] Divisor is 0
+Shall raise CryptAda_Division_By_Zero_Error
+[I] Raised CryptAda_Division_By_Zero_Error
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 9
+Test Case Result: PASSED
+Finished        : 2017/03/21 - 07:34:58
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 10
+Description     : Division by one
+Started         : 2017/03/21 - 07:34:58
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Divide_Digit_And_Remainder()
+- Divide_Digit()
+- Remainder_Digit()
+[I] Check that division by one renders quotient = divisor, remainder = 0
+[I] Testing Divide_Digit_And_Remainder
+[I] Testing Divide_Digit
+[I] Testing Remainder_Digit
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 10
+Test Case Result: PASSED
+Finished        : 2017/03/21 - 07:34:58
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 11
+Description     : Cross checking division with multiplication and addition
+Started         : 2017/03/21 - 07:34:58
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Divide_Digit_And_Remainder()
+- Divide_Digit()
+- Remainder_Digit()
+[I] Performing  100000 iterations with random digit sequences
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 11
+Test Case Result: PASSED
+Finished        : 2017/03/21 - 07:34:58
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.Div
-Finished                 : 2017/03/20 - 21:38:07
+Finished                 : 2017/03/21 - 07:34:58
 ================================================================================

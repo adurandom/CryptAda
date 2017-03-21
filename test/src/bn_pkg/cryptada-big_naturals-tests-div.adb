@@ -36,8 +36,6 @@ with Ada.Strings.Unbounded;            use Ada.Strings.Unbounded;
 
 with CryptAda.Tests.Utils;             use CryptAda.Tests.Utils;
 with CryptAda.Exceptions;              use CryptAda.Exceptions;
-with CryptAda.Pragmatics;              use CryptAda.Pragmatics;
-with CryptAda.Utils.Format;            use CryptAda.Utils.Format;
 
 package body CryptAda.Big_Naturals.Tests.Div is
 
@@ -51,13 +49,13 @@ package body CryptAda.Big_Naturals.Tests.Div is
    RSA_Factors_Count             : constant Positive := 7;
    RSA_Factors_Names             : constant array(1 .. RSA_Factors_Count) of String_Ptr :=
       (
-         new String'("RSA 100 decial digits (330 bits)"),
-         new String'("RSA 110 decial digits (364 bits)"),
-         new String'("RSA 120 decial digits (397 bits)"),
-         new String'("RSA 129 decial digits (426 bits)"),
-         new String'("RSA 130 decial digits (430 bits)"),
-         new String'("RSA 140 decial digits (463 bits)"),
-         new String'("RSA 150 decial digits (496 bits)")
+         new String'("RSA 100 decimal digits (330 bits)"),
+         new String'("RSA 110 decimal digits (364 bits)"),
+         new String'("RSA 120 decimal digits (397 bits)"),
+         new String'("RSA 129 decimal digits (426 bits)"),
+         new String'("RSA 130 decimal digits (430 bits)"),
+         new String'("RSA 140 decimal digits (463 bits)"),
+         new String'("RSA 150 decimal digits (496 bits)")
       );
    RSA_Factors                   : constant array(1 .. RSA_Factors_Count, 1 .. 3) of String_Ptr :=
       (
@@ -108,6 +106,11 @@ package body CryptAda.Big_Naturals.Tests.Div is
    procedure   Case_4;
    procedure   Case_5;
    procedure   Case_6;
+   procedure   Case_7;
+   procedure   Case_8;
+   procedure   Case_9;
+   procedure   Case_10;
+   procedure   Case_11;
          
    -----------------------------------------------------------------------------
    --[Test Case Bodies]---------------------------------------------------------
@@ -750,6 +753,460 @@ package body CryptAda.Big_Naturals.Tests.Div is
          End_Test_Case(6, Failed);
          raise CryptAda_Test_Error;
    end Case_6;
+
+   --[Case_7]-------------------------------------------------------------------
+
+   procedure   Case_7
+   is
+      DD_DS             : Test_DS;
+      DD_SD             : constant Natural := Max_Significant_Digits;
+      DS_DS             : Test_DS;
+      DS_SD             : constant Natural := Max_Significant_Digits - 3;
+      Q1_DS             : Test_DS;
+      Q1_SD             : Natural;
+      R1_DS             : Test_DS;
+      R1_SD             : Natural;
+      Q2_DS             : Test_DS;
+      Q2_SD             : Natural;
+      R2_DS             : Test_DS;
+      R2_SD             : Natural;
+      CHK1_DS           : Test_DS;
+      CHK1_SD           : Natural;
+      CHK2_DS           : Test_DS;
+      CHK2_SD           : Natural;
+   begin
+      Begin_Test_Case(7, "Cross checking division with multiplication and addition");
+      Print_Information_Message("Subprograms tested:");
+      Print_Message("- Divide_And_Remainder()");
+      Print_Message("- Divide()");
+      Print_Message("- Remainder()");
+      
+      Print_Information_Message("Performing " & Positive'Image(Iterations) & " iterations with random digit sequences");
+
+      for I in 1 .. Iterations loop
+         Random_DS(DD_SD, DD_DS);
+         Random_DS(DS_SD, DS_DS);
+         Divide_And_Remainder(DD_DS, DD_SD, DS_DS, DS_SD, Q1_DS, Q1_SD, R1_DS, R1_SD);
+         Multiply(DS_DS, DS_SD, Q1_DS, Q1_SD, CHK1_DS, CHK1_SD);
+         Add(R1_DS, R1_SD, CHK1_DS, CHK1_SD, CHK2_DS, CHK2_SD);
+         
+         if Compare(DD_DS, DD_SD, CHK2_DS, CHK2_SD) /= Equal then
+            Print_Error_Message("Iteration " & Positive'Image(I) & ", results don't match");
+            Print_Message("Dividend:");
+            Print_DS(DD_SD, DD_DS);
+            Print_Message("Divisor:");
+            Print_DS(DS_SD, DS_DS);
+            Print_Message("Quotient:");
+            Print_DS(Q1_SD, Q1_DS);
+            Print_Message("Remainder:");
+            Print_DS(R1_SD, R1_DS);
+            Print_Message("Divisor * Quotient:");
+            Print_DS(CHK1_SD, CHK1_DS);
+            Print_Message("Divisor * Quotient + Remainder:");
+            Print_DS(CHK2_SD, CHK2_DS);
+            
+            raise CryptAda_Test_Error;
+         end if;
+
+         Divide(DD_DS, DD_SD, DS_DS, DS_SD, Q2_DS, Q2_SD);
+         Remainder(DD_DS, DD_SD, DS_DS, DS_SD, R2_DS, R2_SD);
+         Multiply(DS_DS, DS_SD, Q2_DS, Q2_SD, CHK1_DS, CHK1_SD);
+         Add(R2_DS, R2_SD, CHK1_DS, CHK1_SD, CHK2_DS, CHK2_SD);
+
+         if Compare(DD_DS, DD_SD, CHK2_DS, CHK2_SD) /= Equal then
+            Print_Error_Message("Iteration " & Positive'Image(I) & ", results don't match");
+            Print_Message("Dividend:");
+            Print_DS(DD_SD, DD_DS);
+            Print_Message("Divisor:");
+            Print_DS(DS_SD, DS_DS);
+            Print_Message("Quotient:");
+            Print_DS(Q2_SD, Q2_DS);
+            Print_Message("Remainder:");
+            Print_DS(R2_SD, R2_DS);
+            Print_Message("Divisor * Quotient:");
+            Print_DS(CHK1_SD, CHK1_DS);
+            Print_Message("Divisor * Quotient + Remainder:");
+            Print_DS(CHK2_SD, CHK2_DS);
+            
+            raise CryptAda_Test_Error;
+         end if;
+      end loop;
+
+      Print_Information_Message("Test case OK.");
+      End_Test_Case(7, Passed);
+   exception
+      when CryptAda_Test_Error =>
+         End_Test_Case(7, Failed);
+         raise;
+      when X: others =>
+         Print_Error_Message(
+            "Exception: """ & Exception_Name(X) & """");
+         Print_Message(
+            "Message  : """ & Exception_Message(X) & """");
+         End_Test_Case(7, Failed);
+         raise CryptAda_Test_Error;
+   end Case_7;
+
+   --[Case_8]-------------------------------------------------------------------
+
+   procedure   Case_8
+   is
+      DD_DS             : Test_DS;     -- Dividend
+   begin
+      Begin_Test_Case(8, "Overflow conditions in division by digits");
+
+      Print_Information_Message("Subprograms tested:");
+      Print_Message("- Divide_Digit_And_Remainder()");
+      Print_Message("- Divide_Digit()");
+
+      Random_DS(5, DD_DS);
+      
+      Print_Information_Message("Check that CryptAda_Overflow_Error is raised when quotient");
+      Print_Message("Digit_Sequences are not long enough to hold the respective results.", "    ");
+      
+      Print_Information_Message("Testing Divide_Digit_And_Remainder");
+      
+      declare
+         Q_DS              : Digit_Sequence(1 .. 3);
+         Q_SD              : Natural;
+         R                 : Digit;
+      begin
+         Print_Information_Message("Digit_Sequence for quotient not long enough.");
+         Print_Message("Shall raise CryptAda_Overflow_Error");
+         Divide_Digit_And_Remainder(DD_DS, 5, 1, Q_DS, Q_SD, R);
+         Print_Error_Message("No exception raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when CryptAda_Overflow_Error => 
+            Print_Information_Message("Raised CryptAda_Overflow_Error");
+         when X: others =>
+            Print_Error_Message(
+               "Exception: """ & Exception_Name(X) & """");
+            Print_Message(
+               "Message  : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;            
+      end;
+      
+      Print_Information_Message("Testing Divide_Digit");
+      
+      declare
+         Q_DS              : Digit_Sequence(1 .. 3);
+         Q_SD              : Natural;
+      begin
+         Print_Information_Message("Digit_Sequence for quotient not long enough.");
+         Print_Message("Shall raise CryptAda_Overflow_Error");
+         Divide_Digit(DD_DS, 5, 1, Q_DS, Q_SD);
+         Print_Error_Message("No exception raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when CryptAda_Overflow_Error => 
+            Print_Information_Message("Raised CryptAda_Overflow_Error");
+         when X: others =>
+            Print_Error_Message(
+               "Exception: """ & Exception_Name(X) & """");
+            Print_Message(
+               "Message  : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;            
+      end;
+
+      Print_Information_Message("Test case OK.");
+      End_Test_Case(8, Passed);
+   exception
+      when CryptAda_Test_Error =>
+         End_Test_Case(8, Failed);
+         raise;
+      when X: others =>
+         Print_Error_Message(
+            "Exception: """ & Exception_Name(X) & """");
+         Print_Message(
+            "Message  : """ & Exception_Message(X) & """");
+         End_Test_Case(8, Failed);
+         raise CryptAda_Test_Error;
+   end Case_8;
+
+   --[Case_9]-------------------------------------------------------------------
+
+   procedure   Case_9
+   is
+      DD_DS             : Test_DS;     -- Dividend
+   begin
+      Begin_Test_Case(9, "Division by zero");
+
+      Print_Information_Message("Subprograms tested:");
+      Print_Message("- Divide_Digit_And_Remainder()");
+      Print_Message("- Divide_Digit()");
+      Print_Message("- Remainder_Digit()");
+
+      Random_DS(5, DD_DS);
+      
+      Print_Information_Message("Check that CryptAda_Division_By_Zero_Error is raised when divisor is zero");
+      
+      Print_Information_Message("Testing Divide_Digit_And_Remainder");
+      
+      declare
+         Q_DS              : Test_DS;
+         Q_SD              : Natural;
+         R                 : Digit;
+      begin
+         Print_Information_Message("Divisor is 0");
+         Print_Message("Shall raise CryptAda_Division_By_Zero_Error");
+         Divide_Digit_And_Remainder(DD_DS, 5, 0, Q_DS, Q_SD, R);
+         Print_Error_Message("No exception raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when CryptAda_Division_By_Zero_Error => 
+            Print_Information_Message("Raised CryptAda_Division_By_Zero_Error");
+         when X: others =>
+            Print_Error_Message(
+               "Exception: """ & Exception_Name(X) & """");
+            Print_Message(
+               "Message  : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;            
+      end;
+
+      Print_Information_Message("Testing Divide_Digit");
+      
+      declare
+         Q_DS              : Test_DS;
+         Q_SD              : Natural;
+      begin
+         Print_Information_Message("Divisor is 0");
+         Print_Message("Shall raise CryptAda_Division_By_Zero_Error");
+         Divide_Digit(DD_DS, 5, 0, Q_DS, Q_SD);
+         Print_Error_Message("No exception raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when CryptAda_Division_By_Zero_Error => 
+            Print_Information_Message("Raised CryptAda_Division_By_Zero_Error");
+         when X: others =>
+            Print_Error_Message(
+               "Exception: """ & Exception_Name(X) & """");
+            Print_Message(
+               "Message  : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;            
+      end;
+
+      Print_Information_Message("Testing Remainder_Digit");
+      
+      declare
+         R                 : Digit;
+      begin
+         Print_Information_Message("Divisor is 0");
+         Print_Message("Shall raise CryptAda_Division_By_Zero_Error");
+         Remainder_Digit(DD_DS, 5, 0, R);
+         Print_Error_Message("No exception raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when CryptAda_Division_By_Zero_Error => 
+            Print_Information_Message("Raised CryptAda_Division_By_Zero_Error");
+         when X: others =>
+            Print_Error_Message(
+               "Exception: """ & Exception_Name(X) & """");
+            Print_Message(
+               "Message  : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;            
+      end;
+
+      Print_Information_Message("Test case OK.");
+      End_Test_Case(9, Passed);
+   exception
+      when CryptAda_Test_Error =>
+         End_Test_Case(9, Failed);
+         raise;
+      when X: others =>
+         Print_Error_Message(
+            "Exception: """ & Exception_Name(X) & """");
+         Print_Message(
+            "Message  : """ & Exception_Message(X) & """");
+         End_Test_Case(9, Failed);
+         raise CryptAda_Test_Error;
+   end Case_9;
+
+   --[Case_10]------------------------------------------------------------------
+
+   procedure   Case_10
+   is
+      DD_DS             : Test_DS;     -- Dividend
+      Q_DS              : Test_DS;
+      Q_SD              : Natural;
+      R                 : Digit;
+   begin
+      Begin_Test_Case(10, "Division by one");
+
+      Print_Information_Message("Subprograms tested:");
+      Print_Message("- Divide_Digit_And_Remainder()");
+      Print_Message("- Divide_Digit()");
+      Print_Message("- Remainder_Digit()");
+
+      Random_DS(5, DD_DS);
+      
+      Print_Information_Message("Check that division by one renders quotient = divisor, remainder = 0");      
+      Print_Information_Message("Testing Divide_Digit_And_Remainder");
+      
+      Divide_Digit_And_Remainder(DD_DS, 5, 1, Q_DS, Q_SD, R);
+      
+      if Compare(Q_DS, Q_SD, DD_DS, 5) /= Equal or else R /= 0 then
+         Print_Error_Message("Results don't match");
+         Print_Message("Dividend:");
+         Print_DS(5, DD_DS);
+         Print_Message("Divisor: 1");
+         Print_Message("Expected quotient:");
+         Print_DS(5, DD_DS);
+         Print_Message("Obtained quotient");
+         Print_DS(Q_SD, Q_DS);
+         Print_Message("Expected remainder: 0");
+         Print_Message("Obtained remainder: " & Digit'Image(R));
+         
+         raise CryptAda_Test_Error;
+      end if;
+
+      Print_Information_Message("Testing Divide_Digit");
+      
+      Divide_Digit(DD_DS, 5, 1, Q_DS, Q_SD);
+      
+      if Compare(Q_DS, Q_SD, DD_DS, 5) /= Equal then
+         Print_Error_Message("Results don't match");
+         Print_Message("Dividend:");
+         Print_DS(5, DD_DS);
+         Print_Message("Divisor: 1");
+         Print_Message("Expected quotient:");
+         Print_DS(5, DD_DS);
+         Print_Message("Obtained quotient");
+         Print_DS(Q_SD, Q_DS);
+         
+         raise CryptAda_Test_Error;
+      end if;
+
+      Print_Information_Message("Testing Remainder_Digit");
+      
+      Remainder_Digit(DD_DS, 5, 1, R);
+      
+      if R /= 0 then
+         Print_Error_Message("Results don't match");
+         Print_Message("Dividend:");
+         Print_DS(5, DD_DS);
+         Print_Message("Divisor: 1");
+         Print_Message("Expected remainder: 0");
+         Print_Message("Obtained remainder: " & Digit'Image(R));
+         
+         raise CryptAda_Test_Error;
+      end if;
+ 
+      Print_Information_Message("Test case OK.");
+      End_Test_Case(10, Passed);
+   exception
+      when CryptAda_Test_Error =>
+         End_Test_Case(10, Failed);
+         raise;
+      when X: others =>
+         Print_Error_Message(
+            "Exception: """ & Exception_Name(X) & """");
+         Print_Message(
+            "Message  : """ & Exception_Message(X) & """");
+         End_Test_Case(10, Failed);
+         raise CryptAda_Test_Error;
+   end Case_10;
+
+   --[Case_11]------------------------------------------------------------------
+
+   procedure   Case_11
+   is
+      DD_DS             : Test_DS;
+      DD_SD             : constant Natural := Max_Significant_Digits;
+      DS                : Digit;
+      Q1_DS             : Test_DS;
+      Q1_SD             : Natural;
+      R1                : Digit;
+      Q2_DS             : Test_DS;
+      Q2_SD             : Natural;
+      R2                : Digit;
+      CHK1_DS           : Test_DS;
+      CHK1_SD           : Natural;
+      CHK2_DS           : Test_DS;
+      CHK2_SD           : Natural;
+   begin
+      Begin_Test_Case(11, "Cross checking division with multiplication and addition");
+      Print_Information_Message("Subprograms tested:");
+      Print_Message("- Divide_Digit_And_Remainder()");
+      Print_Message("- Divide_Digit()");
+      Print_Message("- Remainder_Digit()");
+      
+      Print_Information_Message("Performing " & Positive'Image(Iterations) & " iterations with random digit sequences");
+
+      for I in 1 .. Iterations loop
+         Random_DS(DD_SD, DD_DS);
+         
+         loop
+            DS := Digit(Random_Four_Bytes);
+            exit when DS /= 0;
+         end loop;
+         
+         Divide_Digit_And_Remainder(DD_DS, DD_SD, DS, Q1_DS, Q1_SD, R1);
+         Multiply_Digit(Q1_DS, Q1_SD, DS, CHK1_DS, CHK1_SD);
+         Add_Digit(CHK1_DS, CHK1_SD, R1, CHK2_DS, CHK2_SD);
+         
+         if Compare(DD_DS, DD_SD, CHK2_DS, CHK2_SD) /= Equal then
+            Print_Error_Message("Iteration " & Positive'Image(I) & ", results don't match");
+            Print_Message("Dividend:");
+            Print_DS(DD_SD, DD_DS);
+            Print_Message("Divisor: " & Digit'Image(DS));
+            Print_Message("Quotient:");
+            Print_DS(Q1_SD, Q1_DS);
+            Print_Message("Remainder: " & Digit'Image(R1));
+            Print_Message("Divisor * Quotient:");
+            Print_DS(CHK1_SD, CHK1_DS);
+            Print_Message("Divisor * Quotient + Remainder:");
+            Print_DS(CHK2_SD, CHK2_DS);
+            
+            raise CryptAda_Test_Error;
+         end if;
+
+         Divide_Digit(DD_DS, DD_SD, DS, Q2_DS, Q2_SD);
+         Remainder_Digit(DD_DS, DD_SD, DS, R2);
+         Multiply_Digit(Q2_DS, Q2_SD, DS, CHK1_DS, CHK1_SD);
+         Add_Digit(CHK1_DS, CHK1_SD, R2, CHK2_DS, CHK2_SD);
+
+         if Compare(DD_DS, DD_SD, CHK2_DS, CHK2_SD) /= Equal then
+            Print_Error_Message("Iteration " & Positive'Image(I) & ", results don't match");
+            Print_Message("Dividend:");
+            Print_DS(DD_SD, DD_DS);
+            Print_Message("Divisor: " & Digit'Image(DS));
+            Print_Message("Quotient:");
+            Print_DS(Q2_SD, Q2_DS);
+            Print_Message("Remainder: " & Digit'Image(R2));
+            Print_Message("Divisor * Quotient:");
+            Print_DS(CHK1_SD, CHK1_DS);
+            Print_Message("Divisor * Quotient + Remainder:");
+            Print_DS(CHK2_SD, CHK2_DS);
+            
+            raise CryptAda_Test_Error;
+         end if;
+      end loop;
+
+      Print_Information_Message("Test case OK.");
+      End_Test_Case(11, Passed);
+   exception
+      when CryptAda_Test_Error =>
+         End_Test_Case(11, Failed);
+         raise;
+      when X: others =>
+         Print_Error_Message(
+            "Exception: """ & Exception_Name(X) & """");
+         Print_Message(
+            "Message  : """ & Exception_Message(X) & """");
+         End_Test_Case(11, Failed);
+         raise CryptAda_Test_Error;
+   end Case_11;
    
    -----------------------------------------------------------------------------
    --[Spec Declared Subprogram Bodies]------------------------------------------
@@ -776,6 +1233,11 @@ package body CryptAda.Big_Naturals.Tests.Div is
       Case_4;
       Case_5;
       Case_6;
+      Case_7;
+      Case_8;
+      Case_9;
+      Case_10;
+      Case_11;
       
       End_Test_Driver(Driver_Name);
    exception

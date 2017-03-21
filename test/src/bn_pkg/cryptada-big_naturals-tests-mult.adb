@@ -51,13 +51,13 @@ package body CryptAda.Big_Naturals.Tests.Mult is
    RSA_Factors_Count             : constant Positive := 7;
    RSA_Factors_Names             : constant array(1 .. RSA_Factors_Count) of String_Ptr :=
       (
-         new String'("RSA 100 decial digits (330 bits)"),
-         new String'("RSA 110 decial digits (364 bits)"),
-         new String'("RSA 120 decial digits (397 bits)"),
-         new String'("RSA 129 decial digits (426 bits)"),
-         new String'("RSA 130 decial digits (430 bits)"),
-         new String'("RSA 140 decial digits (463 bits)"),
-         new String'("RSA 150 decial digits (496 bits)")
+         new String'("RSA 100 decimal digits (330 bits)"),
+         new String'("RSA 110 decimal digits (364 bits)"),
+         new String'("RSA 120 decimal digits (397 bits)"),
+         new String'("RSA 129 decimal digits (426 bits)"),
+         new String'("RSA 130 decimal digits (430 bits)"),
+         new String'("RSA 140 decimal digits (463 bits)"),
+         new String'("RSA 150 decimal digits (496 bits)")
       );
    RSA_Factors                   : constant array(1 .. RSA_Factors_Count, 1 .. 3) of String_Ptr :=
       (

@@ -36,6 +36,7 @@ with Ada.Strings.Fixed;                use Ada.Strings.Fixed;
 with Ada.Strings.Unbounded;            use Ada.Strings.Unbounded;
 
 with CryptAda.Pragmatics;              use CryptAda.Pragmatics;
+with CryptAda.Pragmatics.Byte_Vectors; use CryptAda.Pragmatics.Byte_Vectors;
 with CryptAda.Exceptions;              use CryptAda.Exceptions;
 
 package body CryptAda.Big_Naturals is
@@ -265,6 +266,28 @@ package body CryptAda.Big_Naturals is
    --[Body declared subprogram specs]-------------------------------------------
    -----------------------------------------------------------------------------
 
+   --[Byte_Array_Significant_Bytes]---------------------------------------------
+   -- Purpose:
+   -- Returns the number of significant bytes in a Byte_Array for a specified
+   -- Byte_Order.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Array            Byte_Array to obtain the number of significant bytes.
+   -- Order                Byte_Order that specifies the order of bytes in
+   --                      The_Array.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Natural value with the number of significant bytes.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   function    Byte_Array_Significant_Bytes(
+                  The_Array      : in     Byte_Array;
+                  Order          : in     Byte_Order)
+      return   Natural;
+
    --[Max]----------------------------------------------------------------------
    -- Purpose:
    -- Compares two Natural numbers and returns the greater.
@@ -491,10 +514,35 @@ package body CryptAda.Big_Naturals is
                   Remainder      : in out Digit;
                   Quotient       :    out Digit);
    pragma Inline(Div_Digits);
-   
+
    -----------------------------------------------------------------------------
    --[Body declared subprogram bodies]------------------------------------------
    -----------------------------------------------------------------------------
+
+   --[Byte_Array_Significant_Bytes]---------------------------------------------
+
+   function    Byte_Array_Significant_Bytes(
+                  The_Array      : in     Byte_Array;
+                  Order          : in     Byte_Order)
+      return   Natural
+   is
+   begin
+      if Order = Big_Endian then
+         for I in reverse The_Array'Range loop
+            if The_Array(I) /= 0 then
+               return (1 + I - The_Array'First);
+            end if;
+         end loop;
+      else
+         for I in The_Array'Range loop
+            if The_Array(I) /= 0 then
+               return (1 + The_Array'Last - I);
+            end if;
+         end loop;
+      end if;
+
+      return 0;
+   end Byte_Array_Significant_Bytes;
 
    --[Max]----------------------------------------------------------------------
 
@@ -700,7 +748,7 @@ package body CryptAda.Big_Naturals is
       else
          Result := A - Borrow;
          Result := Result - B;
-      
+
          if Result > (Digit_Last - B) then
             Borrow := 1;
          else
@@ -721,14 +769,14 @@ package body CryptAda.Big_Naturals is
       T              : Double_Digit;
       LT             : Digit;
    begin
-   
+
       -- A - (B * C)
-      
+
       T        := (Double_Digit(B) * Double_Digit(C));
       LT       := Lo_Digit(T);
-      
+
       Result   := A - Borrow;
-      
+
       if Result > (Digit_Last - Borrow) then
          Borrow := 1;
       else
@@ -736,14 +784,14 @@ package body CryptAda.Big_Naturals is
       end if;
 
       Result   := Result - LT;
-      
+
       if Result > (Digit_Last - LT) then
          Borrow := Borrow + 1;
       end if;
-      
+
       Borrow   := Borrow + Hi_Digit(T);
    end Subt_Mult_Digits;
-   
+
    --[Div_Digits]---------------------------------------------------------------
 
    procedure   Div_Digits(
@@ -757,33 +805,33 @@ package body CryptAda.Big_Naturals is
       Quotient    := Lo_Digit(T / Double_Digit(Divisor));
       Remainder   := Lo_Digit(T mod Double_Digit(Divisor));
    end Div_Digits;
-   
+
    -----------------------------------------------------------------------------
    --[Spec declared subprogram bodies]------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[1. Conversions To/From numeric string literals]---------------------------
+   --[1. Conversions from/to other representations to/from Digit_Sequences]-----
 
    --[String_2_Digit_Sequence]--------------------------------------------------
 
    procedure   String_2_Digit_Sequence(
                   The_String     : in     String;
-                  Base           : in     Literal_Base;
+                  Base           : in     Literal_Base := Literal_Base'Last;
                   Sequence       :    out Digit_Sequence;
                   SD             :    out Natural)
    is
       S              : constant String := Trim(The_String, Both);
       L              : Positive;
    begin
-   
+
       -- Output sequence must have length.
-      
+
       if Sequence'Length = 0 then
          raise CryptAda_Overflow_Error;
       end if;
-      
+
       Sequence := (others => 0);
-      
+
       -- If zero length return a zero digit sequence.
 
       if S'Length = 0 then
@@ -847,7 +895,7 @@ package body CryptAda.Big_Naturals is
          -- Now return result.
 
          SD := R_SD;
-        
+
          if R_SD > 0 then
             if Sequence'Length < R_SD then
                raise CryptAda_Overflow_Error;
@@ -863,7 +911,7 @@ package body CryptAda.Big_Naturals is
    procedure   Digit_Sequence_2_String(
                   The_Sequence      : in     Digit_Sequence;
                   SD                : in     Natural;
-                  Base              : in     Literal_Base;
+                  Base              : in     Literal_Base := Literal_Base'Last;
                   The_String        :    out Unbounded_String)
    is
       B              : constant Digit := Digit(Base);
@@ -878,9 +926,9 @@ package body CryptAda.Big_Naturals is
       pragma Assert(The_Sequence'Length >= SD, "Invalid Input length.");
 
       -- Initialize out value.
-      
+
       Set_Unbounded_String(The_String, "");
-      
+
       -- Check input significant digits.
 
       if SD = 0 then
@@ -900,7 +948,7 @@ package body CryptAda.Big_Naturals is
          Divide_Digit_And_Remainder(T, T_SD, B, T, T_SD, R);
          Append(S, Digit_Literal(R));
       end loop;
-         
+
       -- Now we must reverse the string obtained.
 
       declare
@@ -911,7 +959,134 @@ package body CryptAda.Big_Naturals is
          end loop;
       end;
    end Digit_Sequence_2_String;
-     
+
+   --[Byte_Array_2_Digit_Sequence]----------------------------------------------
+
+   procedure   Byte_Array_2_Digit_Sequence(
+                  The_Array      : in     Byte_Array;
+                  Order          : in     Byte_Order := Big_Endian;
+                  Sequence       :    out Digit_Sequence;
+                  SD             :    out Natural)
+   is
+      BA_SB          : constant Natural := Byte_Array_Significant_Bytes(The_Array, Order);
+      DS_SD          : Natural;
+      UFB            : Unpacked_Four_Bytes := (others => 0);
+      FB             : Four_Bytes;
+      R              : Natural;
+      I              : Positive;
+      J              : Positive;
+   begin
+      Sequence := (others => 0);
+
+      if BA_SB = 0 then
+         SD := 0;
+      else
+         DS_SD := 1 + (BA_SB / 4);
+
+         if (BA_SB mod 4) = 0 then
+            DS_SD := DS_SD - 1;
+         end if;
+
+         if DS_SD > Sequence'Length then
+            raise CryptAda_Overflow_Error;
+         end if;
+
+         R := BA_SB;
+
+         if Order = Big_Endian then
+            I := The_Array'First;
+            J := Sequence'First;
+
+            while R >= 4 loop
+               UFB         := The_Array(I .. I + 3);
+               FB          := Pack(UFB, Big_Endian);
+               Sequence(J) := Digit(FB);
+               I           := I + 4;
+               J           := J + 1;
+               R           := R - 4;
+            end loop;
+
+            if R > 0 then
+               UFB         := (others => 0);
+               UFB(1 .. R) := The_Array(I .. The_Array'Last);
+               FB          := Pack(UFB, Big_Endian);
+               Sequence(J) := Digit(FB);
+            end if;
+         else
+            I := The_Array'Last;
+            J := Sequence'First;
+
+            while R >= 4 loop
+               UFB         := The_Array(I - 3 .. I);
+               FB          := Pack(UFB, Little_Endian);
+               Sequence(J) := Digit(FB);
+               I           := I - 4;
+               J           := J + 1;
+               R           := R - 4;
+            end loop;
+
+            if R > 0 then
+               UFB         := (others => 0);
+               UFB(5 - R .. 4) := The_Array(The_Array'First .. I);
+               FB          := Pack(UFB, Little_Endian);
+               Sequence(J) := Digit(FB);
+            end if;
+         end if;
+
+         SD := DS_SD;
+      end if;
+   end Byte_Array_2_Digit_Sequence;
+
+   --[Digit_Sequence_2_Byte_Array]----------------------------------------------
+
+   procedure   Digit_Sequence_2_Byte_Array(
+                  The_Sequence      : in     Digit_Sequence;
+                  SD                : in     Natural;
+                  Order             : in     Byte_Order := Big_Endian;
+                  The_Vector        : in out Byte_Vector)
+   is
+      UFB            : Unpacked_Four_Bytes := (others => 0);
+      UFB_SB         : Natural;
+      J              : Natural;
+   begin
+      Clear(The_Vector);
+
+      if SD = 0 then
+         Append(The_Vector, 0);
+      else
+         if Order = Big_Endian then
+            J := The_Sequence'First;
+
+            for I in 1 .. SD - 1 loop
+               UFB := Unpack(Four_Bytes(The_Sequence(J)), Big_Endian);
+               Append(The_Vector, UFB);
+               J := J + 1;
+            end loop;
+
+            UFB := Unpack(Four_Bytes(The_Sequence(J)), Big_Endian);
+            UFB_SB := Byte_Array_Significant_Bytes(UFB, Big_Endian);
+
+            for I in 1 .. UFB_SB loop
+               Append(The_Vector, UFB(I));
+            end loop;
+         else
+            J := The_Sequence'First + SD - 1;
+
+            UFB := Unpack(Four_Bytes(The_Sequence(J)), Little_Endian);
+            UFB_SB := Byte_Array_Significant_Bytes(UFB, Little_Endian);
+
+            Append(The_Vector, UFB(5 - UFB_SB .. 4));
+            J := J - 1;
+
+            for I in reverse 1 .. SD - 1 loop
+               UFB := Unpack(Four_Bytes(The_Sequence(J)), Little_Endian);
+               Append(The_Vector, UFB);
+               J := J - 1;
+            end loop;
+         end if;
+      end if;
+   end Digit_Sequence_2_Byte_Array;
+
    --[2. Obtaining information from digit sequences]----------------------------
 
    --[Significant_Digits]-------------------------------------------------------
@@ -970,7 +1145,7 @@ package body CryptAda.Big_Naturals is
    end Is_Even;
 
    --[2. Setting to special values]---------------------------------------------
-   
+
    --[Set_To_Zero]--------------------------------------------------------------
 
    procedure   Set_To_Zero(
@@ -981,7 +1156,7 @@ package body CryptAda.Big_Naturals is
          The_Sequence := (others => 0);
       end if;
    end Set_To_Zero;
-                  
+
    --[Set_To_One]---------------------------------------------------------------
 
    procedure   Set_To_One(
@@ -993,7 +1168,7 @@ package body CryptAda.Big_Naturals is
          The_Sequence(The_Sequence'First) := 1;
       end if;
    end Set_To_One;
-   
+
    --[Set_To_Last]--------------------------------------------------------------
 
    procedure   Set_To_Last(
@@ -1010,7 +1185,7 @@ package body CryptAda.Big_Naturals is
          end if;
       end if;
    end Set_To_Last;
-   
+
    --[3. Comparing Digit_Sequences]---------------------------------------------
 
    --[Compare]------------------------------------------------------------------
@@ -1519,11 +1694,11 @@ package body CryptAda.Big_Naturals is
          I := Left'First + L - 1;
 
          Mult_Sum_Digits(Left(I), Left(I), T(K), C, T(K), C);
-         
+
          -- Increment Square's next digit with the carry.
 
          K := K + 1;
-         
+
          Sum_Digits(T(K), C, T(K), C);
 
          -- Increment square's index.
@@ -1535,7 +1710,7 @@ package body CryptAda.Big_Naturals is
 
       Set_Result(T, Result, Result_SD);
    end Square;
-   
+
    --[7. Division]--------------------------------------------------------------
 
    --[Divide_And_Remainder]-----------------------------------------------------
@@ -1562,13 +1737,13 @@ package body CryptAda.Big_Naturals is
       R              : Digit_Sequence(1 .. Dividend_SD) := (others => 0);
       Tmp            : Digit_Sequence(1 .. Divisor_SD + 1) := (others => 0);
       Tmp_SD         : Natural;
-      
+
       --[Internal Operations]---------------------------------------------------
       -- Next internal Digit_Sequence operations are only used in division body.
       -- The Digit_Sequences that accept as input parameters have always the
       -- same length.
       --------------------------------------------------------------------------
-      
+
       --[Shift_Left_Digit]------------------------------------------------------
 
       procedure   Shift_Left_Digit(
@@ -1637,11 +1812,10 @@ package body CryptAda.Big_Naturals is
       -- Argument special case:
       -- Divisor = 0         => Raise CryptAda_Division_By_Zero_Error
       -- Dividend = 0        => Quotient := 0, Remainder := 0
-      -- Dividend = 1        => Quotient := Dividend, Remainder := 0
       -- Dividend < Divisor  => Quotient := 0, Remainder := Dividend
       -- Dividend = Divisor  => Quotient := 1, Remainder := 0
       -- Divisor_SD = 1      => Perform Divide_Digit_And_Remainder
-      
+
       if Divisor_SD = 0 then
          raise CryptAda_Division_By_Zero_Error;
       end if;
@@ -1653,24 +1827,19 @@ package body CryptAda.Big_Naturals is
       end if;
 
       if Divisor_SD = 1 then
-         if Divisor(Divisor'First) = 1 then
-            Set_Result(Dividend, Quotient, Quotient_SD);
-            Set_Result(Zero_Digit_Sequence, Remainder, Remainder_SD);
-         else
-            declare
-               R        : Digit;
-            begin
-               Divide_Digit_And_Remainder(Dividend, Dividend_SD, Divisor(Divisor'First), Quotient, Quotient_SD, R);
-               Remainder := (others => 0);
-               
-               if R = 0 then
-                  Remainder_SD := 0;
-               else
-                  Remainder_SD := 1;
-                  Remainder(Remainder'First) := R;
-               end if;
-            end;
-         end if;
+         declare
+            R        : Digit;
+         begin
+            Divide_Digit_And_Remainder(Dividend, Dividend_SD, Divisor(Divisor'First), Quotient, Quotient_SD, R);
+            Remainder := (others => 0);
+
+            if R = 0 then
+               Remainder_SD := 0;
+            else
+               Remainder_SD := 1;
+               Remainder(Remainder'First) := R;
+            end if;
+         end;
 
          return;
       end if;
@@ -1691,16 +1860,16 @@ package body CryptAda.Big_Naturals is
       -- D.
 
       -- Step 1. Normalize Operands
-      --    Left shift both, dividend and divisor so that the most significant 
+      --    Left shift both, dividend and divisor so that the most significant
       --    bit of the most significant digit of the divisor be 1. So we compute
-      --    the shift amount (S) as the Digit_Size minus the number of 
+      --    the shift amount (S) as the Digit_Size minus the number of
       --    significant bits in the most significant digit of divisor.
       --
       --    This normalization step is, according to Knuth, necessary to make it
-      --    easy to guess the quotient digit with accuracy in each division 
+      --    easy to guess the quotient digit with accuracy in each division
       --    step.
       --
-      --    We perform the same left shift in both, dividend and divisor, so 
+      --    We perform the same left shift in both, dividend and divisor, so
       --    quotient will not be affected (we are multiplying both factors by
       --    2 ** S) but remainder needs to be de-normalized in a later step.
       --
@@ -1726,10 +1895,10 @@ package body CryptAda.Big_Naturals is
 
       for I in reverse 1 .. 1 + Dividend_SD - Divisor_SD loop
 
-         -- 3.1.  Underestimate quotient digit and subtract: 
-         --       If we've got a T such as T + 1 is 0, estimate is the first 
-         --       significant digit of the normalized dividend. 
-         --       Otherwise estimate is the quotient of the two first digits of 
+         -- 3.1.  Underestimate quotient digit and subtract:
+         --       If we've got a T such as T + 1 is 0, estimate is the first
+         --       significant digit of the normalized dividend.
+         --       Otherwise estimate is the quotient of the two first digits of
          --       the normalized dividend and (T + 1).
 
          if T = Digit_Last then
@@ -1742,20 +1911,20 @@ package body CryptAda.Big_Naturals is
          -- 3.2.  Multiply estimated quotient digit by normalized dividend.
 
          Multiply_Digit(RR, Divisor_SD, Q(I), Tmp, Tmp_SD);
-         
+
          -- 3.3.  Subtract from divisor the result of previous multiplication.
-         
+
          LL_SD := Significant_Digits(LL(I .. I + Divisor_SD));
          Subtract(LL(I .. I + Divisor_SD), LL_SD, Tmp, Tmp_SD, Tmp, Tmp_SD);
          LL(I .. I + Divisor_SD) := Tmp;
-         
+
          -- 3.4.  Correct initial estimate (if necessary) increasing quotient
          --       digit and subtracting divisor.
 
          LL_SD := Significant_Digits(LL(I .. I + Divisor_SD));
-         
+
          while ((LL(I + Divisor_SD) /= 0) or else (Compare(LL(I .. I + Divisor_SD), LL_SD, RR(1 .. Divisor_SD), Divisor_SD) /= Lower)) loop
-            Q(I) := Q(I) + 1;            
+            Q(I) := Q(I) + 1;
             Subtract(LL(I .. I + Divisor_SD), LL_SD, RR(1 .. Divisor_SD), Divisor_SD, Tmp, Tmp_SD);
             LL(I .. I + Divisor_SD) := Tmp;
             LL_SD := Significant_Digits(LL(I .. I + Divisor_SD));
@@ -1787,9 +1956,6 @@ package body CryptAda.Big_Naturals is
       R              : Digit_Sequence(1 .. Divisor_SD);
       R_SD           : Natural;
    begin
-
-      -- Perform division.
-
       Divide_And_Remainder(Dividend, Dividend_SD, Divisor, Divisor_SD, Quotient, Quotient_SD, R, R_SD);
    end Divide;
 
@@ -1806,14 +1972,11 @@ package body CryptAda.Big_Naturals is
       Q              : Digit_Sequence(1 .. Dividend_SD);
       Q_SD           : Natural;
    begin
-
-      -- Perform division.
-
       Divide_And_Remainder(Dividend, Dividend_SD, Divisor, Divisor_SD, Q, Q_SD, Remainder, Remainder_SD);
    end Remainder;
 
    --[Divide_Digit_And_Remainder]-----------------------------------------------
-                  
+
    procedure   Divide_Digit_And_Remainder(
                   Dividend       : in     Digit_Sequence;
                   Dividend_SD    : in     Natural;
@@ -1838,35 +2001,34 @@ package body CryptAda.Big_Naturals is
       end if;
 
       -- Check for special cases:
-      -- 1.    Dividend_SD = 0 (Dividend = 0):
-      --            Quotient    => 0
-      --            Remainder   => 0
-      -- 2.    Dividend_SD = 1;
-      -- 2.1.  Dividend > Divisor:
-      --            Perform single digit divission.
-      -- 2.2.  Dividend = Divisor
-      --            Quotient => 1
-      --            Modulo   => 0
-      -- 2.2.  Dividend < Divisor
-      --            Quotient => 0
-      --            Modulo   => Dividend
-      -- For Dividend_SD >= 2 => Perform divission.
+      -- Dividend_SD = 0         => Quotient := 0, Remainder := 0
+      -- Divisor = 1             => Quotient := Dividend, Remainder := 0
+      -- Dividend_SD = 1
+      --    Dividend > Divisor   => Perform single digit division and mod.
+      --    Dividend = Divisor   => Quotient := 1, Remainder := 0
+      --    Dividend < Divisor   => Quotient := 0, Remainder := Dividend
 
       if Dividend_SD = 0 then
-         Remainder := 0;
          Set_Result(Zero_Digit_Sequence, Quotient, Quotient_SD);
+         Remainder := 0;
+         return;
+      end if;
+
+      if Divisor = 1 then
+         Set_Result(Dividend, Quotient, Quotient_SD);
+         Remainder := 0;
          return;
       end if;
 
       if Dividend_SD = 1 then
-         if Dividend(1) > Divisor then
-            Q(1)        := Dividend(1) / Divisor;
-            Remainder   := Dividend(1) mod Divisor;
+         if Dividend(Dividend'First) > Divisor then
+            Q(1)        := Dividend(Dividend'First) / Divisor;
+            Remainder   := Dividend(Dividend'First) mod Divisor;
          elsif Dividend(Dividend'First) = Divisor then
             Q(1)        := 1;
             Remainder   := 0;
          else
-            Remainder   := Dividend(1);
+            Remainder   := Dividend(Dividend'First);
          end if;
 
          Set_Result(Q, Quotient, Quotient_SD);
@@ -1876,16 +2038,44 @@ package body CryptAda.Big_Naturals is
       -- Dividend has 2 or more significant digits, we must perform division.
 
       J := Q'Last;
-      
+
       for I in reverse Dividend'First .. Dividend'First + Dividend_SD - 1 loop
          Div_Digits(Dividend(I), Divisor, R, Q(J));
          J := J - 1;
       end loop;
 
-      --|   Set result.
+      -- Set result.
 
       Remainder := R;
       Set_Result(Q, Quotient, Quotient_SD);
    end Divide_Digit_And_Remainder;
-   
+
+   --[Divide_Digit]-------------------------------------------------------------
+
+   procedure   Divide_Digit(
+                  Dividend       : in     Digit_Sequence;
+                  Dividend_SD    : in     Natural;
+                  Divisor        : in     Digit;
+                  Quotient       :    out Digit_Sequence;
+                  Quotient_SD    :    out Natural)
+   is
+      R              : Digit;
+   begin
+      Divide_Digit_And_Remainder(Dividend, Dividend_SD, Divisor, Quotient, Quotient_SD, R);
+   end Divide_Digit;
+
+   --[Remainder_Digit]----------------------------------------------------------
+
+   procedure   Remainder_Digit(
+                  Dividend       : in     Digit_Sequence;
+                  Dividend_SD    : in     Natural;
+                  Divisor        : in     Digit;
+                  Remainder      :    out Digit)
+   is
+      Q              : Digit_Sequence(1 .. Dividend_SD);
+      Q_SD           : Natural;
+   begin
+      Divide_Digit_And_Remainder(Dividend, Dividend_SD, Divisor, Q, Q_SD, Remainder);
+   end Remainder_Digit;
+
 end CryptAda.Big_Naturals;

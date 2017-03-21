@@ -95,7 +95,8 @@ OBJS     =  cryptada.o \
             cryptada-random-generators.o \
             cryptada-random-generators-rsaref.o \
             cryptada-random-generators-caprng.o \
-            cryptada-big_naturals.o 
+            cryptada-big_naturals.o \
+            cryptada-big_naturals-bounded.o 
 
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -279,6 +280,10 @@ cryptada-big_naturals.o: $(BNDIR)/cryptada-big_naturals.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
+cryptada-big_naturals-bounded.o: $(BNDIR)/cryptada-big_naturals-bounded.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+    
 #>>>[Targets]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 all: objs

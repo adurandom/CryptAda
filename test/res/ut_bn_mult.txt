@@ -6,7 +6,7 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.Mult
 Description              : Unit test driver for CryptAda.Big_Naturals multiplication & squaring functionality.
-Started                  : 2017/03/20 - 21:38:06
+Started                  : 2017/03/21 - 07:34:56
 ================================================================================
 [I] This test driver will validate Digit_Sequences multiplication and squaring
 Next elements will be tested:
@@ -17,7 +17,7 @@ Next elements will be tested:
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Overflow conditions in multiplication
-Started         : 2017/03/20 - 21:38:06
+Started         : 2017/03/21 - 07:34:56
 --------------------------------------------------------------------------------
 [I] Interfaces exercised:
 - Multiply()
@@ -28,13 +28,13 @@ Shall raise CryptAda_Overflow_Error
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:06
+Finished        : 2017/03/21 - 07:34:56
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Basic multiply operations
-Started         : 2017/03/20 - 21:38:06
+Started         : 2017/03/21 - 07:34:56
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Multiply()
@@ -101,13 +101,13 @@ Values match
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:06
+Finished        : 2017/03/21 - 07:34:56
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Testing null element
-Started         : 2017/03/20 - 21:38:06
+Started         : 2017/03/21 - 07:34:56
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Multiply()
@@ -117,13 +117,13 @@ Performing  100000 iterations, multiplying Zero_Digit_Sequence to random digit s
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:06
+Finished        : 2017/03/21 - 07:34:56
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Testing identity multiplication.
-Started         : 2017/03/20 - 21:38:06
+Started         : 2017/03/21 - 07:34:56
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Multiply()
@@ -133,13 +133,13 @@ Performing  100000 iterations, multiplying One_Digit_Sequence to random digit se
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:06
+Finished        : 2017/03/21 - 07:34:56
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Testing correctness of multiplication by using RSA known factors
-Started         : 2017/03/20 - 21:38:06
+Started         : 2017/03/21 - 07:34:56
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
     - Multiply()
@@ -310,13 +310,13 @@ Significant Digits:  16
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:06
+Finished        : 2017/03/21 - 07:34:56
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : Testing multiplication conmutative property
-Started         : 2017/03/20 - 21:38:06
+Started         : 2017/03/21 - 07:34:56
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
     - Multiply()
@@ -326,13 +326,13 @@ Performing  100000 iterations with random Digit_Sequences
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:06
+Finished        : 2017/03/21 - 07:34:56
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
 Description     : Testing multiplication associative property
-Started         : 2017/03/20 - 21:38:06
+Started         : 2017/03/21 - 07:34:56
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
     - Multiply()
@@ -342,13 +342,13 @@ Started         : 2017/03/20 - 21:38:06
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:06
+Finished        : 2017/03/21 - 07:34:57
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 8
 Description     : Testing multiplication distributive property respect addition
-Started         : 2017/03/20 - 21:38:06
+Started         : 2017/03/21 - 07:34:57
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
     - Multiply()
@@ -359,13 +359,13 @@ Started         : 2017/03/20 - 21:38:06
 --------------------------------------------------------------------------------
 Test Case Number: 8
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:06
+Finished        : 2017/03/21 - 07:34:57
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 9
 Description     : Overflow conditions in Multiply_Digit
-Started         : 2017/03/20 - 21:38:06
+Started         : 2017/03/21 - 07:34:57
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Multiply_Digit()
@@ -376,13 +376,13 @@ Shall raise CryptAda_Overflow_Error
 --------------------------------------------------------------------------------
 Test Case Number: 9
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:06
+Finished        : 2017/03/21 - 07:34:57
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 10
 Description     : Basic Multiply_Digit operations
-Started         : 2017/03/20 - 21:38:06
+Started         : 2017/03/21 - 07:34:57
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Multiply_Digit()
@@ -439,13 +439,13 @@ Performing  100000 iterations, multiplying 1 by random digit sequences
 --------------------------------------------------------------------------------
 Test Case Number: 10
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:06
+Finished        : 2017/03/21 - 07:34:57
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 11
 Description     : Bulk Multiply_Digit operations
-Started         : 2017/03/20 - 21:38:06
+Started         : 2017/03/21 - 07:34:57
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Multiply_Digit()
@@ -456,13 +456,13 @@ Performing  100000 iterations.
 --------------------------------------------------------------------------------
 Test Case Number: 11
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:06
+Finished        : 2017/03/21 - 07:34:57
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 12
 Description     : Overflow conditions in squaring
-Started         : 2017/03/20 - 21:38:06
+Started         : 2017/03/21 - 07:34:57
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Square()
@@ -473,13 +473,13 @@ Shall raise CryptAda_Overflow_Error
 --------------------------------------------------------------------------------
 Test Case Number: 12
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:06
+Finished        : 2017/03/21 - 07:34:57
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 13
 Description     : Basic square operations
-Started         : 2017/03/20 - 21:38:06
+Started         : 2017/03/21 - 07:34:57
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Square()
@@ -515,13 +515,13 @@ Values match
 --------------------------------------------------------------------------------
 Test Case Number: 13
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:06
+Finished        : 2017/03/21 - 07:34:57
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 14
 Description     : Cross checking Square with Multiply
-Started         : 2017/03/20 - 21:38:06
+Started         : 2017/03/21 - 07:34:57
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
     - Square()
@@ -532,11 +532,11 @@ Started         : 2017/03/20 - 21:38:06
 --------------------------------------------------------------------------------
 Test Case Number: 14
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 21:38:07
+Finished        : 2017/03/21 - 07:34:57
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.Mult
-Finished                 : 2017/03/20 - 21:38:07
+Finished                 : 2017/03/21 - 07:34:57
 ================================================================================

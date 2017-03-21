@@ -78,7 +78,9 @@
 --------------------------------------------------------------------------------
 
 with Ada.Strings.Unbounded;
+
 with CryptAda.Pragmatics;
+with CryptAda.Pragmatics.Byte_Vectors;
 
 package CryptAda.Big_Naturals is
 
@@ -88,7 +90,7 @@ package CryptAda.Big_Naturals is
 
    --[Digit]--------------------------------------------------------------------
    -- Digit is the type for the digits used for multiprecission arithmetic.
-   -- It shall be a modular type derived from those defined in 
+   -- It shall be a modular type derived from those defined in
    -- CryptAda.Pragmatics. There are some limitations to the type to choose
    -- since some internal operations (eg. multiplication) need a double-sized
    -- type to hold the result.
@@ -101,25 +103,25 @@ package CryptAda.Big_Naturals is
    --[Digit_Sequence]-----------------------------------------------------------
    -- Unconstrained array, positive indexed of Digits.
    --
-   -- Digit sequences will follow the convention I've called Little_Endian. 
+   -- Digit sequences will follow the convention I've called Little_Endian.
    -- Significance of digits increases as the index of the sequence increases.
    -----------------------------------------------------------------------------
-   
+
    type Digit_Sequence is array(Positive range <>) of Digit;
    pragma Pack(Digit_Sequence);
 
    --[Literal_Base]-------------------------------------------------------------
-   -- This type specifies the range of allowed bases for string representations 
-   -- of Digit_Sequences. String representations of Digit_Sequences are numeric 
-   -- literals that are represented in big endian fashion that is the lowest the 
-   -- index in the string the highest significance of the digits. (Usual 
+   -- This type specifies the range of allowed bases for string representations
+   -- of Digit_Sequences. String representations of Digit_Sequences are numeric
+   -- literals that are represented in big endian fashion that is the lowest the
+   -- index in the string the highest significance of the digits. (Usual
    -- convention when printing numbers).
    --
-   -- Those literals could contain any number of leading or trailing blanks but 
-   -- no blanks or other separators are allowed between literal digits. Case of 
+   -- Those literals could contain any number of leading or trailing blanks but
+   -- no blanks or other separators are allowed between literal digits. Case of
    -- characters that represent digits greater than 9 is irrelevant.
    -----------------------------------------------------------------------------
-   
+
    subtype Literal_Base is Positive range 2 .. 16;
 
    -----------------------------------------------------------------------------
@@ -147,47 +149,47 @@ private
    --[Implementation Notes]-----------------------------------------------------
    -- CryptAda provides two different implementations of big natural numbers:
    --
-   -- o  Bounded_Big_Naturals are big natural numbers with a fixed maximum 
-   --    number of digits that is provided, as a generic parameter, in the 
+   -- o  Bounded_Big_Naturals are big natural numbers with a fixed maximum
+   --    number of digits that is provided, as a generic parameter, in the
    --    instantiation of the package CryptAda.Big_Naturals.Bounded.
    --
-   -- o  Unbounded_Big_Naturals that are big natural numbers with an arbitrary 
-   --    number of digits. Unbounded_Big_Natural numbers are defined in the 
+   -- o  Unbounded_Big_Naturals that are big natural numbers with an arbitrary
+   --    number of digits. Unbounded_Big_Natural numbers are defined in the
    --    package CryptAda.Big_Naturals.Unbounded.
    --
-   -- Both packages use internally Digit_Sequences to store the sequences of 
-   -- digits that conform the represented number. This private part provides 
-   -- the operation specifications on Digit_Sequences that are used by both 
-   -- child packages as the basis of the functionality delivered. Thus, child 
+   -- Both packages use internally Digit_Sequences to store the sequences of
+   -- digits that conform the represented number. This private part provides
+   -- the operation specifications on Digit_Sequences that are used by both
+   -- child packages as the basis of the functionality delivered. Thus, child
    -- packages deal with the memory handling and representation of Big_Natural
-   -- values (of any flavour) and this package deals with the algorithmic and 
+   -- values (of any flavour) and this package deals with the algorithmic and
    -- arithmetics behind the scenes.
    --
-   -- Most of the operations implemented in this package are in procedure form 
-   -- and accept one or more Digit_Sequences as in parameters and return one or 
-   -- more Digit_Sequences as out parameters. To ease the tasks performed in 
-   -- this package and since next operations are only used by child packages 
+   -- Most of the operations implemented in this package are in procedure form
+   -- and accept one or more Digit_Sequences as in parameters and return one or
+   -- more Digit_Sequences as out parameters. To ease the tasks performed in
+   -- this package and since next operations are only used by child packages
    -- some conventions that otherwise could be dangerous are set:
    --
    -- o  Both in and out Digit_Sequence's indexes are always 1 based.
-   -- o  For both in and out Digit_Sequences an additional Natural parameter with 
-   --    the same mode indicates the number of significant digits in the 
+   -- o  For both in and out Digit_Sequences an additional Natural parameter with
+   --    the same mode indicates the number of significant digits in the
    --    corresponding Digit_Sequences.
    --
-   -- This package operations use internal Digit_Sequences to hold  intermediate 
-   -- computation results and the setting of the out parameters is made once the 
-   -- operation computation ends. When computation result could not be 
-   -- represented in the out parameter an ACF_Overflow_Error exception will be 
+   -- This package operations use internal Digit_Sequences to hold  intermediate
+   -- computation results and the setting of the out parameters is made once the
+   -- operation computation ends. When computation result could not be
+   -- represented in the out parameter an ACF_Overflow_Error exception will be
    -- raised.
    -----------------------------------------------------------------------------
-   
+
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
    --[Compare_Result]-----------------------------------------------------------
-   -- Enumerated type used for the result of Digit_Sequence comparisons. The 
-   -- identifiers and their meaning are obvious so a description is deemed 
+   -- Enumerated type used for the result of Digit_Sequence comparisons. The
+   -- identifiers and their meaning are obvious so a description is deemed
    -- unnecessary.
    -----------------------------------------------------------------------------
 
@@ -200,7 +202,7 @@ private
    --[Zero_Digit_Sequence]------------------------------------------------------
    -- Digit_Sequence with zero value.
    -----------------------------------------------------------------------------
-   
+
    Zero_Digit_Sequence           : constant Digit_Sequence(1 .. 1) := (1 => 0);
 
    --[One_Digit_Sequence]-------------------------------------------------------
@@ -220,11 +222,11 @@ private
    --[Subprogram Specifications]------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[1. Conversions from/to string numeric literals]---------------------------
+   --[1. Conversions from/to other representations to/from Digit_Sequences]-----
 
    --[String_2_Digit_Sequence]--------------------------------------------------
    -- Purpose:
-   -- Converts a string numeric literal in any base supported into the 
+   -- Converts a string numeric literal in any base supported into the
    -- corresponding Digit_Sequence.
    -----------------------------------------------------------------------------
    -- Arguments:
@@ -248,13 +250,13 @@ private
 
    procedure   String_2_Digit_Sequence(
                   The_String     : in     String;
-                  Base           : in     Literal_Base;
+                  Base           : in     Literal_Base := Literal_Base'Last;
                   Sequence       :    out Digit_Sequence;
                   SD             :    out Natural);
 
    --[Digit_Sequence_2_String]--------------------------------------------------
    -- Purpose:
-   -- Converts a Digit_Sequence into a string numeric literal in any base 
+   -- Converts a Digit_Sequence into a string numeric literal in any base
    -- supported.
    -----------------------------------------------------------------------------
    -- Arguments:
@@ -273,17 +275,67 @@ private
    procedure   Digit_Sequence_2_String(
                   The_Sequence      : in     Digit_Sequence;
                   SD                : in     Natural;
-                  Base              : in     Literal_Base;
+                  Base              : in     Literal_Base := Literal_Base'Last;
                   The_String        :    out Ada.Strings.Unbounded.Unbounded_String);
-   
+
+   --[Byte_Array_2_Digit_Sequence]----------------------------------------------
+   -- Purpose:
+   -- Converts a Byte_Array into a digit sequence.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Array            Byte_Array containing the bytes of the
+   --                      Digit_Sequence.
+   -- Order                Byte_Order specifying the order of bytes in the
+   --                      digits of the Digit_Sequence.
+   -- Sequence             Digit_Sequence resulting from conversion.
+   -- SD                   Number of significant digits in Sequence.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CryptAda_Overflow_Error if Sequence can not hold the resulting digit
+   -- sequence.
+   -----------------------------------------------------------------------------
+
+   procedure   Byte_Array_2_Digit_Sequence(
+                  The_Array      : in     CryptAda.Pragmatics.Byte_Array;
+                  Order          : in     CryptAda.Pragmatics.Byte_Order := CryptAda.Pragmatics.Big_Endian;
+                  Sequence       :    out Digit_Sequence;
+                  SD             :    out Natural);
+
+   --[Digit_Sequence_2_Byte_Array]----------------------------------------------
+   -- Purpose:
+   -- Obtains the bytes in a Digit_Sequence
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Sequence         Digit sequence to obtain the bytes form.
+   -- SD                   Significant digits in The_Sequence.
+   -- Order                Byte_Order value specifying the ordering of bytes in
+   --                      the resulting byte array.
+   -- The_Vector           Byte_Vector resulting of the conversion
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None
+   -----------------------------------------------------------------------------
+
+   procedure   Digit_Sequence_2_Byte_Array(
+                  The_Sequence      : in     Digit_Sequence;
+                  SD                : in     Natural;
+                  Order             : in     CryptAda.Pragmatics.Byte_Order := CryptAda.Pragmatics.Big_Endian;
+                  The_Vector        : in out CryptAda.Pragmatics.Byte_Vectors.Byte_Vector);
+
    --[2. Obtaining information from digit sequences]----------------------------
-   
+
    --[Significant_Digits]-------------------------------------------------------
    -- Purpose:
    -- Returns the number of significant digits in a digit sequence.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- In_Sequence          Digit_Sequence to obtain the number of significant 
+   -- In_Sequence          Digit_Sequence to obtain the number of significant
    --                      digits from.
    -----------------------------------------------------------------------------
    -- Returned value:
@@ -303,7 +355,7 @@ private
    -- Returns the number of significant bits in a digit sequence.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- In_Sequence          Digit_Sequence to obtain the number of significant 
+   -- In_Sequence          Digit_Sequence to obtain the number of significant
    --                      bits from.
    -- In_Sequence_SD       Number of significant digits In_Sequence.
    -----------------------------------------------------------------------------
@@ -342,7 +394,7 @@ private
    pragma Inline(Is_Even);
 
    --[3. Setting to special values]---------------------------------------------
-   
+
    --[Set_To_Zero]--------------------------------------------------------------
    -- Purpose:
    -- Sets a digit sequence to Zero value.
@@ -359,7 +411,7 @@ private
 
    procedure   Set_To_Zero(
                   The_Sequence      : in out Digit_Sequence);
-                  
+
    --[Set_To_One]---------------------------------------------------------------
    -- Purpose:
    -- Sets a digit sequence to One value.
@@ -376,7 +428,7 @@ private
 
    procedure   Set_To_One(
                   The_Sequence      : in out Digit_Sequence);
-                  
+
    --[Set_To_Last]--------------------------------------------------------------
    -- Purpose:
    -- Sets the specified number of digits, starting from the lest significant
@@ -384,8 +436,8 @@ private
    -----------------------------------------------------------------------------
    -- Arguments:
    -- The_Sequence         Digit_Sequence to set.
-   -- For_SD               Number of significant digits to set. If For_SD is 
-   --                      greater than The_Sequence'Length, all 
+   -- For_SD               Number of significant digits to set. If For_SD is
+   --                      greater than The_Sequence'Length, all
    --                      The_Sequence'Length digits will be set to Digit_Last.
    -----------------------------------------------------------------------------
    -- Returned value:
@@ -398,9 +450,9 @@ private
    procedure   Set_To_Last(
                   The_Sequence      : in out Digit_Sequence;
                   For_SD            : in     Natural);
-                  
+
    --[4. Comparing Digit_Sequences]---------------------------------------------
-   
+
    --[Compare]------------------------------------------------------------------
    -- Purpose:
    -- Compares two Digit_Sequence and returns the comparison results.
@@ -424,7 +476,7 @@ private
                   Right          : in     Digit_Sequence;
                   Right_SD       : in     Natural)
       return   Compare_Result;
-   
+
    --[5. Addition and subtraction]----------------------------------------------
 
    --[Add]----------------------------------------------------------------------
@@ -443,10 +495,10 @@ private
    -- N/A.
    -----------------------------------------------------------------------------
    -- Exceptions:
-   -- CryptAda_Overflow_Error if the number of significant digits of the 
+   -- CryptAda_Overflow_Error if the number of significant digits of the
    -- resulting digit sequence is greater than Sum'Length.
    -----------------------------------------------------------------------------
-   
+
    procedure   Add(
                   Left           : in     Digit_Sequence;
                   Left_SD        : in     Natural;
@@ -470,10 +522,10 @@ private
    -- N/A.
    -----------------------------------------------------------------------------
    -- Exceptions:
-   -- CryptAda_Overflow_Error if the number of significant digits of the 
+   -- CryptAda_Overflow_Error if the number of significant digits of the
    -- resulting digit sequence is greater than Sum'Length.
    -----------------------------------------------------------------------------
-   
+
    procedure   Add_Digit(
                   Left           : in     Digit_Sequence;
                   Left_SD        : in     Natural;
@@ -497,7 +549,7 @@ private
    -- N/A.
    -----------------------------------------------------------------------------
    -- Exceptions:
-   -- CryptAda_Overflow_Error if the number of significant digits of the 
+   -- CryptAda_Overflow_Error if the number of significant digits of the
    -- resulting digit sequence is greater than Difference'Length.
    -- CryptAda_Underflow_Error if Subtrahend is greater than Minuend.
    -----------------------------------------------------------------------------
@@ -512,7 +564,7 @@ private
 
    --[Subtract_Digit]-----------------------------------------------------------
    -- Purpose:
-   -- Subtracts a Digit from a Digit_Sequence and returns the resulting 
+   -- Subtracts a Digit from a Digit_Sequence and returns the resulting
    -- difference.
    -----------------------------------------------------------------------------
    -- Arguments:
@@ -526,7 +578,7 @@ private
    -- N/A.
    -----------------------------------------------------------------------------
    -- Exceptions:
-   -- CryptAda_Overflow_Error if the number of significant digits of the 
+   -- CryptAda_Overflow_Error if the number of significant digits of the
    -- resulting digit sequence is greater than Difference'Length.
    -- CryptAda_Underflow_Error if Subtrahend is greater than Minuend.
    -----------------------------------------------------------------------------
@@ -545,7 +597,7 @@ private
    -- Computes and returns the product of two digit sequences.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Left                 First Digit_Sequence to multiply.     
+   -- Left                 First Digit_Sequence to multiply.
    -- Left_SD              Significant digits in Left.
    -- Right                Second Digit_Sequence to multiply.
    -- Right_SD             Significant digits in Right.
@@ -556,7 +608,7 @@ private
    -- N/A.
    -----------------------------------------------------------------------------
    -- Exceptions:
-   -- CryptAda_Overflow_Error if the number of significant digits of the 
+   -- CryptAda_Overflow_Error if the number of significant digits of the
    -- resulting digit sequence is greater than Product'Length.
    -----------------------------------------------------------------------------
 
@@ -573,7 +625,7 @@ private
    -- Computes and returns the product of a digit sequence by a digit.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Left                 Digit_Sequence to multiply.     
+   -- Left                 Digit_Sequence to multiply.
    -- Left_SD              Significant digits in Left.
    -- Right                Digit to multiply.
    -- Product              Resulting product.
@@ -583,10 +635,10 @@ private
    -- N/A.
    -----------------------------------------------------------------------------
    -- Exceptions:
-   -- CryptAda_Overflow_Error if the number of significant digits of the 
+   -- CryptAda_Overflow_Error if the number of significant digits of the
    -- resulting digit sequence is greater than Product'Length.
    -----------------------------------------------------------------------------
-                  
+
    procedure   Multiply_Digit(
                   Left           : in     Digit_Sequence;
                   Left_SD        : in     Natural;
@@ -599,7 +651,7 @@ private
    -- Squares a Digit_Sequence (Left ** 2).
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Left                 Digit_Sequence to square.     
+   -- Left                 Digit_Sequence to square.
    -- Left_SD              Significant digits in Left.
    -- Result               Resulting Digit_Sequence.
    -- Result_SD            Significant digits in Result.
@@ -608,7 +660,7 @@ private
    -- N/A.
    -----------------------------------------------------------------------------
    -- Exceptions:
-   -- CryptAda_Overflow_Error if the number of significant digits of the 
+   -- CryptAda_Overflow_Error if the number of significant digits of the
    -- resulting digit sequence is greater than Result'Length.
    -----------------------------------------------------------------------------
 
@@ -617,9 +669,9 @@ private
                   Left_SD        : in     Natural;
                   Result         :    out Digit_Sequence;
                   Result_SD      :    out Natural);
-                  
+
    --[7. Division]--------------------------------------------------------------
-                  
+
    --[Divide_And_Remainder]-----------------------------------------------------
    -- Purpose:
    -- Performs the following operations on Digit_Sequences:
@@ -641,7 +693,7 @@ private
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- CryptAda_Division_By_Zero_Error if divisor is zero.
-   -- CryptAda_Overflow_Error if the number of significant digits of either 
+   -- CryptAda_Overflow_Error if the number of significant digits of either
    -- Quotient or Remainder is greater than the respective lengths of the
    -- arguments provided.
    -----------------------------------------------------------------------------
@@ -674,7 +726,7 @@ private
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- CryptAda_Division_By_Zero_Error if divisor is zero.
-   -- CryptAda_Overflow_Error if the number of significant digits of either 
+   -- CryptAda_Overflow_Error if the number of significant digits of either
    -- Quotient or Remainder is greater than the respective lengths of the
    -- arguments provided.
    -----------------------------------------------------------------------------
@@ -705,7 +757,7 @@ private
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- CryptAda_Division_By_Zero_Error if divisor is zero.
-   -- CryptAda_Overflow_Error if the number of significant digits of either 
+   -- CryptAda_Overflow_Error if the number of significant digits of either
    -- Quotient or Remainder is greater than the respective lengths of the
    -- arguments provided.
    -----------------------------------------------------------------------------
@@ -721,8 +773,8 @@ private
    --[Divide_Digit_And_Remainder]-----------------------------------------------
    -- Purpose:
    -- Performs the following operation on Digit_Sequences:
-   --    Quotient    := Dividend / Divisor
-   --    Remainder   := Dividend mod Divisor
+   --    Quotient    := Dividend / Divisor (Digit)
+   --    Remainder   := Dividend mod Divisor (Digit)
    -----------------------------------------------------------------------------
    -- Arguments:
    -- Dividend             Digit_Sequence dividend of operation.
@@ -730,19 +782,17 @@ private
    -- Divisor              Digit divisor of operation.
    -- Quotient             Digit_Sequence that is the obtained quotient.
    -- Quotient_SD          Significant digits in Quotient.
-   -- Remainder            Digit_Sequence that is the obtained remainder.
-   -- Remainder_SD         Significant digits in Remainder.
+   -- Remainder            Digit that is the obtained remainder.
    -----------------------------------------------------------------------------
    -- Returned value:
    -- N/A.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- CryptAda_Division_By_Zero_Error if divisor is zero.
-   -- CryptAda_Overflow_Error if the number of significant digits of either 
-   -- Quotient or Remainder is greater than the respective lengths of the
-   -- arguments provided.
+   -- CryptAda_Overflow_Error if the number of significant digits in Quotient
+   -- is greater than the length of the argument provided.
    -----------------------------------------------------------------------------
-                  
+
    procedure   Divide_Digit_And_Remainder(
                   Dividend       : in     Digit_Sequence;
                   Dividend_SD    : in     Natural;
@@ -750,6 +800,58 @@ private
                   Quotient       :    out Digit_Sequence;
                   Quotient_SD    :    out Natural;
                   Remainder      :    out Digit);
-                                                      
+
+   --[Divide_Digit]-------------------------------------------------------------
+   -- Purpose:
+   -- Performs the following operation on Digit_Sequences:
+   --    Quotient    := Dividend / Divisor (Digit)
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- Dividend             Digit_Sequence dividend of operation.
+   -- Dividend_SD          Significant digits in Dividend.
+   -- Divisor              Digit divisor of operation.
+   -- Quotient             Digit_Sequence that is the obtained quotient.
+   -- Quotient_SD          Significant digits in Quotient.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CryptAda_Division_By_Zero_Error if divisor is zero.
+   -- CryptAda_Overflow_Error if the number of significant digits in Quotient
+   -- is greater than the length of the argument provided.
+   -----------------------------------------------------------------------------
+
+   procedure   Divide_Digit(
+                  Dividend       : in     Digit_Sequence;
+                  Dividend_SD    : in     Natural;
+                  Divisor        : in     Digit;
+                  Quotient       :    out Digit_Sequence;
+                  Quotient_SD    :    out Natural);
+
+   --[Remainder_Digit]----------------------------------------------------------
+   -- Purpose:
+   -- Performs the following operation on Digit_Sequences:
+   --    Remainder   := Dividend mod Divisor (Digit)
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- Dividend             Digit_Sequence dividend of operation.
+   -- Dividend_SD          Significant digits in Dividend.
+   -- Divisor              Digit divisor of operation.
+   -- Remainder            Digit that is the obtained remainder.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CryptAda_Division_By_Zero_Error if divisor is zero.
+   -----------------------------------------------------------------------------
+
+   procedure   Remainder_Digit(
+                  Dividend       : in     Digit_Sequence;
+                  Dividend_SD    : in     Natural;
+                  Divisor        : in     Digit;
+                  Remainder      :    out Digit);
+
 end CryptAda.Big_Naturals;
 
