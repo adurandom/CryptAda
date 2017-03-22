@@ -23,6 +23,7 @@ Code is organized in different directories under `src` directory.
 
 Subdir name|Description
 -----------|-----------
+base|Base packages for testing
 
 
 
