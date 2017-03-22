@@ -41,11 +41,12 @@ ENCSDIR     =  $(SRCDIR)/encoders
 DIGDIR      =  $(SRCDIR)/digests
 RNDDIR      =  $(SRCDIR)/random
 BNDIR       =  $(SRCDIR)/bn
+CIPHDIR     =  $(SRCDIR)/ciphers
 
 #>>>[Compilation]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 ADACC       =  gnatmake -c 
-SOURCEDIRS  =  -I$(BASEDIR)/ -I$(NAMESDIR)/ -I$(PRAGMADIR)/ -I$(ENCSDIR)/ -I$(DIGDIR)/ -I$(RNDDIR)/ -I$(BNDIR)/
+SOURCEDIRS  =  -I$(BASEDIR)/ -I$(NAMESDIR)/ -I$(PRAGMADIR)/ -I$(ENCSDIR)/ -I$(DIGDIR)/ -I$(RNDDIR)/ -I$(BNDIR)/ -I$(CIPHDIR)/
 CFLAGS      =  $(SOURCEDIRS) -D $(OBJDIR) -O3 -gnat05 -gnata -gnatn -gnatwa
 
 #>>>[Delete command]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -96,7 +97,11 @@ OBJS     =  cryptada.o \
             cryptada-random-generators-rsaref.o \
             cryptada-random-generators-caprng.o \
             cryptada-big_naturals.o \
-            cryptada-big_naturals-bounded.o 
+            cryptada-big_naturals-bounded.o \
+            cryptada-ciphers.o \
+            cryptada-ciphers-keys.o \
+            cryptada-ciphers-block_ciphers.o \
+            cryptada-ciphers-block_ciphers-des.o
 
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -283,7 +288,25 @@ cryptada-big_naturals.o: $(BNDIR)/cryptada-big_naturals.adb
 cryptada-big_naturals-bounded.o: $(BNDIR)/cryptada-big_naturals-bounded.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
-    
+
+# Ciphers pakages
+
+cryptada-ciphers.o: $(CIPHDIR)/cryptada-ciphers.ads
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-ciphers-keys.o: $(CIPHDIR)/cryptada-ciphers-keys.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-ciphers-block_ciphers.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-ciphers-block_ciphers-des.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers-des.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+        
 #>>>[Targets]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 all: objs

@@ -58,4 +58,10 @@ package CryptAda.Exceptions is
    CryptAda_Generator_Not_Started_Error   : exception;   -- Attempting to use a non-started random generator.
    CryptAda_Generator_Need_Seeding_Error  : exception;   -- Attempting to use a non-seeded random generator.
 
+   --[Cipher specific exceptions]-----------------------------------------------
+
+   CryptAda_Uninitialized_Cipher_Error    : exception;   -- Cipher is not initialized.
+   CryptAda_Invalid_Key_Error             : exception;   -- Cipher key is not valid.
+   CryptAda_Invalid_Block_Length_Error    : exception;   -- Invalid block length.
+   
 end CryptAda.Exceptions;

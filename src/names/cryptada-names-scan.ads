@@ -122,4 +122,21 @@ package CryptAda.Names.SCAN is
          others            => Anonymous_Algorithm'Access
       );
 
+   --[Block Cipher Names]-------------------------------------------------------
+   -- Next constants identify the block ciphers algorithms according to
+   -- SCAN (Standard Cryptographic Algorithm Naming) naming schema.
+   -----------------------------------------------------------------------------
+
+   SCAN_DES                      : aliased constant String := "DES";
+   
+   --[SCAN_Block_Ciphers]-------------------------------------------------------
+   -- Array of SCAN names of block cipher algorithms.
+   -----------------------------------------------------------------------------
+
+   SCAN_Block_Ciphers            : constant array(Block_Cipher_Id) of Algorithm_Name_Ref :=
+      (
+         BC_DES            => SCAN_DES'Access,
+         others            => Anonymous_Algorithm'Access
+      );
+      
 end CryptAda.Names.SCAN;

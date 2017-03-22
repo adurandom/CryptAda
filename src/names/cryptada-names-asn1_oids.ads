@@ -120,4 +120,18 @@ package CryptAda.Names.ASN1_OIDs is
          others            => Anonymous_Algorithm'Access
       );
 
+   --[ASN1 OIDS for Block Ciphers]----------------------------------------------
+   -- Next constants provide the ASN1 OIDs for the block ciphers implemented in
+   -- CryptAda.
+   -----------------------------------------------------------------------------
+
+   --[ASN1_OIDs_Block_Ciphers]--------------------------------------------------
+   -- Array of ASN1 OIDs of block ciphers.
+   -----------------------------------------------------------------------------
+
+   ASN1_OIDs_Block_Ciphers       : constant array(Block_Cipher_Id) of Algorithm_Name_Ref :=
+      (
+         others            => Anonymous_Algorithm'Access
+      );
+      
 end CryptAda.Names.ASN1_OIDs;

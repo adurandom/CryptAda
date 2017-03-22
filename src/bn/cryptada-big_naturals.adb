@@ -2078,4 +2078,49 @@ package body CryptAda.Big_Naturals is
       Divide_Digit_And_Remainder(Dividend, Dividend_SD, Divisor, Q, Q_SD, Remainder);
    end Remainder_Digit;
 
+   --[Remainder_2_Exp]----------------------------------------------------------
+
+   procedure   Remainder_2_Exp(
+                  Dividend       : in     Digit_Sequence;
+                  Dividend_SD    : in     Natural;
+                  Exp            : in     Natural;
+                  Remainder      :    out Digit_Sequence;
+                  Remainder_SD   :    out Natural)
+   is
+      T              : Digit_Sequence(1 .. Dividend_SD) := (others => 0);
+      N              : Positive;
+      M              : Digit;
+   begin
+
+      -- Argument assertions.
+
+      pragma Assert(Dividend'Length >= Dividend_SD, "Invalid Dividend length.");
+
+      -- If exponent is greather than the number of significant bits in dividend
+      -- then result is dividend.
+
+      if Exp > (Significant_Bits(Dividend, Dividend_SD)) then
+         T := Dividend(Dividend'First .. Dividend'First + Dividend_SD - 1);
+      else
+      
+         -- Compute the maximum number of digits of remainder.
+         
+         N := 1 + (Exp / Digit_Bits);
+         
+         -- Copy the N digits of dividend to temporary T.
+
+         T(1 .. N) := Dividend(Dividend'First .. Dividend'First + N - 1);
+
+         -- Create the mask for the most significant digit bits. Set the most
+         -- significant digit by and'ing with that mask.
+
+         M := Shift_Left(1, Exp mod Digit_Bits) - 1;
+         T(N) := T(N) and M;
+      end if;
+
+      -- Set result.
+
+      Set_Result(T, Remainder, Remainder_SD);      
+   end Remainder_2_Exp;
+   
 end CryptAda.Big_Naturals;

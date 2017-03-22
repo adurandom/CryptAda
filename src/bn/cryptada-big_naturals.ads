@@ -853,5 +853,32 @@ private
                   Divisor        : in     Digit;
                   Remainder      :    out Digit);
 
+   --[Remainder_2_Exp]----------------------------------------------------------
+   -- Purpose:
+   -- Performs the following operation on Digit_Sequences:
+   --    Remainder   := Dividend mod (2 ** Exp)
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- Dividend             Digit_Sequence dividend of operation.
+   -- Dividend_SD          Significant digits in Dividend.
+   -- Exp                  Natural value with the exponent of divisor.
+   -- Remainder            Digit_Sequence that is the obtained remainder.
+   -- Remainder_SD         Significant digits in Remainder.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CryptAda_Overflow_Error if Remainder'Length is lower than the number of
+   -- digits of the remainder obtained.
+   -----------------------------------------------------------------------------
+
+   procedure   Remainder_2_Exp(
+                  Dividend       : in     Digit_Sequence;
+                  Dividend_SD    : in     Natural;
+                  Exp            : in     Natural;
+                  Remainder      :    out Digit_Sequence;
+                  Remainder_SD   :    out Natural);
+                  
 end CryptAda.Big_Naturals;
 

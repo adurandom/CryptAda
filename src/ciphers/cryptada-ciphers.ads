@@ -16,65 +16,60 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-names-openpgp.ads
---    File kind         :  Ada package specification.
+--    Filename          :  cryptada-ciphers.ads
+--    File kind         :  Ada package specification
 --    Author            :  A. Duran
---    Creation date     :  March 13th, 2017
+--    Creation date     :  March 21th, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    OpenPGP naming for algorithms.
+--    Root package for CryptAda ciphers.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
---    1.0   20170313 ADD   Initial implementation.
+--    1.0   20170321 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-package CryptAda.Names.OpenPGP is
+package CryptAda.Ciphers is
+    pragma Pure(Ciphers);
 
    -----------------------------------------------------------------------------
-   --[Constants]----------------------------------------------------------------
+   --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[OpenPGP Message Digest Algorithm Names]-----------------------------------
-   -- Next constants provide the OpenPGP names for message digest algorithms.
+   --[Cipher_Operation]---------------------------------------------------------
+   -- Enumerated type that identifies the different operations a Cipher 
+   -- can perform.
    -----------------------------------------------------------------------------
-
-   OpenPGP_MD2                : aliased constant String := "OpenPGP.Digest.5";
-   OpenPGP_MD5                : aliased constant String := "OpenPGP.Digest.1";
-   OpenPGP_SHA_1              : aliased constant String := "OpenPGP.Digest.2";
-   OpenPGP_RIPEMD_160         : aliased constant String := "OpenPGP.Digest.3";
-   OpenPGP_Tiger              : aliased constant String := "OpenPGP.Digest.6";
-   OpenPGP_HAVAL              : aliased constant String := "OpenPGP.Digest.7";
-
-   --[OpenPGP_Digest_Algorithms]------------------------------------------------
-   -- Array of OpenPGP names of digest algorithms.
+   
+   type Cipher_Operation is (Encrypt, Decrypt);
+   
+   --[Cipher_Type]--------------------------------------------------------------
+   -- Enumerated type that identifies the different cipher types:
+   --
+   -- Stream_Cipher     Stream ciphers encrypt individual symbols (bytes) of a 
+   --                   plaintext message one at a time, using an encryption 
+   --                   transformation that varies with time.
+   -- Block_Cipher      Block ciphers encrypt chunks (blocks) of symbols 
+   --                   (bytes)of a plaintext message using a fixed encryption 
+   --                   transformation.
    -----------------------------------------------------------------------------
+   
+   type Cipher_Type is (Stream_Cipher, Block_Cipher);
 
-   OpenPGP_Digest_Algorithms  : constant array(Digest_Algorithm_Id) of Algorithm_Name_Ref :=
-      (
-         MD_MD2            => OpenPGP_MD2'Access,
-         MD_MD5            => OpenPGP_MD5'Access,
-         MD_RIPEMD_160     => OpenPGP_RIPEMD_160'Access,
-         MD_SHA_1          => OpenPGP_SHA_1'Access,
-         MD_Tiger_192_3    => OpenPGP_Tiger'Access,
-         MD_HAVAL_160_5    => OpenPGP_HAVAL'Access,
-         others            => Anonymous_Algorithm'Access
-      );
-
-   --[Block Cipher Names]-------------------------------------------------------
-   -- Next constants identify the block ciphers algorithms according to
-   -- OpenPGP naming schema.
+   --[Cipher_State]-------------------------------------------------------------
+   -- Enumerated type that identifies the different states a cipher object could
+   -- be in:
+   --
+   -- Idle              The cipher object is uninitialized. It must be 
+   --                   initialized either for encryption or decryption.
+   -- Encrypting        The cipher object is in encrypting mode that is is 
+   --                   encrypting plain text into ciphered text.
+   -- Decrypting        The cipher object is in decrypting mode that is is 
+   --                   obtaining plain text from an encrypted message.
    -----------------------------------------------------------------------------
-
-   --[OpenPGP_Block_Ciphers]----------------------------------------------------
-   -- Array of OpenPGP names of block ciphers.
-   -----------------------------------------------------------------------------
-
-   OpenPGP_Block_Ciphers         : constant array(Block_Cipher_Id) of Algorithm_Name_Ref :=
-      (
-         others            => Anonymous_Algorithm'Access
-      );
-      
-end CryptAda.Names.OpenPGP;
+   
+   type Cipher_State is (Idle, Encrypting, Decrypting);
+   
+end CryptAda.Ciphers;
