@@ -28,28 +28,58 @@
 
 #>>>[Directories]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-ACSRC       =  ../src
-ACOBJ       =  ../obj
-ACLIB       =  ../lib
-TSRC        =  ./src
-TOBJ        =  ./obj
-TBIN        =  ./bin
-TRES        =  ./res
+# CryptAda root directories (CA_)
 
-ACBASE      =  $(ACSRC)/base
-ACNAMES     =  $(ACSRC)/names
-ACPRAGMA    =  $(ACSRC)/pragmatics
-ACUTILS     =  $(ACSRC)/utils
-ACENCODERS  =  $(ACSRC)/encoders
-ACDIGESTS   =  $(ACSRC)/digests
-ACRANDOM    =  $(ACSRC)/random
-ACBN        =  $(ACSRC)/bn
+CA_SRC          =  ../src
+CA_OBJ          =  ../obj
+CA_LIB          =  ../lib
 
-TSRCBASE    =  $(TSRC)/base/
-TSRCUPKG    =  $(TSRC)/upkg/
-TSRCUDRV    =  $(TSRC)/udrv/
-TSRCBNPKG   =  $(TSRC)/bn_pkg/
-TSRCBNDRV   =  $(TSRC)/bn_drv/
+# CryptAda Test root directories (CT_)
+
+CT_SRC          =  ./src
+CT_OBJ          =  ./obj
+CT_BIN          =  ./bin
+CT_RES          =  ./res
+
+# CryptAda source directories (CAS_)
+
+CAS_BASE        =  $(CA_SRC)/base
+CAS_NAMES       =  $(CA_SRC)/names
+CAS_PRAGMA      =  $(CA_SRC)/pragmatics
+CAS_UTILS       =  $(CA_SRC)/utils
+CAS_ENCODERS    =  $(CA_SRC)/encoders
+CAS_DIGESTS     =  $(CA_SRC)/digests
+CAS_RANDOM      =  $(CA_SRC)/random
+CAS_BN          =  $(CA_SRC)/bn
+
+# CryptAda test source directories CTS_
+
+CTS_BASE        =  $(CT_SRC)/base/
+CTS_UTILS       =  $(CT_SRC)/utils/
+
+CTS_UUT_PKG     =  $(CT_SRC)/uut_pkg/
+CTS_UUT_DRV     =  $(CT_SRC)/uut_drv/
+CTS_UPR_PKG     =  $(CT_SRC)/upr_pkg/
+CTS_UPR_DRV     =  $(CT_SRC)/upr_drv/
+CTS_UEN_PKG     =  $(CT_SRC)/uen_pkg/
+CTS_UEN_DRV     =  $(CT_SRC)/uen_drv/
+CTS_UDI_PKG     =  $(CT_SRC)/udi_pkg/
+CTS_UDI_DRV     =  $(CT_SRC)/udi_drv/
+CTS_URN_PKG     =  $(CT_SRC)/urn_pkg/
+CTS_URN_DRV     =  $(CT_SRC)/urn_drv/
+CTS_UBN_PKG     =  $(CT_SRC)/ubn_pkg/
+CTS_UBN_DRV     =  $(CT_SRC)/ubn_drv/
+CTS_TDI_PKG     =  $(CT_SRC)/tdi_pkg/
+CTS_TDI_DRV     =  $(CT_SRC)/tdi_drv/
+
+#  CryptAda test bin directories (CTB_)
+
+CTB_UUTILS      = $(CT_BIN)/u_utils
+CTB_UPRAG       = $(CT_BIN)/u_prag
+CTB_UENC        = $(CT_BIN)/u_enc
+CTB_UDIG        = $(CT_BIN)/u_dig
+CTB_URND        = $(CT_BIN)/u_rnd
+CTB_UBN         = $(CT_BIN)/u_bn
 
 #>>>[Compilation]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -57,8 +87,17 @@ CC          =  gcc
 CFLAGS      =  -c -O3 -gnat05 -gnata -gnatn -gnatwa
 SOURCEDIRS  =  -I$(TSRCBASE) -I$(TSRCUPKG) -I$(TSRCBNPKG) -I$(ACBASE) -I$(ACNAMES) -I$(ACPRAGMA) -I$(ACUTILS) -I$(ACENCODERS) -I$(ACDIGESTS) -I$(ACRANDOM) -I$(ACBN)
 
+
+
+
 ADAMAKER    = gnatmake
-ADAFLAGS    = -O3 -gnatn -gnatwa -D $(TOBJ)
+ADAFLAGS    = -O3 -gnat05 -gnata -gnatn -gnatwa -D $(CT_OBJ)
+IDIR_UUT    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UUT_PKG) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS)
+IDIR_UPR    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UPR_PKG) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS)
+IDIR_UEN    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UEN_PKG) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_ENCODERS)
+IDIR_UDI    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UDI_PKG) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_DIGESTS)
+IDIR_URN    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_URN_PKG) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_DIGESTS) -I$(CAS_RANDOM)
+IDIR_UBN    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UBN_PKG) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_BN)
 
 #>>>[Ada Body Extension]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -72,205 +111,255 @@ DELCMD = rm -f
 
 #>>>[Objects]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-UNITDRV =   $(TBIN)/ut_utils.exe \
-            $(TBIN)/ut_format.exe \
-            $(TBIN)/ut_pragmatics.exe \
-            $(TBIN)/ut_bvectors.exe \
-            $(TBIN)/ut_hexenc.exe \
-            $(TBIN)/ut_b16enc.exe \
-            $(TBIN)/ut_b64enc.exe \
-            $(TBIN)/ut_mimeenc.exe \
-            $(TBIN)/ut_count.exe \
-            $(TBIN)/ut_md2.exe \
-            $(TBIN)/ut_md4.exe \
-            $(TBIN)/ut_md5.exe \
-            $(TBIN)/ut_ripemd_128.exe \
-            $(TBIN)/ut_ripemd_160.exe \
-            $(TBIN)/ut_sha_1.exe \
-            $(TBIN)/ut_sha_224.exe \
-            $(TBIN)/ut_sha_256.exe \
-            $(TBIN)/ut_sha_384.exe \
-            $(TBIN)/ut_sha_512.exe \
-            $(TBIN)/ut_snefru.exe \
-            $(TBIN)/ut_tiger.exe \
-            $(TBIN)/ut_haval.exe \
-            $(TBIN)/ut_whirlpool.exe \
-            $(TBIN)/ut_rsaref.exe \
-            $(TBIN)/ut_caprng.exe
+U_UTILS     =   $(CTB_UUTILS)/ut_utils.exe \
+                $(CTB_UUTILS)/ut_format.exe
 
-BNDRV   =   $(TBIN)/ut_bn_basic.exe \
-            $(TBIN)/ut_bn_conv.exe \
-            $(TBIN)/ut_bn_add.exe \
-            $(TBIN)/ut_bn_subt.exe \
-            $(TBIN)/ut_bn_addsub.exe \
-            $(TBIN)/ut_bn_mult.exe \
-            $(TBIN)/ut_bn_div.exe
-            
+U_PRAG      =   $(CTB_UPRAG)/ut_pragmatics.exe \
+                $(CTB_UPRAG)/ut_bvectors.exe
+
+U_ENC       =   $(CTB_UENC)/ut_hexenc.exe \
+                $(CTB_UENC)/ut_b16enc.exe \
+                $(CTB_UENC)/ut_b64enc.exe \
+                $(CTB_UENC)/ut_mimeenc.exe
+
+U_DIG       =   $(CTB_UDIG)/ut_count.exe \
+                $(CTB_UDIG)/ut_md2.exe \
+                $(CTB_UDIG)/ut_md4.exe \
+                $(CTB_UDIG)/ut_md5.exe \
+                $(CTB_UDIG)/ut_ripemd_128.exe \
+                $(CTB_UDIG)/ut_ripemd_160.exe \
+                $(CTB_UDIG)/ut_sha_1.exe \
+                $(CTB_UDIG)/ut_sha_224.exe \
+                $(CTB_UDIG)/ut_sha_256.exe \
+                $(CTB_UDIG)/ut_sha_384.exe \
+                $(CTB_UDIG)/ut_sha_512.exe \
+                $(CTB_UDIG)/ut_sha_3.exe \
+                $(CTB_UDIG)/ut_snefru.exe \
+                $(CTB_UDIG)/ut_tiger.exe \
+                $(CTB_UDIG)/ut_haval.exe \
+                $(CTB_UDIG)/ut_whirlpool.exe
+
+U_RND       =   $(CTB_URND)/ut_rsaref.exe \
+                $(CTB_URND)/ut_caprng.exe
+
+U_BN        =   $(CTB_UBN)/ut_bn_basic.exe \
+                $(CTB_UBN)/ut_bn_conv.exe \
+                $(CTB_UBN)/ut_bn_add.exe \
+                $(CTB_UBN)/ut_bn_subt.exe \
+                $(CTB_UBN)/ut_bn_addsub.exe \
+                $(CTB_UBN)/ut_bn_mult.exe \
+                $(CTB_UBN)/ut_bn_div.exe
+
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 .PHONY: all unit time clean run
 
 #>>>[Building Unit Test Drivers]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-$(TBIN)/ut_utils.exe: $(TSRCUDRV)ut_utils.adb
-	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+# Utils unit test drivers.
 
-$(TBIN)/ut_format.exe: $(TSRCUDRV)ut_format.adb
+$(CTB_UUTILS)/ut_utils.exe: $(CTS_UUT_DRV)ut_utils.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UUT) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_pragmatics.exe: $(TSRCUDRV)ut_pragmatics.adb
+$(CTB_UUTILS)/ut_format.exe: $(CTS_UUT_DRV)ut_format.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UUT) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_bvectors.exe: $(TSRCUDRV)ut_bvectors.adb
-	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+# Pragmatics unit test drivers.
 
-$(TBIN)/ut_hexenc.exe: $(TSRCUDRV)ut_hexenc.adb
+$(CTB_UPRAG)/ut_pragmatics.exe: $(CTS_UPR_DRV)ut_pragmatics.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UPR) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_b16enc.exe: $(TSRCUDRV)ut_b16enc.adb
+$(CTB_UPRAG)/ut_bvectors.exe: $(CTS_UPR_DRV)ut_bvectors.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UPR) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_b64enc.exe: $(TSRCUDRV)ut_b64enc.adb
-	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+# Encoders unit test drivers.
 
-$(TBIN)/ut_mimeenc.exe: $(TSRCUDRV)ut_mimeenc.adb
+$(CTB_UENC)/ut_hexenc.exe: $(CTS_UEN_DRV)ut_hexenc.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UEN) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_count.exe: $(TSRCUDRV)ut_count.adb
+$(CTB_UENC)/ut_b16enc.exe: $(CTS_UEN_DRV)ut_b16enc.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UEN) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_md2.exe: $(TSRCUDRV)ut_md2.adb
+$(CTB_UENC)/ut_b64enc.exe: $(CTS_UEN_DRV)ut_b64enc.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UEN) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_md4.exe: $(TSRCUDRV)ut_md4.adb
+$(CTB_UENC)/ut_mimeenc.exe: $(CTS_UEN_DRV)ut_mimeenc.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UEN) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_md5.exe: $(TSRCUDRV)ut_md5.adb
-	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+# Digests unit test drivers.
 
-$(TBIN)/ut_ripemd_128.exe: $(TSRCUDRV)ut_ripemd_128.adb
+$(CTB_UDIG)/ut_count.exe: $(CTS_UDI_DRV)ut_count.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_ripemd_160.exe: $(TSRCUDRV)ut_ripemd_160.adb
+$(CTB_UDIG)/ut_md2.exe: $(CTS_UDI_DRV)ut_md2.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_sha_1.exe: $(TSRCUDRV)ut_sha_1.adb
+$(CTB_UDIG)/ut_md4.exe: $(CTS_UDI_DRV)ut_md4.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_sha_224.exe: $(TSRCUDRV)ut_sha_224.adb
+$(CTB_UDIG)/ut_md5.exe: $(CTS_UDI_DRV)ut_md5.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_sha_256.exe: $(TSRCUDRV)ut_sha_256.adb
+$(CTB_UDIG)/ut_ripemd_128.exe: $(CTS_UDI_DRV)ut_ripemd_128.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_sha_384.exe: $(TSRCUDRV)ut_sha_384.adb
+$(CTB_UDIG)/ut_ripemd_160.exe: $(CTS_UDI_DRV)ut_ripemd_160.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_sha_512.exe: $(TSRCUDRV)ut_sha_512.adb
+$(CTB_UDIG)/ut_sha_1.exe: $(CTS_UDI_DRV)ut_sha_1.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_snefru.exe: $(TSRCUDRV)ut_snefru.adb
+$(CTB_UDIG)/ut_sha_224.exe: $(CTS_UDI_DRV)ut_sha_224.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
-    
-$(TBIN)/ut_tiger.exe: $(TSRCUDRV)ut_tiger.adb
-	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_haval.exe: $(TSRCUDRV)ut_haval.adb
+$(CTB_UDIG)/ut_sha_256.exe: $(CTS_UDI_DRV)ut_sha_256.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
-    
-$(TBIN)/ut_whirlpool.exe: $(TSRCUDRV)ut_whirlpool.adb
-	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_rsaref.exe: $(TSRCUDRV)ut_rsaref.adb
+$(CTB_UDIG)/ut_sha_384.exe: $(CTS_UDI_DRV)ut_sha_384.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_caprng.exe: $(TSRCUDRV)ut_caprng.adb
+$(CTB_UDIG)/ut_sha_512.exe: $(CTS_UDI_DRV)ut_sha_512.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
 
-#>>>[Building Big_Naturals Unit Test Drivers]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-$(TBIN)/ut_bn_basic.exe: $(TSRCBNDRV)ut_bn_basic.adb
+$(CTB_UDIG)/ut_sha_3.exe: $(CTS_UDI_DRV)ut_sha_3.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_bn_conv.exe: $(TSRCBNDRV)ut_bn_conv.adb
+$(CTB_UDIG)/ut_snefru.exe: $(CTS_UDI_DRV)ut_snefru.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_bn_add.exe: $(TSRCBNDRV)ut_bn_add.adb
+$(CTB_UDIG)/ut_tiger.exe: $(CTS_UDI_DRV)ut_tiger.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_bn_subt.exe: $(TSRCBNDRV)ut_bn_subt.adb
+$(CTB_UDIG)/ut_haval.exe: $(CTS_UDI_DRV)ut_haval.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_bn_addsub.exe: $(TSRCBNDRV)ut_bn_addsub.adb
+$(CTB_UDIG)/ut_whirlpool.exe: $(CTS_UDI_DRV)ut_whirlpool.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
 
-$(TBIN)/ut_bn_mult.exe: $(TSRCBNDRV)ut_bn_mult.adb
-	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+# Random unit test drivers
 
-$(TBIN)/ut_bn_div.exe: $(TSRCBNDRV)ut_bn_div.adb
+$(CTB_URND)/ut_rsaref.exe: $(CTS_URN_DRV)ut_rsaref.adb
 	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
-    
+	$(ADAMAKER) $(IDIR_URN) $(ADAFLAGS) -o $@ $<
+
+$(CTB_URND)/ut_caprng.exe: $(CTS_URN_DRV)ut_caprng.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_URN) $(ADAFLAGS) -o $@ $<
+
+# Big_Naturals unit test drivers
+
+$(CTB_UBN)/ut_bn_basic.exe: $(CTS_UBN_DRV)ut_bn_basic.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBN) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBN)/ut_bn_conv.exe: $(CTS_UBN_DRV)ut_bn_conv.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBN) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBN)/ut_bn_add.exe: $(CTS_UBN_DRV)ut_bn_add.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBN) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBN)/ut_bn_subt.exe: $(CTS_UBN_DRV)ut_bn_subt.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBN) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBN)/ut_bn_addsub.exe: $(CTS_UBN_DRV)ut_bn_addsub.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBN) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBN)/ut_bn_mult.exe: $(CTS_UBN_DRV)ut_bn_mult.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBN) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBN)/ut_bn_div.exe: $(CTS_UBN_DRV)ut_bn_div.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBN) $(ADAFLAGS) -o $@ $<
+
 #>>>[Targets]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 all: unit time
 
-unit: $(UNITDRV) $(BNDRV)
+unit: $(U_UTILS) $(U_PRAG) $(U_ENC) $(U_DIG) $(U_RND) $(U_BN)
 
 time: $(TIMEDRV)
 
 clean:
-	$(DELCMD) $(TOBJ)/*.o
-	$(DELCMD) $(TOBJ)/*.ali
-	$(DELCMD) $(TBIN)/*.exe
-	$(DELCMD) $(TRES)/*.txt
+	$(DELCMD) $(CT_OBJ)/*.o
+	$(DELCMD) $(CT_OBJ)/*.ali
+	$(DELCMD) $(CT_RES)/*.txt
+	$(DELCMD) $(CTB_UUTILS)/*.exe
+	$(DELCMD) $(CTB_UPRAG)/*.exe
+	$(DELCMD) $(CTB_UENC)/*.exe
+	$(DELCMD) $(CTB_UDIG)/*.exe
+	$(DELCMD) $(CTB_URND)/*.exe
+	$(DELCMD) $(CTB_UBN)/*.exe
 
-run: run_unit run_bnunit run_time
+run: r_unit r_time
 
-run_unit: $(UNITDRV)
+r_unit: r_utils r_prag r_enc r_dig r_rnd r_bn
+
+r_utils: $(U_UTILS)
 	for testdriver in $(basename $(notdir $^)); do \
-		echo Running test driver: $$testdriver ... ; \
-		$(TBIN)/$$testdriver.exe > $(TRES)/$$testdriver.txt ;\
+		echo Running utils test driver: $$testdriver ... ; \
+		$(CTB_UUTILS)/$$testdriver.exe > $(CT_RES)/$$testdriver.txt ;\
 	done
 
-run_bnunit: $(BNDRV)
+r_prag: $(U_PRAG)
+	for testdriver in $(basename $(notdir $^)); do \
+		echo Running pragmatics test driver: $$testdriver ... ; \
+		$(CTB_UPRAG)/$$testdriver.exe > $(CT_RES)/$$testdriver.txt ;\
+	done
+
+r_enc: $(U_ENC)
+	for testdriver in $(basename $(notdir $^)); do \
+		echo Running encoders test driver: $$testdriver ... ; \
+		$(CTB_UENC)/$$testdriver.exe > $(CT_RES)/$$testdriver.txt ;\
+	done
+
+r_dig: $(U_DIG)
+	for testdriver in $(basename $(notdir $^)); do \
+		echo Running digests test driver: $$testdriver ... ; \
+		$(CTB_UDIG)/$$testdriver.exe > $(CT_RES)/$$testdriver.txt ;\
+	done
+
+r_rnd: $(U_RND)
+	for testdriver in $(basename $(notdir $^)); do \
+		echo Running random generators test driver: $$testdriver ... ; \
+		$(CTB_URND)/$$testdriver.exe > $(CT_RES)/$$testdriver.txt ;\
+	done
+
+r_bn: $(U_BN)
 	for testdriver in $(basename $(notdir $^)); do \
 		echo Running big naturals test driver: $$testdriver ... ; \
-		$(TBIN)/$$testdriver.exe > $(TRES)/$$testdriver.txt ;\
+		$(CTB_UBN)/$$testdriver.exe > $(CT_RES)/$$testdriver.txt ;\
 	done
     
-run_time: $(TIMEDRV)
+r_time: $(TIMEDRV)
 	for testdriver in $(basename $(notdir $^)); do \
 		echo Running test driver: $$testdriver ... ; \
 		$(TBIN)/$$testdriver.exe > $(TRES)/$$testdriver.txt ;\

@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Snefru
 Description              : Unit test driver for CryptAda.Digests.Algorithms.Snefru functionality.
-Started                  : 2017/03/20 - 11:08:20
+Started                  : 2017/03/22 - 19:49:34
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : CryptAda message digest basic operation
-Started         : 2017/03/20 - 11:08:20
+Started         : 2017/03/22 - 19:49:34
 --------------------------------------------------------------------------------
 [I] Snefru digest parameters:
     Security level                : "SECURITY_LEVEL_4"
@@ -249,13 +249,13 @@ Started         : 2017/03/20 - 11:08:20
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:20
+Finished        : 2017/03/22 - 19:49:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Standard Snefru 128-bit, security level 8 test vectors
-Started         : 2017/03/20 - 11:08:20
+Started         : 2017/03/22 - 19:49:34
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from http://ftp.vim.org/security/coast/crypto/snefru/
     Number of vectors to test:  11
@@ -516,13 +516,13 @@ experimentally.
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:20
+Finished        : 2017/03/22 - 19:49:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Standard Snefru 256-bit, security level 8 test vectors
-Started         : 2017/03/20 - 11:08:20
+Started         : 2017/03/22 - 19:49:34
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from http://ftp.vim.org/security/coast/crypto/snefru/
     Number of vectors to test:  11
@@ -783,13 +783,13 @@ experimentally.
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:20
+Finished        : 2017/03/22 - 19:49:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : CryptAda Snefru 128-bit, security level 8 test vectors
-Started         : 2017/03/20 - 11:08:20
+Started         : 2017/03/22 - 19:49:34
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
     Number of vectors to test:  9
@@ -953,13 +953,13 @@ Started         : 2017/03/20 - 11:08:20
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:20
+Finished        : 2017/03/22 - 19:49:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : CryptAda Snefru 256-bit, security level 8 test vectors
-Started         : 2017/03/20 - 11:08:20
+Started         : 2017/03/22 - 19:49:34
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
     Number of vectors to test:  9
@@ -1123,13 +1123,13 @@ Started         : 2017/03/20 - 11:08:20
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:20
+Finished        : 2017/03/22 - 19:49:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : Testing Snefru 128-bit, security level 8 operation at block boundary.
-Started         : 2017/03/20 - 11:08:20
+Started         : 2017/03/22 - 19:49:34
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at block boundary.
@@ -1167,13 +1167,13 @@ Vector length:  49
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:20
+Finished        : 2017/03/22 - 19:49:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
 Description     : Testing Snefru 256-bit, security level 8 operation at block boundary.
-Started         : 2017/03/20 - 11:08:20
+Started         : 2017/03/22 - 19:49:34
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at block boundary.
@@ -1211,11 +1211,11 @@ Vector length:  33
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:20
+Finished        : 2017/03/22 - 19:49:34
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Snefru
-Finished                 : 2017/03/20 - 11:08:20
+Finished                 : 2017/03/22 - 19:49:34
 ================================================================================

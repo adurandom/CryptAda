@@ -6,7 +6,7 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.Mult
 Description              : Unit test driver for CryptAda.Big_Naturals multiplication & squaring functionality.
-Started                  : 2017/03/21 - 07:34:56
+Started                  : 2017/03/22 - 19:44:20
 ================================================================================
 [I] This test driver will validate Digit_Sequences multiplication and squaring
 Next elements will be tested:
@@ -17,7 +17,7 @@ Next elements will be tested:
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Overflow conditions in multiplication
-Started         : 2017/03/21 - 07:34:56
+Started         : 2017/03/22 - 19:44:20
 --------------------------------------------------------------------------------
 [I] Interfaces exercised:
 - Multiply()
@@ -28,13 +28,13 @@ Shall raise CryptAda_Overflow_Error
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:56
+Finished        : 2017/03/22 - 19:44:20
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Basic multiply operations
-Started         : 2017/03/21 - 07:34:56
+Started         : 2017/03/22 - 19:44:20
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Multiply()
@@ -101,13 +101,13 @@ Values match
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:56
+Finished        : 2017/03/22 - 19:44:20
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Testing null element
-Started         : 2017/03/21 - 07:34:56
+Started         : 2017/03/22 - 19:44:20
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Multiply()
@@ -117,13 +117,13 @@ Performing  100000 iterations, multiplying Zero_Digit_Sequence to random digit s
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:56
+Finished        : 2017/03/22 - 19:44:20
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Testing identity multiplication.
-Started         : 2017/03/21 - 07:34:56
+Started         : 2017/03/22 - 19:44:20
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Multiply()
@@ -133,20 +133,20 @@ Performing  100000 iterations, multiplying One_Digit_Sequence to random digit se
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:56
+Finished        : 2017/03/22 - 19:44:20
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Testing correctness of multiplication by using RSA known factors
-Started         : 2017/03/21 - 07:34:56
+Started         : 2017/03/22 - 19:44:20
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
     - Multiply()
 [I] This test will use a number of known RSA numbers (semiprimes).
 Number of known factors to test:  7
 [I] Test factor:  1
-    Test                           : "RSA 100 decial digits (330 bits)"
+    Test                           : "RSA 100 decimal digits (330 bits)"
     First factor (decimal)         : 37975227936943673922808872755445627854565536638199
     First factor (digit sequence)  : 
 Length            :  20
@@ -169,7 +169,7 @@ Significant Digits:  11
 000002C8 D59AF47C 81AB3725 B472BE41 7E3BF7AB 85439AF7 26ED3DFD F66489D1 55DC0B77 1C7A50EF 7C5E58FB 
 [I] Results match
 [I] Test factor:  2
-    Test                           : "RSA 110 decial digits (364 bits)"
+    Test                           : "RSA 110 decimal digits (364 bits)"
     First factor (decimal)         : 6122421090493547576937037317561418841225758554253106999
     First factor (digit sequence)  : 
 Length            :  20
@@ -192,7 +192,7 @@ Significant Digits:  12
 00000F3D B4DFACD9 CA1D1C77 CDA2C23E 8826C929 130886E2 FFFA6E21 271CA6F3 E2A5A57D E621EEC5 B14FF581 A6368E9B 
 [I] Results match
 [I] Test factor:  3
-    Test                           : "RSA 120 decial digits (397 bits)"
+    Test                           : "RSA 120 decimal digits (397 bits)"
     First factor (decimal)         : 327414555693498015751146303749141488063642403240171463406883
     First factor (digit sequence)  : 
 Length            :  20
@@ -215,7 +215,7 @@ Significant Digits:  13
 00001681 64DBDDB0 7AFE12E5 BE8CABEC FC694EFF 9643D51F 533915EE 55B21769 7CC78256 503276EE 00AF4DFE 166C0725 FDC1447F 
 [I] Results match
 [I] Test factor:  4
-    Test                           : "RSA 129 decial digits (426 bits)"
+    Test                           : "RSA 129 decimal digits (426 bits)"
     First factor (decimal)         : 3490529510847650949147849619903898133417764638493387843990820577
     First factor (digit sequence)  : 
 Length            :  20
@@ -238,7 +238,7 @@ Significant Digits:  14
 000002A3 E4A7E967 464D174F 174C2825 1D97BD37 5C607ACE 8FAE4156 30B45733 C2259D2A FC68DD6F 447AC5BA FB686CA5 A4DC6245 D5E2E8F5 
 [I] Results match
 [I] Test factor:  5
-    Test                           : "RSA 130 decial digits (430 bits)"
+    Test                           : "RSA 130 decimal digits (430 bits)"
     First factor (decimal)         : 39685999459597454290161126162883786067576449112810064832555157243
     First factor (digit sequence)  : 
 Length            :  20
@@ -261,7 +261,7 @@ Significant Digits:  14
 000029B6 3D7C9CAB 219CA873 7A1449BC 8FC7FB00 37DC04EF 40868B48 75B1BEA3 E0D9B992 F9E86798 AC66E9A7 0D21E55B 58C1CF20 C647F32D 
 [I] Results match
 [I] Test factor:  6
-    Test                           : "RSA 140 decial digits (463 bits)"
+    Test                           : "RSA 140 decimal digits (463 bits)"
     First factor (decimal)         : 3398717423028438554530123627613875835633986495969597423490929302771479
     First factor (digit sequence)  : 
 Length            :  20
@@ -284,7 +284,7 @@ Significant Digits:  15
 0000726B 918C8FAF BD62E6EE 45CA374F 5A1428F3 47403944 D0AADD54 021CC36F 1556263F A6B26414 D0C520E5 6C6B9ABE 3FAB5031 666BCB53 C9B52457 
 [I] Results match
 [I] Test factor:  7
-    Test                           : "RSA 150 decial digits (496 bits)"
+    Test                           : "RSA 150 decimal digits (496 bits)"
     First factor (decimal)         : 348009867102283695483970451047593424831012817350385456889559637548278410717
     First factor (digit sequence)  : 
 Length            :  20
@@ -310,13 +310,13 @@ Significant Digits:  16
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:56
+Finished        : 2017/03/22 - 19:44:20
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : Testing multiplication conmutative property
-Started         : 2017/03/21 - 07:34:56
+Started         : 2017/03/22 - 19:44:20
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
     - Multiply()
@@ -326,13 +326,13 @@ Performing  100000 iterations with random Digit_Sequences
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:56
+Finished        : 2017/03/22 - 19:44:20
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
 Description     : Testing multiplication associative property
-Started         : 2017/03/21 - 07:34:56
+Started         : 2017/03/22 - 19:44:20
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
     - Multiply()
@@ -342,13 +342,13 @@ Started         : 2017/03/21 - 07:34:56
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:57
+Finished        : 2017/03/22 - 19:44:21
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 8
 Description     : Testing multiplication distributive property respect addition
-Started         : 2017/03/21 - 07:34:57
+Started         : 2017/03/22 - 19:44:21
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
     - Multiply()
@@ -359,13 +359,13 @@ Started         : 2017/03/21 - 07:34:57
 --------------------------------------------------------------------------------
 Test Case Number: 8
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:57
+Finished        : 2017/03/22 - 19:44:21
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 9
 Description     : Overflow conditions in Multiply_Digit
-Started         : 2017/03/21 - 07:34:57
+Started         : 2017/03/22 - 19:44:21
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Multiply_Digit()
@@ -376,13 +376,13 @@ Shall raise CryptAda_Overflow_Error
 --------------------------------------------------------------------------------
 Test Case Number: 9
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:57
+Finished        : 2017/03/22 - 19:44:21
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 10
 Description     : Basic Multiply_Digit operations
-Started         : 2017/03/21 - 07:34:57
+Started         : 2017/03/22 - 19:44:21
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Multiply_Digit()
@@ -439,13 +439,13 @@ Performing  100000 iterations, multiplying 1 by random digit sequences
 --------------------------------------------------------------------------------
 Test Case Number: 10
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:57
+Finished        : 2017/03/22 - 19:44:21
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 11
 Description     : Bulk Multiply_Digit operations
-Started         : 2017/03/21 - 07:34:57
+Started         : 2017/03/22 - 19:44:21
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Multiply_Digit()
@@ -456,13 +456,13 @@ Performing  100000 iterations.
 --------------------------------------------------------------------------------
 Test Case Number: 11
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:57
+Finished        : 2017/03/22 - 19:44:21
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 12
 Description     : Overflow conditions in squaring
-Started         : 2017/03/21 - 07:34:57
+Started         : 2017/03/22 - 19:44:21
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Square()
@@ -473,13 +473,13 @@ Shall raise CryptAda_Overflow_Error
 --------------------------------------------------------------------------------
 Test Case Number: 12
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:57
+Finished        : 2017/03/22 - 19:44:21
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 13
 Description     : Basic square operations
-Started         : 2017/03/21 - 07:34:57
+Started         : 2017/03/22 - 19:44:21
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Square()
@@ -515,13 +515,13 @@ Values match
 --------------------------------------------------------------------------------
 Test Case Number: 13
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:57
+Finished        : 2017/03/22 - 19:44:21
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 14
 Description     : Cross checking Square with Multiply
-Started         : 2017/03/21 - 07:34:57
+Started         : 2017/03/22 - 19:44:21
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
     - Square()
@@ -532,11 +532,11 @@ Started         : 2017/03/21 - 07:34:57
 --------------------------------------------------------------------------------
 Test Case Number: 14
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:57
+Finished        : 2017/03/22 - 19:44:21
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.Mult
-Finished                 : 2017/03/21 - 07:34:57
+Finished                 : 2017/03/22 - 19:44:21
 ================================================================================

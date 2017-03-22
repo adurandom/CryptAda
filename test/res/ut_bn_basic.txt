@@ -6,7 +6,7 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.Basic
 Description              : Unit test driver for CryptAda.Big_Naturals basic functionality.
-Started                  : 2017/03/21 - 07:34:54
+Started                  : 2017/03/22 - 19:44:18
 ================================================================================
 [I] This test driver will validate basic (non-arithmetic) functionality of CryptAda.Big_Naturals.
 Next elements will be tested:
@@ -22,7 +22,7 @@ Next elements will be tested:
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Constants
-Started         : 2017/03/21 - 07:34:54
+Started         : 2017/03/22 - 19:44:18
 --------------------------------------------------------------------------------
 [I] Viewing declared package constants
     Digit_Bits:  32
@@ -37,13 +37,13 @@ Length:  1
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:54
+Finished        : 2017/03/22 - 19:44:18
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Computing significant digits
-Started         : 2017/03/21 - 07:34:54
+Started         : 2017/03/22 - 19:44:18
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Significant_Digits()
@@ -66,13 +66,13 @@ Values match
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:54
+Finished        : 2017/03/22 - 19:44:18
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Computing significant bits
-Started         : 2017/03/21 - 07:34:54
+Started         : 2017/03/22 - 19:44:18
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Significant_Bits()
@@ -95,13 +95,13 @@ Values match
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:54
+Finished        : 2017/03/22 - 19:44:18
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Testing evenness
-Started         : 2017/03/21 - 07:34:54
+Started         : 2017/03/22 - 19:44:18
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
     - Is_Even()
@@ -111,19 +111,19 @@ Started         : 2017/03/21 - 07:34:54
 [I] Performing  100000 iterations with random digit sequences
 [I] Results shall be approx 50% even, 50% odd
 Digit_Sequences tested:  100000
-Even Digit_Sequences  :  54727
-Odd Digit_Sequences   :  45273
+Even Digit_Sequences  :  54277
+Odd Digit_Sequences   :  45723
 [I] Test case OK.
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:54
+Finished        : 2017/03/22 - 19:44:18
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Testing Set_ subprograms.
-Started         : 2017/03/21 - 07:34:54
+Started         : 2017/03/22 - 19:44:18
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
     - Set_To_Zero()
@@ -139,13 +139,13 @@ Performing  100000 iterations with random digit sequences
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:54
+Finished        : 2017/03/22 - 19:44:18
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : Basic comparison
-Started         : 2017/03/21 - 07:34:54
+Started         : 2017/03/22 - 19:44:18
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Compare()
@@ -169,13 +169,13 @@ Values match
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:54
+Finished        : 2017/03/22 - 19:44:18
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
 Description     : Advanced comparison
-Started         : 2017/03/21 - 07:34:54
+Started         : 2017/03/22 - 19:44:18
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Compare()
@@ -183,11 +183,11 @@ Started         : 2017/03/21 - 07:34:54
 A :
 Length            :  20
 Significant Digits:  5
-D69673BF 6E3B66AB C2049E22 F4C66542 6325551F 
+F11937A7 2B75195B 67710034 65C871EB 61022948 
 B :
 Length            :  20
 Significant Digits:  4
-242645B2 34305E79 D5171FF6 99D61FFC 
+E7BF2117 D3DAA922 0A8F19AB AD84BBA6 
 [I] Comparing:
 [I] 1. A = A
 Expected result: EQUAL
@@ -211,11 +211,11 @@ Performing  100000 iterations with random digit sequences
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:54
+Finished        : 2017/03/22 - 19:44:18
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.Basic
-Finished                 : 2017/03/21 - 07:34:54
+Finished                 : 2017/03/22 - 19:44:18
 ================================================================================

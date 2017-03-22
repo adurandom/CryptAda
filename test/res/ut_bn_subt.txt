@@ -6,7 +6,7 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.Subt
 Description              : Unit test driver for CryptAda.Big_Naturals subtraction functionality.
-Started                  : 2017/03/21 - 07:34:56
+Started                  : 2017/03/22 - 19:44:19
 ================================================================================
 [I] This test driver will validate Digit_Sequences subtraction
 Next elements will be tested:
@@ -16,7 +16,7 @@ Next elements will be tested:
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Overflow and Underflow conditions in subtraction
-Started         : 2017/03/21 - 07:34:56
+Started         : 2017/03/22 - 19:44:19
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Subtract()
@@ -30,13 +30,13 @@ Shall raise CryptAda_Underflow_Error
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:56
+Finished        : 2017/03/22 - 19:44:19
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Basic subtraction operations
-Started         : 2017/03/21 - 07:34:56
+Started         : 2017/03/22 - 19:44:19
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Subtract()
@@ -98,13 +98,13 @@ Values match
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:56
+Finished        : 2017/03/22 - 19:44:19
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Testing subtraction identity
-Started         : 2017/03/21 - 07:34:56
+Started         : 2017/03/22 - 19:44:19
 --------------------------------------------------------------------------------
 [I] Subprogams tested:
 - Subtract()
@@ -113,13 +113,13 @@ Started         : 2017/03/21 - 07:34:56
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:56
+Finished        : 2017/03/22 - 19:44:19
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Testing subtraction associative property
-Started         : 2017/03/21 - 07:34:56
+Started         : 2017/03/22 - 19:44:19
 --------------------------------------------------------------------------------
 [I] Subprogams tested:
 - Subtract()
@@ -129,13 +129,13 @@ Performing  100000 iterations, subtracting Zero_Digit_Sequence from random digit
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:56
+Finished        : 2017/03/22 - 19:44:19
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Overflow and Underflow conditions in Subtract_Digit
-Started         : 2017/03/21 - 07:34:56
+Started         : 2017/03/22 - 19:44:19
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Subtract_Digit()
@@ -154,13 +154,13 @@ Subtrahend:  11
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:56
+Finished        : 2017/03/22 - 19:44:19
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : Basic Subtract_Digit operations
-Started         : 2017/03/21 - 07:34:56
+Started         : 2017/03/22 - 19:44:19
 --------------------------------------------------------------------------------
 [I] Subprograms tested
 - Subtract_Digit()
@@ -215,13 +215,13 @@ Performing  100000 iterations, subtracting 0 to random digit sequences
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:56
+Finished        : 2017/03/22 - 19:44:19
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
 Description     : Bulk Subtract_Digit operations
-Started         : 2017/03/21 - 07:34:56
+Started         : 2017/03/22 - 19:44:19
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Subtract_Digit()
@@ -232,11 +232,11 @@ Performing  100000 iterations.
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:56
+Finished        : 2017/03/22 - 19:44:20
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.Subt
-Finished                 : 2017/03/21 - 07:34:56
+Finished                 : 2017/03/22 - 19:44:20
 ================================================================================

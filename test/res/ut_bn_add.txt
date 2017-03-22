@@ -6,7 +6,7 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.Add
 Description              : Unit test driver for CryptAda.Big_Naturals addition functionality.
-Started                  : 2017/03/21 - 07:34:55
+Started                  : 2017/03/22 - 19:44:19
 ================================================================================
 [I] This test driver will validate Digit_Sequences addition
 Next elements will be tested:
@@ -16,7 +16,7 @@ Next elements will be tested:
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Overflow conditions in addition
-Started         : 2017/03/21 - 07:34:55
+Started         : 2017/03/22 - 19:44:19
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Add()
@@ -27,13 +27,13 @@ Shall raise CryptAda_Overflow_Error
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:55
+Finished        : 2017/03/22 - 19:44:19
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Basic addition operations
-Started         : 2017/03/21 - 07:34:55
+Started         : 2017/03/22 - 19:44:19
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Add()
@@ -95,13 +95,13 @@ Values match
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:55
+Finished        : 2017/03/22 - 19:44:19
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Testing additive identity
-Started         : 2017/03/21 - 07:34:55
+Started         : 2017/03/22 - 19:44:19
 --------------------------------------------------------------------------------
 [I] Subprogams tested:
 - Add()
@@ -110,13 +110,13 @@ Performing  100000 iterations, adding Zero_Digit_Sequence to random digit sequen
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:55
+Finished        : 2017/03/22 - 19:44:19
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Testing addition conmutative property
-Started         : 2017/03/21 - 07:34:55
+Started         : 2017/03/22 - 19:44:19
 --------------------------------------------------------------------------------
 [I] Subprogams tested:
 - Add()
@@ -125,13 +125,13 @@ Performing  100000 iterations with random Digit_Sequences
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:55
+Finished        : 2017/03/22 - 19:44:19
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Testing addition associative property
-Started         : 2017/03/21 - 07:34:55
+Started         : 2017/03/22 - 19:44:19
 --------------------------------------------------------------------------------
 [I] Subprogams tested:
 - Add()
@@ -140,13 +140,13 @@ Performing  100000 iterations with random Digit_Sequences
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:55
+Finished        : 2017/03/22 - 19:44:19
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : Overflow conditions in Add_Digit
-Started         : 2017/03/21 - 07:34:55
+Started         : 2017/03/22 - 19:44:19
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Add_Digit()
@@ -157,13 +157,13 @@ Shall raise CryptAda_Overflow_Error
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:55
+Finished        : 2017/03/22 - 19:44:19
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
 Description     : Basic Add_Digit operations
-Started         : 2017/03/21 - 07:34:55
+Started         : 2017/03/22 - 19:44:19
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Add_Digit()
@@ -218,13 +218,13 @@ Performing  100000 iterations, adding 0 to random digit sequences
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:55
+Finished        : 2017/03/22 - 19:44:19
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 8
 Description     : Bulk Add_Digit operations
-Started         : 2017/03/21 - 07:34:55
+Started         : 2017/03/22 - 19:44:19
 --------------------------------------------------------------------------------
 [I] Subprograms tested:
 - Add_Digit()
@@ -235,11 +235,11 @@ Performing  100000 iterations.
 --------------------------------------------------------------------------------
 Test Case Number: 8
 Test Case Result: PASSED
-Finished        : 2017/03/21 - 07:34:55
+Finished        : 2017/03/22 - 19:44:19
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Big_Naturals.Tests.Add
-Finished                 : 2017/03/21 - 07:34:55
+Finished                 : 2017/03/22 - 19:44:19
 ================================================================================

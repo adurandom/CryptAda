@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Tiger
 Description              : Unit test driver for CryptAda.Digests.Algorithms.Tiger functionality.
-Started                  : 2017/03/20 - 11:08:20
+Started                  : 2017/03/22 - 19:49:34
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : CryptAda message digest basic operation
-Started         : 2017/03/20 - 11:08:20
+Started         : 2017/03/22 - 19:49:34
 --------------------------------------------------------------------------------
 [I] Tiger digest parameters:
     Passes                        : " 3"
@@ -365,13 +365,13 @@ Started         : 2017/03/20 - 11:08:20
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:20
+Finished        : 2017/03/22 - 19:49:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Standard Tiger test vectors (192-bit, 3 passes)
-Started         : 2017/03/20 - 11:08:20
+Started         : 2017/03/22 - 19:49:34
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from http://www.cs.technion.ac.il/~biham/Reports/Tiger/test-vectors-nessie-format.dat
     Number of vectors to test:  8
@@ -503,13 +503,13 @@ Started         : 2017/03/20 - 11:08:20
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:20
+Finished        : 2017/03/22 - 19:49:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : CryptAda Tiger (128-bit, 3 passes) test vectors
-Started         : 2017/03/20 - 11:08:20
+Started         : 2017/03/22 - 19:49:34
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
     Number of vectors to test:  9
@@ -673,13 +673,13 @@ Started         : 2017/03/20 - 11:08:20
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:20
+Finished        : 2017/03/22 - 19:49:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : CryptAda Tiger (160-bit, 3 passes) test vectors
-Started         : 2017/03/20 - 11:08:20
+Started         : 2017/03/22 - 19:49:34
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
     Number of vectors to test:  9
@@ -843,13 +843,13 @@ Started         : 2017/03/20 - 11:08:20
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:20
+Finished        : 2017/03/22 - 19:49:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : CryptAda Tiger (192-bit, 3 passes) test vectors
-Started         : 2017/03/20 - 11:08:20
+Started         : 2017/03/22 - 19:49:34
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
     Number of vectors to test:  9
@@ -1013,13 +1013,13 @@ Started         : 2017/03/20 - 11:08:20
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:20
+Finished        : 2017/03/22 - 19:49:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : CryptAda Tiger (128-bit, 4 passes) test vectors
-Started         : 2017/03/20 - 11:08:20
+Started         : 2017/03/22 - 19:49:34
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
     Number of vectors to test:  9
@@ -1183,13 +1183,13 @@ Started         : 2017/03/20 - 11:08:20
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:20
+Finished        : 2017/03/22 - 19:49:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
 Description     : CryptAda Tiger (160-bit, 4 passes) test vectors
-Started         : 2017/03/20 - 11:08:20
+Started         : 2017/03/22 - 19:49:34
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
     Number of vectors to test:  9
@@ -1353,13 +1353,13 @@ Started         : 2017/03/20 - 11:08:20
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:20
+Finished        : 2017/03/22 - 19:49:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 8
 Description     : CryptAda Tiger (192-bit, 4 passes) test vectors
-Started         : 2017/03/20 - 11:08:20
+Started         : 2017/03/22 - 19:49:34
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
     Number of vectors to test:  9
@@ -1523,13 +1523,13 @@ Started         : 2017/03/20 - 11:08:20
 --------------------------------------------------------------------------------
 Test Case Number: 8
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:20
+Finished        : 2017/03/22 - 19:49:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 9
 Description     : Testing Tiger operation (128-bit, 3 passes) at counter offset and block boundary.
-Started         : 2017/03/20 - 11:08:20
+Started         : 2017/03/22 - 19:49:34
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at counter offset boundary.
@@ -1599,13 +1599,13 @@ Vector length:  65
 --------------------------------------------------------------------------------
 Test Case Number: 9
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:20
+Finished        : 2017/03/22 - 19:49:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 10
 Description     : Testing Tiger operation (160-bit, 3 passes) at counter offset and block boundary.
-Started         : 2017/03/20 - 11:08:20
+Started         : 2017/03/22 - 19:49:34
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at counter offset boundary.
@@ -1675,13 +1675,13 @@ Vector length:  65
 --------------------------------------------------------------------------------
 Test Case Number: 10
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:20
+Finished        : 2017/03/22 - 19:49:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 11
 Description     : Testing Tiger operation (192-bit, 3 passes) at counter offset and block boundary.
-Started         : 2017/03/20 - 11:08:20
+Started         : 2017/03/22 - 19:49:34
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at counter offset boundary.
@@ -1751,13 +1751,13 @@ Vector length:  65
 --------------------------------------------------------------------------------
 Test Case Number: 11
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:20
+Finished        : 2017/03/22 - 19:49:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 12
 Description     : Testing Tiger operation (128-bit, 4 passes) at counter offset and block boundary.
-Started         : 2017/03/20 - 11:08:20
+Started         : 2017/03/22 - 19:49:34
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at counter offset boundary.
@@ -1827,13 +1827,13 @@ Vector length:  65
 --------------------------------------------------------------------------------
 Test Case Number: 12
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:20
+Finished        : 2017/03/22 - 19:49:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 13
 Description     : Testing Tiger operation (160-bit, 4 passes) at counter offset and block boundary.
-Started         : 2017/03/20 - 11:08:20
+Started         : 2017/03/22 - 19:49:34
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at counter offset boundary.
@@ -1903,13 +1903,13 @@ Vector length:  65
 --------------------------------------------------------------------------------
 Test Case Number: 13
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:20
+Finished        : 2017/03/22 - 19:49:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 14
 Description     : Testing Tiger operation (192-bit, 4 passes) at counter offset and block boundary.
-Started         : 2017/03/20 - 11:08:20
+Started         : 2017/03/22 - 19:49:34
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at counter offset boundary.
@@ -1979,13 +1979,13 @@ Vector length:  65
 --------------------------------------------------------------------------------
 Test Case Number: 14
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:20
+Finished        : 2017/03/22 - 19:49:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Another standard Tiger (192-bit, 3 passes) test vector: 1,000,000 repetitions of 'a'
-Started         : 2017/03/20 - 11:08:20
+Started         : 2017/03/22 - 19:49:34
 --------------------------------------------------------------------------------
 [I] Performng 1,000 iteratios with a 1,000 bytes buffer
     Expected bit count (Low, High): ( 8000000,  0)
@@ -1997,11 +1997,11 @@ Started         : 2017/03/20 - 11:08:20
 --------------------------------------------------------------------------------
 Test Case Number: 15
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:20
+Finished        : 2017/03/22 - 19:49:34
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Tiger
-Finished                 : 2017/03/20 - 11:08:20
+Finished                 : 2017/03/22 - 19:49:34
 ================================================================================

@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Base64_Encoders
 Description              : Unit test driver for CryptAda.Encoders.Base64_Encoders functionality.
-Started                  : 2017/03/20 - 11:08:18
+Started                  : 2017/03/22 - 19:44:14
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Testing state and counters during encoding.
-Started         : 2017/03/20 - 11:08:18
+Started         : 2017/03/22 - 19:44:14
 --------------------------------------------------------------------------------
 [I] Initial state of encoder object ...
 [I] Checking encoder state:
@@ -62,13 +62,13 @@ Obtained: "KGMpIDIwMTcsIFRDYW50b3MgU29mdHdhcmU="
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:18
+Finished        : 2017/03/22 - 19:44:14
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Testing CryptAda_Bad_Operation_Error raising in Idle_State
-Started         : 2017/03/20 - 11:08:18
+Started         : 2017/03/22 - 19:44:14
 --------------------------------------------------------------------------------
 [I] Initial state of encoder object is State_Idle
 [I] Checking encoder state:
@@ -91,13 +91,13 @@ Obtained Code Count:  0
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:18
+Finished        : 2017/03/22 - 19:44:14
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Testing CryptAda_Bad_Operation_Error raising in Encoding_State
-Started         : 2017/03/20 - 11:08:18
+Started         : 2017/03/22 - 19:44:14
 --------------------------------------------------------------------------------
 [I] Initial state of encoder object is State_Idle
 [I] Checking encoder state:
@@ -131,13 +131,13 @@ Obtained Code Count:  0
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:18
+Finished        : 2017/03/22 - 19:44:14
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Testing state and counters during decoding.
-Started         : 2017/03/20 - 11:08:18
+Started         : 2017/03/22 - 19:44:14
 --------------------------------------------------------------------------------
 [I] Initial state of encoder object ...
 [I] Checking encoder state:
@@ -191,13 +191,13 @@ Obtained decoded array:
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:18
+Finished        : 2017/03/22 - 19:44:14
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Testing CryptAda_Bad_Operation_Error raising in Decoding_State
-Started         : 2017/03/20 - 11:08:18
+Started         : 2017/03/22 - 19:44:14
 --------------------------------------------------------------------------------
 [I] Initial state of encoder object is State_Idle
 [I] Checking encoder state:
@@ -231,13 +231,13 @@ Obtained Code Count:  0
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:18
+Finished        : 2017/03/22 - 19:44:14
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : Testing encoding/decoding with different Base64 alphabets
-Started         : 2017/03/20 - 11:08:18
+Started         : 2017/03/22 - 19:44:14
 --------------------------------------------------------------------------------
 [I] Encoding with standard alphabet
 Encoding array   : 
@@ -273,13 +273,13 @@ Obtained decoding:
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:18
+Finished        : 2017/03/22 - 19:44:14
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
 Description     : Encoding and decoding one byte/code at a time.
-Started         : 2017/03/20 - 11:08:18
+Started         : 2017/03/22 - 19:44:14
 --------------------------------------------------------------------------------
 [I] Encoding byte by byte
 Byte array to encode
@@ -368,13 +368,13 @@ Expected encoding: "Zm9vYmFy"
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:18
+Finished        : 2017/03/22 - 19:44:14
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 8
 Description     : Testing encoding/decoding RFC 4648 test vectors
-Started         : 2017/03/20 - 11:08:18
+Started         : 2017/03/22 - 19:44:14
 --------------------------------------------------------------------------------
 [I] Encoding test vectors
 [I] Decoded (as string)     : ""
@@ -473,13 +473,13 @@ Obtained decoded (as byte array) :
 --------------------------------------------------------------------------------
 Test Case Number: 8
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:18
+Finished        : 2017/03/22 - 19:44:14
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 9
 Description     : Testing syntactic erroneous Base64 encoded strings
-Started         : 2017/03/20 - 11:08:18
+Started         : 2017/03/22 - 19:44:14
 --------------------------------------------------------------------------------
 [I] Using standard alphabet
 [I] Trying to decode: "       "
@@ -541,11 +541,11 @@ Calling to End_Decoding
 --------------------------------------------------------------------------------
 Test Case Number: 9
 Test Case Result: PASSED
-Finished        : 2017/03/20 - 11:08:18
+Finished        : 2017/03/22 - 19:44:14
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Base64_Encoders
-Finished                 : 2017/03/20 - 11:08:18
+Finished                 : 2017/03/22 - 19:44:14
 ================================================================================
