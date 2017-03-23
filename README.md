@@ -2,8 +2,6 @@
 
 CryptAda contains a pure Ada implementation of some cryptography primitives. It is based on an early development called Ada Cryptographic Framework (ACF). 
 
-There are other repositories containing early implementations (AdaCF and AdaCrypt) that in due course will be removed.
-
 At the moment of this writing (March 22nd, 2017) the following is implemented in CryptAda:
 
 * _Message Digest Algorithms_
