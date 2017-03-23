@@ -1,0 +1,74 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.1.a (2017/03/31)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Time.Whirlpool
+Description              : Time trial for CryptAda.Digests.Algorithms.Whirlpool functionality.
+Started                  : 2017/03/23 - 07:07:44
+================================================================================
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 1
+Description      : Whirlpool hashing
+Started          : 2017/03/23 - 07:07:44
+--------------------------------------------------------------------------------
+[I] Hashing 1MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.WHIRLPOOL.WHIRLPOOL_DIGEST"
+    CryptAda digest algorithm id  : "MD_WHIRLPOOL"
+    Digest algorithm SCAN name    : ""
+    Digest algorithm ASN1 OID     : "1.0.10118.3.0.55"
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  64
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  64
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  1 MB
+    Buffer size        :  1 KB
+    Iterations         :  1024
+[I] Time trial completed
+    Elapsed time       :           0.017218229 secs.
+    Counter (Low, High): ( 8388608,  0)
+    Obtained hash      : "f2e69d390184956c5021f9bfa1c86e8c591e725486f62ab124d3ec0dfba7aa15d690b136e518340db56a51685a64e65ccd1a26330f1e8d8a88fc04fefd8c5b7d"
+--------------------------------------------------------------------------------
+Time Trial Number: 1
+Finished         : 2017/03/23 - 07:07:44
+--[End Time Trial]--------------------------------------------------------------
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 2
+Description      : Whirlpool hashing
+Started          : 2017/03/23 - 07:07:44
+--------------------------------------------------------------------------------
+[I] Hashing 10MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.WHIRLPOOL.WHIRLPOOL_DIGEST"
+    CryptAda digest algorithm id  : "MD_WHIRLPOOL"
+    Digest algorithm SCAN name    : ""
+    Digest algorithm ASN1 OID     : "1.0.10118.3.0.55"
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  64
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  64
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  10 MB
+    Buffer size        :  4 KB
+    Iterations         :  2560
+[I] Time trial completed
+    Elapsed time       :           0.170792090 secs.
+    Counter (Low, High): ( 83886080,  0)
+    Obtained hash      : "769e3cffdef492a68e514d37478eb149cc4639b279ca2bd9b43a0ec0d07c8515e726817948917bcf8b39ee49d0e97fcae9e4f1535955d5590774d438f4d2d321"
+--------------------------------------------------------------------------------
+Time Trial Number: 2
+Finished         : 2017/03/23 - 07:07:44
+--[End Time Trial]--------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Time.Whirlpool
+Finished                 : 2017/03/23 - 07:07:44
+================================================================================

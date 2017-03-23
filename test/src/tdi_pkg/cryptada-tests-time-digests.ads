@@ -16,25 +16,50 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  tt_md2.adb
---    File kind         :  Ada procedure body.
+--    Filename          :  cryptada-tests-time-digests.ads
+--    File kind         :  Ada package specification.
 --    Author            :  A. Duran
---    Creation date     :  March 1st, 2017
+--    Creation date     :  March 12th, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Time trial for CryptAda.Digests.Algorithms.MD2
+--    This package contains the test driver of time trials for message digests
+--    algorithms.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
---    1.0   20170221 ADD   Initial implementation.
+--    1.0   20170312 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with CryptAda.Tests.Time.MD2;
+with CryptAda.Digests.Algorithms;
 
-procedure TT_MD2
-is
-begin
-   CryptAda.Tests.Time.MD2.Test_Driver;
-end TT_MD2;
+package CryptAda.Tests.Time.Digests is
+
+   --[Digest_Time_Trial]--------------------------------------------------------
+   -- Purpose:
+   -- Performs a time trial on a message digest object. The procedure will
+   -- fill a buffer of Buffer_Size KB with random bytres and repeteadly call
+   -- to the digest method to digest To_Digest MB of data. Finally it will
+   -- return the Duration of the digest process.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- Digest               Digest algorithm to use. It must be started with the
+   --                      apropriate parameters.
+   -- To_Digest            MB to digest.
+   -- Buffer_Size          Size of buffer in KBs
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   procedure   Digest_Time_Trial(
+                  Digest         : in out CryptAda.Digests.Algorithms.Digest_Algorithm'Class;
+                  To_Digest      : in     Positive := 10;
+                  Buffer_Size    : in     Positive := 1;
+                  Elapsed        :    out Duration);
+
+end CryptAda.Tests.Time.Digests;

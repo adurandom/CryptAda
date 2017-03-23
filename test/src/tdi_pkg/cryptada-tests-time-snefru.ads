@@ -16,25 +16,21 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  tt_md2.adb
---    File kind         :  Ada procedure body.
+--    Filename          :  cryptada-tests-time-snefru.ads
+--    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 1st, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Time trial for CryptAda.Digests.Algorithms.MD2
+--    Time trial for CryptAda.Digests.Algorithms.Snefru
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
---    1.0   20170221 ADD   Initial implementation.
+--    1.0   20170301 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with CryptAda.Tests.Time.MD2;
-
-procedure TT_MD2
-is
-begin
-   CryptAda.Tests.Time.MD2.Test_Driver;
-end TT_MD2;
+package CryptAda.Tests.Time.Snefru is
+   procedure Test_Driver;
+end CryptAda.Tests.Time.Snefru;

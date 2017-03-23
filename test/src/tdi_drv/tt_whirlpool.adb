@@ -16,14 +16,14 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  adacrypt-tests-time.ads
---    File kind         :  Ada package specification.
+--    Filename          :  tt_whirlpool.adb
+--    File kind         :  Ada procedure body.
 --    Author            :  A. Duran
---    Creation date     :  March 1st, 2017
+--    Creation date     :  March 2nd, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Root package for AdaCrypt time tests.
+--    Time trial for CryptAda.Digests.Algorithms.Whirlpool
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
@@ -31,6 +31,10 @@
 --    1.0   20170301 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-package AdaCrypt.Tests.Time is
-   pragma Pure(Time);
-end AdaCrypt.Tests.Time;
+with CryptAda.Tests.Time.Whirlpool;
+
+procedure TT_Whirlpool
+is
+begin
+   CryptAda.Tests.Time.Whirlpool.Test_Driver;
+end TT_Whirlpool;

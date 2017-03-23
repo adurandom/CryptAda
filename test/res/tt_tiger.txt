@@ -1,0 +1,328 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.1.a (2017/03/31)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Time.Tiger
+Description              : Time trial for CryptAda.Digests.Algorithms.Tiger functionality.
+Started                  : 2017/03/23 - 07:07:42
+================================================================================
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 1
+Description      : Tiger 128-bit hashing
+Started          : 2017/03/23 - 07:07:42
+--------------------------------------------------------------------------------
+[I] Hash size : TIGER_128
+    Passes    :  3
+    Hashing 1MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_128_3"
+    Digest algorithm SCAN name    : "Tiger(16,3)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  16
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  16
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  1 MB
+    Buffer size        :  1 KB
+    Iterations         :  1024
+[I] Time trial completed
+    Elapsed time       :           0.008689808 secs.
+    Counter (Low, High): ( 8388608,  0)
+    Obtained hash      : "283171ff477797a9f8ab8d5fbdddfadf"
+[I] Hash size : TIGER_128
+    Passes    :  4
+    Hashing 1MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_128_4"
+    Digest algorithm SCAN name    : "Tiger(16,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  16
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  16
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  1 MB
+    Buffer size        :  1 KB
+    Iterations         :  1024
+[I] Time trial completed
+    Elapsed time       :           0.010325367 secs.
+    Counter (Low, High): ( 8388608,  0)
+    Obtained hash      : "2e625493b28f9b0d9890c21c3976b094"
+--------------------------------------------------------------------------------
+Time Trial Number: 1
+Finished         : 2017/03/23 - 07:07:42
+--[End Time Trial]--------------------------------------------------------------
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 2
+Description      : Tiger 128-bit hashing
+Started          : 2017/03/23 - 07:07:42
+--------------------------------------------------------------------------------
+[I] Hash size : TIGER_128
+    Passes    :  3
+    Hashing 10MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_128_3"
+    Digest algorithm SCAN name    : "Tiger(16,3)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  16
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  16
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  10 MB
+    Buffer size        :  4 KB
+    Iterations         :  2560
+[I] Time trial completed
+    Elapsed time       :           0.086292674 secs.
+    Counter (Low, High): ( 83886080,  0)
+    Obtained hash      : "1bf14ff95f28601f80e23b168f689286"
+[I] Hash size : TIGER_128
+    Passes    :  4
+    Hashing 10MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_128_4"
+    Digest algorithm SCAN name    : "Tiger(16,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  16
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  16
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  10 MB
+    Buffer size        :  4 KB
+    Iterations         :  2560
+[I] Time trial completed
+    Elapsed time       :           0.101292473 secs.
+    Counter (Low, High): ( 83886080,  0)
+    Obtained hash      : "227a2fd2791bdf8e487a52b6cad2b4d0"
+--------------------------------------------------------------------------------
+Time Trial Number: 2
+Finished         : 2017/03/23 - 07:07:42
+--[End Time Trial]--------------------------------------------------------------
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 3
+Description      : Tiger 160-bit hashing
+Started          : 2017/03/23 - 07:07:42
+--------------------------------------------------------------------------------
+[I] Hash size : TIGER_160
+    Passes    :  3
+    Hashing 1MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_160_3"
+    Digest algorithm SCAN name    : "Tiger(20,3)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  20
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  20
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  1 MB
+    Buffer size        :  1 KB
+    Iterations         :  1024
+[I] Time trial completed
+    Elapsed time       :           0.008660316 secs.
+    Counter (Low, High): ( 8388608,  0)
+    Obtained hash      : "ec7ab2f1c287675115eb3371e5761faf20feaebd"
+[I] Hash size : TIGER_160
+    Passes    :  4
+    Hashing 1MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_160_4"
+    Digest algorithm SCAN name    : "Tiger(20,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  20
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  20
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  1 MB
+    Buffer size        :  1 KB
+    Iterations         :  1024
+[I] Time trial completed
+    Elapsed time       :           0.010195112 secs.
+    Counter (Low, High): ( 8388608,  0)
+    Obtained hash      : "972a6049ee0f3a2cb1762a66e86730fa4662fead"
+--------------------------------------------------------------------------------
+Time Trial Number: 3
+Finished         : 2017/03/23 - 07:07:42
+--[End Time Trial]--------------------------------------------------------------
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 4
+Description      : Tiger 160-bit hashing
+Started          : 2017/03/23 - 07:07:42
+--------------------------------------------------------------------------------
+[I] Hash size : TIGER_160
+    Passes    :  3
+    Hashing 10MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_160_3"
+    Digest algorithm SCAN name    : "Tiger(20,3)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  20
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  20
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  10 MB
+    Buffer size        :  4 KB
+    Iterations         :  2560
+[I] Time trial completed
+    Elapsed time       :           0.086590048 secs.
+    Counter (Low, High): ( 83886080,  0)
+    Obtained hash      : "7b03a80156569b09a3f806c86021d650f4be373b"
+[I] Hash size : TIGER_160
+    Passes    :  4
+    Hashing 10MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_160_4"
+    Digest algorithm SCAN name    : "Tiger(20,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  20
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  20
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  10 MB
+    Buffer size        :  4 KB
+    Iterations         :  2560
+[I] Time trial completed
+    Elapsed time       :           0.102776478 secs.
+    Counter (Low, High): ( 83886080,  0)
+    Obtained hash      : "fef2c02fd3a66ddc0da9bd57067acacbae098875"
+--------------------------------------------------------------------------------
+Time Trial Number: 4
+Finished         : 2017/03/23 - 07:07:42
+--[End Time Trial]--------------------------------------------------------------
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 5
+Description      : Tiger 192-bit hashing
+Started          : 2017/03/23 - 07:07:42
+--------------------------------------------------------------------------------
+[I] Hash size : TIGER_192
+    Passes    :  3
+    Hashing 1MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_192_3"
+    Digest algorithm SCAN name    : "Tiger(24,3)"
+    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.11591.12.2"
+    Digest algorithm OpenPGP name : "OpenPGP.Digest.6"
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  1 MB
+    Buffer size        :  1 KB
+    Iterations         :  1024
+[I] Time trial completed
+    Elapsed time       :           0.008664002 secs.
+    Counter (Low, High): ( 8388608,  0)
+    Obtained hash      : "633e2c1f514e0a6263a01defcfb6498fa14c919669fa3452"
+[I] Hash size : TIGER_192
+    Passes    :  4
+    Hashing 1MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_192_4"
+    Digest algorithm SCAN name    : "Tiger(24,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  1 MB
+    Buffer size        :  1 KB
+    Iterations         :  1024
+[I] Time trial completed
+    Elapsed time       :           0.010209858 secs.
+    Counter (Low, High): ( 8388608,  0)
+    Obtained hash      : "17d1847404b3d8765cfbcefc812217c53c0ed1b56e08518d"
+--------------------------------------------------------------------------------
+Time Trial Number: 5
+Finished         : 2017/03/23 - 07:07:42
+--[End Time Trial]--------------------------------------------------------------
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 6
+Description      : Tiger 192-bit hashing
+Started          : 2017/03/23 - 07:07:42
+--------------------------------------------------------------------------------
+[I] Hash size : TIGER_192
+    Passes    :  3
+    Hashing 10MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_192_3"
+    Digest algorithm SCAN name    : "Tiger(24,3)"
+    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.11591.12.2"
+    Digest algorithm OpenPGP name : "OpenPGP.Digest.6"
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  10 MB
+    Buffer size        :  4 KB
+    Iterations         :  2560
+[I] Time trial completed
+    Elapsed time       :           0.086567930 secs.
+    Counter (Low, High): ( 83886080,  0)
+    Obtained hash      : "332dd205fe6ff3071be0e1fa4b6b9e4018f28498fe067478"
+[I] Hash size : TIGER_192
+    Passes    :  4
+    Hashing 10MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER_192_4"
+    Digest algorithm SCAN name    : "Tiger(24,4)"
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  10 MB
+    Buffer size        :  4 KB
+    Iterations         :  2560
+[I] Time trial completed
+    Elapsed time       :           0.101716007 secs.
+    Counter (Low, High): ( 83886080,  0)
+    Obtained hash      : "8d15bcd9509c780a1f119a81b8b33f23c522d327e73aa609"
+--------------------------------------------------------------------------------
+Time Trial Number: 6
+Finished         : 2017/03/23 - 07:07:43
+--[End Time Trial]--------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Time.Tiger
+Finished                 : 2017/03/23 - 07:07:43
+================================================================================

@@ -16,7 +16,7 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  adacrypt-tests-time-digests.adb
+--    Filename          :  cryptada-tests-time-digests.adb
 --    File kind         :  Ada package body
 --    Author            :  A. Duran
 --    Creation date     :  March 12th, 2017
@@ -35,14 +35,14 @@
 with Ada.Real_Time;                       use Ada.Real_Time;
 with Ada.Text_IO;                         use Ada.Text_IO;
 
-with AdaCrypt.Pragmatics;                 use AdaCrypt.Pragmatics;
-with AdaCrypt.Digests.Counters;           use AdaCrypt.Digests.Counters;
-with AdaCrypt.Digests.Hashes;             use AdaCrypt.Digests.Hashes;
-with AdaCrypt.Digests.Algorithms;         use AdaCrypt.Digests.Algorithms;
-with AdaCrypt.Tests.Utils;                use AdaCrypt.Tests.Utils;
-with AdaCrypt.Tests.Utils.Digests;        use AdaCrypt.Tests.Utils.Digests;
+with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
+with CryptAda.Digests.Counters;           use CryptAda.Digests.Counters;
+with CryptAda.Digests.Hashes;             use CryptAda.Digests.Hashes;
+with CryptAda.Digests.Algorithms;         use CryptAda.Digests.Algorithms;
+with CryptAda.Tests.Utils;                use CryptAda.Tests.Utils;
+with CryptAda.Tests.Utils.Digests;        use CryptAda.Tests.Utils.Digests;
 
-package body AdaCrypt.Tests.Time.Digests is
+package body CryptAda.Tests.Time.Digests is
 
    -----------------------------------------------------------------------------
    --[Generic Instantiations]---------------------------------------------------
@@ -99,4 +99,4 @@ package body AdaCrypt.Tests.Time.Digests is
       Elapsed := To_Duration(TS);
    end Digest_Time_Trial;
 
-end AdaCrypt.Tests.Time.Digests;
+end CryptAda.Tests.Time.Digests;

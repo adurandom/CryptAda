@@ -16,14 +16,14 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  adacrypt-tests-time-md2.ads
---    File kind         :  Ada package specification.
+--    Filename          :  tt_sha_1.adb
+--    File kind         :  Ada procedure body.
 --    Author            :  A. Duran
 --    Creation date     :  March 1st, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Time trial for AdaCrypt.Digests.Algorithms.MD2
+--    Time trial for CryptAda.Digests.Algorithms.SHA_1
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
@@ -31,6 +31,10 @@
 --    1.0   20170301 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-package AdaCrypt.Tests.Time.MD2 is
-   procedure Test_Driver;
-end AdaCrypt.Tests.Time.MD2;
+with CryptAda.Tests.Time.SHA_1;
+
+procedure TT_SHA_1
+is
+begin
+   CryptAda.Tests.Time.SHA_1.Test_Driver;
+end TT_SHA_1;

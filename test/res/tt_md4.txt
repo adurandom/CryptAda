@@ -1,0 +1,74 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.1.a (2017/03/31)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Time.MD4
+Description              : Time trial for CryptAda.Digests.Algorithms.MD4 functionality.
+Started                  : 2017/03/23 - 07:07:36
+================================================================================
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 1
+Description      : MD4 hashing
+Started          : 2017/03/23 - 07:07:36
+--------------------------------------------------------------------------------
+[I] Hashing 1MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.MD4.MD4_DIGEST"
+    CryptAda digest algorithm id  : "MD_MD4"
+    Digest algorithm SCAN name    : "MD4"
+    Digest algorithm ASN1 OID     : "1.2.840.113549.2.4"
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  16
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  16
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  1 MB
+    Buffer size        :  1 KB
+    Iterations         :  1024
+[I] Time trial completed
+    Elapsed time       :           0.002068923 secs.
+    Counter (Low, High): ( 8388608,  0)
+    Obtained hash      : "d52705c6cf3606522e035301bc3a078c"
+--------------------------------------------------------------------------------
+Time Trial Number: 1
+Finished         : 2017/03/23 - 07:07:36
+--[End Time Trial]--------------------------------------------------------------
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 2
+Description      : MD4 hashing
+Started          : 2017/03/23 - 07:07:36
+--------------------------------------------------------------------------------
+[I] Hashing 10MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.MD4.MD4_DIGEST"
+    CryptAda digest algorithm id  : "MD_MD4"
+    Digest algorithm SCAN name    : "MD4"
+    Digest algorithm ASN1 OID     : "1.2.840.113549.2.4"
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  16
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  16
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  10 MB
+    Buffer size        :  4 KB
+    Iterations         :  2560
+[I] Time trial completed
+    Elapsed time       :           0.020551609 secs.
+    Counter (Low, High): ( 83886080,  0)
+    Obtained hash      : "131facc2fcf1393d646f7fc9345a641d"
+--------------------------------------------------------------------------------
+Time Trial Number: 2
+Finished         : 2017/03/23 - 07:07:36
+--[End Time Trial]--------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Time.MD4
+Finished                 : 2017/03/23 - 07:07:36
+================================================================================

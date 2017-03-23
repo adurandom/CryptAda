@@ -69,6 +69,7 @@ CTS_URN_PKG     =  $(CT_SRC)/urn_pkg/
 CTS_URN_DRV     =  $(CT_SRC)/urn_drv/
 CTS_UBN_PKG     =  $(CT_SRC)/ubn_pkg/
 CTS_UBN_DRV     =  $(CT_SRC)/ubn_drv/
+
 CTS_TDI_PKG     =  $(CT_SRC)/tdi_pkg/
 CTS_TDI_DRV     =  $(CT_SRC)/tdi_drv/
 
@@ -81,17 +82,13 @@ CTB_UDIG        = $(CT_BIN)/u_dig
 CTB_URND        = $(CT_BIN)/u_rnd
 CTB_UBN         = $(CT_BIN)/u_bn
 
+CTB_TDIG        = $(CT_BIN)/t_dig
+
 #>>>[Compilation]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-CC          =  gcc
-CFLAGS      =  -c -O3 -gnat05 -gnata -gnatn -gnatwa
-SOURCEDIRS  =  -I$(TSRCBASE) -I$(TSRCUPKG) -I$(TSRCBNPKG) -I$(ACBASE) -I$(ACNAMES) -I$(ACPRAGMA) -I$(ACUTILS) -I$(ACENCODERS) -I$(ACDIGESTS) -I$(ACRANDOM) -I$(ACBN)
-
-
-
 
 ADAMAKER    = gnatmake
 ADAFLAGS    = -O3 -gnat05 -gnata -gnatn -gnatwa -D $(CT_OBJ)
+
 IDIR_UUT    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UUT_PKG) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS)
 IDIR_UPR    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UPR_PKG) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS)
 IDIR_UEN    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UEN_PKG) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_ENCODERS)
@@ -99,9 +96,7 @@ IDIR_UDI    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UDI_PKG) -I$(CAS_BASE) -I$(CA
 IDIR_URN    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_URN_PKG) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_DIGESTS) -I$(CAS_RANDOM)
 IDIR_UBN    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UBN_PKG) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_BN)
 
-#>>>[Ada Body Extension]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-adb         = .adb
+IDIR_TDI    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_TDI_PKG) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_DIGESTS)
 
 #>>>[Delete command]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -150,6 +145,22 @@ U_BN        =   $(CTB_UBN)/ut_bn_basic.exe \
                 $(CTB_UBN)/ut_bn_mult.exe \
                 $(CTB_UBN)/ut_bn_div.exe
 
+T_DIG       =   $(CTB_TDIG)/tt_md2.exe \
+                $(CTB_TDIG)/tt_md4.exe \
+                $(CTB_TDIG)/tt_md5.exe \
+                $(CTB_TDIG)/tt_ripemd_128.exe \
+                $(CTB_TDIG)/tt_ripemd_160.exe \
+                $(CTB_TDIG)/tt_sha_1.exe \
+                $(CTB_TDIG)/tt_sha_224.exe \
+                $(CTB_TDIG)/tt_sha_256.exe \
+                $(CTB_TDIG)/tt_sha_384.exe \
+                $(CTB_TDIG)/tt_sha_512.exe \
+                $(CTB_TDIG)/tt_sha_3.exe \
+                $(CTB_TDIG)/tt_snefru.exe \
+                $(CTB_TDIG)/tt_tiger.exe \
+                $(CTB_TDIG)/tt_haval.exe \
+                $(CTB_TDIG)/tt_whirlpool.exe
+                                
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 .PHONY: all unit time clean run
@@ -300,13 +311,77 @@ $(CTB_UBN)/ut_bn_div.exe: $(CTS_UBN_DRV)ut_bn_div.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UBN) $(ADAFLAGS) -o $@ $<
 
+#>>>[Building time trials Drivers]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+# Digests time trials
+
+$(CTB_TDIG)/tt_md2.exe: $(CTS_TDI_DRV)tt_md2.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_TDIG)/tt_md4.exe: $(CTS_TDI_DRV)tt_md4.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_TDIG)/tt_md5.exe: $(CTS_TDI_DRV)tt_md5.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_TDIG)/tt_ripemd_128.exe: $(CTS_TDI_DRV)tt_ripemd_128.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_TDIG)/tt_ripemd_160.exe: $(CTS_TDI_DRV)tt_ripemd_160.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_TDIG)/tt_sha_1.exe: $(CTS_TDI_DRV)tt_sha_1.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_TDIG)/tt_sha_224.exe: $(CTS_TDI_DRV)tt_sha_224.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_TDIG)/tt_sha_256.exe: $(CTS_TDI_DRV)tt_sha_256.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_TDIG)/tt_sha_384.exe: $(CTS_TDI_DRV)tt_sha_384.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_TDIG)/tt_sha_512.exe: $(CTS_TDI_DRV)tt_sha_512.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_TDIG)/tt_sha_3.exe: $(CTS_TDI_DRV)tt_sha_3.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_TDIG)/tt_snefru.exe: $(CTS_TDI_DRV)tt_snefru.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_TDIG)/tt_tiger.exe: $(CTS_TDI_DRV)tt_tiger.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_TDIG)/tt_haval.exe: $(CTS_TDI_DRV)tt_haval.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_TDIG)/tt_whirlpool.exe: $(CTS_TDI_DRV)tt_whirlpool.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+    
 #>>>[Targets]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 all: unit time
 
 unit: $(U_UTILS) $(U_PRAG) $(U_ENC) $(U_DIG) $(U_RND) $(U_BN)
 
-time: $(TIMEDRV)
+time: $(T_DIG)
 
 clean:
 	$(DELCMD) $(CT_OBJ)/*.o
@@ -358,9 +433,11 @@ r_bn: $(U_BN)
 		echo Running big naturals test driver: $$testdriver ... ; \
 		$(CTB_UBN)/$$testdriver.exe > $(CT_RES)/$$testdriver.txt ;\
 	done
-    
-r_time: $(TIMEDRV)
+
+r_time: r_t_dig
+
+r_t_dig: $(T_DIG)
 	for testdriver in $(basename $(notdir $^)); do \
-		echo Running test driver: $$testdriver ... ; \
-		$(TBIN)/$$testdriver.exe > $(TRES)/$$testdriver.txt ;\
+		echo Running big naturals test driver: $$testdriver ... ; \
+		$(CTB_TDIG)/$$testdriver.exe > $(CT_RES)/$$testdriver.txt ;\
 	done

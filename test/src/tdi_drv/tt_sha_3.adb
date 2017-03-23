@@ -16,25 +16,25 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  tt_md2.adb
+--    Filename          :  tt_sha_3.adb
 --    File kind         :  Ada procedure body.
 --    Author            :  A. Duran
 --    Creation date     :  March 1st, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Time trial for CryptAda.Digests.Algorithms.MD2
+--    Time trial for CryptAda.Digests.Algorithms.SHA_3
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
---    1.0   20170221 ADD   Initial implementation.
+--    1.0   20170301 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with CryptAda.Tests.Time.MD2;
+with CryptAda.Tests.Time.SHA_3;
 
-procedure TT_MD2
+procedure TT_SHA_3
 is
 begin
-   CryptAda.Tests.Time.MD2.Test_Driver;
-end TT_MD2;
+   CryptAda.Tests.Time.SHA_3.Test_Driver;
+end TT_SHA_3;

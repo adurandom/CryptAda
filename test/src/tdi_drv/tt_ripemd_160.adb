@@ -16,25 +16,25 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  tt_md2.adb
+--    Filename          :  tt_ripemd_160.adb
 --    File kind         :  Ada procedure body.
 --    Author            :  A. Duran
---    Creation date     :  March 1st, 2017
+--    Creation date     :  March 12th, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Time trial for CryptAda.Digests.Algorithms.MD2
+--    Time trial for CryptAda.Digests.Algorithms.RIPEMD_160
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
---    1.0   20170221 ADD   Initial implementation.
+--    1.0   20170312 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with CryptAda.Tests.Time.MD2;
+with CryptAda.Tests.Time.RIPEMD_160;
 
-procedure TT_MD2
+procedure TT_RIPEMD_160
 is
 begin
-   CryptAda.Tests.Time.MD2.Test_Driver;
-end TT_MD2;
+   CryptAda.Tests.Time.RIPEMD_160.Test_Driver;
+end TT_RIPEMD_160;

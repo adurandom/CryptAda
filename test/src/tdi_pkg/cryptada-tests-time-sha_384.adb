@@ -16,14 +16,14 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  adacrypt-tests-time-md2.adb
+--    Filename          :  cryptada-tests-time-sha_384.adb
 --    File kind         :  Ada package body
 --    Author            :  A. Duran
 --    Creation date     :  March 1st, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Time trial for AdaCrypt.Digests.Algorithms.MD2.
+--    Time trial for CryptAda.Digests.Algorithms.SHA_384.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
@@ -33,20 +33,21 @@
 
 with Ada.Exceptions;                      use Ada.Exceptions;
 
-with AdaCrypt.Tests.Utils;                use AdaCrypt.Tests.Utils;
-with AdaCrypt.Tests.Time.Digests;         use AdaCrypt.Tests.Time.Digests;
+with CryptAda.Tests.Utils;                use CryptAda.Tests.Utils;
+with CryptAda.Tests.Time.Digests;         use CryptAda.Tests.Time.Digests;
 
-with AdaCrypt.Digests.Algorithms.MD2;     use AdaCrypt.Digests.Algorithms.MD2;
 
-package body AdaCrypt.Tests.Time.MD2 is
+with CryptAda.Digests.Algorithms.SHA_384; use CryptAda.Digests.Algorithms.SHA_384;
+
+package body CryptAda.Tests.Time.SHA_384 is
 
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   Driver_Name                   : constant String := "AdaCrypt.Tests.Time.MD2";
+   Driver_Name                   : constant String := "CryptAda.Tests.Time.SHA_384";
 
-   Driver_Description            : constant String := "Time trial for AdaCrypt.Digests.Algorithms.MD2 functionality.";
+   Driver_Description            : constant String := "Time trial for CryptAda.Digests.Algorithms.SHA_384 functionality.";
 
    -----------------------------------------------------------------------------
    --[Test Cases Specs]---------------------------------------------------------
@@ -59,14 +60,15 @@ package body AdaCrypt.Tests.Time.MD2 is
    --[Test Cases Bodies]--------------------------------------------------------
    -----------------------------------------------------------------------------
 
+
    --[Case_1]-------------------------------------------------------------------
 
    procedure Case_1
    is
-      D           : MD2_Digest;
+      D           : SHA_384_Digest;
       Elapsed     : Duration;
    begin
-      Begin_Time_Trial(1, "MD2 hashing");
+      Begin_Time_Trial(1, "SHA_384 hashing");
       Print_Information_Message("Hashing 1MB");
 
       Digest_Start(D);
@@ -80,17 +82,17 @@ package body AdaCrypt.Tests.Time.MD2 is
          Print_Message(
             "Message  : """ & Exception_Message(X) & """");
          End_Test_Case(1, Failed);
-         raise AdaCrypt_Test_Error;
+         raise CryptAda_Test_Error;
    end Case_1;
 
    --[Case_2]-------------------------------------------------------------------
 
    procedure Case_2
    is
-      D           : MD2_Digest;
+      D           : SHA_384_Digest;
       Elapsed     : Duration;
    begin
-      Begin_Time_Trial(2, "MD2 hashing");
+      Begin_Time_Trial(2, "SHA_384 hashing");
       Print_Information_Message("Hashing 10MB");
 
       Digest_Start(D);
@@ -104,7 +106,7 @@ package body AdaCrypt.Tests.Time.MD2 is
          Print_Message(
             "Message  : """ & Exception_Message(X) & """");
          End_Test_Case(2, Failed);
-         raise AdaCrypt_Test_Error;
+         raise CryptAda_Test_Error;
    end Case_2;
 
    -----------------------------------------------------------------------------
@@ -127,4 +129,4 @@ package body AdaCrypt.Tests.Time.MD2 is
          End_Test_Driver(Driver_Name);
    end Test_Driver;
 
-end AdaCrypt.Tests.Time.MD2;
+end CryptAda.Tests.Time.SHA_384;
