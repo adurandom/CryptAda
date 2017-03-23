@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Time.HAVAL
 Description              : Time trial for CryptAda.Digests.Algorithms.HAVAL functionality.
-Started                  : 2017/03/23 - 07:07:43
+Started                  : 2017/03/23 - 08:20:56
 ================================================================================
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 1
 Description      : HAVAL 128-bit hashing
-Started          : 2017/03/23 - 07:07:43
+Started          : 2017/03/23 - 08:20:56
 --------------------------------------------------------------------------------
 [I] Hash size : HAVAL_128
     Passes    :  3
@@ -32,9 +32,9 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.003484525 secs.
+    Elapsed time       :           0.003534082 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "33841a5188e97503945f838804a7ef60"
+    Obtained hash      : "5f1c00d02aabd0dd120790330ea17b6d"
 [I] Hash size : HAVAL_128
     Passes    :  4
     Hashing 1MB
@@ -53,9 +53,9 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.005206511 secs.
+    Elapsed time       :           0.005183157 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "de46144bceae96144cf3fe9b7d17fb85"
+    Obtained hash      : "42b0a6457f04c7101a2e7de3336c3de8"
 [I] Hash size : HAVAL_128
     Passes    :  5
     Hashing 1MB
@@ -74,18 +74,18 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.006433283 secs.
+    Elapsed time       :           0.006575818 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "c372bf8243aaf42a52168eb03bd9eb98"
+    Obtained hash      : "7616ea96be996631c18ac58718315f81"
 --------------------------------------------------------------------------------
 Time Trial Number: 1
-Finished         : 2017/03/23 - 07:07:43
+Finished         : 2017/03/23 - 08:20:56
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 2
 Description      : HAVAL 128-bit hashing
-Started          : 2017/03/23 - 07:07:43
+Started          : 2017/03/23 - 08:20:56
 --------------------------------------------------------------------------------
 [I] Hash size : HAVAL_128
     Passes    :  3
@@ -105,9 +105,9 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.034591290 secs.
+    Elapsed time       :           0.035996607 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "d7b59c4a9f1086da527c21bafb436c88"
+    Obtained hash      : "574a374b3dd094d45272213db5ab5b6f"
 [I] Hash size : HAVAL_128
     Passes    :  4
     Hashing 10MB
@@ -126,9 +126,9 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.051867275 secs.
+    Elapsed time       :           0.052031053 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "a0427b3ac8827d4dc10758b9b4c6e55e"
+    Obtained hash      : "29bb3064a462ee869d227c42c0369cb5"
 [I] Hash size : HAVAL_128
     Passes    :  5
     Hashing 10MB
@@ -147,18 +147,18 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.065643578 secs.
+    Elapsed time       :           0.062774206 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "7e9484519cae32a724e1c6fde7c91a21"
+    Obtained hash      : "af206f81b2a685f8d863b2e958cdf602"
 --------------------------------------------------------------------------------
 Time Trial Number: 2
-Finished         : 2017/03/23 - 07:07:43
+Finished         : 2017/03/23 - 08:20:56
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 3
 Description      : HAVAL 160-bit hashing
-Started          : 2017/03/23 - 07:07:43
+Started          : 2017/03/23 - 08:20:56
 --------------------------------------------------------------------------------
 [I] Hash size : HAVAL_160
     Passes    :  3
@@ -178,9 +178,9 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.003421036 secs.
+    Elapsed time       :           0.003540227 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "cf36f449790b9ad8a812430f5afdc9d0ee180223"
+    Obtained hash      : "20d8f47178fd7a3027d916dd662c7bd11bacbc37"
 [I] Hash size : HAVAL_160
     Passes    :  4
     Hashing 1MB
@@ -199,9 +199,9 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.005127048 secs.
+    Elapsed time       :           0.005128680 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "50822c1b0ecb6c4513ed9686819f3c71e5935962"
+    Obtained hash      : "6c6959be69e08a5edd60c8c086ae5439afb4f751"
 [I] Hash size : HAVAL_160
     Passes    :  5
     Hashing 1MB
@@ -220,18 +220,18 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.006325557 secs.
+    Elapsed time       :           0.006296876 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "c6acfc513ae1fe9aff0ded3de3799147a3a46f5f"
+    Obtained hash      : "4449c34b01ee2b95cf0b2918c806b02f348b0f35"
 --------------------------------------------------------------------------------
 Time Trial Number: 3
-Finished         : 2017/03/23 - 07:07:43
+Finished         : 2017/03/23 - 08:20:56
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 4
 Description      : HAVAL 160-bit hashing
-Started          : 2017/03/23 - 07:07:43
+Started          : 2017/03/23 - 08:20:56
 --------------------------------------------------------------------------------
 [I] Hash size : HAVAL_160
     Passes    :  3
@@ -251,9 +251,9 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.034356586 secs.
+    Elapsed time       :           0.034378253 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "bb97364644172c8a9f32db88cd94164f6c86b31f"
+    Obtained hash      : "7c9e8c81e3f0ff55809940784ec087b476740036"
 [I] Hash size : HAVAL_160
     Passes    :  4
     Hashing 10MB
@@ -272,9 +272,9 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.052106894 secs.
+    Elapsed time       :           0.051299496 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "35b353452f2fd3ae8b995fa9b328e844c4410922"
+    Obtained hash      : "ccfb4d1126906f337ee7e523491540aab4d38d15"
 [I] Hash size : HAVAL_160
     Passes    :  5
     Hashing 10MB
@@ -293,18 +293,18 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.062886515 secs.
+    Elapsed time       :           0.062871282 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "eb3659e9a194086727a9282368000a920c091e95"
+    Obtained hash      : "4463e2634a9f49d9488974e07576309aacb41c56"
 --------------------------------------------------------------------------------
 Time Trial Number: 4
-Finished         : 2017/03/23 - 07:07:43
+Finished         : 2017/03/23 - 08:20:57
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 5
 Description      : HAVAL 192-bit hashing
-Started          : 2017/03/23 - 07:07:43
+Started          : 2017/03/23 - 08:20:57
 --------------------------------------------------------------------------------
 [I] Hash size : HAVAL_192
     Passes    :  3
@@ -324,9 +324,9 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.003421445 secs.
+    Elapsed time       :           0.003421031 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "f0dab8f5ae518660723343fe091e1cdbd2ec484a58475c2b"
+    Obtained hash      : "104c28fb229a112ba8cda03720992737d4d3ca4aca0f92d4"
 [I] Hash size : HAVAL_192
     Passes    :  4
     Hashing 1MB
@@ -345,9 +345,9 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.005131963 secs.
+    Elapsed time       :           0.005128680 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "b201db6f3662f112cfa80d905ce48946aea5eed976281c8d"
+    Obtained hash      : "1dc4737fb1255f6a883915f6068cf458764a7a54c43ad0df"
 [I] Hash size : HAVAL_192
     Passes    :  5
     Hashing 1MB
@@ -366,18 +366,18 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.006488581 secs.
+    Elapsed time       :           0.006323092 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "e7a3af33a44ddb43dae3924965d02ad7cb9a28c91cca1a8b"
+    Obtained hash      : "c3592aa58f43f22cd32c3731c04ca9983f03379bffdfa2a5"
 --------------------------------------------------------------------------------
 Time Trial Number: 5
-Finished         : 2017/03/23 - 07:07:43
+Finished         : 2017/03/23 - 08:20:57
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 6
 Description      : HAVAL 192-bit hashing
-Started          : 2017/03/23 - 07:07:43
+Started          : 2017/03/23 - 08:20:57
 --------------------------------------------------------------------------------
 [I] Hash size : HAVAL_192
     Passes    :  3
@@ -397,9 +397,9 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.034384849 secs.
+    Elapsed time       :           0.034474101 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "e73de4c5fe2722de3d5da3b2eeb332edef10e6826646817e"
+    Obtained hash      : "326dcfd1823caf13e4450012e13b42dbe2911d7dbbb8f83d"
 [I] Hash size : HAVAL_192
     Passes    :  4
     Hashing 10MB
@@ -418,9 +418,9 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.051757090 secs.
+    Elapsed time       :           0.052214147 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "c573cc6a4a749544ef1c349146cdb784ec13729c05cc3197"
+    Obtained hash      : "557ee085dccbc7a40db7370d70cbd9b7da47ad205f67dec2"
 [I] Hash size : HAVAL_192
     Passes    :  5
     Hashing 10MB
@@ -439,18 +439,18 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.063545573 secs.
+    Elapsed time       :           0.063230097 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "90854e2da9cce727fd3c528c3b5160a138a4b06bf14d49a1"
+    Obtained hash      : "ea4fe76e7c18bafbfd79c7102649d53b8a782bf7adb3467d"
 --------------------------------------------------------------------------------
 Time Trial Number: 6
-Finished         : 2017/03/23 - 07:07:43
+Finished         : 2017/03/23 - 08:20:57
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 7
 Description      : HAVAL 224-bit hashing
-Started          : 2017/03/23 - 07:07:43
+Started          : 2017/03/23 - 08:20:57
 --------------------------------------------------------------------------------
 [I] Hash size : HAVAL_224
     Passes    :  3
@@ -470,9 +470,9 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.003421035 secs.
+    Elapsed time       :           0.003467317 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "b24e62642f090971cb165615b94ee21d34b65376f6db092677cc6a08"
+    Obtained hash      : "294d56ba95f62b5b2113fe7abf91ce5bdab66e8ed89ed4c6f88c0cf3"
 [I] Hash size : HAVAL_224
     Passes    :  4
     Hashing 1MB
@@ -491,9 +491,9 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.005129505 secs.
+    Elapsed time       :           0.005129090 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "2641aed4e4ace09f58deb8330f3ed2bdc604f0c1608858edc36c685e"
+    Obtained hash      : "959a77e7aa47b4e5f58876facece030c1d44771c4b33adf494ae662c"
 [I] Hash size : HAVAL_224
     Passes    :  5
     Hashing 1MB
@@ -512,18 +512,18 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.006306306 secs.
+    Elapsed time       :           0.006314899 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "5705da47e9138bbeb252939a848cf4f0c87ab2dd05879ab98b38c4ff"
+    Obtained hash      : "1c423f0ed7b7c2ad66713608a95f67b39ef1bd8edb0434db5822fbbd"
 --------------------------------------------------------------------------------
 Time Trial Number: 7
-Finished         : 2017/03/23 - 07:07:43
+Finished         : 2017/03/23 - 08:20:57
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 8
 Description      : HAVAL 224-bit hashing
-Started          : 2017/03/23 - 07:07:43
+Started          : 2017/03/23 - 08:20:57
 --------------------------------------------------------------------------------
 [I] Hash size : HAVAL_224
     Passes    :  3
@@ -543,9 +543,9 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.034387307 secs.
+    Elapsed time       :           0.035978994 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "f2e278ae1f2b7c35a71fdeb4245a2baa7c385c48168facbedfdf85f1"
+    Obtained hash      : "cd17c49c7686a18a3811ab66f8b8cb179f6808df3cce8b8df4cfbc73"
 [I] Hash size : HAVAL_224
     Passes    :  4
     Hashing 10MB
@@ -564,9 +564,9 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.051844746 secs.
+    Elapsed time       :           0.050987376 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "0abcc2631577b43e6c769cf5d1bfc55298065994b1b940a8e935ff94"
+    Obtained hash      : "761b4421063d57f5848dd418698cd5275c10b874db0dd4664891290b"
 [I] Hash size : HAVAL_224
     Passes    :  5
     Hashing 10MB
@@ -585,18 +585,18 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.063013903 secs.
+    Elapsed time       :           0.062904051 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "e793550a374705157893d589764d602bbf7f4e5ae480129a61ea392c"
+    Obtained hash      : "f76b50feaaacfb48537e059abc9bb4e55667406e172006cc3c88acba"
 --------------------------------------------------------------------------------
 Time Trial Number: 8
-Finished         : 2017/03/23 - 07:07:43
+Finished         : 2017/03/23 - 08:20:57
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 9
 Description      : HAVAL 256-bit hashing
-Started          : 2017/03/23 - 07:07:43
+Started          : 2017/03/23 - 08:20:57
 --------------------------------------------------------------------------------
 [I] Hash size : HAVAL_256
     Passes    :  3
@@ -616,9 +616,9 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.003421036 secs.
+    Elapsed time       :           0.003421031 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "6cbf3891715a71cff3419aa612e43918be4c36bda67f40b79e150127f59d3118"
+    Obtained hash      : "14a7eddf6f42b66c4b60383854921b0f5c4cd74d22dc195eae97eafd56dc0e02"
 [I] Hash size : HAVAL_256
     Passes    :  4
     Hashing 1MB
@@ -637,9 +637,9 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.005427699 secs.
+    Elapsed time       :           0.005128270 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "57e04fd262ffbec1519a7cef0a31a8c6e20a97f4446f194b3799e3961a44c635"
+    Obtained hash      : "6e240a1d71bb33d02de1f69f60e74f64604a5eb1bfbf97a9f06d9bb069f9c694"
 [I] Hash size : HAVAL_256
     Passes    :  5
     Hashing 1MB
@@ -658,18 +658,18 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.006300572 secs.
+    Elapsed time       :           0.006299744 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "407a28af665c52379399b0db7509c437d7553fc6e474e6db9742396c2f0fd8e4"
+    Obtained hash      : "53aaf8d3ed1a2e7f21a7dbbaa4ff713f80d5b7d26e1e36470848f4a412795d19"
 --------------------------------------------------------------------------------
 Time Trial Number: 9
-Finished         : 2017/03/23 - 07:07:43
+Finished         : 2017/03/23 - 08:20:57
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 10
 Description      : HAVAL 256-bit hashing
-Started          : 2017/03/23 - 07:07:43
+Started          : 2017/03/23 - 08:20:57
 --------------------------------------------------------------------------------
 [I] Hash size : HAVAL_256
     Passes    :  3
@@ -689,9 +689,9 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.034379114 secs.
+    Elapsed time       :           0.034351219 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "56bc5b02ee0424551b82575fd7c6fb9e7723a92d24afbfdfcb3ff4ec08fce340"
+    Obtained hash      : "fd80ee9ce69ca86476870c104530f1c752b171eaf928cf831066ee7a699be9f0"
 [I] Hash size : HAVAL_256
     Passes    :  4
     Hashing 10MB
@@ -710,9 +710,9 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.051798051 secs.
+    Elapsed time       :           0.051905714 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "e550f887027d54d1cd0fd9414740cb4c3e0726949fd3bb97ad0af7ddabeb696b"
+    Obtained hash      : "66a8342f70d75e7ded8ad0ad1bcacc22a73bb44bf9319a9f8c77005efb3fa401"
 [I] Hash size : HAVAL_256
     Passes    :  5
     Hashing 10MB
@@ -731,16 +731,16 @@ Started          : 2017/03/23 - 07:07:43
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.063010626 secs.
+    Elapsed time       :           0.062875788 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "fa4ac3e7f2821313ae95f1887487f913027c91eb824601bcb1b8bf6d18aca417"
+    Obtained hash      : "088344fba3d714b846c8205af6dfc0eb543792bf068922e8a44091d67b7c28ce"
 --------------------------------------------------------------------------------
 Time Trial Number: 10
-Finished         : 2017/03/23 - 07:07:44
+Finished         : 2017/03/23 - 08:20:57
 --[End Time Trial]--------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Time.HAVAL
-Finished                 : 2017/03/23 - 07:07:44
+Finished                 : 2017/03/23 - 08:20:57
 ================================================================================

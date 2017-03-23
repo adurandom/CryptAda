@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Time.Snefru
 Description              : Time trial for CryptAda.Digests.Algorithms.Snefru functionality.
-Started                  : 2017/03/23 - 07:07:39
+Started                  : 2017/03/23 - 08:20:52
 ================================================================================
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 1
 Description      : Snefru 128-bit hashing
-Started          : 2017/03/23 - 07:07:39
+Started          : 2017/03/23 - 08:20:52
 --------------------------------------------------------------------------------
 [I] Hash size     : SNEFRU_128
     Security level: SECURITY_LEVEL_4
@@ -32,9 +32,9 @@ Started          : 2017/03/23 - 07:07:39
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.037535953 secs.
+    Elapsed time       :           0.037649777 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "d60ddb0f62a4c2e556cb6c554e2ad706"
+    Obtained hash      : "647b62fea3913b469f4aeab4b0a32832"
 [I] Hash size     : SNEFRU_128
     Security level: SECURITY_LEVEL_8
     Hashing 1MB
@@ -53,18 +53,18 @@ Started          : 2017/03/23 - 07:07:39
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.072726089 secs.
+    Elapsed time       :           0.072109952 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "9d7fca9f4259ad6e257e00e28b0ebc82"
+    Obtained hash      : "ea2ab6a8ea576ee9a72de8a66a0611c3"
 --------------------------------------------------------------------------------
 Time Trial Number: 1
-Finished         : 2017/03/23 - 07:07:39
+Finished         : 2017/03/23 - 08:20:52
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 2
 Description      : Snefru 128-bit hashing
-Started          : 2017/03/23 - 07:07:39
+Started          : 2017/03/23 - 08:20:52
 --------------------------------------------------------------------------------
 [I] Hash size     : SNEFRU_128
     Security level: SECURITY_LEVEL_4
@@ -84,9 +84,9 @@ Started          : 2017/03/23 - 07:07:39
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.377743034 secs.
+    Elapsed time       :           0.377194517 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "27e1a9eaef6c52779cd4687387bd7f00"
+    Obtained hash      : "6f72f48f7eda629167406b3fce39493f"
 [I] Hash size     : SNEFRU_128
     Security level: SECURITY_LEVEL_8
     Hashing 10MB
@@ -105,18 +105,18 @@ Started          : 2017/03/23 - 07:07:39
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.717255422 secs.
+    Elapsed time       :           0.716667984 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "37fdda0942a14aeade0a1fa3b00ebb1b"
+    Obtained hash      : "3f3fcc65717279b4e98edca2a1d5da72"
 --------------------------------------------------------------------------------
 Time Trial Number: 2
-Finished         : 2017/03/23 - 07:07:40
+Finished         : 2017/03/23 - 08:20:54
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 3
 Description      : Snefru 256-bit hashing
-Started          : 2017/03/23 - 07:07:40
+Started          : 2017/03/23 - 08:20:54
 --------------------------------------------------------------------------------
 [I] Hash size     : SNEFRU_256
     Security level: SECURITY_LEVEL_4
@@ -136,9 +136,9 @@ Started          : 2017/03/23 - 07:07:40
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.055645897 secs.
+    Elapsed time       :           0.055760109 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "b1776a2937013a6650212ca849e9ff1da8bfd05a5a95dee3f5a8a71d703cb7c1"
+    Obtained hash      : "bad59b1409da632662e5d49ea39451a7adb306e35dc9288f6ebb0d88b58e6e6f"
 [I] Hash size     : SNEFRU_256
     Security level: SECURITY_LEVEL_8
     Hashing 1MB
@@ -157,18 +157,18 @@ Started          : 2017/03/23 - 07:07:40
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.107017547 secs.
+    Elapsed time       :           0.107033800 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "ed62611c5ba3e4505518d1cc1add0a9d6d0cfccf323c17b21dae49db0e399679"
+    Obtained hash      : "84a259e54e6f2280778a535f2ff06f84e483c70846c2dcc5083d06922cfe1ddc"
 --------------------------------------------------------------------------------
 Time Trial Number: 3
-Finished         : 2017/03/23 - 07:07:40
+Finished         : 2017/03/23 - 08:20:54
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 4
 Description      : Snefru 256-bit hashing
-Started          : 2017/03/23 - 07:07:40
+Started          : 2017/03/23 - 08:20:54
 --------------------------------------------------------------------------------
 [I] Hash size     : SNEFRU_256
     Security level: SECURITY_LEVEL_4
@@ -188,9 +188,9 @@ Started          : 2017/03/23 - 07:07:40
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.561186647 secs.
+    Elapsed time       :           0.560052986 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "e75e148317f99c4ba37ba39d2da71fd74ce86383e4cdd39a17789a20dcd786f3"
+    Obtained hash      : "e2a2a894706be66dd1643af1f31124f6688208735ad872e618d202aa8a5e93f5"
 [I] Hash size     : SNEFRU_256
     Security level: SECURITY_LEVEL_8
     Hashing 10MB
@@ -209,16 +209,16 @@ Started          : 2017/03/23 - 07:07:40
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           1.074996949 secs.
+    Elapsed time       :           1.070913082 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "1deb93cc568d263525670a5e40c8f9765ca831f768e9ddccaea98e7863128137"
+    Obtained hash      : "d63cd78bc88e6fb81a24a6a6873d7d3922d2ca7a2e8a409f00956134ad4b6875"
 --------------------------------------------------------------------------------
 Time Trial Number: 4
-Finished         : 2017/03/23 - 07:07:42
+Finished         : 2017/03/23 - 08:20:55
 --[End Time Trial]--------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Time.Snefru
-Finished                 : 2017/03/23 - 07:07:42
+Finished                 : 2017/03/23 - 08:20:55
 ================================================================================

@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Time.RIPEMD_160
 Description              : Time trial for CryptAda.Digests.Algorithms.RIPEMD_160 functionality.
-Started                  : 2017/03/23 - 07:07:37
+Started                  : 2017/03/23 - 08:20:50
 ================================================================================
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 1
 Description      : RIPEMD_160 hashing
-Started          : 2017/03/23 - 07:07:37
+Started          : 2017/03/23 - 08:20:50
 --------------------------------------------------------------------------------
 [I] Hashing 1MB
 [I] Starting time trial for digest algorithm.
@@ -30,18 +30,18 @@ Started          : 2017/03/23 - 07:07:37
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.007639575 secs.
+    Elapsed time       :           0.007597786 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "725108b8e7850e1929915a4a6f3a6116732a7091"
+    Obtained hash      : "aec8adae07cb9d01e75a5a2badebcadf3ea346e0"
 --------------------------------------------------------------------------------
 Time Trial Number: 1
-Finished         : 2017/03/23 - 07:07:37
+Finished         : 2017/03/23 - 08:20:50
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 2
 Description      : RIPEMD_160 hashing
-Started          : 2017/03/23 - 07:07:37
+Started          : 2017/03/23 - 08:20:50
 --------------------------------------------------------------------------------
 [I] Hashing 10MB
 [I] Starting time trial for digest algorithm.
@@ -59,16 +59,16 @@ Started          : 2017/03/23 - 07:07:37
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.075649862 secs.
+    Elapsed time       :           0.075565800 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "7723f5ff5405292619a596d8a1df98ba73e3e800"
+    Obtained hash      : "a0adda2d72833a43ff2ee912ba065324dd938c53"
 --------------------------------------------------------------------------------
 Time Trial Number: 2
-Finished         : 2017/03/23 - 07:07:37
+Finished         : 2017/03/23 - 08:20:50
 --[End Time Trial]--------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Time.RIPEMD_160
-Finished                 : 2017/03/23 - 07:07:37
+Finished                 : 2017/03/23 - 08:20:50
 ================================================================================

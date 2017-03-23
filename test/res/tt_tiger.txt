@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Time.Tiger
 Description              : Time trial for CryptAda.Digests.Algorithms.Tiger functionality.
-Started                  : 2017/03/23 - 07:07:42
+Started                  : 2017/03/23 - 08:20:55
 ================================================================================
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 1
 Description      : Tiger 128-bit hashing
-Started          : 2017/03/23 - 07:07:42
+Started          : 2017/03/23 - 08:20:55
 --------------------------------------------------------------------------------
 [I] Hash size : TIGER_128
     Passes    :  3
@@ -32,9 +32,9 @@ Started          : 2017/03/23 - 07:07:42
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.008689808 secs.
+    Elapsed time       :           0.008682014 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "283171ff477797a9f8ab8d5fbdddfadf"
+    Obtained hash      : "caa15980d05811bd0c88cdaf4d9f410f"
 [I] Hash size : TIGER_128
     Passes    :  4
     Hashing 1MB
@@ -53,18 +53,18 @@ Started          : 2017/03/23 - 07:07:42
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.010325367 secs.
+    Elapsed time       :           0.010241385 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "2e625493b28f9b0d9890c21c3976b094"
+    Obtained hash      : "83509fd6ba1e805ed144abb0de1f246c"
 --------------------------------------------------------------------------------
 Time Trial Number: 1
-Finished         : 2017/03/23 - 07:07:42
+Finished         : 2017/03/23 - 08:20:55
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 2
 Description      : Tiger 128-bit hashing
-Started          : 2017/03/23 - 07:07:42
+Started          : 2017/03/23 - 08:20:55
 --------------------------------------------------------------------------------
 [I] Hash size : TIGER_128
     Passes    :  3
@@ -84,9 +84,9 @@ Started          : 2017/03/23 - 07:07:42
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.086292674 secs.
+    Elapsed time       :           0.086818503 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "1bf14ff95f28601f80e23b168f689286"
+    Obtained hash      : "352308eba3d8fb60141a48d33663228f"
 [I] Hash size : TIGER_128
     Passes    :  4
     Hashing 10MB
@@ -105,18 +105,18 @@ Started          : 2017/03/23 - 07:07:42
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.101292473 secs.
+    Elapsed time       :           0.101470937 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "227a2fd2791bdf8e487a52b6cad2b4d0"
+    Obtained hash      : "5c6055509ee0260cc054dae5cfaaa3cc"
 --------------------------------------------------------------------------------
 Time Trial Number: 2
-Finished         : 2017/03/23 - 07:07:42
+Finished         : 2017/03/23 - 08:20:56
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 3
 Description      : Tiger 160-bit hashing
-Started          : 2017/03/23 - 07:07:42
+Started          : 2017/03/23 - 08:20:56
 --------------------------------------------------------------------------------
 [I] Hash size : TIGER_160
     Passes    :  3
@@ -136,9 +136,9 @@ Started          : 2017/03/23 - 07:07:42
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.008660316 secs.
+    Elapsed time       :           0.008663581 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "ec7ab2f1c287675115eb3371e5761faf20feaebd"
+    Obtained hash      : "978d2945a9a045aec97345514dfc773c273f343b"
 [I] Hash size : TIGER_160
     Passes    :  4
     Hashing 1MB
@@ -157,18 +157,18 @@ Started          : 2017/03/23 - 07:07:42
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.010195112 secs.
+    Elapsed time       :           0.010127105 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "972a6049ee0f3a2cb1762a66e86730fa4662fead"
+    Obtained hash      : "cd175e41ee28090803aaee88de6adc351a8029f9"
 --------------------------------------------------------------------------------
 Time Trial Number: 3
-Finished         : 2017/03/23 - 07:07:42
+Finished         : 2017/03/23 - 08:20:56
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 4
 Description      : Tiger 160-bit hashing
-Started          : 2017/03/23 - 07:07:42
+Started          : 2017/03/23 - 08:20:56
 --------------------------------------------------------------------------------
 [I] Hash size : TIGER_160
     Passes    :  3
@@ -188,9 +188,9 @@ Started          : 2017/03/23 - 07:07:42
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.086590048 secs.
+    Elapsed time       :           0.086421594 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "7b03a80156569b09a3f806c86021d650f4be373b"
+    Obtained hash      : "737be3bb9ba6dd1a8e050f06d0c67c7e029ddf3d"
 [I] Hash size : TIGER_160
     Passes    :  4
     Hashing 10MB
@@ -209,18 +209,18 @@ Started          : 2017/03/23 - 07:07:42
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.102776478 secs.
+    Elapsed time       :           0.101257123 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "fef2c02fd3a66ddc0da9bd57067acacbae098875"
+    Obtained hash      : "6d2126ad67954027665a5931a41f171a1e4950e0"
 --------------------------------------------------------------------------------
 Time Trial Number: 4
-Finished         : 2017/03/23 - 07:07:42
+Finished         : 2017/03/23 - 08:20:56
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 5
 Description      : Tiger 192-bit hashing
-Started          : 2017/03/23 - 07:07:42
+Started          : 2017/03/23 - 08:20:56
 --------------------------------------------------------------------------------
 [I] Hash size : TIGER_192
     Passes    :  3
@@ -240,9 +240,9 @@ Started          : 2017/03/23 - 07:07:42
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.008664002 secs.
+    Elapsed time       :           0.008669726 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "633e2c1f514e0a6263a01defcfb6498fa14c919669fa3452"
+    Obtained hash      : "438ea2d32f4e2c4196ce914da09c7c1266f691e99912e348"
 [I] Hash size : TIGER_192
     Passes    :  4
     Hashing 1MB
@@ -261,18 +261,18 @@ Started          : 2017/03/23 - 07:07:42
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.010209858 secs.
+    Elapsed time       :           0.010125876 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "17d1847404b3d8765cfbcefc812217c53c0ed1b56e08518d"
+    Obtained hash      : "3df1aa6878ea3558ee3a96d953c4d7f7e0c1d87eb4a81449"
 --------------------------------------------------------------------------------
 Time Trial Number: 5
-Finished         : 2017/03/23 - 07:07:42
+Finished         : 2017/03/23 - 08:20:56
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 6
 Description      : Tiger 192-bit hashing
-Started          : 2017/03/23 - 07:07:42
+Started          : 2017/03/23 - 08:20:56
 --------------------------------------------------------------------------------
 [I] Hash size : TIGER_192
     Passes    :  3
@@ -292,9 +292,9 @@ Started          : 2017/03/23 - 07:07:42
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.086567930 secs.
+    Elapsed time       :           0.088048140 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "332dd205fe6ff3071be0e1fa4b6b9e4018f28498fe067478"
+    Obtained hash      : "e42e17e8e5b1c8606fa2fa1ed41e3d97d2f27320b0526023"
 [I] Hash size : TIGER_192
     Passes    :  4
     Hashing 10MB
@@ -313,16 +313,16 @@ Started          : 2017/03/23 - 07:07:42
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.101716007 secs.
+    Elapsed time       :           0.101221077 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "8d15bcd9509c780a1f119a81b8b33f23c522d327e73aa609"
+    Obtained hash      : "65347eb1212eb8200b14a6153181b2fd9c550bcd042287b5"
 --------------------------------------------------------------------------------
 Time Trial Number: 6
-Finished         : 2017/03/23 - 07:07:43
+Finished         : 2017/03/23 - 08:20:56
 --[End Time Trial]--------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Time.Tiger
-Finished                 : 2017/03/23 - 07:07:43
+Finished                 : 2017/03/23 - 08:20:56
 ================================================================================
