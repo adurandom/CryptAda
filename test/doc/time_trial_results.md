@@ -54,3 +54,56 @@ SHA-3 256|256|0.132256641
 SHA-3 384|384|0.173251297
 SHA-3 512|512|0.239542437
 Whirlpool|512|0.171731657
+
+## Platform 2
+
+### Hardware
+* Model: Dell Latitude E5430
+* Processor: Intel(R) Core(TM) Quad i5-3320M @ 2.60 GHz
+* RAM: 4GB
+### Software
+* Operating System: Ubuntu 16.10
+* GNAT version: 6.2.0
+### Test Results
+Algorithm|Hash size (bits)|Time (seconds)
+---------|----------------|--------------
+MD2|128|
+MD4|128|
+MD5|128|
+SHA-1|160|
+RIPEMD-128|128|
+RIPEMD-160|160|
+Snefru 128 (4 passes)|128|
+Snefru 128 (8 passes)|128|
+Snefru 256 (4 passes)|256|
+Snefru 256 (8 passes)|256|
+Tiger 128 (3 passes)|128|
+Tiger 128 (4 passes)|128|
+Tiger 160 (3 passes)|160|
+Tiger 160 (4 passes)|160|
+Tiger 192 (3 passes)|192|
+Tiger 192 (4 passes)|192|
+HAVAL 128, 3|128|
+HAVAL 128, 4|128|
+HAVAL 128, 5|128|
+HAVAL 160, 3|160|
+HAVAL 160, 4|160|
+HAVAL 160, 5|160|
+HAVAL 192, 3|192|
+HAVAL 192, 4|192|
+HAVAL 192, 5|192|
+HAVAL 224, 3|224|
+HAVAL 224, 4|224|
+HAVAL 224, 5|224|
+HAVAL 256, 3|256|
+HAVAL 256, 4|256|
+HAVAL 256, 5|256|
+SHA-2 224|224|
+SHA-2 256|256|
+SHA-2 384|384|
+SHA-2 512|512|
+SHA-3 224|224|
+SHA-3 256|256|
+SHA-3 384|384|
+SHA-3 512|512|
+Whirlpool|512|
