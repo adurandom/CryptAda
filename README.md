@@ -29,7 +29,7 @@ At the moment of this writing (March 22nd, 2017) the following is implemented in
   * Base64 text encoder
   * MIME text encoder
 * _Symmetric Block Ciphers_
-  * DES (not tested yet)
+  * DES
   
 Partially implemented is a Big_Naturals implementation containing the basic arithmetic operations (with the corresponding test drivers)
 
