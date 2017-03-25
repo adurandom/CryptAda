@@ -37,6 +37,10 @@ urn_drv|Unit test drivers for *CryptAda.Random.Generators* functionality
 urn_pkg|Unit test driver packages for *CryptAda.Random.Generators* functionality
 ubn_drv|Unit test drivers for *CryptAda.Big_Naturals* functionality
 ubn_pkg|Unit test driver packages for *CryptAda.Big_Naturals* functionality
+ubc_drv|Unit test drivers for *CryptAda.Ciphers.Block_Ciphers* functionality
+ubc_pkg|Unit test driver packages for *CryptAda.Ciphers.Block_Ciphers* functionality
+tdi_drv|Time trials drivers for message digests
+tdi_pkg|Time trials packages for message digests
 
 
 
