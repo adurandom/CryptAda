@@ -16,86 +16,116 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-block_ciphers-des.ads
+--    Filename          :  cryptada-ciphers-block_ciphers-des_ede.ads
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
---    Creation date     :  March 21th, 2017
+--    Creation date     :  March 25th, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Implements the DES block cipher.
+--    Implements the Triple DES block cipher.
 --
---    The Data Encryption Standard (DES) is a symmetric-key algorithm for the 
---    encryption of electronic data. Although now considered insecure, it was 
---    highly influential in the advancement of modern cryptography.
+--    DES EDE is a symmetric-key block cipher, which applies the Data Encryption 
+--    Standard (DES) cipher algorithm three times to each data block.
 --
---    Developed in the early 1970s at IBM and based on an earlier design by 
---    Horst Feistel, the algorithm was submitted to the National Bureau of 
---    Standards (NBS) following the agency's invitation to propose a candidate 
---    for the protection of sensitive, unclassified electronic government data. 
---    In 1976, after consultation with the National Security Agency (NSA), the 
---    NBS eventually selected a slightly modified version (strengthened against 
---    differential cryptanalysis, but weakened against brute force attacks), 
---    which was published as an official Federal Information Processing Standard 
---    (FIPS) for the United States in 1977.
+--    Triple DES uses a "key bundle" that comprises three DES keys, K1, K2 and 
+--    K3, each of 56 bits (excluding parity bits). The encryption algorithm is:
 --
---    The publication of an NSA-approved encryption standard simultaneously 
---    resulted in its quick international adoption and widespread academic 
---    scrutiny. Controversies arose out of classified design elements, a 
---    relatively short key length of the symmetric-key block cipher design, and 
---    the involvement of the NSA, nourishing suspicions about a backdoor. The 
---    intense academic scrutiny the algorithm received over time led to the 
---    modern understanding of block ciphers and their cryptanalysis.
+--       ciphertext = EK3(DK2(EK1(plaintext)))
 --
---    DES is now considered to be insecure for many applications. This is mainly 
---    due to the 56-bit key size being too small; in January 1999, 
---    distributed.net and the Electronic Frontier Foundation collaborated to 
---    publicly break a DES key in 22 hours and 15 minutes. There are also some 
---    analytical results which demonstrate theoretical weaknesses in the cipher, 
---    although they are infeasible to mount in practice. The algorithm is 
---    believed to be practically secure in the form of Triple DES, although 
---    there are theoretical attacks. The cipher has been superseded by the 
---    Advanced Encryption Standard (AES). Furthermore, DES has been withdrawn 
---    as a standard by the National Institute of Standards and Technology.
+--    I.e., DES encrypt with K1, DES decrypt with K2, then DES encrypt with K3.
+--
+--    Decryption is the reverse:
+--
+--       plaintext = DK1(EK2(DK3(ciphertext)))
+--
+--    I.e., DES decrypt with K3, encrypt with K2, then decrypt with K1.
+--
+--    Each triple encryption encrypts one block of 64 bits of data.
+--
+--    In each case the middle operation is the reverse of the first and last. 
+--    This improves the strength of the algorithm when using keying option 2, 
+--    and provides backward compatibility with DES with keying option 3.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
---    1.0   20170321 ADD   Initial implementation.
+--    1.0   20170325 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with CryptAda.Pragmatics;
-with CryptAda.Ciphers.Keys;
 with CryptAda.Random.Generators;
+with CryptAda.Ciphers.Keys;
+with CryptAda.Ciphers.Block_Ciphers.DES;
 
-package CryptAda.Ciphers.Block_Ciphers.DES is
+package CryptAda.Ciphers.Block_Ciphers.DES_EDE is
 
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[DES_Block_Size]-----------------------------------------------------------
-   -- Size in bytes of DES blocks.
+   --[DES_EDE_Block_Size]-------------------------------------------------------
+   -- Size in bytes of DES_EDE blocks.
    -----------------------------------------------------------------------------
 
-   DES_Block_Size                : constant Block_Size   :=  8;
+   DES_EDE_Block_Size            : constant Block_Size   :=  8;
 
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[DES_Cipher]---------------------------------------------------------------
-   -- The DES block cipher context.
+   --[DES_EDE_Cipher]-----------------------------------------------------------
+   -- The DES_EDE block cipher context.
+   --
+   -- As said before, the encryption and decryption process is performed by 
+   -- applying three individual DES operations (Encrypt - Decrypt - Encrypt,
+   -- for encryption and Decrypt - Encrypt - Decrypt for decryptions).
+   --
+   -- Regarding to the keys, there are three possibilities:
+   --
+   -- a. Keying option 1
+   --    All three keys are independent.
+   --
+   -- b. Keying option 2
+   --    K1 and K2 are independent, and K3 = K1.
+   --
+   -- c. Keying option 3
+   --    All three keys are identical, i.e. K1 = K2 = K3.
+   --
+   -- The Generate_Key procedure will generate keys according to keying option
+   -- 1. An overloaded Generate_Key procedure is provided so that to make
+   -- possible to random generate keys according all keying options.
    -----------------------------------------------------------------------------
    
-   type DES_Cipher is new Block_Cipher with private;
+   type DES_EDE_Cipher is new Block_Cipher with private;
 
-   --[DES_Block]----------------------------------------------------------------
+   --[DES_EDE_Block]------------------------------------------------------------
    -- Constrained subtype for DES blocks.
    -----------------------------------------------------------------------------
    
-   subtype DES_Block is Block(1 .. DES_Block_Size);
-   
+   subtype DES_EDE_Block is Block(1 .. DES_EDE_Block_Size);
+
+   --[DES_EDE_Keying_Option]----------------------------------------------------
+   -- Enumerated type that identifies the keying option for Triple DES.
+   --
+   -- "Keying option n" is the term used by the standards (X9.52, FIPS PUB 46-3, 
+   -- SP 800-67, ISO/IEC 18033-3) that define the TDEA. However, other terms are 
+   -- used in other standards and related recommendations, and general usage.
+   -- 
+   -- For keying option 1:
+   --    3TDEA, in NIST SP 800-57 and SP 800-78-3
+   --    Triple-length keys, in general usage
+   -- For keying option 2:
+   --    2TDEA, in NIST SP 800-57 and SP 800-78-3
+   --    Double-length keys, in general usage
+   -----------------------------------------------------------------------------
+
+   type DES_EDE_Keying_Option is
+      (
+         Keying_Option_1,     -- K1 /= K2 /= K3
+         Keying_Option_2,     -- K1 / K2  K1 = K3
+         Keying_Option_3      -- K1 = K2 = K3
+      );
+
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
@@ -105,56 +135,79 @@ package CryptAda.Ciphers.Block_Ciphers.DES is
    --[Start_Cipher]-------------------------------------------------------------
 
    procedure   Start_Cipher(
-                  The_Cipher     : in out DES_Cipher;
+                  The_Cipher     : in out DES_EDE_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     CryptAda.Ciphers.Keys.Key);
 
    --[Process_Block]------------------------------------------------------------
 
    procedure   Process_Block(
-                  With_Cipher    : in out DES_Cipher;
+                  With_Cipher    : in out DES_EDE_Cipher;
                   Input          : in     Block;
                   Output         :    out Block);
 
    --[Stop_Cipher]--------------------------------------------------------------
       
    procedure   Stop_Cipher(
-                  The_Cipher     : in out DES_Cipher);
+                  The_Cipher     : in out DES_EDE_Cipher);
 
    --[Key related operations]---------------------------------------------------
 
    --[Generate_Key]-------------------------------------------------------------
    
    procedure   Generate_Key(
-                  The_Cipher     : in     DES_Cipher;
+                  The_Cipher     : in     DES_EDE_Cipher;
                   Generator      : in out CryptAda.Random.Generators.Random_Generator'Class;
                   The_Key        : in out CryptAda.Ciphers.Keys.Key);
 
    --[Is_Valid_Key]-------------------------------------------------------------
    
    function    Is_Valid_Key(
-                  For_Cipher     : in     DES_Cipher;
+                  For_Cipher     : in     DES_EDE_Cipher;
                   The_Key        : in     CryptAda.Ciphers.Keys.Key)
       return   Boolean;
          
    --[Is_Strong_Key]------------------------------------------------------------
    
    function    Is_Strong_Key(
-                  For_Cipher     : in     DES_Cipher;
+                  For_Cipher     : in     DES_EDE_Cipher;
                   The_Key        : in     CryptAda.Ciphers.Keys.Key)
       return   Boolean;
 
-   --[Check_DES_Key_Parity]-----------------------------------------------------
+   -----------------------------------------------------------------------------
+   --[Non-Dispatching Operations]-----------------------------------------------
+   -----------------------------------------------------------------------------
+
+   --[Generate_Key]-------------------------------------------------------------
    -- Purpose:
-   -- Check the parity of a DES key. DES keys are 8 bytes (64 bit) long but 
-   -- only 56 bits (7 bits of each key byte) ara actually used. 
-   --
-   -- The least significant bit in each byte is used as parity bit to check key
-   -- integrity. This function checks that the parity of all bytes in a DES key 
-   -- is correct.
-   --
-   -- If the parity is not correct (this function returns False), the parity 
-   -- could be fixed by using the procedure Fix_DES_Key_Parity (see below).
+   -- Generates a random DES EDE key for a specified keying option. Generated
+   -- keys are guaranteed to be strong (according to Is_Strong function 
+   -- implementaion) and with correct parity.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Cipher                 Block_Cipher object for which the key is to be
+   --                            generated.
+   -- Keying_Option              DES_EDE keying option (see above).
+   -- Generator                  Random_Generator used to generate the key.
+   -- The_Key                    Generated key.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CryptAda_Generator_Not_Started_Error
+   -- CryptAda_Generator_Need_Seeding_Error
+   -----------------------------------------------------------------------------
+   
+   procedure   Generate_Key(
+                  The_Cipher     : in     DES_EDE_Cipher;
+                  Keying_Option  : in     DES_EDE_Keying_Option;
+                  Generator      : in out CryptAda.Random.Generators.Random_Generator'Class;
+                  The_Key        : in out CryptAda.Ciphers.Keys.Key);
+   
+   --[Check_DES_EDE_Key_Parity]-------------------------------------------------
+   -- Purpose:
+   -- Checks the parity of a DES EDE key.
    -----------------------------------------------------------------------------
    -- Arguments:
    -- Of_Key                  Key object to check its parity.
@@ -168,14 +221,14 @@ package CryptAda.Ciphers.Block_Ciphers.DES is
    -- CryptAda_Invalid_Key_Error if Of_Key length is not valid (8 bytes).
    -----------------------------------------------------------------------------
 
-   function    Check_DES_Key_Parity(
+   function    Check_DES_EDE_Key_Parity(
                   Of_Key         : in     CryptAda.Ciphers.Keys.Key)
       return   Boolean;
 
-   --[Fix_DES_Key_Parity]-------------------------------------------------------
+   --[Fix_DES_EDE_Key_Parity]---------------------------------------------------
    -- Purpose:
-   -- This procedure fixes the parity of a DES key. It sets the parity bit of 
-   -- each key byte to the apropriate value.
+   -- This procedure fixes the parity of a DES EDE key. It sets the parity bit 
+   -- of each key byte to the apropriate value.
    -----------------------------------------------------------------------------
    -- Arguments:
    -- Of_Key                  Key object to fix its parity.
@@ -188,7 +241,7 @@ package CryptAda.Ciphers.Block_Ciphers.DES is
    -- CryptAda_Invalid_Key_Error if Of_Key length is not valid (8 bytes).
    -----------------------------------------------------------------------------
       
-   procedure   Fix_DES_Key_Parity(
+   procedure   Fix_DES_EDE_Key_Parity(
                   Of_Key         : in out CryptAda.Ciphers.Keys.Key);
 
    -----------------------------------------------------------------------------
@@ -201,43 +254,42 @@ private
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[DES Constants]------------------------------------------------------------
+   --[DES EDE Constants]--------------------------------------------------------
    -- Next constants are related to DES processing.
    --
-   -- DES_Key_Schedule_Size   Size of DES key schedule.
-   -- DES_Min_KL              Minimum key length for DES (in bytes).
-   -- DES_Max_KL              Minimum key length for DES (in bytes).
-   -- DES_Def_KL              Minimum key length for DES (in bytes).
-   -- DES_KL_Inc_Step         DES key increment step in length (DES only admits
-   --                         8 bytes keys)
+   -- DES_EDE_Min_KL          Minimum key length for DES EDE (in bytes).
+   -- DES_EDE_Max_KL          Minimum key length for DES EDE (in bytes).
+   -- DES_EDE_Def_KL          Minimum key length for DES EDE (in bytes).
+   -- DES_EDE_KL_Inc_Step     DES EDE key increment step in length (DES EDE only 
+   --                         admits 24 bytes keys)
    -----------------------------------------------------------------------------
    
-   DES_Key_Schedule_Size         : constant Positive     := 32;
-   DES_Min_KL                    : constant Positive     :=  8;
-   DES_Max_KL                    : constant Positive     :=  8;
-   DES_Def_KL                    : constant Positive     :=  8;
-   DES_KL_Inc_Step               : constant Natural      :=  0;
+   DES_EDE_Min_KL                : constant Positive     := 24;
+   DES_EDE_Max_KL                : constant Positive     := 24;
+   DES_EDE_Def_KL                : constant Positive     := 24;
+   DES_EDE_KL_Inc_Step           : constant Natural      :=  0;
    
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[DES_Key_Schedule_Block]---------------------------------------------------
-   -- Subtype for the DES key schedule block.
+   --[DES_Ciphers]--------------------------------------------------------------
+   -- Array type of DES_Cipher used in DES_EDE.
    -----------------------------------------------------------------------------
    
-   subtype DES_Key_Schedule_Block is CryptAda.Pragmatics.Four_Bytes_Array(1 .. DES_Key_Schedule_Size);
+   type DES_Ciphers is array(Positive range 1 .. 3) of CryptAda.Ciphers.Block_Ciphers.DES.DES_Cipher;
    
-   --[DES_Cipher]---------------------------------------------------------------
-   -- Full definition of the DES_Cipher tagged type. It extends the
+   --[DES_EDE_Cipher]-----------------------------------------------------------
+   -- Full definition of the DES_EDE_Cipher tagged type. It extends the
    -- Block_Cipher with the followitng fields.
    --
-   -- Key_Schedule      DES key schedule block.
+   -- Sub_Ciphers          Array of DES_Cipher objects that implement the triple 
+   --                      DES.
    -----------------------------------------------------------------------------
 
-   type DES_Cipher is new Block_Cipher with
+   type DES_EDE_Cipher is new Block_Cipher with
       record
-         Key_Schedule            : DES_Key_Schedule_Block := (others => 0);
+         Sub_Ciphers             : DES_Ciphers;
       end record;
 
    -----------------------------------------------------------------------------
@@ -245,9 +297,9 @@ private
    -----------------------------------------------------------------------------
 
    procedure   Initialize(
-                  Object         : in out DES_Cipher);
+                  Object         : in out DES_EDE_Cipher);
 
    procedure   Finalize(
-                  Object         : in out DES_Cipher);
+                  Object         : in out DES_EDE_Cipher);
 
-end CryptAda.Ciphers.Block_Ciphers.DES;
+end CryptAda.Ciphers.Block_Ciphers.DES_EDE;

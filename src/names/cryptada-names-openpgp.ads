@@ -68,12 +68,15 @@ package CryptAda.Names.OpenPGP is
    -- OpenPGP naming schema.
    -----------------------------------------------------------------------------
 
+   OpenPGP_DES_EDE            : aliased constant String := "OpenPGP.Cipher.2";
+   
    --[OpenPGP_Block_Ciphers]----------------------------------------------------
    -- Array of OpenPGP names of block ciphers.
    -----------------------------------------------------------------------------
 
    OpenPGP_Block_Ciphers         : constant array(Block_Cipher_Id) of Algorithm_Name_Ref :=
       (
+         BC_DES_EDE        => OpenPGP_DES_EDE'Access,
          others            => Anonymous_Algorithm'Access
       );
       

@@ -101,7 +101,8 @@ OBJS     =  cryptada.o \
             cryptada-ciphers.o \
             cryptada-ciphers-keys.o \
             cryptada-ciphers-block_ciphers.o \
-            cryptada-ciphers-block_ciphers-des.o
+            cryptada-ciphers-block_ciphers-des.o \
+            cryptada-ciphers-block_ciphers-des_ede.o 
 
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -306,7 +307,11 @@ cryptada-ciphers-block_ciphers.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers.adb
 cryptada-ciphers-block_ciphers-des.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers-des.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
-        
+
+cryptada-ciphers-block_ciphers-des_ede.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers-des_ede.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+    
 #>>>[Targets]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 all: objs

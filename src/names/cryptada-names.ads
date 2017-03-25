@@ -131,7 +131,8 @@ package CryptAda.Names is
    type Block_Cipher_Id is
       (
          BC_NONE,                -- No cipher.
-         BC_DES                  -- DES cipher.
+         BC_DES,                 -- DES cipher.
+         BC_DES_EDE              -- Triple DES (EDE) cipher.
       );
       
    -----------------------------------------------------------------------------
