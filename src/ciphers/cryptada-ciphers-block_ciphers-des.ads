@@ -38,6 +38,16 @@ with CryptAda.Random.Generators;
 package CryptAda.Ciphers.Block_Ciphers.DES is
 
    -----------------------------------------------------------------------------
+   --[Constants]----------------------------------------------------------------
+   -----------------------------------------------------------------------------
+
+   --[DES_Block_Size]-----------------------------------------------------------
+   -- Size in bytes of DES blocks.
+   -----------------------------------------------------------------------------
+
+   DES_Block_Size                : constant Block_Size   :=  8;
+
+   -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
@@ -47,6 +57,12 @@ package CryptAda.Ciphers.Block_Ciphers.DES is
    
    type DES_Cipher is new Block_Cipher with private;
 
+   --[DES_Block]----------------------------------------------------------------
+   -- Constrained subtype for DES blocks.
+   -----------------------------------------------------------------------------
+   
+   subtype DES_Block is Block(1 .. DES_Block_Size);
+   
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
@@ -155,7 +171,6 @@ private
    --[DES Constants]------------------------------------------------------------
    -- Next constants are related to DES processing.
    --
-   -- DES_Block_Size          Size of blocks processed by DES.
    -- DES_Key_Schedule_Size   Size of DES key schedule.
    -- DES_Min_KL              Minimum key length for DES (in bytes).
    -- DES_Max_KL              Minimum key length for DES (in bytes).
@@ -164,8 +179,7 @@ private
    --                         8 bytes keys)
    -----------------------------------------------------------------------------
    
-   DES_Block_Size                : constant Block_Size   :=  8;
-   DES_Key_Schedule_Size         : constant Positive     := 16;
+   DES_Key_Schedule_Size         : constant Positive     := 32;
    DES_Min_KL                    : constant Positive     :=  8;
    DES_Max_KL                    : constant Positive     :=  8;
    DES_Def_KL                    : constant Positive     :=  8;
@@ -174,12 +188,6 @@ private
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
-
-   --[DES_Block]----------------------------------------------------------------
-   -- Constrained subtype for DES blocks.
-   -----------------------------------------------------------------------------
-   
-   subtype DES_Block is Block(1 .. DES_Block_Size);
 
    --[DES_Key_Schedule_Block]---------------------------------------------------
    -- Subtype for the DES key schedule block.
