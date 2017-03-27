@@ -69,6 +69,9 @@ package CryptAda.Names.OpenPGP is
    -----------------------------------------------------------------------------
 
    OpenPGP_DES_EDE            : aliased constant String := "OpenPGP.Cipher.2";
+   OpenPGP_AES_128            : aliased constant String := "OpenPGP.Cipher.7";
+   OpenPGP_AES_192            : aliased constant String := "OpenPGP.Cipher.8";
+   OpenPGP_AES_256            : aliased constant String := "OpenPGP.Cipher.9";
    
    --[OpenPGP_Block_Ciphers]----------------------------------------------------
    -- Array of OpenPGP names of block ciphers.
@@ -77,6 +80,9 @@ package CryptAda.Names.OpenPGP is
    OpenPGP_Block_Ciphers         : constant array(Block_Cipher_Id) of Algorithm_Name_Ref :=
       (
          BC_DES_EDE        => OpenPGP_DES_EDE'Access,
+         BC_AES_128        => OpenPGP_AES_128'Access,
+         BC_AES_192        => OpenPGP_AES_192'Access,
+         BC_AES_256        => OpenPGP_AES_256'Access,
          others            => Anonymous_Algorithm'Access
       );
       

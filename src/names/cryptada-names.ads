@@ -132,7 +132,10 @@ package CryptAda.Names is
       (
          BC_NONE,                -- No cipher.
          BC_DES,                 -- DES cipher.
-         BC_DES_EDE              -- Triple DES (EDE) cipher.
+         BC_DES_EDE,             -- Triple DES (EDE) cipher.
+         BC_AES_128,             -- AES-128
+         BC_AES_192,             -- AES-192
+         BC_AES_256              -- AES-256
       );
       
    -----------------------------------------------------------------------------
