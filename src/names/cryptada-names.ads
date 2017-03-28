@@ -139,7 +139,8 @@ package CryptAda.Names is
          BC_TDEA_EDE_3,          -- Triple DES with keying option 1 (K1 /= K2 /= K3)
          BC_AES_128,             -- AES-128
          BC_AES_192,             -- AES-192
-         BC_AES_256              -- AES-256
+         BC_AES_256,             -- AES-256
+         BC_Blowfish             -- Blowfish.
       );
       
    -----------------------------------------------------------------------------

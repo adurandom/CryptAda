@@ -72,6 +72,7 @@ package CryptAda.Names.OpenPGP is
    OpenPGP_AES_128            : aliased constant String := "OpenPGP.Cipher.7";
    OpenPGP_AES_192            : aliased constant String := "OpenPGP.Cipher.8";
    OpenPGP_AES_256            : aliased constant String := "OpenPGP.Cipher.9";
+   OpenPGP_Blowfish           : aliased constant String := "OpenPGP.Cipher.4";
    
    --[OpenPGP_Block_Ciphers]----------------------------------------------------
    -- Array of OpenPGP names of block ciphers.
@@ -83,6 +84,7 @@ package CryptAda.Names.OpenPGP is
          BC_AES_128        => OpenPGP_AES_128'Access,
          BC_AES_192        => OpenPGP_AES_192'Access,
          BC_AES_256        => OpenPGP_AES_256'Access,
+         BC_Blowfish       => OpenPGP_Blowfish'Access,
          others            => Anonymous_Algorithm'Access
       );
       

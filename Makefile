@@ -102,7 +102,8 @@ OBJS     =  cryptada.o \
             cryptada-ciphers-block_ciphers-desx.o \
             cryptada-ciphers-block_ciphers-des2x.o \
             cryptada-ciphers-block_ciphers-tdea.o \
-            cryptada-ciphers-block_ciphers-aes.o 
+            cryptada-ciphers-block_ciphers-aes.o \
+            cryptada-ciphers-block_ciphers-blowfish.o 
 
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -311,6 +312,10 @@ cryptada-ciphers-block_ciphers-tdea.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers
 	$(ADACC) $(CFLAGS) $<
 
 cryptada-ciphers-block_ciphers-aes.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers-aes.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-ciphers-block_ciphers-blowfish.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers-blowfish.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
     
