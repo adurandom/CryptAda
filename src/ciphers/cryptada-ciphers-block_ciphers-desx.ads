@@ -16,7 +16,7 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-block_ciphers-des-desx.ads
+--    Filename          :  cryptada-ciphers-block_ciphers-desx.ads
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 28th, 2017
@@ -56,8 +56,9 @@
 
 with CryptAda.Ciphers.Keys;
 with CryptAda.Random.Generators;
+with CryptAda.Ciphers.Block_Ciphers.DES;
 
-package CryptAda.Ciphers.Block_Ciphers.DES.DESX is
+package CryptAda.Ciphers.Block_Ciphers.DESX is
 
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
@@ -67,7 +68,7 @@ package CryptAda.Ciphers.Block_Ciphers.DES.DESX is
    -- Size in bytes of DESX blocks.
    -----------------------------------------------------------------------------
 
-   DESX_Block_Size               : constant Block_Size   :=  DES_Block_Size;
+   DESX_Block_Size               : constant Block_Size   :=  CryptAda.Ciphers.Block_Ciphers.DES.DES_Block_Size;
 
    --[DESX_Key_Size]------------------------------------------------------------
    -- Size in bytes of DESX keys. The size is 24 bytes
@@ -86,7 +87,7 @@ package CryptAda.Ciphers.Block_Ciphers.DES.DESX is
    -- The DESX block cipher context.
    -----------------------------------------------------------------------------
    
-   type DESX_Cipher is new DES_Cipher with private;
+   type DESX_Cipher is new Block_Cipher with private;
 
    --[DESX_Block]---------------------------------------------------------------
    -- Constrained subtype for DESX blocks.
@@ -172,14 +173,16 @@ private
    
    --[DESX_Cipher]--------------------------------------------------------------
    -- Full definition of the DESX_Cipher tagged type. It extends the
-   -- DES_Cipher with the followitng fields:
+   -- Block_Cipher with the followitng fields:
    --
+   -- Sub_Cipher        DES_Cipher.
    -- Xor_K1            Key for xoring input block before encryption.
    -- Xor_K2            Key for xoring output block after encryption.
    -----------------------------------------------------------------------------
 
-   type DESX_Cipher is new DES_Cipher with
+   type DESX_Cipher is new Block_Cipher with
       record
+         Sub_Cipher              : CryptAda.Ciphers.Block_Ciphers.DES.DES_Cipher;
          Xor_K1                  : DESX_Block := (others => 0);
          Xor_K2                  : DESX_Block := (others => 0);
       end record;
@@ -194,4 +197,4 @@ private
    procedure   Finalize(
                   Object         : in out DESX_Cipher);
 
-end CryptAda.Ciphers.Block_Ciphers.DES.DESX;
+end CryptAda.Ciphers.Block_Ciphers.DESX;

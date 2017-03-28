@@ -16,7 +16,7 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-block_ciphers-des-desx.adb
+--    Filename          :  cryptada-ciphers-block_ciphers-desx.adb
 --    File kind         :  Ada package body
 --    Author            :  A. Duran
 --    Creation date     :  March 28th, 2017
@@ -36,8 +36,9 @@ with CryptAda.Names;                   use CryptAda.Names;
 with CryptAda.Exceptions;              use CryptAda.Exceptions;
 with CryptAda.Ciphers.Keys;            use CryptAda.Ciphers.Keys;
 with CryptAda.Random.Generators;       use CryptAda.Random.Generators;
+with CryptAda.Ciphers.Block_Ciphers.DES;  use CryptAda.Ciphers.Block_Ciphers.DES;
 
-package body CryptAda.Ciphers.Block_Ciphers.DES.DESX is
+package body CryptAda.Ciphers.Block_Ciphers.DESX is
 
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
@@ -88,7 +89,7 @@ package body CryptAda.Ciphers.Block_Ciphers.DES.DESX is
       
       -- DES encrypt Xor'ed block.
       
-      Process_Block(DES_Cipher(With_Cipher), T1, T2);
+      Process_Block(With_Cipher.Sub_Cipher, T1, T2);
       
       -- Xor T2 with Xor_K2 to generate output.
       
@@ -117,7 +118,7 @@ package body CryptAda.Ciphers.Block_Ciphers.DES.DESX is
       
       -- DES decrypt Xor'ed block.
       
-      Process_Block(DES_Cipher(With_Cipher), T1, T2);
+      Process_Block(With_Cipher.Sub_Cipher, T1, T2);
       
       -- Xor T2 with Xor_K1 to generate output.
       
@@ -143,13 +144,13 @@ package body CryptAda.Ciphers.Block_Ciphers.DES.DESX is
       K              : Key;
    begin
 
-      -- Veriify that key is a valid DES key.
+      -- Veriify that key is a valid DESX key.
       
       if not Is_Valid_Key(The_Cipher, With_Key) then
          raise CryptAda_Invalid_Key_Error;
       end if;
 
-      -- Get key bytes nd set the DES key and both Xor keys.
+      -- Get key bytes and set the DES key and both Xor keys.
       
       KB := Get_Key_Bytes(With_Key);
       
@@ -159,7 +160,15 @@ package body CryptAda.Ciphers.Block_Ciphers.DES.DESX is
 
       -- Start DES cipher.
       
-      Start_Cipher(DES_Cipher(The_Cipher), For_Operation, K);
+      Start_Cipher(The_Cipher.Sub_Cipher, For_Operation, K);
+
+      -- Set state.
+     
+      if For_Operation = Encrypt then
+         The_Cipher.State  := Encrypting;
+      else
+         The_Cipher.State  := Decrypting;
+      end if;      
    end Start_Cipher;
 
    --[Process_Block]------------------------------------------------------------
@@ -201,7 +210,8 @@ package body CryptAda.Ciphers.Block_Ciphers.DES.DESX is
       if The_Cipher.State /= Idle then
          The_Cipher.Xor_K1    := (others => 0);
          The_Cipher.Xor_K2    := (others => 0);
-         Stop_Cipher(DES_Cipher(The_Cipher));
+         Stop_Cipher(The_Cipher.Sub_Cipher);
+         The_Cipher.State     := Idle;
       end if;
    end Stop_Cipher;
 
@@ -245,21 +255,8 @@ package body CryptAda.Ciphers.Block_Ciphers.DES.DESX is
                   The_Key        : in     Key)
       return   Boolean
    is
-      KB             : Byte_Array(1 .. DESX_Key_Size);
-      K              : Key;
    begin
-      -- Key must be valid.
-      
-      if not Is_Valid_Key(For_Cipher, The_Key) then
-         return False;
-      end if;
-
-      -- Check if DES key is strong.
-      
-      KB := Get_Key_Bytes(The_Key);
-      Set_Key(K, KB(1 .. 8));
-      
-      return Is_Strong_Key(DES_Cipher(For_Cipher), K);
+      return Is_Valid_Key(For_Cipher, The_Key);
    end Is_Strong_Key;
    
    --[Ada.Finalization interface]-----------------------------------------------
@@ -277,7 +274,6 @@ package body CryptAda.Ciphers.Block_Ciphers.DES.DESX is
       Object.KL_Inc_Step      := DESX_KL_Inc_Step;
       Object.Blk_Size         := DESX_Block_Size;
       Object.State            := Idle;
-      Object.Key_Schedule     := (others => 0);
       Object.Xor_K1           := (others => 0);
       Object.Xor_K2           := (others => 0);
    end Initialize;
@@ -295,8 +291,7 @@ package body CryptAda.Ciphers.Block_Ciphers.DES.DESX is
       Object.KL_Inc_Step      := DESX_KL_Inc_Step;
       Object.Blk_Size         := DESX_Block_Size;
       Object.State            := Idle;
-      Object.Key_Schedule     := (others => 0);
       Object.Xor_K1           := (others => 0);
       Object.Xor_K2           := (others => 0);
    end Finalize;
-end CryptAda.Ciphers.Block_Ciphers.DES.DESX;
+end CryptAda.Ciphers.Block_Ciphers.DESX;

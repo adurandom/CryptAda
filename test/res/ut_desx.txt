@@ -1,0 +1,235 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.1.b (2017/03/31)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.DESX
+Description              : Unit test driver for CryptAda.Ciphers.Block_Ciphers.DESX functionality.
+Started                  : 2017/03/28 - 16:52:15
+================================================================================
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Attempting to use a Block_Cipher without starting it
+Started         : 2017/03/28 - 16:52:15
+--------------------------------------------------------------------------------
+[I] Must raise CryptAda_Uninitialized_Cipher_Error
+[I] Cipher information
+[I] Information of block cipher object:
+    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DESX.DESX_CIPHER"
+    CryptAda cipher algorithm id  : "BC_DESX"
+    Block_Cipher SCAN name        : "DESX"
+    Block_Cipher ASN1 OID         : ""
+    Block_Cipher OpenPGP name     : ""
+    Block size                    :  8
+    Cipher state                  : IDLE
+    Minimum key length            :  24
+    Maximum key length            :  24
+    Default key length            :  24
+    Key length increment step     :  0
+[I] Trying to process a block.
+[I] Raised CryptAda_Uninitialized_Cipher_Error
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/03/28 - 16:52:15
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Cipher life-cycle
+Started         : 2017/03/28 - 16:52:15
+--------------------------------------------------------------------------------
+[I] Checking Cipher object state along is life cycle.
+[I] Before Start_Cipher, state is Idle
+[I] Information of block cipher object:
+    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DESX.DESX_CIPHER"
+    CryptAda cipher algorithm id  : "BC_DESX"
+    Block_Cipher SCAN name        : "DESX"
+    Block_Cipher ASN1 OID         : ""
+    Block_Cipher OpenPGP name     : ""
+    Block size                    :  8
+    Cipher state                  : IDLE
+    Minimum key length            :  24
+    Maximum key length            :  24
+    Default key length            :  24
+    Key length increment step     :  0
+[I] Starting cipher for encryption
+State must be: ENCRYPTING
+[I] Key used:
+    Key length:  24
+    Key bytes :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#
+[I] Information of block cipher object:
+    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DESX.DESX_CIPHER"
+    CryptAda cipher algorithm id  : "BC_DESX"
+    Block_Cipher SCAN name        : "DESX"
+    Block_Cipher ASN1 OID         : ""
+    Block_Cipher OpenPGP name     : ""
+    Block size                    :  8
+    Cipher state                  : ENCRYPTING
+    Minimum key length            :  24
+    Maximum key length            :  24
+    Default key length            :  24
+    Key length increment step     :  0
+[I] Processing a block
+[I] Block to encrypt:
+    Block length:  8
+    Block data  :
+16#08#, 16#07#, 16#06#, 16#05#, 16#04#, 16#03#, 16#02#, 16#01#
+[I] Encrypted block:
+    Block length:  8
+    Block data  :
+16#45#, 16#7F#, 16#B1#, 16#7D#, 16#1B#, 16#89#, 16#CE#, 16#B6#
+[I] Stopping cipher
+State must be: IDLE
+[I] Information of block cipher object:
+    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DESX.DESX_CIPHER"
+    CryptAda cipher algorithm id  : "BC_DESX"
+    Block_Cipher SCAN name        : "DESX"
+    Block_Cipher ASN1 OID         : ""
+    Block_Cipher OpenPGP name     : ""
+    Block size                    :  8
+    Cipher state                  : IDLE
+    Minimum key length            :  24
+    Maximum key length            :  24
+    Default key length            :  24
+    Key length increment step     :  0
+[I] Starting cipher for decryption
+State must be: DECRYPTING
+[I] Key used:
+    Key length:  24
+    Key bytes :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#
+[I] Information of block cipher object:
+    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DESX.DESX_CIPHER"
+    CryptAda cipher algorithm id  : "BC_DESX"
+    Block_Cipher SCAN name        : "DESX"
+    Block_Cipher ASN1 OID         : ""
+    Block_Cipher OpenPGP name     : ""
+    Block size                    :  8
+    Cipher state                  : DECRYPTING
+    Minimum key length            :  24
+    Maximum key length            :  24
+    Default key length            :  24
+    Key length increment step     :  0
+[I] Processing the previously encrypted block
+[I] Block to decrypt:
+    Block length:  8
+    Block data  :
+16#45#, 16#7F#, 16#B1#, 16#7D#, 16#1B#, 16#89#, 16#CE#, 16#B6#
+[I] Decrypted block:
+    Block length:  8
+    Block data  :
+16#08#, 16#07#, 16#06#, 16#05#, 16#04#, 16#03#, 16#02#, 16#01#
+[I] Stopping cipher
+State must be: IDLE
+[I] Information of block cipher object:
+    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DESX.DESX_CIPHER"
+    CryptAda cipher algorithm id  : "BC_DESX"
+    Block_Cipher SCAN name        : "DESX"
+    Block_Cipher ASN1 OID         : ""
+    Block_Cipher OpenPGP name     : ""
+    Block size                    :  8
+    Cipher state                  : IDLE
+    Minimum key length            :  24
+    Maximum key length            :  24
+    Default key length            :  24
+    Key length increment step     :  0
+[I] Decrypted block must be equal to plain text original block
+[I] Results match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/03/28 - 16:52:15
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Testing random key generation
+Started         : 2017/03/28 - 16:52:15
+--------------------------------------------------------------------------------
+[I] Using an unitialized random generator
+Must raise CryptAda_Generator_Not_Started_Error
+[I] Raised CryptAda_Generator_Not_Started_Error
+[I] Using an un-seeded random generator
+Must raise CryptAda_Generator_Need_Seeding_Error
+[I] Raised CryptAda_Generator_Need_Seeding_Error
+[I] Using an internal seeded random generator
+[I] Generating a Key
+[I] Generated key:
+    Key length:  24
+    Key bytes :
+16#1C#, 16#9E#, 16#0D#, 16#CB#, 16#16#, 16#8D#, 16#20#, 16#52#, 16#A7#, 16#EA#, 
+16#01#, 16#09#, 16#E8#, 16#5B#, 16#C5#, 16#E9#, 16#67#, 16#D8#, 16#FB#, 16#36#, 
+16#F8#, 16#EF#, 16#03#, 16#8C#
+[I] Key must be valid
+[I] Key is valid
+[I] Key must be strong
+[I] Key is strong
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/03/28 - 16:52:15
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : DESX standard test vectors
+Started         : 2017/03/28 - 16:52:15
+--------------------------------------------------------------------------------
+[I] Poor, just found 1 vector
+[I] DESX Test vector:  1
+    Key                     : 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#23#, 16#45#, 16#67#, 16#89#, 16#AB#, 16#CD#, 16#EF#, 16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#
+    Plain text block        : 16#94#, 16#DB#, 16#E0#, 16#82#, 16#54#, 16#9A#, 16#14#, 16#EF#
+    Expected encrypted block: 16#90#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#
+    Obtained encrypted block: 16#90#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#
+[I] Cipher test vector, results match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/03/28 - 16:52:15
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 5
+Description     : DESX Bulk test
+Started         : 2017/03/28 - 16:52:15
+--------------------------------------------------------------------------------
+[I] Block cipher bulk test
+    Performing  10000 iterations encrypting and decrypting random blocks
+    with random keys.
+[I] Information of block cipher object:
+    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DESX.DESX_CIPHER"
+    CryptAda cipher algorithm id  : "BC_DESX"
+    Block_Cipher SCAN name        : "DESX"
+    Block_Cipher ASN1 OID         : ""
+    Block_Cipher OpenPGP name     : ""
+    Block size                    :  8
+    Cipher state                  : IDLE
+    Minimum key length            :  24
+    Maximum key length            :  24
+    Default key length            :  24
+    Key length increment step     :  0
+[I] Bulk test completed OK
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 5
+Test Case Result: PASSED
+Finished        : 2017/03/28 - 16:52:15
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.DESX
+Finished                 : 2017/03/28 - 16:52:15
+================================================================================
