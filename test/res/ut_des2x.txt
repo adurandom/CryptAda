@@ -4,8 +4,8 @@ Version: 0.1.b (2017/03/31)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
-CryptAda Test Driver Name: CryptAda.Tests.Unit.DESX
-Description              : Unit test driver for CryptAda.Ciphers.Block_Ciphers.DESX functionality.
+CryptAda Test Driver Name: CryptAda.Tests.Unit.DES2X
+Description              : Unit test driver for CryptAda.Ciphers.Block_Ciphers.DES2X functionality.
 Started                  : 2017/03/28 - 17:44:04
 ================================================================================
 
@@ -17,16 +17,16 @@ Started         : 2017/03/28 - 17:44:04
 [I] Must raise CryptAda_Uninitialized_Cipher_Error
 [I] Cipher information
 [I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DESX.DESX_CIPHER"
-    CryptAda cipher algorithm id  : "BC_DESX"
-    Block_Cipher SCAN name        : "DESX"
+    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DES2X.DES2X_CIPHER"
+    CryptAda cipher algorithm id  : "BC_DES2X"
+    Block_Cipher SCAN name        : ""
     Block_Cipher ASN1 OID         : ""
     Block_Cipher OpenPGP name     : ""
     Block size                    :  8
     Cipher state                  : IDLE
-    Minimum key length            :  24
-    Maximum key length            :  24
-    Default key length            :  24
+    Minimum key length            :  32
+    Maximum key length            :  32
+    Default key length            :  32
     Key length increment step     :  0
 [I] Trying to process a block.
 [I] Raised CryptAda_Uninitialized_Cipher_Error
@@ -45,36 +45,37 @@ Started         : 2017/03/28 - 17:44:04
 [I] Checking Cipher object state along is life cycle.
 [I] Before Start_Cipher, state is Idle
 [I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DESX.DESX_CIPHER"
-    CryptAda cipher algorithm id  : "BC_DESX"
-    Block_Cipher SCAN name        : "DESX"
+    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DES2X.DES2X_CIPHER"
+    CryptAda cipher algorithm id  : "BC_DES2X"
+    Block_Cipher SCAN name        : ""
     Block_Cipher ASN1 OID         : ""
     Block_Cipher OpenPGP name     : ""
     Block size                    :  8
     Cipher state                  : IDLE
-    Minimum key length            :  24
-    Maximum key length            :  24
-    Default key length            :  24
+    Minimum key length            :  32
+    Maximum key length            :  32
+    Default key length            :  32
     Key length increment step     :  0
 [I] Starting cipher for encryption
 State must be: ENCRYPTING
 [I] Key used:
-    Key length:  24
+    Key length:  32
     Key bytes :
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
-16#00#, 16#00#, 16#00#, 16#00#
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#
 [I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DESX.DESX_CIPHER"
-    CryptAda cipher algorithm id  : "BC_DESX"
-    Block_Cipher SCAN name        : "DESX"
+    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DES2X.DES2X_CIPHER"
+    CryptAda cipher algorithm id  : "BC_DES2X"
+    Block_Cipher SCAN name        : ""
     Block_Cipher ASN1 OID         : ""
     Block_Cipher OpenPGP name     : ""
     Block size                    :  8
     Cipher state                  : ENCRYPTING
-    Minimum key length            :  24
-    Maximum key length            :  24
-    Default key length            :  24
+    Minimum key length            :  32
+    Maximum key length            :  32
+    Default key length            :  32
     Key length increment step     :  0
 [I] Processing a block
 [I] Block to encrypt:
@@ -84,46 +85,47 @@ State must be: ENCRYPTING
 [I] Encrypted block:
     Block length:  8
     Block data  :
-16#45#, 16#7F#, 16#B1#, 16#7D#, 16#1B#, 16#89#, 16#CE#, 16#B6#
+16#54#, 16#68#, 16#9E#, 16#AE#, 16#86#, 16#B4#, 16#33#, 16#13#
 [I] Stopping cipher
 State must be: IDLE
 [I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DESX.DESX_CIPHER"
-    CryptAda cipher algorithm id  : "BC_DESX"
-    Block_Cipher SCAN name        : "DESX"
+    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DES2X.DES2X_CIPHER"
+    CryptAda cipher algorithm id  : "BC_DES2X"
+    Block_Cipher SCAN name        : ""
     Block_Cipher ASN1 OID         : ""
     Block_Cipher OpenPGP name     : ""
     Block size                    :  8
     Cipher state                  : IDLE
-    Minimum key length            :  24
-    Maximum key length            :  24
-    Default key length            :  24
+    Minimum key length            :  32
+    Maximum key length            :  32
+    Default key length            :  32
     Key length increment step     :  0
 [I] Starting cipher for decryption
 State must be: DECRYPTING
 [I] Key used:
-    Key length:  24
+    Key length:  32
     Key bytes :
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
-16#00#, 16#00#, 16#00#, 16#00#
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#
 [I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DESX.DESX_CIPHER"
-    CryptAda cipher algorithm id  : "BC_DESX"
-    Block_Cipher SCAN name        : "DESX"
+    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DES2X.DES2X_CIPHER"
+    CryptAda cipher algorithm id  : "BC_DES2X"
+    Block_Cipher SCAN name        : ""
     Block_Cipher ASN1 OID         : ""
     Block_Cipher OpenPGP name     : ""
     Block size                    :  8
     Cipher state                  : DECRYPTING
-    Minimum key length            :  24
-    Maximum key length            :  24
-    Default key length            :  24
+    Minimum key length            :  32
+    Maximum key length            :  32
+    Default key length            :  32
     Key length increment step     :  0
 [I] Processing the previously encrypted block
 [I] Block to decrypt:
     Block length:  8
     Block data  :
-16#45#, 16#7F#, 16#B1#, 16#7D#, 16#1B#, 16#89#, 16#CE#, 16#B6#
+16#54#, 16#68#, 16#9E#, 16#AE#, 16#86#, 16#B4#, 16#33#, 16#13#
 [I] Decrypted block:
     Block length:  8
     Block data  :
@@ -131,16 +133,16 @@ State must be: DECRYPTING
 [I] Stopping cipher
 State must be: IDLE
 [I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DESX.DESX_CIPHER"
-    CryptAda cipher algorithm id  : "BC_DESX"
-    Block_Cipher SCAN name        : "DESX"
+    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DES2X.DES2X_CIPHER"
+    CryptAda cipher algorithm id  : "BC_DES2X"
+    Block_Cipher SCAN name        : ""
     Block_Cipher ASN1 OID         : ""
     Block_Cipher OpenPGP name     : ""
     Block size                    :  8
     Cipher state                  : IDLE
-    Minimum key length            :  24
-    Maximum key length            :  24
-    Default key length            :  24
+    Minimum key length            :  32
+    Maximum key length            :  32
+    Default key length            :  32
     Key length increment step     :  0
 [I] Decrypted block must be equal to plain text original block
 [I] Results match
@@ -165,11 +167,12 @@ Must raise CryptAda_Generator_Need_Seeding_Error
 [I] Using an internal seeded random generator
 [I] Generating a Key
 [I] Generated key:
-    Key length:  24
+    Key length:  32
     Key bytes :
-16#26#, 16#D2#, 16#3E#, 16#90#, 16#E0#, 16#61#, 16#98#, 16#0A#, 16#42#, 16#B3#, 
-16#71#, 16#5E#, 16#0C#, 16#55#, 16#A0#, 16#29#, 16#34#, 16#EE#, 16#A7#, 16#AB#, 
-16#24#, 16#71#, 16#0E#, 16#10#
+16#76#, 16#DE#, 16#A2#, 16#45#, 16#D3#, 16#94#, 16#00#, 16#6F#, 16#1D#, 16#AF#, 
+16#BD#, 16#6C#, 16#E2#, 16#B8#, 16#C5#, 16#32#, 16#14#, 16#36#, 16#92#, 16#39#, 
+16#CB#, 16#F5#, 16#10#, 16#C7#, 16#19#, 16#40#, 16#4B#, 16#46#, 16#D0#, 16#29#, 
+16#05#, 16#6E#
 [I] Key must be valid
 [I] Key is valid
 [I] Key must be strong
@@ -183,16 +186,10 @@ Finished        : 2017/03/28 - 17:44:04
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
-Description     : DESX standard test vectors
+Description     : DES2X standard test vectors
 Started         : 2017/03/28 - 17:44:04
 --------------------------------------------------------------------------------
-[I] Poor, just found 1 vector
-[I] DESX Test vector:  1
-    Key                     : 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#23#, 16#45#, 16#67#, 16#89#, 16#AB#, 16#CD#, 16#EF#, 16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#
-    Plain text block        : 16#94#, 16#DB#, 16#E0#, 16#82#, 16#54#, 16#9A#, 16#14#, 16#EF#
-    Expected encrypted block: 16#90#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#
-    Obtained encrypted block: 16#90#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#
-[I] Cipher test vector, results match
+[I] No vectors so far.
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 4
@@ -202,34 +199,34 @@ Finished        : 2017/03/28 - 17:44:04
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
-Description     : DESX Bulk test
+Description     : DES2X Bulk test
 Started         : 2017/03/28 - 17:44:04
 --------------------------------------------------------------------------------
 [I] Block cipher bulk test
     Performing  10000 iterations encrypting and decrypting random blocks
     with random keys.
 [I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DESX.DESX_CIPHER"
-    CryptAda cipher algorithm id  : "BC_DESX"
-    Block_Cipher SCAN name        : "DESX"
+    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DES2X.DES2X_CIPHER"
+    CryptAda cipher algorithm id  : "BC_DES2X"
+    Block_Cipher SCAN name        : ""
     Block_Cipher ASN1 OID         : ""
     Block_Cipher OpenPGP name     : ""
     Block size                    :  8
     Cipher state                  : IDLE
-    Minimum key length            :  24
-    Maximum key length            :  24
-    Default key length            :  24
+    Minimum key length            :  32
+    Maximum key length            :  32
+    Default key length            :  32
     Key length increment step     :  0
 [I] Bulk test completed OK
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 17:44:04
+Finished        : 2017/03/28 - 17:44:05
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
-CryptAda Test Driver Name: CryptAda.Tests.Unit.DESX
-Finished                 : 2017/03/28 - 17:44:04
+CryptAda Test Driver Name: CryptAda.Tests.Unit.DES2X
+Finished                 : 2017/03/28 - 17:44:05
 ================================================================================

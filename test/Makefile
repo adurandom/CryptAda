@@ -139,6 +139,7 @@ U_RND       =   $(CTB_URND)/ut_rsaref.exe \
 
 U_BC        =   $(CTB_UBC)/ut_des.exe \
                 $(CTB_UBC)/ut_desx.exe \
+                $(CTB_UBC)/ut_des2x.exe \
                 $(CTB_UBC)/ut_tdea.exe \
                 $(CTB_UBC)/ut_aes.exe
                 
@@ -285,6 +286,10 @@ $(CTB_UBC)/ut_des.exe: $(CTS_UBC_DRV)ut_des.adb
 	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
 
 $(CTB_UBC)/ut_desx.exe: $(CTS_UBC_DRV)ut_desx.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBC)/ut_des2x.exe: $(CTS_UBC_DRV)ut_des2x.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
     

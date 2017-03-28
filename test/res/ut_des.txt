@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.DES
 Description              : Unit test driver for CryptAda.Ciphers.Block_Ciphers.DES functionality.
-Started                  : 2017/03/28 - 16:52:14
+Started                  : 2017/03/28 - 17:44:04
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Attempting to use a Block_Cipher without starting it
-Started         : 2017/03/28 - 16:52:14
+Started         : 2017/03/28 - 17:44:04
 --------------------------------------------------------------------------------
 [I] Must raise CryptAda_Uninitialized_Cipher_Error
 [I] Cipher information
@@ -34,13 +34,13 @@ Started         : 2017/03/28 - 16:52:14
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 16:52:14
+Finished        : 2017/03/28 - 17:44:04
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Cipher life-cycle
-Started         : 2017/03/28 - 16:52:14
+Started         : 2017/03/28 - 17:44:04
 --------------------------------------------------------------------------------
 [I] Checking Cipher object state along is life cycle.
 [I] Before Start_Cipher, state is Idle
@@ -144,13 +144,13 @@ State must be: IDLE
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 16:52:14
+Finished        : 2017/03/28 - 17:44:04
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Testing random key generation
-Started         : 2017/03/28 - 16:52:14
+Started         : 2017/03/28 - 17:44:04
 --------------------------------------------------------------------------------
 [I] Using an unitialized random generator
 Must raise CryptAda_Generator_Not_Started_Error
@@ -163,7 +163,7 @@ Must raise CryptAda_Generator_Need_Seeding_Error
 [I] Generated key:
     Key length:  8
     Key bytes :
-16#71#, 16#66#, 16#F9#, 16#6A#, 16#71#, 16#66#, 16#AA#, 16#C5#
+16#4B#, 16#4B#, 16#42#, 16#B4#, 16#5A#, 16#14#, 16#4B#, 16#B7#
 [I] Key must be valid
 [I] Key is valid
 [I] Key must be strong
@@ -174,13 +174,13 @@ Must raise CryptAda_Generator_Need_Seeding_Error
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 16:52:14
+Finished        : 2017/03/28 - 17:44:04
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : DES Key operations tests
-Started         : 2017/03/28 - 16:52:14
+Started         : 2017/03/28 - 17:44:04
 --------------------------------------------------------------------------------
 [I] Generate random byte arraya and check key validity, strength, parity and fix parity.
 Performing  20 iterations.
@@ -188,7 +188,7 @@ Performing  20 iterations.
 [I] Generated key:
     Key length:  8
     Key bytes :
-16#F3#, 16#7E#, 16#A1#, 16#23#, 16#F1#, 16#54#, 16#40#, 16#C3#
+16#0E#, 16#B4#, 16#65#, 16#D1#, 16#53#, 16#F8#, 16#DB#, 16#BC#
 [I] Checking validity ...
 Key is valid
 [I] Checking strength ...
@@ -198,12 +198,12 @@ Key is strong
 [I] Key after fixing parity:
     Key length:  8
     Key bytes :
-16#F3#, 16#7E#, 16#A0#, 16#22#, 16#F0#, 16#55#, 16#41#, 16#C3#
+16#0F#, 16#B4#, 16#65#, 16#D1#, 16#53#, 16#F9#, 16#DB#, 16#BD#
 [I] Iteration  2
 [I] Generated key:
     Key length:  8
     Key bytes :
-16#15#, 16#41#, 16#A1#, 16#31#, 16#C4#, 16#F3#, 16#88#, 16#5A#
+16#33#, 16#31#, 16#B7#, 16#E1#, 16#06#, 16#CA#, 16#61#, 16#72#
 [I] Checking validity ...
 Key is valid
 [I] Checking strength ...
@@ -213,12 +213,12 @@ Key is strong
 [I] Key after fixing parity:
     Key length:  8
     Key bytes :
-16#14#, 16#41#, 16#A0#, 16#30#, 16#C5#, 16#F3#, 16#88#, 16#5A#
+16#33#, 16#30#, 16#B7#, 16#E1#, 16#06#, 16#CA#, 16#60#, 16#72#
 [I] Iteration  3
 [I] Generated key:
     Key length:  8
     Key bytes :
-16#B5#, 16#71#, 16#81#, 16#B3#, 16#E1#, 16#5F#, 16#16#, 16#F5#
+16#2F#, 16#89#, 16#A6#, 16#03#, 16#00#, 16#E6#, 16#CF#, 16#46#
 [I] Checking validity ...
 Key is valid
 [I] Checking strength ...
@@ -228,12 +228,12 @@ Key is strong
 [I] Key after fixing parity:
     Key length:  8
     Key bytes :
-16#B4#, 16#71#, 16#81#, 16#B2#, 16#E1#, 16#5F#, 16#17#, 16#F5#
+16#2E#, 16#88#, 16#A6#, 16#03#, 16#00#, 16#E7#, 16#CF#, 16#47#
 [I] Iteration  4
 [I] Generated key:
     Key length:  8
     Key bytes :
-16#65#, 16#BF#, 16#9F#, 16#92#, 16#67#, 16#3F#, 16#82#, 16#C4#
+16#D3#, 16#2C#, 16#88#, 16#87#, 16#13#, 16#EB#, 16#9E#, 16#BB#
 [I] Checking validity ...
 Key is valid
 [I] Checking strength ...
@@ -243,12 +243,12 @@ Key is strong
 [I] Key after fixing parity:
     Key length:  8
     Key bytes :
-16#65#, 16#BE#, 16#9F#, 16#93#, 16#66#, 16#3F#, 16#82#, 16#C5#
+16#D2#, 16#2D#, 16#88#, 16#87#, 16#12#, 16#EB#, 16#9F#, 16#BB#
 [I] Iteration  5
 [I] Generated key:
     Key length:  8
     Key bytes :
-16#4D#, 16#B3#, 16#55#, 16#04#, 16#F5#, 16#23#, 16#EC#, 16#6F#
+16#2D#, 16#DC#, 16#66#, 16#2B#, 16#90#, 16#A4#, 16#C5#, 16#3B#
 [I] Checking validity ...
 Key is valid
 [I] Checking strength ...
@@ -258,12 +258,12 @@ Key is strong
 [I] Key after fixing parity:
     Key length:  8
     Key bytes :
-16#4D#, 16#B2#, 16#55#, 16#05#, 16#F5#, 16#22#, 16#ED#, 16#6F#
+16#2D#, 16#DD#, 16#66#, 16#2B#, 16#90#, 16#A5#, 16#C5#, 16#3A#
 [I] Iteration  6
 [I] Generated key:
     Key length:  8
     Key bytes :
-16#32#, 16#F3#, 16#FC#, 16#A1#, 16#B1#, 16#3B#, 16#34#, 16#C8#
+16#11#, 16#3C#, 16#6F#, 16#93#, 16#44#, 16#7C#, 16#EA#, 16#A6#
 [I] Checking validity ...
 Key is valid
 [I] Checking strength ...
@@ -273,12 +273,12 @@ Key is strong
 [I] Key after fixing parity:
     Key length:  8
     Key bytes :
-16#33#, 16#F3#, 16#FC#, 16#A0#, 16#B1#, 16#3A#, 16#35#, 16#C9#
+16#11#, 16#3C#, 16#6F#, 16#93#, 16#44#, 16#7D#, 16#EB#, 16#A6#
 [I] Iteration  7
 [I] Generated key:
     Key length:  8
     Key bytes :
-16#46#, 16#14#, 16#B1#, 16#7F#, 16#38#, 16#77#, 16#A0#, 16#60#
+16#40#, 16#C6#, 16#A5#, 16#59#, 16#AA#, 16#E3#, 16#50#, 16#EB#
 [I] Checking validity ...
 Key is valid
 [I] Checking strength ...
@@ -288,12 +288,12 @@ Key is strong
 [I] Key after fixing parity:
     Key length:  8
     Key bytes :
-16#47#, 16#14#, 16#B1#, 16#7E#, 16#39#, 16#77#, 16#A0#, 16#60#
+16#41#, 16#C6#, 16#A5#, 16#59#, 16#AA#, 16#E2#, 16#50#, 16#EB#
 [I] Iteration  8
 [I] Generated key:
     Key length:  8
     Key bytes :
-16#27#, 16#CB#, 16#3C#, 16#9F#, 16#B6#, 16#48#, 16#C2#, 16#87#
+16#A7#, 16#03#, 16#8A#, 16#E0#, 16#FB#, 16#05#, 16#43#, 16#EF#
 [I] Checking validity ...
 Key is valid
 [I] Checking strength ...
@@ -303,12 +303,12 @@ Key is strong
 [I] Key after fixing parity:
     Key length:  8
     Key bytes :
-16#27#, 16#CA#, 16#3C#, 16#9F#, 16#B7#, 16#48#, 16#C3#, 16#87#
+16#A6#, 16#03#, 16#8B#, 16#E1#, 16#FA#, 16#05#, 16#42#, 16#EE#
 [I] Iteration  9
 [I] Generated key:
     Key length:  8
     Key bytes :
-16#77#, 16#69#, 16#5A#, 16#FC#, 16#07#, 16#39#, 16#00#, 16#7E#
+16#AD#, 16#88#, 16#B2#, 16#BE#, 16#06#, 16#B4#, 16#58#, 16#34#
 [I] Checking validity ...
 Key is valid
 [I] Checking strength ...
@@ -318,12 +318,12 @@ Key is strong
 [I] Key after fixing parity:
     Key length:  8
     Key bytes :
-16#77#, 16#69#, 16#5A#, 16#FC#, 16#06#, 16#39#, 16#00#, 16#7E#
+16#AC#, 16#88#, 16#B2#, 16#BE#, 16#06#, 16#B4#, 16#59#, 16#35#
 [I] Iteration  10
 [I] Generated key:
     Key length:  8
     Key bytes :
-16#D2#, 16#4B#, 16#2A#, 16#AB#, 16#1A#, 16#F2#, 16#AA#, 16#10#
+16#42#, 16#56#, 16#08#, 16#D6#, 16#DE#, 16#03#, 16#B6#, 16#73#
 [I] Checking validity ...
 Key is valid
 [I] Checking strength ...
@@ -333,12 +333,12 @@ Key is strong
 [I] Key after fixing parity:
     Key length:  8
     Key bytes :
-16#D2#, 16#4B#, 16#2B#, 16#AA#, 16#1B#, 16#F3#, 16#AA#, 16#11#
+16#42#, 16#56#, 16#09#, 16#D7#, 16#DE#, 16#03#, 16#B7#, 16#72#
 [I] Iteration  11
 [I] Generated key:
     Key length:  8
     Key bytes :
-16#14#, 16#50#, 16#DA#, 16#2C#, 16#CB#, 16#A4#, 16#6D#, 16#A7#
+16#5D#, 16#15#, 16#D7#, 16#98#, 16#9B#, 16#44#, 16#2B#, 16#A1#
 [I] Checking validity ...
 Key is valid
 [I] Checking strength ...
@@ -348,12 +348,12 @@ Key is strong
 [I] Key after fixing parity:
     Key length:  8
     Key bytes :
-16#14#, 16#50#, 16#DB#, 16#2D#, 16#CA#, 16#A5#, 16#6C#, 16#A6#
+16#5C#, 16#14#, 16#D7#, 16#99#, 16#9A#, 16#44#, 16#2B#, 16#A0#
 [I] Iteration  12
 [I] Generated key:
     Key length:  8
     Key bytes :
-16#C4#, 16#16#, 16#8D#, 16#26#, 16#8C#, 16#EA#, 16#F8#, 16#97#
+16#56#, 16#D2#, 16#FE#, 16#B5#, 16#81#, 16#C6#, 16#31#, 16#92#
 [I] Checking validity ...
 Key is valid
 [I] Checking strength ...
@@ -363,12 +363,12 @@ Key is strong
 [I] Key after fixing parity:
     Key length:  8
     Key bytes :
-16#C5#, 16#17#, 16#8D#, 16#27#, 16#8D#, 16#EB#, 16#F9#, 16#96#
+16#56#, 16#D2#, 16#FF#, 16#B4#, 16#81#, 16#C6#, 16#30#, 16#93#
 [I] Iteration  13
 [I] Generated key:
     Key length:  8
     Key bytes :
-16#40#, 16#41#, 16#C6#, 16#6B#, 16#B6#, 16#FE#, 16#E8#, 16#E0#
+16#2D#, 16#AC#, 16#8B#, 16#3D#, 16#2D#, 16#4B#, 16#A2#, 16#BB#
 [I] Checking validity ...
 Key is valid
 [I] Checking strength ...
@@ -378,12 +378,12 @@ Key is strong
 [I] Key after fixing parity:
     Key length:  8
     Key bytes :
-16#41#, 16#41#, 16#C6#, 16#6A#, 16#B7#, 16#FF#, 16#E8#, 16#E1#
+16#2D#, 16#AC#, 16#8B#, 16#3C#, 16#2D#, 16#4B#, 16#A3#, 16#BB#
 [I] Iteration  14
 [I] Generated key:
     Key length:  8
     Key bytes :
-16#DA#, 16#17#, 16#A1#, 16#08#, 16#01#, 16#BD#, 16#B0#, 16#28#
+16#FB#, 16#98#, 16#DA#, 16#01#, 16#A5#, 16#B5#, 16#74#, 16#2F#
 [I] Checking validity ...
 Key is valid
 [I] Checking strength ...
@@ -393,12 +393,12 @@ Key is strong
 [I] Key after fixing parity:
     Key length:  8
     Key bytes :
-16#DB#, 16#17#, 16#A0#, 16#09#, 16#00#, 16#BD#, 16#B1#, 16#28#
+16#FA#, 16#99#, 16#DB#, 16#00#, 16#A5#, 16#B4#, 16#74#, 16#2E#
 [I] Iteration  15
 [I] Generated key:
     Key length:  8
     Key bytes :
-16#40#, 16#1E#, 16#5D#, 16#74#, 16#D1#, 16#CA#, 16#5F#, 16#95#
+16#E7#, 16#C4#, 16#F4#, 16#98#, 16#AC#, 16#49#, 16#61#, 16#65#
 [I] Checking validity ...
 Key is valid
 [I] Checking strength ...
@@ -408,12 +408,12 @@ Key is strong
 [I] Key after fixing parity:
     Key length:  8
     Key bytes :
-16#41#, 16#1E#, 16#5C#, 16#74#, 16#D1#, 16#CA#, 16#5F#, 16#95#
+16#E7#, 16#C5#, 16#F5#, 16#99#, 16#AC#, 16#48#, 16#60#, 16#65#
 [I] Iteration  16
 [I] Generated key:
     Key length:  8
     Key bytes :
-16#DB#, 16#4F#, 16#E4#, 16#D6#, 16#26#, 16#8A#, 16#10#, 16#F8#
+16#6D#, 16#0D#, 16#D7#, 16#17#, 16#B0#, 16#D9#, 16#F5#, 16#48#
 [I] Checking validity ...
 Key is valid
 [I] Checking strength ...
@@ -423,12 +423,12 @@ Key is strong
 [I] Key after fixing parity:
     Key length:  8
     Key bytes :
-16#DB#, 16#4E#, 16#E4#, 16#D7#, 16#27#, 16#8B#, 16#11#, 16#F9#
+16#6C#, 16#0C#, 16#D7#, 16#17#, 16#B1#, 16#D8#, 16#F5#, 16#48#
 [I] Iteration  17
 [I] Generated key:
     Key length:  8
     Key bytes :
-16#D3#, 16#BC#, 16#23#, 16#6B#, 16#09#, 16#CA#, 16#AF#, 16#6D#
+16#4C#, 16#97#, 16#A8#, 16#AC#, 16#EF#, 16#6C#, 16#6A#, 16#07#
 [I] Checking validity ...
 Key is valid
 [I] Checking strength ...
@@ -438,12 +438,12 @@ Key is strong
 [I] Key after fixing parity:
     Key length:  8
     Key bytes :
-16#D2#, 16#BD#, 16#22#, 16#6A#, 16#09#, 16#CA#, 16#AF#, 16#6C#
+16#4D#, 16#96#, 16#A9#, 16#AC#, 16#EE#, 16#6C#, 16#6A#, 16#06#
 [I] Iteration  18
 [I] Generated key:
     Key length:  8
     Key bytes :
-16#A5#, 16#67#, 16#3D#, 16#D7#, 16#D5#, 16#B1#, 16#29#, 16#62#
+16#AE#, 16#30#, 16#99#, 16#F5#, 16#A7#, 16#9C#, 16#6C#, 16#F3#
 [I] Checking validity ...
 Key is valid
 [I] Checking strength ...
@@ -453,12 +453,12 @@ Key is strong
 [I] Key after fixing parity:
     Key length:  8
     Key bytes :
-16#A5#, 16#66#, 16#3C#, 16#D7#, 16#D4#, 16#B1#, 16#28#, 16#63#
+16#AF#, 16#30#, 16#99#, 16#F5#, 16#A6#, 16#9C#, 16#6C#, 16#F3#
 [I] Iteration  19
 [I] Generated key:
     Key length:  8
     Key bytes :
-16#43#, 16#C7#, 16#46#, 16#25#, 16#12#, 16#20#, 16#4E#, 16#D4#
+16#25#, 16#23#, 16#0D#, 16#FF#, 16#99#, 16#AB#, 16#67#, 16#BB#
 [I] Checking validity ...
 Key is valid
 [I] Checking strength ...
@@ -468,12 +468,12 @@ Key is strong
 [I] Key after fixing parity:
     Key length:  8
     Key bytes :
-16#42#, 16#C6#, 16#47#, 16#24#, 16#12#, 16#21#, 16#4E#, 16#D4#
+16#24#, 16#22#, 16#0C#, 16#FF#, 16#99#, 16#AA#, 16#66#, 16#BB#
 [I] Iteration  20
 [I] Generated key:
     Key length:  8
     Key bytes :
-16#EF#, 16#8E#, 16#46#, 16#4A#, 16#4B#, 16#E5#, 16#6C#, 16#D9#
+16#B1#, 16#4D#, 16#15#, 16#78#, 16#E1#, 16#06#, 16#24#, 16#87#
 [I] Checking validity ...
 Key is valid
 [I] Checking strength ...
@@ -483,18 +483,18 @@ Key is strong
 [I] Key after fixing parity:
     Key length:  8
     Key bytes :
-16#EE#, 16#8E#, 16#47#, 16#4B#, 16#4B#, 16#E4#, 16#6C#, 16#D8#
+16#B1#, 16#4D#, 16#14#, 16#78#, 16#E1#, 16#06#, 16#24#, 16#87#
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 16:52:14
+Finished        : 2017/03/28 - 17:44:04
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : DES standard test vectors
-Started         : 2017/03/28 - 16:52:14
+Started         : 2017/03/28 - 17:44:04
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from project NESSIE
     (New European Schemes for Signature, Integrity, and Encryption)
@@ -2871,13 +2871,13 @@ Results match
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 16:52:14
+Finished        : 2017/03/28 - 17:44:04
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : DES Bulk test
-Started         : 2017/03/28 - 16:52:14
+Started         : 2017/03/28 - 17:44:04
 --------------------------------------------------------------------------------
 [I] Block cipher bulk test
     Performing  10000 iterations encrypting and decrypting random blocks
@@ -2899,11 +2899,11 @@ Started         : 2017/03/28 - 16:52:14
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 16:52:15
+Finished        : 2017/03/28 - 17:44:04
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.DES
-Finished                 : 2017/03/28 - 16:52:15
+Finished                 : 2017/03/28 - 17:44:04
 ================================================================================
