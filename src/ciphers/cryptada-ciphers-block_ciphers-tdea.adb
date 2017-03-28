@@ -16,14 +16,15 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-block_ciphers-des_ede.adb
+--    Filename          :  cryptada-ciphers-block_ciphers-tdea.adb
 --    File kind         :  Ada package body
 --    Author            :  A. Duran
 --    Creation date     :  March 25th, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Implements the Triple DES block cipher.
+--    Implements the Triple Data Encryption Algorithm (Triple DES EDE) block 
+--    cipher.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
@@ -38,7 +39,7 @@ with CryptAda.Ciphers.Keys;               use CryptAda.Ciphers.Keys;
 with CryptAda.Random.Generators;          use CryptAda.Random.Generators;
 with CryptAda.Ciphers.Block_Ciphers.DES;  use CryptAda.Ciphers.Block_Ciphers.DES;
 
-package body CryptAda.Ciphers.Block_Ciphers.DES_EDE is
+package body CryptAda.Ciphers.Block_Ciphers.TDEA is
 
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
@@ -49,23 +50,48 @@ package body CryptAda.Ciphers.Block_Ciphers.DES_EDE is
    --[Start_Cipher]-------------------------------------------------------------
 
    procedure   Start_Cipher(
-                  The_Cipher     : in out DES_EDE_Cipher;
+                  The_Cipher     : in out TDEA_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     Key)
    is
-      KB             : Byte_Array(1 .. DES_EDE_Max_KL) := (others => 0);
+      KB             : Byte_Array(1 .. TDEA_Key_Size) := (others => 0);
       K              : Key;
+      KO             : TDEA_Keying_Option;
+      BC_Id          : Block_Cipher_Id;
    begin
 
-      -- Veriify that key is a valid DES EDE key.
+      -- Veriify that key is a valid TDEA key.
       
       if not Is_Valid_Key(The_Cipher, With_Key) then
          raise CryptAda_Invalid_Key_Error;
       end if;
 
-      -- Start DES ciphers.
+      -- Get Key Bytes.
       
       KB := Get_Key_Bytes(With_Key);
+
+      -- Check Keying Option.
+      
+      if KB(1 .. 8) = KB(17 .. 24) then
+         if KB(1 .. 8) = KB(9 .. 16) then
+            -- K1 = K2 = K3 => Keying_Option_3
+            
+            KO    := Keying_Option_3;
+            BC_Id := BC_TDEA_EDE_1;
+         else
+            -- K1 = K3 /= K2 => Keying_Option_2
+            
+            KO    := Keying_Option_2;
+            BC_Id := BC_TDEA_EDE_2;
+         end if;
+      else
+         -- K1 /= K3 /= K2 => Keying_Option_1
+         
+         KO    := Keying_Option_1;
+         BC_Id := BC_TDEA_EDE_3;
+      end if;
+
+      -- Start Subciphers
       
       Set_Key(K, KB(1 .. 8));
       Start_Cipher(The_Cipher.Sub_Ciphers(1), For_Operation, K);
@@ -80,25 +106,29 @@ package body CryptAda.Ciphers.Block_Ciphers.DES_EDE is
       
       Set_Key(K, KB(17 .. 24));
       Start_Cipher(The_Cipher.Sub_Ciphers(3), For_Operation, K);
-            
-      -- Set state.
-     
+
+      -- Set object attributes.
+      
+      The_Cipher.Cipher_Id       := BC_Id;
+      
       if For_Operation = Encrypt then
-         The_Cipher.State  := Encrypting;
+         The_Cipher.State        := Encrypting;
       else
-         The_Cipher.State  := Decrypting;
+         The_Cipher.State        := Decrypting;
       end if;
+      
+      The_Cipher.Keying_Option   := KO;
    end Start_Cipher;
 
    --[Process_Block]------------------------------------------------------------
 
    procedure   Process_Block(
-                  With_Cipher    : in out DES_EDE_Cipher;
+                  With_Cipher    : in out TDEA_Cipher;
                   Input          : in     Block;
                   Output         :    out Block)
    is
-      B_I            : DES_EDE_Block;
-      B_O            : DES_EDE_Block;
+      B_I            : TDEA_Block;
+      B_O            : TDEA_Block;
    begin
       -- Check state.
       
@@ -108,19 +138,25 @@ package body CryptAda.Ciphers.Block_Ciphers.DES_EDE is
 
       -- Check blocks.
       
-      if Input'Length /= DES_EDE_Block_Size or
-         Output'Length /= DES_EDE_Block_Size then
+      if Input'Length /= TDEA_Block_Size or
+         Output'Length /= TDEA_Block_Size then
          raise CryptAda_Invalid_Block_Length_Error;
       end if;
 
       -- Process block.
-      
+
       B_I := Input;
       
-      for I in With_Cipher.Sub_Ciphers'Range loop
-         Process_Block(With_Cipher.Sub_Ciphers(I), B_I, B_O);
-         B_I := B_O;
-      end loop;
+      if With_Cipher.Keying_Option = Keying_Option_3 then      
+         -- The 3 keys are equal just perform 1 block processing.
+         
+         Process_Block(With_Cipher.Sub_Ciphers(3), B_I, B_O);
+      else      
+         for I in With_Cipher.Sub_Ciphers'Range loop
+            Process_Block(With_Cipher.Sub_Ciphers(I), B_I, B_O);
+            B_I := B_O;
+         end loop;
+      end if;
       
       Output := B_O;
    end Process_Block;
@@ -128,7 +164,7 @@ package body CryptAda.Ciphers.Block_Ciphers.DES_EDE is
    --[Stop_Cipher]--------------------------------------------------------------
       
    procedure   Stop_Cipher(
-                  The_Cipher     : in out DES_EDE_Cipher)
+                  The_Cipher     : in out TDEA_Cipher)
    is
    begin
       if The_Cipher.State /= Idle then
@@ -145,7 +181,7 @@ package body CryptAda.Ciphers.Block_Ciphers.DES_EDE is
    --[Generate_Key]-------------------------------------------------------------
    
    procedure   Generate_Key(
-                  The_Cipher     : in     DES_EDE_Cipher;
+                  The_Cipher     : in     TDEA_Cipher;
                   Generator      : in out Random_Generator'Class;
                   The_Key        : in out Key)
    is
@@ -156,7 +192,7 @@ package body CryptAda.Ciphers.Block_Ciphers.DES_EDE is
    --[Is_Valid_Key]-------------------------------------------------------------
    
    function    Is_Valid_Key(
-                  For_Cipher     : in     DES_EDE_Cipher;
+                  For_Cipher     : in     TDEA_Cipher;
                   The_Key        : in     Key)
       return   Boolean
    is
@@ -171,11 +207,11 @@ package body CryptAda.Ciphers.Block_Ciphers.DES_EDE is
    --[Is_Strong_Key]------------------------------------------------------------
    
    function    Is_Strong_Key(
-                  For_Cipher     : in     DES_EDE_Cipher;
+                  For_Cipher     : in     TDEA_Cipher;
                   The_Key        : in     Key)
       return   Boolean
    is
-      KB             : Byte_Array(1 .. DES_EDE_Max_KL);
+      KB             : Byte_Array(1 .. TDEA_Max_KL);
       J              : Positive := KB'First;
       K              : Key;
    begin
@@ -205,48 +241,115 @@ package body CryptAda.Ciphers.Block_Ciphers.DES_EDE is
    --[Generate_Key]-------------------------------------------------------------
    
    procedure   Generate_Key(
-                  The_Cipher     : in     DES_EDE_Cipher;
-                  Keying_Option  : in     DES_EDE_Keying_Option;
+                  The_Cipher     : in     TDEA_Cipher;
+                  Keying_Option  : in     TDEA_Keying_Option;
                   Generator      : in out CryptAda.Random.Generators.Random_Generator'Class;
                   The_Key        : in out CryptAda.Ciphers.Keys.Key)
    is
-      KB             : Byte_Array(1 .. DES_EDE_Max_KL);
+      KB             : Byte_Array(1 .. TDEA_Key_Size);
       J              : Positive := KB'First;
       K              : Key;
    begin
       case Keying_Option is
          when Keying_Option_1 =>
-            for I in The_Cipher.Sub_Ciphers'Range loop
-               Generate_Key(The_Cipher.Sub_Ciphers(I), Generator, K);
-               KB(J .. J + 7) := Get_Key_Bytes(K);
-               J := J + 8;
+            while J < TDEA_Key_Size loop
+               Generate_Key(The_Cipher.Sub_Ciphers(The_Cipher.Sub_Ciphers'First), Generator, K);
+               
+               if J = KB'First then
+                  KB(J .. J + 7) := Get_Key_Bytes(K);
+                  J := J + 8;
+               else
+                  KB(J .. J + 7) := Get_Key_Bytes(K);
+         
+                  if J = 9 then
+                     if KB(J .. J + 7) /= KB(1 .. 8) then
+                        J := J + 8;
+                     end if;
+                  elsif J = 17 then
+                     if KB(J .. J + 7) /= KB(1 .. 8) and then
+                        KB(J .. J + 7) /= KB(9 .. 16) then
+                        J := J + 8;
+                     end if;
+                  end if;
+               end if;
             end loop;
             
          when Keying_Option_2 =>
             Generate_Key(The_Cipher.Sub_Ciphers(The_Cipher.Sub_Ciphers'First), Generator, K);
-            KB( 1 ..  8)   := Get_Key_Bytes(K);
+            KB(1 .. 8)     := Get_Key_Bytes(K);
             KB(17 .. 24)   := Get_Key_Bytes(K);
-            Generate_Key(The_Cipher.Sub_Ciphers(The_Cipher.Sub_Ciphers'First), Generator, K);
-            KB( 9 .. 16)   := Get_Key_Bytes(K);
+            
+            loop
+               Generate_Key(The_Cipher.Sub_Ciphers(The_Cipher.Sub_Ciphers'First), Generator, K);
+               KB(9 .. 16) := Get_Key_Bytes(K);
+               exit when KB(9 .. 16) /= KB(1 .. 8);
+            end loop;
             
          when Keying_Option_3 =>
             Generate_Key(The_Cipher.Sub_Ciphers(The_Cipher.Sub_Ciphers'First), Generator, K);
-            KB( 1 ..  8)   := Get_Key_Bytes(K);
-            KB( 9 .. 16)   := Get_Key_Bytes(K);
+            KB(1 .. 8)     := Get_Key_Bytes(K);
+            KB(9 .. 16)    := Get_Key_Bytes(K);
             KB(17 .. 24)   := Get_Key_Bytes(K);
             
       end case;
       
       Set_Key(The_Key, KB);
    end Generate_Key;
-   
-   --[Check_DES_EDE_Key_Parity]-------------------------------------------------
 
-   function    Check_DES_EDE_Key_Parity(
+   --[Is_Valid_Key]-------------------------------------------------------------
+   
+   function    Is_Valid_Key(
+                  The_Key        : in     Key;
+                  Keying_Option  : in     TDEA_Keying_Option)
+      return   Boolean
+   is
+      KB             : Byte_Array(1 .. TDEA_Key_Size);
+   begin
+      if Is_Null(The_Key) then
+         return False;
+      end if;
+      
+      if Get_Key_Length(The_Key) /= TDEA_Key_Size then
+         return False;
+      end if;
+      
+      KB := Get_Key_Bytes(The_Key);
+      
+      case Keying_Option is
+         when Keying_Option_1 =>
+            if KB(1 .. 8) /= KB(9 .. 16)     and then
+               KB(1 .. 8) /= KB(17 .. 24)    and then
+               KB(9 .. 16) /= KB(17 .. 24)   then
+               return True;
+            else
+               return False;
+            end if;
+            
+         when Keying_Option_2 =>
+            if KB(1 .. 8) = KB(17 .. 24)     and then
+               KB(1 .. 8) /= KB(9 .. 16)     then
+               return True;
+            else
+               return False;
+            end if;
+            
+         when others =>
+            if KB(1 .. 8) = KB(9 .. 16)      and then
+               KB(1 .. 8) = KB(17 .. 24)     then
+               return True;
+            else
+               return False;
+            end if;
+      end case;
+   end Is_Valid_Key;
+      
+   --[Check_TDEA_Key_Parity]-------------------------------------------------
+
+   function    Check_TDEA_Key_Parity(
                   Of_Key         : in     CryptAda.Ciphers.Keys.Key)
       return   Boolean
    is
-      KB             : Byte_Array(1 .. DES_EDE_Max_KL);
+      KB             : Byte_Array(1 .. TDEA_Max_KL);
       K              : Key;
       J              : Positive := KB'First;
    begin
@@ -254,7 +357,7 @@ package body CryptAda.Ciphers.Block_Ciphers.DES_EDE is
          raise CryptAda_Null_Argument_Error;
       end if;
       
-      if Get_Key_Length(Of_Key) /= DES_EDE_Min_KL then
+      if Get_Key_Length(Of_Key) /= TDEA_Min_KL then
          raise CryptAda_Invalid_Key_Error;
       end if;
 
@@ -271,14 +374,14 @@ package body CryptAda.Ciphers.Block_Ciphers.DES_EDE is
       end loop;
       
       return True;
-   end Check_DES_EDE_Key_Parity;
+   end Check_TDEA_Key_Parity;
 
-   --[Fix_DES_EDE_Key_Parity]---------------------------------------------------
+   --[Fix_TDEA_Key_Parity]---------------------------------------------------
       
-   procedure   Fix_DES_EDE_Key_Parity(
+   procedure   Fix_TDEA_Key_Parity(
                   Of_Key         : in out CryptAda.Ciphers.Keys.Key)
    is
-      KB             : Byte_Array(1 .. DES_EDE_Max_KL);
+      KB             : Byte_Array(1 .. TDEA_Max_KL);
       K              : Key;
       J              : Positive := KB'First;
    begin
@@ -286,7 +389,7 @@ package body CryptAda.Ciphers.Block_Ciphers.DES_EDE is
          raise CryptAda_Null_Argument_Error;
       end if;
       
-      if Get_Key_Length(Of_Key) /= DES_EDE_Min_KL then
+      if Get_Key_Length(Of_Key) /= TDEA_Min_KL then
          raise CryptAda_Invalid_Key_Error;
       end if;
       
@@ -300,38 +403,39 @@ package body CryptAda.Ciphers.Block_Ciphers.DES_EDE is
       end loop;
       
       Set_Key(K, KB);
-   end Fix_DES_EDE_Key_Parity;
+   end Fix_TDEA_Key_Parity;
 
    --[Ada.Finalization interface]-----------------------------------------------
 
    --[Initialize]---------------------------------------------------------------
 
    procedure   Initialize(
-                  Object         : in out DES_EDE_Cipher)
+                  Object         : in out TDEA_Cipher)
    is
    begin
-      Object.Cipher_Id        := BC_DES_EDE;
-      Object.Min_KL           := DES_EDE_Min_KL;
-      Object.Max_KL           := DES_EDE_Max_KL;
-      Object.Def_KL           := DES_EDE_Def_KL;
-      Object.KL_Inc_Step      := DES_EDE_KL_Inc_Step;
-      Object.Blk_Size         := DES_EDE_Block_Size;
+      Object.Cipher_Id        := BC_TDEA_EDE_3;
+      Object.Min_KL           := TDEA_Min_KL;
+      Object.Max_KL           := TDEA_Max_KL;
+      Object.Def_KL           := TDEA_Def_KL;
+      Object.KL_Inc_Step      := TDEA_KL_Inc_Step;
+      Object.Blk_Size         := TDEA_Block_Size;
       Object.State            := Idle;
+      Object.Keying_Option    := Keying_Option_1;
    end Initialize;
 
    --[Finalize]-----------------------------------------------------------------
 
    procedure   Finalize(
-                  Object         : in out DES_EDE_Cipher)
+                  Object         : in out TDEA_Cipher)
    is
    begin
-      Object.Cipher_Id        := BC_DES_EDE;
-      Object.Min_KL           := DES_EDE_Min_KL;
-      Object.Max_KL           := DES_EDE_Max_KL;
-      Object.Def_KL           := DES_EDE_Def_KL;
-      Object.KL_Inc_Step      := DES_EDE_KL_Inc_Step;
-      Object.Blk_Size         := DES_EDE_Block_Size;
+      Object.Cipher_Id        := BC_TDEA_EDE_3;
+      Object.Min_KL           := TDEA_Min_KL;
+      Object.Max_KL           := TDEA_Max_KL;
+      Object.Def_KL           := TDEA_Def_KL;
+      Object.KL_Inc_Step      := TDEA_KL_Inc_Step;
+      Object.Blk_Size         := TDEA_Block_Size;
       Object.State            := Idle;
-   end Finalize;
-   
-end CryptAda.Ciphers.Block_Ciphers.DES_EDE;
+      Object.Keying_Option    := Keying_Option_1;
+   end Finalize;   
+end CryptAda.Ciphers.Block_Ciphers.TDEA;
