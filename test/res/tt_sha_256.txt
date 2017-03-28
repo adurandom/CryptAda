@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Time.SHA_256
 Description              : Time trial for CryptAda.Digests.Algorithms.SHA_256 functionality.
-Started                  : 2017/03/23 - 08:20:51
+Started                  : 2017/03/28 - 13:22:04
 ================================================================================
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 1
 Description      : SHA_256 hashing
-Started          : 2017/03/23 - 08:20:51
+Started          : 2017/03/28 - 13:22:04
 --------------------------------------------------------------------------------
 [I] Hashing 1MB
 [I] Starting time trial for digest algorithm.
@@ -30,18 +30,18 @@ Started          : 2017/03/23 - 08:20:51
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.012823543 secs.
+    Elapsed time       :           0.012544601 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "dce0f8fa6f74009bf693695f36e2c1d8351dc30e3c569859d0fd8649c958831c"
+    Obtained hash      : "36a699798e0ea0a9561bfd5059bdf6ef37b39087ccff9641a02b33758db7ea07"
 --------------------------------------------------------------------------------
 Time Trial Number: 1
-Finished         : 2017/03/23 - 08:20:51
+Finished         : 2017/03/28 - 13:22:04
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 2
 Description      : SHA_256 hashing
-Started          : 2017/03/23 - 08:20:51
+Started          : 2017/03/28 - 13:22:04
 --------------------------------------------------------------------------------
 [I] Hashing 10MB
 [I] Starting time trial for digest algorithm.
@@ -59,16 +59,16 @@ Started          : 2017/03/23 - 08:20:51
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.128750713 secs.
+    Elapsed time       :           0.126436847 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "2215be7ba44bdd8725b0edf7d13a135a9671b028116d3bb1da7dfd718044dd87"
+    Obtained hash      : "6c8c6d342a703587963c11cf9b1e239ab104f96a32baed284bbb1dcd04b88132"
 --------------------------------------------------------------------------------
 Time Trial Number: 2
-Finished         : 2017/03/23 - 08:20:51
+Finished         : 2017/03/28 - 13:22:04
 --[End Time Trial]--------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Time.SHA_256
-Finished                 : 2017/03/23 - 08:20:51
+Finished                 : 2017/03/28 - 13:22:04
 ================================================================================

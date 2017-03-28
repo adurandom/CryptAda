@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.TDEA
 Description              : Unit test driver for CryptAda.Ciphers.Block_Ciphers.TDEA functionality.
-Started                  : 2017/03/28 - 12:29:03
+Started                  : 2017/03/28 - 13:22:00
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Attempting to use a Block_Cipher without starting it
-Started         : 2017/03/28 - 12:29:03
+Started         : 2017/03/28 - 13:22:00
 --------------------------------------------------------------------------------
 [I] Must raise CryptAda_Uninitialized_Cipher_Error
 [I] Cipher information
@@ -34,13 +34,13 @@ Started         : 2017/03/28 - 12:29:03
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 12:29:03
+Finished        : 2017/03/28 - 13:22:00
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Cipher life-cycle
-Started         : 2017/03/28 - 12:29:03
+Started         : 2017/03/28 - 13:22:00
 --------------------------------------------------------------------------------
 [I] Checking Cipher object state along its life cycle.
 [I] TDEA Keying option: KEYING_OPTION_1
@@ -62,9 +62,9 @@ State must be: ENCRYPTING
 [I] Key used:
     Key length:  24
     Key bytes :
-16#4E#, 16#28#, 16#87#, 16#A5#, 16#F3#, 16#C3#, 16#7D#, 16#F6#, 16#ED#, 16#BD#, 
-16#BD#, 16#1D#, 16#BE#, 16#65#, 16#88#, 16#E1#, 16#72#, 16#5C#, 16#B4#, 16#99#, 
-16#DB#, 16#9A#, 16#AC#, 16#E8#
+16#F6#, 16#AC#, 16#8B#, 16#63#, 16#B8#, 16#06#, 16#88#, 16#D1#, 16#35#, 16#4E#, 
+16#7B#, 16#ED#, 16#C9#, 16#28#, 16#C6#, 16#22#, 16#77#, 16#D4#, 16#42#, 16#1D#, 
+16#05#, 16#FF#, 16#24#, 16#84#
 [I] Information of block cipher object:
     Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
     CryptAda cipher algorithm id  : "BC_TDEA_EDE_3"
@@ -85,7 +85,7 @@ State must be: ENCRYPTING
 [I] Encrypted block:
     Block length:  8
     Block data  :
-16#0D#, 16#08#, 16#84#, 16#48#, 16#A7#, 16#98#, 16#C0#, 16#8C#
+16#97#, 16#68#, 16#DD#, 16#72#, 16#29#, 16#3E#, 16#35#, 16#66#
 [I] Stopping cipher
 State must be: IDLE
 [I] Information of block cipher object:
@@ -105,9 +105,9 @@ State must be: DECRYPTING
 [I] Key used:
     Key length:  24
     Key bytes :
-16#4E#, 16#28#, 16#87#, 16#A5#, 16#F3#, 16#C3#, 16#7D#, 16#F6#, 16#ED#, 16#BD#, 
-16#BD#, 16#1D#, 16#BE#, 16#65#, 16#88#, 16#E1#, 16#72#, 16#5C#, 16#B4#, 16#99#, 
-16#DB#, 16#9A#, 16#AC#, 16#E8#
+16#F6#, 16#AC#, 16#8B#, 16#63#, 16#B8#, 16#06#, 16#88#, 16#D1#, 16#35#, 16#4E#, 
+16#7B#, 16#ED#, 16#C9#, 16#28#, 16#C6#, 16#22#, 16#77#, 16#D4#, 16#42#, 16#1D#, 
+16#05#, 16#FF#, 16#24#, 16#84#
 [I] Information of block cipher object:
     Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
     CryptAda cipher algorithm id  : "BC_TDEA_EDE_3"
@@ -124,7 +124,7 @@ State must be: DECRYPTING
 [I] Block to decrypt:
     Block length:  8
     Block data  :
-16#0D#, 16#08#, 16#84#, 16#48#, 16#A7#, 16#98#, 16#C0#, 16#8C#
+16#97#, 16#68#, 16#DD#, 16#72#, 16#29#, 16#3E#, 16#35#, 16#66#
 [I] Decrypted block:
     Block length:  8
     Block data  :
@@ -164,9 +164,9 @@ State must be: ENCRYPTING
 [I] Key used:
     Key length:  24
     Key bytes :
-16#06#, 16#28#, 16#F6#, 16#78#, 16#11#, 16#65#, 16#59#, 16#3A#, 16#6A#, 16#06#, 
-16#FA#, 16#F6#, 16#1B#, 16#0A#, 16#12#, 16#C3#, 16#06#, 16#28#, 16#F6#, 16#78#, 
-16#11#, 16#65#, 16#59#, 16#3A#
+16#6C#, 16#66#, 16#18#, 16#66#, 16#DB#, 16#2D#, 16#AC#, 16#B8#, 16#99#, 16#17#, 
+16#B7#, 16#A0#, 16#6F#, 16#87#, 16#82#, 16#3C#, 16#6C#, 16#66#, 16#18#, 16#66#, 
+16#DB#, 16#2D#, 16#AC#, 16#B8#
 [I] Information of block cipher object:
     Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
     CryptAda cipher algorithm id  : "BC_TDEA_EDE_2"
@@ -187,7 +187,7 @@ State must be: ENCRYPTING
 [I] Encrypted block:
     Block length:  8
     Block data  :
-16#D2#, 16#9E#, 16#43#, 16#18#, 16#B4#, 16#93#, 16#21#, 16#7F#
+16#81#, 16#64#, 16#03#, 16#37#, 16#7E#, 16#C1#, 16#23#, 16#7A#
 [I] Stopping cipher
 State must be: IDLE
 [I] Information of block cipher object:
@@ -207,9 +207,9 @@ State must be: DECRYPTING
 [I] Key used:
     Key length:  24
     Key bytes :
-16#06#, 16#28#, 16#F6#, 16#78#, 16#11#, 16#65#, 16#59#, 16#3A#, 16#6A#, 16#06#, 
-16#FA#, 16#F6#, 16#1B#, 16#0A#, 16#12#, 16#C3#, 16#06#, 16#28#, 16#F6#, 16#78#, 
-16#11#, 16#65#, 16#59#, 16#3A#
+16#6C#, 16#66#, 16#18#, 16#66#, 16#DB#, 16#2D#, 16#AC#, 16#B8#, 16#99#, 16#17#, 
+16#B7#, 16#A0#, 16#6F#, 16#87#, 16#82#, 16#3C#, 16#6C#, 16#66#, 16#18#, 16#66#, 
+16#DB#, 16#2D#, 16#AC#, 16#B8#
 [I] Information of block cipher object:
     Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
     CryptAda cipher algorithm id  : "BC_TDEA_EDE_2"
@@ -226,7 +226,7 @@ State must be: DECRYPTING
 [I] Block to decrypt:
     Block length:  8
     Block data  :
-16#D2#, 16#9E#, 16#43#, 16#18#, 16#B4#, 16#93#, 16#21#, 16#7F#
+16#81#, 16#64#, 16#03#, 16#37#, 16#7E#, 16#C1#, 16#23#, 16#7A#
 [I] Decrypted block:
     Block length:  8
     Block data  :
@@ -266,9 +266,9 @@ State must be: ENCRYPTING
 [I] Key used:
     Key length:  24
     Key bytes :
-16#00#, 16#8D#, 16#72#, 16#28#, 16#30#, 16#66#, 16#35#, 16#1D#, 16#00#, 16#8D#, 
-16#72#, 16#28#, 16#30#, 16#66#, 16#35#, 16#1D#, 16#00#, 16#8D#, 16#72#, 16#28#, 
-16#30#, 16#66#, 16#35#, 16#1D#
+16#B8#, 16#9F#, 16#5C#, 16#B8#, 16#7B#, 16#AF#, 16#27#, 16#4D#, 16#B8#, 16#9F#, 
+16#5C#, 16#B8#, 16#7B#, 16#AF#, 16#27#, 16#4D#, 16#B8#, 16#9F#, 16#5C#, 16#B8#, 
+16#7B#, 16#AF#, 16#27#, 16#4D#
 [I] Information of block cipher object:
     Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
     CryptAda cipher algorithm id  : "BC_TDEA_EDE_1"
@@ -289,7 +289,7 @@ State must be: ENCRYPTING
 [I] Encrypted block:
     Block length:  8
     Block data  :
-16#86#, 16#3F#, 16#C9#, 16#5A#, 16#27#, 16#C4#, 16#33#, 16#D1#
+16#EC#, 16#11#, 16#53#, 16#BD#, 16#17#, 16#30#, 16#F9#, 16#74#
 [I] Stopping cipher
 State must be: IDLE
 [I] Information of block cipher object:
@@ -309,9 +309,9 @@ State must be: DECRYPTING
 [I] Key used:
     Key length:  24
     Key bytes :
-16#00#, 16#8D#, 16#72#, 16#28#, 16#30#, 16#66#, 16#35#, 16#1D#, 16#00#, 16#8D#, 
-16#72#, 16#28#, 16#30#, 16#66#, 16#35#, 16#1D#, 16#00#, 16#8D#, 16#72#, 16#28#, 
-16#30#, 16#66#, 16#35#, 16#1D#
+16#B8#, 16#9F#, 16#5C#, 16#B8#, 16#7B#, 16#AF#, 16#27#, 16#4D#, 16#B8#, 16#9F#, 
+16#5C#, 16#B8#, 16#7B#, 16#AF#, 16#27#, 16#4D#, 16#B8#, 16#9F#, 16#5C#, 16#B8#, 
+16#7B#, 16#AF#, 16#27#, 16#4D#
 [I] Information of block cipher object:
     Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
     CryptAda cipher algorithm id  : "BC_TDEA_EDE_1"
@@ -328,7 +328,7 @@ State must be: DECRYPTING
 [I] Block to decrypt:
     Block length:  8
     Block data  :
-16#86#, 16#3F#, 16#C9#, 16#5A#, 16#27#, 16#C4#, 16#33#, 16#D1#
+16#EC#, 16#11#, 16#53#, 16#BD#, 16#17#, 16#30#, 16#F9#, 16#74#
 [I] Decrypted block:
     Block length:  8
     Block data  :
@@ -353,13 +353,13 @@ State must be: IDLE
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 12:29:03
+Finished        : 2017/03/28 - 13:22:00
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Testing random key generation
-Started         : 2017/03/28 - 12:29:03
+Started         : 2017/03/28 - 13:22:00
 --------------------------------------------------------------------------------
 [I] Using an unitialized random generator
 Must raise CryptAda_Generator_Not_Started_Error
@@ -372,9 +372,9 @@ Must raise CryptAda_Generator_Need_Seeding_Error
 [I] Generated key:
     Key length:  24
     Key bytes :
-16#21#, 16#F9#, 16#05#, 16#DB#, 16#5A#, 16#87#, 16#D4#, 16#1E#, 16#A9#, 16#88#, 
-16#63#, 16#60#, 16#6A#, 16#CC#, 16#C6#, 16#8B#, 16#EE#, 16#DE#, 16#D2#, 16#BB#, 
-16#EB#, 16#2E#, 16#C9#, 16#EE#
+16#96#, 16#F5#, 16#F9#, 16#F6#, 16#DD#, 16#DB#, 16#EE#, 16#B4#, 16#F0#, 16#E4#, 
+16#0C#, 16#7E#, 16#3A#, 16#C9#, 16#C5#, 16#11#, 16#1E#, 16#1B#, 16#1E#, 16#FC#, 
+16#C6#, 16#27#, 16#3F#, 16#95#
 [I] Key must be valid
 [I] Key is valid
 [I] Key must be strong
@@ -387,34 +387,34 @@ Key length:  24
 [I] Generated key:
     Key length:  24
     Key bytes :
-16#88#, 16#95#, 16#09#, 16#B4#, 16#C5#, 16#C9#, 16#1B#, 16#39#, 16#BE#, 16#82#, 
-16#B2#, 16#11#, 16#36#, 16#F3#, 16#6A#, 16#AF#, 16#24#, 16#8D#, 16#56#, 16#56#, 
-16#84#, 16#56#, 16#BB#, 16#63#
+16#72#, 16#55#, 16#59#, 16#11#, 16#C6#, 16#5C#, 16#F5#, 16#78#, 16#3F#, 16#7E#, 
+16#3C#, 16#EE#, 16#BB#, 16#AF#, 16#F0#, 16#3A#, 16#0A#, 16#0A#, 16#0F#, 16#77#, 
+16#7E#, 16#D8#, 16#5F#, 16#63#
 [I] Keying option: KEYING_OPTION_2
 [I] Generated key:
     Key length:  24
     Key bytes :
-16#0A#, 16#74#, 16#CC#, 16#71#, 16#21#, 16#63#, 16#27#, 16#3C#, 16#C5#, 16#7D#, 
-16#88#, 16#A6#, 16#18#, 16#78#, 16#8E#, 16#30#, 16#0A#, 16#74#, 16#CC#, 16#71#, 
-16#21#, 16#63#, 16#27#, 16#3C#
+16#F9#, 16#E1#, 16#71#, 16#72#, 16#F3#, 16#3F#, 16#D2#, 16#2D#, 16#F3#, 16#0A#, 
+16#66#, 16#D7#, 16#14#, 16#D4#, 16#5F#, 16#A3#, 16#F9#, 16#E1#, 16#71#, 16#72#, 
+16#F3#, 16#3F#, 16#D2#, 16#2D#
 [I] Keying option: KEYING_OPTION_3
 [I] Generated key:
     Key length:  24
     Key bytes :
-16#D1#, 16#72#, 16#03#, 16#33#, 16#C5#, 16#CF#, 16#22#, 16#18#, 16#D1#, 16#72#, 
-16#03#, 16#33#, 16#C5#, 16#CF#, 16#22#, 16#18#, 16#D1#, 16#72#, 16#03#, 16#33#, 
-16#C5#, 16#CF#, 16#22#, 16#18#
+16#BE#, 16#BD#, 16#D7#, 16#35#, 16#8D#, 16#12#, 16#95#, 16#E7#, 16#BE#, 16#BD#, 
+16#D7#, 16#35#, 16#8D#, 16#12#, 16#95#, 16#E7#, 16#BE#, 16#BD#, 16#D7#, 16#35#, 
+16#8D#, 16#12#, 16#95#, 16#E7#
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 12:29:03
+Finished        : 2017/03/28 - 13:22:00
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : TDEA standard test vectors 1
-Started         : 2017/03/28 - 12:29:03
+Started         : 2017/03/28 - 13:22:00
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from: "NIST Special Publication 800-20"
 [I] TDEA Known Answer Tests:  1
@@ -469,13 +469,13 @@ Started         : 2017/03/28 - 12:29:03
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 12:29:03
+Finished        : 2017/03/28 - 13:22:00
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : TDEA Bulk test
-Started         : 2017/03/28 - 12:29:03
+Started         : 2017/03/28 - 13:22:00
 --------------------------------------------------------------------------------
 [I] Block cipher bulk test
     Performing  10000 iterations encrypting and decrypting random blocks
@@ -497,11 +497,11 @@ Started         : 2017/03/28 - 12:29:03
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 12:29:03
+Finished        : 2017/03/28 - 13:22:00
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.TDEA
-Finished                 : 2017/03/28 - 12:29:03
+Finished                 : 2017/03/28 - 13:22:00
 ================================================================================

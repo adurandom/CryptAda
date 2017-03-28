@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Time.HAVAL
 Description              : Time trial for CryptAda.Digests.Algorithms.HAVAL functionality.
-Started                  : 2017/03/23 - 08:20:56
+Started                  : 2017/03/28 - 13:22:09
 ================================================================================
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 1
 Description      : HAVAL 128-bit hashing
-Started          : 2017/03/23 - 08:20:56
+Started          : 2017/03/28 - 13:22:09
 --------------------------------------------------------------------------------
 [I] Hash size : HAVAL_128
     Passes    :  3
@@ -32,9 +32,9 @@ Started          : 2017/03/23 - 08:20:56
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.003534082 secs.
+    Elapsed time       :           0.003493122 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "5f1c00d02aabd0dd120790330ea17b6d"
+    Obtained hash      : "6e29cddf049f4df15d6441eac578b8a6"
 [I] Hash size : HAVAL_128
     Passes    :  4
     Hashing 1MB
@@ -53,9 +53,9 @@ Started          : 2017/03/23 - 08:20:56
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.005183157 secs.
+    Elapsed time       :           0.005255658 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "42b0a6457f04c7101a2e7de3336c3de8"
+    Obtained hash      : "5bb76e8f185620e9940f976c5bbde6ae"
 [I] Hash size : HAVAL_128
     Passes    :  5
     Hashing 1MB
@@ -74,18 +74,18 @@ Started          : 2017/03/23 - 08:20:56
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.006575818 secs.
+    Elapsed time       :           0.006337018 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "7616ea96be996631c18ac58718315f81"
+    Obtained hash      : "17097ff8e626da0bf9e67c581b1f7862"
 --------------------------------------------------------------------------------
 Time Trial Number: 1
-Finished         : 2017/03/23 - 08:20:56
+Finished         : 2017/03/28 - 13:22:09
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 2
 Description      : HAVAL 128-bit hashing
-Started          : 2017/03/23 - 08:20:56
+Started          : 2017/03/28 - 13:22:09
 --------------------------------------------------------------------------------
 [I] Hash size : HAVAL_128
     Passes    :  3
@@ -105,9 +105,9 @@ Started          : 2017/03/23 - 08:20:56
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.035996607 secs.
+    Elapsed time       :           0.034400371 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "574a374b3dd094d45272213db5ab5b6f"
+    Obtained hash      : "532944e20f1b0587b9f4eafe271dc1f3"
 [I] Hash size : HAVAL_128
     Passes    :  4
     Hashing 10MB
@@ -126,9 +126,9 @@ Started          : 2017/03/23 - 08:20:56
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.052031053 secs.
+    Elapsed time       :           0.051968793 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "29bb3064a462ee869d227c42c0369cb5"
+    Obtained hash      : "7de4b3fc6ba70203fff353c1001b45fd"
 [I] Hash size : HAVAL_128
     Passes    :  5
     Hashing 10MB
@@ -147,18 +147,18 @@ Started          : 2017/03/23 - 08:20:56
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.062774206 secs.
+    Elapsed time       :           0.064191853 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "af206f81b2a685f8d863b2e958cdf602"
+    Obtained hash      : "8cf16e7582e17e3c2cf14b4fad56a004"
 --------------------------------------------------------------------------------
 Time Trial Number: 2
-Finished         : 2017/03/23 - 08:20:56
+Finished         : 2017/03/28 - 13:22:09
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 3
 Description      : HAVAL 160-bit hashing
-Started          : 2017/03/23 - 08:20:56
+Started          : 2017/03/28 - 13:22:09
 --------------------------------------------------------------------------------
 [I] Hash size : HAVAL_160
     Passes    :  3
@@ -178,9 +178,9 @@ Started          : 2017/03/23 - 08:20:56
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.003540227 secs.
+    Elapsed time       :           0.003449704 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "20d8f47178fd7a3027d916dd662c7bd11bacbc37"
+    Obtained hash      : "3d24c875e59427a907053903087a2325ea7f1642"
 [I] Hash size : HAVAL_160
     Passes    :  4
     Hashing 1MB
@@ -199,9 +199,9 @@ Started          : 2017/03/23 - 08:20:56
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.005128680 secs.
+    Elapsed time       :           0.005129908 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "6c6959be69e08a5edd60c8c086ae5439afb4f751"
+    Obtained hash      : "0d428a07ff0768bffa557c1862631e46d6acc139"
 [I] Hash size : HAVAL_160
     Passes    :  5
     Hashing 1MB
@@ -220,18 +220,18 @@ Started          : 2017/03/23 - 08:20:56
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.006296876 secs.
+    Elapsed time       :           0.006318176 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "4449c34b01ee2b95cf0b2918c806b02f348b0f35"
+    Obtained hash      : "73d3566dd49c0acdcda9aa8c2fcc30661067a36f"
 --------------------------------------------------------------------------------
 Time Trial Number: 3
-Finished         : 2017/03/23 - 08:20:56
+Finished         : 2017/03/28 - 13:22:09
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 4
 Description      : HAVAL 160-bit hashing
-Started          : 2017/03/23 - 08:20:56
+Started          : 2017/03/28 - 13:22:09
 --------------------------------------------------------------------------------
 [I] Hash size : HAVAL_160
     Passes    :  3
@@ -251,9 +251,9 @@ Started          : 2017/03/23 - 08:20:56
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.034378253 secs.
+    Elapsed time       :           0.035808188 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "7c9e8c81e3f0ff55809940784ec087b476740036"
+    Obtained hash      : "051b61e3f51252f58095a228914b3377d7451192"
 [I] Hash size : HAVAL_160
     Passes    :  4
     Hashing 10MB
@@ -272,9 +272,9 @@ Started          : 2017/03/23 - 08:20:56
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.051299496 secs.
+    Elapsed time       :           0.051860657 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "ccfb4d1126906f337ee7e523491540aab4d38d15"
+    Obtained hash      : "eb671d320f5dd5ab98c3f1b4224462bc14238574"
 [I] Hash size : HAVAL_160
     Passes    :  5
     Hashing 10MB
@@ -293,18 +293,18 @@ Started          : 2017/03/23 - 08:20:56
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.062871282 secs.
+    Elapsed time       :           0.063137117 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "4463e2634a9f49d9488974e07576309aacb41c56"
+    Obtained hash      : "fbbf2c8060d12b8a28d2e07243a1a0f3d6407848"
 --------------------------------------------------------------------------------
 Time Trial Number: 4
-Finished         : 2017/03/23 - 08:20:57
+Finished         : 2017/03/28 - 13:22:09
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 5
 Description      : HAVAL 192-bit hashing
-Started          : 2017/03/23 - 08:20:57
+Started          : 2017/03/28 - 13:22:09
 --------------------------------------------------------------------------------
 [I] Hash size : HAVAL_192
     Passes    :  3
@@ -324,9 +324,9 @@ Started          : 2017/03/23 - 08:20:57
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.003421031 secs.
+    Elapsed time       :           0.003449704 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "104c28fb229a112ba8cda03720992737d4d3ca4aca0f92d4"
+    Obtained hash      : "951927c6062afb5e1b85377a1ffc178bce96e7a0da69ec94"
 [I] Hash size : HAVAL_192
     Passes    :  4
     Hashing 1MB
@@ -340,6 +340,298 @@ Started          : 2017/03/23 - 08:20:57
     State size (bytes)            :  32
     Input block size (bytes)      :  128
     Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  1 MB
+    Buffer size        :  1 KB
+    Iterations         :  1024
+[I] Time trial completed
+    Elapsed time       :           0.005207324 secs.
+    Counter (Low, High): ( 8388608,  0)
+    Obtained hash      : "016d474f405b02efd18e5fd5c10f7ba5d97a3a8d537d7996"
+[I] Hash size : HAVAL_192
+    Passes    :  5
+    Hashing 1MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
+    CryptAda digest algorithm id  : "MD_HAVAL_192_5"
+    Digest algorithm SCAN name    : "HAVAL(24,5)"
+    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.13"
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  32
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  1 MB
+    Buffer size        :  1 KB
+    Iterations         :  1024
+[I] Time trial completed
+    Elapsed time       :           0.006298106 secs.
+    Counter (Low, High): ( 8388608,  0)
+    Obtained hash      : "3dc54d186fc6bd7506d2e4ce2fbd96c3b77f0c91d8965fdf"
+--------------------------------------------------------------------------------
+Time Trial Number: 5
+Finished         : 2017/03/28 - 13:22:09
+--[End Time Trial]--------------------------------------------------------------
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 6
+Description      : HAVAL 192-bit hashing
+Started          : 2017/03/28 - 13:22:09
+--------------------------------------------------------------------------------
+[I] Hash size : HAVAL_192
+    Passes    :  3
+    Hashing 10MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
+    CryptAda digest algorithm id  : "MD_HAVAL_192_3"
+    Digest algorithm SCAN name    : "HAVAL(24,3)"
+    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.3"
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  32
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  10 MB
+    Buffer size        :  4 KB
+    Iterations         :  2560
+[I] Time trial completed
+    Elapsed time       :           0.034381120 secs.
+    Counter (Low, High): ( 83886080,  0)
+    Obtained hash      : "c722e56ea1008d91088427429bf03250e0525ee2f758ad03"
+[I] Hash size : HAVAL_192
+    Passes    :  4
+    Hashing 10MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
+    CryptAda digest algorithm id  : "MD_HAVAL_192_4"
+    Digest algorithm SCAN name    : "HAVAL(24,4)"
+    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.8"
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  32
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  10 MB
+    Buffer size        :  4 KB
+    Iterations         :  2560
+[I] Time trial completed
+    Elapsed time       :           0.051936434 secs.
+    Counter (Low, High): ( 83886080,  0)
+    Obtained hash      : "73e05e50a2e7ae03bf7bd7f80f6ef806ad360aede310267d"
+[I] Hash size : HAVAL_192
+    Passes    :  5
+    Hashing 10MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
+    CryptAda digest algorithm id  : "MD_HAVAL_192_5"
+    Digest algorithm SCAN name    : "HAVAL(24,5)"
+    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.13"
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  32
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  24
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  10 MB
+    Buffer size        :  4 KB
+    Iterations         :  2560
+[I] Time trial completed
+    Elapsed time       :           0.064238548 secs.
+    Counter (Low, High): ( 83886080,  0)
+    Obtained hash      : "52a7e6b6701a34a9a3ad6f7859c77dae07919fe067b7a2df"
+--------------------------------------------------------------------------------
+Time Trial Number: 6
+Finished         : 2017/03/28 - 13:22:09
+--[End Time Trial]--------------------------------------------------------------
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 7
+Description      : HAVAL 224-bit hashing
+Started          : 2017/03/28 - 13:22:09
+--------------------------------------------------------------------------------
+[I] Hash size : HAVAL_224
+    Passes    :  3
+    Hashing 1MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
+    CryptAda digest algorithm id  : "MD_HAVAL_224_3"
+    Digest algorithm SCAN name    : "HAVAL(28,3)"
+    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.4"
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  32
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  28
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  1 MB
+    Buffer size        :  1 KB
+    Iterations         :  1024
+[I] Time trial completed
+    Elapsed time       :           0.003449704 secs.
+    Counter (Low, High): ( 8388608,  0)
+    Obtained hash      : "6251c6f4a5a2c362091fec6299ae1c40b29c193ca6caff9c56a6e60c"
+[I] Hash size : HAVAL_224
+    Passes    :  4
+    Hashing 1MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
+    CryptAda digest algorithm id  : "MD_HAVAL_224_4"
+    Digest algorithm SCAN name    : "HAVAL(28,4)"
+    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.9"
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  32
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  28
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  1 MB
+    Buffer size        :  1 KB
+    Iterations         :  1024
+[I] Time trial completed
+    Elapsed time       :           0.005184387 secs.
+    Counter (Low, High): ( 8388608,  0)
+    Obtained hash      : "ac464637200a6e20cef86d595bb2af394fe250cc7b413437bbbeee5f"
+[I] Hash size : HAVAL_224
+    Passes    :  5
+    Hashing 1MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
+    CryptAda digest algorithm id  : "MD_HAVAL_224_5"
+    Digest algorithm SCAN name    : "HAVAL(28,5)"
+    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.14"
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  32
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  28
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  1 MB
+    Buffer size        :  1 KB
+    Iterations         :  1024
+[I] Time trial completed
+    Elapsed time       :           0.006371015 secs.
+    Counter (Low, High): ( 8388608,  0)
+    Obtained hash      : "042432ed0eeaf89a01da9f7247e57d364bebcbfbda85465c3e2647be"
+--------------------------------------------------------------------------------
+Time Trial Number: 7
+Finished         : 2017/03/28 - 13:22:09
+--[End Time Trial]--------------------------------------------------------------
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 8
+Description      : HAVAL 224-bit hashing
+Started          : 2017/03/28 - 13:22:09
+--------------------------------------------------------------------------------
+[I] Hash size : HAVAL_224
+    Passes    :  3
+    Hashing 10MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
+    CryptAda digest algorithm id  : "MD_HAVAL_224_3"
+    Digest algorithm SCAN name    : "HAVAL(28,3)"
+    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.4"
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  32
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  28
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  10 MB
+    Buffer size        :  4 KB
+    Iterations         :  2560
+[I] Time trial completed
+    Elapsed time       :           0.034491714 secs.
+    Counter (Low, High): ( 83886080,  0)
+    Obtained hash      : "00b26827036b8c12ff23bc3e2357001481ccb0fa55c132d9dc503fb3"
+[I] Hash size : HAVAL_224
+    Passes    :  4
+    Hashing 10MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
+    CryptAda digest algorithm id  : "MD_HAVAL_224_4"
+    Digest algorithm SCAN name    : "HAVAL(28,4)"
+    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.9"
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  32
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  28
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  10 MB
+    Buffer size        :  4 KB
+    Iterations         :  2560
+[I] Time trial completed
+    Elapsed time       :           0.051869668 secs.
+    Counter (Low, High): ( 83886080,  0)
+    Obtained hash      : "f0dd24e9808253348fd9660cf809d9a3813a9c9741006864d0d063cf"
+[I] Hash size : HAVAL_224
+    Passes    :  5
+    Hashing 10MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
+    CryptAda digest algorithm id  : "MD_HAVAL_224_5"
+    Digest algorithm SCAN name    : "HAVAL(28,5)"
+    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.14"
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  32
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  28
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  10 MB
+    Buffer size        :  4 KB
+    Iterations         :  2560
+[I] Time trial completed
+    Elapsed time       :           0.063411143 secs.
+    Counter (Low, High): ( 83886080,  0)
+    Obtained hash      : "7a353cd757257707b12038620a7105ce4c088315227b26d626c36503"
+--------------------------------------------------------------------------------
+Time Trial Number: 8
+Finished         : 2017/03/28 - 13:22:09
+--[End Time Trial]--------------------------------------------------------------
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 9
+Description      : HAVAL 256-bit hashing
+Started          : 2017/03/28 - 13:22:09
+--------------------------------------------------------------------------------
+[I] Hash size : HAVAL_256
+    Passes    :  3
+    Hashing 1MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
+    CryptAda digest algorithm id  : "MD_HAVAL_256_3"
+    Digest algorithm SCAN name    : "HAVAL(32,3)"
+    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.5"
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  32
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  32
+    Processed bit count           : ( 0,  0)
+    Bytes to digest    :  1 MB
+    Buffer size        :  1 KB
+    Iterations         :  1024
+[I] Time trial completed
+    Elapsed time       :           0.003449704 secs.
+    Counter (Low, High): ( 8388608,  0)
+    Obtained hash      : "2616147856ef508d7a4757e8084e6a747c58d49b09861fa2ba8bb08488650cbf"
+[I] Hash size : HAVAL_256
+    Passes    :  4
+    Hashing 1MB
+[I] Starting time trial for digest algorithm.
+[I] Information of digest object:
+    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
+    CryptAda digest algorithm id  : "MD_HAVAL_256_4"
+    Digest algorithm SCAN name    : "HAVAL(32,4)"
+    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.10"
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  32
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  32
     Processed bit count           : ( 0,  0)
     Bytes to digest    :  1 MB
     Buffer size        :  1 KB
@@ -347,299 +639,7 @@ Started          : 2017/03/23 - 08:20:57
 [I] Time trial completed
     Elapsed time       :           0.005128680 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "1dc4737fb1255f6a883915f6068cf458764a7a54c43ad0df"
-[I] Hash size : HAVAL_192
-    Passes    :  5
-    Hashing 1MB
-[I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
-    CryptAda digest algorithm id  : "MD_HAVAL_192_5"
-    Digest algorithm SCAN name    : "HAVAL(24,5)"
-    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.13"
-    Digest algorithm OpenPGP name : ""
-    State size (bytes)            :  32
-    Input block size (bytes)      :  128
-    Hash size (bytes)             :  24
-    Processed bit count           : ( 0,  0)
-    Bytes to digest    :  1 MB
-    Buffer size        :  1 KB
-    Iterations         :  1024
-[I] Time trial completed
-    Elapsed time       :           0.006323092 secs.
-    Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "c3592aa58f43f22cd32c3731c04ca9983f03379bffdfa2a5"
---------------------------------------------------------------------------------
-Time Trial Number: 5
-Finished         : 2017/03/23 - 08:20:57
---[End Time Trial]--------------------------------------------------------------
-
---[Begin Time Trial]------------------------------------------------------------
-Time Trial Number: 6
-Description      : HAVAL 192-bit hashing
-Started          : 2017/03/23 - 08:20:57
---------------------------------------------------------------------------------
-[I] Hash size : HAVAL_192
-    Passes    :  3
-    Hashing 10MB
-[I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
-    CryptAda digest algorithm id  : "MD_HAVAL_192_3"
-    Digest algorithm SCAN name    : "HAVAL(24,3)"
-    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.3"
-    Digest algorithm OpenPGP name : ""
-    State size (bytes)            :  32
-    Input block size (bytes)      :  128
-    Hash size (bytes)             :  24
-    Processed bit count           : ( 0,  0)
-    Bytes to digest    :  10 MB
-    Buffer size        :  4 KB
-    Iterations         :  2560
-[I] Time trial completed
-    Elapsed time       :           0.034474101 secs.
-    Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "326dcfd1823caf13e4450012e13b42dbe2911d7dbbb8f83d"
-[I] Hash size : HAVAL_192
-    Passes    :  4
-    Hashing 10MB
-[I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
-    CryptAda digest algorithm id  : "MD_HAVAL_192_4"
-    Digest algorithm SCAN name    : "HAVAL(24,4)"
-    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.8"
-    Digest algorithm OpenPGP name : ""
-    State size (bytes)            :  32
-    Input block size (bytes)      :  128
-    Hash size (bytes)             :  24
-    Processed bit count           : ( 0,  0)
-    Bytes to digest    :  10 MB
-    Buffer size        :  4 KB
-    Iterations         :  2560
-[I] Time trial completed
-    Elapsed time       :           0.052214147 secs.
-    Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "557ee085dccbc7a40db7370d70cbd9b7da47ad205f67dec2"
-[I] Hash size : HAVAL_192
-    Passes    :  5
-    Hashing 10MB
-[I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
-    CryptAda digest algorithm id  : "MD_HAVAL_192_5"
-    Digest algorithm SCAN name    : "HAVAL(24,5)"
-    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.13"
-    Digest algorithm OpenPGP name : ""
-    State size (bytes)            :  32
-    Input block size (bytes)      :  128
-    Hash size (bytes)             :  24
-    Processed bit count           : ( 0,  0)
-    Bytes to digest    :  10 MB
-    Buffer size        :  4 KB
-    Iterations         :  2560
-[I] Time trial completed
-    Elapsed time       :           0.063230097 secs.
-    Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "ea4fe76e7c18bafbfd79c7102649d53b8a782bf7adb3467d"
---------------------------------------------------------------------------------
-Time Trial Number: 6
-Finished         : 2017/03/23 - 08:20:57
---[End Time Trial]--------------------------------------------------------------
-
---[Begin Time Trial]------------------------------------------------------------
-Time Trial Number: 7
-Description      : HAVAL 224-bit hashing
-Started          : 2017/03/23 - 08:20:57
---------------------------------------------------------------------------------
-[I] Hash size : HAVAL_224
-    Passes    :  3
-    Hashing 1MB
-[I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
-    CryptAda digest algorithm id  : "MD_HAVAL_224_3"
-    Digest algorithm SCAN name    : "HAVAL(28,3)"
-    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.4"
-    Digest algorithm OpenPGP name : ""
-    State size (bytes)            :  32
-    Input block size (bytes)      :  128
-    Hash size (bytes)             :  28
-    Processed bit count           : ( 0,  0)
-    Bytes to digest    :  1 MB
-    Buffer size        :  1 KB
-    Iterations         :  1024
-[I] Time trial completed
-    Elapsed time       :           0.003467317 secs.
-    Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "294d56ba95f62b5b2113fe7abf91ce5bdab66e8ed89ed4c6f88c0cf3"
-[I] Hash size : HAVAL_224
-    Passes    :  4
-    Hashing 1MB
-[I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
-    CryptAda digest algorithm id  : "MD_HAVAL_224_4"
-    Digest algorithm SCAN name    : "HAVAL(28,4)"
-    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.9"
-    Digest algorithm OpenPGP name : ""
-    State size (bytes)            :  32
-    Input block size (bytes)      :  128
-    Hash size (bytes)             :  28
-    Processed bit count           : ( 0,  0)
-    Bytes to digest    :  1 MB
-    Buffer size        :  1 KB
-    Iterations         :  1024
-[I] Time trial completed
-    Elapsed time       :           0.005129090 secs.
-    Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "959a77e7aa47b4e5f58876facece030c1d44771c4b33adf494ae662c"
-[I] Hash size : HAVAL_224
-    Passes    :  5
-    Hashing 1MB
-[I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
-    CryptAda digest algorithm id  : "MD_HAVAL_224_5"
-    Digest algorithm SCAN name    : "HAVAL(28,5)"
-    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.14"
-    Digest algorithm OpenPGP name : ""
-    State size (bytes)            :  32
-    Input block size (bytes)      :  128
-    Hash size (bytes)             :  28
-    Processed bit count           : ( 0,  0)
-    Bytes to digest    :  1 MB
-    Buffer size        :  1 KB
-    Iterations         :  1024
-[I] Time trial completed
-    Elapsed time       :           0.006314899 secs.
-    Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "1c423f0ed7b7c2ad66713608a95f67b39ef1bd8edb0434db5822fbbd"
---------------------------------------------------------------------------------
-Time Trial Number: 7
-Finished         : 2017/03/23 - 08:20:57
---[End Time Trial]--------------------------------------------------------------
-
---[Begin Time Trial]------------------------------------------------------------
-Time Trial Number: 8
-Description      : HAVAL 224-bit hashing
-Started          : 2017/03/23 - 08:20:57
---------------------------------------------------------------------------------
-[I] Hash size : HAVAL_224
-    Passes    :  3
-    Hashing 10MB
-[I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
-    CryptAda digest algorithm id  : "MD_HAVAL_224_3"
-    Digest algorithm SCAN name    : "HAVAL(28,3)"
-    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.4"
-    Digest algorithm OpenPGP name : ""
-    State size (bytes)            :  32
-    Input block size (bytes)      :  128
-    Hash size (bytes)             :  28
-    Processed bit count           : ( 0,  0)
-    Bytes to digest    :  10 MB
-    Buffer size        :  4 KB
-    Iterations         :  2560
-[I] Time trial completed
-    Elapsed time       :           0.035978994 secs.
-    Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "cd17c49c7686a18a3811ab66f8b8cb179f6808df3cce8b8df4cfbc73"
-[I] Hash size : HAVAL_224
-    Passes    :  4
-    Hashing 10MB
-[I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
-    CryptAda digest algorithm id  : "MD_HAVAL_224_4"
-    Digest algorithm SCAN name    : "HAVAL(28,4)"
-    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.9"
-    Digest algorithm OpenPGP name : ""
-    State size (bytes)            :  32
-    Input block size (bytes)      :  128
-    Hash size (bytes)             :  28
-    Processed bit count           : ( 0,  0)
-    Bytes to digest    :  10 MB
-    Buffer size        :  4 KB
-    Iterations         :  2560
-[I] Time trial completed
-    Elapsed time       :           0.050987376 secs.
-    Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "761b4421063d57f5848dd418698cd5275c10b874db0dd4664891290b"
-[I] Hash size : HAVAL_224
-    Passes    :  5
-    Hashing 10MB
-[I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
-    CryptAda digest algorithm id  : "MD_HAVAL_224_5"
-    Digest algorithm SCAN name    : "HAVAL(28,5)"
-    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.14"
-    Digest algorithm OpenPGP name : ""
-    State size (bytes)            :  32
-    Input block size (bytes)      :  128
-    Hash size (bytes)             :  28
-    Processed bit count           : ( 0,  0)
-    Bytes to digest    :  10 MB
-    Buffer size        :  4 KB
-    Iterations         :  2560
-[I] Time trial completed
-    Elapsed time       :           0.062904051 secs.
-    Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "f76b50feaaacfb48537e059abc9bb4e55667406e172006cc3c88acba"
---------------------------------------------------------------------------------
-Time Trial Number: 8
-Finished         : 2017/03/23 - 08:20:57
---[End Time Trial]--------------------------------------------------------------
-
---[Begin Time Trial]------------------------------------------------------------
-Time Trial Number: 9
-Description      : HAVAL 256-bit hashing
-Started          : 2017/03/23 - 08:20:57
---------------------------------------------------------------------------------
-[I] Hash size : HAVAL_256
-    Passes    :  3
-    Hashing 1MB
-[I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
-    CryptAda digest algorithm id  : "MD_HAVAL_256_3"
-    Digest algorithm SCAN name    : "HAVAL(32,3)"
-    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.5"
-    Digest algorithm OpenPGP name : ""
-    State size (bytes)            :  32
-    Input block size (bytes)      :  128
-    Hash size (bytes)             :  32
-    Processed bit count           : ( 0,  0)
-    Bytes to digest    :  1 MB
-    Buffer size        :  1 KB
-    Iterations         :  1024
-[I] Time trial completed
-    Elapsed time       :           0.003421031 secs.
-    Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "14a7eddf6f42b66c4b60383854921b0f5c4cd74d22dc195eae97eafd56dc0e02"
-[I] Hash size : HAVAL_256
-    Passes    :  4
-    Hashing 1MB
-[I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
-    CryptAda digest algorithm id  : "MD_HAVAL_256_4"
-    Digest algorithm SCAN name    : "HAVAL(32,4)"
-    Digest algorithm ASN1 OID     : "1.3.6.1.4.1.18105.2.1.1.10"
-    Digest algorithm OpenPGP name : ""
-    State size (bytes)            :  32
-    Input block size (bytes)      :  128
-    Hash size (bytes)             :  32
-    Processed bit count           : ( 0,  0)
-    Bytes to digest    :  1 MB
-    Buffer size        :  1 KB
-    Iterations         :  1024
-[I] Time trial completed
-    Elapsed time       :           0.005128270 secs.
-    Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "6e240a1d71bb33d02de1f69f60e74f64604a5eb1bfbf97a9f06d9bb069f9c694"
+    Obtained hash      : "4ef4395a1771586300e1908951f6dd4c4cc23098e2bcf507839b363bac95e6da"
 [I] Hash size : HAVAL_256
     Passes    :  5
     Hashing 1MB
@@ -658,18 +658,18 @@ Started          : 2017/03/23 - 08:20:57
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.006299744 secs.
+    Elapsed time       :           0.006307527 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "53aaf8d3ed1a2e7f21a7dbbaa4ff713f80d5b7d26e1e36470848f4a412795d19"
+    Obtained hash      : "ea575fdddb6c297cfa57a74393461c7c8846b9db780379038cb9d983adcab837"
 --------------------------------------------------------------------------------
 Time Trial Number: 9
-Finished         : 2017/03/23 - 08:20:57
+Finished         : 2017/03/28 - 13:22:09
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 10
 Description      : HAVAL 256-bit hashing
-Started          : 2017/03/23 - 08:20:57
+Started          : 2017/03/28 - 13:22:09
 --------------------------------------------------------------------------------
 [I] Hash size : HAVAL_256
     Passes    :  3
@@ -689,9 +689,9 @@ Started          : 2017/03/23 - 08:20:57
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.034351219 secs.
+    Elapsed time       :           0.034619511 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "fd80ee9ce69ca86476870c104530f1c752b171eaf928cf831066ee7a699be9f0"
+    Obtained hash      : "0855a19f164e10ec37c3812f3b2efaa5a7d089b83d58273f7a004404274e4cab"
 [I] Hash size : HAVAL_256
     Passes    :  4
     Hashing 10MB
@@ -710,9 +710,9 @@ Started          : 2017/03/23 - 08:20:57
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.051905714 secs.
+    Elapsed time       :           0.051671419 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "66a8342f70d75e7ded8ad0ad1bcacc22a73bb44bf9319a9f8c77005efb3fa401"
+    Obtained hash      : "6b1758fc6db18d783e847fe271b03d26f4a1397a37bf61cac25367c569a34a59"
 [I] Hash size : HAVAL_256
     Passes    :  5
     Hashing 10MB
@@ -731,16 +731,16 @@ Started          : 2017/03/23 - 08:20:57
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.062875788 secs.
+    Elapsed time       :           0.062999489 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "088344fba3d714b846c8205af6dfc0eb543792bf068922e8a44091d67b7c28ce"
+    Obtained hash      : "b25ac5297ee42848acae25a270b08d88ef5bed6b3c9b48f06f9bd64fef40e616"
 --------------------------------------------------------------------------------
 Time Trial Number: 10
-Finished         : 2017/03/23 - 08:20:57
+Finished         : 2017/03/28 - 13:22:10
 --[End Time Trial]--------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Time.HAVAL
-Finished                 : 2017/03/23 - 08:20:57
+Finished                 : 2017/03/28 - 13:22:10
 ================================================================================

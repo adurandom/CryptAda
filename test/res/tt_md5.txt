@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Time.MD5
 Description              : Time trial for CryptAda.Digests.Algorithms.MD5 functionality.
-Started                  : 2017/03/23 - 08:20:50
+Started                  : 2017/03/28 - 13:22:03
 ================================================================================
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 1
 Description      : MD5 hashing
-Started          : 2017/03/23 - 08:20:50
+Started          : 2017/03/28 - 13:22:03
 --------------------------------------------------------------------------------
 [I] Hashing 1MB
 [I] Starting time trial for digest algorithm.
@@ -30,18 +30,18 @@ Started          : 2017/03/23 - 08:20:50
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.003342797 secs.
+    Elapsed time       :           0.003405057 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "a2a0ea7b2cf8b0dc892602a3ca2dc0e9"
+    Obtained hash      : "a856596d46bb73ed8c52547bf520bdad"
 --------------------------------------------------------------------------------
 Time Trial Number: 1
-Finished         : 2017/03/23 - 08:20:50
+Finished         : 2017/03/28 - 13:22:03
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 2
 Description      : MD5 hashing
-Started          : 2017/03/23 - 08:20:50
+Started          : 2017/03/28 - 13:22:03
 --------------------------------------------------------------------------------
 [I] Hashing 10MB
 [I] Starting time trial for digest algorithm.
@@ -59,16 +59,16 @@ Started          : 2017/03/23 - 08:20:50
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.033656526 secs.
+    Elapsed time       :           0.033565593 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "b662d9c00b42d82ea967758538bdbb54"
+    Obtained hash      : "c267d5a6a87284db9881388eae4b6a53"
 --------------------------------------------------------------------------------
 Time Trial Number: 2
-Finished         : 2017/03/23 - 08:20:50
+Finished         : 2017/03/28 - 13:22:03
 --[End Time Trial]--------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Time.MD5
-Finished                 : 2017/03/23 - 08:20:50
+Finished                 : 2017/03/28 - 13:22:03
 ================================================================================

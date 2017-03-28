@@ -40,7 +40,6 @@ UTILSDIR    =  $(SRCDIR)/utils
 ENCSDIR     =  $(SRCDIR)/encoders
 DIGDIR      =  $(SRCDIR)/digests
 RNDDIR      =  $(SRCDIR)/random
-BNDIR       =  $(SRCDIR)/bn
 CIPHDIR     =  $(SRCDIR)/ciphers
 
 #>>>[Compilation]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -96,8 +95,6 @@ OBJS     =  cryptada.o \
             cryptada-random-generators.o \
             cryptada-random-generators-rsaref.o \
             cryptada-random-generators-caprng.o \
-            cryptada-big_naturals.o \
-            cryptada-big_naturals-bounded.o \
             cryptada-ciphers.o \
             cryptada-ciphers-keys.o \
             cryptada-ciphers-block_ciphers.o \
@@ -278,16 +275,6 @@ cryptada-random-generators-rsaref.o: $(RNDDIR)/cryptada-random-generators-rsaref
 	$(ADACC) $(CFLAGS) $<
 
 cryptada-random-generators-caprng.o: $(RNDDIR)/cryptada-random-generators-caprng.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-# Big naturals pakages
-
-cryptada-big_naturals.o: $(BNDIR)/cryptada-big_naturals.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-big_naturals-bounded.o: $(BNDIR)/cryptada-big_naturals-bounded.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 

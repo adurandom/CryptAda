@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Time.SHA_3
 Description              : Time trial for CryptAda.Digests.Algorithms.SHA_3 functionality.
-Started                  : 2017/03/23 - 08:20:51
+Started                  : 2017/03/28 - 13:22:04
 ================================================================================
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 1
 Description      : SHA-3 224-bit hashing
-Started          : 2017/03/23 - 08:20:51
+Started          : 2017/03/28 - 13:22:04
 --------------------------------------------------------------------------------
 [I] Hash size     : SHA_3_224
     Hashing 1MB
@@ -31,18 +31,18 @@ Started          : 2017/03/23 - 08:20:51
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.012599898 secs.
+    Elapsed time       :           0.012374205 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "5f0d907498c72b4ec35b2d381de9d28e851bc45bbfe0991cbf250a31"
+    Obtained hash      : "1718ea7d5643b4e2f663b850eb3d166254f9f1c0d49f1533238c5cb3"
 --------------------------------------------------------------------------------
 Time Trial Number: 1
-Finished         : 2017/03/23 - 08:20:51
+Finished         : 2017/03/28 - 13:22:04
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 2
 Description      : SHA-3 224-bit hashing
-Started          : 2017/03/23 - 08:20:51
+Started          : 2017/03/28 - 13:22:04
 --------------------------------------------------------------------------------
 [I] Hash size     : SHA_3_224
     Hashing 10MB
@@ -61,18 +61,18 @@ Started          : 2017/03/23 - 08:20:51
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.122657411 secs.
+    Elapsed time       :           0.123051862 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "cffe70ab4416e6f7f664a5244c94552e0284f28ee83d1d522eec2782"
+    Obtained hash      : "55c62adc13f79a6aae5379e54da118666e237f59165d040f14856b2b"
 --------------------------------------------------------------------------------
 Time Trial Number: 2
-Finished         : 2017/03/23 - 08:20:52
+Finished         : 2017/03/28 - 13:22:04
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 3
 Description      : SHA-3 256-bit hashing
-Started          : 2017/03/23 - 08:20:52
+Started          : 2017/03/28 - 13:22:04
 --------------------------------------------------------------------------------
 [I] Hash size     : SHA_3_256
     Hashing 1MB
@@ -91,18 +91,18 @@ Started          : 2017/03/23 - 08:20:52
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.013039405 secs.
+    Elapsed time       :           0.013170480 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "332047e2f0b144478c5e430ae81a1ccde244e26a70f505e388631af96f6f2338"
+    Obtained hash      : "3593ef7ef856733cc289be5b1a0d82ddf65c42540d601ed8f07fd01761a7b60a"
 --------------------------------------------------------------------------------
 Time Trial Number: 3
-Finished         : 2017/03/23 - 08:20:52
+Finished         : 2017/03/28 - 13:22:04
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 4
 Description      : SHA-3 256-bit hashing
-Started          : 2017/03/23 - 08:20:52
+Started          : 2017/03/28 - 13:22:04
 --------------------------------------------------------------------------------
 [I] Hash size     : SHA_3_256
     Hashing 10MB
@@ -121,18 +121,18 @@ Started          : 2017/03/23 - 08:20:52
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.129472439 secs.
+    Elapsed time       :           0.130372754 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "36099fa6c24634993f448ddf11c8250ece9d49ec8cfb1da4f7d5889204780150"
+    Obtained hash      : "c0ca38ff0bdb72b19d4d165d4de74fb949616674dbac8f5d2c645daf03510c7e"
 --------------------------------------------------------------------------------
 Time Trial Number: 4
-Finished         : 2017/03/23 - 08:20:52
+Finished         : 2017/03/28 - 13:22:05
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 5
 Description      : SHA-3 384-bit hashing
-Started          : 2017/03/23 - 08:20:52
+Started          : 2017/03/28 - 13:22:05
 --------------------------------------------------------------------------------
 [I] Hash size     : SHA_3_384
     Hashing 1MB
@@ -151,18 +151,18 @@ Started          : 2017/03/23 - 08:20:52
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.016840961 secs.
+    Elapsed time       :           0.016776653 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "303e2ae32534b218e561682fb551e9328cf5545523c5469c7d3ac9141d3697f840af1d2e2378870d06a5e725b15c5d60"
+    Obtained hash      : "5f9e33cafb62c17b9508c4c5ecde507917c1990c43c4173ed9a1281deaa93b2ba3d1ffa3a9a8b07826104d4123cfbdd4"
 --------------------------------------------------------------------------------
 Time Trial Number: 5
-Finished         : 2017/03/23 - 08:20:52
+Finished         : 2017/03/28 - 13:22:05
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 6
 Description      : SHA-3 384-bit hashing
-Started          : 2017/03/23 - 08:20:52
+Started          : 2017/03/28 - 13:22:05
 --------------------------------------------------------------------------------
 [I] Hash size     : SHA_3_384
     Hashing 10MB
@@ -181,18 +181,18 @@ Started          : 2017/03/23 - 08:20:52
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.168679950 secs.
+    Elapsed time       :           0.166737597 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "2b3fb7364a7449860a49e4c29918fceece112f5e3748063c28a846c0b20879417898f26a9bf894bc10c63cfed5e7b80c"
+    Obtained hash      : "9d608d4f9a8ce44bff34f5bc11d87ada40d403de867d8299b26fad3c3d3afa22e41e889b25e3c9efe94cc5936d492e61"
 --------------------------------------------------------------------------------
 Time Trial Number: 6
-Finished         : 2017/03/23 - 08:20:52
+Finished         : 2017/03/28 - 13:22:05
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 7
 Description      : SHA-3 512-bit hashing
-Started          : 2017/03/23 - 08:20:52
+Started          : 2017/03/28 - 13:22:05
 --------------------------------------------------------------------------------
 [I] Hash size     : SHA_3_512
     Hashing 1MB
@@ -211,18 +211,18 @@ Started          : 2017/03/23 - 08:20:52
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.023662953 secs.
+    Elapsed time       :           0.024491587 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "791e48369e4c187f1b74ca36b08162afff1f6cee31fbcea0c250b0ec26ee712dcf7f8dad045b7b8cd056c18a643f38d9fb4e6ae4ee4a4088c09fa8c0f50921f5"
+    Obtained hash      : "70f0c10a654ea0e0c1fd2392e64c64f8bf19544820854b6d6fde6237d606c001e0e7ee164c7f04dce8664d9be16ce88bde600c13a91494338133a38ad06486b6"
 --------------------------------------------------------------------------------
 Time Trial Number: 7
-Finished         : 2017/03/23 - 08:20:52
+Finished         : 2017/03/28 - 13:22:05
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 8
 Description      : SHA-3 512-bit hashing
-Started          : 2017/03/23 - 08:20:52
+Started          : 2017/03/28 - 13:22:05
 --------------------------------------------------------------------------------
 [I] Hash size     : SHA_3_512
     Hashing 10MB
@@ -241,16 +241,16 @@ Started          : 2017/03/23 - 08:20:52
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.236599629 secs.
+    Elapsed time       :           0.236930182 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "70acc950fd4fca85a6ddfa2474c49fc71e1b42a0702576134710307eade32e55e6e868a4df0f12f01291b50707dd17eebd7b7247035e050786a856a2b8787295"
+    Obtained hash      : "cec2d25525d5c0385ed7ba6755ce8fbb0a231fc62d0199a18d3a0ac8dd150c718cd063e3d8ccc386a8a3a8c71329ea7b6b5682f01d0f53947fbb15a597343401"
 --------------------------------------------------------------------------------
 Time Trial Number: 8
-Finished         : 2017/03/23 - 08:20:52
+Finished         : 2017/03/28 - 13:22:05
 --[End Time Trial]--------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Time.SHA_3
-Finished                 : 2017/03/23 - 08:20:52
+Finished                 : 2017/03/28 - 13:22:05
 ================================================================================
