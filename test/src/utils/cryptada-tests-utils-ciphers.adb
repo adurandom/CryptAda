@@ -49,7 +49,7 @@ package body CryptAda.Tests.Utils.Ciphers is
    -----------------------------------------------------------------------------
 
    Indent_Str                    : constant String := "    ";
-   Iterations                    : constant Positive := 100_000;
+   Iterations                    : constant Positive := 10_000;
 
    -----------------------------------------------------------------------------
    --[Body subprogram specs]----------------------------------------------------
@@ -82,49 +82,6 @@ package body CryptAda.Tests.Utils.Ciphers is
       Print_Message("Default key length            : " & Positive'Image(Get_Default_Key_Length(The_Cipher)), Indent_Str);
       Print_Message("Key length increment step     : " & Natural'Image(Get_Key_Length_Increment_Step(The_Cipher)), Indent_Str);
    end Print_Block_Cipher_Info;
-
-   --[Run_Cipher_Bulk_Test]-----------------------------------------------------
-
-   procedure   Run_Cipher_Bulk_Test(
-                  With_Cipher    : in out CryptAda.Ciphers.Block_Ciphers.Block_Cipher'Class)
-   is
-      BL             : constant Positive  := Get_Block_Size(With_Cipher);
-      G              : RSAREF_Generator;
-      IB             : Block(1 .. BL);
-      OB             : Block(1 .. BL);
-      OB_2           : Block(1 .. BL);
-      K              : Key;
-   begin
-      Print_Information_Message("Block cipher bulk test");
-      Print_Message("Performing " & Positive'Image(Iterations) & " iterations encrypting and decrypting random blocks", Indent_Str);
-      Print_Message("with random keys.", Indent_Str);
-      Print_Block_Cipher_Info(With_Cipher);
-      
-      Random_Start_And_Seed(G);
-      
-      for I in 1 .. Iterations loop
-         Generate_Key(With_Cipher, G, K);
-         Start_Cipher(With_Cipher, Encrypt, K);
-         Random_Generate(G, IB);
-         Process_Block(With_Cipher, IB, OB);
-         Stop_Cipher(With_Cipher);
-         Start_Cipher(With_Cipher, Decrypt, K);
-         Process_Block(With_Cipher, OB, OB_2);
-         Stop_Cipher(With_Cipher);
-         
-         if IB /= OB_2 then
-            Print_Error_Message("Iteration: " & Positive'Image(I) & ". Results don't match.");
-            Print_Key(K, "Key:");
-            Print_Block(IB, "Input block:");
-            Print_Block(OB, "Encrypted block:");
-            Print_Block(OB_2, "Decrypted block:");
-            
-            raise CryptAda_Test_Error;
-         end if;
-      end loop;
-      
-      Print_Information_Message("Bulk test completed OK");
-   end Run_Cipher_Bulk_Test;
    
    --[Print_Block]--------------------------------------------------------------
    
@@ -156,5 +113,88 @@ package body CryptAda.Tests.Utils.Ciphers is
          Print_Message(To_Hex_String(Get_Key_Bytes(The_Key), 10, LF_Only, ", ", "16#", "#"));
       end if;
    end Print_Key;
+
+   --[Run_Cipher_Bulk_Test]-----------------------------------------------------
+
+   procedure   Run_Cipher_Bulk_Test(
+                  With_Cipher    : in out CryptAda.Ciphers.Block_Ciphers.Block_Cipher'Class;
+                  Key_Size       : in     Positive)
+   is
+      BL             : constant Positive  := Get_Block_Size(With_Cipher);
+      G              : RSAREF_Generator;
+      IB             : Block(1 .. BL);
+      OB             : Block(1 .. BL);
+      OB_2           : Block(1 .. BL);
+      K              : Key;
+      KB             : Byte_Array(1 .. Key_Size);
+   begin
+      Print_Information_Message("Block cipher bulk test");
+      Print_Message("Performing " & Positive'Image(Iterations) & " iterations encrypting and decrypting random blocks", Indent_Str);
+      Print_Message("with random keys.", Indent_Str);
+      Print_Block_Cipher_Info(With_Cipher);
+      
+      Random_Start_And_Seed(G);
+      
+      for I in 1 .. Iterations loop
+         loop
+            Random_Generate(G, KB);
+            Set_Key(K, KB);
+            exit when Is_Valid_Key(With_Cipher, K);
+         end loop;
+         
+         Start_Cipher(With_Cipher, Encrypt, K);
+         Random_Generate(G, IB);
+         Process_Block(With_Cipher, IB, OB);
+         Stop_Cipher(With_Cipher);
+         Start_Cipher(With_Cipher, Decrypt, K);
+         Process_Block(With_Cipher, OB, OB_2);
+         Stop_Cipher(With_Cipher);
+         
+         if IB /= OB_2 then
+            Print_Error_Message("Iteration: " & Positive'Image(I) & ". Results don't match.");
+            Print_Key(K, "Key:");
+            Print_Block(IB, "Input block:");
+            Print_Block(OB, "Encrypted block:");
+            Print_Block(OB_2, "Decrypted block:");
+            
+            raise CryptAda_Test_Error;
+         end if;
+      end loop;
+      
+      Print_Information_Message("Bulk test completed OK");
+   end Run_Cipher_Bulk_Test;
+
+   --[Run_Cipher_Test_Vector]---------------------------------------------------
+
+   procedure   Run_Cipher_Test_Vector(
+                  Message        : in     String;
+                  With_Cipher    : in out CryptAda.Ciphers.Block_Ciphers.Block_Cipher'Class;
+                  Vector         : in     Test_Vector;
+                  Result         :    out Boolean)
+   is
+      BL                   : constant Positive  := Get_Block_Size(With_Cipher);   
+      K                    : Key;
+      B                    : Block(1 .. BL);
+   begin
+      Print_Information_Message(Message);
+      Print_Message("Key                     : " & To_Hex_String(Vector(The_Key).all, No_Line_Breaks, LF_Only, ", ", "16#", "#"), Indent_Str);
+      Print_Message("Plain text block        : " & To_Hex_String(Vector(Plain).all, No_Line_Breaks, LF_Only, ", ", "16#", "#"), Indent_Str);
+      Print_Message("Expected encrypted block: " & To_Hex_String(Vector(Crypt).all, No_Line_Breaks, LF_Only, ", ", "16#", "#"), Indent_Str);
+      
+      Set_Key(K, Vector(The_Key).all);
+      Start_Cipher(With_Cipher, Encrypt, K);
+      Process_Block(With_Cipher, Vector(Plain).all, B);
+      Stop_Cipher(With_Cipher);
+
+      Print_Message("Obtained encrypted block: " & To_Hex_String(B, No_Line_Breaks, LF_Only, ", ", "16#", "#"), Indent_Str);
+
+      if B = Vector(Crypt).all then
+         Print_Information_Message("Cipher test vector, results match");
+         Result := True;
+      else
+         Print_Error_Message("Cipher test vector, results don't match");
+         Result := False;
+      end if;      
+   end Run_Cipher_Test_Vector;
    
 end CryptAda.Tests.Utils.Ciphers;

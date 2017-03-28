@@ -150,7 +150,8 @@ U_BN        =   $(CTB_UBN)/ut_bn_basic.exe \
                 $(CTB_UBN)/ut_bn_mult.exe \
                 $(CTB_UBN)/ut_bn_div.exe
 
-U_BC        =   $(CTB_UBC)/ut_des.exe
+U_BC        =   $(CTB_UBC)/ut_des.exe \
+                $(CTB_UBC)/ut_aes.exe
                 
 T_DIG       =   $(CTB_TDIG)/tt_md2.exe \
                 $(CTB_TDIG)/tt_md4.exe \
@@ -321,6 +322,10 @@ $(CTB_UBN)/ut_bn_div.exe: $(CTS_UBN_DRV)ut_bn_div.adb
 # Block_Ciphers unit test drivers
 
 $(CTB_UBC)/ut_des.exe: $(CTS_UBC_DRV)ut_des.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBC)/ut_aes.exe: $(CTS_UBC_DRV)ut_aes.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
     

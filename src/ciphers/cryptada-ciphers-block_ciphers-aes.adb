@@ -730,7 +730,7 @@ package body CryptAda.Ciphers.Block_Ciphers.AES is
                   Output         :    out AES_Packed_Block)
    is
       K              : Positive := RK.all'First;
-      R              : Natural := AES_Rounds(Key_Id);
+      R              : Natural := AES_Rounds(Key_Id) / 2;
       TI             : AES_Packed_Block := Input;
       TT             : AES_Packed_Block := (others => 0);
    begin
@@ -740,7 +740,7 @@ package body CryptAda.Ciphers.Block_Ciphers.AES is
       end loop;
 
       K := RK.all'First;
-
+      
       loop
          TT(1) :=
             Te_0(Byte(Shift_Right(TI(1), 24) and 16#0000_00FF#)) xor
@@ -838,7 +838,7 @@ package body CryptAda.Ciphers.Block_Ciphers.AES is
                   Output         :    out AES_Packed_Block)
    is
       K              : Positive := RK.all'First;
-      R              : Natural := AES_Rounds(Key_Id);
+      R              : Natural := AES_Rounds(Key_Id) / 2;
       TI             : AES_Packed_Block := Input;
       TT             : AES_Packed_Block := (others => 0);
    begin

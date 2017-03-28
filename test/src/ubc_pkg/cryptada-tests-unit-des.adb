@@ -1041,7 +1041,7 @@ package body CryptAda.Tests.Unit.DES is
       C                    : DES_Cipher;
    begin
       Begin_Test_Case(6, "DES Bulk test");
-      Run_Cipher_Bulk_Test(C);
+      Run_Cipher_Bulk_Test(C, DES_Key_Size);
       Print_Information_Message("Test case OK");
       End_Test_Case(6, Passed);
    exception

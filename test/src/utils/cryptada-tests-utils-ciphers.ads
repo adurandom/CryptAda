@@ -31,6 +31,7 @@
 --    1.0   20170323 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
+with CryptAda.Pragmatics;
 with CryptAda.Ciphers.Block_Ciphers;
 with CryptAda.Ciphers.Keys;
 
@@ -39,6 +40,16 @@ package CryptAda.Tests.Utils.Ciphers is
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
+
+   -----------------------------------------------------------------------------
+   --[Types]--------------------------------------------------------------------
+   -----------------------------------------------------------------------------
+   
+   type Test_Element is (The_Key, Plain, Crypt);
+   
+   type Test_Vector is array(Test_Element) of CryptAda.Pragmatics.Byte_Array_Ptr;
+   
+   type Test_Vectors is array(Positive range <>) of Test_Vector;
    
    -----------------------------------------------------------------------------
    --[Subprogram Specification]-------------------------------------------------
@@ -46,16 +57,22 @@ package CryptAda.Tests.Utils.Ciphers is
 
    procedure   Print_Block_Cipher_Info(
                   The_Cipher     : in     CryptAda.Ciphers.Block_Ciphers.Block_Cipher'Class);
-
-   procedure   Run_Cipher_Bulk_Test(
-                  With_Cipher    : in out CryptAda.Ciphers.Block_Ciphers.Block_Cipher'Class);
    
    procedure   Print_Block(
-                  The_Block         : in     CryptAda.Ciphers.Block_Ciphers.Block;
-                  Message           : in     String);
+                  The_Block      : in     CryptAda.Ciphers.Block_Ciphers.Block;
+                  Message        : in     String);
    
    procedure   Print_Key(
-                  The_Key           : in     CryptAda.Ciphers.Keys.Key;
-                  Message           : in     String);
-                  
+                  The_Key        : in     CryptAda.Ciphers.Keys.Key;
+                  Message        : in     String);
+
+   procedure   Run_Cipher_Bulk_Test(
+                  With_Cipher    : in out CryptAda.Ciphers.Block_Ciphers.Block_Cipher'Class;
+                  Key_Size       : in     Positive);
+
+   procedure   Run_Cipher_Test_Vector(
+                  Message        : in     String;
+                  With_Cipher    : in out CryptAda.Ciphers.Block_Ciphers.Block_Cipher'Class;
+                  Vector         : in     Test_Vector;
+                  Result         :    out Boolean);
 end CryptAda.Tests.Utils.Ciphers;
