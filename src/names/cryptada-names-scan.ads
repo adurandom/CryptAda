@@ -128,6 +128,7 @@ package CryptAda.Names.SCAN is
    -----------------------------------------------------------------------------
 
    SCAN_DES                      : aliased constant String := "DES";
+   SCAN_DESX                     : aliased constant String := "DESX";
    SCAN_DESEDE                   : aliased constant String := "DESede";
    SCAN_DES_EDE_2                : aliased constant String := "DES-EDE2";
    SCAN_DES_EDE_3                : aliased constant String := "DES-EDE3";
@@ -142,6 +143,7 @@ package CryptAda.Names.SCAN is
    SCAN_Block_Ciphers            : constant array(Block_Cipher_Id) of Algorithm_Name_Ref :=
       (
          BC_DES            => SCAN_DES'Access,
+         BC_DESX           => SCAN_DESX'Access,
          BC_TDEA_EDE_1     => SCAN_DESEDE'Access,
          BC_TDEA_EDE_2     => SCAN_DES_EDE_2'Access,
          BC_TDEA_EDE_3     => SCAN_DES_EDE_3'Access,

@@ -99,6 +99,7 @@ OBJS     =  cryptada.o \
             cryptada-ciphers-keys.o \
             cryptada-ciphers-block_ciphers.o \
             cryptada-ciphers-block_ciphers-des.o \
+            cryptada-ciphers-block_ciphers-des-desx.o \
             cryptada-ciphers-block_ciphers-tdea.o \
             cryptada-ciphers-block_ciphers-aes.o 
 
@@ -296,6 +297,10 @@ cryptada-ciphers-block_ciphers-des.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers-
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
+cryptada-ciphers-block_ciphers-des-desx.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers-des-desx.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+    
 cryptada-ciphers-block_ciphers-tdea.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers-tdea.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<

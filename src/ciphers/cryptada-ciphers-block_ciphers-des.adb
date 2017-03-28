@@ -661,7 +661,7 @@ package body CryptAda.Ciphers.Block_Ciphers.DES is
                   Generator      : in out Random_Generator'Class;
                   The_Key        : in out Key)
    is
-      KB             : Byte_Array(1 .. DES_Max_KL);
+      KB             : Byte_Array(1 .. DES_Key_Size);
    begin
       loop
          Random_Generate(Generator, KB);
@@ -739,7 +739,7 @@ package body CryptAda.Ciphers.Block_Ciphers.DES is
          raise CryptAda_Null_Argument_Error;
       end if;
       
-      if Get_Key_Length(Of_Key) /= DES_Min_KL then
+      if Get_Key_Length(Of_Key) /= DES_Key_Size then
          raise CryptAda_Invalid_Key_Error;
       end if;
       
@@ -791,7 +791,7 @@ package body CryptAda.Ciphers.Block_Ciphers.DES is
          raise CryptAda_Null_Argument_Error;
       end if;
       
-      if Get_Key_Length(Of_Key) /= DES_Min_KL then
+      if Get_Key_Length(Of_Key) /= DES_Key_Size then
          raise CryptAda_Invalid_Key_Error;
       end if;
 
