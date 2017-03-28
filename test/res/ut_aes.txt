@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.AES
 Description              : Unit test driver for CryptAda.Ciphers.Block_Ciphers.AES functionality.
-Started                  : 2017/03/28 - 06:51:23
+Started                  : 2017/03/28 - 12:29:03
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Attempting to use a Block_Cipher without starting it
-Started         : 2017/03/28 - 06:51:23
+Started         : 2017/03/28 - 12:29:03
 --------------------------------------------------------------------------------
 [I] Must raise CryptAda_Uninitialized_Cipher_Error
 [I] Cipher information
@@ -34,13 +34,13 @@ Started         : 2017/03/28 - 06:51:23
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 06:51:23
+Finished        : 2017/03/28 - 12:29:03
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Cipher life-cycle
-Started         : 2017/03/28 - 06:51:23
+Started         : 2017/03/28 - 12:29:03
 --------------------------------------------------------------------------------
 [I] Checking Cipher object state along its life cycle.
 [I] Key Id: AES_128
@@ -365,13 +365,13 @@ State must be: IDLE
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 06:51:23
+Finished        : 2017/03/28 - 12:29:03
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Testing random key generation
-Started         : 2017/03/28 - 06:51:23
+Started         : 2017/03/28 - 12:29:03
 --------------------------------------------------------------------------------
 [I] Using an unitialized random generator
 Must raise CryptAda_Generator_Not_Started_Error
@@ -384,10 +384,10 @@ Must raise CryptAda_Generator_Need_Seeding_Error
 [I] Generated key:
     Key length:  32
     Key bytes :
-16#CC#, 16#77#, 16#1F#, 16#96#, 16#02#, 16#B0#, 16#85#, 16#CA#, 16#6E#, 16#E8#, 
-16#30#, 16#33#, 16#81#, 16#51#, 16#5A#, 16#A0#, 16#C8#, 16#D1#, 16#B5#, 16#7B#, 
-16#6F#, 16#6C#, 16#31#, 16#D8#, 16#3D#, 16#32#, 16#D9#, 16#64#, 16#8D#, 16#34#, 
-16#04#, 16#A7#
+16#5A#, 16#DE#, 16#99#, 16#18#, 16#C4#, 16#6F#, 16#E7#, 16#5F#, 16#78#, 16#AB#, 
+16#D6#, 16#AD#, 16#25#, 16#5C#, 16#1B#, 16#FA#, 16#FB#, 16#11#, 16#FB#, 16#2C#, 
+16#41#, 16#14#, 16#6D#, 16#3A#, 16#8F#, 16#06#, 16#7D#, 16#F8#, 16#08#, 16#53#, 
+16#1B#, 16#AB#
 [I] Key must be valid
 [I] Key is valid
 [I] Key must be strong
@@ -412,13 +412,13 @@ Obtained key length:  32
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 06:51:23
+Finished        : 2017/03/28 - 12:29:03
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : AES standard test vectors 1
-Started         : 2017/03/28 - 06:51:23
+Started         : 2017/03/28 - 12:29:03
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from: "The Advanced Encryption Standard
     Algorithm Validation Suite (AESAVS)"
@@ -540,13 +540,13 @@ Started         : 2017/03/28 - 06:51:23
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 06:51:23
+Finished        : 2017/03/28 - 12:29:03
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : AES Bulk test
-Started         : 2017/03/28 - 06:51:23
+Started         : 2017/03/28 - 12:29:03
 --------------------------------------------------------------------------------
 [I] Using key size:  16
 [I] Block cipher bulk test
@@ -603,11 +603,11 @@ Started         : 2017/03/28 - 06:51:23
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 06:51:23
+Finished        : 2017/03/28 - 12:29:04
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.AES
-Finished                 : 2017/03/28 - 06:51:23
+Finished                 : 2017/03/28 - 12:29:04
 ================================================================================

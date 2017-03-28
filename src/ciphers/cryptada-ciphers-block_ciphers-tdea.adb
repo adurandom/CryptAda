@@ -152,10 +152,17 @@ package body CryptAda.Ciphers.Block_Ciphers.TDEA is
          
          Process_Block(With_Cipher.Sub_Ciphers(3), B_I, B_O);
       else      
-         for I in With_Cipher.Sub_Ciphers'Range loop
-            Process_Block(With_Cipher.Sub_Ciphers(I), B_I, B_O);
-            B_I := B_O;
-         end loop;
+         if With_Cipher.State = Encrypting then
+            for I in With_Cipher.Sub_Ciphers'Range loop
+               Process_Block(With_Cipher.Sub_Ciphers(I), B_I, B_O);
+               B_I := B_O;
+            end loop;
+         else
+            for I in reverse With_Cipher.Sub_Ciphers'Range loop
+               Process_Block(With_Cipher.Sub_Ciphers(I), B_I, B_O);
+               B_I := B_O;
+            end loop;
+         end if;
       end if;
       
       Output := B_O;

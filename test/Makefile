@@ -151,6 +151,7 @@ U_BN        =   $(CTB_UBN)/ut_bn_basic.exe \
                 $(CTB_UBN)/ut_bn_div.exe
 
 U_BC        =   $(CTB_UBC)/ut_des.exe \
+                $(CTB_UBC)/ut_tdea.exe \
                 $(CTB_UBC)/ut_aes.exe
                 
 T_DIG       =   $(CTB_TDIG)/tt_md2.exe \
@@ -325,6 +326,10 @@ $(CTB_UBC)/ut_des.exe: $(CTS_UBC_DRV)ut_des.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
 
+$(CTB_UBC)/ut_tdea.exe: $(CTS_UBC_DRV)ut_tdea.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
+    
 $(CTB_UBC)/ut_aes.exe: $(CTS_UBC_DRV)ut_aes.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
