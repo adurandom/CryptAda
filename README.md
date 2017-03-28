@@ -30,12 +30,7 @@ At the moment of this writing (March 22nd, 2017) the following is implemented in
   * MIME text encoder
 * _Symmetric Block Ciphers_
   * DES
+  * TDEA (Triple DES EDE)
+  * AES
   
-Partially implemented is a Big_Naturals implementation containing the basic arithmetic operations (with the corresponding test drivers)
-
-Next tasks are (in no particular order)
-* Complete Big_Naturals package with two subpackages Unbounded and Bounded Big_Naturals (including modular arithmetic, prime numbers, etc.)
-* Code and test block ciphers: DES, 3DES, AES, IDEA, Blowfish, ...
-* We'll see what's next.
-
 Hope you enjoy it!
