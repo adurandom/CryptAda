@@ -207,7 +207,7 @@ package CryptAda.Ciphers.Block_Ciphers.TDEA is
    -----------------------------------------------------------------------------
    
    procedure   Generate_Key(
-                  The_Cipher     : in     TDEA_Cipher;
+                  The_Cipher     : in     TDEA_Cipher'Class;
                   Keying_Option  : in     TDEA_Keying_Option;
                   Generator      : in out CryptAda.Random.Generators.Random_Generator'Class;
                   The_Key        : in out CryptAda.Ciphers.Keys.Key);

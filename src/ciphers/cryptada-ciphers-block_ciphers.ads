@@ -29,6 +29,7 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170321 ADD   Initial implementation.
+--    1.1   20170329 ADD   Removed key generation subprogram.
 --------------------------------------------------------------------------------
 
 with Ada.Finalization;
@@ -36,7 +37,6 @@ with Ada.Finalization;
 with CryptAda.Pragmatics;
 with CryptAda.Names;
 with CryptAda.Ciphers.Keys;
-with CryptAda.Random.Generators;
 
 package CryptAda.Ciphers.Block_Ciphers is
 
@@ -58,23 +58,21 @@ package CryptAda.Ciphers.Block_Ciphers is
    
    type Block_Cipher_Ref is access all Block_Cipher'Class;
    
-   --[Block_Size]---------------------------------------------------------------
+   --[Cipher_Block_Size]--------------------------------------------------------
    -- Type for block size values.
    -----------------------------------------------------------------------------
    
-   subtype Block_Size is Positive;
+   subtype Cipher_Block_Size is Positive;
    
-   --[Block]---------------------------------------------------------------
+   --[Cipher_Block]-------------------------------------------------------------
    -- Type for blocks.
    -----------------------------------------------------------------------------
 
-   subtype Block is CryptAda.Pragmatics.Byte_Array;
+   subtype Cipher_Block is CryptAda.Pragmatics.Byte_Array;
    
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
-
-   --[Encrypt/Decrypt Interface]------------------------------------------------
 
    --[Start_Cipher]-------------------------------------------------------------
    -- Purpose:
@@ -124,8 +122,8 @@ package CryptAda.Ciphers.Block_Ciphers is
 
    procedure   Process_Block(
                   With_Cipher    : in out Block_Cipher;
-                  Input          : in     Block;
-                  Output         :    out Block)
+                  Input          : in     Cipher_Block;
+                  Output         :    out Cipher_Block)
       is abstract;
 
    --[Stop_Cipher]--------------------------------------------------------------
@@ -145,74 +143,6 @@ package CryptAda.Ciphers.Block_Ciphers is
       
    procedure   Stop_Cipher(
                   The_Cipher     : in out Block_Cipher)
-         is abstract;
-
-   --[Key related operations]---------------------------------------------------
-
-   --[Generate_Key]-------------------------------------------------------------
-   -- Purpose:
-   -- Generates a strong random key for encrypting/decrypting.
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- The_Cipher           Block_Cipher object.
-   -- Generator            Random_Generator used to generate the random key.
-   -- The_Key              The generated key.
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- N/A.
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- CryptAda_Generator_Not_Started_Error
-   -- CryptAda_Generator_Need_Seeding_Error
-   -- CryptAda_Storage_Error
-   -----------------------------------------------------------------------------
-   
-   procedure   Generate_Key(
-                  The_Cipher     : in     Block_Cipher;
-                  Generator      : in out CryptAda.Random.Generators.Random_Generator'Class;
-                  The_Key        : in out CryptAda.Ciphers.Keys.Key)
-         is abstract;
-
-   --[Is_Valid_Key]-------------------------------------------------------------
-   -- Purpose:
-   -- Checks if a Key is valid for the particular cipher algorithm.
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- For_Cipher           Block_Cipher object.
-   -- The_Key              Key to check for validity.
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- Boolean value that indicates if The_Key is valid or not.
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- None.
-   -----------------------------------------------------------------------------
-   
-   function    Is_Valid_Key(
-                  For_Cipher     : in     Block_Cipher;
-                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
-      return   Boolean
-         is abstract;
-         
-   --[Is_Strong_Key]------------------------------------------------------------
-   -- Purpose:
-   -- Checks the strongness of a Key for a particular cipher algorithm.
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- For_Cipher           Block_Cipher object.
-   -- The_Key              Key to check for strongness.
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- Boolean value that indicates if The_Key is strong or not.
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- None.
-   -----------------------------------------------------------------------------
-   
-   function    Is_Strong_Key(
-                  For_Cipher     : in     Block_Cipher;
-                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
-      return   Boolean
          is abstract;
          
    -----------------------------------------------------------------------------
@@ -245,7 +175,7 @@ package CryptAda.Ciphers.Block_Ciphers is
    -- From                 Block_Cipher object to obtain the block size from.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Block_Size value with the size in bytes of the block.
+   -- Cipher_Block_Size value with the size in bytes of the block.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- None.
@@ -253,7 +183,7 @@ package CryptAda.Ciphers.Block_Ciphers is
 
    function    Get_Block_Size(
                   From           : in     Block_Cipher'Class)
-      return   Block_Size;
+      return   Cipher_Block_Size;
 
    --[Get_Cipher_State]---------------------------------------------------------
    -- Purpose:
@@ -310,7 +240,7 @@ package CryptAda.Ciphers.Block_Ciphers is
 
    function    Is_Valid_Key_Length(
                   For_Cipher     : in     Block_Cipher'Class;
-                  The_Length     : in     Positive)
+                  The_Length     : in     Cipher_Key_Length)
       return   Boolean;
 
    --[Get_Minimum_Key_Length]---------------------------------------------------
@@ -321,7 +251,7 @@ package CryptAda.Ciphers.Block_Ciphers is
    -- For_Cipher           Block_Cipher object.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Positive value with the minimum number of bytes for a valid key.
+   -- Cipher_Key_Length value with the minimum number of bytes for a valid key.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- None.
@@ -329,7 +259,7 @@ package CryptAda.Ciphers.Block_Ciphers is
 
    function    Get_Minimum_Key_Length(
                   For_Cipher     : in     Block_Cipher'Class)
-      return   Positive;
+      return   Cipher_Key_Length;
 
    --[Get_Maximum_Key_Length]---------------------------------------------------
    -- Purpose:
@@ -339,7 +269,7 @@ package CryptAda.Ciphers.Block_Ciphers is
    -- For_Cipher           Block_Cipher object.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Positive value with the maximum number of bytes for a valid key.
+   -- Cipher_Key_Length value with the maximum number of bytes for a valid key.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- None.
@@ -347,7 +277,7 @@ package CryptAda.Ciphers.Block_Ciphers is
 
    function    Get_Maximum_Key_Length(
                   For_Cipher     : in     Block_Cipher'Class)
-      return   Positive;
+      return   Cipher_Key_Length;
 
    --[Get_Default_Key_Length]---------------------------------------------------
    -- Purpose:
@@ -357,7 +287,7 @@ package CryptAda.Ciphers.Block_Ciphers is
    -- For_Cipher           Block_Cipher object.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Positive value with the default number of bytes for a valid key.
+   -- Cipher_Key_Length value with the default number of bytes for a valid key.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- None.
@@ -365,7 +295,7 @@ package CryptAda.Ciphers.Block_Ciphers is
 
    function    Get_Default_Key_Length(
                   For_Cipher     : in     Block_Cipher'Class)
-      return   Positive;
+      return   Cipher_Key_Length;
 
    --[Get_Key_Length_Increment_Step]--------------------------------------------
    -- Purpose:
@@ -385,7 +315,7 @@ package CryptAda.Ciphers.Block_Ciphers is
    -- For_Cipher           Block_Cipher object.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Naturla value with the key size increment step.
+   -- Natural value with the key size increment step.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- None.
@@ -394,6 +324,25 @@ package CryptAda.Ciphers.Block_Ciphers is
    function    Get_Key_Length_Increment_Step(
                   For_Cipher     : in     Block_Cipher'Class)
       return   Natural;
+
+   --[Get_Cipher_Key_Info]------------------------------------------------------
+   -- Purpose:
+   -- Returns key related information for a particular Block_Cipher object.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- For_Cipher           Block_Cipher object.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Cipher_Key_Info (CryptAda.Ciphers) record with key information
+   -- For_Cipher.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+   
+   function    Get_Cipher_Key_Info(
+                  For_Cipher     : in     Block_Cipher'Class)
+      return   Cipher_Key_Info;
       
    -----------------------------------------------------------------------------
    --[Private Part]-------------------------------------------------------------
@@ -411,22 +360,16 @@ private
    --
    -- Cipher_Id            Enumerated value that identifies the particular
    --                      block cipher algorithm.
-   -- Min_KL               Minimum key length.
-   -- Max_KL               Maximum key length.
-   -- Def_KL               Default key length.
-   -- KL_Inc_Step          Key length increment step.
-   -- Blk_Size             Size in bytes of the block.
+   -- Key_Info             Cipher's key information.
+   -- Block_Size           Size in bytes of the block.
    -- State                State the cipher object is in.
    -----------------------------------------------------------------------------
 
    type Block_Cipher is abstract new Ada.Finalization.Limited_Controlled with
       record
          Cipher_Id               : CryptAda.Names.Block_Cipher_Id;
-         Min_KL                  : Positive;
-         Max_KL                  : Positive;
-         Def_KL                  : Positive;
-         KL_Inc_Step             : Natural;
-         Blk_Size                : Block_Size;
+         Key_Info                : Cipher_Key_Info;
+         Block_Size              : Cipher_Block_Size;
          State                   : Cipher_State;
       end record;
 end CryptAda.Ciphers.Block_Ciphers;

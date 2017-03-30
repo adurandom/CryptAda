@@ -55,11 +55,15 @@ package CryptAda.Tests.Utils.Ciphers is
    --[Subprogram Specification]-------------------------------------------------
    -----------------------------------------------------------------------------
 
+   procedure   Run_Block_Cipher_Basic_Test(
+                  The_Cipher     : in out CryptAda.Ciphers.Block_Ciphers.Block_Cipher'Class;
+                  Message        : in     String);
+   
    procedure   Print_Block_Cipher_Info(
                   The_Cipher     : in     CryptAda.Ciphers.Block_Ciphers.Block_Cipher'Class);
    
    procedure   Print_Block(
-                  The_Block      : in     CryptAda.Ciphers.Block_Ciphers.Block;
+                  The_Block      : in     CryptAda.Ciphers.Block_Ciphers.Cipher_Block;
                   Message        : in     String);
    
    procedure   Print_Key(

@@ -29,6 +29,9 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170321 ADD   Initial implementation.
+--    1.1   20170329 ADD   Added types:
+--                            Cipher_Key_Length
+--                            Cipher_Key_Info
 --------------------------------------------------------------------------------
 
 package CryptAda.Ciphers is
@@ -71,5 +74,31 @@ package CryptAda.Ciphers is
    -----------------------------------------------------------------------------
    
    type Cipher_State is (Idle, Encrypting, Decrypting);
+
+   --[Cipher_Key_Length]--------------------------------------------------------
+   -- Type for Cipher key length values.
+   -----------------------------------------------------------------------------
+
+   subtype Cipher_Key_Length is Positive;
    
+   --[Cipher_Key_Info]----------------------------------------------------------
+   -- Record type that contains information regarding keys of a cipher. The
+   -- record contains the following fields.
+   --
+   -- Min_Key_Length    Minimum key length in bytes.
+   -- Max_Key_Length    Maximum key length in bytes.
+   -- Def_Key_Length    Default key length in bytes.
+   -- Key_Length_Inc    Natural value with the increment step in bytes between 
+   --                   minimum and maximum key lengths for valid key lengths. 
+   --                   A 0 value means that the cipher only admits a single 
+   --                   key length (that is, Min = Max = Def).
+   -----------------------------------------------------------------------------
+
+   type Cipher_Key_Info is
+      record
+         Min_Key_Length    : Cipher_Key_Length;
+         Max_Key_Length    : Cipher_Key_Length;
+         Def_Key_Length    : Cipher_Key_Length;
+         Key_Length_Inc    : Natural;
+      end record;            
 end CryptAda.Ciphers;

@@ -29,6 +29,7 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170313 ADD   Initial implementation.
+--    1.1   20170329 ADD   Changes in CryptAda.Names.
 --------------------------------------------------------------------------------
 
 package CryptAda.Names.OpenPGP is
@@ -80,11 +81,11 @@ package CryptAda.Names.OpenPGP is
 
    OpenPGP_Block_Ciphers         : constant array(Block_Cipher_Id) of Algorithm_Name_Ref :=
       (
-         BC_TDEA_EDE_3     => OpenPGP_DES_EDE_3'Access,
-         BC_AES_128        => OpenPGP_AES_128'Access,
-         BC_AES_192        => OpenPGP_AES_192'Access,
-         BC_AES_256        => OpenPGP_AES_256'Access,
-         BC_Blowfish       => OpenPGP_Blowfish'Access,
+         SC_TDEA_EDE_3     => OpenPGP_DES_EDE_3'Access,
+         SC_AES_128        => OpenPGP_AES_128'Access,
+         SC_AES_192        => OpenPGP_AES_192'Access,
+         SC_AES_256        => OpenPGP_AES_256'Access,
+         SC_Blowfish       => OpenPGP_Blowfish'Access,
          others            => Anonymous_Algorithm'Access
       );
       

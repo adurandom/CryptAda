@@ -68,7 +68,7 @@ package body CryptAda.Tests.Utils is
    Nibble_2_Code  : constant array(Byte range 0 .. 16#0F#) of Character :=
       (
          '0', '1', '2', '3', '4', '5', '6', '7',
-         '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
+         '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
       );
 
    -----------------------------------------------------------------------------
@@ -372,6 +372,39 @@ package body CryptAda.Tests.Utils is
       return S;
    end Bytes_2_Hex_String;
 
+   --[Print_Byte_Array]---------------------------------------------------------
+   
+   procedure   Print_Byte_Array(
+                  Message        : in     String;
+                  The_Array      : in     Byte_Array;
+                  Indent         : in     String := "")
+   is
+      I             : Positive;
+   begin
+      Print_Information_Message(Message);
+      Put_Line(Indent & "Byte_Array Length: " & Integer'Image(The_Array'Length));
+      
+      if The_Array'Length > 0 then
+         I := The_Array'First;
+         Put(Indent);
+         
+         loop
+            Put("16#" & Nibble_2_Code(Hi_Nibble(The_Array(I))) & Nibble_2_Code(Lo_Nibble(The_Array(I))) & "#");
+            exit when I = The_Array'Last;
+            Put(", ");
+            
+            if ((1 + I - The_Array'First) mod 16) = 0 then
+               New_Line;
+               Put(Indent);
+            end if;
+            
+            I := I + 1;
+         end loop;
+         
+         New_Line;
+      end if;
+   end Print_Byte_Array;
+   
    --[Random_Byte]--------------------------------------------------------------
 
    function    Random_Byte

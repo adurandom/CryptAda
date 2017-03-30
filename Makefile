@@ -97,13 +97,14 @@ OBJS     =  cryptada.o \
             cryptada-random-generators-caprng.o \
             cryptada-ciphers.o \
             cryptada-ciphers-keys.o \
+            cryptada-ciphers-key_generators.o \
             cryptada-ciphers-block_ciphers.o \
             cryptada-ciphers-block_ciphers-des.o \
             cryptada-ciphers-block_ciphers-desx.o \
             cryptada-ciphers-block_ciphers-des2x.o \
             cryptada-ciphers-block_ciphers-tdea.o \
             cryptada-ciphers-block_ciphers-aes.o \
-            cryptada-ciphers-block_ciphers-blowfish.o 
+            cryptada-ciphers-block_ciphers-blowfish.o
 
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -290,7 +291,7 @@ cryptada-ciphers.o: $(CIPHDIR)/cryptada-ciphers.ads
 cryptada-ciphers-keys.o: $(CIPHDIR)/cryptada-ciphers-keys.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
-
+    
 cryptada-ciphers-block_ciphers.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
@@ -316,6 +317,14 @@ cryptada-ciphers-block_ciphers-aes.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers-
 	$(ADACC) $(CFLAGS) $<
 
 cryptada-ciphers-block_ciphers-blowfish.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers-blowfish.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-ciphers-key_generators.o: $(CIPHDIR)/cryptada-ciphers-key_generators.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-ciphers-key_generators-des.o: $(CIPHDIR)/cryptada-ciphers-key_generators-des.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
     

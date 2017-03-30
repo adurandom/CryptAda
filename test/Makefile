@@ -137,7 +137,8 @@ U_DIG       =   $(CTB_UDIG)/ut_count.exe \
 U_RND       =   $(CTB_URND)/ut_rsaref.exe \
                 $(CTB_URND)/ut_caprng.exe
 
-U_BC        =   $(CTB_UBC)/ut_des.exe \
+U_BC        =   $(CTB_UBC)/ut_keys.exe \
+                $(CTB_UBC)/ut_des.exe \
                 $(CTB_UBC)/ut_desx.exe \
                 $(CTB_UBC)/ut_des2x.exe \
                 $(CTB_UBC)/ut_tdea.exe \
@@ -280,6 +281,10 @@ $(CTB_URND)/ut_caprng.exe: $(CTS_URN_DRV)ut_caprng.adb
 	$(ADAMAKER) $(IDIR_URN) $(ADAFLAGS) -o $@ $<
 
 # Block_Ciphers unit test drivers
+
+$(CTB_UBC)/ut_keys.exe: $(CTS_UBC_DRV)ut_keys.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
 
 $(CTB_UBC)/ut_des.exe: $(CTS_UBC_DRV)ut_des.adb
 	@echo Building $<

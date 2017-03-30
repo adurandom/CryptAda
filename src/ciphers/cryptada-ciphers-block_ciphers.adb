@@ -29,6 +29,7 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170321 ADD   Initial implementation.
+--    1.1   20170329 ADD   Removed key generation subprogramm and other changes.
 --------------------------------------------------------------------------------
 
 with CryptAda.Names;                      use CryptAda.Names;
@@ -56,10 +57,10 @@ package body CryptAda.Ciphers.Block_Ciphers is
 
    function    Get_Block_Size(
                   From           : in     Block_Cipher'Class)
-      return   Block_Size
+      return   Cipher_Block_Size
    is
    begin
-      return From.Blk_Size;
+      return From.Block_Size;
    end Get_Block_Size;
 
    --[Get_Cipher_State]---------------------------------------------------------
@@ -96,23 +97,25 @@ package body CryptAda.Ciphers.Block_Ciphers is
 
    function    Is_Valid_Key_Length(
                   For_Cipher     : in     Block_Cipher'Class;
-                  The_Length     : in     Positive)
+                  The_Length     : in     Cipher_Key_Length)
       return   Boolean
    is
    begin
 
       -- Check length is between bonds.
 
-      if The_Length < For_Cipher.Min_KL or The_Length > For_Cipher.Max_KL then
+      if The_Length < For_Cipher.Key_Info.Min_Key_Length or 
+         The_Length > For_Cipher.Key_Info.Max_Key_Length then
          return False;
       else
-         -- If KL_Inc_Step means that The_Length is the only length allowed.
-         -- If not, we need to check if it is a valid length.
+         -- If For_Cipher.Key_Info.Key_Length_Inc is 0 means that The_Length is
+         -- the only  key length allowed for the particular cipher. In any other
+         -- case, we must check The_Length.
          
-         if For_Cipher.KL_Inc_Step = 0 then
+         if For_Cipher.Key_Info.Key_Length_Inc = 0 then
             return True;
          else
-            return (((The_Length - For_Cipher.Min_KL) mod For_Cipher.KL_Inc_Step) = 0);
+            return (((The_Length - For_Cipher.Key_Info.Min_Key_Length) mod For_Cipher.Key_Info.Key_Length_Inc) = 0);
          end if;
       end if;   
    end Is_Valid_Key_Length;
@@ -121,30 +124,30 @@ package body CryptAda.Ciphers.Block_Ciphers is
 
    function    Get_Minimum_Key_Length(
                   For_Cipher     : in     Block_Cipher'Class)
-      return   Positive
+      return   Cipher_Key_Length
    is
    begin
-      return For_Cipher.Min_KL;
+      return For_Cipher.Key_Info.Min_Key_Length;
    end Get_Minimum_Key_Length;
 
    --[Get_Maximum_Key_Length]---------------------------------------------------
 
    function    Get_Maximum_Key_Length(
                   For_Cipher     : in     Block_Cipher'Class)
-      return   Positive
+      return   Cipher_Key_Length
    is
    begin
-      return For_Cipher.Max_KL;
+      return For_Cipher.Key_Info.Max_Key_Length;
    end Get_Maximum_Key_Length;
 
    --[Get_Default_Key_Length]---------------------------------------------------
 
    function    Get_Default_Key_Length(
                   For_Cipher     : in     Block_Cipher'Class)
-      return   Positive
+      return   Cipher_Key_Length
    is
    begin
-      return For_Cipher.Def_KL;
+      return For_Cipher.Key_Info.Def_Key_Length;
    end Get_Default_Key_Length;
 
    --[Get_Key_Length_Increment_Step]--------------------------------------------
@@ -154,7 +157,16 @@ package body CryptAda.Ciphers.Block_Ciphers is
       return   Natural
    is
    begin
-      return For_Cipher.KL_Inc_Step;
+      return For_Cipher.Key_Info.Key_Length_Inc;
    end Get_Key_Length_Increment_Step;
-      
+
+   --[Get_Cipher_Key_Info]------------------------------------------------------
+   
+   function    Get_Cipher_Key_Info(
+                  For_Cipher     : in     Block_Cipher'Class)
+      return   Cipher_Key_Info
+   is
+   begin
+      return For_Cipher.Key_Info;
+   end Get_Cipher_Key_Info;   
 end CryptAda.Ciphers.Block_Ciphers;

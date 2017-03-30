@@ -29,13 +29,13 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170328 ADD   Initial implementation.
+--    1.1   20170330 ADD   Removed key generation subprogram.
 --------------------------------------------------------------------------------
 
-with CryptAda.Pragmatics;              use CryptAda.Pragmatics;
-with CryptAda.Names;                   use CryptAda.Names;
-with CryptAda.Exceptions;              use CryptAda.Exceptions;
-with CryptAda.Ciphers.Keys;            use CryptAda.Ciphers.Keys;
-with CryptAda.Random.Generators;       use CryptAda.Random.Generators;
+with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
+with CryptAda.Names;                      use CryptAda.Names;
+with CryptAda.Exceptions;                 use CryptAda.Exceptions;
+with CryptAda.Ciphers.Keys;               use CryptAda.Ciphers.Keys;
 with CryptAda.Ciphers.Block_Ciphers.DES;  use CryptAda.Ciphers.Block_Ciphers.DES;
 
 package body CryptAda.Ciphers.Block_Ciphers.DESX is
@@ -58,13 +58,15 @@ package body CryptAda.Ciphers.Block_Ciphers.DESX is
                   With_Cipher    : in out DESX_Cipher;
                   Input          : in     DESX_Block;
                   Output         :    out DESX_Block);
-
+   pragma Inline(DESX_Encrypt);
+   
    --[DESX_Decrypt]-------------------------------------------------------------
 
    procedure   DESX_Decrypt(
                   With_Cipher    : in out DESX_Cipher;
                   Input          : in     DESX_Block;
                   Output         :    out DESX_Block);
+   pragma Inline(DESX_Decrypt);
                   
    -----------------------------------------------------------------------------
    --[Body declared subprogram bodies]------------------------------------------
@@ -126,12 +128,39 @@ package body CryptAda.Ciphers.Block_Ciphers.DESX is
          Output(I) := T2(I) xor With_Cipher.Xor_K1(I);
       end loop;
    end DESX_Decrypt;
-   
-   -----------------------------------------------------------------------------
-   --[Dispatching Operations]---------------------------------------------------
-   -----------------------------------------------------------------------------
 
-   --[Encrypt/Decrypt Interface]------------------------------------------------
+   -----------------------------------------------------------------------------
+   --[Body declared subprogram bodies]------------------------------------------
+   -----------------------------------------------------------------------------
+   
+   --[Ada.Finalization interface]-----------------------------------------------
+
+   --[Initialize]---------------------------------------------------------------
+
+   procedure   Initialize(
+                  Object         : in out DESX_Cipher)
+   is
+   begin
+      Object.Cipher_Id  := SC_DESX;   
+      Object.Key_Info   := DESX_Key_Info;
+      Object.Block_Size := DESX_Block_Size;
+      Object.State      := Idle;
+      Object.Xor_K1     := (others => 0);
+      Object.Xor_K2     := (others => 0);
+   end Initialize;
+
+   --[Finalize]-----------------------------------------------------------------
+
+   procedure   Finalize(
+                  Object         : in out DESX_Cipher)
+   is
+   begin
+      Object.State      := Idle;
+      Object.Xor_K1     := (others => 0);
+      Object.Xor_K2     := (others => 0);
+   end Finalize;
+   
+   --[Dispatching operations]---------------------------------------------------
 
    --[Start_Cipher]-------------------------------------------------------------
 
@@ -140,13 +169,13 @@ package body CryptAda.Ciphers.Block_Ciphers.DESX is
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     Key)
    is
-      KB             : Byte_Array(1 .. DESX_Key_Size);
+      KB             : Byte_Array(1 .. DESX_Key_Length);
       K              : Key;
    begin
 
       -- Veriify that key is a valid DESX key.
       
-      if not Is_Valid_Key(The_Cipher, With_Key) then
+      if not Is_Valid_DESX_Key(With_Key) then
          raise CryptAda_Invalid_Key_Error;
       end if;
 
@@ -154,7 +183,7 @@ package body CryptAda.Ciphers.Block_Ciphers.DESX is
       
       KB := Get_Key_Bytes(With_Key);
       
-      Set_Key(K, KB(1 .. DES_Key_Size));
+      Set_Key(K, KB(1 .. DES_Key_Length));
       The_Cipher.Xor_K1 := KB(9 .. 16);
       The_Cipher.Xor_K2 := KB(17 .. 24);
 
@@ -175,8 +204,8 @@ package body CryptAda.Ciphers.Block_Ciphers.DESX is
 
    procedure   Process_Block(
                   With_Cipher    : in out DESX_Cipher;
-                  Input          : in     Block;
-                  Output         :    out Block)
+                  Input          : in     Cipher_Block;
+                  Output         :    out Cipher_Block)
    is
    begin
       case With_Cipher.State is
@@ -184,16 +213,16 @@ package body CryptAda.Ciphers.Block_Ciphers.DESX is
             raise CryptAda_Uninitialized_Cipher_Error;
 
          when Encrypting =>
-            if Input'Length /= DES_Block_Size or
-               Output'Length /= DES_Block_Size then
+            if Input'Length /= DESX_Block_Size or
+               Output'Length /= DESX_Block_Size then
                raise CryptAda_Invalid_Block_Length_Error;
             end if;
             
             DESX_Encrypt(With_Cipher, Input, Output);
             
          when Decrypting =>
-            if Input'Length /= DES_Block_Size or
-               Output'Length /= DES_Block_Size then
+            if Input'Length /= DESX_Block_Size or
+               Output'Length /= DESX_Block_Size then
                raise CryptAda_Invalid_Block_Length_Error;
             end if;
             
@@ -215,28 +244,11 @@ package body CryptAda.Ciphers.Block_Ciphers.DESX is
       end if;
    end Stop_Cipher;
 
-   --[Key related operations]---------------------------------------------------
-
-   --[Generate_Key]-------------------------------------------------------------
+   --[Other public subprograms]-------------------------------------------------
    
-   procedure   Generate_Key(
-                  The_Cipher     : in     DESX_Cipher;
-                  Generator      : in out Random_Generator'Class;
-                  The_Key        : in out Key)
-   is
-      KB             : Byte_Array(1 .. DESX_Key_Size);
-   begin
-      loop
-         Random_Generate(Generator, KB);
-         Set_Key(The_Key, KB);
-         exit when Is_Strong_Key(The_Cipher, The_Key);
-      end loop;
-   end Generate_Key;
-
-   --[Is_Valid_Key]-------------------------------------------------------------
+   --[Is_Valid_DESX_Key]--------------------------------------------------------
    
-   function    Is_Valid_Key(
-                  For_Cipher     : in     DESX_Cipher;
+   function    Is_Valid_DESX_Key(
                   The_Key        : in     Key)
       return   Boolean
    is
@@ -244,54 +256,7 @@ package body CryptAda.Ciphers.Block_Ciphers.DESX is
       if Is_Null(The_Key) then
          return False;
       else
-         return Is_Valid_Key_Length(For_Cipher, Get_Key_Length(The_Key));
+         return (Get_Key_Length(The_Key) = DESX_Key_Length);
       end if;
-   end Is_Valid_Key;
-         
-   --[Is_Strong_Key]------------------------------------------------------------
-   
-   function    Is_Strong_Key(
-                  For_Cipher     : in     DESX_Cipher;
-                  The_Key        : in     Key)
-      return   Boolean
-   is
-   begin
-      return Is_Valid_Key(For_Cipher, The_Key);
-   end Is_Strong_Key;
-   
-   --[Ada.Finalization interface]-----------------------------------------------
-
-   --[Initialize]---------------------------------------------------------------
-
-   procedure   Initialize(
-                  Object         : in out DESX_Cipher)
-   is
-   begin
-      Object.Cipher_Id        := BC_DESX;   
-      Object.Min_KL           := DESX_Min_KL;
-      Object.Max_KL           := DESX_Max_KL;
-      Object.Def_KL           := DESX_Def_KL;
-      Object.KL_Inc_Step      := DESX_KL_Inc_Step;
-      Object.Blk_Size         := DESX_Block_Size;
-      Object.State            := Idle;
-      Object.Xor_K1           := (others => 0);
-      Object.Xor_K2           := (others => 0);
-   end Initialize;
-
-   --[Finalize]-----------------------------------------------------------------
-
-   procedure   Finalize(
-                  Object         : in out DESX_Cipher)
-   is
-   begin
-      Object.Cipher_Id        := BC_DESX;   
-      Object.Min_KL           := DESX_Min_KL;
-      Object.Max_KL           := DESX_Max_KL;
-      Object.Def_KL           := DESX_Def_KL;
-      Object.KL_Inc_Step      := DESX_KL_Inc_Step;
-      Object.Blk_Size         := DESX_Block_Size;
-      Object.State            := Idle;
-      Object.Xor_K1           := (others => 0);
-      Object.Xor_K2           := (others => 0);
-   end Finalize;
+   end Is_Valid_DESX_Key; 
 end CryptAda.Ciphers.Block_Ciphers.DESX;

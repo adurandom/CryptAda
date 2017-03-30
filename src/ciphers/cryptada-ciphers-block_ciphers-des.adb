@@ -35,7 +35,6 @@ with CryptAda.Pragmatics;              use CryptAda.Pragmatics;
 with CryptAda.Names;                   use CryptAda.Names;
 with CryptAda.Exceptions;              use CryptAda.Exceptions;
 with CryptAda.Ciphers.Keys;            use CryptAda.Ciphers.Keys;
-with CryptAda.Random.Generators;       use CryptAda.Random.Generators;
 
 package body CryptAda.Ciphers.Block_Ciphers.DES is
 
@@ -281,30 +280,42 @@ package body CryptAda.Ciphers.Block_Ciphers.DES is
    --[Subprogram Specification]-------------------------------------------------
    -----------------------------------------------------------------------------
    
+   --[Pack_Block]---------------------------------------------------------------
+
    procedure   Pack_Block(
                   Unpacked       : in     DES_Block;
                   Packed         :    out DES_Packed_Block);
    pragma Inline(Pack_Block);
    
+   --[Unpack_Block]-------------------------------------------------------------
+
    procedure   Unpack_Block(
                   Packed         : in     DES_Packed_Block;
                   Unpacked       :    out DES_Block);
    pragma Inline(Unpack_Block);
+
+   --[Generate_Key_Schedule]----------------------------------------------------
 
    procedure   Generate_Key_Schedule(
                   For_Cipher     : in out DES_Cipher;
                   With_Key       : in     Key;
                   For_Operation  : in     Cipher_Operation);
 
+   --[I_Perm]-------------------------------------------------------------------
+
    procedure   I_Perm(
                   R              : in out Four_Bytes;
                   L              : in out Four_Bytes);
    pragma Inline(I_Perm);
 
+   --[F_Perm]-------------------------------------------------------------------
+
    procedure   F_Perm(
                   R              : in out Four_Bytes;
                   L              : in out Four_Bytes);
    pragma Inline(F_Perm);
+
+   --[Do_Block]-----------------------------------------------------------------
 
    procedure   Do_Block(
                   KS             : in     DES_Key_Schedule_Block;
@@ -575,12 +586,37 @@ package body CryptAda.Ciphers.Block_Ciphers.DES is
       Block(1) := R;
       Block(2) := L;
    end Do_Block;
-   
+
    -----------------------------------------------------------------------------
-   --[Dispatching Operations]---------------------------------------------------
+   --[Spec declared subprogram bodies]------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Encrypt/Decrypt Interface]------------------------------------------------
+   --[Ada.Finalization interface]-----------------------------------------------
+
+   --[Initialize]---------------------------------------------------------------
+
+   procedure   Initialize(
+                  Object         : in out DES_Cipher)
+   is
+   begin
+      Object.Cipher_Id     := SC_DES;
+      Object.Key_Info      := DES_Key_Info;
+      Object.Block_Size    := DES_Block_Size;
+      Object.State         := Idle;
+      Object.Key_Schedule  := (others => 0);
+   end Initialize;
+
+   --[Finalize]-----------------------------------------------------------------
+
+   procedure   Finalize(
+                  Object         : in out DES_Cipher)
+   is
+   begin
+      Object.State         := Idle;
+      Object.Key_Schedule  := (others => 0);
+   end Finalize;
+   
+   --[Dispatching Operations]---------------------------------------------------
 
    --[Start_Cipher]-------------------------------------------------------------
 
@@ -593,15 +629,15 @@ package body CryptAda.Ciphers.Block_Ciphers.DES is
 
       -- Veriify that key is a valid DES key.
       
-      if not Is_Valid_Key(The_Cipher, With_Key) then
+      if not Is_Valid_DES_Key(With_Key) then
          raise CryptAda_Invalid_Key_Error;
       end if;
 
-      -- Obtain key schedule and set state.
+      -- Obtain key schedule.
 
       Generate_Key_Schedule(The_Cipher, With_Key, For_Operation);
 
-      -- Set state.
+      -- Set cipher state.
      
       if For_Operation = Encrypt then
          The_Cipher.State  := Encrypting;
@@ -614,22 +650,20 @@ package body CryptAda.Ciphers.Block_Ciphers.DES is
 
    procedure   Process_Block(
                   With_Cipher    : in out DES_Cipher;
-                  Input          : in     Block;
-                  Output         :    out Block)
+                  Input          : in     Cipher_Block;
+                  Output         :    out Cipher_Block)
    is
       PB             : DES_Packed_Block;
    begin
-   
       -- Check state.
       
       if With_Cipher.State = Idle then
          raise CryptAda_Uninitialized_Cipher_Error;
       end if;
 
-      -- Check blocks.
+      -- Check block lengthd.
       
-      if Input'Length /= DES_Block_Size or
-         Output'Length /= DES_Block_Size then
+      if Input'Length /= DES_Block_Size or Output'Length /= DES_Block_Size then
          raise CryptAda_Invalid_Block_Length_Error;
       end if;
 
@@ -652,44 +686,29 @@ package body CryptAda.Ciphers.Block_Ciphers.DES is
       end if;
    end Stop_Cipher;
 
-   --[Key related operations]---------------------------------------------------
+   --[Non-Dispatching operations]-----------------------------------------------
 
-   --[Generate_Key]-------------------------------------------------------------
+   --[Is_Valid_DES_Key]---------------------------------------------------------
    
-   procedure   Generate_Key(
-                  The_Cipher     : in     DES_Cipher;
-                  Generator      : in out Random_Generator'Class;
-                  The_Key        : in out Key)
-   is
-      KB             : Byte_Array(1 .. DES_Key_Size);
-   begin
-      loop
-         Random_Generate(Generator, KB);
-         Set_Key(The_Key, KB);
-         Fix_DES_Key_Parity(The_Key);
-         exit when Is_Strong_Key(The_Cipher, The_Key);
-      end loop;
-   end Generate_Key;
-
-   --[Is_Valid_Key]-------------------------------------------------------------
-   
-   function    Is_Valid_Key(
-                  For_Cipher     : in     DES_Cipher;
+   function    Is_Valid_DES_Key(
                   The_Key        : in     Key)
       return   Boolean
    is
    begin
+   
+      -- Check for key validity: Key must not be null and must be of appropriate 
+      -- length.
+      
       if Is_Null(The_Key) then
          return False;
       else
-         return Is_Valid_Key_Length(For_Cipher, Get_Key_Length(The_Key));
+         return (Get_Key_Length(The_Key) = DES_Key_Length);
       end if;
-   end Is_Valid_Key;
+   end Is_Valid_DES_Key;
          
-   --[Is_Strong_Key]------------------------------------------------------------
+   --[Is_Strong_DES_Key]--------------------------------------------------------
    
-   function    Is_Strong_Key(
-                  For_Cipher     : in     DES_Cipher;
+   function    Is_Strong_DES_Key(
                   The_Key        : in     Key)
       return   Boolean
    is
@@ -697,7 +716,7 @@ package body CryptAda.Ciphers.Block_Ciphers.DES is
    
       -- Key must be valid.
       
-      if not Is_Valid_Key(For_Cipher, The_Key) then
+      if not Is_Valid_DES_Key(The_Key) then
          return False;
       end if;
       
@@ -726,7 +745,7 @@ package body CryptAda.Ciphers.Block_Ciphers.DES is
             return True;
          end if;
       end;
-   end Is_Strong_Key;
+   end Is_Strong_DES_Key;
 
    --[Check_DES_Key_Parity]-----------------------------------------------------
 
@@ -739,7 +758,7 @@ package body CryptAda.Ciphers.Block_Ciphers.DES is
          raise CryptAda_Null_Argument_Error;
       end if;
       
-      if Get_Key_Length(Of_Key) /= DES_Key_Size then
+      if Get_Key_Length(Of_Key) /= DES_Key_Length then
          raise CryptAda_Invalid_Key_Error;
       end if;
       
@@ -791,7 +810,7 @@ package body CryptAda.Ciphers.Block_Ciphers.DES is
          raise CryptAda_Null_Argument_Error;
       end if;
       
-      if Get_Key_Length(Of_Key) /= DES_Key_Size then
+      if Get_Key_Length(Of_Key) /= DES_Key_Length then
          raise CryptAda_Invalid_Key_Error;
       end if;
 
@@ -829,38 +848,4 @@ package body CryptAda.Ciphers.Block_Ciphers.DES is
          Set_Key(Of_Key, KB);
       end;
    end Fix_DES_Key_Parity;
-   
-   --[Ada.Finalization interface]-----------------------------------------------
-
-   --[Initialize]---------------------------------------------------------------
-
-   procedure   Initialize(
-                  Object         : in out DES_Cipher)
-   is
-   begin
-      Object.Cipher_Id        := BC_DES;
-      Object.Min_KL           := DES_Min_KL;
-      Object.Max_KL           := DES_Max_KL;
-      Object.Def_KL           := DES_Def_KL;
-      Object.KL_Inc_Step      := DES_KL_Inc_Step;
-      Object.Blk_Size         := DES_Block_Size;
-      Object.State            := Idle;
-      Object.Key_Schedule     := (others => 0);
-   end Initialize;
-
-   --[Finalize]-----------------------------------------------------------------
-
-   procedure   Finalize(
-                  Object         : in out DES_Cipher)
-   is
-   begin
-      Object.Cipher_Id        := BC_DES;
-      Object.Min_KL           := DES_Min_KL;
-      Object.Max_KL           := DES_Max_KL;
-      Object.Def_KL           := DES_Def_KL;
-      Object.KL_Inc_Step      := DES_KL_Inc_Step;
-      Object.Blk_Size         := DES_Block_Size;
-      Object.State            := Idle;
-      Object.Key_Schedule     := (others => 0);
-   end Finalize;
 end CryptAda.Ciphers.Block_Ciphers.DES;

@@ -62,11 +62,11 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170321 ADD   Initial implementation.
+--    1.1   20170329 ADD   Removed key generation subprogram.
 --------------------------------------------------------------------------------
 
 with CryptAda.Pragmatics;
 with CryptAda.Ciphers.Keys;
-with CryptAda.Random.Generators;
 
 package CryptAda.Ciphers.Block_Ciphers.DES is
 
@@ -78,13 +78,13 @@ package CryptAda.Ciphers.Block_Ciphers.DES is
    -- Size in bytes of DES blocks.
    -----------------------------------------------------------------------------
 
-   DES_Block_Size                : constant Block_Size   :=  8;
+   DES_Block_Size                : constant Cipher_Block_Size  :=  8;
 
-   --[DES_Key_Size]-------------------------------------------------------------
-   -- Size in bytes of DES keys.
+   --[DES_Key_Length]-----------------------------------------------------------
+   -- Length in bytes of DES keys.
    -----------------------------------------------------------------------------
 
-   DES_Key_Size                  : constant Positive     :=  8;
+   DES_Key_Length                : constant Cipher_Key_Length  :=  8;
    
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
@@ -100,13 +100,11 @@ package CryptAda.Ciphers.Block_Ciphers.DES is
    -- Constrained subtype for DES blocks.
    -----------------------------------------------------------------------------
    
-   subtype DES_Block is Block(1 .. DES_Block_Size);
+   subtype DES_Block is Cipher_Block(1 .. DES_Block_Size);
    
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
-
-   --[Encrypt/Decrypt Interface]------------------------------------------------
 
    --[Start_Cipher]-------------------------------------------------------------
 
@@ -119,34 +117,54 @@ package CryptAda.Ciphers.Block_Ciphers.DES is
 
    procedure   Process_Block(
                   With_Cipher    : in out DES_Cipher;
-                  Input          : in     Block;
-                  Output         :    out Block);
+                  Input          : in     Cipher_Block;
+                  Output         :    out Cipher_Block);
 
    --[Stop_Cipher]--------------------------------------------------------------
       
    procedure   Stop_Cipher(
                   The_Cipher     : in out DES_Cipher);
 
-   --[Key related operations]---------------------------------------------------
+   -----------------------------------------------------------------------------
+   --[DES Specific Subprograms]-------------------------------------------------
+   -----------------------------------------------------------------------------
 
-   --[Generate_Key]-------------------------------------------------------------
+   --[Is_Valid_DES_Key]---------------------------------------------------------
+   -- Purpose:
+   -- Checks if a given key is a valid DES key. This function does not 
+   -- take into account the parity bits (see below).
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Key                 Key object to check its validity.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Boolean value that indicates if The_Key is a valid DES key (True) or not
+   -- (False)
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
    
-   procedure   Generate_Key(
-                  The_Cipher     : in     DES_Cipher;
-                  Generator      : in out CryptAda.Random.Generators.Random_Generator'Class;
-                  The_Key        : in out CryptAda.Ciphers.Keys.Key);
-
-   --[Is_Valid_Key]-------------------------------------------------------------
-   
-   function    Is_Valid_Key(
-                  For_Cipher     : in     DES_Cipher;
+   function    Is_Valid_DES_Key(
                   The_Key        : in     CryptAda.Ciphers.Keys.Key)
       return   Boolean;
          
-   --[Is_Strong_Key]------------------------------------------------------------
+   --[Is_Strong_DES_Key]--------------------------------------------------------
+   -- Purpose:
+   -- Checks if a given key is a DES strong key.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Key                 Key object to check its strength.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Boolean value that indicates if The_Key is a strong DES key (True) or not
+   -- (False). If key is not valid the function will return False.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
    
-   function    Is_Strong_Key(
-                  For_Cipher     : in     DES_Cipher;
+   function    Is_Strong_DES_Key(
                   The_Key        : in     CryptAda.Ciphers.Keys.Key)
       return   Boolean;
 
@@ -211,18 +229,21 @@ private
    -- Next constants are related to DES processing.
    --
    -- DES_Key_Schedule_Size   Size of DES key schedule.
-   -- DES_Min_KL              Minimum key length for DES (in bytes).
-   -- DES_Max_KL              Minimum key length for DES (in bytes).
-   -- DES_Def_KL              Minimum key length for DES (in bytes).
-   -- DES_KL_Inc_Step         DES key increment step in length (DES only admits
-   --                         8 bytes keys)
    -----------------------------------------------------------------------------
    
    DES_Key_Schedule_Size         : constant Positive     := 32;
-   DES_Min_KL                    : constant Positive     :=  8;
-   DES_Max_KL                    : constant Positive     :=  8;
-   DES_Def_KL                    : constant Positive     :=  8;
-   DES_KL_Inc_Step               : constant Natural      :=  0;
+
+   --[DES_Key_Info]-------------------------------------------------------------
+   -- Information regarding DES keys.
+   -----------------------------------------------------------------------------
+
+   DES_Key_Info                  : constant Cipher_Key_Info := 
+      (
+         Min_Key_Length    => DES_Key_Length,
+         Max_Key_Length    => DES_Key_Length,
+         Def_Key_Length    => DES_Key_Length,
+         Key_Length_Inc    => 0
+      );
    
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
@@ -246,9 +267,7 @@ private
          Key_Schedule            : DES_Key_Schedule_Block := (others => 0);
       end record;
 
-   -----------------------------------------------------------------------------
-   --[Subprogram specifications]------------------------------------------------
-   -----------------------------------------------------------------------------
+   --[Ada.Finalization.Limited_Controlled interface]----------------------------
 
    procedure   Initialize(
                   Object         : in out DES_Cipher);

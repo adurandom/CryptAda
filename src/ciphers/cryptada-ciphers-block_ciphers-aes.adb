@@ -1104,7 +1104,7 @@ package body CryptAda.Ciphers.Block_Ciphers.AES is
    --[Generate_Key]-------------------------------------------------------------
    
    procedure   Generate_Key(
-                  The_Cipher     : in     AES_Cipher;
+                  The_Cipher     : in     AES_Cipher'Class;
                   Key_Id         : in     AES_Key_Id;
                   Generator      : in out Random_Generator'Class;
                   The_Key        : in out Key)

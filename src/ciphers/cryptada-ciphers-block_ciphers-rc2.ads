@@ -16,110 +16,90 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-block_ciphers-aes.ads
+--    Filename          :  cryptada-ciphers-block_ciphers-rc2.ads
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
---    Creation date     :  March 25th, 2017
+--    Creation date     :  March 29th, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Implements the AES block cipher.
+--    Implements the RC2 block cipher as described in RFC 2268
 --
---    The Advanced Encryption Standard (AES), also known by its original name 
---    Rijndael is a specification for the encryption of electronic data 
---    established by the U.S. National Institute of Standards and Technology 
---    (NIST) in 2001.
+--    RC2 (also known as ARC2) is a symmetric-key block cipher designed by 
+--    Ron Rivest in 1987. "RC" stands for "Ron's Code" or "Rivest Cipher"; other 
+--    ciphers designed by Rivest include RC4, RC5, and RC6.
 --
---    AES is a subset of the Rijndael cipher developed by two Belgian 
---    cryptographers, Vincent Rijmen and Joan Daemen, who submitted a proposal 
---    to NIST during the AES selection process. Rijndael is a family of ciphers 
---    with different key and block sizes.
+--    The development of RC2 was sponsored by Lotus, who were seeking a custom 
+--    cipher that, after evaluation by the NSA, could be exported as part of 
+--    their Lotus Notes software. The NSA suggested a couple of changes, which 
+--    Rivest incorporated. After further negotiations, the cipher was approved 
+--    for export in 1989. Along with RC4, RC2 with a 40-bit key size was treated 
+--    favourably under US export regulations for cryptography.
 --
---    For AES, NIST selected three members of the Rijndael family, each with a 
---    block size of 128 bits, but three different key lengths: 128, 192 and 
---    256 bits.
+--    Initially, the details of the algorithm were kept secret — proprietary to 
+--    RSA Security — but on 29 January 1996, source code for RC2 was anonymously 
+--    posted to the Internet on the Usenet forum, sci.crypt. Mentions of 
+--    CodeView and SoftICE (popular debuggers) suggest that it had been reverse 
+--    engineered. A similar disclosure had occurred earlier with RC4.
 --
---    AES has been adopted by the U.S. government and is now used worldwide. It 
---    supersedes the Data Encryption Standard (DES), which was published in 
---    1977. The algorithm described by AES is a symmetric-key algorithm, meaning 
---    the same key is used for both encrypting and decrypting the data.
+--    In March 1998 Ron Rivest authored an RFC publicly describing RC2 himself.
 --
---    In the United States, AES was announced by the NIST as U.S. FIPS PUB 197 
---    (FIPS 197) on November 26, 2001. This announcement followed a five-year 
---    standardization process in which fifteen competing designs were presented 
---    and evaluated, before the Rijndael cipher was selected as the most 
---    suitable.
+--    RC2 is a 64-bit block cipher with a variable size key. Its 18 rounds are 
+--    arranged as a source-heavy unbalanced Feistel network, with 16 rounds of 
+--    one type (MIXING) punctuated by two rounds of another type (MASHING). A 
+--    MIXING round consists of four applications of the MIX transformation.
 --
---    AES became effective as a federal government standard on May 26, 2002 
---    after approval by the Secretary of Commerce. AES is included in the 
---    ISO/IEC 18033-3 standard. AES is available in many different encryption 
---    packages, and is the first (and only) publicly accessible cipher approved 
---    by the National Security Agency (NSA) for top secret information when used 
---    in an NSA approved cryptographic module.
+--    RC2 is vulnerable to a related-key attack using 234 chosen plaintexts.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
---    1.0   20170325 ADD   Initial implementation.
+--    1.0   20170329 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
 with CryptAda.Pragmatics;
 with CryptAda.Ciphers.Keys;
 with CryptAda.Random.Generators;
 
-package CryptAda.Ciphers.Block_Ciphers.AES is
+package CryptAda.Ciphers.Block_Ciphers.RC2 is
 
-   -----------------------------------------------------------------------------
-   --[Type Definitions]---------------------------------------------------------
-   -----------------------------------------------------------------------------
-
-   --[AES_Key_Id]---------------------------------------------------------------
-   -- Identifies the different keys supported by AES.
-   -----------------------------------------------------------------------------
-   
-   type AES_Key_Id is
-      (
-         AES_128,                -- AES 128-bit keys
-         AES_192,                -- AES 192-bit keys.
-         AES_256                 -- AES 256-bit keys.
-      );
-      
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[AES_Block_Size]-----------------------------------------------------------
-   -- Size in bytes of AES blocks (128-bit, 16 byte).
+   --[RC2_Block_Size]-----------------------------------------------------------
+   -- Size in bytes of RC2 blocks.
    -----------------------------------------------------------------------------
 
-   AES_Block_Size                : constant Block_Size   :=  16;
+   RC2_Block_Size                : constant Block_Size   :=  8;
 
-   --[AES_Key_Sizes]------------------------------------------------------------
-   -- Array containing the AES key sizes.
+   --[RC2_Default_Key_Size]-----------------------------------------------------
+   -- Default key size in bytes for RC2.
    -----------------------------------------------------------------------------
 
-   AES_Key_Sizes                 : constant array(AES_Key_Id) of Positive := 
-      (
-         AES_128        => 16,
-         AES_192        => 24,
-         AES_256        => 32
-      );
-      
+   RC2_Default_Key_Size          : constant Positive     :=  16;
+   
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[AES_Cipher]---------------------------------------------------------------
-   -- The AES block cipher context.
+   --[RC2_Cipher]---------------------------------------------------------------
+   -- The RC2 block cipher context.
    -----------------------------------------------------------------------------
    
-   type AES_Cipher is new Block_Cipher with private;
+   type RC2_Cipher is new Block_Cipher with private;
 
-   --[AES_Block]----------------------------------------------------------------
-   -- Constrained subtype for AES blocks.
+   --[RC2_Block]----------------------------------------------------------------
+   -- Constrained subtype for RC2 blocks.
    -----------------------------------------------------------------------------
    
-   subtype AES_Block is Block(1 .. AES_Block_Size);
+   subtype RC2_Block is Block(1 .. RC2_Block_Size);
+
+   --[RC2_Key_Size]-------------------------------------------------------------
+   -- Subtype for key sizes.
+   -----------------------------------------------------------------------------
+   
+   subtype RC2_Key_Size is Positive range 1 .. 128;
    
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
@@ -130,42 +110,42 @@ package CryptAda.Ciphers.Block_Ciphers.AES is
    --[Start_Cipher]-------------------------------------------------------------
 
    procedure   Start_Cipher(
-                  The_Cipher     : in out AES_Cipher;
+                  The_Cipher     : in out RC2_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     CryptAda.Ciphers.Keys.Key);
 
    --[Process_Block]------------------------------------------------------------
 
    procedure   Process_Block(
-                  With_Cipher    : in out AES_Cipher;
+                  With_Cipher    : in out RC2_Cipher;
                   Input          : in     Block;
                   Output         :    out Block);
 
    --[Stop_Cipher]--------------------------------------------------------------
       
    procedure   Stop_Cipher(
-                  The_Cipher     : in out AES_Cipher);
+                  The_Cipher     : in out RC2_Cipher);
 
    --[Key related operations]---------------------------------------------------
 
    --[Generate_Key]-------------------------------------------------------------
    
    procedure   Generate_Key(
-                  The_Cipher     : in     AES_Cipher;
+                  The_Cipher     : in     RC2_Cipher;
                   Generator      : in out CryptAda.Random.Generators.Random_Generator'Class;
                   The_Key        : in out CryptAda.Ciphers.Keys.Key);
 
    --[Is_Valid_Key]-------------------------------------------------------------
    
    function    Is_Valid_Key(
-                  For_Cipher     : in     AES_Cipher;
+                  For_Cipher     : in     RC2_Cipher;
                   The_Key        : in     CryptAda.Ciphers.Keys.Key)
       return   Boolean;
          
    --[Is_Strong_Key]------------------------------------------------------------
    
    function    Is_Strong_Key(
-                  For_Cipher     : in     AES_Cipher;
+                  For_Cipher     : in     RC2_Cipher;
                   The_Key        : in     CryptAda.Ciphers.Keys.Key)
       return   Boolean;
 
@@ -175,13 +155,13 @@ package CryptAda.Ciphers.Block_Ciphers.AES is
 
    --[Generate_Key]-------------------------------------------------------------
    -- Purpose:
-   -- Generates a random AES key of a specified length.
+   -- Generates a random RC2 key of a specified length.
    -----------------------------------------------------------------------------
    -- Arguments:
    -- The_Cipher                 Block_Cipher object for which the key is to be
    --                            generated.
-   -- Key_Id                     AES_Key_Id value that identifies the size of 
-   --                            key to generate-
+   -- Key_Length                 RC2_Key_Size value with the size of the
+   --                            key to generate.
    -- Generator                  Random_Generator used to generate the key.
    -- The_Key                    Generated key.
    -----------------------------------------------------------------------------
@@ -194,11 +174,11 @@ package CryptAda.Ciphers.Block_Ciphers.AES is
    -----------------------------------------------------------------------------
    
    procedure   Generate_Key(
-                  The_Cipher     : in     AES_Cipher'Class;
-                  Key_Id         : in     AES_Key_Id;
+                  The_Cipher     : in     RC2_Cipher'Class;
+                  Key_Length     : in     RC2_Key_Size;
                   Generator      : in out CryptAda.Random.Generators.Random_Generator'Class;
                   The_Key        : in out CryptAda.Ciphers.Keys.Key);
-
+      
    -----------------------------------------------------------------------------
    --[Private Part]-------------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -209,48 +189,52 @@ private
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[AES Constants]------------------------------------------------------------
-   -- Next constants are related to DES processing.
+   --[RC2 Constants]-------------------------------------------------------
+   -- Next constants are related to RC2 processing.
    --
-   -- AES_Min_KL              Minimum key length for AES (in bytes).
-   -- AES_Max_KL              Minimum key length for AES (in bytes).
-   -- AES_Def_KL              Minimum key length for AES (in bytes).
-   -- AES_KL_Inc_Step         AES key increment step in length.
-   -- AES_Word_Size           AES word size (4 bytes).
-   -- AES_Rounds              Numbers of rounds for each AES key size.
+   -- RC2_Min_KL            Minimum key length for RC2 (in bytes).
+   -- RC2_Max_KL            Minimum key length for RC2 (in bytes).
+   -- RC2_Def_KL            Minimum key length for RC2 (in bytes).
+   -- RC2_KL_Inc_Step       RC2 key increment step in length
+   -- RC2_Rounds            Number of rounds.
+   -- RC2_SBox_Size         Size of RC2 SBoxes.
    -----------------------------------------------------------------------------
    
-   AES_Min_KL                    : constant Positive     := 16;
-   AES_Max_KL                    : constant Positive     := 32;
-   AES_Def_KL                    : constant Positive     := 32;
-   AES_KL_Inc_Step               : constant Natural      :=  8;
-   AES_Word_Size                 : constant Positive     :=  4;
-   AES_Rounds                    : constant array(AES_Key_Id) of Positive :=
-      (
-         AES_128        => 10,
-         AES_192        => 12,
-         AES_256        => 14
-      );
+   RC2_Min_KL               : constant Positive     :=  4;
+   RC2_Max_KL               : constant Positive     := 56;
+   RC2_Def_KL               : constant Positive     := 16;
+   RC2_KL_Inc_Step          : constant Natural      :=  1;
+   RC2_Rounds               : constant Positive     := 16;
+   RC2_SBox_Size            : constant Positive     := 1024;
    
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[AES_Round_Keys]-----------------------------------------------------------
-   -- The AES Round Keys.
+   --[RC2_P_Array]---------------------------------------------------------
+   -- Subtype for the RC2 P_Array field.
    -----------------------------------------------------------------------------
    
-   type AES_Round_Keys is access all CryptAda.Pragmatics.Four_Bytes_Array;
-   
-   --[AES_Cipher]---------------------------------------------------------------
-   -- Full definition of the AES_Cipher tagged type. It extends the
-   -- Block_Cipher with the followitng fields.
+   subtype RC2_P_Array is CryptAda.Pragmatics.Four_Bytes_Array(1 .. RC2_Rounds + 2);
+
+   --[RC2_S_Boxes]---------------------------------------------------------
+   -- Subtype for the RC2 S-Boxes.
    -----------------------------------------------------------------------------
 
-   type AES_Cipher is new Block_Cipher with
+   subtype RC2_S_Boxes is CryptAda.Pragmatics.Four_Bytes_Array(1 .. RC2_SBox_Size);
+   
+   --[RC2_Cipher]----------------------------------------------------------
+   -- Full definition of the RC2_Cipher tagged type. It extends the
+   -- Block_Cipher with the followitng fields:
+   --
+   -- P_Array              P_Array field.
+   -- S_Boxes              RC2 S-Boxes.
+   -----------------------------------------------------------------------------
+
+   type RC2_Cipher is new Block_Cipher with
       record
-         Key_Id                  : AES_Key_Id         := AES_256;
-         Round_Keys              : AES_Round_Keys     := null;
+         P_Array                 : RC2_P_Array := (others => 0);
+         S_Boxes                 : RC2_S_Boxes := (others => 0);
       end record;
 
    -----------------------------------------------------------------------------
@@ -258,9 +242,9 @@ private
    -----------------------------------------------------------------------------
 
    procedure   Initialize(
-                  Object         : in out AES_Cipher);
+                  Object         : in out RC2_Cipher);
 
    procedure   Finalize(
-                  Object         : in out AES_Cipher);
+                  Object         : in out RC2_Cipher);
 
-end CryptAda.Ciphers.Block_Ciphers.AES;
+end CryptAda.Ciphers.Block_Ciphers.RC2;

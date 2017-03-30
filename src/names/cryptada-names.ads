@@ -30,6 +30,9 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170313 ADD   Initial implementation.
+--    1.1   20170329 ADD   Added a Symmetric_Cipher_Id type and made 
+--                         Block_Cipher_Id a subtype of that type.
+--                         Changes the preffix of enumerated values.
 --------------------------------------------------------------------------------
 
 package CryptAda.Names is
@@ -124,25 +127,32 @@ package CryptAda.Names is
          RG_RSAREF               -- RSA Ref RPRNG.
       );
 
-   --[Block_Cipher_Id]----------------------------------------------------------
-   -- Enumerated type identifies the ciphers implemented in CryptAda
+   --[Symmetric_Cipher_Id]------------------------------------------------------
+   -- Enumerated type identifies the symmetric ciphers implemented in CryptAda
    -----------------------------------------------------------------------------
 
-   type Block_Cipher_Id is
+   type Symmetric_Cipher_Id is
       (
-         BC_NONE,                -- No cipher.
-         BC_DES,                 -- DES cipher.
-         BC_DESX,                -- DES-X cipher (Ron Rivest).
-         BC_DES2X,               -- DES2X cipher.
-         BC_TDEA_EDE_1,          -- Triple DES with keying option 3 (K1 = K2 = K3)
-         BC_TDEA_EDE_2,          -- Triple DES with keying option 2 (K1 = K3 /= K2)
-         BC_TDEA_EDE_3,          -- Triple DES with keying option 1 (K1 /= K2 /= K3)
-         BC_AES_128,             -- AES-128
-         BC_AES_192,             -- AES-192
-         BC_AES_256,             -- AES-256
-         BC_Blowfish             -- Blowfish.
+         SC_NONE,                -- No symmetric cipher.
+         SC_DES,                 -- DES cipher.
+         SC_DESX,                -- DES-X cipher (Ron Rivest).
+         SC_DES2X,               -- DES2X cipher.
+         SC_TDEA_EDE_1,          -- Triple DES with keying option 3 (K1 = K2 = K3)
+         SC_TDEA_EDE_2,          -- Triple DES with keying option 2 (K1 = K3 /= K2)
+         SC_TDEA_EDE_3,          -- Triple DES with keying option 1 (K1 /= K2 /= K3)
+         SC_AES_128,             -- AES-128
+         SC_AES_192,             -- AES-192
+         SC_AES_256,             -- AES-256
+         SC_Blowfish             -- Blowfish.
       );
       
+   --[Block_Cipher_Id]----------------------------------------------------------
+   -- Enumerated type identifies the symmetric block ciphers implemented in 
+   -- CryptAda.
+   -----------------------------------------------------------------------------
+
+   subtype Block_Cipher_Id is Symmetric_Cipher_Id range SC_DES .. SC_Blowfish;
+   
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------

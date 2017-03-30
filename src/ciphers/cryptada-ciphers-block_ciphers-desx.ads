@@ -52,10 +52,10 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170328 ADD   Initial implementation.
+--    1.1   20170329 ADD   Removed key generation subprogram.
 --------------------------------------------------------------------------------
 
 with CryptAda.Ciphers.Keys;
-with CryptAda.Random.Generators;
 with CryptAda.Ciphers.Block_Ciphers.DES;
 
 package CryptAda.Ciphers.Block_Ciphers.DESX is
@@ -68,16 +68,16 @@ package CryptAda.Ciphers.Block_Ciphers.DESX is
    -- Size in bytes of DESX blocks.
    -----------------------------------------------------------------------------
 
-   DESX_Block_Size               : constant Block_Size   :=  CryptAda.Ciphers.Block_Ciphers.DES.DES_Block_Size;
+   DESX_Block_Size               : constant Cipher_Block_Size :=  CryptAda.Ciphers.Block_Ciphers.DES.DES_Block_Size;
 
-   --[DESX_Key_Size]------------------------------------------------------------
-   -- Size in bytes of DESX keys. The size is 24 bytes
+   --[DESX_Key_Length]----------------------------------------------------------
+   -- Length in bytes of DESX keys. The length is 24 bytes
    -- - 8 Bytes for DES Key
    -- - 8 Bytes for pre-encrypt Xor block
    -- - 8 bytes for post-encrypt Xor block.
    -----------------------------------------------------------------------------
 
-   DESX_Key_Size                 : constant Positive     :=  24;
+   DESX_Key_Length               : constant Cipher_Key_Length :=  24;
    
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
@@ -93,13 +93,11 @@ package CryptAda.Ciphers.Block_Ciphers.DESX is
    -- Constrained subtype for DESX blocks.
    -----------------------------------------------------------------------------
    
-   subtype DESX_Block is Block(1 .. DESX_Block_Size);
+   subtype DESX_Block is Cipher_Block(1 .. DESX_Block_Size);
    
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
-
-   --[Encrypt/Decrypt Interface]------------------------------------------------
 
    --[Start_Cipher]-------------------------------------------------------------
 
@@ -112,37 +110,37 @@ package CryptAda.Ciphers.Block_Ciphers.DESX is
 
    procedure   Process_Block(
                   With_Cipher    : in out DESX_Cipher;
-                  Input          : in     Block;
-                  Output         :    out Block);
+                  Input          : in     Cipher_Block;
+                  Output         :    out Cipher_Block);
 
    --[Stop_Cipher]--------------------------------------------------------------
       
    procedure   Stop_Cipher(
                   The_Cipher     : in out DESX_Cipher);
 
-   --[Key related operations]---------------------------------------------------
+   -----------------------------------------------------------------------------
+   --[Non-dispatching operations]-----------------------------------------------
+   -----------------------------------------------------------------------------
 
-   --[Generate_Key]-------------------------------------------------------------
+   --[Is_Valid_DESX_Key]--------------------------------------------------------
+   -- Purpose:
+   -- Checks if a given key is a valid DESX key.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Key                 Key object to check its validity.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Boolean value that indicates if The_Key is a valid key (True) or not
+   -- (False) for the Cipher.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
    
-   procedure   Generate_Key(
-                  The_Cipher     : in     DESX_Cipher;
-                  Generator      : in out CryptAda.Random.Generators.Random_Generator'Class;
-                  The_Key        : in out CryptAda.Ciphers.Keys.Key);
-
-   --[Is_Valid_Key]-------------------------------------------------------------
-   
-   function    Is_Valid_Key(
-                  For_Cipher     : in     DESX_Cipher;
+   function    Is_Valid_DESX_Key(
                   The_Key        : in     CryptAda.Ciphers.Keys.Key)
       return   Boolean;
          
-   --[Is_Strong_Key]------------------------------------------------------------
-   
-   function    Is_Strong_Key(
-                  For_Cipher     : in     DESX_Cipher;
-                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
-      return   Boolean;
-
    -----------------------------------------------------------------------------
    --[Private Part]-------------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -153,19 +151,17 @@ private
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[DESX Constants]-----------------------------------------------------------
-   -- Next constants are related to DESX processing.
-   --
-   -- DESX_Min_KL             Minimum key length for DESX (in bytes).
-   -- DESX_Max_KL             Minimum key length for DESX (in bytes).
-   -- DESX_Def_KL             Minimum key length for DESX (in bytes).
-   -- DESX_KL_Inc_Step        DESX key increment step in length
+   --[DESX_Key_Info]------------------------------------------------------------
+   -- Information regarding DESX keys.
    -----------------------------------------------------------------------------
-   
-   DESX_Min_KL                   : constant Positive     :=  24;
-   DESX_Max_KL                   : constant Positive     :=  24;
-   DESX_Def_KL                   : constant Positive     :=  24;
-   DESX_KL_Inc_Step              : constant Natural      :=  0;
+
+   DESX_Key_Info                 : constant Cipher_Key_Info := 
+      (
+         Min_Key_Length    => DESX_Key_Length,
+         Max_Key_Length    => DESX_Key_Length,
+         Def_Key_Length    => DESX_Key_Length,
+         Key_Length_Inc    => 0
+      );
    
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------

@@ -29,6 +29,7 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170313 ADD   Initial implementation.
+--    1.1   20170329 ADD   Changes in CryptAda.Names.
 --------------------------------------------------------------------------------
 
 package CryptAda.Names.SCAN is
@@ -143,15 +144,15 @@ package CryptAda.Names.SCAN is
 
    SCAN_Block_Ciphers            : constant array(Block_Cipher_Id) of Algorithm_Name_Ref :=
       (
-         BC_DES            => SCAN_DES'Access,
-         BC_DESX           => SCAN_DESX'Access,
-         BC_TDEA_EDE_1     => SCAN_DESEDE'Access,
-         BC_TDEA_EDE_2     => SCAN_DES_EDE_2'Access,
-         BC_TDEA_EDE_3     => SCAN_DES_EDE_3'Access,
-         BC_AES_128        => SCAN_AES128'Access,
-         BC_AES_192        => SCAN_AES192'Access,
-         BC_AES_256        => SCAN_AES256'Access,
-         BC_Blowfish       => SCAN_Blowfish'Access,
+         SC_DES            => SCAN_DES'Access,
+         SC_DESX           => SCAN_DESX'Access,
+         SC_TDEA_EDE_1     => SCAN_DESEDE'Access,
+         SC_TDEA_EDE_2     => SCAN_DES_EDE_2'Access,
+         SC_TDEA_EDE_3     => SCAN_DES_EDE_3'Access,
+         SC_AES_128        => SCAN_AES128'Access,
+         SC_AES_192        => SCAN_AES192'Access,
+         SC_AES_256        => SCAN_AES256'Access,
+         SC_Blowfish       => SCAN_Blowfish'Access,
          others            => Anonymous_Algorithm'Access
       );
       

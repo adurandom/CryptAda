@@ -248,7 +248,7 @@ package body CryptAda.Ciphers.Block_Ciphers.TDEA is
    --[Generate_Key]-------------------------------------------------------------
    
    procedure   Generate_Key(
-                  The_Cipher     : in     TDEA_Cipher;
+                  The_Cipher     : in     TDEA_Cipher'Class;
                   Keying_Option  : in     TDEA_Keying_Option;
                   Generator      : in out CryptAda.Random.Generators.Random_Generator'Class;
                   The_Key        : in out CryptAda.Ciphers.Keys.Key)
@@ -353,7 +353,7 @@ package body CryptAda.Ciphers.Block_Ciphers.TDEA is
    --[Check_TDEA_Key_Parity]-------------------------------------------------
 
    function    Check_TDEA_Key_Parity(
-                  Of_Key         : in     CryptAda.Ciphers.Keys.Key)
+                  Of_Key         : in     Key)
       return   Boolean
    is
       KB             : Byte_Array(1 .. TDEA_Max_KL);
@@ -386,7 +386,7 @@ package body CryptAda.Ciphers.Block_Ciphers.TDEA is
    --[Fix_TDEA_Key_Parity]---------------------------------------------------
       
    procedure   Fix_TDEA_Key_Parity(
-                  Of_Key         : in out CryptAda.Ciphers.Keys.Key)
+                  Of_Key         : in out Key)
    is
       KB             : Byte_Array(1 .. TDEA_Max_KL);
       K              : Key;
