@@ -26,8 +26,9 @@
 --    Implements the Triple Data Encryption Algorithm (Triple DES EDE) block 
 --    cipher.
 --
---    TDEA is a symmetric-key block cipher, which applies the Data Encryption 
---    Standard (DES) cipher algorithm three times to each data block.
+--    TDEA (Triple Data Encryption Algorithm) is a symmetric-key block cipher, 
+--    which applies the Data Encryption Standard (DES) cipher algorithm three 
+--    times to each data block.
 --
 --    TDEA uses a "key bundle" that comprises three DES keys, K1, K2 and 
 --    K3, each of 56 bits (excluding parity bits). The encryption algorithm is:
@@ -52,9 +53,9 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170325 ADD   Initial implementation.
+--    1.1   20170330 ADD   Removed key generation subprogram.
 --------------------------------------------------------------------------------
 
-with CryptAda.Random.Generators;
 with CryptAda.Ciphers.Keys;
 with CryptAda.Ciphers.Block_Ciphers.DES;
 
@@ -68,13 +69,13 @@ package CryptAda.Ciphers.Block_Ciphers.TDEA is
    -- Size in bytes of TDEA blocks.
    -----------------------------------------------------------------------------
 
-   TDEA_Block_Size            : constant Block_Size   :=  8;
+   TDEA_Block_Size            : constant Cipher_Block_Size :=  CryptAda.Ciphers.Block_Ciphers.DES.DES_Block_Size;
 
-   --[TDEA_Key_Size]---------------------------------------------------------
+   --[TDEA_Key_Length]----------------------------------------------------------
    -- Size in bytes of TDEA keys.
    -----------------------------------------------------------------------------
 
-   TDEA_Key_Size              : constant Positive     :=  24;
+   TDEA_Key_Length            : constant Cipher_Key_Length :=  24;
    
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
@@ -109,7 +110,7 @@ package CryptAda.Ciphers.Block_Ciphers.TDEA is
    -- Constrained subtype for DES blocks.
    -----------------------------------------------------------------------------
    
-   subtype TDEA_Block is Block(1 .. TDEA_Block_Size);
+   subtype TDEA_Block is Cipher_Block(1 .. TDEA_Block_Size);
 
    --[TDEA_Keying_Option]-------------------------------------------------------
    -- Enumerated type that identifies the keying option for TDEA.
@@ -129,7 +130,7 @@ package CryptAda.Ciphers.Block_Ciphers.TDEA is
    type TDEA_Keying_Option is
       (
          Keying_Option_1,     -- K1 /= K2 /= K3
-         Keying_Option_2,     -- K1 / K2  K1 = K3
+         Keying_Option_2,     -- K1 /= K2 and K1 = K3
          Keying_Option_3      -- K1 = K2 = K3
       );
 
@@ -150,127 +151,58 @@ package CryptAda.Ciphers.Block_Ciphers.TDEA is
 
    procedure   Process_Block(
                   With_Cipher    : in out TDEA_Cipher;
-                  Input          : in     Block;
-                  Output         :    out Block);
+                  Input          : in     Cipher_Block;
+                  Output         :    out Cipher_Block);
 
    --[Stop_Cipher]--------------------------------------------------------------
       
    procedure   Stop_Cipher(
                   The_Cipher     : in out TDEA_Cipher);
 
-   --[Key related operations]---------------------------------------------------
-
-   --[Generate_Key]-------------------------------------------------------------
-   
-   procedure   Generate_Key(
-                  The_Cipher     : in     TDEA_Cipher;
-                  Generator      : in out CryptAda.Random.Generators.Random_Generator'Class;
-                  The_Key        : in out CryptAda.Ciphers.Keys.Key);
-
-   --[Is_Valid_Key]-------------------------------------------------------------
-   
-   function    Is_Valid_Key(
-                  For_Cipher     : in     TDEA_Cipher;
-                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
-      return   Boolean;
-         
-   --[Is_Strong_Key]------------------------------------------------------------
-   
-   function    Is_Strong_Key(
-                  For_Cipher     : in     TDEA_Cipher;
-                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
-      return   Boolean;
-
    -----------------------------------------------------------------------------
-   --[Non-Dispatching Operations]-----------------------------------------------
+   --[Non-dispatching operations]-----------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Generate_Key]-------------------------------------------------------------
+   --[Get_TDEA_Keying_Option]---------------------------------------------------
    -- Purpose:
-   -- Generates a random DES EDE key for a specified keying option. Generated
-   -- keys are guaranteed to be strong (according to Is_Strong function 
-   -- implementaion) and with correct parity.
+   -- Gets the keying option the cipher is using.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- The_Cipher                 Block_Cipher object for which the key is to be
-   --                            generated.
-   -- Keying_Option              TDEA keying option (see above).
-   -- Generator                  Random_Generator used to generate the key.
-   -- The_Key                    Generated key.
+   -- Of_Cipher               TDEA_Cipher object to get the keying option from.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- N/A.
+   -- TDEA_Keying_Option value.
    -----------------------------------------------------------------------------
    -- Exceptions:
-   -- CryptAda_Generator_Not_Started_Error
-   -- CryptAda_Generator_Need_Seeding_Error
+   -- CryptAda_Uninitialized_Cipher_Error if Of_Cipher is in Idle state.
    -----------------------------------------------------------------------------
-   
-   procedure   Generate_Key(
-                  The_Cipher     : in     TDEA_Cipher'Class;
-                  Keying_Option  : in     TDEA_Keying_Option;
-                  Generator      : in out CryptAda.Random.Generators.Random_Generator'Class;
-                  The_Key        : in out CryptAda.Ciphers.Keys.Key);
 
-   --[Is_Valid_Key]-------------------------------------------------------------
+   function    Get_TDEA_Keying_Option(
+                  Of_Cipher      : in     TDEA_Cipher'Class)
+      return   TDEA_Keying_Option;
+   
+   --[Is_Valid_TDEA_Key]--------------------------------------------------------
    -- Purpose:
-   -- Checks if a key is valid for a particular keying option.
+   -- Checks if a given key is a valid TDEA key.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- The_Key                    Key to check.
-   -- Keying_Option              TDEA keying option (see above).
+   -- The_Key                 Key object to check its validity.
+   -- For_Option              TDEA_Keying_Option value that identifies the 
+   --                         TDEA Keying option to validate this key for.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- True if key is valid for Keying option, false otherwise.
+   -- Boolean value that indicates if The_Key is a valid key (True) or not
+   -- (False) for the Cipher.
    -----------------------------------------------------------------------------
    -- Exceptions:
-   -- Node.
+   -- None.
    -----------------------------------------------------------------------------
-   
-   function    Is_Valid_Key(
+
+   function    Is_Valid_TDEA_Key(
                   The_Key        : in     CryptAda.Ciphers.Keys.Key;
-                  Keying_Option  : in     TDEA_Keying_Option)
+                  For_Option     : in     TDEA_Keying_Option)
       return   Boolean;
-                  
-   --[Check_TDEA_Key_Parity]-------------------------------------------------
-   -- Purpose:
-   -- Checks the parity of a DES EDE key.
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- Of_Key                  Key object to check its parity.
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- Boolean value that indicates if the key party is correct (True) or not
-   -- (False)
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- CryptAda_Null_Argument_Error id Of_Key is null.
-   -- CryptAda_Invalid_Key_Error if Of_Key length is not valid (8 bytes).
-   -----------------------------------------------------------------------------
-
-   function    Check_TDEA_Key_Parity(
-                  Of_Key         : in     CryptAda.Ciphers.Keys.Key)
-      return   Boolean;
-
-   --[Fix_TDEA_Key_Parity]---------------------------------------------------
-   -- Purpose:
-   -- This procedure fixes the parity of a DES EDE key. It sets the parity bit 
-   -- of each key byte to the apropriate value.
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- Of_Key                  Key object to fix its parity.
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- N/A.
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- CryptAda_Null_Argument_Error id Of_Key is null.
-   -- CryptAda_Invalid_Key_Error if Of_Key length is not valid (8 bytes).
-   -----------------------------------------------------------------------------
       
-   procedure   Fix_TDEA_Key_Parity(
-                  Of_Key         : in out CryptAda.Ciphers.Keys.Key);
-
    -----------------------------------------------------------------------------
    --[Private Part]-------------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -281,21 +213,18 @@ private
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[TDEA Constants]-----------------------------------------------------------
-   -- Next constants are related to TDEA processing.
-   --
-   -- TDEA_Min_KL          Minimum key length for TDEA (in bytes).
-   -- TDEA_Max_KL          Minimum key length for TDEA (in bytes).
-   -- TDEA_Def_KL          Minimum key length for TDEA (in bytes).
-   -- TDEA_KL_Inc_Step     TDEA key increment step in length (TDEA only 
-   --                      admits 24 bytes keys)
+   --[TDEA_Key_Info]------------------------------------------------------------
+   -- Information regarding TDEA keys.
    -----------------------------------------------------------------------------
-   
-   TDEA_Min_KL                   : constant Positive     := 24;
-   TDEA_Max_KL                   : constant Positive     := 24;
-   TDEA_Def_KL                   : constant Positive     := 24;
-   TDEA_KL_Inc_Step              : constant Natural      :=  0;
-   
+
+   TDEA_Key_Info                 : constant Cipher_Key_Info := 
+      (
+         Min_Key_Length    => TDEA_Key_Length,
+         Max_Key_Length    => TDEA_Key_Length,
+         Def_Key_Length    => TDEA_Key_Length,
+         Key_Length_Inc    => 0
+      );
+      
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------

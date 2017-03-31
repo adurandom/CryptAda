@@ -97,14 +97,15 @@ OBJS     =  cryptada.o \
             cryptada-random-generators-caprng.o \
             cryptada-ciphers.o \
             cryptada-ciphers-keys.o \
-            cryptada-ciphers-key_generators.o \
             cryptada-ciphers-block_ciphers.o \
             cryptada-ciphers-block_ciphers-des.o \
             cryptada-ciphers-block_ciphers-desx.o \
             cryptada-ciphers-block_ciphers-des2x.o \
             cryptada-ciphers-block_ciphers-tdea.o \
             cryptada-ciphers-block_ciphers-aes.o \
-            cryptada-ciphers-block_ciphers-blowfish.o
+            cryptada-ciphers-block_ciphers-blowfish.o \
+            cryptada-ciphers-key_generators.o \
+            cryptada-ciphers-key_generators-tdea.o
 
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -324,7 +325,7 @@ cryptada-ciphers-key_generators.o: $(CIPHDIR)/cryptada-ciphers-key_generators.ad
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
-cryptada-ciphers-key_generators-des.o: $(CIPHDIR)/cryptada-ciphers-key_generators-des.adb
+cryptada-ciphers-key_generators-tdea.o: $(CIPHDIR)/cryptada-ciphers-key_generators-tdea.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
     

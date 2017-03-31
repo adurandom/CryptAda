@@ -16,14 +16,14 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-key_generators.ads
+--    Filename          :  cryptada-ciphers-key_generators-tdea.ads
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
---    Creation date     :  March 29th, 2017
+--    Creation date     :  March 30th, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Root package for CryptAda key generators.
+--    TDEA key generator.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
@@ -32,58 +32,33 @@
 --------------------------------------------------------------------------------
 
 with CryptAda.Ciphers.Keys;
-with CryptAda.Random.Generators;
+with CryptAda.Ciphers.Block_Ciphers.TDEA;
 
-package CryptAda.Ciphers.Key_Generators is
+package CryptAda.Ciphers.Key_Generators.TDEA is
 
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Key_Generator]------------------------------------------------------------
-   -- Key_Generator type.
+   --[TDEA_Key_Generator]-------------------------------------------------------
+   -- TDEA key generator type.
    -----------------------------------------------------------------------------
 
-   type Key_Generator is tagged limited private;
+   type TDEA_Key_Generator is new Key_Generator with private;
 
    -----------------------------------------------------------------------------
    --[Subprograms]--------------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Start_Key_Generator]------------------------------------------------------
-   -- Purpose:
-   -- Starts a Key_Generator object.
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- Generator            Key_Generator object to start.
-   -- PRNG                 Access to the Pseudo-random number generator to use 
-   --                      to generate the random bytes of keys. This subprogram
-   --                      expects a started and seeded Random_Generator.
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- N/A.
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- CryptAda_Null_Argument_Error if PRNG is null.
-   -- CryptAda_Generator_Not_Started_Error if the random generator is not 
-   --    started.
-   -- CryptAda_Generator_Need_Seeding_Error if the random generator is not 
-   --    seeded.
-   -----------------------------------------------------------------------------
-
-   procedure   Start_Key_Generator(
-                  The_Generator  : in out Key_Generator;
-                  PRNG           : in     CryptAda.Random.Generators.Random_Generator_Ref);
-
    --[Generate_Key]-------------------------------------------------------------
    -- Purpose:
-   -- Generates a random key of the specified length.
+   -- Generates a random key for the specific TDEA_Keying_Option.
    -----------------------------------------------------------------------------
    -- Arguments:
    -- Generator            Key_Generator object.
    -- The_Key              Key to generate.
-   -- Key_Length           Cipher_Key_Length value with the length of the key
-   --                      to generate.
+   -- Keying_Option        TDEA_Keying_Option value that specifies the type
+   --                      of key to generate.
    -----------------------------------------------------------------------------
    -- Returned value:
    -- N/A.
@@ -93,28 +68,9 @@ package CryptAda.Ciphers.Key_Generators is
    -----------------------------------------------------------------------------
 
    procedure   Generate_Key(
-                  The_Generator  : in out Key_Generator;
+                  The_Generator  : in out TDEA_Key_Generator'Class;
                   The_Key        : in out CryptAda.Ciphers.Keys.Key;
-                  Key_Length     : in     Cipher_Key_Length);
-
-   --[Is_Started]---------------------------------------------------------------
-   -- Purpose:
-   -- Checks if a particular generator is started.
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- The_Generator        Key_Generator object.
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- Boolean value that indicates if The_Generator is started (True) or not
-   -- (False).
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- None.
-   -----------------------------------------------------------------------------
-
-   function    Is_Started(
-                  The_Generator  : in     Key_Generator)
-      return   Boolean;
+                  Keying_Option  : in     CryptAda.Ciphers.Block_Ciphers.TDEA.TDEA_Keying_Option);
    
    -----------------------------------------------------------------------------
    --[Private Part]-------------------------------------------------------------
@@ -126,12 +82,10 @@ private
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Key_Generator]------------------------------------------------------------
-   -- Full definition of the Key_Generator type.
+   --[TDEA_Key_Generator]-------------------------------------------------------
+   -- Full definition of the TDEA_Key_Generator type.
    -----------------------------------------------------------------------------
 
-   type Key_Generator is tagged limited
-      record
-         PRNG                    : CryptAda.Random.Generators.Random_Generator_Ref;
-      end record;            
-end CryptAda.Ciphers.Key_Generators;
+   type TDEA_Key_Generator is new Key_Generator with null record;
+   
+end CryptAda.Ciphers.Key_Generators.TDEA;

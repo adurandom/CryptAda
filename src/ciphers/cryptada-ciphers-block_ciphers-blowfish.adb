@@ -29,13 +29,13 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170328 ADD   Initial implementation.
+--    1.1   20170331 ADD   Removed key generation subprogram.
 --------------------------------------------------------------------------------
 
 with CryptAda.Pragmatics;              use CryptAda.Pragmatics;
 with CryptAda.Names;                   use CryptAda.Names;
 with CryptAda.Exceptions;              use CryptAda.Exceptions;
 with CryptAda.Ciphers.Keys;            use CryptAda.Ciphers.Keys;
-with CryptAda.Random.Generators;       use CryptAda.Random.Generators;
 
 package body CryptAda.Ciphers.Block_Ciphers.Blowfish is
 
@@ -48,22 +48,22 @@ package body CryptAda.Ciphers.Block_Ciphers.Blowfish is
    -----------------------------------------------------------------------------
 
    Blowfish_Word_Size            : constant Positive := 4;
-   
+
    --[Initial_P_Array]----------------------------------------------------------
    -- P-Array initialization value.
    -----------------------------------------------------------------------------
-   
+
    Initial_P_Array               : constant Blowfish_P_Array :=
       (
          16#243F6A88#, 16#85A308D3#, 16#13198A2E#, 16#03707344#, 16#A4093822#, 16#299F31D0#, 16#082EFA98#, 16#EC4E6C89#,
          16#452821E6#, 16#38D01377#, 16#BE5466CF#, 16#34E90C6C#, 16#C0AC29B7#, 16#C97C50DD#, 16#3F84D5B5#, 16#B5470917#,
          16#9216D5D9#, 16#8979FB1B#
       );
-   
+
    --[Initial_S_Boxes]----------------------------------------------------------
    -- S-Boxes initialization value.
    -----------------------------------------------------------------------------
-      
+
    Initial_S_Boxes               : constant Blowfish_S_Boxes :=
       (
          16#D1310BA6#, 16#98DFB5AC#, 16#2FFD72DB#, 16#D01ADFB7#, 16#B8E1AFED#, 16#6A267E96#, 16#BA7C9045#, 16#F12C7F99#,
@@ -226,7 +226,7 @@ package body CryptAda.Ciphers.Block_Ciphers.Blowfish is
          16#85CBFE4E#, 16#8AE88DD8#, 16#7AAAF9B0#, 16#4CF9AA7E#, 16#1948C25C#, 16#02FB8A8C#, 16#01C36AE4#, 16#D6EBE1F9#,
          16#90D4F869#, 16#A65CDEA0#, 16#3F09252D#, 16#C208E69F#, 16#B74E6132#, 16#CE77E25B#, 16#578FDFE3#, 16#3AC372E6#
       );
-      
+
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -234,13 +234,13 @@ package body CryptAda.Ciphers.Block_Ciphers.Blowfish is
    --[Blowfish_Packed_Block]----------------------------------------------------
    -- Type for packed blocks.
    -----------------------------------------------------------------------------
-   
+
    subtype Blowfish_Packed_Block is Four_Bytes_Array(1 .. Blowfish_Block_Size / Blowfish_Word_Size);
-   
+
    -----------------------------------------------------------------------------
    --[Subprogram Specification]-------------------------------------------------
    -----------------------------------------------------------------------------
-   
+
    --[Pack_Block]---------------------------------------------------------------
 
    function    Pack_Block(
@@ -279,7 +279,7 @@ package body CryptAda.Ciphers.Block_Ciphers.Blowfish is
                   S              : in     Blowfish_S_Boxes;
                   I              : in     Blowfish_Block;
                   O              :    out Blowfish_Block);
-   
+
    -----------------------------------------------------------------------------
    --[Body declared subprogram bodies]------------------------------------------
    -----------------------------------------------------------------------------
@@ -297,10 +297,10 @@ package body CryptAda.Ciphers.Block_Ciphers.Blowfish is
          PB(I) := Pack(Unpacked(J .. J + 3), Big_Endian);
          J := J + 4;
       end loop;
-      
+
       return PB;
    end Pack_Block;
-   
+
    --[Unpack_Block]-------------------------------------------------------------
 
    function    Unpack_Block(
@@ -314,10 +314,10 @@ package body CryptAda.Ciphers.Block_Ciphers.Blowfish is
          UB(J .. J + 3) := Unpack(Packed(I), Big_Endian);
          J := J + 4;
       end loop;
-      
+
       return UB;
    end Unpack_Block;
- 
+
    --[Build_Key_Crypt]----------------------------------------------------------
 
    procedure   Build_Key_Crypt(
@@ -356,7 +356,7 @@ package body CryptAda.Ciphers.Block_Ciphers.Blowfish is
       Output(Output'First)       := R;
       Output(Output'First + 1)   := L;
    end Build_Key_Crypt;
- 
+
    --[Build_Key]----------------------------------------------------------------
 
    procedure   Build_Key(
@@ -461,15 +461,42 @@ package body CryptAda.Ciphers.Block_Ciphers.Blowfish is
 
       OP(OP'First)      := R;
       OP(OP'First + 1)  := L;
-      
+
       O := Unpack_Block(OP);
    end Do_Block;
-   
+
    -----------------------------------------------------------------------------
-   --[Dispatching Operations]---------------------------------------------------
+   --[Spec declared subprogram bodies]------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Encrypt/Decrypt Interface]------------------------------------------------
+   --[Ada.Finalization interface]-----------------------------------------------
+
+   --[Initialize]---------------------------------------------------------------
+
+   procedure   Initialize(
+                  Object         : in out Blowfish_Cipher)
+   is
+   begin
+      Object.Cipher_Id  := SC_Blowfish;
+      Object.Key_Info   := Blowfish_Key_Info;
+      Object.Block_Size := Blowfish_Block_Size;
+      Object.State      := Idle;
+      Object.P_Array    := (others => 0);
+      Object.S_Boxes    := (others => 0);
+   end Initialize;
+
+   --[Finalize]-----------------------------------------------------------------
+
+   procedure   Finalize(
+                  Object         : in out Blowfish_Cipher)
+   is
+   begin
+      Object.State      := Idle;
+      Object.P_Array    := (others => 0);
+      Object.S_Boxes    := (others => 0);
+   end Finalize;
+   
+   --[Dispatching Operations]---------------------------------------------------
 
    --[Start_Cipher]-------------------------------------------------------------
 
@@ -481,30 +508,30 @@ package body CryptAda.Ciphers.Block_Ciphers.Blowfish is
    begin
 
       -- Veriify that key is a valid Blowfish key.
-      
-      if not Is_Valid_Key(The_Cipher, With_Key) then
+
+      if not Is_Valid_Blowfish_Key(With_Key) then
          raise CryptAda_Invalid_Key_Error;
       end if;
 
       -- Build key.
-      
+
       Build_Key(The_Cipher.P_Array, The_Cipher.S_Boxes, With_Key, For_Operation);
-      
+
       -- Set state.
-     
+
       if For_Operation = Encrypt then
          The_Cipher.State  := Encrypting;
       else
          The_Cipher.State  := Decrypting;
-      end if;      
+      end if;
    end Start_Cipher;
 
    --[Process_Block]------------------------------------------------------------
 
    procedure   Process_Block(
                   With_Cipher    : in out Blowfish_Cipher;
-                  Input          : in     Block;
-                  Output         :    out Block)
+                  Input          : in     Cipher_Block;
+                  Output         :    out Cipher_Block)
    is
    begin
       if With_Cipher.State = Idle then
@@ -520,7 +547,7 @@ package body CryptAda.Ciphers.Block_Ciphers.Blowfish is
    end Process_Block;
 
    --[Stop_Cipher]--------------------------------------------------------------
-      
+
    procedure   Stop_Cipher(
                   The_Cipher     : in out Blowfish_Cipher)
    is
@@ -532,23 +559,11 @@ package body CryptAda.Ciphers.Block_Ciphers.Blowfish is
       end if;
    end Stop_Cipher;
 
-   --[Key related operations]---------------------------------------------------
+   --[Other public subprograms]-------------------------------------------------
 
-   --[Generate_Key]-------------------------------------------------------------
-   
-   procedure   Generate_Key(
-                  The_Cipher     : in     Blowfish_Cipher;
-                  Generator      : in out Random_Generator'Class;
-                  The_Key        : in out Key)
-   is
-   begin
-      Generate_Key(The_Cipher, Blowfish_Def_KL, Generator, The_Key);
-   end Generate_Key;
+   --[Is_Valid_Blowfish_Key]----------------------------------------------------
 
-   --[Is_Valid_Key]-------------------------------------------------------------
-   
-   function    Is_Valid_Key(
-                  For_Cipher     : in     Blowfish_Cipher;
+   function    Is_Valid_Blowfish_Key(
                   The_Key        : in     Key)
       return   Boolean
    is
@@ -556,75 +571,8 @@ package body CryptAda.Ciphers.Block_Ciphers.Blowfish is
       if Is_Null(The_Key) then
          return False;
       else
-         return Is_Valid_Key_Length(For_Cipher, Get_Key_Length(The_Key));
+         return (Get_Key_Length(The_Key) in Blowfish_Key_Length);
       end if;
-   end Is_Valid_Key;
-         
-   --[Is_Strong_Key]------------------------------------------------------------
-   
-   function    Is_Strong_Key(
-                  For_Cipher     : in     Blowfish_Cipher;
-                  The_Key        : in     Key)
-      return   Boolean
-   is
-   begin
-      return Is_Valid_Key(For_Cipher, The_Key);
-   end Is_Strong_Key;
-   
-   --[Ada.Finalization interface]-----------------------------------------------
+   end Is_Valid_Blowfish_Key;
 
-   --[Initialize]---------------------------------------------------------------
-
-   procedure   Initialize(
-                  Object         : in out Blowfish_Cipher)
-   is
-   begin
-      Object.Cipher_Id        := BC_Blowfish;   
-      Object.Min_KL           := Blowfish_Min_KL;
-      Object.Max_KL           := Blowfish_Max_KL;
-      Object.Def_KL           := Blowfish_Def_KL;
-      Object.KL_Inc_Step      := Blowfish_KL_Inc_Step;
-      Object.Blk_Size         := Blowfish_Block_Size;
-      Object.State            := Idle;
-      Object.P_Array          := (others => 0);
-      Object.S_Boxes          := (others => 0);
-   end Initialize;
-
-   --[Finalize]-----------------------------------------------------------------
-
-   procedure   Finalize(
-                  Object         : in out Blowfish_Cipher)
-   is
-   begin
-      Object.Cipher_Id        := BC_Blowfish;   
-      Object.Min_KL           := Blowfish_Min_KL;
-      Object.Max_KL           := Blowfish_Max_KL;
-      Object.Def_KL           := Blowfish_Def_KL;
-      Object.KL_Inc_Step      := Blowfish_KL_Inc_Step;
-      Object.Blk_Size         := Blowfish_Block_Size;
-      Object.State            := Idle;
-      Object.P_Array          := (others => 0);
-      Object.S_Boxes          := (others => 0);
-   end Finalize;
-
-   -----------------------------------------------------------------------------
-   --[Non-Dispatching Operations]-----------------------------------------------
-   -----------------------------------------------------------------------------
-
-   --[Generate_Key]-------------------------------------------------------------
-   
-   procedure   Generate_Key(
-                  The_Cipher     : in     Blowfish_Cipher'Class;
-                  Key_Length     : in     Blowfish_Key_Size;
-                  Generator      : in out Random_Generator'Class;
-                  The_Key        : in out Key)
-   is
-      KB             : Byte_Array(1 .. Key_Length);
-   begin
-      loop
-         Random_Generate(Generator, KB);
-         Set_Key(The_Key, KB);
-         exit when Is_Strong_Key(The_Cipher, The_Key);
-      end loop;
-   end Generate_Key;
 end CryptAda.Ciphers.Block_Ciphers.Blowfish;

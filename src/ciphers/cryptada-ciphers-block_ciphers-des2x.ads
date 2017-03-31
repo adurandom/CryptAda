@@ -36,10 +36,10 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170328 ADD   Initial implementation.
+--    1.1   20170329 ADD   Removed key generation subprogram.
 --------------------------------------------------------------------------------
 
 with CryptAda.Ciphers.Keys;
-with CryptAda.Random.Generators;
 with CryptAda.Ciphers.Block_Ciphers.DES;
 
 package CryptAda.Ciphers.Block_Ciphers.DES2X is
@@ -52,9 +52,9 @@ package CryptAda.Ciphers.Block_Ciphers.DES2X is
    -- Size in bytes of DES2X blocks.
    -----------------------------------------------------------------------------
 
-   DES2X_Block_Size              : constant Block_Size   :=  CryptAda.Ciphers.Block_Ciphers.DES.DES_Block_Size;
+   DES2X_Block_Size              : constant Cipher_Block_Size :=  CryptAda.Ciphers.Block_Ciphers.DES.DES_Block_Size;
 
-   --[DES2X_Key_Size]-----------------------------------------------------------
+   --[DES2X_Key_Length]---------------------------------------------------------
    -- Size in bytes of DESX keys. The size is 32 bytes
    -- - 8 Bytes for DES Key
    -- - 8 Bytes for Xor block K1
@@ -62,7 +62,7 @@ package CryptAda.Ciphers.Block_Ciphers.DES2X is
    -- - 8 bytes for Xor block K3
    -----------------------------------------------------------------------------
 
-   DES2X_Key_Size                : constant Positive     :=  32;
+   DES2X_Key_Length              : constant Cipher_Key_Length :=  32;
    
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
@@ -78,7 +78,7 @@ package CryptAda.Ciphers.Block_Ciphers.DES2X is
    -- Constrained subtype for DES2X blocks.
    -----------------------------------------------------------------------------
    
-   subtype DES2X_Block is Block(1 .. DES2X_Block_Size);
+   subtype DES2X_Block is Cipher_Block(1 .. DES2X_Block_Size);
    
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
@@ -97,37 +97,37 @@ package CryptAda.Ciphers.Block_Ciphers.DES2X is
 
    procedure   Process_Block(
                   With_Cipher    : in out DES2X_Cipher;
-                  Input          : in     Block;
-                  Output         :    out Block);
+                  Input          : in     Cipher_Block;
+                  Output         :    out Cipher_Block);
 
    --[Stop_Cipher]--------------------------------------------------------------
       
    procedure   Stop_Cipher(
                   The_Cipher     : in out DES2X_Cipher);
 
-   --[Key related operations]---------------------------------------------------
+   -----------------------------------------------------------------------------
+   --[Non-dispatching operations]-----------------------------------------------
+   -----------------------------------------------------------------------------
 
-   --[Generate_Key]-------------------------------------------------------------
-   
-   procedure   Generate_Key(
-                  The_Cipher     : in     DES2X_Cipher;
-                  Generator      : in out CryptAda.Random.Generators.Random_Generator'Class;
-                  The_Key        : in out CryptAda.Ciphers.Keys.Key);
+   --[Is_Valid_DES2X_Key]-------------------------------------------------------
+   -- Purpose:
+   -- Checks if a given key is a valid DES2X key.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Key                 Key object to check its validity.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Boolean value that indicates if The_Key is a valid key (True) or not
+   -- (False) for the Cipher.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
 
-   --[Is_Valid_Key]-------------------------------------------------------------
-   
-   function    Is_Valid_Key(
-                  For_Cipher     : in     DES2X_Cipher;
+   function    Is_Valid_DES2X_Key(
                   The_Key        : in     CryptAda.Ciphers.Keys.Key)
       return   Boolean;
          
-   --[Is_Strong_Key]------------------------------------------------------------
-   
-   function    Is_Strong_Key(
-                  For_Cipher     : in     DES2X_Cipher;
-                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
-      return   Boolean;
-
    -----------------------------------------------------------------------------
    --[Private Part]-------------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -138,19 +138,17 @@ private
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[DES2X Constants]----------------------------------------------------------
-   -- Next constants are related to DES2X processing.
-   --
-   -- DES2X_Min_KL            Minimum key length for DES2X (in bytes).
-   -- DES2X_Max_KL            Minimum key length for DES2X (in bytes).
-   -- DES2X_Def_KL            Minimum key length for DES2X (in bytes).
-   -- DES2X_KL_Inc_Step       DES2X key increment step in length
+   --[DESX_Key_Info]------------------------------------------------------------
+   -- Information regarding DESX keys.
    -----------------------------------------------------------------------------
-   
-   DES2X_Min_KL                  : constant Positive     :=  32;
-   DES2X_Max_KL                  : constant Positive     :=  32;
-   DES2X_Def_KL                  : constant Positive     :=  32;
-   DES2X_KL_Inc_Step             : constant Natural      :=  0;
+
+   DES2X_Key_Info                : constant Cipher_Key_Info := 
+      (
+         Min_Key_Length    => DES2X_Key_Length,
+         Max_Key_Length    => DES2X_Key_Length,
+         Def_Key_Length    => DES2X_Key_Length,
+         Key_Length_Inc    => 0
+      );
    
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------

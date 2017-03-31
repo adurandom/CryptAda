@@ -25,20 +25,20 @@
 -- 2. Purpose:
 --    Implements the Blowfish block cipher.
 --
---    Blowfish was designed by Bruce Schneier. Blowfish has a 64-bit (8-byte) 
---    block size and a variable key length from 32 bits (4 bytes) up to 448 
---    bits (56 byte). It is a 16-round Feistel cipher and uses large 
+--    Blowfish was designed by Bruce Schneier. Blowfish has a 64-bit (8-byte)
+--    block size and a variable key length from 32 bits (4 bytes) up to 448
+--    bits (56 byte). It is a 16-round Feistel cipher and uses large
 --    key-dependent S-boxes.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170328 ADD   Initial implementation.
+--    1.1   20170331 ADD   Removed key generation subprogram.
 --------------------------------------------------------------------------------
 
 with CryptAda.Pragmatics;
 with CryptAda.Ciphers.Keys;
-with CryptAda.Random.Generators;
 
 package CryptAda.Ciphers.Block_Ciphers.Blowfish is
 
@@ -50,14 +50,8 @@ package CryptAda.Ciphers.Block_Ciphers.Blowfish is
    -- Size in bytes of Blowfish blocks.
    -----------------------------------------------------------------------------
 
-   Blowfish_Block_Size           : constant Block_Size   :=  8;
+   Blowfish_Block_Size           : constant Cipher_Block_Size := 8;
 
-   --[Blowfish_Default_Key_Size]------------------------------------------------
-   -- Default key size in bytes for Blowfish.
-   -----------------------------------------------------------------------------
-
-   Blowfish_Default_Key_Size     : constant Positive     :=  16;
-   
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -65,21 +59,21 @@ package CryptAda.Ciphers.Block_Ciphers.Blowfish is
    --[Blowfish_Cipher]----------------------------------------------------------
    -- The Blowfish block cipher context.
    -----------------------------------------------------------------------------
-   
+
    type Blowfish_Cipher is new Block_Cipher with private;
 
    --[Blowfish_Block]-----------------------------------------------------------
    -- Constrained subtype for Blowfish blocks.
    -----------------------------------------------------------------------------
-   
-   subtype Blowfish_Block is Block(1 .. Blowfish_Block_Size);
 
-   --[Blowfish_Key_Size]--------------------------------------------------------
+   subtype Blowfish_Block is Cipher_Block(1 .. Blowfish_Block_Size);
+
+   --[Blowfish_Key_Length]------------------------------------------------------
    -- Subtype for key sizes.
    -----------------------------------------------------------------------------
-   
-   subtype Blowfish_Key_Size is Positive range 4 .. 56;
-   
+
+   subtype Blowfish_Key_Length is Cipher_Key_Length range 4 .. 56;
+
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
@@ -97,67 +91,37 @@ package CryptAda.Ciphers.Block_Ciphers.Blowfish is
 
    procedure   Process_Block(
                   With_Cipher    : in out Blowfish_Cipher;
-                  Input          : in     Block;
-                  Output         :    out Block);
+                  Input          : in     Cipher_Block;
+                  Output         :    out Cipher_Block);
 
    --[Stop_Cipher]--------------------------------------------------------------
-      
+
    procedure   Stop_Cipher(
                   The_Cipher     : in out Blowfish_Cipher);
-
-   --[Key related operations]---------------------------------------------------
-
-   --[Generate_Key]-------------------------------------------------------------
-   
-   procedure   Generate_Key(
-                  The_Cipher     : in     Blowfish_Cipher;
-                  Generator      : in out CryptAda.Random.Generators.Random_Generator'Class;
-                  The_Key        : in out CryptAda.Ciphers.Keys.Key);
-
-   --[Is_Valid_Key]-------------------------------------------------------------
-   
-   function    Is_Valid_Key(
-                  For_Cipher     : in     Blowfish_Cipher;
-                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
-      return   Boolean;
-         
-   --[Is_Strong_Key]------------------------------------------------------------
-   
-   function    Is_Strong_Key(
-                  For_Cipher     : in     Blowfish_Cipher;
-                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
-      return   Boolean;
 
    -----------------------------------------------------------------------------
    --[Non-Dispatching Operations]-----------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Generate_Key]-------------------------------------------------------------
+   --[Is_Valid_Blowfish_Key]----------------------------------------------------
    -- Purpose:
-   -- Generates a random Blowfish key of a specified length.
+   -- Checks if a given key is a valid Blowfish key.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- The_Cipher                 Block_Cipher object for which the key is to be
-   --                            generated.
-   -- Key_Length                 Blowfish_Key_Size value with the size of the
-   --                            key to generate.
-   -- Generator                  Random_Generator used to generate the key.
-   -- The_Key                    Generated key.
+   -- The_Key                 Key object to check its validity.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- N/A.
+   -- Boolean value that indicates if The_Key is a valid Blowfish key (True) or
+   -- not (False)
    -----------------------------------------------------------------------------
    -- Exceptions:
-   -- CryptAda_Generator_Not_Started_Error
-   -- CryptAda_Generator_Need_Seeding_Error
+   -- None.
    -----------------------------------------------------------------------------
-   
-   procedure   Generate_Key(
-                  The_Cipher     : in     Blowfish_Cipher'Class;
-                  Key_Length     : in     Blowfish_Key_Size;
-                  Generator      : in out CryptAda.Random.Generators.Random_Generator'Class;
-                  The_Key        : in out CryptAda.Ciphers.Keys.Key);
-      
+
+   function    Is_Valid_Blowfish_Key(
+                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
+      return   Boolean;
+
    -----------------------------------------------------------------------------
    --[Private Part]-------------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -168,24 +132,30 @@ private
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Blowfish Constants]-------------------------------------------------------
-   -- Next constants are related to Blowfish processing.
-   --
-   -- Blowfish_Min_KL            Minimum key length for Blowfish (in bytes).
-   -- Blowfish_Max_KL            Minimum key length for Blowfish (in bytes).
-   -- Blowfish_Def_KL            Minimum key length for Blowfish (in bytes).
-   -- Blowfish_KL_Inc_Step       Blowfish key increment step in length
-   -- Blowfish_Rounds            Number of rounds.
-   -- Blowfish_SBox_Size         Size of Blowfish SBoxes.
+   --[Blowfish_Key_Info]--------------------------------------------------------
+   -- Information regarding Blowfish keys.
    -----------------------------------------------------------------------------
-   
-   Blowfish_Min_KL               : constant Positive     :=  4;
-   Blowfish_Max_KL               : constant Positive     := 56;
-   Blowfish_Def_KL               : constant Positive     := 16;
-   Blowfish_KL_Inc_Step          : constant Natural      :=  1;
-   Blowfish_Rounds               : constant Positive     := 16;
-   Blowfish_SBox_Size            : constant Positive     := 1024;
-   
+
+   Blowfish_Key_Info             : constant Cipher_Key_Info :=
+      (
+         Min_Key_Length    =>  4,
+         Max_Key_Length    => 56,
+         Def_Key_Length    => 16,
+         Key_Length_Inc    =>  1
+      );
+
+   --[Blowfish_Rounds]----------------------------------------------------------
+   -- Number of rounds in Blowfish processing.
+   -----------------------------------------------------------------------------
+
+   Blowfish_Rounds               : constant Positive := 16;
+
+   --[Blowfish_SBox_Size]-------------------------------------------------------
+   -- Blowfish S-Box size.
+   -----------------------------------------------------------------------------
+
+   Blowfish_SBox_Size            : constant Positive := 1024;
+
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -193,7 +163,7 @@ private
    --[Blowfish_P_Array]---------------------------------------------------------
    -- Subtype for the Blowfish P_Array field.
    -----------------------------------------------------------------------------
-   
+
    subtype Blowfish_P_Array is CryptAda.Pragmatics.Four_Bytes_Array(1 .. Blowfish_Rounds + 2);
 
    --[Blowfish_S_Boxes]---------------------------------------------------------
@@ -201,7 +171,7 @@ private
    -----------------------------------------------------------------------------
 
    subtype Blowfish_S_Boxes is CryptAda.Pragmatics.Four_Bytes_Array(1 .. Blowfish_SBox_Size);
-   
+
    --[Blowfish_Cipher]----------------------------------------------------------
    -- Full definition of the Blowfish_Cipher tagged type. It extends the
    -- Block_Cipher with the followitng fields:
