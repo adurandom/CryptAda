@@ -80,7 +80,7 @@ package body CryptAda.Tests.Utils.Ciphers is
       PT_B2          : Cipher_Block(1 .. BS) := (others => 0);
    begin
       Print_Information_Message(Message);
-      Print_Message("This test exercise the dispatching operations.", Indent_Str);
+      Print_Information_Message("This test case is a 10 step test that will exercise the Cipher dispatching operations");
       
       if Get_Cipher_State(The_Cipher) /= Idle then
          Print_Information_Message("The cipher is not idle, stopping it.");
@@ -90,8 +90,10 @@ package body CryptAda.Tests.Utils.Ciphers is
       Print_Information_Message("Cipher information:");
       Print_Block_Cipher_Info(The_Cipher);
       
-      Print_Information_Message("Attempting to process a block with an Idle Cipher mus result in a");
-      Print_Message("CryptAda_Uninitialized_Cipher_Error exception being raised.", Indent_Str);
+      -- 1. Trying to process a block when cipher is Idle.
+      
+      Print_Information_Message("1. Trying to process a block with a cipher in Idle state.");
+      Print_Message("Must raise CryptAda_Uninitialized_Cipher_Error exception.", Indent_Str);
    
       declare
       begin
@@ -110,7 +112,58 @@ package body CryptAda.Tests.Utils.Ciphers is
             raise CryptAda_Test_Error;         
       end;
       
-      Print_Information_Message("Starting cipher for encryption ...");
+      -- 2. Trying to start a cipher with an invalid key
+
+      Print_Information_Message("2. Trying Start_Cipher with an invalid key");
+      Print_Message("Must raise CryptAda_Invalid_Key_Error exception.", Indent_Str);
+   
+      declare
+         MK          : Key;
+      begin
+         Print_Information_Message("Using a null key");
+         Print_Key(MK, "The key");
+         Print_Information_Message("Calling to Start_Cipher");
+         Start_Cipher(The_Cipher, Encrypt, MK);
+         Print_Error_Message("No exception was raised.");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Invalid_Key_Error =>
+            Print_Information_Message("Raised CryptAda_Invalid_Key_Error");
+         when CryptAda_Test_Error =>
+            raise;
+         when X: others =>
+            Print_Error_Message("Unexpected exception: """ & Exception_Name(X) & """");
+            Print_Message("Message             : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;         
+      end;
+
+      declare
+         MKL         : constant Positive := 1 + Get_Maximum_Key_Length(The_Cipher);
+         MKB         : constant Byte_Array(1 .. MKL) := (others => 16#11#);
+         MK          : Key;
+      begin
+         Print_Information_Message("Using key with excessive length");
+         Print_Information_Message("Maximum key length is: " & Positive'Image(Get_Maximum_Key_Length(The_Cipher)));
+         Set_Key(MK, MKB);
+         Print_Key(MK, "The key");
+         Print_Information_Message("Calling to Start_Cipher");
+         Start_Cipher(The_Cipher, Encrypt, MK);
+         Print_Error_Message("No exception was raised.");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Invalid_Key_Error =>
+            Print_Information_Message("Raised CryptAda_Invalid_Key_Error");
+         when CryptAda_Test_Error =>
+            raise;
+         when X: others =>
+            Print_Error_Message("Unexpected exception: """ & Exception_Name(X) & """");
+            Print_Message("Message             : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;         
+      end;
+      
+      -- 3. Checking cipher state after successful Start_Cipher for encryption
+
+      Print_Information_Message("3. Checking state after successful Start_Cipher for encryption");
       Set_Key(K, KB);
       Print_Key(K, "Key set to");
       Start_Cipher(The_Cipher, Encrypt, K);
@@ -122,7 +175,9 @@ package body CryptAda.Tests.Utils.Ciphers is
          raise CryptAda_Test_Error;
       end if;
       
-      Print_Information_Message("Trying to encrypt blocks of invalid length");
+      -- 4. Trying to encrypt a block of invalid length.
+
+      Print_Information_Message("4. Trying to encrypt blocks of invalid length");
       Print_Message("Must raise CryptAda_Invalid_Block_Length_Error", Indent_Str);
 
       declare
@@ -205,14 +260,17 @@ package body CryptAda.Tests.Utils.Ciphers is
             raise CryptAda_Test_Error;         
       end;
 
-      Print_Information_Message("Encrypting one block.");
+      -- 5. Encrypting a valid block.
+
+      Print_Information_Message("5. Encrypting a valid block");
       Print_Block(PT_B1, "Block to encrypt");     
       Process_Block(The_Cipher, PT_B1, CT_B);
       Print_Block(CT_B, "Encrypted block");     
 
-      Print_Information_Message("Stopping the cipher");
-      Stop_Cipher(The_Cipher);
+      -- 6. Stopping the cipher.
 
+      Print_Information_Message("6. Stopping the cipher");
+      Stop_Cipher(The_Cipher);
       Print_Information_Message("Cipher now must be in Idle state");
       Print_Block_Cipher_Info(The_Cipher);
       
@@ -221,7 +279,9 @@ package body CryptAda.Tests.Utils.Ciphers is
          raise CryptAda_Test_Error;
       end if;
       
-      Print_Information_Message("Starting cipher for decrypting");
+      -- 7. Checking cipher state after successful Start_Cipher for decryption
+
+      Print_Information_Message("7. Checking cipher state after successful Start_Cipher for decryption");
       Start_Cipher(The_Cipher, Decrypt, K);
       Print_Information_Message("Cipher now must be in Decrypting state");
       Print_Block_Cipher_Info(The_Cipher);
@@ -231,7 +291,9 @@ package body CryptAda.Tests.Utils.Ciphers is
          raise CryptAda_Test_Error;
       end if;
       
-      Print_Information_Message("Trying to decrypt blocks of invalid length");
+      -- 8. Trying to decrypt blocks of invalid length
+
+      Print_Information_Message("8. Trying to decryt blocks of invalid length");
       Print_Message("Must raise CryptAda_Invalid_Block_Length_Error", Indent_Str);
 
       declare
@@ -314,7 +376,9 @@ package body CryptAda.Tests.Utils.Ciphers is
             raise CryptAda_Test_Error;         
       end;
 
-      Print_Information_Message("Decrypting the previously encrypted block.");
+      -- 9. Decrypting the block encrypted on step 5
+      
+      Print_Information_Message("9. Decrypting the block encrypted on step 5");
       Print_Block(CT_B, "Block to decrypt");     
       Process_Block(The_Cipher, CT_B, PT_B2);
       Print_Block(PT_B2, "Decrypted block");     
@@ -325,6 +389,18 @@ package body CryptAda.Tests.Utils.Ciphers is
          Print_Information_Message("Results match");
       else
          Print_Error_Message("Results don't match");
+         raise CryptAda_Test_Error;
+      end if;
+      
+      -- 10. Final Stop_Cipher
+      
+      Print_Information_Message("10. Final Stop_Cipher");
+      Stop_Cipher(The_Cipher);
+      Print_Information_Message("Cipher now must be in Idle state");
+      Print_Block_Cipher_Info(The_Cipher);
+      
+      if Get_Cipher_State(The_Cipher) /= Idle then
+         Print_Error_Message("The cipher is not Idle");
          raise CryptAda_Test_Error;
       end if;
    end Run_Block_Cipher_Basic_Test;

@@ -142,7 +142,8 @@ U_BC        =   $(CTB_UBC)/ut_keys.exe \
                 $(CTB_UBC)/ut_desx.exe \
                 $(CTB_UBC)/ut_des2x.exe \
                 $(CTB_UBC)/ut_tdea.exe \
-                $(CTB_UBC)/ut_aes.exe
+                $(CTB_UBC)/ut_aes.exe \
+                $(CTB_UBC)/ut_blowfish.exe
                 
 T_DIG       =   $(CTB_TDIG)/tt_md2.exe \
                 $(CTB_TDIG)/tt_md4.exe \
@@ -303,6 +304,10 @@ $(CTB_UBC)/ut_tdea.exe: $(CTS_UBC_DRV)ut_tdea.adb
 	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
     
 $(CTB_UBC)/ut_aes.exe: $(CTS_UBC_DRV)ut_aes.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBC)/ut_blowfish.exe: $(CTS_UBC_DRV)ut_blowfish.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
     

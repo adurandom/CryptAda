@@ -1,18 +1,18 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.a (2017/03/31)
+Version: 0.1.b (2017/03/31)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Time.MD5
 Description              : Time trial for CryptAda.Digests.Algorithms.MD5 functionality.
-Started                  : 2017/03/28 - 13:22:03
+Started                  : 2017/03/31 - 19:30:45
 ================================================================================
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 1
 Description      : MD5 hashing
-Started          : 2017/03/28 - 13:22:03
+Started          : 2017/03/31 - 19:30:45
 --------------------------------------------------------------------------------
 [I] Hashing 1MB
 [I] Starting time trial for digest algorithm.
@@ -30,18 +30,18 @@ Started          : 2017/03/28 - 13:22:03
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.003405057 secs.
+    Elapsed time       :           0.003797458 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "a856596d46bb73ed8c52547bf520bdad"
+    Obtained hash      : "0684CA255A6B0D75D29BD37AE18A397D"
 --------------------------------------------------------------------------------
 Time Trial Number: 1
-Finished         : 2017/03/28 - 13:22:03
+Finished         : 2017/03/31 - 19:30:45
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 2
 Description      : MD5 hashing
-Started          : 2017/03/28 - 13:22:03
+Started          : 2017/03/31 - 19:30:45
 --------------------------------------------------------------------------------
 [I] Hashing 10MB
 [I] Starting time trial for digest algorithm.
@@ -59,16 +59,16 @@ Started          : 2017/03/28 - 13:22:03
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.033565593 secs.
+    Elapsed time       :           0.038095414 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "c267d5a6a87284db9881388eae4b6a53"
+    Obtained hash      : "75C611F00F1BABB31599A1A6CB7A2C41"
 --------------------------------------------------------------------------------
 Time Trial Number: 2
-Finished         : 2017/03/28 - 13:22:03
+Finished         : 2017/03/31 - 19:30:45
 --[End Time Trial]--------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Time.MD5
-Finished                 : 2017/03/28 - 13:22:03
+Finished                 : 2017/03/31 - 19:30:45
 ================================================================================

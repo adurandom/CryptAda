@@ -1,24 +1,25 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.a (2017/03/31)
+Version: 0.1.b (2017/03/31)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.TDEA
 Description              : Unit test driver for CryptAda.Ciphers.Block_Ciphers.TDEA functionality.
-Started                  : 2017/03/28 - 17:44:05
+Started                  : 2017/03/31 - 19:29:10
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
-Description     : Attempting to use a Block_Cipher without starting it
-Started         : 2017/03/28 - 17:44:05
+Description     : Running TDEA_Cipher basic tests
+Started         : 2017/03/31 - 19:29:10
 --------------------------------------------------------------------------------
-[I] Must raise CryptAda_Uninitialized_Cipher_Error
-[I] Cipher information
+[I] Basic tests for TDEA_Cipher
+[I] This test case is a 10 step test that will exercise the Cipher dispatching operations
+[I] Cipher information:
 [I] Information of block cipher object:
     Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
-    CryptAda cipher algorithm id  : "BC_TDEA_EDE_3"
+    CryptAda cipher algorithm id  : "SC_TDEA_EDE_3"
     Block_Cipher SCAN name        : "DES-EDE3"
     Block_Cipher ASN1 OID         : ""
     Block_Cipher OpenPGP name     : "OpenPGP.Cipher.2"
@@ -28,393 +29,370 @@ Started         : 2017/03/28 - 17:44:05
     Maximum key length            :  24
     Default key length            :  24
     Key length increment step     :  0
-[I] Trying to process a block.
+[I] 1. Trying to process a block with a cipher in Idle state.
+    Must raise CryptAda_Uninitialized_Cipher_Error exception.
+[I] Block to process:
+Block length:  8
+Block data  :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
 [I] Raised CryptAda_Uninitialized_Cipher_Error
+[I] 2. Trying Start_Cipher with an invalid key
+    Must raise CryptAda_Invalid_Key_Error exception.
+[I] Using a null key
+[I] The key
+Null key
+[I] Calling to Start_Cipher
+[I] Raised CryptAda_Invalid_Key_Error
+[I] Using key with excessive length
+[I] Maximum key length is:  24
+[I] The key
+    Key length:  25
+    Key bytes :
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+[I] Calling to Start_Cipher
+[I] Raised CryptAda_Invalid_Key_Error
+[I] 3. Checking state after successful Start_Cipher for encryption
+[I] Key set to
+    Key length:  24
+    Key bytes :
+16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 
+16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#
+[I] Cipher now must be in Encrypting state
+[I] Information of block cipher object:
+    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
+    CryptAda cipher algorithm id  : "SC_TDEA_EDE_1"
+    Block_Cipher SCAN name        : "DESede"
+    Block_Cipher ASN1 OID         : ""
+    Block_Cipher OpenPGP name     : ""
+    Block size                    :  8
+    Cipher state                  : ENCRYPTING
+    Minimum key length            :  24
+    Maximum key length            :  24
+    Default key length            :  24
+    Key length increment step     :  0
+[I] 4. Trying to encrypt blocks of invalid length
+    Must raise CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid input block information: 
+Block length:  7
+Block data  :
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid input block information: 
+Block length:  9
+Block data  :
+16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid output block information: 
+Block length:  7
+Block data  :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid output block information: 
+Block length:  9
+Block data  :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] 5. Encrypting a valid block
+[I] Block to encrypt
+Block length:  8
+Block data  :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+[I] Encrypted block
+Block length:  8
+Block data  :
+16#C7#, 16#7B#, 16#AC#, 16#AF#, 16#25#, 16#63#, 16#BB#, 16#67#
+[I] 6. Stopping the cipher
+[I] Cipher now must be in Idle state
+[I] Information of block cipher object:
+    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
+    CryptAda cipher algorithm id  : "SC_TDEA_EDE_3"
+    Block_Cipher SCAN name        : "DES-EDE3"
+    Block_Cipher ASN1 OID         : ""
+    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.2"
+    Block size                    :  8
+    Cipher state                  : IDLE
+    Minimum key length            :  24
+    Maximum key length            :  24
+    Default key length            :  24
+    Key length increment step     :  0
+[I] 7. Checking cipher state after successful Start_Cipher for decryption
+[I] Cipher now must be in Decrypting state
+[I] Information of block cipher object:
+    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
+    CryptAda cipher algorithm id  : "SC_TDEA_EDE_1"
+    Block_Cipher SCAN name        : "DESede"
+    Block_Cipher ASN1 OID         : ""
+    Block_Cipher OpenPGP name     : ""
+    Block size                    :  8
+    Cipher state                  : DECRYPTING
+    Minimum key length            :  24
+    Maximum key length            :  24
+    Default key length            :  24
+    Key length increment step     :  0
+[I] 8. Trying to decryt blocks of invalid length
+    Must raise CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid input block information: 
+Block length:  7
+Block data  :
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid input block information: 
+Block length:  9
+Block data  :
+16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid output block information: 
+Block length:  7
+Block data  :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid output block information: 
+Block length:  9
+Block data  :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] 9. Decrypting the block encrypted on step 5
+[I] Block to decrypt
+Block length:  8
+Block data  :
+16#C7#, 16#7B#, 16#AC#, 16#AF#, 16#25#, 16#63#, 16#BB#, 16#67#
+[I] Decrypted block
+Block length:  8
+Block data  :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+[I] Decrypted block must be equal to original plain text block
+[I] Results match
+[I] 10. Final Stop_Cipher
+[I] Cipher now must be in Idle state
+[I] Information of block cipher object:
+    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
+    CryptAda cipher algorithm id  : "SC_TDEA_EDE_3"
+    Block_Cipher SCAN name        : "DES-EDE3"
+    Block_Cipher ASN1 OID         : ""
+    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.2"
+    Block size                    :  8
+    Cipher state                  : IDLE
+    Minimum key length            :  24
+    Maximum key length            :  24
+    Default key length            :  24
+    Key length increment step     :  0
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 17:44:05
+Finished        : 2017/03/31 - 19:29:10
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
-Description     : Cipher life-cycle
-Started         : 2017/03/28 - 17:44:05
+Description     : Testing TDEA_Cipher non dispatching operations
+Started         : 2017/03/31 - 19:29:10
 --------------------------------------------------------------------------------
-[I] Checking Cipher object state along its life cycle.
-[I] TDEA Keying option: KEYING_OPTION_1
-[I] Before Start_Cipher, state is Idle
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
-    CryptAda cipher algorithm id  : "BC_TDEA_EDE_3"
-    Block_Cipher SCAN name        : "DES-EDE3"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.2"
-    Block size                    :  8
-    Cipher state                  : IDLE
-    Minimum key length            :  24
-    Maximum key length            :  24
-    Default key length            :  24
-    Key length increment step     :  0
-[I] Starting cipher for encryption
-State must be: ENCRYPTING
-[I] Key used:
+[I] Interfaces to test:
+Get_TDEA_Keying_Option
+[I] Iterating over different keying options
+[I] TDEA keying option: KEYING_OPTION_1
+[I] Trying to Get_TDEA_Keying_Option on an Idle Cipher will result in an
+    CryptAda_Uninitialized_Cipher_Error exception.
+[I] Raised CryptAda_Uninitialized_Cipher_Error
+[I] Now starting the cipher with an apropriate key
+[I] Key for KEYING_OPTION_1
     Key length:  24
     Key bytes :
-16#69#, 16#66#, 16#09#, 16#E1#, 16#0C#, 16#B8#, 16#11#, 16#90#, 16#44#, 16#EE#, 
-16#9F#, 16#A9#, 16#78#, 16#1B#, 16#F6#, 16#C0#, 16#EB#, 16#ED#, 16#3F#, 16#A0#, 
-16#00#, 16#C9#, 16#11#, 16#BE#
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
-    CryptAda cipher algorithm id  : "BC_TDEA_EDE_3"
-    Block_Cipher SCAN name        : "DES-EDE3"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.2"
-    Block size                    :  8
-    Cipher state                  : ENCRYPTING
-    Minimum key length            :  24
-    Maximum key length            :  24
-    Default key length            :  24
-    Key length increment step     :  0
-[I] Processing a block
-[I] Block to encrypt:
-    Block length:  8
-    Block data  :
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
-[I] Encrypted block:
-    Block length:  8
-    Block data  :
-16#7E#, 16#76#, 16#D4#, 16#16#, 16#66#, 16#DB#, 16#AB#, 16#DC#
-[I] Stopping cipher
-State must be: IDLE
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
-    CryptAda cipher algorithm id  : "BC_TDEA_EDE_3"
-    Block_Cipher SCAN name        : "DES-EDE3"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.2"
-    Block size                    :  8
-    Cipher state                  : IDLE
-    Minimum key length            :  24
-    Maximum key length            :  24
-    Default key length            :  24
-    Key length increment step     :  0
-[I] Starting cipher for decryption
-State must be: DECRYPTING
-[I] Key used:
-    Key length:  24
-    Key bytes :
-16#69#, 16#66#, 16#09#, 16#E1#, 16#0C#, 16#B8#, 16#11#, 16#90#, 16#44#, 16#EE#, 
-16#9F#, 16#A9#, 16#78#, 16#1B#, 16#F6#, 16#C0#, 16#EB#, 16#ED#, 16#3F#, 16#A0#, 
-16#00#, 16#C9#, 16#11#, 16#BE#
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
-    CryptAda cipher algorithm id  : "BC_TDEA_EDE_3"
-    Block_Cipher SCAN name        : "DES-EDE3"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.2"
-    Block size                    :  8
-    Cipher state                  : DECRYPTING
-    Minimum key length            :  24
-    Maximum key length            :  24
-    Default key length            :  24
-    Key length increment step     :  0
-[I] Processing the previously encrypted block
-[I] Block to decrypt:
-    Block length:  8
-    Block data  :
-16#7E#, 16#76#, 16#D4#, 16#16#, 16#66#, 16#DB#, 16#AB#, 16#DC#
-[I] Decrypted block:
-    Block length:  8
-    Block data  :
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
-[I] Stopping cipher
-State must be: IDLE
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
-    CryptAda cipher algorithm id  : "BC_TDEA_EDE_3"
-    Block_Cipher SCAN name        : "DES-EDE3"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.2"
-    Block size                    :  8
-    Cipher state                  : IDLE
-    Minimum key length            :  24
-    Maximum key length            :  24
-    Default key length            :  24
-    Key length increment step     :  0
-[I] Decrypted block must be equal to plain text original block
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 
+16#03#, 16#03#, 16#03#, 16#03#, 16#03#, 16#03#, 16#03#, 16#03#
+    Calling GET_TDEA_Keying_Option
+Expected keying option: KEYING_OPTION_1
+Obtained keying option: KEYING_OPTION_1
 [I] Results match
-[I] TDEA Keying option: KEYING_OPTION_2
-[I] Before Start_Cipher, state is Idle
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
-    CryptAda cipher algorithm id  : "BC_TDEA_EDE_3"
-    Block_Cipher SCAN name        : "DES-EDE3"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.2"
-    Block size                    :  8
-    Cipher state                  : IDLE
-    Minimum key length            :  24
-    Maximum key length            :  24
-    Default key length            :  24
-    Key length increment step     :  0
-[I] Starting cipher for encryption
-State must be: ENCRYPTING
-[I] Key used:
+[I] TDEA keying option: KEYING_OPTION_2
+[I] Trying to Get_TDEA_Keying_Option on an Idle Cipher will result in an
+    CryptAda_Uninitialized_Cipher_Error exception.
+[I] Raised CryptAda_Uninitialized_Cipher_Error
+[I] Now starting the cipher with an apropriate key
+[I] Key for KEYING_OPTION_2
     Key length:  24
     Key bytes :
-16#48#, 16#D7#, 16#60#, 16#4E#, 16#ED#, 16#50#, 16#E2#, 16#21#, 16#0F#, 16#B8#, 
-16#24#, 16#3C#, 16#1E#, 16#4D#, 16#6F#, 16#C9#, 16#48#, 16#D7#, 16#60#, 16#4E#, 
-16#ED#, 16#50#, 16#E2#, 16#21#
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
-    CryptAda cipher algorithm id  : "BC_TDEA_EDE_2"
-    Block_Cipher SCAN name        : "DES-EDE2"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : ""
-    Block size                    :  8
-    Cipher state                  : ENCRYPTING
-    Minimum key length            :  24
-    Maximum key length            :  24
-    Default key length            :  24
-    Key length increment step     :  0
-[I] Processing a block
-[I] Block to encrypt:
-    Block length:  8
-    Block data  :
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
-[I] Encrypted block:
-    Block length:  8
-    Block data  :
-16#BD#, 16#D1#, 16#56#, 16#30#, 16#CF#, 16#F4#, 16#00#, 16#4A#
-[I] Stopping cipher
-State must be: IDLE
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
-    CryptAda cipher algorithm id  : "BC_TDEA_EDE_2"
-    Block_Cipher SCAN name        : "DES-EDE2"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : ""
-    Block size                    :  8
-    Cipher state                  : IDLE
-    Minimum key length            :  24
-    Maximum key length            :  24
-    Default key length            :  24
-    Key length increment step     :  0
-[I] Starting cipher for decryption
-State must be: DECRYPTING
-[I] Key used:
-    Key length:  24
-    Key bytes :
-16#48#, 16#D7#, 16#60#, 16#4E#, 16#ED#, 16#50#, 16#E2#, 16#21#, 16#0F#, 16#B8#, 
-16#24#, 16#3C#, 16#1E#, 16#4D#, 16#6F#, 16#C9#, 16#48#, 16#D7#, 16#60#, 16#4E#, 
-16#ED#, 16#50#, 16#E2#, 16#21#
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
-    CryptAda cipher algorithm id  : "BC_TDEA_EDE_2"
-    Block_Cipher SCAN name        : "DES-EDE2"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : ""
-    Block size                    :  8
-    Cipher state                  : DECRYPTING
-    Minimum key length            :  24
-    Maximum key length            :  24
-    Default key length            :  24
-    Key length increment step     :  0
-[I] Processing the previously encrypted block
-[I] Block to decrypt:
-    Block length:  8
-    Block data  :
-16#BD#, 16#D1#, 16#56#, 16#30#, 16#CF#, 16#F4#, 16#00#, 16#4A#
-[I] Decrypted block:
-    Block length:  8
-    Block data  :
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
-[I] Stopping cipher
-State must be: IDLE
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
-    CryptAda cipher algorithm id  : "BC_TDEA_EDE_2"
-    Block_Cipher SCAN name        : "DES-EDE2"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : ""
-    Block size                    :  8
-    Cipher state                  : IDLE
-    Minimum key length            :  24
-    Maximum key length            :  24
-    Default key length            :  24
-    Key length increment step     :  0
-[I] Decrypted block must be equal to plain text original block
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+    Calling GET_TDEA_Keying_Option
+Expected keying option: KEYING_OPTION_2
+Obtained keying option: KEYING_OPTION_2
 [I] Results match
-[I] TDEA Keying option: KEYING_OPTION_3
-[I] Before Start_Cipher, state is Idle
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
-    CryptAda cipher algorithm id  : "BC_TDEA_EDE_3"
-    Block_Cipher SCAN name        : "DES-EDE3"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.2"
-    Block size                    :  8
-    Cipher state                  : IDLE
-    Minimum key length            :  24
-    Maximum key length            :  24
-    Default key length            :  24
-    Key length increment step     :  0
-[I] Starting cipher for encryption
-State must be: ENCRYPTING
-[I] Key used:
+[I] TDEA keying option: KEYING_OPTION_3
+[I] Trying to Get_TDEA_Keying_Option on an Idle Cipher will result in an
+    CryptAda_Uninitialized_Cipher_Error exception.
+[I] Raised CryptAda_Uninitialized_Cipher_Error
+[I] Now starting the cipher with an apropriate key
+[I] Key for KEYING_OPTION_3
     Key length:  24
     Key bytes :
-16#D7#, 16#66#, 16#FF#, 16#00#, 16#71#, 16#3C#, 16#B8#, 16#AA#, 16#D7#, 16#66#, 
-16#FF#, 16#00#, 16#71#, 16#3C#, 16#B8#, 16#AA#, 16#D7#, 16#66#, 16#FF#, 16#00#, 
-16#71#, 16#3C#, 16#B8#, 16#AA#
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
-    CryptAda cipher algorithm id  : "BC_TDEA_EDE_1"
-    Block_Cipher SCAN name        : "DESede"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : ""
-    Block size                    :  8
-    Cipher state                  : ENCRYPTING
-    Minimum key length            :  24
-    Maximum key length            :  24
-    Default key length            :  24
-    Key length increment step     :  0
-[I] Processing a block
-[I] Block to encrypt:
-    Block length:  8
-    Block data  :
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
-[I] Encrypted block:
-    Block length:  8
-    Block data  :
-16#9E#, 16#51#, 16#30#, 16#F7#, 16#3F#, 16#6B#, 16#BC#, 16#09#
-[I] Stopping cipher
-State must be: IDLE
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
-    CryptAda cipher algorithm id  : "BC_TDEA_EDE_1"
-    Block_Cipher SCAN name        : "DESede"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : ""
-    Block size                    :  8
-    Cipher state                  : IDLE
-    Minimum key length            :  24
-    Maximum key length            :  24
-    Default key length            :  24
-    Key length increment step     :  0
-[I] Starting cipher for decryption
-State must be: DECRYPTING
-[I] Key used:
-    Key length:  24
-    Key bytes :
-16#D7#, 16#66#, 16#FF#, 16#00#, 16#71#, 16#3C#, 16#B8#, 16#AA#, 16#D7#, 16#66#, 
-16#FF#, 16#00#, 16#71#, 16#3C#, 16#B8#, 16#AA#, 16#D7#, 16#66#, 16#FF#, 16#00#, 
-16#71#, 16#3C#, 16#B8#, 16#AA#
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
-    CryptAda cipher algorithm id  : "BC_TDEA_EDE_1"
-    Block_Cipher SCAN name        : "DESede"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : ""
-    Block size                    :  8
-    Cipher state                  : DECRYPTING
-    Minimum key length            :  24
-    Maximum key length            :  24
-    Default key length            :  24
-    Key length increment step     :  0
-[I] Processing the previously encrypted block
-[I] Block to decrypt:
-    Block length:  8
-    Block data  :
-16#9E#, 16#51#, 16#30#, 16#F7#, 16#3F#, 16#6B#, 16#BC#, 16#09#
-[I] Decrypted block:
-    Block length:  8
-    Block data  :
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
-[I] Stopping cipher
-State must be: IDLE
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
-    CryptAda cipher algorithm id  : "BC_TDEA_EDE_1"
-    Block_Cipher SCAN name        : "DESede"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : ""
-    Block size                    :  8
-    Cipher state                  : IDLE
-    Minimum key length            :  24
-    Maximum key length            :  24
-    Default key length            :  24
-    Key length increment step     :  0
-[I] Decrypted block must be equal to plain text original block
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+    Calling GET_TDEA_Keying_Option
+Expected keying option: KEYING_OPTION_3
+Obtained keying option: KEYING_OPTION_3
 [I] Results match
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 17:44:05
+Finished        : 2017/03/31 - 19:29:10
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
-Description     : Testing random key generation
-Started         : 2017/03/28 - 17:44:05
+Description     : Testing TDEA_Cipher non dispatching operations
+Started         : 2017/03/31 - 19:29:10
 --------------------------------------------------------------------------------
-[I] Using an unitialized random generator
-Must raise CryptAda_Generator_Not_Started_Error
-[I] Raised CryptAda_Generator_Not_Started_Error
-[I] Using an un-seeded random generator
-Must raise CryptAda_Generator_Need_Seeding_Error
-[I] Raised CryptAda_Generator_Need_Seeding_Error
-[I] Using an internal seeded random generator
-[I] Generating a Key
-[I] Generated key:
+[I] Interfaces to test:
+Is_Valid_TDEA_Key
+[I] TDEA keying option: KEYING_OPTION_1
+[I] Checking validity of null key
+[I] Testing null key:
+Null key
+Key is not valid: OK
+[I] Checking validity of invalid key lengths
+[I] Testing invalid key 1
+    Key length:  23
+    Key bytes :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 
+16#03#, 16#03#, 16#03#, 16#03#, 16#03#, 16#03#, 16#03#
+Key is not valid: OK
+[I] Checking validity of invalid key lengths
+[I] Testing invalid key 2
+    Key length:  25
+    Key bytes :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 
+16#03#, 16#03#, 16#03#, 16#03#, 16#03#, 16#03#, 16#03#, 16#03#, 16#03#
+Key is not valid: OK
+[I] Checking validity of a KEYING_OPTION_2 key
+[I] Key to test
     Key length:  24
     Key bytes :
-16#A0#, 16#66#, 16#72#, 16#BD#, 16#53#, 16#DE#, 16#E2#, 16#39#, 16#90#, 16#84#, 
-16#CF#, 16#E4#, 16#2E#, 16#D2#, 16#35#, 16#F0#, 16#82#, 16#00#, 16#FA#, 16#F9#, 
-16#D2#, 16#63#, 16#ED#, 16#21#
-[I] Key must be valid
-[I] Key is valid
-[I] Key must be strong
-[I] Key is strong
-[I] Default key length must be 24 bytes.
-Key length:  24
-[I] Key length OK
-[I] Generating keys for different keying option
-[I] Keying option: KEYING_OPTION_1
-[I] Generated key:
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+Key is not valid: OK
+[I] Checking validity of a KEYING_OPTION_3 key
+[I] Key to test
     Key length:  24
     Key bytes :
-16#18#, 16#95#, 16#BB#, 16#F0#, 16#D2#, 16#48#, 16#47#, 16#8D#, 16#87#, 16#AA#, 
-16#D7#, 16#71#, 16#AC#, 16#AC#, 16#CA#, 16#B1#, 16#4E#, 16#8B#, 16#24#, 16#9A#, 
-16#74#, 16#53#, 16#C6#, 16#F0#
-[I] Keying option: KEYING_OPTION_2
-[I] Generated key:
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+Key is not valid: OK
+[I] Checking validity of valid key
+[I] Valid key
     Key length:  24
     Key bytes :
-16#A0#, 16#F9#, 16#17#, 16#CA#, 16#CC#, 16#18#, 16#0C#, 16#B4#, 16#DE#, 16#DD#, 
-16#D8#, 16#DE#, 16#28#, 16#DD#, 16#4B#, 16#D8#, 16#A0#, 16#F9#, 16#17#, 16#CA#, 
-16#CC#, 16#18#, 16#0C#, 16#B4#
-[I] Keying option: KEYING_OPTION_3
-[I] Generated key:
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 
+16#03#, 16#03#, 16#03#, 16#03#, 16#03#, 16#03#, 16#03#, 16#03#
+Key is valid: OK
+[I] TDEA keying option: KEYING_OPTION_2
+[I] Checking validity of null key
+[I] Testing null key:
     Key length:  24
     Key bytes :
-16#4B#, 16#93#, 16#50#, 16#4D#, 16#4B#, 16#B7#, 16#AA#, 16#AC#, 16#4B#, 16#93#, 
-16#50#, 16#4D#, 16#4B#, 16#B7#, 16#AA#, 16#AC#, 16#4B#, 16#93#, 16#50#, 16#4D#, 
-16#4B#, 16#B7#, 16#AA#, 16#AC#
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 
+16#03#, 16#03#, 16#03#, 16#03#, 16#03#, 16#03#, 16#03#, 16#03#
+Key is not valid: OK
+[I] Checking validity of invalid key lengths
+[I] Testing invalid key 1
+    Key length:  23
+    Key bytes :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+Key is not valid: OK
+[I] Checking validity of invalid key lengths
+[I] Testing invalid key 2
+    Key length:  25
+    Key bytes :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+Key is not valid: OK
+[I] Checking validity of a KEYING_OPTION_1 key
+[I] Key to test
+    Key length:  24
+    Key bytes :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 
+16#03#, 16#03#, 16#03#, 16#03#, 16#03#, 16#03#, 16#03#, 16#03#
+Key is not valid: OK
+[I] Checking validity of a KEYING_OPTION_3 key
+[I] Key to test
+    Key length:  24
+    Key bytes :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+Key is not valid: OK
+[I] Checking validity of valid key
+[I] Valid key
+    Key length:  24
+    Key bytes :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+Key is valid: OK
+[I] TDEA keying option: KEYING_OPTION_3
+[I] Checking validity of null key
+[I] Testing null key:
+    Key length:  24
+    Key bytes :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+Key is not valid: OK
+[I] Checking validity of invalid key lengths
+[I] Testing invalid key 1
+    Key length:  23
+    Key bytes :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+Key is not valid: OK
+[I] Checking validity of invalid key lengths
+[I] Testing invalid key 2
+    Key length:  25
+    Key bytes :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+Key is not valid: OK
+[I] Checking validity of a KEYING_OPTION_1 key
+[I] Key to test
+    Key length:  24
+    Key bytes :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 
+16#03#, 16#03#, 16#03#, 16#03#, 16#03#, 16#03#, 16#03#, 16#03#
+Key is not valid: OK
+[I] Checking validity of a KEYING_OPTION_2 key
+[I] Key to test
+    Key length:  24
+    Key bytes :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 16#02#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+Key is not valid: OK
+[I] Checking validity of valid key
+[I] Valid key
+    Key length:  24
+    Key bytes :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+Key is valid: OK
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 17:44:05
+Finished        : 2017/03/31 - 19:29:10
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : TDEA standard test vectors 1
-Started         : 2017/03/28 - 17:44:05
+Started         : 2017/03/31 - 19:29:10
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from: "NIST Special Publication 800-20"
 [I] TDEA Known Answer Tests:  1
@@ -469,20 +447,20 @@ Started         : 2017/03/28 - 17:44:05
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 17:44:05
+Finished        : 2017/03/31 - 19:29:10
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : TDEA Bulk test
-Started         : 2017/03/28 - 17:44:05
+Started         : 2017/03/31 - 19:29:10
 --------------------------------------------------------------------------------
 [I] Block cipher bulk test
     Performing  10000 iterations encrypting and decrypting random blocks
     with random keys.
 [I] Information of block cipher object:
     Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.TDEA.TDEA_CIPHER"
-    CryptAda cipher algorithm id  : "BC_TDEA_EDE_3"
+    CryptAda cipher algorithm id  : "SC_TDEA_EDE_3"
     Block_Cipher SCAN name        : "DES-EDE3"
     Block_Cipher ASN1 OID         : ""
     Block_Cipher OpenPGP name     : "OpenPGP.Cipher.2"
@@ -497,11 +475,11 @@ Started         : 2017/03/28 - 17:44:05
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 17:44:05
+Finished        : 2017/03/31 - 19:29:11
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.TDEA
-Finished                 : 2017/03/28 - 17:44:05
+Finished                 : 2017/03/31 - 19:29:11
 ================================================================================

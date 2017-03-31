@@ -1,18 +1,18 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.a (2017/03/31)
+Version: 0.1.b (2017/03/31)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Counters
 Description              : Unit test driver for CryptAda.Pragmatics.Counters functionality.
-Started                  : 2017/03/28 - 13:21:55
+Started                  : 2017/03/31 - 19:29:05
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Setting counters
-Started         : 2017/03/28 - 13:21:55
+Started         : 2017/03/31 - 19:29:05
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
 - Set_Counter
@@ -26,13 +26,13 @@ Performing  100000 iterations
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:21:55
+Finished        : 2017/03/31 - 19:29:05
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Setting counters (2)
-Started         : 2017/03/28 - 13:21:55
+Started         : 2017/03/31 - 19:29:05
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
 - To_Counter
@@ -46,13 +46,13 @@ Performing  100000 iterations
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:21:55
+Finished        : 2017/03/31 - 19:29:05
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Incrementing counters
-Started         : 2017/03/28 - 13:21:55
+Started         : 2017/03/31 - 19:29:05
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
 - Increment
@@ -133,13 +133,13 @@ High: 16#0000000000000002#
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:21:55
+Finished        : 2017/03/31 - 19:29:05
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Decrementing counters
-Started         : 2017/03/28 - 13:21:55
+Started         : 2017/03/31 - 19:29:05
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
 - Decrement
@@ -229,13 +229,13 @@ Message  : "cryptada-digests-counters.adb:112 explicit raise"
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:21:55
+Finished        : 2017/03/31 - 19:29:05
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Packing bytes
-Started         : 2017/03/28 - 13:21:55
+Started         : 2017/03/31 - 19:29:05
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
 - Pack
@@ -276,13 +276,13 @@ Obtained high: 16#0F0E0D0C0B0A0908#
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:21:55
+Finished        : 2017/03/31 - 19:29:05
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : Unpacking counters
-Started         : 2017/03/28 - 13:21:55
+Started         : 2017/03/31 - 19:29:05
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
 - Unpack
@@ -326,11 +326,11 @@ Obtained array:
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:21:55
+Finished        : 2017/03/31 - 19:29:05
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Counters
-Finished                 : 2017/03/28 - 13:21:55
+Finished                 : 2017/03/31 - 19:29:05
 ================================================================================
