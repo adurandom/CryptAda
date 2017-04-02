@@ -143,7 +143,8 @@ package CryptAda.Names is
          SC_AES_128,             -- AES-128
          SC_AES_192,             -- AES-192
          SC_AES_256,             -- AES-256
-         SC_Blowfish             -- Blowfish.
+         SC_Blowfish,            -- Blowfish
+         SC_RC2                  -- RC2.
       );
       
    --[Block_Cipher_Id]----------------------------------------------------------
@@ -151,7 +152,7 @@ package CryptAda.Names is
    -- CryptAda.
    -----------------------------------------------------------------------------
 
-   subtype Block_Cipher_Id is Symmetric_Cipher_Id range SC_DES .. SC_Blowfish;
+   subtype Block_Cipher_Id is Symmetric_Cipher_Id range SC_DES .. SC_RC2;
    
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------

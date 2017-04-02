@@ -104,6 +104,7 @@ OBJS     =  cryptada.o \
             cryptada-ciphers-block_ciphers-tdea.o \
             cryptada-ciphers-block_ciphers-aes.o \
             cryptada-ciphers-block_ciphers-blowfish.o \
+            cryptada-ciphers-block_ciphers-rc2.o \
             cryptada-ciphers-key_generators.o \
             cryptada-ciphers-key_generators-tdea.o
 
@@ -321,6 +322,10 @@ cryptada-ciphers-block_ciphers-blowfish.o: $(CIPHDIR)/cryptada-ciphers-block_cip
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
+cryptada-ciphers-block_ciphers-rc2.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers-rc2.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+    
 cryptada-ciphers-key_generators.o: $(CIPHDIR)/cryptada-ciphers-key_generators.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
