@@ -16,11 +16,11 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-block_ciphers-tdea.adb
+--    Filename          :  cryptada-ciphers-symmetric-block-tdea.adb
 --    File kind         :  Ada package body
 --    Author            :  A. Duran
 --    Creation date     :  March 25th, 2017
---    Current version   :  1.0
+--    Current version   :  1.2
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the Triple Data Encryption Algorithm (Triple DES EDE) block
@@ -31,15 +31,16 @@
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170325 ADD   Initial implementation.
 --    1.1   20170330 ADD   Removed key generation subprogram.
+--    1.2   20170403 ADD   Changed symmetric ciphers hierarchy.
 --------------------------------------------------------------------------------
 
-with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
-with CryptAda.Names;                      use CryptAda.Names;
-with CryptAda.Exceptions;                 use CryptAda.Exceptions;
-with CryptAda.Ciphers.Keys;               use CryptAda.Ciphers.Keys;
-with CryptAda.Ciphers.Block_Ciphers.DES;  use CryptAda.Ciphers.Block_Ciphers.DES;
+with CryptAda.Pragmatics;                    use CryptAda.Pragmatics;
+with CryptAda.Names;                         use CryptAda.Names;
+with CryptAda.Exceptions;                    use CryptAda.Exceptions;
+with CryptAda.Ciphers.Keys;                  use CryptAda.Ciphers.Keys;
+with CryptAda.Ciphers.Symmetric.Block.DES;   use CryptAda.Ciphers.Symmetric.Block.DES;
 
-package body CryptAda.Ciphers.Block_Ciphers.TDEA is
+package body CryptAda.Ciphers.Symmetric.Block.TDEA is
 
    -----------------------------------------------------------------------------
    --[Subprogram Specification]-------------------------------------------------
@@ -114,16 +115,16 @@ package body CryptAda.Ciphers.Block_Ciphers.TDEA is
         -- Keying option 3 means that three keys are equal, revert to a single
         -- DES block processing.
 
-        Process_Block(With_Cipher.Sub_Ciphers(1), B_I, B_O);
+        Do_Process(With_Cipher.Sub_Ciphers(1), B_I, B_O);
       else
          if With_Cipher.State = Encrypting then
             for I in With_Cipher.Sub_Ciphers'Range loop
-               Process_Block(With_Cipher.Sub_Ciphers(I), B_I, B_O);
+               Do_Process(With_Cipher.Sub_Ciphers(I), B_I, B_O);
                B_I := B_O;
             end loop;
          else
             for I in reverse With_Cipher.Sub_Ciphers'Range loop
-               Process_Block(With_Cipher.Sub_Ciphers(I), B_I, B_O);
+               Do_Process(With_Cipher.Sub_Ciphers(I), B_I, B_O);
                B_I := B_O;
             end loop;
          end if;
@@ -145,9 +146,10 @@ package body CryptAda.Ciphers.Block_Ciphers.TDEA is
    is
    begin
       Object.Cipher_Id     := SC_TDEA_EDE_3;
+      Object.Ciph_Type     := CryptAda.Ciphers.Block_Cipher;
       Object.Key_Info      := TDEA_Key_Info;
-      Object.Block_Size    := TDEA_Block_Size;
       Object.State         := Idle;
+      Object.Block_Size    := TDEA_Block_Size;
       Object.Keying_Option := Keying_Option_1;
    end Initialize;
 
@@ -216,12 +218,12 @@ package body CryptAda.Ciphers.Block_Ciphers.TDEA is
       The_Cipher.Keying_Option   := KO;
    end Start_Cipher;
 
-   --[Process_Block]------------------------------------------------------------
+   --[Do_Process]---------------------------------------------------------------
 
-   procedure   Process_Block(
+   procedure   Do_Process(
                   With_Cipher    : in out TDEA_Cipher;
-                  Input          : in     Cipher_Block;
-                  Output         :    out Cipher_Block)
+                  Input          : in     Byte_Array;
+                  Output         :    out Byte_Array)
    is
    begin
       -- Check state.
@@ -240,7 +242,7 @@ package body CryptAda.Ciphers.Block_Ciphers.TDEA is
       -- Process block.
 
       TDEA_Do_Block(With_Cipher, Input, Output);
-   end Process_Block;
+   end Do_Process;
 
    --[Stop_Cipher]--------------------------------------------------------------
 
@@ -290,4 +292,4 @@ package body CryptAda.Ciphers.Block_Ciphers.TDEA is
       end if;
    end Is_Valid_TDEA_Key;
 
-end CryptAda.Ciphers.Block_Ciphers.TDEA;
+end CryptAda.Ciphers.Symmetric.Block.TDEA;

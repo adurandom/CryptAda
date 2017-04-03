@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 13th, 2017
---    Current version   :  1.0
+--    Current version   :  1.2
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Algorithm naming according to SCAN.
@@ -30,6 +30,7 @@
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170313 ADD   Initial implementation.
 --    1.1   20170329 ADD   Changes in CryptAda.Names.
+--    1.2   20170403 ADD   Changes in Symmetric cipher hierachy.
 --------------------------------------------------------------------------------
 
 package CryptAda.Names.SCAN is
@@ -123,8 +124,8 @@ package CryptAda.Names.SCAN is
          others            => Anonymous_Algorithm'Access
       );
 
-   --[Block Cipher Names]-------------------------------------------------------
-   -- Next constants identify the block ciphers algorithms according to
+   --[Symmetric Cipher Names]---------------------------------------------------
+   -- Next constants identify the symmetric ciphers algorithms according to
    -- SCAN (Standard Cryptographic Algorithm Naming) naming schema.
    -----------------------------------------------------------------------------
 
@@ -139,11 +140,11 @@ package CryptAda.Names.SCAN is
    SCAN_Blowfish                 : aliased constant String := "Blowfish";
    SCAN_RC2                      : aliased constant String := "RC2";
    
-   --[SCAN_Block_Ciphers]-------------------------------------------------------
+   --[SCAN_Symmetric_Ciphers]---------------------------------------------------
    -- Array of SCAN names of block cipher algorithms.
    -----------------------------------------------------------------------------
 
-   SCAN_Block_Ciphers            : constant array(Block_Cipher_Id) of Algorithm_Name_Ref :=
+   SCAN_Symmetric_Ciphers        : constant array(Symmetric_Cipher_Id) of Algorithm_Name_Ref :=
       (
          SC_DES            => SCAN_DES'Access,
          SC_DESX           => SCAN_DESX'Access,

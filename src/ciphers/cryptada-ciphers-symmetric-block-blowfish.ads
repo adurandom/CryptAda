@@ -16,131 +16,113 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-block_ciphers-desx.ads
+--    Filename          :  cryptada-ciphers-symmetric-block-blowfish.ads
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 28th, 2017
---    Current version   :  1.0
+--    Current version   :  1.2
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Implements the DES-X block cipher.
+--    Implements the Blowfish block cipher.
 --
---    In cryptography, DES-X (or DESX) is a variant on the DES (Data Encryption 
---    Standard) symmetric-key block cipher intended to increase the complexity 
---    of a brute force attack using a technique called key whitening.
---
---    The original DES algorithm was specified in 1976 with a 56-bit key size: 
---    2**56 possibilities for the key. There was criticism that an exhaustive 
---    search might be within the capabilities of large governments, particularly 
---    the United States' National Security Agency (NSA). One scheme to increase 
---    the key size of DES without substantially altering the algorithm was 
---    DES-X, proposed by Ron Rivest in May 1984.
---
---    The algorithm has been included in RSA Security's BSAFE cryptographic 
---    library since the late 1980s.
---
---    DES-X augments DES by XORing an extra 64 bits of key (K1) to the plaintext 
---    before applying DES, and then XORing another 64 bits of key (K2) after the 
---    encryption. In this way, the key size is increased to 56 + (2 × 64) = 184 
---    bits (effective 119 bits).
---    
---    DES-X also increases the strength of DES against differential 
---    cryptanalysis and linear cryptanalysis, although the improvement is much 
---    smaller than in the case of brute force attacks.
+--    Blowfish was designed by Bruce Schneier. Blowfish has a 64-bit (8-byte)
+--    block size and a variable key length from 32 bits (4 bytes) up to 448
+--    bits (56 byte). It is a 16-round Feistel cipher and uses large
+--    key-dependent S-boxes.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170328 ADD   Initial implementation.
---    1.1   20170329 ADD   Removed key generation subprogram.
+--    1.1   20170331 ADD   Removed key generation subprogram.
+--    1.2   20170403 ADD   Changed symmetric ciphers hierarchy.
 --------------------------------------------------------------------------------
 
+with CryptAda.Pragmatics;
 with CryptAda.Ciphers.Keys;
-with CryptAda.Ciphers.Block_Ciphers.DES;
 
-package CryptAda.Ciphers.Block_Ciphers.DESX is
+package CryptAda.Ciphers.Symmetric.Block.Blowfish is
 
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[DESX_Block_Size]----------------------------------------------------------
-   -- Size in bytes of DESX blocks.
+   --[Blowfish_Block_Size]------------------------------------------------------
+   -- Size in bytes of Blowfish blocks.
    -----------------------------------------------------------------------------
 
-   DESX_Block_Size               : constant Cipher_Block_Size :=  CryptAda.Ciphers.Block_Ciphers.DES.DES_Block_Size;
+   Blowfish_Block_Size           : constant Cipher_Block_Size := 8;
 
-   --[DESX_Key_Length]----------------------------------------------------------
-   -- Length in bytes of DESX keys. The length is 24 bytes
-   -- - 8 Bytes for DES Key
-   -- - 8 Bytes for pre-encrypt Xor block
-   -- - 8 bytes for post-encrypt Xor block.
-   -----------------------------------------------------------------------------
-
-   DESX_Key_Length               : constant Cipher_Key_Length :=  24;
-   
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[DESX_Cipher]--------------------------------------------------------------
-   -- The DESX block cipher context.
+   --[Blowfish_Cipher]----------------------------------------------------------
+   -- The Blowfish block cipher context.
    -----------------------------------------------------------------------------
-   
-   type DESX_Cipher is new Block_Cipher with private;
 
-   --[DESX_Block]---------------------------------------------------------------
-   -- Constrained subtype for DESX blocks.
+   type Blowfish_Cipher is new Block_Cipher with private;
+
+   --[Blowfish_Block]-----------------------------------------------------------
+   -- Constrained subtype for Blowfish blocks.
    -----------------------------------------------------------------------------
-   
-   subtype DESX_Block is Cipher_Block(1 .. DESX_Block_Size);
-   
+
+   subtype Blowfish_Block is Cipher_Block(1 .. Blowfish_Block_Size);
+
+   --[Blowfish_Key_Length]------------------------------------------------------
+   -- Subtype for key sizes.
+   -----------------------------------------------------------------------------
+
+   subtype Blowfish_Key_Length is Cipher_Key_Length range 4 .. 56;
+
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
 
+   --[Encrypt/Decrypt Interface]------------------------------------------------
+
    --[Start_Cipher]-------------------------------------------------------------
 
    procedure   Start_Cipher(
-                  The_Cipher     : in out DESX_Cipher;
+                  The_Cipher     : in out Blowfish_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     CryptAda.Ciphers.Keys.Key);
 
-   --[Process_Block]------------------------------------------------------------
+   --[Do_Process]---------------------------------------------------------------
 
-   procedure   Process_Block(
-                  With_Cipher    : in out DESX_Cipher;
-                  Input          : in     Cipher_Block;
-                  Output         :    out Cipher_Block);
+   procedure   Do_Process(
+                  With_Cipher    : in out Blowfish_Cipher;
+                  Input          : in     CryptAda.Pragmatics.Byte_Array;
+                  Output         :    out CryptAda.Pragmatics.Byte_Array);
 
    --[Stop_Cipher]--------------------------------------------------------------
-      
+
    procedure   Stop_Cipher(
-                  The_Cipher     : in out DESX_Cipher);
+                  The_Cipher     : in out Blowfish_Cipher);
 
    -----------------------------------------------------------------------------
-   --[Non-dispatching operations]-----------------------------------------------
+   --[Non-Dispatching Operations]-----------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Is_Valid_DESX_Key]--------------------------------------------------------
+   --[Is_Valid_Blowfish_Key]----------------------------------------------------
    -- Purpose:
-   -- Checks if a given key is a valid DESX key.
+   -- Checks if a given key is a valid Blowfish key.
    -----------------------------------------------------------------------------
    -- Arguments:
    -- The_Key                 Key object to check its validity.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Boolean value that indicates if The_Key is a valid key (True) or not
-   -- (False) for the Cipher.
+   -- Boolean value that indicates if The_Key is a valid Blowfish key (True) or
+   -- not (False)
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- None.
    -----------------------------------------------------------------------------
-   
-   function    Is_Valid_DESX_Key(
+
+   function    Is_Valid_Blowfish_Key(
                   The_Key        : in     CryptAda.Ciphers.Keys.Key)
       return   Boolean;
-         
+
    -----------------------------------------------------------------------------
    --[Private Part]-------------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -151,36 +133,58 @@ private
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[DESX_Key_Info]------------------------------------------------------------
-   -- Information regarding DESX keys.
+   --[Blowfish_Key_Info]--------------------------------------------------------
+   -- Information regarding Blowfish keys.
    -----------------------------------------------------------------------------
 
-   DESX_Key_Info                 : constant Cipher_Key_Info := 
+   Blowfish_Key_Info             : constant Cipher_Key_Info :=
       (
-         Min_Key_Length    => DESX_Key_Length,
-         Max_Key_Length    => DESX_Key_Length,
-         Def_Key_Length    => DESX_Key_Length,
-         Key_Length_Inc    => 0
+         Min_Key_Length    =>  4,
+         Max_Key_Length    => 56,
+         Def_Key_Length    => 16,
+         Key_Length_Inc    =>  1
       );
-   
+
+   --[Blowfish_Rounds]----------------------------------------------------------
+   -- Number of rounds in Blowfish processing.
+   -----------------------------------------------------------------------------
+
+   Blowfish_Rounds               : constant Positive := 16;
+
+   --[Blowfish_SBox_Size]-------------------------------------------------------
+   -- Blowfish S-Box size.
+   -----------------------------------------------------------------------------
+
+   Blowfish_SBox_Size            : constant Positive := 1024;
+
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
-   
-   --[DESX_Cipher]--------------------------------------------------------------
-   -- Full definition of the DESX_Cipher tagged type. It extends the
-   -- Block_Cipher with the followitng fields:
-   --
-   -- Sub_Cipher        DES_Cipher.
-   -- Xor_K1            Key for xoring input block before encryption.
-   -- Xor_K2            Key for xoring output block after encryption.
+
+   --[Blowfish_P_Array]---------------------------------------------------------
+   -- Subtype for the Blowfish P_Array field.
    -----------------------------------------------------------------------------
 
-   type DESX_Cipher is new Block_Cipher with
+   subtype Blowfish_P_Array is CryptAda.Pragmatics.Four_Bytes_Array(1 .. Blowfish_Rounds + 2);
+
+   --[Blowfish_S_Boxes]---------------------------------------------------------
+   -- Subtype for the Blowfish S-Boxes.
+   -----------------------------------------------------------------------------
+
+   subtype Blowfish_S_Boxes is CryptAda.Pragmatics.Four_Bytes_Array(1 .. Blowfish_SBox_Size);
+
+   --[Blowfish_Cipher]----------------------------------------------------------
+   -- Full definition of the Blowfish_Cipher tagged type. It extends the
+   -- Block_Cipher with the followitng fields:
+   --
+   -- P_Array              P_Array field.
+   -- S_Boxes              Blowfish S-Boxes.
+   -----------------------------------------------------------------------------
+
+   type Blowfish_Cipher is new Block_Cipher with
       record
-         Sub_Cipher              : CryptAda.Ciphers.Block_Ciphers.DES.DES_Cipher;
-         Xor_K1                  : DESX_Block := (others => 0);
-         Xor_K2                  : DESX_Block := (others => 0);
+         P_Array                 : Blowfish_P_Array := (others => 0);
+         S_Boxes                 : Blowfish_S_Boxes := (others => 0);
       end record;
 
    -----------------------------------------------------------------------------
@@ -188,9 +192,9 @@ private
    -----------------------------------------------------------------------------
 
    procedure   Initialize(
-                  Object         : in out DESX_Cipher);
+                  Object         : in out Blowfish_Cipher);
 
    procedure   Finalize(
-                  Object         : in out DESX_Cipher);
+                  Object         : in out Blowfish_Cipher);
 
-end CryptAda.Ciphers.Block_Ciphers.DESX;
+end CryptAda.Ciphers.Symmetric.Block.Blowfish;

@@ -97,16 +97,18 @@ OBJS     =  cryptada.o \
             cryptada-random-generators-caprng.o \
             cryptada-ciphers.o \
             cryptada-ciphers-keys.o \
-            cryptada-ciphers-block_ciphers.o \
-            cryptada-ciphers-block_ciphers-des.o \
-            cryptada-ciphers-block_ciphers-desx.o \
-            cryptada-ciphers-block_ciphers-des2x.o \
-            cryptada-ciphers-block_ciphers-tdea.o \
-            cryptada-ciphers-block_ciphers-aes.o \
-            cryptada-ciphers-block_ciphers-blowfish.o \
-            cryptada-ciphers-block_ciphers-rc2.o \
+            cryptada-ciphers-symmetric.o \
+            cryptada-ciphers-symmetric-block.o \
+            cryptada-ciphers-symmetric-block-des.o \
+            cryptada-ciphers-symmetric-block-desx.o \
+            cryptada-ciphers-symmetric-block-des2x.o \
+            cryptada-ciphers-symmetric-block-tdea.o \
+            cryptada-ciphers-symmetric-block-blowfish.o \
+            cryptada-ciphers-symmetric-block-aes.o \
+            cryptada-ciphers-symmetric-block-rc2.o \
+            cryptada-ciphers-symmetric-stream.o \
             cryptada-ciphers-key_generators.o \
-            cryptada-ciphers-key_generators-tdea.o
+            cryptada-ciphers-key_generators-tdea.o 
 
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -294,35 +296,43 @@ cryptada-ciphers-keys.o: $(CIPHDIR)/cryptada-ciphers-keys.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
     
-cryptada-ciphers-block_ciphers.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers.adb
+cryptada-ciphers-symmetric.o: $(CIPHDIR)/cryptada-ciphers-symmetric.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
-cryptada-ciphers-block_ciphers-des.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers-des.adb
+cryptada-ciphers-symmetric-block.o: $(CIPHDIR)/cryptada-ciphers-symmetric-block.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
-cryptada-ciphers-block_ciphers-desx.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers-desx.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-ciphers-block_ciphers-des2x.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers-des2x.adb
+cryptada-ciphers-symmetric-block-des.o: $(CIPHDIR)/cryptada-ciphers-symmetric-block-des.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
     
-cryptada-ciphers-block_ciphers-tdea.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers-tdea.adb
+cryptada-ciphers-symmetric-block-desx.o: $(CIPHDIR)/cryptada-ciphers-symmetric-block-desx.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
-cryptada-ciphers-block_ciphers-aes.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers-aes.adb
+cryptada-ciphers-symmetric-block-des2x.o: $(CIPHDIR)/cryptada-ciphers-symmetric-block-des2x.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
-cryptada-ciphers-block_ciphers-blowfish.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers-blowfish.adb
+cryptada-ciphers-symmetric-block-tdea.o: $(CIPHDIR)/cryptada-ciphers-symmetric-block-tdea.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
-cryptada-ciphers-block_ciphers-rc2.o: $(CIPHDIR)/cryptada-ciphers-block_ciphers-rc2.adb
+cryptada-ciphers-symmetric-block-blowfish.o: $(CIPHDIR)/cryptada-ciphers-symmetric-block-blowfish.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-ciphers-symmetric-block-aes.o: $(CIPHDIR)/cryptada-ciphers-symmetric-block-aes.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-ciphers-symmetric-block-rc2.o: $(CIPHDIR)/cryptada-ciphers-symmetric-block-rc2.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+    
+cryptada-ciphers-symmetric-stream.o: $(CIPHDIR)/cryptada-ciphers-symmetric-stream.ads
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
     

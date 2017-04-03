@@ -16,11 +16,11 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-block_ciphers-des.adb
+--    Filename          :  cryptada-ciphers-symmetric-block-des.adb
 --    File kind         :  Ada package body
 --    Author            :  A. Duran
 --    Creation date     :  March 21th, 2017
---    Current version   :  1.0
+--    Current version   :  1.2
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the DES block cipher.
@@ -29,6 +29,8 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170321 ADD   Initial implementation.
+--    1.1   20170329 ADD   Removed key generation subprogram.
+--    1.2   20170403 ADD   Changed symmetric ciphers hierarchy.
 --------------------------------------------------------------------------------
 
 with CryptAda.Pragmatics;              use CryptAda.Pragmatics;
@@ -36,7 +38,7 @@ with CryptAda.Names;                   use CryptAda.Names;
 with CryptAda.Exceptions;              use CryptAda.Exceptions;
 with CryptAda.Ciphers.Keys;            use CryptAda.Ciphers.Keys;
 
-package body CryptAda.Ciphers.Block_Ciphers.DES is
+package body CryptAda.Ciphers.Symmetric.Block.DES is
 
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
@@ -600,9 +602,10 @@ package body CryptAda.Ciphers.Block_Ciphers.DES is
    is
    begin
       Object.Cipher_Id     := SC_DES;
+      Object.Ciph_Type     := CryptAda.Ciphers.Block_Cipher;
       Object.Key_Info      := DES_Key_Info;
-      Object.Block_Size    := DES_Block_Size;
       Object.State         := Idle;
+      Object.Block_Size    := DES_Block_Size;
       Object.Key_Schedule  := (others => 0);
    end Initialize;
 
@@ -646,12 +649,12 @@ package body CryptAda.Ciphers.Block_Ciphers.DES is
       end if;
    end Start_Cipher;
 
-   --[Process_Block]------------------------------------------------------------
+   --[Do_Process]---------------------------------------------------------------
 
-   procedure   Process_Block(
+   procedure   Do_Process(
                   With_Cipher    : in out DES_Cipher;
-                  Input          : in     Cipher_Block;
-                  Output         :    out Cipher_Block)
+                  Input          : in     Byte_Array;
+                  Output         :    out Byte_Array)
    is
       PB             : DES_Packed_Block;
    begin
@@ -672,7 +675,7 @@ package body CryptAda.Ciphers.Block_Ciphers.DES is
       Pack_Block(Input, PB);
       Do_Block(With_Cipher.Key_Schedule, PB);
       Unpack_Block(PB, Output);
-   end Process_Block;
+   end Do_Process;
 
    --[Stop_Cipher]--------------------------------------------------------------
       
@@ -848,4 +851,5 @@ package body CryptAda.Ciphers.Block_Ciphers.DES is
          Set_Key(Of_Key, KB);
       end;
    end Fix_DES_Key_Parity;
-end CryptAda.Ciphers.Block_Ciphers.DES;
+   
+end CryptAda.Ciphers.Symmetric.Block.DES;

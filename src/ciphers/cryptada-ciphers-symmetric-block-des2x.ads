@@ -16,11 +16,11 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-block_ciphers-des2x.ads
+--    Filename          :  cryptada-ciphers-symmetric-block-des2x.ads
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 28th, 2017
---    Current version   :  1.0
+--    Current version   :  1.2
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the DES2X block cipher.
@@ -37,12 +37,14 @@
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170328 ADD   Initial implementation.
 --    1.1   20170329 ADD   Removed key generation subprogram.
+--    1.2   20170403 ADD   Changed symmetric ciphers hierarchy.
 --------------------------------------------------------------------------------
 
+with CryptAda.Pragmatics;
 with CryptAda.Ciphers.Keys;
-with CryptAda.Ciphers.Block_Ciphers.DES;
+with CryptAda.Ciphers.Symmetric.Block.DES;
 
-package CryptAda.Ciphers.Block_Ciphers.DES2X is
+package CryptAda.Ciphers.Symmetric.Block.DES2X is
 
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
@@ -52,7 +54,7 @@ package CryptAda.Ciphers.Block_Ciphers.DES2X is
    -- Size in bytes of DES2X blocks.
    -----------------------------------------------------------------------------
 
-   DES2X_Block_Size              : constant Cipher_Block_Size :=  CryptAda.Ciphers.Block_Ciphers.DES.DES_Block_Size;
+   DES2X_Block_Size              : constant Cipher_Block_Size :=  CryptAda.Ciphers.Symmetric.Block.DES.DES_Block_Size;
 
    --[DES2X_Key_Length]---------------------------------------------------------
    -- Size in bytes of DESX keys. The size is 32 bytes
@@ -93,12 +95,12 @@ package CryptAda.Ciphers.Block_Ciphers.DES2X is
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     CryptAda.Ciphers.Keys.Key);
 
-   --[Process_Block]------------------------------------------------------------
+   --[Do_Process]---------------------------------------------------------------
 
-   procedure   Process_Block(
+   procedure   Do_Process(
                   With_Cipher    : in out DES2X_Cipher;
-                  Input          : in     Cipher_Block;
-                  Output         :    out Cipher_Block);
+                  Input          : in     CryptAda.Pragmatics.Byte_Array;
+                  Output         :    out CryptAda.Pragmatics.Byte_Array);
 
    --[Stop_Cipher]--------------------------------------------------------------
       
@@ -166,7 +168,7 @@ private
 
    type DES2X_Cipher is new Block_Cipher with
       record
-         Sub_Cipher              : CryptAda.Ciphers.Block_Ciphers.DES.DES_Cipher;
+         Sub_Cipher              : CryptAda.Ciphers.Symmetric.Block.DES.DES_Cipher;
          Xor_K1                  : DES2X_Block := (others => 0);
          Xor_K2                  : DES2X_Block := (others => 0);
          Xor_K3                  : DES2X_Block := (others => 0);
@@ -182,4 +184,4 @@ private
    procedure   Finalize(
                   Object         : in out DES2X_Cipher);
 
-end CryptAda.Ciphers.Block_Ciphers.DES2X;
+end CryptAda.Ciphers.Symmetric.Block.DES2X;

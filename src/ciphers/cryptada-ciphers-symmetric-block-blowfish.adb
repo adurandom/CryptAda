@@ -16,11 +16,11 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-block_ciphers-blowfish.adb
+--    Filename          :  cryptada-ciphers-symmetric-block-blowfish.adb
 --    File kind         :  Ada package body
 --    Author            :  A. Duran
 --    Creation date     :  March 28th, 2017
---    Current version   :  1.0
+--    Current version   :  1.2
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the Blowfish block cipher.
@@ -30,6 +30,7 @@
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170328 ADD   Initial implementation.
 --    1.1   20170331 ADD   Removed key generation subprogram.
+--    1.2   20170403 ADD   Changed symmetric ciphers hierarchy.
 --------------------------------------------------------------------------------
 
 with CryptAda.Pragmatics;              use CryptAda.Pragmatics;
@@ -37,7 +38,7 @@ with CryptAda.Names;                   use CryptAda.Names;
 with CryptAda.Exceptions;              use CryptAda.Exceptions;
 with CryptAda.Ciphers.Keys;            use CryptAda.Ciphers.Keys;
 
-package body CryptAda.Ciphers.Block_Ciphers.Blowfish is
+package body CryptAda.Ciphers.Symmetric.Block.Blowfish is
 
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
@@ -478,9 +479,10 @@ package body CryptAda.Ciphers.Block_Ciphers.Blowfish is
    is
    begin
       Object.Cipher_Id  := SC_Blowfish;
+      Object.Ciph_Type  := CryptAda.Ciphers.Block_Cipher;
       Object.Key_Info   := Blowfish_Key_Info;
-      Object.Block_Size := Blowfish_Block_Size;
       Object.State      := Idle;
+      Object.Block_Size := Blowfish_Block_Size;
       Object.P_Array    := (others => 0);
       Object.S_Boxes    := (others => 0);
    end Initialize;
@@ -526,12 +528,12 @@ package body CryptAda.Ciphers.Block_Ciphers.Blowfish is
       end if;
    end Start_Cipher;
 
-   --[Process_Block]------------------------------------------------------------
+   --[Do_Process]---------------------------------------------------------------
 
-   procedure   Process_Block(
+   procedure   Do_Process(
                   With_Cipher    : in out Blowfish_Cipher;
-                  Input          : in     Cipher_Block;
-                  Output         :    out Cipher_Block)
+                  Input          : in     Byte_Array;
+                  Output         :    out Byte_Array)
    is
    begin
       if With_Cipher.State = Idle then
@@ -544,7 +546,7 @@ package body CryptAda.Ciphers.Block_Ciphers.Blowfish is
             Do_Block(With_Cipher.P_Array, With_Cipher.S_Boxes, Input, Output);
          end if;
       end if;
-   end Process_Block;
+   end Do_Process;
 
    --[Stop_Cipher]--------------------------------------------------------------
 
@@ -575,4 +577,4 @@ package body CryptAda.Ciphers.Block_Ciphers.Blowfish is
       end if;
    end Is_Valid_Blowfish_Key;
 
-end CryptAda.Ciphers.Block_Ciphers.Blowfish;
+end CryptAda.Ciphers.Symmetric.Block.Blowfish;

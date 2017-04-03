@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 13th, 2017
---    Current version   :  1.0
+--    Current version   :  1.2
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    This package contains type definitions used to identify object and classes
@@ -33,6 +33,7 @@
 --    1.1   20170329 ADD   Added a Symmetric_Cipher_Id type and made 
 --                         Block_Cipher_Id a subtype of that type.
 --                         Changes the preffix of enumerated values.
+--    1.2   20170403 ADD   Changes in Symmetric cipher hierachy.
 --------------------------------------------------------------------------------
 
 package CryptAda.Names is
@@ -144,7 +145,8 @@ package CryptAda.Names is
          SC_AES_192,             -- AES-192
          SC_AES_256,             -- AES-256
          SC_Blowfish,            -- Blowfish
-         SC_RC2                  -- RC2.
+         SC_RC2,                 -- RC2.
+         SC_RC4                  -- RC4 
       );
       
    --[Block_Cipher_Id]----------------------------------------------------------
@@ -153,6 +155,13 @@ package CryptAda.Names is
    -----------------------------------------------------------------------------
 
    subtype Block_Cipher_Id is Symmetric_Cipher_Id range SC_DES .. SC_RC2;
+
+   --[Stream_Cipher_Id]---------------------------------------------------------
+   -- Enumerated type identifies the symmetric stream ciphers implemented in 
+   -- CryptAda.
+   -----------------------------------------------------------------------------
+
+   subtype Stream_Cipher_Id is Symmetric_Cipher_Id range SC_RC4 .. SC_RC4;
    
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------

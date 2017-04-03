@@ -16,11 +16,11 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-block_ciphers-tdea.ads
+--    Filename          :  cryptada-ciphers-symmetric-block-tdea.ads
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 25th, 2017
---    Current version   :  1.0
+--    Current version   :  1.2
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the Triple Data Encryption Algorithm (Triple DES EDE) block 
@@ -54,12 +54,14 @@
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170325 ADD   Initial implementation.
 --    1.1   20170330 ADD   Removed key generation subprogram.
+--    1.2   20170403 ADD   Changed symmetric ciphers hierarchy.
 --------------------------------------------------------------------------------
 
+with CryptAda.Pragmatics;
 with CryptAda.Ciphers.Keys;
-with CryptAda.Ciphers.Block_Ciphers.DES;
+with CryptAda.Ciphers.Symmetric.Block.DES;
 
-package CryptAda.Ciphers.Block_Ciphers.TDEA is
+package CryptAda.Ciphers.Symmetric.Block.TDEA is
 
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
@@ -69,7 +71,7 @@ package CryptAda.Ciphers.Block_Ciphers.TDEA is
    -- Size in bytes of TDEA blocks.
    -----------------------------------------------------------------------------
 
-   TDEA_Block_Size            : constant Cipher_Block_Size :=  CryptAda.Ciphers.Block_Ciphers.DES.DES_Block_Size;
+   TDEA_Block_Size            : constant Cipher_Block_Size :=  CryptAda.Ciphers.Symmetric.Block.DES.DES_Block_Size;
 
    --[TDEA_Key_Length]----------------------------------------------------------
    -- Size in bytes of TDEA keys.
@@ -147,12 +149,12 @@ package CryptAda.Ciphers.Block_Ciphers.TDEA is
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     CryptAda.Ciphers.Keys.Key);
 
-   --[Process_Block]------------------------------------------------------------
+   --[Do_Process]---------------------------------------------------------------
 
-   procedure   Process_Block(
+   procedure   Do_Process(
                   With_Cipher    : in out TDEA_Cipher;
-                  Input          : in     Cipher_Block;
-                  Output         :    out Cipher_Block);
+                  Input          : in     CryptAda.Pragmatics.Byte_Array;
+                  Output         :    out CryptAda.Pragmatics.Byte_Array);
 
    --[Stop_Cipher]--------------------------------------------------------------
       
@@ -233,7 +235,7 @@ private
    -- Array type of DES_Cipher used in TDEA.
    -----------------------------------------------------------------------------
    
-   type DES_Ciphers is array(Positive range 1 .. 3) of CryptAda.Ciphers.Block_Ciphers.DES.DES_Cipher;
+   type DES_Ciphers is array(Positive range 1 .. 3) of CryptAda.Ciphers.Symmetric.Block.DES.DES_Cipher;
    
    --[TDEA_Cipher]-----------------------------------------------------------
    -- Full definition of the TDEA_Cipher tagged type. It extends the
@@ -260,4 +262,4 @@ private
    procedure   Finalize(
                   Object         : in out TDEA_Cipher);
 
-end CryptAda.Ciphers.Block_Ciphers.TDEA;
+end CryptAda.Ciphers.Symmetric.Block.TDEA;

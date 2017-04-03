@@ -20,7 +20,7 @@
 --    File kind         :  Ada package body.
 --    Author            :  A. Duran
 --    Creation date     :  March 30th, 2017
---    Current version   :  1.0
+--    Current version   :  1.1
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    TDEA key generator.
@@ -29,14 +29,15 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170329 ADD   Initial implementation.
+--    1.1   20170403 ADD   Changes in Symmetric ciphers hierarchy.
 --------------------------------------------------------------------------------
 
-with CryptAda.Exceptions;                 use CryptAda.Exceptions;
-with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
-with CryptAda.Random.Generators;          use CryptAda.Random.Generators;
-with CryptAda.Ciphers.Keys;               use CryptAda.Ciphers.Keys;
-with CryptAda.Ciphers.Block_Ciphers.DES;  use CryptAda.Ciphers.Block_Ciphers.DES;
-with CryptAda.Ciphers.Block_Ciphers.TDEA; use CryptAda.Ciphers.Block_Ciphers.TDEA;
+with CryptAda.Exceptions;                    use CryptAda.Exceptions;
+with CryptAda.Pragmatics;                    use CryptAda.Pragmatics;
+with CryptAda.Random.Generators;             use CryptAda.Random.Generators;
+with CryptAda.Ciphers.Keys;                  use CryptAda.Ciphers.Keys;
+with CryptAda.Ciphers.Symmetric.Block.DES;   use CryptAda.Ciphers.Symmetric.Block.DES;
+with CryptAda.Ciphers.Symmetric.Block.TDEA;  use CryptAda.Ciphers.Symmetric.Block.TDEA;
 
 package body CryptAda.Ciphers.Key_Generators.TDEA is
 

@@ -16,11 +16,11 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-block_ciphers-rc2.adb
+--    Filename          :  cryptada-ciphers-symmetric-block-rc2.adb
 --    File kind         :  Ada package body
 --    Author            :  A. Duran
 --    Creation date     :  April 2nd, 2017
---    Current version   :  1.0
+--    Current version   :  1.1
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the RC2 block cipher.
@@ -29,6 +29,7 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170402 ADD   Initial implementation.
+--    1.1   20170403 ADD   Changed symmetric ciphers hierarchy.
 --------------------------------------------------------------------------------
 
 with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
@@ -36,7 +37,7 @@ with CryptAda.Names;                      use CryptAda.Names;
 with CryptAda.Exceptions;                 use CryptAda.Exceptions;
 with CryptAda.Ciphers.Keys;               use CryptAda.Ciphers.Keys;
 
-package body CryptAda.Ciphers.Block_Ciphers.RC2 is
+package body CryptAda.Ciphers.Symmetric.Block.RC2 is
 
    -----------------------------------------------------------------------------
    --[Generic Instantiation]----------------------------------------------------
@@ -517,9 +518,10 @@ package body CryptAda.Ciphers.Block_Ciphers.RC2 is
    is
    begin
       Object.Cipher_Id     := SC_RC2;
+      Object.Ciph_Type     := CryptAda.Ciphers.Block_Cipher;
       Object.Key_Info      := RC2_Key_Info;
-      Object.Block_Size    := RC2_Block_Size;
       Object.State         := Idle;
+      Object.Block_Size    := RC2_Block_Size;
       Object.Effective_KB  := RC2_Effective_Key_Bits'First;
       Object.Expanded_Key  := (others => 0);
    end Initialize;
@@ -559,12 +561,12 @@ package body CryptAda.Ciphers.Block_Ciphers.RC2 is
       Start_Cipher(The_Cipher, For_Operation, With_Key, 8 * KL);
    end Start_Cipher;
 
-   --[Process_Block]------------------------------------------------------------
+   --[Do_Process]---------------------------------------------------------------
 
-   procedure   Process_Block(
+   procedure   Do_Process(
                   With_Cipher    : in out RC2_Cipher;
-                  Input          : in     Cipher_Block;
-                  Output         :    out Cipher_Block)
+                  Input          : in     Byte_Array;
+                  Output         :    out Byte_Array)
    is
    begin
       -- Check state.
@@ -587,7 +589,7 @@ package body CryptAda.Ciphers.Block_Ciphers.RC2 is
       else
          Decrypt_Block(With_Cipher.Expanded_Key, Input, Output);
       end if;
-   end Process_Block;
+   end Do_Process;
    
    --[Stop_Cipher]--------------------------------------------------------------
       
@@ -663,4 +665,4 @@ package body CryptAda.Ciphers.Block_Ciphers.RC2 is
       end if;
    end Is_Valid_RC2_Key;
          
-end CryptAda.Ciphers.Block_Ciphers.RC2;
+end CryptAda.Ciphers.Symmetric.Block.RC2;

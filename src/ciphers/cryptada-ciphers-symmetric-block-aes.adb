@@ -16,11 +16,11 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-block_ciphers-aes.adb
+--    Filename          :  cryptada-ciphers-symmetric-block-aes.adb
 --    File kind         :  Ada package body
 --    Author            :  A. Duran
 --    Creation date     :  March 25th, 2017
---    Current version   :  1.0
+--    Current version   :  1.2
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the AES block cipher.
@@ -30,6 +30,7 @@
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170325 ADD   Initial implementation.
 --    1.1   20170330 ADD   Removed key generation subprogram.
+--    1.2   20170403 ADD   Changed symmetric ciphers hierarchy.
 --------------------------------------------------------------------------------
 
 with Ada.Unchecked_Deallocation;
@@ -39,7 +40,7 @@ with CryptAda.Names;                      use CryptAda.Names;
 with CryptAda.Exceptions;                 use CryptAda.Exceptions;
 with CryptAda.Ciphers.Keys;               use CryptAda.Ciphers.Keys;
 
-package body CryptAda.Ciphers.Block_Ciphers.AES is
+package body CryptAda.Ciphers.Symmetric.Block.AES is
 
    -----------------------------------------------------------------------------
    --[Generic Instantiation]----------------------------------------------------
@@ -950,9 +951,10 @@ package body CryptAda.Ciphers.Block_Ciphers.AES is
    is
    begin
       Object.Cipher_Id     := SC_AES_256;
+      Object.Ciph_Type     := CryptAda.Ciphers.Block_Cipher;
       Object.Key_Info      := AES_Key_Info;
-      Object.Block_Size    := AES_Block_Size;
       Object.State         := Idle;
+      Object.Block_Size    := AES_Block_Size;
       Object.Key_Id        := AES_256;
       Object.Round_Keys    := null;
    end Initialize;
@@ -1033,12 +1035,12 @@ package body CryptAda.Ciphers.Block_Ciphers.AES is
       The_Cipher.Round_Keys      := RK;      
    end Start_Cipher;
 
-   --[Process_Block]------------------------------------------------------------
+   --[Do_Process]---------------------------------------------------------------
 
-   procedure   Process_Block(
+   procedure   Do_Process(
                   With_Cipher    : in out AES_Cipher;
-                  Input          : in     Cipher_Block;
-                  Output         :    out Cipher_Block)
+                  Input          : in     Byte_Array;
+                  Output         :    out Byte_Array)
    is
       B_I            : AES_Packed_Block;
       B_O            : AES_Packed_Block;
@@ -1067,7 +1069,7 @@ package body CryptAda.Ciphers.Block_Ciphers.AES is
       end if;
       
       Output := Unpack_Block(B_O);
-   end Process_Block;
+   end Do_Process;
    
    --[Stop_Cipher]--------------------------------------------------------------
       
@@ -1128,4 +1130,4 @@ package body CryptAda.Ciphers.Block_Ciphers.AES is
       end if;
    end Is_Valid_AES_Key;
          
-end CryptAda.Ciphers.Block_Ciphers.AES;
+end CryptAda.Ciphers.Symmetric.Block.AES;

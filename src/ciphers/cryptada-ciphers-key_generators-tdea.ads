@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 30th, 2017
---    Current version   :  1.0
+--    Current version   :  1.1
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    TDEA key generator.
@@ -29,10 +29,11 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170329 ADD   Initial implementation.
+--    1.1   20170403 ADD   Changes in Symmetric ciphers hierarchy.
 --------------------------------------------------------------------------------
 
 with CryptAda.Ciphers.Keys;
-with CryptAda.Ciphers.Block_Ciphers.TDEA;
+with CryptAda.Ciphers.Symmetric.Block.TDEA;
 
 package CryptAda.Ciphers.Key_Generators.TDEA is
 
@@ -70,7 +71,7 @@ package CryptAda.Ciphers.Key_Generators.TDEA is
    procedure   Generate_Key(
                   The_Generator  : in out TDEA_Key_Generator'Class;
                   The_Key        : in out CryptAda.Ciphers.Keys.Key;
-                  Keying_Option  : in     CryptAda.Ciphers.Block_Ciphers.TDEA.TDEA_Keying_Option);
+                  Keying_Option  : in     CryptAda.Ciphers.Symmetric.Block.TDEA.TDEA_Keying_Option);
    
    -----------------------------------------------------------------------------
    --[Private Part]-------------------------------------------------------------

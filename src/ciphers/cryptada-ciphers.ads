@@ -23,7 +23,7 @@
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Root package for CryptAda ciphers.
+--    Root package for CryptAda symmetric ciphers.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why

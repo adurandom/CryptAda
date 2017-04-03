@@ -16,11 +16,11 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-block_ciphers-aes.ads
+--    Filename          :  cryptada-ciphers-symmetric-block-aes.ads
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 25th, 2017
---    Current version   :  1.0
+--    Current version   :  1.2
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the AES block cipher.
@@ -62,12 +62,13 @@
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170325 ADD   Initial implementation.
 --    1.1   20170330 ADD   Removed key generation subprogram.
+--    1.2   20170403 ADD   Changed symmetric ciphers hierarchy.
 --------------------------------------------------------------------------------
 
 with CryptAda.Pragmatics;
 with CryptAda.Ciphers.Keys;
 
-package CryptAda.Ciphers.Block_Ciphers.AES is
+package CryptAda.Ciphers.Symmetric.Block.AES is
 
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
@@ -132,12 +133,12 @@ package CryptAda.Ciphers.Block_Ciphers.AES is
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     CryptAda.Ciphers.Keys.Key);
 
-   --[Process_Block]------------------------------------------------------------
+   --[Do_Process]---------------------------------------------------------------
 
-   procedure   Process_Block(
+   procedure   Do_Process(
                   With_Cipher    : in out AES_Cipher;
-                  Input          : in     Cipher_Block;
-                  Output         :    out Cipher_Block);
+                  Input          : in     CryptAda.Pragmatics.Byte_Array;
+                  Output         :    out CryptAda.Pragmatics.Byte_Array);
 
    --[Stop_Cipher]--------------------------------------------------------------
       
@@ -255,4 +256,4 @@ private
    procedure   Finalize(
                   Object         : in out AES_Cipher);
 
-end CryptAda.Ciphers.Block_Ciphers.AES;
+end CryptAda.Ciphers.Symmetric.Block.AES;

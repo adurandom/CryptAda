@@ -16,11 +16,11 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-block_ciphers-des.ads
+--    Filename          :  cryptada-ciphers-symmetric-block-des.ads
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 21th, 2017
---    Current version   :  1.0
+--    Current version   :  1.2
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the DES block cipher.
@@ -63,12 +63,13 @@
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170321 ADD   Initial implementation.
 --    1.1   20170329 ADD   Removed key generation subprogram.
+--    1.2   20170403 ADD   Changed symmetric ciphers hierarchy.
 --------------------------------------------------------------------------------
 
 with CryptAda.Pragmatics;
 with CryptAda.Ciphers.Keys;
 
-package CryptAda.Ciphers.Block_Ciphers.DES is
+package CryptAda.Ciphers.Symmetric.Block.DES is
 
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
@@ -113,12 +114,12 @@ package CryptAda.Ciphers.Block_Ciphers.DES is
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     CryptAda.Ciphers.Keys.Key);
 
-   --[Process_Block]------------------------------------------------------------
+   --[Do_Process]---------------------------------------------------------------
 
-   procedure   Process_Block(
+   procedure   Do_Process(
                   With_Cipher    : in out DES_Cipher;
-                  Input          : in     Cipher_Block;
-                  Output         :    out Cipher_Block);
+                  Input          : in     CryptAda.Pragmatics.Byte_Array;
+                  Output         :    out CryptAda.Pragmatics.Byte_Array);
 
    --[Stop_Cipher]--------------------------------------------------------------
       
@@ -275,4 +276,4 @@ private
    procedure   Finalize(
                   Object         : in out DES_Cipher);
 
-end CryptAda.Ciphers.Block_Ciphers.DES;
+end CryptAda.Ciphers.Symmetric.Block.DES;

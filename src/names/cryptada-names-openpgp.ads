@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 13th, 2017
---    Current version   :  1.0
+--    Current version   :  1.2
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    OpenPGP naming for algorithms.
@@ -30,6 +30,7 @@
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170313 ADD   Initial implementation.
 --    1.1   20170329 ADD   Changes in CryptAda.Names.
+--    1.2   20170403 ADD   Changes in Symmetric cipher hierachy.
 --------------------------------------------------------------------------------
 
 package CryptAda.Names.OpenPGP is
@@ -64,8 +65,8 @@ package CryptAda.Names.OpenPGP is
          others            => Anonymous_Algorithm'Access
       );
 
-   --[Block Cipher Names]-------------------------------------------------------
-   -- Next constants identify the block ciphers algorithms according to
+   --[Symmetric Cipher Names]---------------------------------------------------
+   -- Next constants identify the symmetric ciphers algorithms according to
    -- OpenPGP naming schema.
    -----------------------------------------------------------------------------
 
@@ -75,11 +76,11 @@ package CryptAda.Names.OpenPGP is
    OpenPGP_AES_256            : aliased constant String := "OpenPGP.Cipher.9";
    OpenPGP_Blowfish           : aliased constant String := "OpenPGP.Cipher.4";
    
-   --[OpenPGP_Block_Ciphers]----------------------------------------------------
+   --[OpenPGP_Symmetric_Ciphers]------------------------------------------------
    -- Array of OpenPGP names of block ciphers.
    -----------------------------------------------------------------------------
 
-   OpenPGP_Block_Ciphers         : constant array(Block_Cipher_Id) of Algorithm_Name_Ref :=
+   OpenPGP_Symmetric_Ciphers  : constant array(Symmetric_Cipher_Id) of Algorithm_Name_Ref :=
       (
          SC_TDEA_EDE_3     => OpenPGP_DES_EDE_3'Access,
          SC_AES_128        => OpenPGP_AES_128'Access,
