@@ -139,6 +139,7 @@ package CryptAda.Names.SCAN is
    SCAN_AES256                   : aliased constant String := "AES256";
    SCAN_Blowfish                 : aliased constant String := "Blowfish";
    SCAN_RC2                      : aliased constant String := "RC2";
+   SCAN_IDEA                     : aliased constant String := "IDEA";
    
    --[SCAN_Symmetric_Ciphers]---------------------------------------------------
    -- Array of SCAN names of block cipher algorithms.
@@ -156,6 +157,7 @@ package CryptAda.Names.SCAN is
          SC_AES_256        => SCAN_AES256'Access,
          SC_Blowfish       => SCAN_Blowfish'Access,
          SC_RC2            => SCAN_RC2'Access,
+         SC_IDEA           => SCAN_IDEA'Access,
          others            => Anonymous_Algorithm'Access
       );
       
