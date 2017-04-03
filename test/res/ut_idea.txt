@@ -1,0 +1,372 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.1.b (2017/03/31)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.IDEA
+Description              : Unit test driver for CryptAda.Ciphers.Symmetric.Block.IDEA functionality.
+Started                  : 2017/04/04 - 00:03:08
+================================================================================
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Running IDEA_Cipher basic tests
+Started         : 2017/04/04 - 00:03:08
+--------------------------------------------------------------------------------
+[I] Basic tests for IDEA_Cipher
+    This test case is a 10 step test that will exercise Block_Cipher dispatching operations
+[I] Cipher information:
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.IDEA.IDEA_CIPHER"
+    CryptAda cipher algorithm id  : SC_IDEA
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "IDEA"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.1"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  16
+    Maximum key length            :  16
+    Default key length            :  16
+    Key length increment step     :  0
+    Block size                    :  8
+[I] Basic Test 1
+    Trying to process a block with a cipher in Idle state.
+    Must raise CryptAda_Uninitialized_Cipher_Error exception.
+[I] Block to process:
+Block length:  8
+Block data  :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+[I] Raised CryptAda_Uninitialized_Cipher_Error
+[I] Basic Test 2
+    Trying Start_Cipher with an invalid key
+    Must raise CryptAda_Invalid_Key_Error exception.
+[I] Using a null key
+[I] The key
+Null key
+[I] Calling to Start_Cipher
+[I] Raised CryptAda_Invalid_Key_Error
+[I] Using key with excessive length
+[I] Maximum key length is:  16
+[I] The key
+    Key length:  17
+    Key bytes :
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#
+[I] Calling to Start_Cipher
+[I] Raised CryptAda_Invalid_Key_Error
+[I] Basic Test 3
+    Checking state after successful Start_Cipher for encryption
+[I] Key set to
+    Key length:  16
+    Key bytes :
+16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#
+[I] Cipher now must be in Encrypting state
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.IDEA.IDEA_CIPHER"
+    CryptAda cipher algorithm id  : SC_IDEA
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "IDEA"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.1"
+    Cipher state                  : ENCRYPTING
+    Started                       : TRUE
+    Minimum key length            :  16
+    Maximum key length            :  16
+    Default key length            :  16
+    Key length increment step     :  0
+    Block size                    :  8
+[I] Basic Test 4
+    Trying to encrypt blocks of invalid length
+    Must raise CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid input block information: 
+Block length:  7
+Block data  :
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid input block information: 
+Block length:  9
+Block data  :
+16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid output block information: 
+Block length:  7
+Block data  :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid output block information: 
+Block length:  9
+Block data  :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Basic Test 5
+    Encrypting a valid block
+[I] Block to encrypt
+Block length:  8
+Block data  :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+[I] Encrypted block
+Block length:  8
+Block data  :
+16#DC#, 16#30#, 16#25#, 16#33#, 16#6A#, 16#8B#, 16#59#, 16#E9#
+[I] Basic Test 6
+    Stopping the cipher and check state
+[I] Cipher now must be in Idle state
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.IDEA.IDEA_CIPHER"
+    CryptAda cipher algorithm id  : SC_IDEA
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "IDEA"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.1"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  16
+    Maximum key length            :  16
+    Default key length            :  16
+    Key length increment step     :  0
+    Block size                    :  8
+[I] Basic Test 7
+    Checking cipher state after successful Start_Cipher for decryption
+[I] Cipher now must be in Decrypting state
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.IDEA.IDEA_CIPHER"
+    CryptAda cipher algorithm id  : SC_IDEA
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "IDEA"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.1"
+    Cipher state                  : DECRYPTING
+    Started                       : TRUE
+    Minimum key length            :  16
+    Maximum key length            :  16
+    Default key length            :  16
+    Key length increment step     :  0
+    Block size                    :  8
+[I] Basic Test 8
+    Trying to decryt blocks of invalid length
+    Must raise CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid input block information: 
+Block length:  7
+Block data  :
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid input block information: 
+Block length:  9
+Block data  :
+16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid output block information: 
+Block length:  7
+Block data  :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid output block information: 
+Block length:  9
+Block data  :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Basic Test 9
+    Decrypting the block encrypted on basic test 5. Must be equal to original
+    plaintext block
+[I] Block to decrypt
+Block length:  8
+Block data  :
+16#DC#, 16#30#, 16#25#, 16#33#, 16#6A#, 16#8B#, 16#59#, 16#E9#
+[I] Decrypted block
+Block length:  8
+Block data  :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+[I] Results match
+[I] Basic Test 10
+    Final Stop_Cipher
+[I] Cipher now must be in Idle state
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.IDEA.IDEA_CIPHER"
+    CryptAda cipher algorithm id  : SC_IDEA
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "IDEA"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.1"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  16
+    Maximum key length            :  16
+    Default key length            :  16
+    Key length increment step     :  0
+    Block size                    :  8
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/04/04 - 00:03:08
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Testing IDEA_Cipher non dispatching operations
+Started         : 2017/04/04 - 00:03:08
+--------------------------------------------------------------------------------
+[I] Interfaces to test:
+    Is_Valid_IDEA_Key
+[I] Null Key must not be valid
+[I] Null key
+Null key
+[I] A key of  15 bytes must not be valid
+[I] Invalid key
+    Key length:  15
+    Key bytes :
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#
+[I] Key of  16 bytes must be valid
+Key length  16 is valid
+[I] A key of  17 bytes must not be valid
+[I] Invalid key
+    Key length:  17
+    Key bytes :
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/04/04 - 00:03:08
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : IDEA standard test vectors
+Started         : 2017/04/04 - 00:03:08
+--------------------------------------------------------------------------------
+[I] Using test vectors obtained from: http://web.archive.org/web/20000613182108/http://www.ascom.ch/infosec/downloads.html
+[I] IDEA Test Vector:  1
+    Key                     : 16#72#, 16#9A#, 16#27#, 16#ED#, 16#8F#, 16#5C#, 16#3E#, 16#8B#, 16#AF#, 16#16#, 16#56#, 16#0D#, 16#14#, 16#C9#, 16#0B#, 16#43#
+    Plain text block        : 16#D5#, 16#3F#, 16#AB#, 16#BF#, 16#94#, 16#FF#, 16#8B#, 16#5F#
+    Expected encrypted block: 16#1D#, 16#0C#, 16#B2#, 16#AF#, 16#16#, 16#54#, 16#82#, 16#0A#
+    Encrypting ...
+    Obtained encrypted block: 16#1D#, 16#0C#, 16#B2#, 16#AF#, 16#16#, 16#54#, 16#82#, 16#0A#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#D5#, 16#3F#, 16#AB#, 16#BF#, 16#94#, 16#FF#, 16#8B#, 16#5F#
+[I] Cipher test vector, results match
+[I] IDEA Test Vector:  2
+    Key                     : 16#72#, 16#9A#, 16#27#, 16#ED#, 16#8F#, 16#5C#, 16#3E#, 16#8B#, 16#AF#, 16#16#, 16#56#, 16#0D#, 16#14#, 16#C9#, 16#0B#, 16#43#
+    Plain text block        : 16#84#, 16#8F#, 16#83#, 16#67#, 16#80#, 16#93#, 16#81#, 16#69#
+    Expected encrypted block: 16#D7#, 16#E0#, 16#46#, 16#82#, 16#26#, 16#D0#, 16#FC#, 16#56#
+    Encrypting ...
+    Obtained encrypted block: 16#D7#, 16#E0#, 16#46#, 16#82#, 16#26#, 16#D0#, 16#FC#, 16#56#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#84#, 16#8F#, 16#83#, 16#67#, 16#80#, 16#93#, 16#81#, 16#69#
+[I] Cipher test vector, results match
+[I] IDEA Test Vector:  3
+    Key                     : 16#72#, 16#9A#, 16#27#, 16#ED#, 16#8F#, 16#5C#, 16#3E#, 16#8B#, 16#AF#, 16#16#, 16#56#, 16#0D#, 16#14#, 16#C9#, 16#0B#, 16#43#
+    Plain text block        : 16#81#, 16#94#, 16#40#, 16#CA#, 16#20#, 16#65#, 16#D1#, 16#12#
+    Expected encrypted block: 16#26#, 16#4A#, 16#8B#, 16#BA#, 16#66#, 16#95#, 16#90#, 16#75#
+    Encrypting ...
+    Obtained encrypted block: 16#26#, 16#4A#, 16#8B#, 16#BA#, 16#66#, 16#95#, 16#90#, 16#75#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#81#, 16#94#, 16#40#, 16#CA#, 16#20#, 16#65#, 16#D1#, 16#12#
+[I] Cipher test vector, results match
+[I] IDEA Test Vector:  4
+    Key                     : 16#72#, 16#9A#, 16#27#, 16#ED#, 16#8F#, 16#5C#, 16#3E#, 16#8B#, 16#AF#, 16#16#, 16#56#, 16#0D#, 16#14#, 16#C9#, 16#0B#, 16#43#
+    Plain text block        : 16#68#, 16#89#, 16#F5#, 16#64#, 16#7A#, 16#B2#, 16#3D#, 16#59#
+    Expected encrypted block: 16#F9#, 16#63#, 16#46#, 16#8B#, 16#52#, 16#F4#, 16#5D#, 16#4D#
+    Encrypting ...
+    Obtained encrypted block: 16#F9#, 16#63#, 16#46#, 16#8B#, 16#52#, 16#F4#, 16#5D#, 16#4D#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#68#, 16#89#, 16#F5#, 16#64#, 16#7A#, 16#B2#, 16#3D#, 16#59#
+[I] Cipher test vector, results match
+[I] IDEA Test Vector:  5
+    Key                     : 16#72#, 16#9A#, 16#27#, 16#ED#, 16#8F#, 16#5C#, 16#3E#, 16#8B#, 16#AF#, 16#16#, 16#56#, 16#0D#, 16#14#, 16#C9#, 16#0B#, 16#43#
+    Plain text block        : 16#DF#, 16#8C#, 16#6F#, 16#C6#, 16#37#, 16#E3#, 16#DA#, 16#D1#
+    Expected encrypted block: 16#29#, 16#35#, 16#8C#, 16#C6#, 16#C8#, 16#38#, 16#28#, 16#AE#
+    Encrypting ...
+    Obtained encrypted block: 16#29#, 16#35#, 16#8C#, 16#C6#, 16#C8#, 16#38#, 16#28#, 16#AE#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#DF#, 16#8C#, 16#6F#, 16#C6#, 16#37#, 16#E3#, 16#DA#, 16#D1#
+[I] Cipher test vector, results match
+[I] IDEA Test Vector:  6
+    Key                     : 16#72#, 16#9A#, 16#27#, 16#ED#, 16#8F#, 16#5C#, 16#3E#, 16#8B#, 16#AF#, 16#16#, 16#56#, 16#0D#, 16#14#, 16#C9#, 16#0B#, 16#43#
+    Plain text block        : 16#AC#, 16#48#, 16#56#, 16#24#, 16#2B#, 16#12#, 16#15#, 16#89#
+    Expected encrypted block: 16#95#, 16#CD#, 16#92#, 16#F4#, 16#4B#, 16#AC#, 16#B7#, 16#2D#
+    Encrypting ...
+    Obtained encrypted block: 16#95#, 16#CD#, 16#92#, 16#F4#, 16#4B#, 16#AC#, 16#B7#, 16#2D#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#AC#, 16#48#, 16#56#, 16#24#, 16#2B#, 16#12#, 16#15#, 16#89#
+[I] Cipher test vector, results match
+[I] IDEA Test Vector:  7
+    Key                     : 16#72#, 16#9A#, 16#27#, 16#ED#, 16#8F#, 16#5C#, 16#3E#, 16#8B#, 16#AF#, 16#16#, 16#56#, 16#0D#, 16#14#, 16#C9#, 16#0B#, 16#43#
+    Plain text block        : 16#CB#, 16#E4#, 16#65#, 16#F2#, 16#32#, 16#F9#, 16#D8#, 16#5C#
+    Expected encrypted block: 16#BC#, 16#E2#, 16#4D#, 16#C8#, 16#D0#, 16#96#, 16#1C#, 16#44#
+    Encrypting ...
+    Obtained encrypted block: 16#BC#, 16#E2#, 16#4D#, 16#C8#, 16#D0#, 16#96#, 16#1C#, 16#44#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#CB#, 16#E4#, 16#65#, 16#F2#, 16#32#, 16#F9#, 16#D8#, 16#5C#
+[I] Cipher test vector, results match
+[I] IDEA Test Vector:  8
+    Key                     : 16#72#, 16#9A#, 16#27#, 16#ED#, 16#8F#, 16#5C#, 16#3E#, 16#8B#, 16#AF#, 16#16#, 16#56#, 16#0D#, 16#14#, 16#C9#, 16#0B#, 16#43#
+    Plain text block        : 16#6C#, 16#2E#, 16#36#, 16#17#, 16#DA#, 16#2B#, 16#AC#, 16#35#
+    Expected encrypted block: 16#15#, 16#69#, 16#E0#, 16#62#, 16#70#, 16#07#, 16#B1#, 16#2E#
+    Encrypting ...
+    Obtained encrypted block: 16#15#, 16#69#, 16#E0#, 16#62#, 16#70#, 16#07#, 16#B1#, 16#2E#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#6C#, 16#2E#, 16#36#, 16#17#, 16#DA#, 16#2B#, 16#AC#, 16#35#
+[I] Cipher test vector, results match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/04/04 - 00:03:08
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : IDEA Bulk test
+Started         : 2017/04/04 - 00:03:08
+--------------------------------------------------------------------------------
+[I] Block cipher bulk test
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.IDEA.IDEA_CIPHER"
+    CryptAda cipher algorithm id  : SC_IDEA
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "IDEA"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.1"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  16
+    Maximum key length            :  16
+    Default key length            :  16
+    Key length increment step     :  0
+    Block size                    :  8
+[I] Bulk test completed OK
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/04/04 - 00:03:08
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.IDEA
+Finished                 : 2017/04/04 - 00:03:08
+================================================================================
