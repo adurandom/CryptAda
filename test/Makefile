@@ -145,7 +145,8 @@ U_BC        =   $(CTB_UBC)/ut_keys.exe \
                 $(CTB_UBC)/ut_aes.exe \
                 $(CTB_UBC)/ut_blowfish.exe \
                 $(CTB_UBC)/ut_rc2.exe \
-                $(CTB_UBC)/ut_key_generators.exe
+                $(CTB_UBC)/ut_key_generators.exe \
+                $(CTB_UBC)/ut_kg_tdea.exe
                 
                 
 T_DIG       =   $(CTB_TDIG)/tt_md2.exe \
@@ -319,6 +320,10 @@ $(CTB_UBC)/ut_rc2.exe: $(CTS_UBC_DRV)ut_rc2.adb
 	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
     
 $(CTB_UBC)/ut_key_generators.exe: $(CTS_UBC_DRV)ut_key_generators.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBC)/ut_kg_tdea.exe: $(CTS_UBC_DRV)ut_kg_tdea.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
     
