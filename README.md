@@ -36,6 +36,7 @@ At the moment of this writing (April 3rd, 2017) the following is implemented in 
   * AES
   * Blowfish
   * RC2
+  * IDEA
   
 ... and all the unit tests for these packages.
 
