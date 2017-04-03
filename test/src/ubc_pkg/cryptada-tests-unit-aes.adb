@@ -31,19 +31,18 @@
 --    1.0   20170327 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with Ada.Exceptions;                      use Ada.Exceptions;
+with Ada.Exceptions;                         use Ada.Exceptions;
 
-with CryptAda.Tests.Utils;                use CryptAda.Tests.Utils;
-with CryptAda.Tests.Utils.Ciphers;        use CryptAda.Tests.Utils.Ciphers;
+with CryptAda.Tests.Utils;                   use CryptAda.Tests.Utils;
+with CryptAda.Tests.Utils.Ciphers;           use CryptAda.Tests.Utils.Ciphers;
 
-with CryptAda.Exceptions;                 use CryptAda.Exceptions;
-with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
-with CryptAda.Ciphers;                    use CryptAda.Ciphers;
-with CryptAda.Ciphers.Keys;               use CryptAda.Ciphers.Keys;
-with CryptAda.Ciphers.Block_Ciphers;      use CryptAda.Ciphers.Block_Ciphers;
-with CryptAda.Ciphers.Block_Ciphers.AES;  use CryptAda.Ciphers.Block_Ciphers.AES;
-with CryptAda.Random.Generators;          use CryptAda.Random.Generators;
-with CryptAda.Random.Generators.RSAREF;   use CryptAda.Random.Generators.RSAREF;
+with CryptAda.Pragmatics;                    use CryptAda.Pragmatics;
+with CryptAda.Exceptions;                    use CryptAda.Exceptions;
+with CryptAda.Ciphers;                       use CryptAda.Ciphers;
+with CryptAda.Ciphers.Keys;                  use CryptAda.Ciphers.Keys;
+with CryptAda.Ciphers.Symmetric;             use CryptAda.Ciphers.Symmetric;
+with CryptAda.Ciphers.Symmetric.Block;       use CryptAda.Ciphers.Symmetric.Block;
+with CryptAda.Ciphers.Symmetric.Block.AES;   use CryptAda.Ciphers.Symmetric.Block.AES;
 
 package body CryptAda.Tests.Unit.AES is
 
@@ -53,7 +52,7 @@ package body CryptAda.Tests.Unit.AES is
 
    Driver_Name                   : constant String := "CryptAda.Tests.Unit.AES";
 
-   Driver_Description            : constant String := "Unit test driver for CryptAda.Ciphers.Block_Ciphers.AES functionality.";
+   Driver_Description            : constant String := "Unit test driver for CryptAda.Ciphers.Symmetric.Block.AES functionality.";
 
    --[Standard AES test vectors]------------------------------------------------
    -----------------------------------------------------------------------------
@@ -191,7 +190,7 @@ package body CryptAda.Tests.Unit.AES is
       C                    : AES_Cipher;
    begin
       Begin_Test_Case(1, "Running AES_Cipher basic tests");
-      Run_Block_Cipher_Basic_Test(C, "Basic tests for AES_Cipher");
+      Run_Block_Cipher_Basic_Tests(C, "Basic tests for AES_Cipher");
       Print_Information_Message("Test case OK");
       End_Test_Case(1, Passed);
    exception
@@ -308,7 +307,7 @@ package body CryptAda.Tests.Unit.AES is
       Print_Message("Appendix B.1. Keysize = 128", "    ");
 
       for I in AES_GFSbox_128_TVs'Range loop
-         Run_Cipher_Test_Vector(
+         Run_Block_Cipher_Test_Vector(
             "AES GSFbox 128 Test Vector: " & Integer'Image(I),
             C,
             AES_GFSbox_128_TVs(I),
@@ -324,7 +323,7 @@ package body CryptAda.Tests.Unit.AES is
       Print_Message("Appendix B.2. Keysize = 192", "    ");
 
       for I in AES_GFSbox_192_TVs'Range loop
-         Run_Cipher_Test_Vector(
+         Run_Block_Cipher_Test_Vector(
             "AES GSFbox 192 Test Vector: " & Integer'Image(I),
             C,
             AES_GFSbox_192_TVs(I),
@@ -340,7 +339,7 @@ package body CryptAda.Tests.Unit.AES is
       Print_Message("Appendix B.3. Keysize = 256", "    ");
 
       for I in AES_GFSbox_256_TVs'Range loop
-         Run_Cipher_Test_Vector(
+         Run_Block_Cipher_Test_Vector(
             "AES GSFbox 256 Test Vector: " & Integer'Image(I),
             C,
             AES_GFSbox_256_TVs(I),
@@ -377,7 +376,7 @@ package body CryptAda.Tests.Unit.AES is
       
       for I in AES_Key_Id'Range loop
          Print_Information_Message("Using key size: " & Integer'Image(AES_Key_Lengths(I)));
-         Run_Cipher_Bulk_Test(C, AES_Key_Lengths(I));
+         Run_Block_Cipher_Bulk_Tests(C, AES_Key_Lengths(I));
       end loop;
       
       Print_Information_Message("Test case OK");

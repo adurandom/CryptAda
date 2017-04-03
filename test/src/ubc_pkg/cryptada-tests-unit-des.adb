@@ -31,19 +31,20 @@
 --    1.0   20170323 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with Ada.Exceptions;                      use Ada.Exceptions;
+with Ada.Exceptions;                         use Ada.Exceptions;
 
-with CryptAda.Tests.Utils;                use CryptAda.Tests.Utils;
-with CryptAda.Tests.Utils.Ciphers;        use CryptAda.Tests.Utils.Ciphers;
+with CryptAda.Tests.Utils;                   use CryptAda.Tests.Utils;
+with CryptAda.Tests.Utils.Ciphers;           use CryptAda.Tests.Utils.Ciphers;
 
-with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
-with CryptAda.Ciphers;                    use CryptAda.Ciphers;
-with CryptAda.Ciphers.Keys;               use CryptAda.Ciphers.Keys;
-with CryptAda.Ciphers.Block_Ciphers;      use CryptAda.Ciphers.Block_Ciphers;
-with CryptAda.Ciphers.Block_Ciphers.DES;  use CryptAda.Ciphers.Block_Ciphers.DES;
-with CryptAda.Random.Generators;          use CryptAda.Random.Generators;
-with CryptAda.Random.Generators.RSAREF;   use CryptAda.Random.Generators.RSAREF;
-with CryptAda.Utils.Format;               use CryptAda.Utils.Format;
+with CryptAda.Pragmatics;                    use CryptAda.Pragmatics;
+with CryptAda.Ciphers;                       use CryptAda.Ciphers;
+with CryptAda.Ciphers.Keys;                  use CryptAda.Ciphers.Keys;
+with CryptAda.Ciphers.Symmetric;             use CryptAda.Ciphers.Symmetric;
+with CryptAda.Ciphers.Symmetric.Block;       use CryptAda.Ciphers.Symmetric.Block;
+with CryptAda.Ciphers.Symmetric.Block.DES;   use CryptAda.Ciphers.Symmetric.Block.DES;
+with CryptAda.Random.Generators;             use CryptAda.Random.Generators;
+with CryptAda.Random.Generators.RSAREF;      use CryptAda.Random.Generators.RSAREF;
+with CryptAda.Utils.Format;                  use CryptAda.Utils.Format;
 
 package body CryptAda.Tests.Unit.DES is
 
@@ -53,7 +54,7 @@ package body CryptAda.Tests.Unit.DES is
 
    Driver_Name                   : constant String := "CryptAda.Tests.Unit.DES";
 
-   Driver_Description            : constant String := "Unit test driver for CryptAda.Ciphers.Block_Ciphers.DES functionality.";
+   Driver_Description            : constant String := "Unit test driver for CryptAda.Ciphers.Symmetric.Block.DES functionality.";
 
    --[Standard DES test vectors]------------------------------------------------
    -- To validate this DES implementation I will use the project NESSIE 
@@ -634,7 +635,7 @@ package body CryptAda.Tests.Unit.DES is
       C                    : DES_Cipher;
    begin
       Begin_Test_Case(1, "Running DES_Cipher basic tests");
-      Run_Block_Cipher_Basic_Test(C, "Basic test for DES_Cipher");
+      Run_Block_Cipher_Basic_Tests(C, "Basic test for DES_Cipher");
       Print_Information_Message("Test case OK");
       End_Test_Case(1, Passed);
    exception
@@ -734,7 +735,7 @@ package body CryptAda.Tests.Unit.DES is
          
          Print_Information_Message("Encrypting");
          Start_Cipher(C, Encrypt, K);
-         Process_Block(C, DES_Std_Test_Vector(I, Plain).all, B_1);
+         Do_Process(C, DES_Std_Test_Vector(I, Plain).all, B_1);
          Stop_Cipher(C);
          Print_Block(B_1, "Encrypted block");    
          
@@ -747,7 +748,7 @@ package body CryptAda.Tests.Unit.DES is
 
          Print_Information_Message("Decrypting");
          Start_Cipher(C, Decrypt, K);
-         Process_Block(C, B_1, B_2);
+         Do_Process(C, B_1, B_2);
          Stop_Cipher(C);
          Print_Block(B_2, "Decrypted block");    
          
@@ -763,7 +764,7 @@ package body CryptAda.Tests.Unit.DES is
          Start_Cipher(C, Encrypt, K);
          
          for J in 1 .. 100 loop
-            Process_Block(C, B_1, B_2);
+            Do_Process(C, B_1, B_2);
             B_1 := B_2;
          end loop;
 
@@ -782,7 +783,7 @@ package body CryptAda.Tests.Unit.DES is
          Start_Cipher(C, Encrypt, K);
          
          for J in 1 .. 1000 loop
-            Process_Block(C, B_1, B_2);
+            Do_Process(C, B_1, B_2);
             B_1 := B_2;
          end loop;
 
@@ -819,7 +820,7 @@ package body CryptAda.Tests.Unit.DES is
       C                    : DES_Cipher;
    begin
       Begin_Test_Case(4, "DES Bulk test");
-      Run_Cipher_Bulk_Test(C, DES_Key_Length);
+      Run_Block_Cipher_Bulk_Tests(C, DES_Key_Length);
       Print_Information_Message("Test case OK");
       End_Test_Case(4, Passed);
    exception

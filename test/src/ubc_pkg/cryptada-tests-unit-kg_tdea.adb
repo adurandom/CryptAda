@@ -31,18 +31,21 @@
 --    1.0   20170403 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with Ada.Exceptions;                      use Ada.Exceptions;
+with Ada.Exceptions;                            use Ada.Exceptions;
 
-with CryptAda.Tests.Utils;                use CryptAda.Tests.Utils;
-with CryptAda.Tests.Utils.Ciphers;        use CryptAda.Tests.Utils.Ciphers;
+with CryptAda.Tests.Utils;                      use CryptAda.Tests.Utils;
+with CryptAda.Tests.Utils.Ciphers;              use CryptAda.Tests.Utils.Ciphers;
 
-with CryptAda.Exceptions;                 use CryptAda.Exceptions;
-with CryptAda.Ciphers.Keys;               use CryptAda.Ciphers.Keys;
-with CryptAda.Ciphers.Block_Ciphers.TDEA; use CryptAda.Ciphers.Block_Ciphers.TDEA;
-with CryptAda.Ciphers.Key_Generators.TDEA;   use CryptAda.Ciphers.Key_Generators.TDEA;
-with CryptAda.Random.Generators;          use CryptAda.Random.Generators;
-with CryptAda.Random.Generators.RSAREF;   use CryptAda.Random.Generators.RSAREF;
-with CryptAda.Random.Generators.CAPRNG;   use CryptAda.Random.Generators.CAPRNG;
+with CryptAda.Exceptions;                       use CryptAda.Exceptions;
+with CryptAda.Ciphers;                          use CryptAda.Ciphers;
+with CryptAda.Ciphers.Keys;                     use CryptAda.Ciphers.Keys;
+with CryptAda.Ciphers.Symmetric;                use CryptAda.Ciphers.Symmetric;
+with CryptAda.Ciphers.Symmetric.Block;          use CryptAda.Ciphers.Symmetric.Block;
+with CryptAda.Ciphers.Symmetric.Block.TDEA;     use CryptAda.Ciphers.Symmetric.Block.TDEA;
+with CryptAda.Ciphers.Key_Generators.TDEA;      use CryptAda.Ciphers.Key_Generators.TDEA;
+with CryptAda.Random.Generators;                use CryptAda.Random.Generators;
+with CryptAda.Random.Generators.RSAREF;         use CryptAda.Random.Generators.RSAREF;
+with CryptAda.Random.Generators.CAPRNG;         use CryptAda.Random.Generators.CAPRNG;
 
 package body CryptAda.Tests.Unit.KG_TDEA is
 

@@ -5,38 +5,42 @@ Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.DESX
-Description              : Unit test driver for CryptAda.Ciphers.Block_Ciphers.DESX functionality.
-Started                  : 2017/03/31 - 19:29:10
+Description              : Unit test driver for CryptAda.Ciphers.Symmetric.Block.DESX functionality.
+Started                  : 2017/04/03 - 20:44:30
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Running DESX_Cipher basic tests
-Started         : 2017/03/31 - 19:29:10
+Started         : 2017/04/03 - 20:44:30
 --------------------------------------------------------------------------------
 [I] Basic tests for DESX_Cipher
-[I] This test case is a 10 step test that will exercise the Cipher dispatching operations
+    This test case is a 10 step test that will exercise Block_Cipher dispatching operations
 [I] Cipher information:
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DESX.DESX_CIPHER"
-    CryptAda cipher algorithm id  : "SC_DESX"
-    Block_Cipher SCAN name        : "DESX"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : ""
-    Block size                    :  8
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.DESX.DESX_CIPHER"
+    CryptAda cipher algorithm id  : SC_DESX
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "DESX"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
     Cipher state                  : IDLE
+    Started                       : FALSE
     Minimum key length            :  24
     Maximum key length            :  24
     Default key length            :  24
     Key length increment step     :  0
-[I] 1. Trying to process a block with a cipher in Idle state.
+    Block size                    :  8
+[I] Basic Test 1
+    Trying to process a block with a cipher in Idle state.
     Must raise CryptAda_Uninitialized_Cipher_Error exception.
 [I] Block to process:
 Block length:  8
 Block data  :
 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
 [I] Raised CryptAda_Uninitialized_Cipher_Error
-[I] 2. Trying Start_Cipher with an invalid key
+[I] Basic Test 2
+    Trying Start_Cipher with an invalid key
     Must raise CryptAda_Invalid_Key_Error exception.
 [I] Using a null key
 [I] The key
@@ -52,26 +56,30 @@ Null key
 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
 [I] Calling to Start_Cipher
 [I] Raised CryptAda_Invalid_Key_Error
-[I] 3. Checking state after successful Start_Cipher for encryption
+[I] Basic Test 3
+    Checking state after successful Start_Cipher for encryption
 [I] Key set to
     Key length:  24
     Key bytes :
 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 
 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#
 [I] Cipher now must be in Encrypting state
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DESX.DESX_CIPHER"
-    CryptAda cipher algorithm id  : "SC_DESX"
-    Block_Cipher SCAN name        : "DESX"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : ""
-    Block size                    :  8
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.DESX.DESX_CIPHER"
+    CryptAda cipher algorithm id  : SC_DESX
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "DESX"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
     Cipher state                  : ENCRYPTING
+    Started                       : TRUE
     Minimum key length            :  24
     Maximum key length            :  24
     Default key length            :  24
     Key length increment step     :  0
-[I] 4. Trying to encrypt blocks of invalid length
+    Block size                    :  8
+[I] Basic Test 4
+    Trying to encrypt blocks of invalid length
     Must raise CryptAda_Invalid_Block_Length_Error
     Cipher block size:  8 bytes
 [I] Invalid input block information: 
@@ -97,7 +105,8 @@ Block length:  9
 Block data  :
 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
 [I] Raised CryptAda_Invalid_Block_Length_Error
-[I] 5. Encrypting a valid block
+[I] Basic Test 5
+    Encrypting a valid block
 [I] Block to encrypt
 Block length:  8
 Block data  :
@@ -106,35 +115,42 @@ Block data  :
 Block length:  8
 Block data  :
 16#9F#, 16#A4#, 16#BF#, 16#17#, 16#4B#, 16#50#, 16#0B#, 16#BC#
-[I] 6. Stopping the cipher
+[I] Basic Test 6
+    Stopping the cipher and check state
 [I] Cipher now must be in Idle state
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DESX.DESX_CIPHER"
-    CryptAda cipher algorithm id  : "SC_DESX"
-    Block_Cipher SCAN name        : "DESX"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : ""
-    Block size                    :  8
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.DESX.DESX_CIPHER"
+    CryptAda cipher algorithm id  : SC_DESX
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "DESX"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
     Cipher state                  : IDLE
+    Started                       : FALSE
     Minimum key length            :  24
     Maximum key length            :  24
     Default key length            :  24
     Key length increment step     :  0
-[I] 7. Checking cipher state after successful Start_Cipher for decryption
-[I] Cipher now must be in Decrypting state
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DESX.DESX_CIPHER"
-    CryptAda cipher algorithm id  : "SC_DESX"
-    Block_Cipher SCAN name        : "DESX"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : ""
     Block size                    :  8
+[I] Basic Test 7
+    Checking cipher state after successful Start_Cipher for decryption
+[I] Cipher now must be in Decrypting state
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.DESX.DESX_CIPHER"
+    CryptAda cipher algorithm id  : SC_DESX
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "DESX"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
     Cipher state                  : DECRYPTING
+    Started                       : TRUE
     Minimum key length            :  24
     Maximum key length            :  24
     Default key length            :  24
     Key length increment step     :  0
-[I] 8. Trying to decryt blocks of invalid length
+    Block size                    :  8
+[I] Basic Test 8
+    Trying to decryt blocks of invalid length
     Must raise CryptAda_Invalid_Block_Length_Error
     Cipher block size:  8 bytes
 [I] Invalid input block information: 
@@ -160,7 +176,9 @@ Block length:  9
 Block data  :
 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
 [I] Raised CryptAda_Invalid_Block_Length_Error
-[I] 9. Decrypting the block encrypted on step 5
+[I] Basic Test 9
+    Decrypting the block encrypted on basic test 5. Must be equal to original
+    plaintext block
 [I] Block to decrypt
 Block length:  8
 Block data  :
@@ -169,33 +187,35 @@ Block data  :
 Block length:  8
 Block data  :
 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
-[I] Decrypted block must be equal to original plain text block
 [I] Results match
-[I] 10. Final Stop_Cipher
+[I] Basic Test 10
+    Final Stop_Cipher
 [I] Cipher now must be in Idle state
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DESX.DESX_CIPHER"
-    CryptAda cipher algorithm id  : "SC_DESX"
-    Block_Cipher SCAN name        : "DESX"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : ""
-    Block size                    :  8
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.DESX.DESX_CIPHER"
+    CryptAda cipher algorithm id  : SC_DESX
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "DESX"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
     Cipher state                  : IDLE
+    Started                       : FALSE
     Minimum key length            :  24
     Maximum key length            :  24
     Default key length            :  24
     Key length increment step     :  0
+    Block size                    :  8
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/31 - 19:29:10
+Finished        : 2017/04/03 - 20:44:30
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Testing DESX_Cipher non dispatching operations
-Started         : 2017/03/31 - 19:29:10
+Started         : 2017/04/03 - 20:44:30
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
 Is_Valid_DESX_Key
@@ -227,58 +247,65 @@ Key is valid: OK
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/31 - 19:29:10
+Finished        : 2017/04/03 - 20:44:30
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : DESX standard test vectors
-Started         : 2017/03/31 - 19:29:10
+Started         : 2017/04/03 - 20:44:30
 --------------------------------------------------------------------------------
 [I] Poor, just found 1 vector
 [I] DESX Test vector:  1
     Key                     : 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#23#, 16#45#, 16#67#, 16#89#, 16#AB#, 16#CD#, 16#EF#, 16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#
     Plain text block        : 16#94#, 16#DB#, 16#E0#, 16#82#, 16#54#, 16#9A#, 16#14#, 16#EF#
     Expected encrypted block: 16#90#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#
+    Encrypting ...
     Obtained encrypted block: 16#90#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#94#, 16#DB#, 16#E0#, 16#82#, 16#54#, 16#9A#, 16#14#, 16#EF#
 [I] Cipher test vector, results match
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/31 - 19:29:10
+Finished        : 2017/04/03 - 20:44:30
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : DESX Bulk test
-Started         : 2017/03/31 - 19:29:10
+Started         : 2017/04/03 - 20:44:30
 --------------------------------------------------------------------------------
 [I] Block cipher bulk test
-    Performing  10000 iterations encrypting and decrypting random blocks
-    with random keys.
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.DESX.DESX_CIPHER"
-    CryptAda cipher algorithm id  : "SC_DESX"
-    Block_Cipher SCAN name        : "DESX"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : ""
-    Block size                    :  8
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.DESX.DESX_CIPHER"
+    CryptAda cipher algorithm id  : SC_DESX
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "DESX"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
     Cipher state                  : IDLE
+    Started                       : FALSE
     Minimum key length            :  24
     Maximum key length            :  24
     Default key length            :  24
     Key length increment step     :  0
+    Block size                    :  8
 [I] Bulk test completed OK
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/31 - 19:29:10
+Finished        : 2017/04/03 - 20:44:30
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.DESX
-Finished                 : 2017/03/31 - 19:29:10
+Finished                 : 2017/04/03 - 20:44:30
 ================================================================================

@@ -40,7 +40,8 @@ with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
 with CryptAda.Utils.Format;               use CryptAda.Utils.Format;
 with CryptAda.Ciphers;                    use CryptAda.Ciphers;
 with CryptAda.Ciphers.Keys;               use CryptAda.Ciphers.Keys;
-with CryptAda.Ciphers.Block_Ciphers;      use CryptAda.Ciphers.Block_Ciphers;
+with CryptAda.Ciphers.Symmetric;          use CryptAda.Ciphers.Symmetric;
+with CryptAda.Ciphers.Symmetric.Block;    use CryptAda.Ciphers.Symmetric.Block;
 with CryptAda.Random.Generators;          use CryptAda.Random.Generators;
 with CryptAda.Random.Generators.RSAREF;   use CryptAda.Random.Generators.RSAREF;
 
@@ -56,19 +57,19 @@ package body CryptAda.Tests.Utils.Ciphers is
    -----------------------------------------------------------------------------
    --[Body subprogram specs]----------------------------------------------------
    -----------------------------------------------------------------------------
-
+                  
    -----------------------------------------------------------------------------
    --[Body subprogram bodies]---------------------------------------------------
    -----------------------------------------------------------------------------
-
+   
    -----------------------------------------------------------------------------
    --[Spec declared subprogram bodies]------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Run_Block_Cipher_Basic_Test]----------------------------------------------
+   --[Run_Block_Cipher_Basic_Tests]---------------------------------------------
 
-   procedure   Run_Block_Cipher_Basic_Test(
-                  The_Cipher     : in out CryptAda.Ciphers.Block_Ciphers.Block_Cipher'Class;
+   procedure   Run_Block_Cipher_Basic_Tests(
+                  The_Cipher     : in out CryptAda.Ciphers.Symmetric.Block.Block_Cipher'Class;
                   Message        : in     String)
    is
       BS             : constant Positive := Get_Block_Size(The_Cipher);
@@ -80,9 +81,9 @@ package body CryptAda.Tests.Utils.Ciphers is
       PT_B2          : Cipher_Block(1 .. BS) := (others => 0);
    begin
       Print_Information_Message(Message);
-      Print_Information_Message("This test case is a 10 step test that will exercise the Cipher dispatching operations");
+      Print_Message("This test case is a 10 step test that will exercise Block_Cipher dispatching operations", Indent_Str);
       
-      if Get_Cipher_State(The_Cipher) /= Idle then
+      if Get_Symmetric_Cipher_State(The_Cipher) /= Idle then
          Print_Information_Message("The cipher is not idle, stopping it.");
          Stop_Cipher(The_Cipher);
       end if;
@@ -92,13 +93,14 @@ package body CryptAda.Tests.Utils.Ciphers is
       
       -- 1. Trying to process a block when cipher is Idle.
       
-      Print_Information_Message("1. Trying to process a block with a cipher in Idle state.");
+      Print_Information_Message("Basic Test 1");
+      Print_Message("Trying to process a block with a cipher in Idle state.", Indent_Str);
       Print_Message("Must raise CryptAda_Uninitialized_Cipher_Error exception.", Indent_Str);
    
       declare
       begin
          Print_Block(PT_B1, "Block to process:");
-         Process_Block(The_Cipher, PT_B1, CT_B);
+         Do_Process(The_Cipher, PT_B1, CT_B);
          Print_Error_Message("No exception was raised.");
          raise CryptAda_Test_Error;
       exception
@@ -114,7 +116,8 @@ package body CryptAda.Tests.Utils.Ciphers is
       
       -- 2. Trying to start a cipher with an invalid key
 
-      Print_Information_Message("2. Trying Start_Cipher with an invalid key");
+      Print_Information_Message("Basic Test 2");
+      Print_Message("Trying Start_Cipher with an invalid key", Indent_Str);
       Print_Message("Must raise CryptAda_Invalid_Key_Error exception.", Indent_Str);
    
       declare
@@ -163,21 +166,23 @@ package body CryptAda.Tests.Utils.Ciphers is
       
       -- 3. Checking cipher state after successful Start_Cipher for encryption
 
-      Print_Information_Message("3. Checking state after successful Start_Cipher for encryption");
+      Print_Information_Message("Basic Test 3");
+      Print_Message("Checking state after successful Start_Cipher for encryption", Indent_Str);
       Set_Key(K, KB);
       Print_Key(K, "Key set to");
       Start_Cipher(The_Cipher, Encrypt, K);
       Print_Information_Message("Cipher now must be in Encrypting state");
       Print_Block_Cipher_Info(The_Cipher);
       
-      if Get_Cipher_State(The_Cipher) /= Encrypting then
+      if Get_Symmetric_Cipher_State(The_Cipher) /= Encrypting then
          Print_Error_Message("The cipher is not encrypting");
          raise CryptAda_Test_Error;
       end if;
       
       -- 4. Trying to encrypt a block of invalid length.
 
-      Print_Information_Message("4. Trying to encrypt blocks of invalid length");
+      Print_Information_Message("Basic Test 4");
+      Print_Message("Trying to encrypt blocks of invalid length", Indent_Str);
       Print_Message("Must raise CryptAda_Invalid_Block_Length_Error", Indent_Str);
 
       declare
@@ -186,7 +191,7 @@ package body CryptAda.Tests.Utils.Ciphers is
       begin
          Print_Message("Cipher block size: " & Positive'Image(BS) & " bytes", Indent_Str);
          Print_Block(IB, "Invalid input block information: ");
-         Process_Block(The_Cipher, IB, OB);
+         Do_Process(The_Cipher, IB, OB);
          Print_Error_Message("No exception raised");
          raise CryptAda_Test_Error;
       exception
@@ -206,7 +211,7 @@ package body CryptAda.Tests.Utils.Ciphers is
       begin
          Print_Message("Cipher block size: " & Positive'Image(BS) & " bytes", Indent_Str);
          Print_Block(IB, "Invalid input block information: ");
-         Process_Block(The_Cipher, IB, OB);
+         Do_Process(The_Cipher, IB, OB);
          Print_Error_Message("No exception raised");
          raise CryptAda_Test_Error;
       exception
@@ -226,7 +231,7 @@ package body CryptAda.Tests.Utils.Ciphers is
       begin
          Print_Message("Cipher block size: " & Positive'Image(BS) & " bytes", Indent_Str);
          Print_Block(OB, "Invalid output block information: ");
-         Process_Block(The_Cipher, IB, OB);
+         Do_Process(The_Cipher, IB, OB);
          Print_Error_Message("No exception raised");
          raise CryptAda_Test_Error;
       exception
@@ -246,7 +251,7 @@ package body CryptAda.Tests.Utils.Ciphers is
       begin
          Print_Message("Cipher block size: " & Positive'Image(BS) & " bytes", Indent_Str);
          Print_Block(OB, "Invalid output block information: ");
-         Process_Block(The_Cipher, IB, OB);
+         Do_Process(The_Cipher, IB, OB);
          Print_Error_Message("No exception raised");
          raise CryptAda_Test_Error;
       exception
@@ -262,38 +267,42 @@ package body CryptAda.Tests.Utils.Ciphers is
 
       -- 5. Encrypting a valid block.
 
-      Print_Information_Message("5. Encrypting a valid block");
+      Print_Information_Message("Basic Test 5");
+      Print_Message("Encrypting a valid block", Indent_Str);
       Print_Block(PT_B1, "Block to encrypt");     
-      Process_Block(The_Cipher, PT_B1, CT_B);
+      Do_Process(The_Cipher, PT_B1, CT_B);
       Print_Block(CT_B, "Encrypted block");     
 
       -- 6. Stopping the cipher.
 
-      Print_Information_Message("6. Stopping the cipher");
+      Print_Information_Message("Basic Test 6");
+      Print_Message("Stopping the cipher and check state", Indent_Str);
       Stop_Cipher(The_Cipher);
       Print_Information_Message("Cipher now must be in Idle state");
       Print_Block_Cipher_Info(The_Cipher);
       
-      if Get_Cipher_State(The_Cipher) /= Idle then
+      if Get_Symmetric_Cipher_State(The_Cipher) /= Idle then
          Print_Error_Message("The cipher is not Idle");
          raise CryptAda_Test_Error;
       end if;
       
       -- 7. Checking cipher state after successful Start_Cipher for decryption
 
-      Print_Information_Message("7. Checking cipher state after successful Start_Cipher for decryption");
+      Print_Information_Message("Basic Test 7");
+      Print_Message("Checking cipher state after successful Start_Cipher for decryption", Indent_Str);
       Start_Cipher(The_Cipher, Decrypt, K);
       Print_Information_Message("Cipher now must be in Decrypting state");
       Print_Block_Cipher_Info(The_Cipher);
       
-      if Get_Cipher_State(The_Cipher) /= Decrypting then
+      if Get_Symmetric_Cipher_State(The_Cipher) /= Decrypting then
          Print_Error_Message("The cipher is not decrypting");
          raise CryptAda_Test_Error;
       end if;
       
       -- 8. Trying to decrypt blocks of invalid length
 
-      Print_Information_Message("8. Trying to decryt blocks of invalid length");
+      Print_Information_Message("Basic Test 8");
+      Print_Message("Trying to decryt blocks of invalid length", Indent_Str);
       Print_Message("Must raise CryptAda_Invalid_Block_Length_Error", Indent_Str);
 
       declare
@@ -302,7 +311,7 @@ package body CryptAda.Tests.Utils.Ciphers is
       begin
          Print_Message("Cipher block size: " & Positive'Image(BS) & " bytes", Indent_Str);
          Print_Block(IB, "Invalid input block information: ");
-         Process_Block(The_Cipher, IB, OB);
+         Do_Process(The_Cipher, IB, OB);
          Print_Error_Message("No exception raised");
          raise CryptAda_Test_Error;
       exception
@@ -322,7 +331,7 @@ package body CryptAda.Tests.Utils.Ciphers is
       begin
          Print_Message("Cipher block size: " & Positive'Image(BS) & " bytes", Indent_Str);
          Print_Block(IB, "Invalid input block information: ");
-         Process_Block(The_Cipher, IB, OB);
+         Do_Process(The_Cipher, IB, OB);
          Print_Error_Message("No exception raised");
          raise CryptAda_Test_Error;
       exception
@@ -342,7 +351,7 @@ package body CryptAda.Tests.Utils.Ciphers is
       begin
          Print_Message("Cipher block size: " & Positive'Image(BS) & " bytes", Indent_Str);
          Print_Block(OB, "Invalid output block information: ");
-         Process_Block(The_Cipher, IB, OB);
+         Do_Process(The_Cipher, IB, OB);
          Print_Error_Message("No exception raised");
          raise CryptAda_Test_Error;
       exception
@@ -362,7 +371,7 @@ package body CryptAda.Tests.Utils.Ciphers is
       begin
          Print_Message("Cipher block size: " & Positive'Image(BS) & " bytes", Indent_Str);
          Print_Block(OB, "Invalid output block information: ");
-         Process_Block(The_Cipher, IB, OB);
+         Do_Process(The_Cipher, IB, OB);
          Print_Error_Message("No exception raised");
          raise CryptAda_Test_Error;
       exception
@@ -378,12 +387,12 @@ package body CryptAda.Tests.Utils.Ciphers is
 
       -- 9. Decrypting the block encrypted on step 5
       
-      Print_Information_Message("9. Decrypting the block encrypted on step 5");
+      Print_Information_Message("Basic Test 9");
+      Print_Message("Decrypting the block encrypted on basic test 5. Must be equal to original", Indent_Str); 
+      Print_Message("plaintext block", Indent_Str);
       Print_Block(CT_B, "Block to decrypt");     
-      Process_Block(The_Cipher, CT_B, PT_B2);
+      Do_Process(The_Cipher, CT_B, PT_B2);
       Print_Block(PT_B2, "Decrypted block");     
-      
-      Print_Information_Message("Decrypted block must be equal to original plain text block");
       
       if PT_B1 = PT_B2 then
          Print_Information_Message("Results match");
@@ -394,41 +403,153 @@ package body CryptAda.Tests.Utils.Ciphers is
       
       -- 10. Final Stop_Cipher
       
-      Print_Information_Message("10. Final Stop_Cipher");
+      Print_Information_Message("Basic Test 10");
+      Print_Message("Final Stop_Cipher", Indent_Str);
       Stop_Cipher(The_Cipher);
       Print_Information_Message("Cipher now must be in Idle state");
       Print_Block_Cipher_Info(The_Cipher);
       
-      if Get_Cipher_State(The_Cipher) /= Idle then
+      if Get_Symmetric_Cipher_State(The_Cipher) /= Idle then
          Print_Error_Message("The cipher is not Idle");
          raise CryptAda_Test_Error;
       end if;
-   end Run_Block_Cipher_Basic_Test;
-   
-   --[Print_Block_Cipher_Info]--------------------------------------------------
+   end Run_Block_Cipher_Basic_Tests;
 
-   procedure   Print_Block_Cipher_Info(
-                  The_Cipher     : in     CryptAda.Ciphers.Block_Ciphers.Block_Cipher'Class)
+   --[Run_Block_Cipher_Bulk_Tests]----------------------------------------------
+
+   procedure   Run_Block_Cipher_Bulk_Tests(
+                  With_Cipher    : in out CryptAda.Ciphers.Symmetric.Block.Block_Cipher'Class;
+                  Key_Size       : in     Positive)
+   is
+      BL             : constant Positive  := Get_Block_Size(With_Cipher);
+      G              : RSAREF_Generator;
+      IB             : Cipher_Block(1 .. BL);
+      OB             : Cipher_Block(1 .. BL);
+      OB_2           : Cipher_Block(1 .. BL);
+      K              : Key;
+      KB             : Byte_Array(1 .. Key_Size);
+   begin
+      Print_Information_Message("Block cipher bulk test");
+      Print_Message("Performing " & Positive'Image(Iterations) & " iterations of decrypt(encrypt(plain_text)), checking that", Indent_Str);
+      Print_Message("resulting block is equal to original plaintext block.", Indent_Str);
+      Print_Message("Both, original plaintext block and key are random generated.", Indent_Str);
+
+      Print_Block_Cipher_Info(With_Cipher);
+      
+      Random_Start_And_Seed(G);
+      
+      for I in 1 .. Iterations loop
+         Random_Generate(G, KB);
+         Set_Key(K, KB);
+         
+         Start_Cipher(With_Cipher, Encrypt, K);
+         Random_Generate(G, IB);
+         Do_Process(With_Cipher, IB, OB);
+         Stop_Cipher(With_Cipher);
+         Start_Cipher(With_Cipher, Decrypt, K);
+         Do_Process(With_Cipher, OB, OB_2);
+         Stop_Cipher(With_Cipher);
+         
+         if IB /= OB_2 then
+            Print_Error_Message("Iteration: " & Positive'Image(I) & ". Results don't match.");
+            Print_Key(K, "Key:");
+            Print_Block(IB, "Input block:");
+            Print_Block(OB, "Encrypted block:");
+            Print_Block(OB_2, "Decrypted block:");
+            
+            raise CryptAda_Test_Error;
+         end if;
+      end loop;
+      
+      Print_Information_Message("Bulk test completed OK");
+   end Run_Block_Cipher_Bulk_Tests;
+
+   --[Run_Block_Cipher_Test_Vector]---------------------------------------------
+
+   procedure   Run_Block_Cipher_Test_Vector(
+                  Message        : in     String;
+                  With_Cipher    : in out CryptAda.Ciphers.Symmetric.Block.Block_Cipher'Class;
+                  Vector         : in     Test_Vector;
+                  Result         :    out Boolean)
+   is
+      BL                   : constant Positive  := Get_Block_Size(With_Cipher);   
+      K                    : Key;
+      B                    : Cipher_Block(1 .. BL);
+   begin
+      Print_Information_Message(Message);
+      Print_Message("Key                     : " & To_Hex_String(Vector(The_Key).all, No_Line_Breaks, LF_Only, ", ", "16#", "#"), Indent_Str);
+      Print_Message("Plain text block        : " & To_Hex_String(Vector(Plain).all, No_Line_Breaks, LF_Only, ", ", "16#", "#"), Indent_Str);
+      Print_Message("Expected encrypted block: " & To_Hex_String(Vector(Crypt).all, No_Line_Breaks, LF_Only, ", ", "16#", "#"), Indent_Str);
+      
+      Set_Key(K, Vector(The_Key).all);
+
+      Print_Message("Encrypting ...", Indent_Str);
+      Start_Cipher(With_Cipher, Encrypt, K);
+      Do_Process(With_Cipher, Vector(Plain).all, B);
+      Stop_Cipher(With_Cipher);
+
+      Print_Message("Obtained encrypted block: " & To_Hex_String(B, No_Line_Breaks, LF_Only, ", ", "16#", "#"), Indent_Str);
+
+      if B = Vector(Crypt).all then
+         Print_Information_Message("Cipher test vector, results match");
+         Result := True;
+      else
+         Print_Error_Message("Cipher test vector, results don't match");
+         Result := False;
+         return;
+      end if;      
+      
+      Print_Message("Decrypting ...", Indent_Str);
+      Start_Cipher(With_Cipher, Decrypt, K);
+      Do_Process(With_Cipher, Vector(Crypt).all, B);
+      Stop_Cipher(With_Cipher);
+
+      Print_Message("Obtained decrypted block: " & To_Hex_String(B, No_Line_Breaks, LF_Only, ", ", "16#", "#"), Indent_Str);
+
+      if B = Vector(Plain).all then
+         Print_Information_Message("Cipher test vector, results match");
+         Result := True;
+      else
+         Print_Error_Message("Cipher test vector, results don't match");
+         Result := False;
+      end if;      
+   end Run_Block_Cipher_Test_Vector;
+
+   --[Print_Cipher_Info]--------------------------------------------------------
+
+   procedure   Print_Cipher_Info(
+                  The_Cipher     : in     CryptAda.Ciphers.Symmetric.Symmetric_Cipher'Class)
    is
    begin
-      Print_Information_Message("Information of block cipher object:");
-      Print_Message("Block_Cipher object tag name  : """ & Expanded_Name(The_Cipher'Tag) & """", Indent_Str);
-      Print_Message("CryptAda cipher algorithm id  : """ & Block_Cipher_Id'Image(Get_Block_Cipher_Id(The_Cipher)) & """", Indent_Str);
-      Print_Message("Block_Cipher SCAN name        : """ & Get_Block_Cipher_Name(The_Cipher, NS_SCAN) & """", Indent_Str);
-      Print_Message("Block_Cipher ASN1 OID         : """ & Get_Block_Cipher_Name(The_Cipher, NS_ASN1_OIDs) & """", Indent_Str);
-      Print_Message("Block_Cipher OpenPGP name     : """ & Get_Block_Cipher_Name(The_Cipher, NS_OpenPGP) & """", Indent_Str);
-      Print_Message("Block size                    : " & Cipher_Block_Size'Image(Get_Block_Size(The_Cipher)), Indent_Str);
-      Print_Message("Cipher state                  : " & Cipher_State'Image(Get_Cipher_State(The_Cipher)), Indent_Str);
+      Print_Information_Message("Information of cipher object:");
+      Print_Message("Cipher object tag name        : """ & Expanded_Name(The_Cipher'Tag) & """", Indent_Str);
+      Print_Message("CryptAda cipher algorithm id  : " & Symmetric_Cipher_Id'Image(Get_Symmetric_Cipher_Id(The_Cipher)), Indent_Str);
+      Print_Message("Cipher type                   : " & Cipher_Type'Image(Get_Symmetric_Cipher_Type(The_Cipher)), Indent_Str);
+      Print_Message("SCAN name                     : """ & Get_Symmetric_Cipher_Name(The_Cipher, NS_SCAN) & """", Indent_Str);
+      Print_Message("ASN1 OID                      : """ & Get_Symmetric_Cipher_Name(The_Cipher, NS_ASN1_OIDs) & """", Indent_Str);
+      Print_Message("OpenPGP name                  : """ & Get_Symmetric_Cipher_Name(The_Cipher, NS_OpenPGP) & """", Indent_Str);
+      Print_Message("Cipher state                  : " & Cipher_State'Image(Get_Symmetric_Cipher_State(The_Cipher)), Indent_Str);
+      Print_Message("Started                       : " & Boolean'Image(Is_Started(The_Cipher)), Indent_Str);
       Print_Message("Minimum key length            : " & Positive'Image(Get_Minimum_Key_Length(The_Cipher)), Indent_Str);
       Print_Message("Maximum key length            : " & Positive'Image(Get_Maximum_Key_Length(The_Cipher)), Indent_Str);
       Print_Message("Default key length            : " & Positive'Image(Get_Default_Key_Length(The_Cipher)), Indent_Str);
       Print_Message("Key length increment step     : " & Natural'Image(Get_Key_Length_Increment_Step(The_Cipher)), Indent_Str);
+   end Print_Cipher_Info;
+   
+   --[Print_Block_Cipher_Info]--------------------------------------------------
+
+   procedure   Print_Block_Cipher_Info(
+                  The_Cipher     : in     CryptAda.Ciphers.Symmetric.Block.Block_Cipher'Class)
+   is
+   begin
+      Print_Cipher_Info(The_Cipher);
+      Print_Message("Block size                    : " & Cipher_Block_Size'Image(Get_Block_Size(The_Cipher)), Indent_Str);
    end Print_Block_Cipher_Info;
    
    --[Print_Block]--------------------------------------------------------------
    
    procedure   Print_Block(
-                  The_Block         : in     CryptAda.Ciphers.Block_Ciphers.Cipher_Block;
+                  The_Block         : in     CryptAda.Ciphers.Symmetric.Block.Cipher_Block;
                   Message           : in     String)
    is
    begin
@@ -456,83 +577,4 @@ package body CryptAda.Tests.Utils.Ciphers is
       end if;
    end Print_Key;
 
-   --[Run_Cipher_Bulk_Test]-----------------------------------------------------
-
-   procedure   Run_Cipher_Bulk_Test(
-                  With_Cipher    : in out CryptAda.Ciphers.Block_Ciphers.Block_Cipher'Class;
-                  Key_Size       : in     Positive)
-   is
-      BL             : constant Positive  := Get_Block_Size(With_Cipher);
-      G              : RSAREF_Generator;
-      IB             : Cipher_Block(1 .. BL);
-      OB             : Cipher_Block(1 .. BL);
-      OB_2           : Cipher_Block(1 .. BL);
-      K              : Key;
-      KB             : Byte_Array(1 .. Key_Size);
-   begin
-      Print_Information_Message("Block cipher bulk test");
-      Print_Message("Performing " & Positive'Image(Iterations) & " iterations encrypting and decrypting random blocks", Indent_Str);
-      Print_Message("with random keys.", Indent_Str);
-      Print_Block_Cipher_Info(With_Cipher);
-      
-      Random_Start_And_Seed(G);
-      
-      for I in 1 .. Iterations loop
-         Random_Generate(G, KB);
-         Set_Key(K, KB);
-         
-         Start_Cipher(With_Cipher, Encrypt, K);
-         Random_Generate(G, IB);
-         Process_Block(With_Cipher, IB, OB);
-         Stop_Cipher(With_Cipher);
-         Start_Cipher(With_Cipher, Decrypt, K);
-         Process_Block(With_Cipher, OB, OB_2);
-         Stop_Cipher(With_Cipher);
-         
-         if IB /= OB_2 then
-            Print_Error_Message("Iteration: " & Positive'Image(I) & ". Results don't match.");
-            Print_Key(K, "Key:");
-            Print_Block(IB, "Input block:");
-            Print_Block(OB, "Encrypted block:");
-            Print_Block(OB_2, "Decrypted block:");
-            
-            raise CryptAda_Test_Error;
-         end if;
-      end loop;
-      
-      Print_Information_Message("Bulk test completed OK");
-   end Run_Cipher_Bulk_Test;
-
-   --[Run_Cipher_Test_Vector]---------------------------------------------------
-
-   procedure   Run_Cipher_Test_Vector(
-                  Message        : in     String;
-                  With_Cipher    : in out CryptAda.Ciphers.Block_Ciphers.Block_Cipher'Class;
-                  Vector         : in     Test_Vector;
-                  Result         :    out Boolean)
-   is
-      BL                   : constant Positive  := Get_Block_Size(With_Cipher);   
-      K                    : Key;
-      B                    : Cipher_Block(1 .. BL);
-   begin
-      Print_Information_Message(Message);
-      Print_Message("Key                     : " & To_Hex_String(Vector(The_Key).all, No_Line_Breaks, LF_Only, ", ", "16#", "#"), Indent_Str);
-      Print_Message("Plain text block        : " & To_Hex_String(Vector(Plain).all, No_Line_Breaks, LF_Only, ", ", "16#", "#"), Indent_Str);
-      Print_Message("Expected encrypted block: " & To_Hex_String(Vector(Crypt).all, No_Line_Breaks, LF_Only, ", ", "16#", "#"), Indent_Str);
-      
-      Set_Key(K, Vector(The_Key).all);
-      Start_Cipher(With_Cipher, Encrypt, K);
-      Process_Block(With_Cipher, Vector(Plain).all, B);
-      Stop_Cipher(With_Cipher);
-
-      Print_Message("Obtained encrypted block: " & To_Hex_String(B, No_Line_Breaks, LF_Only, ", ", "16#", "#"), Indent_Str);
-
-      if B = Vector(Crypt).all then
-         Print_Information_Message("Cipher test vector, results match");
-         Result := True;
-      else
-         Print_Error_Message("Cipher test vector, results don't match");
-         Result := False;
-      end if;      
-   end Run_Cipher_Test_Vector;
 end CryptAda.Tests.Utils.Ciphers;

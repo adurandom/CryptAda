@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.MD4
 Description              : Unit test driver for CryptAda.Digests.Algorithms.MD4 functionality.
-Started                  : 2017/03/31 - 19:29:05
+Started                  : 2017/04/03 - 20:44:24
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : CryptAda message digest basic operation
-Started         : 2017/03/31 - 19:29:05
+Started         : 2017/04/03 - 20:44:24
 --------------------------------------------------------------------------------
 [I] Digest object information before Digest_Start()
 [I] Information of digest object:
@@ -65,13 +65,13 @@ Started         : 2017/03/31 - 19:29:05
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/31 - 19:29:05
+Finished        : 2017/04/03 - 20:44:24
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Standard MD4 test vectors
-Started         : 2017/03/31 - 19:29:05
+Started         : 2017/04/03 - 20:44:24
 --------------------------------------------------------------------------------
 [I] Standard test vectors obtained from RFC 1320 annex A.5
     Number of vectors to test:  7
@@ -185,13 +185,13 @@ Started         : 2017/03/31 - 19:29:05
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/31 - 19:29:05
+Finished        : 2017/04/03 - 20:44:24
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : CryptAda MD4 test vectors
-Started         : 2017/03/31 - 19:29:05
+Started         : 2017/04/03 - 20:44:24
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
     Number of vectors to test:  9
@@ -355,13 +355,13 @@ Started         : 2017/03/31 - 19:29:05
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/31 - 19:29:05
+Finished        : 2017/04/03 - 20:44:24
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Testing MD4 operation at counter offset and block boundary.
-Started         : 2017/03/31 - 19:29:05
+Started         : 2017/04/03 - 20:44:24
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at counter offset boundary.
@@ -431,11 +431,11 @@ Vector length:  65
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/31 - 19:29:05
+Finished        : 2017/04/03 - 20:44:24
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.MD4
-Finished                 : 2017/03/31 - 19:29:05
+Finished                 : 2017/04/03 - 20:44:24
 ================================================================================

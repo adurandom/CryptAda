@@ -31,18 +31,19 @@
 --    1.0   20170402 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with Ada.Exceptions;                      use Ada.Exceptions;
+with Ada.Exceptions;                         use Ada.Exceptions;
 
-with CryptAda.Tests.Utils;                use CryptAda.Tests.Utils;
-with CryptAda.Tests.Utils.Ciphers;        use CryptAda.Tests.Utils.Ciphers;
+with CryptAda.Tests.Utils;                   use CryptAda.Tests.Utils;
+with CryptAda.Tests.Utils.Ciphers;           use CryptAda.Tests.Utils.Ciphers;
 
-with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
-with CryptAda.Exceptions;                 use CryptAda.Exceptions;
-with CryptAda.Utils.Format;               use CryptAda.Utils.Format;
-with CryptAda.Ciphers;                    use CryptAda.Ciphers;
-with CryptAda.Ciphers.Keys;               use CryptAda.Ciphers.Keys;
-with CryptAda.Ciphers.Block_Ciphers;      use CryptAda.Ciphers.Block_Ciphers;
-with CryptAda.Ciphers.Block_Ciphers.RC2;  use CryptAda.Ciphers.Block_Ciphers.RC2;
+with CryptAda.Pragmatics;                    use CryptAda.Pragmatics;
+with CryptAda.Exceptions;                    use CryptAda.Exceptions;
+with CryptAda.Utils.Format;                  use CryptAda.Utils.Format;
+with CryptAda.Ciphers;                       use CryptAda.Ciphers;
+with CryptAda.Ciphers.Keys;                  use CryptAda.Ciphers.Keys;
+with CryptAda.Ciphers.Symmetric;             use CryptAda.Ciphers.Symmetric;
+with CryptAda.Ciphers.Symmetric.Block;       use CryptAda.Ciphers.Symmetric.Block;
+with CryptAda.Ciphers.Symmetric.Block.RC2;   use CryptAda.Ciphers.Symmetric.Block.RC2;
 
 package body CryptAda.Tests.Unit.RC2 is
 
@@ -52,7 +53,7 @@ package body CryptAda.Tests.Unit.RC2 is
 
    Driver_Name                   : constant String := "CryptAda.Tests.Unit.RC2";
 
-   Driver_Description            : constant String := "Unit test driver for CryptAda.Ciphers.Block_Ciphers.RC2 functionality.";
+   Driver_Description            : constant String := "Unit test driver for CryptAda.Ciphers.Symmetric.Block.RC2 functionality.";
 
    --[Standard RC2 test vectors]------------------------------------------------
    -- RC2 Test vectors from RFC 2268 Section 5.
@@ -162,7 +163,7 @@ package body CryptAda.Tests.Unit.RC2 is
       C                    : RC2_Cipher;
    begin
       Begin_Test_Case(1, "Running RC2_Cipher basic tests");
-      Run_Block_Cipher_Basic_Test(C, "Basic test for RC2_Cipher");
+      Run_Block_Cipher_Basic_Tests(C, "Basic test for RC2_Cipher");
       Print_Information_Message("Test case OK");
       End_Test_Case(1, Passed);
    exception
@@ -254,7 +255,7 @@ package body CryptAda.Tests.Unit.RC2 is
          Print_RC2_Test_Vector(I, RC2_TVs(I));
          Set_Key(K, RC2_TVs(I).KB.all);
          Start_Cipher(C, Encrypt, K, RC2_TVs(I).EKB);
-         Process_Block(C, RC2_TVs(I).Plain_Text.all, OB);
+         Do_Process(C, RC2_TVs(I).Plain_Text.all, OB);
          Stop_Cipher(C);
          Print_Block(OB, "Obtained cipher text");
 
@@ -288,7 +289,7 @@ package body CryptAda.Tests.Unit.RC2 is
       Begin_Test_Case(4, "RC2 Bulk test");
       
       Print_Information_Message("Using key size: " & Integer'Image(Get_Default_Key_Length(C)));
-      Run_Cipher_Bulk_Test(C, Get_Default_Key_Length(C));
+      Run_Block_Cipher_Bulk_Tests(C, Get_Default_Key_Length(C));
       
       Print_Information_Message("Test case OK");
       End_Test_Case(4, Passed);

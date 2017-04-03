@@ -5,38 +5,42 @@ Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.RC2
-Description              : Unit test driver for CryptAda.Ciphers.Block_Ciphers.RC2 functionality.
-Started                  : 2017/04/03 - 08:17:04
+Description              : Unit test driver for CryptAda.Ciphers.Symmetric.Block.RC2 functionality.
+Started                  : 2017/04/03 - 20:44:42
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Running RC2_Cipher basic tests
-Started         : 2017/04/03 - 08:17:04
+Started         : 2017/04/03 - 20:44:42
 --------------------------------------------------------------------------------
 [I] Basic test for RC2_Cipher
-[I] This test case is a 10 step test that will exercise the Cipher dispatching operations
+    This test case is a 10 step test that will exercise Block_Cipher dispatching operations
 [I] Cipher information:
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.RC2.RC2_CIPHER"
-    CryptAda cipher algorithm id  : "SC_RC2"
-    Block_Cipher SCAN name        : "RC2"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : ""
-    Block size                    :  8
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.RC2.RC2_CIPHER"
+    CryptAda cipher algorithm id  : SC_RC2
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "RC2"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
     Cipher state                  : IDLE
+    Started                       : FALSE
     Minimum key length            :  1
     Maximum key length            :  128
     Default key length            :  16
     Key length increment step     :  1
-[I] 1. Trying to process a block with a cipher in Idle state.
+    Block size                    :  8
+[I] Basic Test 1
+    Trying to process a block with a cipher in Idle state.
     Must raise CryptAda_Uninitialized_Cipher_Error exception.
 [I] Block to process:
 Block length:  8
 Block data  :
 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
 [I] Raised CryptAda_Uninitialized_Cipher_Error
-[I] 2. Trying Start_Cipher with an invalid key
+[I] Basic Test 2
+    Trying Start_Cipher with an invalid key
     Must raise CryptAda_Invalid_Key_Error exception.
 [I] Using a null key
 [I] The key
@@ -59,25 +63,29 @@ Null key
 16#11#
 [I] Calling to Start_Cipher
 [I] Raised CryptAda_Invalid_Key_Error
-[I] 3. Checking state after successful Start_Cipher for encryption
+[I] Basic Test 3
+    Checking state after successful Start_Cipher for encryption
 [I] Key set to
     Key length:  16
     Key bytes :
 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#
 [I] Cipher now must be in Encrypting state
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.RC2.RC2_CIPHER"
-    CryptAda cipher algorithm id  : "SC_RC2"
-    Block_Cipher SCAN name        : "RC2"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : ""
-    Block size                    :  8
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.RC2.RC2_CIPHER"
+    CryptAda cipher algorithm id  : SC_RC2
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "RC2"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
     Cipher state                  : ENCRYPTING
+    Started                       : TRUE
     Minimum key length            :  1
     Maximum key length            :  128
     Default key length            :  16
     Key length increment step     :  1
-[I] 4. Trying to encrypt blocks of invalid length
+    Block size                    :  8
+[I] Basic Test 4
+    Trying to encrypt blocks of invalid length
     Must raise CryptAda_Invalid_Block_Length_Error
     Cipher block size:  8 bytes
 [I] Invalid input block information: 
@@ -103,7 +111,8 @@ Block length:  9
 Block data  :
 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
 [I] Raised CryptAda_Invalid_Block_Length_Error
-[I] 5. Encrypting a valid block
+[I] Basic Test 5
+    Encrypting a valid block
 [I] Block to encrypt
 Block length:  8
 Block data  :
@@ -112,35 +121,42 @@ Block data  :
 Block length:  8
 Block data  :
 16#2B#, 16#A6#, 16#A0#, 16#93#, 16#80#, 16#E3#, 16#A3#, 16#53#
-[I] 6. Stopping the cipher
+[I] Basic Test 6
+    Stopping the cipher and check state
 [I] Cipher now must be in Idle state
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.RC2.RC2_CIPHER"
-    CryptAda cipher algorithm id  : "SC_RC2"
-    Block_Cipher SCAN name        : "RC2"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : ""
-    Block size                    :  8
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.RC2.RC2_CIPHER"
+    CryptAda cipher algorithm id  : SC_RC2
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "RC2"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
     Cipher state                  : IDLE
+    Started                       : FALSE
     Minimum key length            :  1
     Maximum key length            :  128
     Default key length            :  16
     Key length increment step     :  1
-[I] 7. Checking cipher state after successful Start_Cipher for decryption
-[I] Cipher now must be in Decrypting state
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.RC2.RC2_CIPHER"
-    CryptAda cipher algorithm id  : "SC_RC2"
-    Block_Cipher SCAN name        : "RC2"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : ""
     Block size                    :  8
+[I] Basic Test 7
+    Checking cipher state after successful Start_Cipher for decryption
+[I] Cipher now must be in Decrypting state
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.RC2.RC2_CIPHER"
+    CryptAda cipher algorithm id  : SC_RC2
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "RC2"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
     Cipher state                  : DECRYPTING
+    Started                       : TRUE
     Minimum key length            :  1
     Maximum key length            :  128
     Default key length            :  16
     Key length increment step     :  1
-[I] 8. Trying to decryt blocks of invalid length
+    Block size                    :  8
+[I] Basic Test 8
+    Trying to decryt blocks of invalid length
     Must raise CryptAda_Invalid_Block_Length_Error
     Cipher block size:  8 bytes
 [I] Invalid input block information: 
@@ -166,7 +182,9 @@ Block length:  9
 Block data  :
 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
 [I] Raised CryptAda_Invalid_Block_Length_Error
-[I] 9. Decrypting the block encrypted on step 5
+[I] Basic Test 9
+    Decrypting the block encrypted on basic test 5. Must be equal to original
+    plaintext block
 [I] Block to decrypt
 Block length:  8
 Block data  :
@@ -175,33 +193,35 @@ Block data  :
 Block length:  8
 Block data  :
 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
-[I] Decrypted block must be equal to original plain text block
 [I] Results match
-[I] 10. Final Stop_Cipher
+[I] Basic Test 10
+    Final Stop_Cipher
 [I] Cipher now must be in Idle state
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.RC2.RC2_CIPHER"
-    CryptAda cipher algorithm id  : "SC_RC2"
-    Block_Cipher SCAN name        : "RC2"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : ""
-    Block size                    :  8
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.RC2.RC2_CIPHER"
+    CryptAda cipher algorithm id  : SC_RC2
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "RC2"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
     Cipher state                  : IDLE
+    Started                       : FALSE
     Minimum key length            :  1
     Maximum key length            :  128
     Default key length            :  16
     Key length increment step     :  1
+    Block size                    :  8
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 08:17:04
+Finished        : 2017/04/03 - 20:44:42
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Testing specific RC2_Cipher interfaces.
-Started         : 2017/04/03 - 08:17:04
+Started         : 2017/04/03 - 20:44:42
 --------------------------------------------------------------------------------
 [I] Trying to Get_Effective_Key_Bits on an Idle Cipher will result in a
     CryptAda_Uninitialized_Cipher_Error exception.
@@ -218,13 +238,13 @@ Effective key bits obtained:  96
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 08:17:04
+Finished        : 2017/04/03 - 20:44:42
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Standard RC2 test vectors
-Started         : 2017/04/03 - 08:17:04
+Started         : 2017/04/03 - 20:44:42
 --------------------------------------------------------------------------------
 [I] Test vectors obtained from RFC 2268 Section 5.
 [I] RC2 test vector index:  1
@@ -303,40 +323,43 @@ Block data  :
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 08:17:04
+Finished        : 2017/04/03 - 20:44:42
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : RC2 Bulk test
-Started         : 2017/04/03 - 08:17:04
+Started         : 2017/04/03 - 20:44:42
 --------------------------------------------------------------------------------
 [I] Using key size:  16
 [I] Block cipher bulk test
-    Performing  10000 iterations encrypting and decrypting random blocks
-    with random keys.
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.RC2.RC2_CIPHER"
-    CryptAda cipher algorithm id  : "SC_RC2"
-    Block_Cipher SCAN name        : "RC2"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : ""
-    Block size                    :  8
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.RC2.RC2_CIPHER"
+    CryptAda cipher algorithm id  : SC_RC2
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "RC2"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
     Cipher state                  : IDLE
+    Started                       : FALSE
     Minimum key length            :  1
     Maximum key length            :  128
     Default key length            :  16
     Key length increment step     :  1
+    Block size                    :  8
 [I] Bulk test completed OK
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 08:17:05
+Finished        : 2017/04/03 - 20:44:42
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.RC2
-Finished                 : 2017/04/03 - 08:17:05
+Finished                 : 2017/04/03 - 20:44:42
 ================================================================================

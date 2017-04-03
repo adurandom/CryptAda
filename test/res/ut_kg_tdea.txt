@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.KG_TDEA
 Description              : Unit test driver for CryptAda.Ciphers.Key_Generators.TDEA functionality.
-Started                  : 2017/04/03 - 08:34:13
+Started                  : 2017/04/03 - 20:44:43
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Testing basic Key_Generator operation
-Started         : 2017/04/03 - 08:34:13
+Started         : 2017/04/03 - 20:44:43
 --------------------------------------------------------------------------------
 [I] Trying Start_Key_Generator with a null Random_Generator_Ref
     Must raise CryptAda_Null_Argument_Error
@@ -29,19 +29,19 @@ Started         : 2017/04/03 - 08:34:13
 [I] Generated key
     Key length:  24
     Key bytes :
-16#18#, 16#53#, 16#53#, 16#B2#, 16#22#, 16#99#, 16#0F#, 16#00#, 16#06#, 16#6C#, 16#2D#, 16#FC#, 16#1E#, 16#A6#, 16#63#, 16#2D#, 
-16#4E#, 16#E4#, 16#FC#, 16#A0#, 16#06#, 16#0C#, 16#72#, 16#74#
+16#87#, 16#C3#, 16#E2#, 16#14#, 16#EE#, 16#DD#, 16#24#, 16#8D#, 16#3A#, 16#2B#, 16#2D#, 16#DD#, 16#30#, 16#30#, 16#B1#, 16#21#, 
+16#81#, 16#60#, 16#F5#, 16#74#, 16#24#, 16#DB#, 16#0C#, 16#A6#
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 08:34:13
+Finished        : 2017/04/03 - 20:44:43
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Creating multiple keys
-Started         : 2017/04/03 - 08:34:13
+Started         : 2017/04/03 - 20:44:43
 --------------------------------------------------------------------------------
 [I] Performing  100000 iterations.
 [I] Performing  100000 iterations for TDEA keying option: KEYING_OPTION_1
@@ -51,11 +51,11 @@ Started         : 2017/04/03 - 08:34:13
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 08:34:15
+Finished        : 2017/04/03 - 20:44:44
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.KG_TDEA
-Finished                 : 2017/04/03 - 08:34:15
+Finished                 : 2017/04/03 - 20:44:44
 ================================================================================

@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Key_Generators
 Description              : Unit test driver for CryptAda.Ciphers.Key_Generators functionality.
-Started                  : 2017/04/01 - 08:51:16
+Started                  : 2017/04/03 - 20:44:43
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Testing basic Key_Generator operation
-Started         : 2017/04/01 - 08:51:16
+Started         : 2017/04/03 - 20:44:43
 --------------------------------------------------------------------------------
 [I] Trying Start_Key_Generator with a null Random_Generator_Ref
     Must raise CryptAda_Null_Argument_Error
@@ -29,30 +29,30 @@ Started         : 2017/04/01 - 08:51:16
 [I] Generated key
     Key length:  24
     Key bytes :
-16#1F#, 16#31#, 16#A7#, 16#B6#, 16#67#, 16#23#, 16#38#, 16#75#, 16#7F#, 16#A1#, 16#BD#, 16#F5#, 16#3F#, 16#41#, 16#DE#, 16#18#, 
-16#4C#, 16#A1#, 16#A6#, 16#F5#, 16#54#, 16#CB#, 16#8B#, 16#1A#
+16#5A#, 16#3E#, 16#F3#, 16#A7#, 16#A2#, 16#7C#, 16#84#, 16#9E#, 16#20#, 16#22#, 16#2E#, 16#52#, 16#DF#, 16#FF#, 16#BB#, 16#6B#, 
+16#A8#, 16#C3#, 16#BD#, 16#E9#, 16#4A#, 16#42#, 16#A1#, 16#75#
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/01 - 08:51:16
+Finished        : 2017/04/03 - 20:44:43
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Creating multiple keys
-Started         : 2017/04/01 - 08:51:16
+Started         : 2017/04/03 - 20:44:43
 --------------------------------------------------------------------------------
 [I] Performing  10000 iterations.
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/01 - 08:51:16
+Finished        : 2017/04/03 - 20:44:43
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Key_Generators
-Finished                 : 2017/04/01 - 08:51:16
+Finished                 : 2017/04/03 - 20:44:43
 ================================================================================

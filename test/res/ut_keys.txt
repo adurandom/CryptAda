@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Keys
 Description              : Unit test driver for CryptAda.Ciphers.Keys functionality.
-Started                  : 2017/03/31 - 19:29:09
+Started                  : 2017/04/03 - 20:44:29
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Attempting operations on Null key
-Started         : 2017/03/31 - 19:29:09
+Started         : 2017/04/03 - 20:44:29
 --------------------------------------------------------------------------------
 [I] Key must be created as a null key
 [I] The key as created:
@@ -29,13 +29,13 @@ Null key
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/31 - 19:29:09
+Finished        : 2017/04/03 - 20:44:29
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Testing Set_Key
-Started         : 2017/03/31 - 19:29:09
+Started         : 2017/04/03 - 20:44:29
 --------------------------------------------------------------------------------
 [I] Setting key to a given Byte_Array
 [I] The key before Set_Key
@@ -78,13 +78,13 @@ Null key
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/31 - 19:29:09
+Finished        : 2017/04/03 - 20:44:29
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Retrieving key bytes
-Started         : 2017/03/31 - 19:29:09
+Started         : 2017/04/03 - 20:44:29
 --------------------------------------------------------------------------------
 [I] Testing Get_Key_Bytes subprograms.
 [I] Byte_Array to set Key to
@@ -121,11 +121,11 @@ Number of bytes copied:  8
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/31 - 19:29:09
+Finished        : 2017/04/03 - 20:44:29
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Keys
-Finished                 : 2017/03/31 - 19:29:09
+Finished                 : 2017/04/03 - 20:44:29
 ================================================================================

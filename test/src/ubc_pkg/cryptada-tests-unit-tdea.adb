@@ -31,17 +31,18 @@
 --    1.0   20170328 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with Ada.Exceptions;                      use Ada.Exceptions;
+with Ada.Exceptions;                         use Ada.Exceptions;
 
-with CryptAda.Tests.Utils;                use CryptAda.Tests.Utils;
-with CryptAda.Tests.Utils.Ciphers;        use CryptAda.Tests.Utils.Ciphers;
+with CryptAda.Tests.Utils;                   use CryptAda.Tests.Utils;
+with CryptAda.Tests.Utils.Ciphers;           use CryptAda.Tests.Utils.Ciphers;
 
-with CryptAda.Exceptions;                 use CryptAda.Exceptions;
-with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
-with CryptAda.Ciphers;                    use CryptAda.Ciphers;
-with CryptAda.Ciphers.Keys;               use CryptAda.Ciphers.Keys;
-with CryptAda.Ciphers.Block_Ciphers;      use CryptAda.Ciphers.Block_Ciphers;
-with CryptAda.Ciphers.Block_Ciphers.TDEA; use CryptAda.Ciphers.Block_Ciphers.TDEA;
+with CryptAda.Pragmatics;                    use CryptAda.Pragmatics;
+with CryptAda.Exceptions;                    use CryptAda.Exceptions;
+with CryptAda.Ciphers;                       use CryptAda.Ciphers;
+with CryptAda.Ciphers.Keys;                  use CryptAda.Ciphers.Keys;
+with CryptAda.Ciphers.Symmetric;             use CryptAda.Ciphers.Symmetric;
+with CryptAda.Ciphers.Symmetric.Block;       use CryptAda.Ciphers.Symmetric.Block;
+with CryptAda.Ciphers.Symmetric.Block.TDEA;  use CryptAda.Ciphers.Symmetric.Block.TDEA;
 
 package body CryptAda.Tests.Unit.TDEA is
 
@@ -51,7 +52,7 @@ package body CryptAda.Tests.Unit.TDEA is
 
    Driver_Name                   : constant String := "CryptAda.Tests.Unit.TDEA";
 
-   Driver_Description            : constant String := "Unit test driver for CryptAda.Ciphers.Block_Ciphers.TDEA functionality.";
+   Driver_Description            : constant String := "Unit test driver for CryptAda.Ciphers.Symmetric.Block.TDEA functionality.";
 
    --[Standard AES test vectors]------------------------------------------------
    -----------------------------------------------------------------------------
@@ -130,7 +131,7 @@ package body CryptAda.Tests.Unit.TDEA is
       C                    : TDEA_Cipher;
    begin
       Begin_Test_Case(1, "Running TDEA_Cipher basic tests");
-      Run_Block_Cipher_Basic_Test(C, "Basic tests for TDEA_Cipher");
+      Run_Block_Cipher_Basic_Tests(C, "Basic tests for TDEA_Cipher");
       Print_Information_Message("Test case OK");
       End_Test_Case(1, Passed);
    exception
@@ -391,7 +392,7 @@ package body CryptAda.Tests.Unit.TDEA is
       Print_Information_Message("Using test vectors obtained from: ""NIST Special Publication 800-20""");
 
       for I in TDEA_TVs'Range loop
-         Run_Cipher_Test_Vector(
+         Run_Block_Cipher_Test_Vector(
             "TDEA Known Answer Tests: " & Integer'Image(I),
             C,
             TDEA_TVs(I),
@@ -426,7 +427,7 @@ package body CryptAda.Tests.Unit.TDEA is
    begin
       Begin_Test_Case(5, "TDEA Bulk test");
 
-      Run_Cipher_Bulk_Test(C, TDEA_Key_Length);
+      Run_Block_Cipher_Bulk_Tests(C, TDEA_Key_Length);
 
       Print_Information_Message("Test case OK");
       End_Test_Case(5, Passed);

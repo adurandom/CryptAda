@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Hex_Encoders
 Description              : Unit test driver for CryptAda.Encoders.Hex_Encoders functionality.
-Started                  : 2017/03/31 - 19:29:05
+Started                  : 2017/04/03 - 20:44:23
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Testing state and counters during encoding.
-Started         : 2017/03/31 - 19:29:05
+Started         : 2017/04/03 - 20:44:23
 --------------------------------------------------------------------------------
 [I] Initial state of encoder object ...
 [I] Checking encoder state:
@@ -61,13 +61,13 @@ Obtained: "000102030405060708090a0b0c0d0e0f"
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/31 - 19:29:05
+Finished        : 2017/04/03 - 20:44:23
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Testing CryptAda_Bad_Operation_Error raising in Idle_State
-Started         : 2017/03/31 - 19:29:05
+Started         : 2017/04/03 - 20:44:23
 --------------------------------------------------------------------------------
 [I] Initial state of encoder object is State_Idle
 [I] Checking encoder state:
@@ -90,13 +90,13 @@ Obtained Code Count:  0
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/31 - 19:29:05
+Finished        : 2017/04/03 - 20:44:23
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Testing CryptAda_Bad_Operation_Error raising in Encoding_State
-Started         : 2017/03/31 - 19:29:05
+Started         : 2017/04/03 - 20:44:23
 --------------------------------------------------------------------------------
 [I] Initial state of encoder object is State_Idle
 [I] Checking encoder state:
@@ -130,13 +130,13 @@ Obtained Code Count:  0
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/31 - 19:29:05
+Finished        : 2017/04/03 - 20:44:23
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Testing state and counters during decoding.
-Started         : 2017/03/31 - 19:29:05
+Started         : 2017/04/03 - 20:44:23
 --------------------------------------------------------------------------------
 [I] Initial state of encoder object ...
 [I] Checking encoder state:
@@ -186,13 +186,13 @@ Obtained decoded array:
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/31 - 19:29:05
+Finished        : 2017/04/03 - 20:44:23
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Testing CryptAda_Bad_Operation_Error raising in Decoding_State
-Started         : 2017/03/31 - 19:29:05
+Started         : 2017/04/03 - 20:44:23
 --------------------------------------------------------------------------------
 [I] Initial state of encoder object is State_Idle
 [I] Checking encoder state:
@@ -226,13 +226,13 @@ Obtained Code Count:  0
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/03/31 - 19:29:05
+Finished        : 2017/04/03 - 20:44:23
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : Testing CryptAda_Syntax_Error raising during decoding
-Started         : 2017/03/31 - 19:29:05
+Started         : 2017/04/03 - 20:44:23
 --------------------------------------------------------------------------------
 [I] Testing  5 invalid encoded strings
 [I] String to decode: "    "
@@ -291,11 +291,11 @@ Obtained Decoded => ( 16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/03/31 - 19:29:05
+Finished        : 2017/04/03 - 20:44:23
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Hex_Encoders
-Finished                 : 2017/03/31 - 19:29:05
+Finished                 : 2017/04/03 - 20:44:23
 ================================================================================
