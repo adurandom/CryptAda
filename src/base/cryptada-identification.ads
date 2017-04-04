@@ -50,9 +50,9 @@ package CryptAda.Identification is
    CryptAda_Copyright         : constant String    := "Copyright (c) 2017, Antonio Duran";
    CryptAda_Version_Major     : constant Natural   := 0;
    CryptAda_Version_Minor     : constant Natural   := 1;
-   CryptAda_Release           : constant Character := 'b';
-   CryptAda_Version_String    : constant String    := "0.1.b";
+   CryptAda_Release           : constant Character := 'c';
+   CryptAda_Version_String    : constant String    := "0.1.c";
    CryptAda_Version_Comments  : constant String    := "First alpha release";
-   CryptAda_Release_Date      : constant String    := "2017/03/31";
+   CryptAda_Release_Date      : constant String    := "2017/04/04";
 
 end CryptAda.Identification;
