@@ -43,10 +43,10 @@ package CryptAda.Names.OpenPGP is
    -- Next constants provide the OpenPGP names for message digest algorithms.
    -----------------------------------------------------------------------------
 
-   OpenPGP_MD2                : aliased constant String := "OpenPGP.Digest.5";
    OpenPGP_MD5                : aliased constant String := "OpenPGP.Digest.1";
    OpenPGP_SHA_1              : aliased constant String := "OpenPGP.Digest.2";
    OpenPGP_RIPEMD_160         : aliased constant String := "OpenPGP.Digest.3";
+   OpenPGP_MD2                : aliased constant String := "OpenPGP.Digest.5";
    OpenPGP_Tiger              : aliased constant String := "OpenPGP.Digest.6";
    OpenPGP_HAVAL              : aliased constant String := "OpenPGP.Digest.7";
 
@@ -72,6 +72,7 @@ package CryptAda.Names.OpenPGP is
 
    OpenPGP_IDEA               : aliased constant String := "OpenPGP.Cipher.1";
    OpenPGP_DES_EDE_3          : aliased constant String := "OpenPGP.Cipher.2";
+   OpenPGP_CAST_128           : aliased constant String := "OpenPGP.Cipher.3";
    OpenPGP_Blowfish           : aliased constant String := "OpenPGP.Cipher.4";
    OpenPGP_AES_128            : aliased constant String := "OpenPGP.Cipher.7";
    OpenPGP_AES_192            : aliased constant String := "OpenPGP.Cipher.8";
@@ -89,6 +90,7 @@ package CryptAda.Names.OpenPGP is
          SC_AES_256        => OpenPGP_AES_256'Access,
          SC_Blowfish       => OpenPGP_Blowfish'Access,
          SC_IDEA           => OpenPGP_IDEA'Access,
+         SC_CAST_128       => OpenPGP_CAST_128'Access,
          others            => Anonymous_Algorithm'Access
       );
       

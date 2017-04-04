@@ -107,6 +107,7 @@ OBJS     =  cryptada.o \
             cryptada-ciphers-symmetric-block-aes.o \
             cryptada-ciphers-symmetric-block-rc2.o \
             cryptada-ciphers-symmetric-block-idea.o \
+            cryptada-ciphers-symmetric-block-cast_128.o \
             cryptada-ciphers-symmetric-stream.o \
             cryptada-ciphers-key_generators.o \
             cryptada-ciphers-key_generators-tdea.o 
@@ -336,7 +337,11 @@ cryptada-ciphers-symmetric-block-rc2.o: $(CIPHDIR)/cryptada-ciphers-symmetric-bl
 cryptada-ciphers-symmetric-block-idea.o: $(CIPHDIR)/cryptada-ciphers-symmetric-block-idea.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
-        
+
+cryptada-ciphers-symmetric-block-cast_128.o: $(CIPHDIR)/cryptada-ciphers-symmetric-block-cast_128.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+            
 cryptada-ciphers-symmetric-stream.o: $(CIPHDIR)/cryptada-ciphers-symmetric-stream.ads
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<

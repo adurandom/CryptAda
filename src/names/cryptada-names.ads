@@ -147,6 +147,7 @@ package CryptAda.Names is
          SC_Blowfish,            -- Blowfish
          SC_RC2,                 -- RC2
          SC_IDEA,                -- IDEA block cipher
+         SC_CAST_128,            -- CAST-128
          SC_RC4                  -- RC4 
       );
       
@@ -155,7 +156,7 @@ package CryptAda.Names is
    -- CryptAda.
    -----------------------------------------------------------------------------
 
-   subtype Block_Cipher_Id is Symmetric_Cipher_Id range SC_DES .. SC_IDEA;
+   subtype Block_Cipher_Id is Symmetric_Cipher_Id range SC_DES .. SC_CAST_128;
 
    --[Stream_Cipher_Id]---------------------------------------------------------
    -- Enumerated type identifies the symmetric stream ciphers implemented in 
