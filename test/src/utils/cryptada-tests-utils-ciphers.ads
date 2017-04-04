@@ -34,6 +34,7 @@
 with CryptAda.Pragmatics;
 with CryptAda.Ciphers.Symmetric;
 with CryptAda.Ciphers.Symmetric.Block;
+with CryptAda.Ciphers.Symmetric.Stream;
 with CryptAda.Ciphers.Keys;
 
 package CryptAda.Tests.Utils.Ciphers is
@@ -62,10 +63,19 @@ package CryptAda.Tests.Utils.Ciphers is
                   The_Cipher     : in out CryptAda.Ciphers.Symmetric.Block.Block_Cipher'Class;
                   Message        : in     String);
 
+   procedure   Run_Stream_Cipher_Basic_Tests(
+                  The_Cipher     : in out CryptAda.Ciphers.Symmetric.Stream.Stream_Cipher'Class;
+                  Message        : in     String);
+                  
    procedure   Run_Block_Cipher_Bulk_Tests(
                   With_Cipher    : in out CryptAda.Ciphers.Symmetric.Block.Block_Cipher'Class;
                   Key_Size       : in     Positive);
 
+   procedure   Run_Stream_Cipher_Bulk_Tests(
+                  With_Cipher    : in out CryptAda.Ciphers.Symmetric.Stream.Stream_Cipher'Class;
+                  Key_Size       : in     Positive;
+                  Buffer_Size    : in     Positive);
+                  
    procedure   Run_Block_Cipher_Test_Vector(
                   Message        : in     String;
                   With_Cipher    : in out CryptAda.Ciphers.Symmetric.Block.Block_Cipher'Class;
