@@ -16,11 +16,11 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-block_ciphers-aes.ads
+--    Filename          :  cryptada-ciphers-symmetric-block-aes.ads
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 25th, 2017
---    Current version   :  1.0
+--    Current version   :  1.2
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the AES block cipher.
@@ -61,13 +61,14 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170325 ADD   Initial implementation.
+--    1.1   20170330 ADD   Removed key generation subprogram.
+--    1.2   20170403 ADD   Changed symmetric ciphers hierarchy.
 --------------------------------------------------------------------------------
 
 with CryptAda.Pragmatics;
 with CryptAda.Ciphers.Keys;
-with CryptAda.Random.Generators;
 
-package CryptAda.Ciphers.Block_Ciphers.AES is
+package CryptAda.Ciphers.Symmetric.Block.AES is
 
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
@@ -92,13 +93,13 @@ package CryptAda.Ciphers.Block_Ciphers.AES is
    -- Size in bytes of AES blocks (128-bit, 16 byte).
    -----------------------------------------------------------------------------
 
-   AES_Block_Size                : constant Block_Size   :=  16;
+   AES_Block_Size                : constant Cipher_Block_Size :=  16;
 
-   --[AES_Key_Sizes]------------------------------------------------------------
-   -- Array containing the AES key sizes.
+   --[AES_Key_Lengths]----------------------------------------------------------
+   -- Array containing the valid AES key lengths.
    -----------------------------------------------------------------------------
 
-   AES_Key_Sizes                 : constant array(AES_Key_Id) of Positive := 
+   AES_Key_Lengths               : constant array(AES_Key_Id) of Cipher_Key_Length := 
       (
          AES_128        => 16,
          AES_192        => 24,
@@ -119,13 +120,11 @@ package CryptAda.Ciphers.Block_Ciphers.AES is
    -- Constrained subtype for AES blocks.
    -----------------------------------------------------------------------------
    
-   subtype AES_Block is Block(1 .. AES_Block_Size);
+   subtype AES_Block is Cipher_Block(1 .. AES_Block_Size);
    
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
-
-   --[Encrypt/Decrypt Interface]------------------------------------------------
 
    --[Start_Cipher]-------------------------------------------------------------
 
@@ -134,71 +133,59 @@ package CryptAda.Ciphers.Block_Ciphers.AES is
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     CryptAda.Ciphers.Keys.Key);
 
-   --[Process_Block]------------------------------------------------------------
+   --[Do_Process]---------------------------------------------------------------
 
-   procedure   Process_Block(
+   procedure   Do_Process(
                   With_Cipher    : in out AES_Cipher;
-                  Input          : in     Block;
-                  Output         :    out Block);
+                  Input          : in     CryptAda.Pragmatics.Byte_Array;
+                  Output         :    out CryptAda.Pragmatics.Byte_Array);
 
    --[Stop_Cipher]--------------------------------------------------------------
       
    procedure   Stop_Cipher(
                   The_Cipher     : in out AES_Cipher);
 
-   --[Key related operations]---------------------------------------------------
-
-   --[Generate_Key]-------------------------------------------------------------
-   
-   procedure   Generate_Key(
-                  The_Cipher     : in     AES_Cipher;
-                  Generator      : in out CryptAda.Random.Generators.Random_Generator'Class;
-                  The_Key        : in out CryptAda.Ciphers.Keys.Key);
-
-   --[Is_Valid_Key]-------------------------------------------------------------
-   
-   function    Is_Valid_Key(
-                  For_Cipher     : in     AES_Cipher;
-                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
-      return   Boolean;
-         
-   --[Is_Strong_Key]------------------------------------------------------------
-   
-   function    Is_Strong_Key(
-                  For_Cipher     : in     AES_Cipher;
-                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
-      return   Boolean;
-
    -----------------------------------------------------------------------------
-   --[Non-Dispatching Operations]-----------------------------------------------
+   --[Non-dispatching operations]-----------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Generate_Key]-------------------------------------------------------------
+   --[Get_AES_Key_Id]-----------------------------------------------------------
    -- Purpose:
-   -- Generates a random AES key of a specified length.
+   -- Returns the identifier of the key the AES cipher is using.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- The_Cipher                 Block_Cipher object for which the key is to be
-   --                            generated.
-   -- Key_Id                     AES_Key_Id value that identifies the size of 
-   --                            key to generate-
-   -- Generator                  Random_Generator used to generate the key.
-   -- The_Key                    Generated key.
+   -- Of_Cipher               AES_Cipher object to get the key id from.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- N/A.
+   -- AES_Key_Id value.
    -----------------------------------------------------------------------------
    -- Exceptions:
-   -- CryptAda_Generator_Not_Started_Error
-   -- CryptAda_Generator_Need_Seeding_Error
+   -- CryptAda_Uninitialized_Cipher_Error if Of_Cipher is in Idle state.
+   -----------------------------------------------------------------------------
+
+   function    Get_AES_Key_Id(
+                  Of_Cipher      : in     AES_Cipher'Class)
+      return   AES_Key_Id;
+                  
+   --[Is_Valid_AES_Key]---------------------------------------------------------
+   -- Purpose:
+   -- Checks if a given key is a valid AES key.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Key                 Key object to check its validity.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Boolean value that indicates if The_Key is a valid AES key (True) or not
+   -- (False)
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
    -----------------------------------------------------------------------------
    
-   procedure   Generate_Key(
-                  The_Cipher     : in     AES_Cipher;
-                  Key_Id         : in     AES_Key_Id;
-                  Generator      : in out CryptAda.Random.Generators.Random_Generator'Class;
-                  The_Key        : in out CryptAda.Ciphers.Keys.Key);
-
+   function    Is_Valid_AES_Key(
+                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
+      return   Boolean;
+      
    -----------------------------------------------------------------------------
    --[Private Part]-------------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -209,22 +196,28 @@ private
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[AES Constants]------------------------------------------------------------
-   -- Next constants are related to DES processing.
-   --
-   -- AES_Min_KL              Minimum key length for AES (in bytes).
-   -- AES_Max_KL              Minimum key length for AES (in bytes).
-   -- AES_Def_KL              Minimum key length for AES (in bytes).
-   -- AES_KL_Inc_Step         AES key increment step in length.
-   -- AES_Word_Size           AES word size (4 bytes).
-   -- AES_Rounds              Numbers of rounds for each AES key size.
+   --[AES_Key_Info]-------------------------------------------------------------
+   -- Information regarding AES keys.
+   -----------------------------------------------------------------------------
+
+   AES_Key_Info                  : constant Cipher_Key_Info := 
+      (
+         Min_Key_Length    => 16,
+         Max_Key_Length    => 32,
+         Def_Key_Length    => 32,
+         Key_Length_Inc    => 8
+      );
+
+   --[AES_Word_Size]------------------------------------------------------------
+   -- Size of words for AES.
    -----------------------------------------------------------------------------
    
-   AES_Min_KL                    : constant Positive     := 16;
-   AES_Max_KL                    : constant Positive     := 32;
-   AES_Def_KL                    : constant Positive     := 32;
-   AES_KL_Inc_Step               : constant Natural      :=  8;
-   AES_Word_Size                 : constant Positive     :=  4;
+   AES_Word_Size                 : constant Positive :=  4;
+
+   --[AES_Rounds]---------------------------------------------------------------
+   -- Number of rounds for each AES key size (Key Words + 6)
+   -----------------------------------------------------------------------------
+   
    AES_Rounds                    : constant array(AES_Key_Id) of Positive :=
       (
          AES_128        => 10,
@@ -263,4 +256,4 @@ private
    procedure   Finalize(
                   Object         : in out AES_Cipher);
 
-end CryptAda.Ciphers.Block_Ciphers.AES;
+end CryptAda.Ciphers.Symmetric.Block.AES;

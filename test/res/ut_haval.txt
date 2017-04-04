@@ -1,18 +1,18 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.a (2017/03/31)
+Version: 0.1.b (2017/03/31)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.HAVAL
 Description              : Unit test driver for CryptAda.Digests.Algorithms.HAVAL functionality.
-Started                  : 2017/03/28 - 13:21:57
+Started                  : 2017/04/03 - 20:44:27
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : CryptAda message digest basic operation
-Started         : 2017/03/28 - 13:21:57
+Started         : 2017/04/03 - 20:44:27
 --------------------------------------------------------------------------------
 [I] HAVAL digest parameters:
     Passes                        : " 3"
@@ -58,7 +58,7 @@ Started         : 2017/03/28 - 13:21:57
     Passes                        :  3
     Hash size id                  : HAVAL_128
 [I] Ending digest processing and obtaining hash
-    Obtained hash                 : "81d06f60c896055d4e3c06c5f4545902"
+    Obtained hash                 : "81D06F60C896055D4E3C06C5F4545902"
 [I] Digest object information after Digest_End()
 [I] Information of digest object:
     Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
@@ -116,7 +116,7 @@ Started         : 2017/03/28 - 13:21:57
     Passes                        :  3
     Hash size id                  : HAVAL_160
 [I] Ending digest processing and obtaining hash
-    Obtained hash                 : "e373e61faff254308968ce7e053a63ddd334dade"
+    Obtained hash                 : "E373E61FAFF254308968CE7E053A63DDD334DADE"
 [I] Digest object information after Digest_End()
 [I] Information of digest object:
     Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
@@ -174,7 +174,7 @@ Started         : 2017/03/28 - 13:21:57
     Passes                        :  3
     Hash size id                  : HAVAL_192
 [I] Ending digest processing and obtaining hash
-    Obtained hash                 : "b913d13287858dc4a0bc18d5c155589534e0cd7bab50e38d"
+    Obtained hash                 : "B913D13287858DC4A0BC18D5C155589534E0CD7BAB50E38D"
 [I] Digest object information after Digest_End()
 [I] Information of digest object:
     Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
@@ -232,7 +232,7 @@ Started         : 2017/03/28 - 13:21:57
     Passes                        :  3
     Hash size id                  : HAVAL_224
 [I] Ending digest processing and obtaining hash
-    Obtained hash                 : "5c3480a77e7269e705f77ffd7ae44e6d3a4b60bd2fdfcda5f93c459d"
+    Obtained hash                 : "5C3480A77E7269E705F77FFD7AE44E6D3A4B60BD2FDFCDA5F93C459D"
 [I] Digest object information after Digest_End()
 [I] Information of digest object:
     Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
@@ -290,7 +290,7 @@ Started         : 2017/03/28 - 13:21:57
     Passes                        :  3
     Hash size id                  : HAVAL_256
 [I] Ending digest processing and obtaining hash
-    Obtained hash                 : "4d011ff4978d444b2778ff45be4ccfa5ade53882ea20769019e6a3dd9882e161"
+    Obtained hash                 : "4D011FF4978D444B2778FF45BE4CCFA5ADE53882EA20769019E6A3DD9882E161"
 [I] Digest object information after Digest_End()
 [I] Information of digest object:
     Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
@@ -348,7 +348,7 @@ Started         : 2017/03/28 - 13:21:57
     Passes                        :  4
     Hash size id                  : HAVAL_128
 [I] Ending digest processing and obtaining hash
-    Obtained hash                 : "67f44824b0cfc0e8bbf319c41b9684db"
+    Obtained hash                 : "67F44824B0CFC0E8BBF319C41B9684DB"
 [I] Digest object information after Digest_End()
 [I] Information of digest object:
     Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
@@ -406,7 +406,7 @@ Started         : 2017/03/28 - 13:21:57
     Passes                        :  4
     Hash size id                  : HAVAL_160
 [I] Ending digest processing and obtaining hash
-    Obtained hash                 : "60b46ec2a777a9c5c114ca70ea7c7968e110e7f1"
+    Obtained hash                 : "60B46EC2A777A9C5C114CA70EA7C7968E110E7F1"
 [I] Digest object information after Digest_End()
 [I] Information of digest object:
     Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
@@ -464,7 +464,7 @@ Started         : 2017/03/28 - 13:21:57
     Passes                        :  4
     Hash size id                  : HAVAL_192
 [I] Ending digest processing and obtaining hash
-    Obtained hash                 : "e07219582e7bd97e86e4e2b7e8b405b7746c433e0364b929"
+    Obtained hash                 : "E07219582E7BD97E86E4E2B7E8B405B7746C433E0364B929"
 [I] Digest object information after Digest_End()
 [I] Information of digest object:
     Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
@@ -522,7 +522,7 @@ Started         : 2017/03/28 - 13:21:57
     Passes                        :  4
     Hash size id                  : HAVAL_224
 [I] Ending digest processing and obtaining hash
-    Obtained hash                 : "45336db282b6b75589dd80320a7c14dd2c1111cd9ec86e88d53bac31"
+    Obtained hash                 : "45336DB282B6B75589DD80320A7C14DD2C1111CD9EC86E88D53BAC31"
 [I] Digest object information after Digest_End()
 [I] Information of digest object:
     Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
@@ -580,7 +580,7 @@ Started         : 2017/03/28 - 13:21:57
     Passes                        :  4
     Hash size id                  : HAVAL_256
 [I] Ending digest processing and obtaining hash
-    Obtained hash                 : "d5af6e503f2380ad5e934b9250cbed30d3617de5fdb9a954c69fc7b920244859"
+    Obtained hash                 : "D5AF6E503F2380AD5E934B9250CBED30D3617DE5FDB9A954C69FC7B920244859"
 [I] Digest object information after Digest_End()
 [I] Information of digest object:
     Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
@@ -638,7 +638,7 @@ Started         : 2017/03/28 - 13:21:57
     Passes                        :  5
     Hash size id                  : HAVAL_128
 [I] Ending digest processing and obtaining hash
-    Obtained hash                 : "88a4e1518d57a7df38034716b6e87818"
+    Obtained hash                 : "88A4E1518D57A7DF38034716B6E87818"
 [I] Digest object information after Digest_End()
 [I] Information of digest object:
     Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
@@ -696,7 +696,7 @@ Started         : 2017/03/28 - 13:21:57
     Passes                        :  5
     Hash size id                  : HAVAL_160
 [I] Ending digest processing and obtaining hash
-    Obtained hash                 : "2fb12081b9e1dce44686e9d693a65ded725e1e1b"
+    Obtained hash                 : "2FB12081B9E1DCE44686E9D693A65DED725E1E1B"
 [I] Digest object information after Digest_End()
 [I] Information of digest object:
     Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
@@ -754,7 +754,7 @@ Started         : 2017/03/28 - 13:21:57
     Passes                        :  5
     Hash size id                  : HAVAL_192
 [I] Ending digest processing and obtaining hash
-    Obtained hash                 : "863377553270363d208818b4ce1abf173e0a2eead045ffcb"
+    Obtained hash                 : "863377553270363D208818B4CE1ABF173E0A2EEAD045FFCB"
 [I] Digest object information after Digest_End()
 [I] Information of digest object:
     Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
@@ -812,7 +812,7 @@ Started         : 2017/03/28 - 13:21:57
     Passes                        :  5
     Hash size id                  : HAVAL_224
 [I] Ending digest processing and obtaining hash
-    Obtained hash                 : "6d6e3b90b943a7990bf98ce9f8c13cd4c7c7fefc40c377bac19ed4a2"
+    Obtained hash                 : "6D6E3B90B943A7990BF98CE9F8C13CD4C7C7FEFC40C377BAC19ED4A2"
 [I] Digest object information after Digest_End()
 [I] Information of digest object:
     Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
@@ -870,7 +870,7 @@ Started         : 2017/03/28 - 13:21:57
     Passes                        :  5
     Hash size id                  : HAVAL_256
 [I] Ending digest processing and obtaining hash
-    Obtained hash                 : "c60fe005462f2371869f11a456569bac0627edc14ffc760fb12fe64ee3bbe120"
+    Obtained hash                 : "C60FE005462F2371869F11A456569BAC0627EDC14FFC760FB12FE64EE3BBE120"
 [I] Digest object information after Digest_End()
 [I] Information of digest object:
     Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.HAVAL.HAVAL_DIGEST"
@@ -887,13 +887,13 @@ Started         : 2017/03/28 - 13:21:57
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:21:57
+Finished        : 2017/04/03 - 20:44:27
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Standard HAVAL test vectors
-Started         : 2017/03/28 - 13:21:57
+Started         : 2017/04/03 - 20:44:27
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from https://web.archive.org/web/20150111210116/http://labs.calyptix.com/haval.php
     Number of vectors to test:  6
@@ -917,8 +917,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results
     Expected bit count (Low, High): ( 0,  0)
     Obtained bit count (Low, High): ( 0,  0)
-    Expected hash (String)        : "c68f39913f901f3ddf44c707357a7d70"
-    Obtained hash (String)        : "c68f39913f901f3ddf44c707357a7d70"
+    Expected hash (String)        : "C68F39913F901F3DDF44C707357A7D70"
+    Obtained hash (String)        : "C68F39913F901F3DDF44C707357A7D70"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 test passed.
@@ -942,8 +942,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results
     Expected bit count (Low, High): ( 8,  0)
     Obtained bit count (Low, High): ( 8,  0)
-    Expected hash (String)        : "4da08f514a7275dbc4cece4a347385983983a830"
-    Obtained hash (String)        : "4da08f514a7275dbc4cece4a347385983983a830"
+    Expected hash (String)        : "4DA08F514A7275DBC4CECE4A347385983983A830"
+    Obtained hash (String)        : "4DA08F514A7275DBC4CECE4A347385983983A830"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 test passed.
@@ -967,8 +967,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results
     Expected bit count (Low, High): ( 40,  0)
     Obtained bit count (Low, High): ( 40,  0)
-    Expected hash (String)        : "0c1396d7772689c46773f3daaca4efa982adbfb2f1467eea"
-    Obtained hash (String)        : "0c1396d7772689c46773f3daaca4efa982adbfb2f1467eea"
+    Expected hash (String)        : "0C1396D7772689C46773F3DAACA4EFA982ADBFB2F1467EEA"
+    Obtained hash (String)        : "0C1396D7772689C46773F3DAACA4EFA982ADBFB2F1467EEA"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 test passed.
@@ -992,8 +992,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results
     Expected bit count (Low, High): ( 80,  0)
     Obtained bit count (Low, High): ( 80,  0)
-    Expected hash (String)        : "bebd7816f09baeecf8903b1b9bc672d9fa428e462ba699f814841529"
-    Obtained hash (String)        : "bebd7816f09baeecf8903b1b9bc672d9fa428e462ba699f814841529"
+    Expected hash (String)        : "BEBD7816F09BAEECF8903B1B9BC672D9FA428E462BA699F814841529"
+    Obtained hash (String)        : "BEBD7816F09BAEECF8903B1B9BC672D9FA428E462BA699F814841529"
 [I] Counters match
 [I] Hashes match
 [I] Vector  4 test passed.
@@ -1019,8 +1019,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results
     Expected bit count (Low, High): ( 208,  0)
     Obtained bit count (Low, High): ( 208,  0)
-    Expected hash (String)        : "c9c7d8afa159fd9e965cb83ff5ee6f58aeda352c0eff005548153a61551c38ee"
-    Obtained hash (String)        : "c9c7d8afa159fd9e965cb83ff5ee6f58aeda352c0eff005548153a61551c38ee"
+    Expected hash (String)        : "C9C7D8AFA159FD9E965CB83FF5EE6F58AEDA352C0EFF005548153A61551C38EE"
+    Obtained hash (String)        : "C9C7D8AFA159FD9E965CB83FF5EE6F58AEDA352C0EFF005548153A61551C38EE"
 [I] Counters match
 [I] Hashes match
 [I] Vector  5 test passed.
@@ -1050,21 +1050,21 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results
     Expected bit count (Low, High): ( 496,  0)
     Obtained bit count (Low, High): ( 496,  0)
-    Expected hash (String)        : "b45cb6e62f2b1320e4f8f1b0b273d45add47c321fd23999dcf403ac37636d963"
-    Obtained hash (String)        : "b45cb6e62f2b1320e4f8f1b0b273d45add47c321fd23999dcf403ac37636d963"
+    Expected hash (String)        : "B45CB6E62F2B1320E4F8F1B0B273D45ADD47C321FD23999DCF403AC37636D963"
+    Obtained hash (String)        : "B45CB6E62F2B1320E4F8F1B0B273D45ADD47C321FD23999DCF403AC37636D963"
 [I] Counters match
 [I] Hashes match
 [I] Vector  6 test passed.
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:21:57
+Finished        : 2017/04/03 - 20:44:27
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : CryptAda HAVAL (128-bit) test vectors
-Started         : 2017/03/28 - 13:21:57
+Started         : 2017/04/03 - 20:44:27
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Number of passes:  3
@@ -1079,8 +1079,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  1
     Expected bit count (Low, High): ( 0,  0)
     Obtained bit count (Low, High): ( 0,  0)
-    Expected hash (String)        : "c68f39913f901f3ddf44c707357a7d70"
-    Obtained hash (String)        : "c68f39913f901f3ddf44c707357a7d70"
+    Expected hash (String)        : "C68F39913F901F3DDF44C707357A7D70"
+    Obtained hash (String)        : "C68F39913F901F3DDF44C707357A7D70"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 test passed.
@@ -1094,8 +1094,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  2
     Expected bit count (Low, High): ( 8,  0)
     Obtained bit count (Low, High): ( 8,  0)
-    Expected hash (String)        : "0cd40739683e15f01ca5dbceef4059f1"
-    Obtained hash (String)        : "0cd40739683e15f01ca5dbceef4059f1"
+    Expected hash (String)        : "0CD40739683E15F01CA5DBCEEF4059F1"
+    Obtained hash (String)        : "0CD40739683E15F01CA5DBCEEF4059F1"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 test passed.
@@ -1109,8 +1109,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  3
     Expected bit count (Low, High): ( 24,  0)
     Obtained bit count (Low, High): ( 24,  0)
-    Expected hash (String)        : "9e40ed883fb63e985d299b40cda2b8f2"
-    Obtained hash (String)        : "9e40ed883fb63e985d299b40cda2b8f2"
+    Expected hash (String)        : "9E40ED883FB63E985D299B40CDA2B8F2"
+    Obtained hash (String)        : "9E40ED883FB63E985D299B40CDA2B8F2"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 test passed.
@@ -1125,8 +1125,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  4
     Expected bit count (Low, High): ( 112,  0)
     Obtained bit count (Low, High): ( 112,  0)
-    Expected hash (String)        : "3caf4a79e81adcd6d1716bcc1cef4573"
-    Obtained hash (String)        : "3caf4a79e81adcd6d1716bcc1cef4573"
+    Expected hash (String)        : "3CAF4A79E81ADCD6D1716BCC1CEF4573"
+    Obtained hash (String)        : "3CAF4A79E81ADCD6D1716BCC1CEF4573"
 [I] Counters match
 [I] Hashes match
 [I] Vector  4 test passed.
@@ -1142,8 +1142,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  5
     Expected bit count (Low, High): ( 208,  0)
     Obtained bit count (Low, High): ( 208,  0)
-    Expected hash (String)        : "dc502247fb3eb8376109eda32d361d82"
-    Obtained hash (String)        : "dc502247fb3eb8376109eda32d361d82"
+    Expected hash (String)        : "DC502247FB3EB8376109EDA32D361D82"
+    Obtained hash (String)        : "DC502247FB3EB8376109EDA32D361D82"
 [I] Counters match
 [I] Hashes match
 [I] Vector  5 test passed.
@@ -1163,8 +1163,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  6
     Expected bit count (Low, High): ( 496,  0)
     Obtained bit count (Low, High): ( 496,  0)
-    Expected hash (String)        : "de5eb3f7d9eb08fae7a07d68e3047ec6"
-    Obtained hash (String)        : "de5eb3f7d9eb08fae7a07d68e3047ec6"
+    Expected hash (String)        : "DE5EB3F7D9EB08FAE7A07D68E3047EC6"
+    Obtained hash (String)        : "DE5EB3F7D9EB08FAE7A07D68E3047EC6"
 [I] Counters match
 [I] Hashes match
 [I] Vector  6 test passed.
@@ -1185,8 +1185,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  7
     Expected bit count (Low, High): ( 640,  0)
     Obtained bit count (Low, High): ( 640,  0)
-    Expected hash (String)        : "d15c566b5c1b84928236ca065565208f"
-    Obtained hash (String)        : "d15c566b5c1b84928236ca065565208f"
+    Expected hash (String)        : "D15C566B5C1B84928236CA065565208F"
+    Obtained hash (String)        : "D15C566B5C1B84928236CA065565208F"
 [I] Counters match
 [I] Hashes match
 [I] Vector  7 test passed.
@@ -1204,8 +1204,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  8
     Expected bit count (Low, High): ( 344,  0)
     Obtained bit count (Low, High): ( 344,  0)
-    Expected hash (String)        : "713502673d67e5fa557629a71d331945"
-    Obtained hash (String)        : "713502673d67e5fa557629a71d331945"
+    Expected hash (String)        : "713502673D67E5FA557629A71D331945"
+    Obtained hash (String)        : "713502673D67E5FA557629A71D331945"
 [I] Counters match
 [I] Hashes match
 [I] Vector  8 test passed.
@@ -1221,8 +1221,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  9
     Expected bit count (Low, High): ( 224,  0)
     Obtained bit count (Low, High): ( 224,  0)
-    Expected hash (String)        : "81d06f60c896055d4e3c06c5f4545902"
-    Obtained hash (String)        : "81d06f60c896055d4e3c06c5f4545902"
+    Expected hash (String)        : "81D06F60C896055D4E3C06C5F4545902"
+    Obtained hash (String)        : "81D06F60C896055D4E3C06C5F4545902"
 [I] Counters match
 [I] Hashes match
 [I] Vector  9 test passed.
@@ -1238,8 +1238,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  1
     Expected bit count (Low, High): ( 0,  0)
     Obtained bit count (Low, High): ( 0,  0)
-    Expected hash (String)        : "ee6bbf4d6a46a679b3a856c88538bb98"
-    Obtained hash (String)        : "ee6bbf4d6a46a679b3a856c88538bb98"
+    Expected hash (String)        : "EE6BBF4D6A46A679B3A856C88538BB98"
+    Obtained hash (String)        : "EE6BBF4D6A46A679B3A856C88538BB98"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 test passed.
@@ -1253,8 +1253,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  2
     Expected bit count (Low, High): ( 8,  0)
     Obtained bit count (Low, High): ( 8,  0)
-    Expected hash (String)        : "5cd07f03330c3b5020b29ba75911e17d"
-    Obtained hash (String)        : "5cd07f03330c3b5020b29ba75911e17d"
+    Expected hash (String)        : "5CD07F03330C3B5020B29BA75911E17D"
+    Obtained hash (String)        : "5CD07F03330C3B5020B29BA75911E17D"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 test passed.
@@ -1268,8 +1268,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  3
     Expected bit count (Low, High): ( 24,  0)
     Obtained bit count (Low, High): ( 24,  0)
-    Expected hash (String)        : "6f2132867c9648419adcd5013e532fa2"
-    Obtained hash (String)        : "6f2132867c9648419adcd5013e532fa2"
+    Expected hash (String)        : "6F2132867C9648419ADCD5013E532FA2"
+    Obtained hash (String)        : "6F2132867C9648419ADCD5013E532FA2"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 test passed.
@@ -1284,8 +1284,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  4
     Expected bit count (Low, High): ( 112,  0)
     Obtained bit count (Low, High): ( 112,  0)
-    Expected hash (String)        : "faee633871b30771ecda708d66fe6551"
-    Obtained hash (String)        : "faee633871b30771ecda708d66fe6551"
+    Expected hash (String)        : "FAEE633871B30771ECDA708D66FE6551"
+    Obtained hash (String)        : "FAEE633871B30771ECDA708D66FE6551"
 [I] Counters match
 [I] Hashes match
 [I] Vector  4 test passed.
@@ -1301,8 +1301,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  5
     Expected bit count (Low, High): ( 208,  0)
     Obtained bit count (Low, High): ( 208,  0)
-    Expected hash (String)        : "b2a73b99775ffb17cd8781b85ec66221"
-    Obtained hash (String)        : "b2a73b99775ffb17cd8781b85ec66221"
+    Expected hash (String)        : "B2A73B99775FFB17CD8781B85EC66221"
+    Obtained hash (String)        : "B2A73B99775FFB17CD8781B85EC66221"
 [I] Counters match
 [I] Hashes match
 [I] Vector  5 test passed.
@@ -1322,8 +1322,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  6
     Expected bit count (Low, High): ( 496,  0)
     Obtained bit count (Low, High): ( 496,  0)
-    Expected hash (String)        : "cad57c0563bda208d66bb89eb922e2a2"
-    Obtained hash (String)        : "cad57c0563bda208d66bb89eb922e2a2"
+    Expected hash (String)        : "CAD57C0563BDA208D66BB89EB922E2A2"
+    Obtained hash (String)        : "CAD57C0563BDA208D66BB89EB922E2A2"
 [I] Counters match
 [I] Hashes match
 [I] Vector  6 test passed.
@@ -1344,8 +1344,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  7
     Expected bit count (Low, High): ( 640,  0)
     Obtained bit count (Low, High): ( 640,  0)
-    Expected hash (String)        : "edf66fa258f61206595b7c261cf2f812"
-    Obtained hash (String)        : "edf66fa258f61206595b7c261cf2f812"
+    Expected hash (String)        : "EDF66FA258F61206595B7C261CF2F812"
+    Obtained hash (String)        : "EDF66FA258F61206595B7C261CF2F812"
 [I] Counters match
 [I] Hashes match
 [I] Vector  7 test passed.
@@ -1363,8 +1363,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  8
     Expected bit count (Low, High): ( 344,  0)
     Obtained bit count (Low, High): ( 344,  0)
-    Expected hash (String)        : "6eece560a2e8d6b919e81fe91b0e7156"
-    Obtained hash (String)        : "6eece560a2e8d6b919e81fe91b0e7156"
+    Expected hash (String)        : "6EECE560A2E8D6B919E81FE91B0E7156"
+    Obtained hash (String)        : "6EECE560A2E8D6B919E81FE91B0E7156"
 [I] Counters match
 [I] Hashes match
 [I] Vector  8 test passed.
@@ -1380,8 +1380,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  9
     Expected bit count (Low, High): ( 224,  0)
     Obtained bit count (Low, High): ( 224,  0)
-    Expected hash (String)        : "67f44824b0cfc0e8bbf319c41b9684db"
-    Obtained hash (String)        : "67f44824b0cfc0e8bbf319c41b9684db"
+    Expected hash (String)        : "67F44824B0CFC0E8BBF319C41B9684DB"
+    Obtained hash (String)        : "67F44824B0CFC0E8BBF319C41B9684DB"
 [I] Counters match
 [I] Hashes match
 [I] Vector  9 test passed.
@@ -1397,8 +1397,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  1
     Expected bit count (Low, High): ( 0,  0)
     Obtained bit count (Low, High): ( 0,  0)
-    Expected hash (String)        : "184b8482a0c050dca54b59c7f05bf5dd"
-    Obtained hash (String)        : "184b8482a0c050dca54b59c7f05bf5dd"
+    Expected hash (String)        : "184B8482A0C050DCA54B59C7F05BF5DD"
+    Obtained hash (String)        : "184B8482A0C050DCA54B59C7F05BF5DD"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 test passed.
@@ -1412,8 +1412,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  2
     Expected bit count (Low, High): ( 8,  0)
     Obtained bit count (Low, High): ( 8,  0)
-    Expected hash (String)        : "f23fbe704be8494bfa7a7fb4f8ab09e5"
-    Obtained hash (String)        : "f23fbe704be8494bfa7a7fb4f8ab09e5"
+    Expected hash (String)        : "F23FBE704BE8494BFA7A7FB4F8AB09E5"
+    Obtained hash (String)        : "F23FBE704BE8494BFA7A7FB4F8AB09E5"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 test passed.
@@ -1427,8 +1427,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  3
     Expected bit count (Low, High): ( 24,  0)
     Obtained bit count (Low, High): ( 24,  0)
-    Expected hash (String)        : "d054232fe874d9c6c6dc8e6a853519ea"
-    Obtained hash (String)        : "d054232fe874d9c6c6dc8e6a853519ea"
+    Expected hash (String)        : "D054232FE874D9C6C6DC8E6A853519EA"
+    Obtained hash (String)        : "D054232FE874D9C6C6DC8E6A853519EA"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 test passed.
@@ -1443,8 +1443,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  4
     Expected bit count (Low, High): ( 112,  0)
     Obtained bit count (Low, High): ( 112,  0)
-    Expected hash (String)        : "c28052dc143c1c70450d3c0504756efe"
-    Obtained hash (String)        : "c28052dc143c1c70450d3c0504756efe"
+    Expected hash (String)        : "C28052DC143C1C70450D3C0504756EFE"
+    Obtained hash (String)        : "C28052DC143C1C70450D3C0504756EFE"
 [I] Counters match
 [I] Hashes match
 [I] Vector  4 test passed.
@@ -1460,8 +1460,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  5
     Expected bit count (Low, High): ( 208,  0)
     Obtained bit count (Low, High): ( 208,  0)
-    Expected hash (String)        : "0efff71d7d14344cba1f4b25f924a693"
-    Obtained hash (String)        : "0efff71d7d14344cba1f4b25f924a693"
+    Expected hash (String)        : "0EFFF71D7D14344CBA1F4B25F924A693"
+    Obtained hash (String)        : "0EFFF71D7D14344CBA1F4B25F924A693"
 [I] Counters match
 [I] Hashes match
 [I] Vector  5 test passed.
@@ -1481,8 +1481,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  6
     Expected bit count (Low, High): ( 496,  0)
     Obtained bit count (Low, High): ( 496,  0)
-    Expected hash (String)        : "4b27d04ddb516bdcdfeb96eb8c7c8e90"
-    Obtained hash (String)        : "4b27d04ddb516bdcdfeb96eb8c7c8e90"
+    Expected hash (String)        : "4B27D04DDB516BDCDFEB96EB8C7C8E90"
+    Obtained hash (String)        : "4B27D04DDB516BDCDFEB96EB8C7C8E90"
 [I] Counters match
 [I] Hashes match
 [I] Vector  6 test passed.
@@ -1503,8 +1503,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  7
     Expected bit count (Low, High): ( 640,  0)
     Obtained bit count (Low, High): ( 640,  0)
-    Expected hash (String)        : "2395f65e5eeb485293fc561a0b349f1e"
-    Obtained hash (String)        : "2395f65e5eeb485293fc561a0b349f1e"
+    Expected hash (String)        : "2395F65E5EEB485293FC561A0B349F1E"
+    Obtained hash (String)        : "2395F65E5EEB485293FC561A0B349F1E"
 [I] Counters match
 [I] Hashes match
 [I] Vector  7 test passed.
@@ -1522,8 +1522,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  8
     Expected bit count (Low, High): ( 344,  0)
     Obtained bit count (Low, High): ( 344,  0)
-    Expected hash (String)        : "696f02111f2e1da5c21d50eb782b7e8f"
-    Obtained hash (String)        : "696f02111f2e1da5c21d50eb782b7e8f"
+    Expected hash (String)        : "696F02111F2E1DA5C21D50EB782B7E8F"
+    Obtained hash (String)        : "696F02111F2E1DA5C21D50EB782B7E8F"
 [I] Counters match
 [I] Hashes match
 [I] Vector  8 test passed.
@@ -1539,21 +1539,21 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  9
     Expected bit count (Low, High): ( 224,  0)
     Obtained bit count (Low, High): ( 224,  0)
-    Expected hash (String)        : "88a4e1518d57a7df38034716b6e87818"
-    Obtained hash (String)        : "88a4e1518d57a7df38034716b6e87818"
+    Expected hash (String)        : "88A4E1518D57A7DF38034716B6E87818"
+    Obtained hash (String)        : "88A4E1518D57A7DF38034716B6E87818"
 [I] Counters match
 [I] Hashes match
 [I] Vector  9 test passed.
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:21:57
+Finished        : 2017/04/03 - 20:44:27
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : CryptAda HAVAL (160-bit) test vectors
-Started         : 2017/03/28 - 13:21:57
+Started         : 2017/04/03 - 20:44:27
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Number of passes:  3
@@ -1568,8 +1568,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  1
     Expected bit count (Low, High): ( 0,  0)
     Obtained bit count (Low, High): ( 0,  0)
-    Expected hash (String)        : "d353c3ae22a25401d257643836d7231a9a95f953"
-    Obtained hash (String)        : "d353c3ae22a25401d257643836d7231a9a95f953"
+    Expected hash (String)        : "D353C3AE22A25401D257643836D7231A9A95F953"
+    Obtained hash (String)        : "D353C3AE22A25401D257643836D7231A9A95F953"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 test passed.
@@ -1583,8 +1583,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  2
     Expected bit count (Low, High): ( 8,  0)
     Obtained bit count (Low, High): ( 8,  0)
-    Expected hash (String)        : "4da08f514a7275dbc4cece4a347385983983a830"
-    Obtained hash (String)        : "4da08f514a7275dbc4cece4a347385983983a830"
+    Expected hash (String)        : "4DA08F514A7275DBC4CECE4A347385983983A830"
+    Obtained hash (String)        : "4DA08F514A7275DBC4CECE4A347385983983A830"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 test passed.
@@ -1598,8 +1598,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  3
     Expected bit count (Low, High): ( 24,  0)
     Obtained bit count (Low, High): ( 24,  0)
-    Expected hash (String)        : "b21e876c4d391e2a897661149d83576b5530a089"
-    Obtained hash (String)        : "b21e876c4d391e2a897661149d83576b5530a089"
+    Expected hash (String)        : "B21E876C4D391E2A897661149D83576B5530A089"
+    Obtained hash (String)        : "B21E876C4D391E2A897661149D83576B5530A089"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 test passed.
@@ -1614,8 +1614,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  4
     Expected bit count (Low, High): ( 112,  0)
     Obtained bit count (Low, High): ( 112,  0)
-    Expected hash (String)        : "43a47f6f1c016207f08be8115c0977bf155346da"
-    Obtained hash (String)        : "43a47f6f1c016207f08be8115c0977bf155346da"
+    Expected hash (String)        : "43A47F6F1C016207F08BE8115C0977BF155346DA"
+    Obtained hash (String)        : "43A47F6F1C016207F08BE8115C0977BF155346DA"
 [I] Counters match
 [I] Hashes match
 [I] Vector  4 test passed.
@@ -1631,8 +1631,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  5
     Expected bit count (Low, High): ( 208,  0)
     Obtained bit count (Low, High): ( 208,  0)
-    Expected hash (String)        : "eba9fa6050f24c07c29d1834a60900ea4e32e61b"
-    Obtained hash (String)        : "eba9fa6050f24c07c29d1834a60900ea4e32e61b"
+    Expected hash (String)        : "EBA9FA6050F24C07C29D1834A60900EA4E32E61B"
+    Obtained hash (String)        : "EBA9FA6050F24C07C29D1834A60900EA4E32E61B"
 [I] Counters match
 [I] Hashes match
 [I] Vector  5 test passed.
@@ -1652,8 +1652,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  6
     Expected bit count (Low, High): ( 496,  0)
     Obtained bit count (Low, High): ( 496,  0)
-    Expected hash (String)        : "97dc988d97caae757be7523c4e8d4ea63007a4b9"
-    Obtained hash (String)        : "97dc988d97caae757be7523c4e8d4ea63007a4b9"
+    Expected hash (String)        : "97DC988D97CAAE757BE7523C4E8D4EA63007A4B9"
+    Obtained hash (String)        : "97DC988D97CAAE757BE7523C4E8D4EA63007A4B9"
 [I] Counters match
 [I] Hashes match
 [I] Vector  6 test passed.
@@ -1674,8 +1674,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  7
     Expected bit count (Low, High): ( 640,  0)
     Obtained bit count (Low, High): ( 640,  0)
-    Expected hash (String)        : "34038b573ef4a91ebfe54fc67b8b24ea11654eac"
-    Obtained hash (String)        : "34038b573ef4a91ebfe54fc67b8b24ea11654eac"
+    Expected hash (String)        : "34038B573EF4A91EBFE54FC67B8B24EA11654EAC"
+    Obtained hash (String)        : "34038B573EF4A91EBFE54FC67B8B24EA11654EAC"
 [I] Counters match
 [I] Hashes match
 [I] Vector  7 test passed.
@@ -1693,8 +1693,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  8
     Expected bit count (Low, High): ( 344,  0)
     Obtained bit count (Low, High): ( 344,  0)
-    Expected hash (String)        : "b338ac397e8bccadcccd96549cadd4882d834107"
-    Obtained hash (String)        : "b338ac397e8bccadcccd96549cadd4882d834107"
+    Expected hash (String)        : "B338AC397E8BCCADCCCD96549CADD4882D834107"
+    Obtained hash (String)        : "B338AC397E8BCCADCCCD96549CADD4882D834107"
 [I] Counters match
 [I] Hashes match
 [I] Vector  8 test passed.
@@ -1710,8 +1710,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  9
     Expected bit count (Low, High): ( 224,  0)
     Obtained bit count (Low, High): ( 224,  0)
-    Expected hash (String)        : "e373e61faff254308968ce7e053a63ddd334dade"
-    Obtained hash (String)        : "e373e61faff254308968ce7e053a63ddd334dade"
+    Expected hash (String)        : "E373E61FAFF254308968CE7E053A63DDD334DADE"
+    Obtained hash (String)        : "E373E61FAFF254308968CE7E053A63DDD334DADE"
 [I] Counters match
 [I] Hashes match
 [I] Vector  9 test passed.
@@ -1727,8 +1727,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  1
     Expected bit count (Low, High): ( 0,  0)
     Obtained bit count (Low, High): ( 0,  0)
-    Expected hash (String)        : "1d33aae1be4146dbaaca0b6e70d7a11f10801525"
-    Obtained hash (String)        : "1d33aae1be4146dbaaca0b6e70d7a11f10801525"
+    Expected hash (String)        : "1D33AAE1BE4146DBAACA0B6E70D7A11F10801525"
+    Obtained hash (String)        : "1D33AAE1BE4146DBAACA0B6E70D7A11F10801525"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 test passed.
@@ -1742,8 +1742,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  2
     Expected bit count (Low, High): ( 8,  0)
     Obtained bit count (Low, High): ( 8,  0)
-    Expected hash (String)        : "e0a5be29627332034d4dd8a910a1a0e6fe04084d"
-    Obtained hash (String)        : "e0a5be29627332034d4dd8a910a1a0e6fe04084d"
+    Expected hash (String)        : "E0A5BE29627332034D4DD8A910A1A0E6FE04084D"
+    Obtained hash (String)        : "E0A5BE29627332034D4DD8A910A1A0E6FE04084D"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 test passed.
@@ -1757,8 +1757,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  3
     Expected bit count (Low, High): ( 24,  0)
     Obtained bit count (Low, High): ( 24,  0)
-    Expected hash (String)        : "77aca22f5b12cc09010afc9c0797308638b1cb9b"
-    Obtained hash (String)        : "77aca22f5b12cc09010afc9c0797308638b1cb9b"
+    Expected hash (String)        : "77ACA22F5B12CC09010AFC9C0797308638B1CB9B"
+    Obtained hash (String)        : "77ACA22F5B12CC09010AFC9C0797308638B1CB9B"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 test passed.
@@ -1773,8 +1773,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  4
     Expected bit count (Low, High): ( 112,  0)
     Obtained bit count (Low, High): ( 112,  0)
-    Expected hash (String)        : "429346bb57211af6651060fd02db264fbe9c4365"
-    Obtained hash (String)        : "429346bb57211af6651060fd02db264fbe9c4365"
+    Expected hash (String)        : "429346BB57211AF6651060FD02DB264FBE9C4365"
+    Obtained hash (String)        : "429346BB57211AF6651060FD02DB264FBE9C4365"
 [I] Counters match
 [I] Hashes match
 [I] Vector  4 test passed.
@@ -1790,8 +1790,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  5
     Expected bit count (Low, High): ( 208,  0)
     Obtained bit count (Low, High): ( 208,  0)
-    Expected hash (String)        : "1c7884af86d11ac120fe5df75cee792d2dfa48ef"
-    Obtained hash (String)        : "1c7884af86d11ac120fe5df75cee792d2dfa48ef"
+    Expected hash (String)        : "1C7884AF86D11AC120FE5DF75CEE792D2DFA48EF"
+    Obtained hash (String)        : "1C7884AF86D11AC120FE5DF75CEE792D2DFA48EF"
 [I] Counters match
 [I] Hashes match
 [I] Vector  5 test passed.
@@ -1811,8 +1811,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  6
     Expected bit count (Low, High): ( 496,  0)
     Obtained bit count (Low, High): ( 496,  0)
-    Expected hash (String)        : "148334aad24b658bdc946c521cdd2b1256608c7b"
-    Obtained hash (String)        : "148334aad24b658bdc946c521cdd2b1256608c7b"
+    Expected hash (String)        : "148334AAD24B658BDC946C521CDD2B1256608C7B"
+    Obtained hash (String)        : "148334AAD24B658BDC946C521CDD2B1256608C7B"
 [I] Counters match
 [I] Hashes match
 [I] Vector  6 test passed.
@@ -1833,8 +1833,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  7
     Expected bit count (Low, High): ( 640,  0)
     Obtained bit count (Low, High): ( 640,  0)
-    Expected hash (String)        : "238770cb2812aed0bd43335d5c8e5785e819a1f1"
-    Obtained hash (String)        : "238770cb2812aed0bd43335d5c8e5785e819a1f1"
+    Expected hash (String)        : "238770CB2812AED0BD43335D5C8E5785E819A1F1"
+    Obtained hash (String)        : "238770CB2812AED0BD43335D5C8E5785E819A1F1"
 [I] Counters match
 [I] Hashes match
 [I] Vector  7 test passed.
@@ -1852,8 +1852,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  8
     Expected bit count (Low, High): ( 344,  0)
     Obtained bit count (Low, High): ( 344,  0)
-    Expected hash (String)        : "6e739d01f5739ceed94da1a115b52d5951280560"
-    Obtained hash (String)        : "6e739d01f5739ceed94da1a115b52d5951280560"
+    Expected hash (String)        : "6E739D01F5739CEED94DA1A115B52D5951280560"
+    Obtained hash (String)        : "6E739D01F5739CEED94DA1A115B52D5951280560"
 [I] Counters match
 [I] Hashes match
 [I] Vector  8 test passed.
@@ -1869,8 +1869,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  9
     Expected bit count (Low, High): ( 224,  0)
     Obtained bit count (Low, High): ( 224,  0)
-    Expected hash (String)        : "60b46ec2a777a9c5c114ca70ea7c7968e110e7f1"
-    Obtained hash (String)        : "60b46ec2a777a9c5c114ca70ea7c7968e110e7f1"
+    Expected hash (String)        : "60B46EC2A777A9C5C114CA70EA7C7968E110E7F1"
+    Obtained hash (String)        : "60B46EC2A777A9C5C114CA70EA7C7968E110E7F1"
 [I] Counters match
 [I] Hashes match
 [I] Vector  9 test passed.
@@ -1886,8 +1886,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  1
     Expected bit count (Low, High): ( 0,  0)
     Obtained bit count (Low, High): ( 0,  0)
-    Expected hash (String)        : "255158cfc1eed1a7be7c55ddd64d9790415b933b"
-    Obtained hash (String)        : "255158cfc1eed1a7be7c55ddd64d9790415b933b"
+    Expected hash (String)        : "255158CFC1EED1A7BE7C55DDD64D9790415B933B"
+    Obtained hash (String)        : "255158CFC1EED1A7BE7C55DDD64D9790415B933B"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 test passed.
@@ -1901,8 +1901,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  2
     Expected bit count (Low, High): ( 8,  0)
     Obtained bit count (Low, High): ( 8,  0)
-    Expected hash (String)        : "f5147df7abc5e3c81b031268927c2b5761b5a2b5"
-    Obtained hash (String)        : "f5147df7abc5e3c81b031268927c2b5761b5a2b5"
+    Expected hash (String)        : "F5147DF7ABC5E3C81B031268927C2B5761B5A2B5"
+    Obtained hash (String)        : "F5147DF7ABC5E3C81B031268927C2B5761B5A2B5"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 test passed.
@@ -1916,8 +1916,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  3
     Expected bit count (Low, High): ( 24,  0)
     Obtained bit count (Low, High): ( 24,  0)
-    Expected hash (String)        : "ae646b04845e3351f00c5161d138940e1fa0c11c"
-    Obtained hash (String)        : "ae646b04845e3351f00c5161d138940e1fa0c11c"
+    Expected hash (String)        : "AE646B04845E3351F00C5161D138940E1FA0C11C"
+    Obtained hash (String)        : "AE646B04845E3351F00C5161D138940E1FA0C11C"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 test passed.
@@ -1932,8 +1932,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  4
     Expected bit count (Low, High): ( 112,  0)
     Obtained bit count (Low, High): ( 112,  0)
-    Expected hash (String)        : "2ac00ef52871b373eda407d7eafbd225987f33f1"
-    Obtained hash (String)        : "2ac00ef52871b373eda407d7eafbd225987f33f1"
+    Expected hash (String)        : "2AC00EF52871B373EDA407D7EAFBD225987F33F1"
+    Obtained hash (String)        : "2AC00EF52871B373EDA407D7EAFBD225987F33F1"
 [I] Counters match
 [I] Hashes match
 [I] Vector  4 test passed.
@@ -1949,8 +1949,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  5
     Expected bit count (Low, High): ( 208,  0)
     Obtained bit count (Low, High): ( 208,  0)
-    Expected hash (String)        : "917836a9d27eed42d406f6002e7d11a0f87c404c"
-    Obtained hash (String)        : "917836a9d27eed42d406f6002e7d11a0f87c404c"
+    Expected hash (String)        : "917836A9D27EED42D406F6002E7D11A0F87C404C"
+    Obtained hash (String)        : "917836A9D27EED42D406F6002E7D11A0F87C404C"
 [I] Counters match
 [I] Hashes match
 [I] Vector  5 test passed.
@@ -1970,8 +1970,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  6
     Expected bit count (Low, High): ( 496,  0)
     Obtained bit count (Low, High): ( 496,  0)
-    Expected hash (String)        : "6ddbde98ea1c4f8c7f360fb9163c7c952680aa70"
-    Obtained hash (String)        : "6ddbde98ea1c4f8c7f360fb9163c7c952680aa70"
+    Expected hash (String)        : "6DDBDE98EA1C4F8C7F360FB9163C7C952680AA70"
+    Obtained hash (String)        : "6DDBDE98EA1C4F8C7F360FB9163C7C952680AA70"
 [I] Counters match
 [I] Hashes match
 [I] Vector  6 test passed.
@@ -1992,8 +1992,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  7
     Expected bit count (Low, High): ( 640,  0)
     Obtained bit count (Low, High): ( 640,  0)
-    Expected hash (String)        : "a807c7a8a1afa6d8dd64cb395917f5792748243c"
-    Obtained hash (String)        : "a807c7a8a1afa6d8dd64cb395917f5792748243c"
+    Expected hash (String)        : "A807C7A8A1AFA6D8DD64CB395917F5792748243C"
+    Obtained hash (String)        : "A807C7A8A1AFA6D8DD64CB395917F5792748243C"
 [I] Counters match
 [I] Hashes match
 [I] Vector  7 test passed.
@@ -2011,8 +2011,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  8
     Expected bit count (Low, High): ( 344,  0)
     Obtained bit count (Low, High): ( 344,  0)
-    Expected hash (String)        : "ecce9fa8a428866304ff082af2f9062637d36b23"
-    Obtained hash (String)        : "ecce9fa8a428866304ff082af2f9062637d36b23"
+    Expected hash (String)        : "ECCE9FA8A428866304FF082AF2F9062637D36B23"
+    Obtained hash (String)        : "ECCE9FA8A428866304FF082AF2F9062637D36B23"
 [I] Counters match
 [I] Hashes match
 [I] Vector  8 test passed.
@@ -2028,21 +2028,21 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  9
     Expected bit count (Low, High): ( 224,  0)
     Obtained bit count (Low, High): ( 224,  0)
-    Expected hash (String)        : "2fb12081b9e1dce44686e9d693a65ded725e1e1b"
-    Obtained hash (String)        : "2fb12081b9e1dce44686e9d693a65ded725e1e1b"
+    Expected hash (String)        : "2FB12081B9E1DCE44686E9D693A65DED725E1E1B"
+    Obtained hash (String)        : "2FB12081B9E1DCE44686E9D693A65DED725E1E1B"
 [I] Counters match
 [I] Hashes match
 [I] Vector  9 test passed.
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:21:57
+Finished        : 2017/04/03 - 20:44:27
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : CryptAda HAVAL (192-bit) test vectors
-Started         : 2017/03/28 - 13:21:57
+Started         : 2017/04/03 - 20:44:27
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Number of passes:  3
@@ -2057,8 +2057,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  1
     Expected bit count (Low, High): ( 0,  0)
     Obtained bit count (Low, High): ( 0,  0)
-    Expected hash (String)        : "e9c48d7903eaf2a91c5b350151efcb175c0fc82de2289a4e"
-    Obtained hash (String)        : "e9c48d7903eaf2a91c5b350151efcb175c0fc82de2289a4e"
+    Expected hash (String)        : "E9C48D7903EAF2A91C5B350151EFCB175C0FC82DE2289A4E"
+    Obtained hash (String)        : "E9C48D7903EAF2A91C5B350151EFCB175C0FC82DE2289A4E"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 test passed.
@@ -2072,8 +2072,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  2
     Expected bit count (Low, High): ( 8,  0)
     Obtained bit count (Low, High): ( 8,  0)
-    Expected hash (String)        : "b359c8835647f5697472431c142731ff6e2cddcacc4f6e08"
-    Obtained hash (String)        : "b359c8835647f5697472431c142731ff6e2cddcacc4f6e08"
+    Expected hash (String)        : "B359C8835647F5697472431C142731FF6E2CDDCACC4F6E08"
+    Obtained hash (String)        : "B359C8835647F5697472431C142731FF6E2CDDCACC4F6E08"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 test passed.
@@ -2087,8 +2087,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  3
     Expected bit count (Low, High): ( 24,  0)
     Obtained bit count (Low, High): ( 24,  0)
-    Expected hash (String)        : "a7b14c9ef3092319b0e75e3b20b957d180bf20745629e8de"
-    Obtained hash (String)        : "a7b14c9ef3092319b0e75e3b20b957d180bf20745629e8de"
+    Expected hash (String)        : "A7B14C9EF3092319B0E75E3B20B957D180BF20745629E8DE"
+    Obtained hash (String)        : "A7B14C9EF3092319B0E75E3B20B957D180BF20745629E8DE"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 test passed.
@@ -2103,8 +2103,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  4
     Expected bit count (Low, High): ( 112,  0)
     Obtained bit count (Low, High): ( 112,  0)
-    Expected hash (String)        : "6c4d9ec368efc96eeea58e132bdb2391c2b3e9d20190f7ea"
-    Obtained hash (String)        : "6c4d9ec368efc96eeea58e132bdb2391c2b3e9d20190f7ea"
+    Expected hash (String)        : "6C4D9EC368EFC96EEEA58E132BDB2391C2B3E9D20190F7EA"
+    Obtained hash (String)        : "6C4D9EC368EFC96EEEA58E132BDB2391C2B3E9D20190F7EA"
 [I] Counters match
 [I] Hashes match
 [I] Vector  4 test passed.
@@ -2120,8 +2120,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  5
     Expected bit count (Low, High): ( 208,  0)
     Obtained bit count (Low, High): ( 208,  0)
-    Expected hash (String)        : "a25e1456e6863e7d7c74017bb3e098e086ad4be0580d7056"
-    Obtained hash (String)        : "a25e1456e6863e7d7c74017bb3e098e086ad4be0580d7056"
+    Expected hash (String)        : "A25E1456E6863E7D7C74017BB3E098E086AD4BE0580D7056"
+    Obtained hash (String)        : "A25E1456E6863E7D7C74017BB3E098E086AD4BE0580D7056"
 [I] Counters match
 [I] Hashes match
 [I] Vector  5 test passed.
@@ -2141,8 +2141,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  6
     Expected bit count (Low, High): ( 496,  0)
     Obtained bit count (Low, High): ( 496,  0)
-    Expected hash (String)        : "def6653091e3005b43a61681014a066cd189009d00856ee7"
-    Obtained hash (String)        : "def6653091e3005b43a61681014a066cd189009d00856ee7"
+    Expected hash (String)        : "DEF6653091E3005B43A61681014A066CD189009D00856EE7"
+    Obtained hash (String)        : "DEF6653091E3005B43A61681014A066CD189009D00856EE7"
 [I] Counters match
 [I] Hashes match
 [I] Vector  6 test passed.
@@ -2163,8 +2163,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  7
     Expected bit count (Low, High): ( 640,  0)
     Obtained bit count (Low, High): ( 640,  0)
-    Expected hash (String)        : "0706697dd426d8549504c64fb1de2eca5492513b18da7193"
-    Obtained hash (String)        : "0706697dd426d8549504c64fb1de2eca5492513b18da7193"
+    Expected hash (String)        : "0706697DD426D8549504C64FB1DE2ECA5492513B18DA7193"
+    Obtained hash (String)        : "0706697DD426D8549504C64FB1DE2ECA5492513B18DA7193"
 [I] Counters match
 [I] Hashes match
 [I] Vector  7 test passed.
@@ -2182,8 +2182,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  8
     Expected bit count (Low, High): ( 344,  0)
     Obtained bit count (Low, High): ( 344,  0)
-    Expected hash (String)        : "58e6ced002e311172483d434ba738ad033e7fa950e431503"
-    Obtained hash (String)        : "58e6ced002e311172483d434ba738ad033e7fa950e431503"
+    Expected hash (String)        : "58E6CED002E311172483D434BA738AD033E7FA950E431503"
+    Obtained hash (String)        : "58E6CED002E311172483D434BA738AD033E7FA950E431503"
 [I] Counters match
 [I] Hashes match
 [I] Vector  8 test passed.
@@ -2199,8 +2199,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  9
     Expected bit count (Low, High): ( 224,  0)
     Obtained bit count (Low, High): ( 224,  0)
-    Expected hash (String)        : "b913d13287858dc4a0bc18d5c155589534e0cd7bab50e38d"
-    Obtained hash (String)        : "b913d13287858dc4a0bc18d5c155589534e0cd7bab50e38d"
+    Expected hash (String)        : "B913D13287858DC4A0BC18D5C155589534E0CD7BAB50E38D"
+    Obtained hash (String)        : "B913D13287858DC4A0BC18D5C155589534E0CD7BAB50E38D"
 [I] Counters match
 [I] Hashes match
 [I] Vector  9 test passed.
@@ -2216,8 +2216,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  1
     Expected bit count (Low, High): ( 0,  0)
     Obtained bit count (Low, High): ( 0,  0)
-    Expected hash (String)        : "4a8372945afa55c7dead800311272523ca19d42ea47b72da"
-    Obtained hash (String)        : "4a8372945afa55c7dead800311272523ca19d42ea47b72da"
+    Expected hash (String)        : "4A8372945AFA55C7DEAD800311272523CA19D42EA47B72DA"
+    Obtained hash (String)        : "4A8372945AFA55C7DEAD800311272523CA19D42EA47B72DA"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 test passed.
@@ -2231,8 +2231,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  2
     Expected bit count (Low, High): ( 8,  0)
     Obtained bit count (Low, High): ( 8,  0)
-    Expected hash (String)        : "856c19f86214ea9a8a2f0c4b758b973cce72a2d8ff55505c"
-    Obtained hash (String)        : "856c19f86214ea9a8a2f0c4b758b973cce72a2d8ff55505c"
+    Expected hash (String)        : "856C19F86214EA9A8A2F0C4B758B973CCE72A2D8FF55505C"
+    Obtained hash (String)        : "856C19F86214EA9A8A2F0C4B758B973CCE72A2D8FF55505C"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 test passed.
@@ -2246,8 +2246,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  3
     Expected bit count (Low, High): ( 24,  0)
     Obtained bit count (Low, High): ( 24,  0)
-    Expected hash (String)        : "7e29881ed05c915903dd5e24a8e81cde5d910142ae66207c"
-    Obtained hash (String)        : "7e29881ed05c915903dd5e24a8e81cde5d910142ae66207c"
+    Expected hash (String)        : "7E29881ED05C915903DD5E24A8E81CDE5D910142AE66207C"
+    Obtained hash (String)        : "7E29881ED05C915903DD5E24A8E81CDE5D910142AE66207C"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 test passed.
@@ -2262,8 +2262,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  4
     Expected bit count (Low, High): ( 112,  0)
     Obtained bit count (Low, High): ( 112,  0)
-    Expected hash (String)        : "e91960a06afbc8bd9f400a16135ed66e2745ef01d6d1cdf7"
-    Obtained hash (String)        : "e91960a06afbc8bd9f400a16135ed66e2745ef01d6d1cdf7"
+    Expected hash (String)        : "E91960A06AFBC8BD9F400A16135ED66E2745EF01D6D1CDF7"
+    Obtained hash (String)        : "E91960A06AFBC8BD9F400A16135ED66E2745EF01D6D1CDF7"
 [I] Counters match
 [I] Hashes match
 [I] Vector  4 test passed.
@@ -2279,8 +2279,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  5
     Expected bit count (Low, High): ( 208,  0)
     Obtained bit count (Low, High): ( 208,  0)
-    Expected hash (String)        : "2e2e581d725e799fda1948c75e85a28cfe1cf0c6324a1ada"
-    Obtained hash (String)        : "2e2e581d725e799fda1948c75e85a28cfe1cf0c6324a1ada"
+    Expected hash (String)        : "2E2E581D725E799FDA1948C75E85A28CFE1CF0C6324A1ADA"
+    Obtained hash (String)        : "2E2E581D725E799FDA1948C75E85A28CFE1CF0C6324A1ADA"
 [I] Counters match
 [I] Hashes match
 [I] Vector  5 test passed.
@@ -2300,8 +2300,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  6
     Expected bit count (Low, High): ( 496,  0)
     Obtained bit count (Low, High): ( 496,  0)
-    Expected hash (String)        : "e5c9f81ae0b31fc8780fc37cb63bb4ec96496f79a9b58344"
-    Obtained hash (String)        : "e5c9f81ae0b31fc8780fc37cb63bb4ec96496f79a9b58344"
+    Expected hash (String)        : "E5C9F81AE0B31FC8780FC37CB63BB4EC96496F79A9B58344"
+    Obtained hash (String)        : "E5C9F81AE0B31FC8780FC37CB63BB4EC96496F79A9B58344"
 [I] Counters match
 [I] Hashes match
 [I] Vector  6 test passed.
@@ -2322,8 +2322,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  7
     Expected bit count (Low, High): ( 640,  0)
     Obtained bit count (Low, High): ( 640,  0)
-    Expected hash (String)        : "c7c44bcc0f83946d6cba0ee6344ac0b7d80c38abce5d470f"
-    Obtained hash (String)        : "c7c44bcc0f83946d6cba0ee6344ac0b7d80c38abce5d470f"
+    Expected hash (String)        : "C7C44BCC0F83946D6CBA0EE6344AC0B7D80C38ABCE5D470F"
+    Obtained hash (String)        : "C7C44BCC0F83946D6CBA0EE6344AC0B7D80C38ABCE5D470F"
 [I] Counters match
 [I] Hashes match
 [I] Vector  7 test passed.
@@ -2341,8 +2341,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  8
     Expected bit count (Low, High): ( 344,  0)
     Obtained bit count (Low, High): ( 344,  0)
-    Expected hash (String)        : "228ee09bc7e36151c6f285f558e6aede66ad38c8341592b9"
-    Obtained hash (String)        : "228ee09bc7e36151c6f285f558e6aede66ad38c8341592b9"
+    Expected hash (String)        : "228EE09BC7E36151C6F285F558E6AEDE66AD38C8341592B9"
+    Obtained hash (String)        : "228EE09BC7E36151C6F285F558E6AEDE66AD38C8341592B9"
 [I] Counters match
 [I] Hashes match
 [I] Vector  8 test passed.
@@ -2358,8 +2358,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  9
     Expected bit count (Low, High): ( 224,  0)
     Obtained bit count (Low, High): ( 224,  0)
-    Expected hash (String)        : "e07219582e7bd97e86e4e2b7e8b405b7746c433e0364b929"
-    Obtained hash (String)        : "e07219582e7bd97e86e4e2b7e8b405b7746c433e0364b929"
+    Expected hash (String)        : "E07219582E7BD97E86E4E2B7E8B405B7746C433E0364B929"
+    Obtained hash (String)        : "E07219582E7BD97E86E4E2B7E8B405B7746C433E0364B929"
 [I] Counters match
 [I] Hashes match
 [I] Vector  9 test passed.
@@ -2375,8 +2375,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  1
     Expected bit count (Low, High): ( 0,  0)
     Obtained bit count (Low, High): ( 0,  0)
-    Expected hash (String)        : "4839d0626f95935e17ee2fc4509387bbe2cc46cb382ffe85"
-    Obtained hash (String)        : "4839d0626f95935e17ee2fc4509387bbe2cc46cb382ffe85"
+    Expected hash (String)        : "4839D0626F95935E17EE2FC4509387BBE2CC46CB382FFE85"
+    Obtained hash (String)        : "4839D0626F95935E17EE2FC4509387BBE2CC46CB382FFE85"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 test passed.
@@ -2390,8 +2390,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  2
     Expected bit count (Low, High): ( 8,  0)
     Obtained bit count (Low, High): ( 8,  0)
-    Expected hash (String)        : "5ffa3b3548a6e2cfc06b7908ceb5263595df67cf9c4b9341"
-    Obtained hash (String)        : "5ffa3b3548a6e2cfc06b7908ceb5263595df67cf9c4b9341"
+    Expected hash (String)        : "5FFA3B3548A6E2CFC06B7908CEB5263595DF67CF9C4B9341"
+    Obtained hash (String)        : "5FFA3B3548A6E2CFC06B7908CEB5263595DF67CF9C4B9341"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 test passed.
@@ -2405,8 +2405,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  3
     Expected bit count (Low, High): ( 24,  0)
     Obtained bit count (Low, High): ( 24,  0)
-    Expected hash (String)        : "d12091104555b00119a8d07808a3380bf9e60018915b9025"
-    Obtained hash (String)        : "d12091104555b00119a8d07808a3380bf9e60018915b9025"
+    Expected hash (String)        : "D12091104555B00119A8D07808A3380BF9E60018915B9025"
+    Obtained hash (String)        : "D12091104555B00119A8D07808A3380BF9E60018915B9025"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 test passed.
@@ -2421,8 +2421,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  4
     Expected bit count (Low, High): ( 112,  0)
     Obtained bit count (Low, High): ( 112,  0)
-    Expected hash (String)        : "8225efabaded623849843546cdf3c8c88e0fdca68f9a5a56"
-    Obtained hash (String)        : "8225efabaded623849843546cdf3c8c88e0fdca68f9a5a56"
+    Expected hash (String)        : "8225EFABADED623849843546CDF3C8C88E0FDCA68F9A5A56"
+    Obtained hash (String)        : "8225EFABADED623849843546CDF3C8C88E0FDCA68F9A5A56"
 [I] Counters match
 [I] Hashes match
 [I] Vector  4 test passed.
@@ -2438,8 +2438,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  5
     Expected bit count (Low, High): ( 208,  0)
     Obtained bit count (Low, High): ( 208,  0)
-    Expected hash (String)        : "85f1f1c0eca04330cf2de5c8c83cf85a611b696f793284de"
-    Obtained hash (String)        : "85f1f1c0eca04330cf2de5c8c83cf85a611b696f793284de"
+    Expected hash (String)        : "85F1F1C0ECA04330CF2DE5C8C83CF85A611B696F793284DE"
+    Obtained hash (String)        : "85F1F1C0ECA04330CF2DE5C8C83CF85A611B696F793284DE"
 [I] Counters match
 [I] Hashes match
 [I] Vector  5 test passed.
@@ -2459,8 +2459,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  6
     Expected bit count (Low, High): ( 496,  0)
     Obtained bit count (Low, High): ( 496,  0)
-    Expected hash (String)        : "d651c8ac45c9050810d9fd64fc919909900c4664be0336d0"
-    Obtained hash (String)        : "d651c8ac45c9050810d9fd64fc919909900c4664be0336d0"
+    Expected hash (String)        : "D651C8AC45C9050810D9FD64FC919909900C4664BE0336D0"
+    Obtained hash (String)        : "D651C8AC45C9050810D9FD64FC919909900C4664BE0336D0"
 [I] Counters match
 [I] Hashes match
 [I] Vector  6 test passed.
@@ -2481,8 +2481,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  7
     Expected bit count (Low, High): ( 640,  0)
     Obtained bit count (Low, High): ( 640,  0)
-    Expected hash (String)        : "0a60fce978d5777e5410c0b71b9053108265e3038f395b9f"
-    Obtained hash (String)        : "0a60fce978d5777e5410c0b71b9053108265e3038f395b9f"
+    Expected hash (String)        : "0A60FCE978D5777E5410C0B71B9053108265E3038F395B9F"
+    Obtained hash (String)        : "0A60FCE978D5777E5410C0B71B9053108265E3038F395B9F"
 [I] Counters match
 [I] Hashes match
 [I] Vector  7 test passed.
@@ -2500,8 +2500,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  8
     Expected bit count (Low, High): ( 344,  0)
     Obtained bit count (Low, High): ( 344,  0)
-    Expected hash (String)        : "023d045f75d4bf051fd6e50f7b7417bf9949c4b5d2b4b7ef"
-    Obtained hash (String)        : "023d045f75d4bf051fd6e50f7b7417bf9949c4b5d2b4b7ef"
+    Expected hash (String)        : "023D045F75D4BF051FD6E50F7B7417BF9949C4B5D2B4B7EF"
+    Obtained hash (String)        : "023D045F75D4BF051FD6E50F7B7417BF9949C4B5D2B4B7EF"
 [I] Counters match
 [I] Hashes match
 [I] Vector  8 test passed.
@@ -2517,21 +2517,21 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  9
     Expected bit count (Low, High): ( 224,  0)
     Obtained bit count (Low, High): ( 224,  0)
-    Expected hash (String)        : "863377553270363d208818b4ce1abf173e0a2eead045ffcb"
-    Obtained hash (String)        : "863377553270363d208818b4ce1abf173e0a2eead045ffcb"
+    Expected hash (String)        : "863377553270363D208818B4CE1ABF173E0A2EEAD045FFCB"
+    Obtained hash (String)        : "863377553270363D208818B4CE1ABF173E0A2EEAD045FFCB"
 [I] Counters match
 [I] Hashes match
 [I] Vector  9 test passed.
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:21:57
+Finished        : 2017/04/03 - 20:44:27
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : CryptAda HAVAL (224-bit) test vectors
-Started         : 2017/03/28 - 13:21:57
+Started         : 2017/04/03 - 20:44:27
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Number of passes:  3
@@ -2546,8 +2546,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  1
     Expected bit count (Low, High): ( 0,  0)
     Obtained bit count (Low, High): ( 0,  0)
-    Expected hash (String)        : "c5aae9d47bffcaaf84a8c6e7ccacd60a0dd1932be7b1a192b9214b6d"
-    Obtained hash (String)        : "c5aae9d47bffcaaf84a8c6e7ccacd60a0dd1932be7b1a192b9214b6d"
+    Expected hash (String)        : "C5AAE9D47BFFCAAF84A8C6E7CCACD60A0DD1932BE7B1A192B9214B6D"
+    Obtained hash (String)        : "C5AAE9D47BFFCAAF84A8C6E7CCACD60A0DD1932BE7B1A192B9214B6D"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 test passed.
@@ -2561,8 +2561,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  2
     Expected bit count (Low, High): ( 8,  0)
     Obtained bit count (Low, High): ( 8,  0)
-    Expected hash (String)        : "731814ba5605c59b673e4caae4ad28eeb515b3abc2b198336794e17b"
-    Obtained hash (String)        : "731814ba5605c59b673e4caae4ad28eeb515b3abc2b198336794e17b"
+    Expected hash (String)        : "731814BA5605C59B673E4CAAE4AD28EEB515B3ABC2B198336794E17B"
+    Obtained hash (String)        : "731814BA5605C59B673E4CAAE4AD28EEB515B3ABC2B198336794E17B"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 test passed.
@@ -2576,8 +2576,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  3
     Expected bit count (Low, High): ( 24,  0)
     Obtained bit count (Low, High): ( 24,  0)
-    Expected hash (String)        : "5bc955220ba2346a948d2848eca37bdd5eca6ecca7b594bd32923fab"
-    Obtained hash (String)        : "5bc955220ba2346a948d2848eca37bdd5eca6ecca7b594bd32923fab"
+    Expected hash (String)        : "5BC955220BA2346A948D2848ECA37BDD5ECA6ECCA7B594BD32923FAB"
+    Obtained hash (String)        : "5BC955220BA2346A948D2848ECA37BDD5ECA6ECCA7B594BD32923FAB"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 test passed.
@@ -2592,8 +2592,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  4
     Expected bit count (Low, High): ( 112,  0)
     Obtained bit count (Low, High): ( 112,  0)
-    Expected hash (String)        : "edf3e4add009ee89ee8ab03c39a3c749d20a48319c50c3a83861c540"
-    Obtained hash (String)        : "edf3e4add009ee89ee8ab03c39a3c749d20a48319c50c3a83861c540"
+    Expected hash (String)        : "EDF3E4ADD009EE89EE8AB03C39A3C749D20A48319C50C3A83861C540"
+    Obtained hash (String)        : "EDF3E4ADD009EE89EE8AB03C39A3C749D20A48319C50C3A83861C540"
 [I] Counters match
 [I] Hashes match
 [I] Vector  4 test passed.
@@ -2609,8 +2609,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  5
     Expected bit count (Low, High): ( 208,  0)
     Obtained bit count (Low, High): ( 208,  0)
-    Expected hash (String)        : "06ae38ebc43db58bd6b1d477c7b4e01b85a1e7b19b0bd088e33b58d1"
-    Obtained hash (String)        : "06ae38ebc43db58bd6b1d477c7b4e01b85a1e7b19b0bd088e33b58d1"
+    Expected hash (String)        : "06AE38EBC43DB58BD6B1D477C7B4E01B85A1E7B19B0BD088E33B58D1"
+    Obtained hash (String)        : "06AE38EBC43DB58BD6B1D477C7B4E01B85A1E7B19B0BD088E33B58D1"
 [I] Counters match
 [I] Hashes match
 [I] Vector  5 test passed.
@@ -2630,8 +2630,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  6
     Expected bit count (Low, High): ( 496,  0)
     Obtained bit count (Low, High): ( 496,  0)
-    Expected hash (String)        : "939f7ed7801c1ce4b32bc74a4056eee6081c999ed246907adba880a7"
-    Obtained hash (String)        : "939f7ed7801c1ce4b32bc74a4056eee6081c999ed246907adba880a7"
+    Expected hash (String)        : "939F7ED7801C1CE4B32BC74A4056EEE6081C999ED246907ADBA880A7"
+    Obtained hash (String)        : "939F7ED7801C1CE4B32BC74A4056EEE6081C999ED246907ADBA880A7"
 [I] Counters match
 [I] Hashes match
 [I] Vector  6 test passed.
@@ -2652,8 +2652,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  7
     Expected bit count (Low, High): ( 640,  0)
     Obtained bit count (Low, High): ( 640,  0)
-    Expected hash (String)        : "0fe989b4633b10d7deffb1171d3134f9bead7a9dc5309f03fe2241cd"
-    Obtained hash (String)        : "0fe989b4633b10d7deffb1171d3134f9bead7a9dc5309f03fe2241cd"
+    Expected hash (String)        : "0FE989B4633B10D7DEFFB1171D3134F9BEAD7A9DC5309F03FE2241CD"
+    Obtained hash (String)        : "0FE989B4633B10D7DEFFB1171D3134F9BEAD7A9DC5309F03FE2241CD"
 [I] Counters match
 [I] Hashes match
 [I] Vector  7 test passed.
@@ -2671,8 +2671,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  8
     Expected bit count (Low, High): ( 344,  0)
     Obtained bit count (Low, High): ( 344,  0)
-    Expected hash (String)        : "e1d5792306f56b22419662b06d1885a66dca3eba01f53274c89aeaeb"
-    Obtained hash (String)        : "e1d5792306f56b22419662b06d1885a66dca3eba01f53274c89aeaeb"
+    Expected hash (String)        : "E1D5792306F56B22419662B06D1885A66DCA3EBA01F53274C89AEAEB"
+    Obtained hash (String)        : "E1D5792306F56B22419662B06D1885A66DCA3EBA01F53274C89AEAEB"
 [I] Counters match
 [I] Hashes match
 [I] Vector  8 test passed.
@@ -2688,8 +2688,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  9
     Expected bit count (Low, High): ( 224,  0)
     Obtained bit count (Low, High): ( 224,  0)
-    Expected hash (String)        : "5c3480a77e7269e705f77ffd7ae44e6d3a4b60bd2fdfcda5f93c459d"
-    Obtained hash (String)        : "5c3480a77e7269e705f77ffd7ae44e6d3a4b60bd2fdfcda5f93c459d"
+    Expected hash (String)        : "5C3480A77E7269E705F77FFD7AE44E6D3A4B60BD2FDFCDA5F93C459D"
+    Obtained hash (String)        : "5C3480A77E7269E705F77FFD7AE44E6D3A4B60BD2FDFCDA5F93C459D"
 [I] Counters match
 [I] Hashes match
 [I] Vector  9 test passed.
@@ -2705,8 +2705,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  1
     Expected bit count (Low, High): ( 0,  0)
     Obtained bit count (Low, High): ( 0,  0)
-    Expected hash (String)        : "3e56243275b3b81561750550e36fcd676ad2f5dd9e15f2e89e6ed78e"
-    Obtained hash (String)        : "3e56243275b3b81561750550e36fcd676ad2f5dd9e15f2e89e6ed78e"
+    Expected hash (String)        : "3E56243275B3B81561750550E36FCD676AD2F5DD9E15F2E89E6ED78E"
+    Obtained hash (String)        : "3E56243275B3B81561750550E36FCD676AD2F5DD9E15F2E89E6ED78E"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 test passed.
@@ -2720,8 +2720,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  2
     Expected bit count (Low, High): ( 8,  0)
     Obtained bit count (Low, High): ( 8,  0)
-    Expected hash (String)        : "742f1dbeeaf17f74960558b44f08aa98bdc7d967e6c0ab8f799b3ac1"
-    Obtained hash (String)        : "742f1dbeeaf17f74960558b44f08aa98bdc7d967e6c0ab8f799b3ac1"
+    Expected hash (String)        : "742F1DBEEAF17F74960558B44F08AA98BDC7D967E6C0AB8F799B3AC1"
+    Obtained hash (String)        : "742F1DBEEAF17F74960558B44F08AA98BDC7D967E6C0AB8F799B3AC1"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 test passed.
@@ -2735,8 +2735,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  3
     Expected bit count (Low, High): ( 24,  0)
     Obtained bit count (Low, High): ( 24,  0)
-    Expected hash (String)        : "124c43d2ba4884599d013e8c872bfea4c88b0b6bf6303974cbe04e68"
-    Obtained hash (String)        : "124c43d2ba4884599d013e8c872bfea4c88b0b6bf6303974cbe04e68"
+    Expected hash (String)        : "124C43D2BA4884599D013E8C872BFEA4C88B0B6BF6303974CBE04E68"
+    Obtained hash (String)        : "124C43D2BA4884599D013E8C872BFEA4C88B0B6BF6303974CBE04E68"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 test passed.
@@ -2751,8 +2751,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  4
     Expected bit count (Low, High): ( 112,  0)
     Obtained bit count (Low, High): ( 112,  0)
-    Expected hash (String)        : "86e52ecc72ccaec188c17033fafe8b652705fd6a7d9db2e0d10cab92"
-    Obtained hash (String)        : "86e52ecc72ccaec188c17033fafe8b652705fd6a7d9db2e0d10cab92"
+    Expected hash (String)        : "86E52ECC72CCAEC188C17033FAFE8B652705FD6A7D9DB2E0D10CAB92"
+    Obtained hash (String)        : "86E52ECC72CCAEC188C17033FAFE8B652705FD6A7D9DB2E0D10CAB92"
 [I] Counters match
 [I] Hashes match
 [I] Vector  4 test passed.
@@ -2768,8 +2768,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  5
     Expected bit count (Low, High): ( 208,  0)
     Obtained bit count (Low, High): ( 208,  0)
-    Expected hash (String)        : "a0ac696cdb2030fa67f6cc1d14613b1962a7b69b4378a9a1b9738796"
-    Obtained hash (String)        : "a0ac696cdb2030fa67f6cc1d14613b1962a7b69b4378a9a1b9738796"
+    Expected hash (String)        : "A0AC696CDB2030FA67F6CC1D14613B1962A7B69B4378A9A1B9738796"
+    Obtained hash (String)        : "A0AC696CDB2030FA67F6CC1D14613B1962A7B69B4378A9A1B9738796"
 [I] Counters match
 [I] Hashes match
 [I] Vector  5 test passed.
@@ -2789,8 +2789,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  6
     Expected bit count (Low, High): ( 496,  0)
     Obtained bit count (Low, High): ( 496,  0)
-    Expected hash (String)        : "3e63c95727e0cd85d42034191314401e42ab9063a94772647e3e8e0f"
-    Obtained hash (String)        : "3e63c95727e0cd85d42034191314401e42ab9063a94772647e3e8e0f"
+    Expected hash (String)        : "3E63C95727E0CD85D42034191314401E42AB9063A94772647E3E8E0F"
+    Obtained hash (String)        : "3E63C95727E0CD85D42034191314401E42AB9063A94772647E3E8E0F"
 [I] Counters match
 [I] Hashes match
 [I] Vector  6 test passed.
@@ -2811,8 +2811,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  7
     Expected bit count (Low, High): ( 640,  0)
     Obtained bit count (Low, High): ( 640,  0)
-    Expected hash (String)        : "3a37ae6d1069343bb62e1ab5222c19c3d48da344d01583963210384a"
-    Obtained hash (String)        : "3a37ae6d1069343bb62e1ab5222c19c3d48da344d01583963210384a"
+    Expected hash (String)        : "3A37AE6D1069343BB62E1AB5222C19C3D48DA344D01583963210384A"
+    Obtained hash (String)        : "3A37AE6D1069343BB62E1AB5222C19C3D48DA344D01583963210384A"
 [I] Counters match
 [I] Hashes match
 [I] Vector  7 test passed.
@@ -2830,8 +2830,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  8
     Expected bit count (Low, High): ( 344,  0)
     Obtained bit count (Low, High): ( 344,  0)
-    Expected hash (String)        : "dddd6689885f6db4ad91e35a35e1f4498446510df798d4fd54b8654f"
-    Obtained hash (String)        : "dddd6689885f6db4ad91e35a35e1f4498446510df798d4fd54b8654f"
+    Expected hash (String)        : "DDDD6689885F6DB4AD91E35A35E1F4498446510DF798D4FD54B8654F"
+    Obtained hash (String)        : "DDDD6689885F6DB4AD91E35A35E1F4498446510DF798D4FD54B8654F"
 [I] Counters match
 [I] Hashes match
 [I] Vector  8 test passed.
@@ -2847,8 +2847,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  9
     Expected bit count (Low, High): ( 224,  0)
     Obtained bit count (Low, High): ( 224,  0)
-    Expected hash (String)        : "45336db282b6b75589dd80320a7c14dd2c1111cd9ec86e88d53bac31"
-    Obtained hash (String)        : "45336db282b6b75589dd80320a7c14dd2c1111cd9ec86e88d53bac31"
+    Expected hash (String)        : "45336DB282B6B75589DD80320A7C14DD2C1111CD9EC86E88D53BAC31"
+    Obtained hash (String)        : "45336DB282B6B75589DD80320A7C14DD2C1111CD9EC86E88D53BAC31"
 [I] Counters match
 [I] Hashes match
 [I] Vector  9 test passed.
@@ -2864,8 +2864,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  1
     Expected bit count (Low, High): ( 0,  0)
     Obtained bit count (Low, High): ( 0,  0)
-    Expected hash (String)        : "4a0513c032754f5582a758d35917ac9adf3854219b39e3ac77d1837e"
-    Obtained hash (String)        : "4a0513c032754f5582a758d35917ac9adf3854219b39e3ac77d1837e"
+    Expected hash (String)        : "4A0513C032754F5582A758D35917AC9ADF3854219B39E3AC77D1837E"
+    Obtained hash (String)        : "4A0513C032754F5582A758D35917AC9ADF3854219B39E3AC77D1837E"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 test passed.
@@ -2879,8 +2879,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  2
     Expected bit count (Low, High): ( 8,  0)
     Obtained bit count (Low, High): ( 8,  0)
-    Expected hash (String)        : "67b3cb8d4068e3641fa4f156e03b52978b421947328bfb9168c7655d"
-    Obtained hash (String)        : "67b3cb8d4068e3641fa4f156e03b52978b421947328bfb9168c7655d"
+    Expected hash (String)        : "67B3CB8D4068E3641FA4F156E03B52978B421947328BFB9168C7655D"
+    Obtained hash (String)        : "67B3CB8D4068E3641FA4F156E03B52978B421947328BFB9168C7655D"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 test passed.
@@ -2894,8 +2894,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  3
     Expected bit count (Low, High): ( 24,  0)
     Obtained bit count (Low, High): ( 24,  0)
-    Expected hash (String)        : "8081027a500147c512e5f1055986674d746d92af4841abeb89da64ad"
-    Obtained hash (String)        : "8081027a500147c512e5f1055986674d746d92af4841abeb89da64ad"
+    Expected hash (String)        : "8081027A500147C512E5F1055986674D746D92AF4841ABEB89DA64AD"
+    Obtained hash (String)        : "8081027A500147C512E5F1055986674D746D92AF4841ABEB89DA64AD"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 test passed.
@@ -2910,8 +2910,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  4
     Expected bit count (Low, High): ( 112,  0)
     Obtained bit count (Low, High): ( 112,  0)
-    Expected hash (String)        : "877a7b891fce89036fc127756b07923ece3ba7c495922909cc89512e"
-    Obtained hash (String)        : "877a7b891fce89036fc127756b07923ece3ba7c495922909cc89512e"
+    Expected hash (String)        : "877A7B891FCE89036FC127756B07923ECE3BA7C495922909CC89512E"
+    Obtained hash (String)        : "877A7B891FCE89036FC127756B07923ECE3BA7C495922909CC89512E"
 [I] Counters match
 [I] Hashes match
 [I] Vector  4 test passed.
@@ -2927,8 +2927,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  5
     Expected bit count (Low, High): ( 208,  0)
     Obtained bit count (Low, High): ( 208,  0)
-    Expected hash (String)        : "1b360acff7806502b5d40c71d237cc0c40343d2000ae2f65cf487c94"
-    Obtained hash (String)        : "1b360acff7806502b5d40c71d237cc0c40343d2000ae2f65cf487c94"
+    Expected hash (String)        : "1B360ACFF7806502B5D40C71D237CC0C40343D2000AE2F65CF487C94"
+    Obtained hash (String)        : "1B360ACFF7806502B5D40C71D237CC0C40343D2000AE2F65CF487C94"
 [I] Counters match
 [I] Hashes match
 [I] Vector  5 test passed.
@@ -2948,8 +2948,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  6
     Expected bit count (Low, High): ( 496,  0)
     Obtained bit count (Low, High): ( 496,  0)
-    Expected hash (String)        : "180aed7f988266016719f60148ba2c9b4f5ec3b9758960fc735df274"
-    Obtained hash (String)        : "180aed7f988266016719f60148ba2c9b4f5ec3b9758960fc735df274"
+    Expected hash (String)        : "180AED7F988266016719F60148BA2C9B4F5EC3B9758960FC735DF274"
+    Obtained hash (String)        : "180AED7F988266016719F60148BA2C9B4F5EC3B9758960FC735DF274"
 [I] Counters match
 [I] Hashes match
 [I] Vector  6 test passed.
@@ -2970,8 +2970,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  7
     Expected bit count (Low, High): ( 640,  0)
     Obtained bit count (Low, High): ( 640,  0)
-    Expected hash (String)        : "55591d16852c9ef56bdac519790dfed8b0af1e719d531e20d65148da"
-    Obtained hash (String)        : "55591d16852c9ef56bdac519790dfed8b0af1e719d531e20d65148da"
+    Expected hash (String)        : "55591D16852C9EF56BDAC519790DFED8B0AF1E719D531E20D65148DA"
+    Obtained hash (String)        : "55591D16852C9EF56BDAC519790DFED8B0AF1E719D531E20D65148DA"
 [I] Counters match
 [I] Hashes match
 [I] Vector  7 test passed.
@@ -2989,8 +2989,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  8
     Expected bit count (Low, High): ( 344,  0)
     Obtained bit count (Low, High): ( 344,  0)
-    Expected hash (String)        : "03d953298c8e56b46385c6761cd4b2e377889a75c97eaea475421c73"
-    Obtained hash (String)        : "03d953298c8e56b46385c6761cd4b2e377889a75c97eaea475421c73"
+    Expected hash (String)        : "03D953298C8E56B46385C6761CD4B2E377889A75C97EAEA475421C73"
+    Obtained hash (String)        : "03D953298C8E56B46385C6761CD4B2E377889A75C97EAEA475421C73"
 [I] Counters match
 [I] Hashes match
 [I] Vector  8 test passed.
@@ -3006,21 +3006,21 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  9
     Expected bit count (Low, High): ( 224,  0)
     Obtained bit count (Low, High): ( 224,  0)
-    Expected hash (String)        : "6d6e3b90b943a7990bf98ce9f8c13cd4c7c7fefc40c377bac19ed4a2"
-    Obtained hash (String)        : "6d6e3b90b943a7990bf98ce9f8c13cd4c7c7fefc40c377bac19ed4a2"
+    Expected hash (String)        : "6D6E3B90B943A7990BF98CE9F8C13CD4C7C7FEFC40C377BAC19ED4A2"
+    Obtained hash (String)        : "6D6E3B90B943A7990BF98CE9F8C13CD4C7C7FEFC40C377BAC19ED4A2"
 [I] Counters match
 [I] Hashes match
 [I] Vector  9 test passed.
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:21:57
+Finished        : 2017/04/03 - 20:44:27
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
 Description     : CryptAda HAVAL (256-bit) test vectors
-Started         : 2017/03/28 - 13:21:57
+Started         : 2017/04/03 - 20:44:27
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Number of passes:  3
@@ -3035,8 +3035,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  1
     Expected bit count (Low, High): ( 0,  0)
     Obtained bit count (Low, High): ( 0,  0)
-    Expected hash (String)        : "4f6938531f0bc8991f62da7bbd6f7de3fad44562b8c6f4ebf146d5b4e46f7c17"
-    Obtained hash (String)        : "4f6938531f0bc8991f62da7bbd6f7de3fad44562b8c6f4ebf146d5b4e46f7c17"
+    Expected hash (String)        : "4F6938531F0BC8991F62DA7BBD6F7DE3FAD44562B8C6F4EBF146D5B4E46F7C17"
+    Obtained hash (String)        : "4F6938531F0BC8991F62DA7BBD6F7DE3FAD44562B8C6F4EBF146D5B4E46F7C17"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 test passed.
@@ -3050,8 +3050,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  2
     Expected bit count (Low, High): ( 8,  0)
     Obtained bit count (Low, High): ( 8,  0)
-    Expected hash (String)        : "47c838fbb4081d9525a0ff9b1e2c05a98f625714e72db289010374e27db021d8"
-    Obtained hash (String)        : "47c838fbb4081d9525a0ff9b1e2c05a98f625714e72db289010374e27db021d8"
+    Expected hash (String)        : "47C838FBB4081D9525A0FF9B1E2C05A98F625714E72DB289010374E27DB021D8"
+    Obtained hash (String)        : "47C838FBB4081D9525A0FF9B1E2C05A98F625714E72DB289010374E27DB021D8"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 test passed.
@@ -3065,8 +3065,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  3
     Expected bit count (Low, High): ( 24,  0)
     Obtained bit count (Low, High): ( 24,  0)
-    Expected hash (String)        : "8699f1e3384d05b2a84b032693e2b6f46df85a13a50d93808d6874bb8fb9e86c"
-    Obtained hash (String)        : "8699f1e3384d05b2a84b032693e2b6f46df85a13a50d93808d6874bb8fb9e86c"
+    Expected hash (String)        : "8699F1E3384D05B2A84B032693E2B6F46DF85A13A50D93808D6874BB8FB9E86C"
+    Obtained hash (String)        : "8699F1E3384D05B2A84B032693E2B6F46DF85A13A50D93808D6874BB8FB9E86C"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 test passed.
@@ -3081,8 +3081,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  4
     Expected bit count (Low, High): ( 112,  0)
     Obtained bit count (Low, High): ( 112,  0)
-    Expected hash (String)        : "911d1aad699e1b4a3a0e783bd5e68ba45392cc4915b1a17eca8a49da70879912"
-    Obtained hash (String)        : "911d1aad699e1b4a3a0e783bd5e68ba45392cc4915b1a17eca8a49da70879912"
+    Expected hash (String)        : "911D1AAD699E1B4A3A0E783BD5E68BA45392CC4915B1A17ECA8A49DA70879912"
+    Obtained hash (String)        : "911D1AAD699E1B4A3A0E783BD5E68BA45392CC4915B1A17ECA8A49DA70879912"
 [I] Counters match
 [I] Hashes match
 [I] Vector  4 test passed.
@@ -3098,8 +3098,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  5
     Expected bit count (Low, High): ( 208,  0)
     Obtained bit count (Low, High): ( 208,  0)
-    Expected hash (String)        : "72fad4bde1da8c8332fb60561a780e7f504f21547b98686824fc33fc796afa76"
-    Obtained hash (String)        : "72fad4bde1da8c8332fb60561a780e7f504f21547b98686824fc33fc796afa76"
+    Expected hash (String)        : "72FAD4BDE1DA8C8332FB60561A780E7F504F21547B98686824FC33FC796AFA76"
+    Obtained hash (String)        : "72FAD4BDE1DA8C8332FB60561A780E7F504F21547B98686824FC33FC796AFA76"
 [I] Counters match
 [I] Hashes match
 [I] Vector  5 test passed.
@@ -3119,8 +3119,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  6
     Expected bit count (Low, High): ( 496,  0)
     Obtained bit count (Low, High): ( 496,  0)
-    Expected hash (String)        : "899397d96489281e9e76d5e65abab751f312e06c06c07c9c1d42abd31bb6a404"
-    Obtained hash (String)        : "899397d96489281e9e76d5e65abab751f312e06c06c07c9c1d42abd31bb6a404"
+    Expected hash (String)        : "899397D96489281E9E76D5E65ABAB751F312E06C06C07C9C1D42ABD31BB6A404"
+    Obtained hash (String)        : "899397D96489281E9E76D5E65ABAB751F312E06C06C07C9C1D42ABD31BB6A404"
 [I] Counters match
 [I] Hashes match
 [I] Vector  6 test passed.
@@ -3141,8 +3141,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  7
     Expected bit count (Low, High): ( 640,  0)
     Obtained bit count (Low, High): ( 640,  0)
-    Expected hash (String)        : "29911201fc26e68ddfedd0fd5172c0af1f05b0a7ae2f027a04cbceb3be69f632"
-    Obtained hash (String)        : "29911201fc26e68ddfedd0fd5172c0af1f05b0a7ae2f027a04cbceb3be69f632"
+    Expected hash (String)        : "29911201FC26E68DDFEDD0FD5172C0AF1F05B0A7AE2F027A04CBCEB3BE69F632"
+    Obtained hash (String)        : "29911201FC26E68DDFEDD0FD5172C0AF1F05B0A7AE2F027A04CBCEB3BE69F632"
 [I] Counters match
 [I] Hashes match
 [I] Vector  7 test passed.
@@ -3160,8 +3160,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  8
     Expected bit count (Low, High): ( 344,  0)
     Obtained bit count (Low, High): ( 344,  0)
-    Expected hash (String)        : "9446028f42b3768a41bd873ca69b0c006341d986613567f39eb61f96ca683300"
-    Obtained hash (String)        : "9446028f42b3768a41bd873ca69b0c006341d986613567f39eb61f96ca683300"
+    Expected hash (String)        : "9446028F42B3768A41BD873CA69B0C006341D986613567F39EB61F96CA683300"
+    Obtained hash (String)        : "9446028F42B3768A41BD873CA69B0C006341D986613567F39EB61F96CA683300"
 [I] Counters match
 [I] Hashes match
 [I] Vector  8 test passed.
@@ -3177,8 +3177,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  9
     Expected bit count (Low, High): ( 224,  0)
     Obtained bit count (Low, High): ( 224,  0)
-    Expected hash (String)        : "4d011ff4978d444b2778ff45be4ccfa5ade53882ea20769019e6a3dd9882e161"
-    Obtained hash (String)        : "4d011ff4978d444b2778ff45be4ccfa5ade53882ea20769019e6a3dd9882e161"
+    Expected hash (String)        : "4D011FF4978D444B2778FF45BE4CCFA5ADE53882EA20769019E6A3DD9882E161"
+    Obtained hash (String)        : "4D011FF4978D444B2778FF45BE4CCFA5ADE53882EA20769019E6A3DD9882E161"
 [I] Counters match
 [I] Hashes match
 [I] Vector  9 test passed.
@@ -3194,8 +3194,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  1
     Expected bit count (Low, High): ( 0,  0)
     Obtained bit count (Low, High): ( 0,  0)
-    Expected hash (String)        : "c92b2e23091e80e375dadce26982482d197b1a2521be82da819f8ca2c579b99b"
-    Obtained hash (String)        : "c92b2e23091e80e375dadce26982482d197b1a2521be82da819f8ca2c579b99b"
+    Expected hash (String)        : "C92B2E23091E80E375DADCE26982482D197B1A2521BE82DA819F8CA2C579B99B"
+    Obtained hash (String)        : "C92B2E23091E80E375DADCE26982482D197B1A2521BE82DA819F8CA2C579B99B"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 test passed.
@@ -3209,8 +3209,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  2
     Expected bit count (Low, High): ( 8,  0)
     Obtained bit count (Low, High): ( 8,  0)
-    Expected hash (String)        : "e686d2394a49b44d306ece295cf9021553221db132b36cc0ff5b593d39295899"
-    Obtained hash (String)        : "e686d2394a49b44d306ece295cf9021553221db132b36cc0ff5b593d39295899"
+    Expected hash (String)        : "E686D2394A49B44D306ECE295CF9021553221DB132B36CC0FF5B593D39295899"
+    Obtained hash (String)        : "E686D2394A49B44D306ECE295CF9021553221DB132B36CC0FF5B593D39295899"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 test passed.
@@ -3224,8 +3224,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  3
     Expected bit count (Low, High): ( 24,  0)
     Obtained bit count (Low, High): ( 24,  0)
-    Expected hash (String)        : "8f409f1bb6b30c5016fdce55f652642261575bedca0b9533f32f5455459142b5"
-    Obtained hash (String)        : "8f409f1bb6b30c5016fdce55f652642261575bedca0b9533f32f5455459142b5"
+    Expected hash (String)        : "8F409F1BB6B30C5016FDCE55F652642261575BEDCA0B9533F32F5455459142B5"
+    Obtained hash (String)        : "8F409F1BB6B30C5016FDCE55F652642261575BEDCA0B9533F32F5455459142B5"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 test passed.
@@ -3240,8 +3240,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  4
     Expected bit count (Low, High): ( 112,  0)
     Obtained bit count (Low, High): ( 112,  0)
-    Expected hash (String)        : "dbcc8e1011df45121d4ff2bb62c6c38949d76084f829c36d5929aee71b261f2f"
-    Obtained hash (String)        : "dbcc8e1011df45121d4ff2bb62c6c38949d76084f829c36d5929aee71b261f2f"
+    Expected hash (String)        : "DBCC8E1011DF45121D4FF2BB62C6C38949D76084F829C36D5929AEE71B261F2F"
+    Obtained hash (String)        : "DBCC8E1011DF45121D4FF2BB62C6C38949D76084F829C36D5929AEE71B261F2F"
 [I] Counters match
 [I] Hashes match
 [I] Vector  4 test passed.
@@ -3257,8 +3257,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  5
     Expected bit count (Low, High): ( 208,  0)
     Obtained bit count (Low, High): ( 208,  0)
-    Expected hash (String)        : "124f6eb645dc407637f8f719cc31250089c89903bf1db8fac21ea4614df4e99a"
-    Obtained hash (String)        : "124f6eb645dc407637f8f719cc31250089c89903bf1db8fac21ea4614df4e99a"
+    Expected hash (String)        : "124F6EB645DC407637F8F719CC31250089C89903BF1DB8FAC21EA4614DF4E99A"
+    Obtained hash (String)        : "124F6EB645DC407637F8F719CC31250089C89903BF1DB8FAC21EA4614DF4E99A"
 [I] Counters match
 [I] Hashes match
 [I] Vector  5 test passed.
@@ -3278,8 +3278,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  6
     Expected bit count (Low, High): ( 496,  0)
     Obtained bit count (Low, High): ( 496,  0)
-    Expected hash (String)        : "46a3a1dfe867ede652425ccd7fe8006537ead26372251686bea286da152dc35a"
-    Obtained hash (String)        : "46a3a1dfe867ede652425ccd7fe8006537ead26372251686bea286da152dc35a"
+    Expected hash (String)        : "46A3A1DFE867EDE652425CCD7FE8006537EAD26372251686BEA286DA152DC35A"
+    Obtained hash (String)        : "46A3A1DFE867EDE652425CCD7FE8006537EAD26372251686BEA286DA152DC35A"
 [I] Counters match
 [I] Hashes match
 [I] Vector  6 test passed.
@@ -3300,8 +3300,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  7
     Expected bit count (Low, High): ( 640,  0)
     Obtained bit count (Low, High): ( 640,  0)
-    Expected hash (String)        : "2187a29f8d4539010a3b91407304f74a0fc30325d91fd3c6bb585cbc45546543"
-    Obtained hash (String)        : "2187a29f8d4539010a3b91407304f74a0fc30325d91fd3c6bb585cbc45546543"
+    Expected hash (String)        : "2187A29F8D4539010A3B91407304F74A0FC30325D91FD3C6BB585CBC45546543"
+    Obtained hash (String)        : "2187A29F8D4539010A3B91407304F74A0FC30325D91FD3C6BB585CBC45546543"
 [I] Counters match
 [I] Hashes match
 [I] Vector  7 test passed.
@@ -3319,8 +3319,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  8
     Expected bit count (Low, High): ( 344,  0)
     Obtained bit count (Low, High): ( 344,  0)
-    Expected hash (String)        : "c0d4c6ea514105fd1a9c38a238553fb7fa21d4127eb1a3035a75ce9d06a83d96"
-    Obtained hash (String)        : "c0d4c6ea514105fd1a9c38a238553fb7fa21d4127eb1a3035a75ce9d06a83d96"
+    Expected hash (String)        : "C0D4C6EA514105FD1A9C38A238553FB7FA21D4127EB1A3035A75CE9D06A83D96"
+    Obtained hash (String)        : "C0D4C6EA514105FD1A9C38A238553FB7FA21D4127EB1A3035A75CE9D06A83D96"
 [I] Counters match
 [I] Hashes match
 [I] Vector  8 test passed.
@@ -3336,8 +3336,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  9
     Expected bit count (Low, High): ( 224,  0)
     Obtained bit count (Low, High): ( 224,  0)
-    Expected hash (String)        : "d5af6e503f2380ad5e934b9250cbed30d3617de5fdb9a954c69fc7b920244859"
-    Obtained hash (String)        : "d5af6e503f2380ad5e934b9250cbed30d3617de5fdb9a954c69fc7b920244859"
+    Expected hash (String)        : "D5AF6E503F2380AD5E934B9250CBED30D3617DE5FDB9A954C69FC7B920244859"
+    Obtained hash (String)        : "D5AF6E503F2380AD5E934B9250CBED30D3617DE5FDB9A954C69FC7B920244859"
 [I] Counters match
 [I] Hashes match
 [I] Vector  9 test passed.
@@ -3353,8 +3353,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  1
     Expected bit count (Low, High): ( 0,  0)
     Obtained bit count (Low, High): ( 0,  0)
-    Expected hash (String)        : "be417bb4dd5cfb76c7126f4f8eeb1553a449039307b1a3cd451dbfdc0fbbe330"
-    Obtained hash (String)        : "be417bb4dd5cfb76c7126f4f8eeb1553a449039307b1a3cd451dbfdc0fbbe330"
+    Expected hash (String)        : "BE417BB4DD5CFB76C7126F4F8EEB1553A449039307B1A3CD451DBFDC0FBBE330"
+    Obtained hash (String)        : "BE417BB4DD5CFB76C7126F4F8EEB1553A449039307B1A3CD451DBFDC0FBBE330"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 test passed.
@@ -3368,8 +3368,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  2
     Expected bit count (Low, High): ( 8,  0)
     Obtained bit count (Low, High): ( 8,  0)
-    Expected hash (String)        : "de8fd5ee72a5e4265af0a756f4e1a1f65c9b2b2f47cf17ecf0d1b88679a3e22f"
-    Obtained hash (String)        : "de8fd5ee72a5e4265af0a756f4e1a1f65c9b2b2f47cf17ecf0d1b88679a3e22f"
+    Expected hash (String)        : "DE8FD5EE72A5E4265AF0A756F4E1A1F65C9B2B2F47CF17ECF0D1B88679A3E22F"
+    Obtained hash (String)        : "DE8FD5EE72A5E4265AF0A756F4E1A1F65C9B2B2F47CF17ECF0D1B88679A3E22F"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 test passed.
@@ -3383,8 +3383,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  3
     Expected bit count (Low, High): ( 24,  0)
     Obtained bit count (Low, High): ( 24,  0)
-    Expected hash (String)        : "976cd6254c337969e5913b158392a2921af16fca51f5601d486e0a9de01156e7"
-    Obtained hash (String)        : "976cd6254c337969e5913b158392a2921af16fca51f5601d486e0a9de01156e7"
+    Expected hash (String)        : "976CD6254C337969E5913B158392A2921AF16FCA51F5601D486E0A9DE01156E7"
+    Obtained hash (String)        : "976CD6254C337969E5913B158392A2921AF16FCA51F5601D486E0A9DE01156E7"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 test passed.
@@ -3399,8 +3399,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  4
     Expected bit count (Low, High): ( 112,  0)
     Obtained bit count (Low, High): ( 112,  0)
-    Expected hash (String)        : "7ccf22af7f99acd6ac84f176041329e2958fde1419a259d5a4b89d8f4115ad74"
-    Obtained hash (String)        : "7ccf22af7f99acd6ac84f176041329e2958fde1419a259d5a4b89d8f4115ad74"
+    Expected hash (String)        : "7CCF22AF7F99ACD6AC84F176041329E2958FDE1419A259D5A4B89D8F4115AD74"
+    Obtained hash (String)        : "7CCF22AF7F99ACD6AC84F176041329E2958FDE1419A259D5A4B89D8F4115AD74"
 [I] Counters match
 [I] Hashes match
 [I] Vector  4 test passed.
@@ -3416,8 +3416,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  5
     Expected bit count (Low, High): ( 208,  0)
     Obtained bit count (Low, High): ( 208,  0)
-    Expected hash (String)        : "c9c7d8afa159fd9e965cb83ff5ee6f58aeda352c0eff005548153a61551c38ee"
-    Obtained hash (String)        : "c9c7d8afa159fd9e965cb83ff5ee6f58aeda352c0eff005548153a61551c38ee"
+    Expected hash (String)        : "C9C7D8AFA159FD9E965CB83FF5EE6F58AEDA352C0EFF005548153A61551C38EE"
+    Obtained hash (String)        : "C9C7D8AFA159FD9E965CB83FF5EE6F58AEDA352C0EFF005548153A61551C38EE"
 [I] Counters match
 [I] Hashes match
 [I] Vector  5 test passed.
@@ -3437,8 +3437,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  6
     Expected bit count (Low, High): ( 496,  0)
     Obtained bit count (Low, High): ( 496,  0)
-    Expected hash (String)        : "b45cb6e62f2b1320e4f8f1b0b273d45add47c321fd23999dcf403ac37636d963"
-    Obtained hash (String)        : "b45cb6e62f2b1320e4f8f1b0b273d45add47c321fd23999dcf403ac37636d963"
+    Expected hash (String)        : "B45CB6E62F2B1320E4F8F1B0B273D45ADD47C321FD23999DCF403AC37636D963"
+    Obtained hash (String)        : "B45CB6E62F2B1320E4F8F1B0B273D45ADD47C321FD23999DCF403AC37636D963"
 [I] Counters match
 [I] Hashes match
 [I] Vector  6 test passed.
@@ -3459,8 +3459,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  7
     Expected bit count (Low, High): ( 640,  0)
     Obtained bit count (Low, High): ( 640,  0)
-    Expected hash (String)        : "68e57a72ad513af517469a96a0073ce212b42e772671687de3dfce4ff8cde9bf"
-    Obtained hash (String)        : "68e57a72ad513af517469a96a0073ce212b42e772671687de3dfce4ff8cde9bf"
+    Expected hash (String)        : "68E57A72AD513AF517469A96A0073CE212B42E772671687DE3DFCE4FF8CDE9BF"
+    Obtained hash (String)        : "68E57A72AD513AF517469A96A0073CE212B42E772671687DE3DFCE4FF8CDE9BF"
 [I] Counters match
 [I] Hashes match
 [I] Vector  7 test passed.
@@ -3478,8 +3478,8 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  8
     Expected bit count (Low, High): ( 344,  0)
     Obtained bit count (Low, High): ( 344,  0)
-    Expected hash (String)        : "b89c551cdfe2e06dbd4cea2be1bc7d557416c58ebb4d07cbc94e49f710c55be4"
-    Obtained hash (String)        : "b89c551cdfe2e06dbd4cea2be1bc7d557416c58ebb4d07cbc94e49f710c55be4"
+    Expected hash (String)        : "B89C551CDFE2E06DBD4CEA2BE1BC7D557416C58EBB4D07CBC94E49F710C55BE4"
+    Obtained hash (String)        : "B89C551CDFE2E06DBD4CEA2BE1BC7D557416C58EBB4D07CBC94E49F710C55BE4"
 [I] Counters match
 [I] Hashes match
 [I] Vector  8 test passed.
@@ -3495,21 +3495,21 @@ Started         : 2017/03/28 - 13:21:57
 [I] Digest results for vector     :  9
     Expected bit count (Low, High): ( 224,  0)
     Obtained bit count (Low, High): ( 224,  0)
-    Expected hash (String)        : "c60fe005462f2371869f11a456569bac0627edc14ffc760fb12fe64ee3bbe120"
-    Obtained hash (String)        : "c60fe005462f2371869f11a456569bac0627edc14ffc760fb12fe64ee3bbe120"
+    Expected hash (String)        : "C60FE005462F2371869F11A456569BAC0627EDC14FFC760FB12FE64EE3BBE120"
+    Obtained hash (String)        : "C60FE005462F2371869F11A456569BAC0627EDC14FFC760FB12FE64EE3BBE120"
 [I] Counters match
 [I] Hashes match
 [I] Vector  9 test passed.
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:21:57
+Finished        : 2017/04/03 - 20:44:27
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 8
 Description     : Testing HAVAL operation (128-bit) at counter offset and block boundary.
-Started         : 2017/03/28 - 13:21:57
+Started         : 2017/04/03 - 20:44:27
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at counter offset boundary.
@@ -3520,8 +3520,8 @@ Vector length:  117
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 936,  0)
     Obtained bit count (Low, High): ( 936,  0)
-    Expected hash (String)        : "38171266657f3537d8fd0161de586787"
-    Obtained hash (String)        : "38171266657f3537d8fd0161de586787"
+    Expected hash (String)        : "38171266657F3537D8FD0161DE586787"
+    Obtained hash (String)        : "38171266657F3537D8FD0161DE586787"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -3530,8 +3530,8 @@ Vector length:  118
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 944,  0)
     Obtained bit count (Low, High): ( 944,  0)
-    Expected hash (String)        : "1065c6b9296279e1286c9b248bcf3208"
-    Obtained hash (String)        : "1065c6b9296279e1286c9b248bcf3208"
+    Expected hash (String)        : "1065C6B9296279E1286C9B248BCF3208"
+    Obtained hash (String)        : "1065C6B9296279E1286C9B248BCF3208"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -3540,8 +3540,8 @@ Vector length:  119
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 952,  0)
     Obtained bit count (Low, High): ( 952,  0)
-    Expected hash (String)        : "dec9fa29cfebf302bc06181962c82c88"
-    Obtained hash (String)        : "dec9fa29cfebf302bc06181962c82c88"
+    Expected hash (String)        : "DEC9FA29CFEBF302BC06181962C82C88"
+    Obtained hash (String)        : "DEC9FA29CFEBF302BC06181962C82C88"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -3552,8 +3552,8 @@ Vector length:  117
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 936,  0)
     Obtained bit count (Low, High): ( 936,  0)
-    Expected hash (String)        : "5f044045f2c4ab9d33d5edcf3f4cb4a6"
-    Obtained hash (String)        : "5f044045f2c4ab9d33d5edcf3f4cb4a6"
+    Expected hash (String)        : "5F044045F2C4AB9D33D5EDCF3F4CB4A6"
+    Obtained hash (String)        : "5F044045F2C4AB9D33D5EDCF3F4CB4A6"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -3562,8 +3562,8 @@ Vector length:  118
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 944,  0)
     Obtained bit count (Low, High): ( 944,  0)
-    Expected hash (String)        : "2e6181228660bde07d7c235b28a39599"
-    Obtained hash (String)        : "2e6181228660bde07d7c235b28a39599"
+    Expected hash (String)        : "2E6181228660BDE07D7C235B28A39599"
+    Obtained hash (String)        : "2E6181228660BDE07D7C235B28A39599"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -3572,8 +3572,8 @@ Vector length:  119
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 952,  0)
     Obtained bit count (Low, High): ( 952,  0)
-    Expected hash (String)        : "dc7daf4374da9b19d33ed11891e4211d"
-    Obtained hash (String)        : "dc7daf4374da9b19d33ed11891e4211d"
+    Expected hash (String)        : "DC7DAF4374DA9B19D33ED11891E4211D"
+    Obtained hash (String)        : "DC7DAF4374DA9B19D33ED11891E4211D"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -3584,8 +3584,8 @@ Vector length:  117
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 936,  0)
     Obtained bit count (Low, High): ( 936,  0)
-    Expected hash (String)        : "8843b4b1638a357f45af6a5fef9ae694"
-    Obtained hash (String)        : "8843b4b1638a357f45af6a5fef9ae694"
+    Expected hash (String)        : "8843B4B1638A357F45AF6A5FEF9AE694"
+    Obtained hash (String)        : "8843B4B1638A357F45AF6A5FEF9AE694"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -3594,8 +3594,8 @@ Vector length:  118
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 944,  0)
     Obtained bit count (Low, High): ( 944,  0)
-    Expected hash (String)        : "337fea6400d4d7955b61558c96bfebad"
-    Obtained hash (String)        : "337fea6400d4d7955b61558c96bfebad"
+    Expected hash (String)        : "337FEA6400D4D7955B61558C96BFEBAD"
+    Obtained hash (String)        : "337FEA6400D4D7955B61558C96BFEBAD"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -3604,8 +3604,8 @@ Vector length:  119
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 952,  0)
     Obtained bit count (Low, High): ( 952,  0)
-    Expected hash (String)        : "637f998895180a849ae720819ffb7b74"
-    Obtained hash (String)        : "637f998895180a849ae720819ffb7b74"
+    Expected hash (String)        : "637F998895180A849AE720819FFB7B74"
+    Obtained hash (String)        : "637F998895180A849AE720819FFB7B74"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -3618,8 +3618,8 @@ Vector length:  127
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 1016,  0)
     Obtained bit count (Low, High): ( 1016,  0)
-    Expected hash (String)        : "73b9f78088014e590f8e85bd1613074b"
-    Obtained hash (String)        : "73b9f78088014e590f8e85bd1613074b"
+    Expected hash (String)        : "73B9F78088014E590F8E85BD1613074B"
+    Obtained hash (String)        : "73B9F78088014E590F8E85BD1613074B"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -3628,8 +3628,8 @@ Vector length:  128
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 1024,  0)
     Obtained bit count (Low, High): ( 1024,  0)
-    Expected hash (String)        : "f9974bd9089cadfc82971b5b72073c05"
-    Obtained hash (String)        : "f9974bd9089cadfc82971b5b72073c05"
+    Expected hash (String)        : "F9974BD9089CADFC82971B5B72073C05"
+    Obtained hash (String)        : "F9974BD9089CADFC82971B5B72073C05"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -3638,8 +3638,8 @@ Vector length:  129
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 1032,  0)
     Obtained bit count (Low, High): ( 1032,  0)
-    Expected hash (String)        : "654b6dae7483100ef1d66e15c3b187f3"
-    Obtained hash (String)        : "654b6dae7483100ef1d66e15c3b187f3"
+    Expected hash (String)        : "654B6DAE7483100EF1D66E15C3B187F3"
+    Obtained hash (String)        : "654B6DAE7483100EF1D66E15C3B187F3"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -3650,8 +3650,8 @@ Vector length:  127
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 1016,  0)
     Obtained bit count (Low, High): ( 1016,  0)
-    Expected hash (String)        : "48c85afbe8b16e2443050a19d2c435f2"
-    Obtained hash (String)        : "48c85afbe8b16e2443050a19d2c435f2"
+    Expected hash (String)        : "48C85AFBE8B16E2443050A19D2C435F2"
+    Obtained hash (String)        : "48C85AFBE8B16E2443050A19D2C435F2"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -3660,8 +3660,8 @@ Vector length:  128
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 1024,  0)
     Obtained bit count (Low, High): ( 1024,  0)
-    Expected hash (String)        : "8b2a2e2181a632ceda0ff65f85bc2bff"
-    Obtained hash (String)        : "8b2a2e2181a632ceda0ff65f85bc2bff"
+    Expected hash (String)        : "8B2A2E2181A632CEDA0FF65F85BC2BFF"
+    Obtained hash (String)        : "8B2A2E2181A632CEDA0FF65F85BC2BFF"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -3670,8 +3670,8 @@ Vector length:  129
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 1032,  0)
     Obtained bit count (Low, High): ( 1032,  0)
-    Expected hash (String)        : "afbea75cea75a9f0ed2aae942d7ca20b"
-    Obtained hash (String)        : "afbea75cea75a9f0ed2aae942d7ca20b"
+    Expected hash (String)        : "AFBEA75CEA75A9F0ED2AAE942D7CA20B"
+    Obtained hash (String)        : "AFBEA75CEA75A9F0ED2AAE942D7CA20B"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -3682,8 +3682,8 @@ Vector length:  127
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 1016,  0)
     Obtained bit count (Low, High): ( 1016,  0)
-    Expected hash (String)        : "eb7880cc66c8a2ca21b0a84268216797"
-    Obtained hash (String)        : "eb7880cc66c8a2ca21b0a84268216797"
+    Expected hash (String)        : "EB7880CC66C8A2CA21B0A84268216797"
+    Obtained hash (String)        : "EB7880CC66C8A2CA21B0A84268216797"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -3692,8 +3692,8 @@ Vector length:  128
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 1024,  0)
     Obtained bit count (Low, High): ( 1024,  0)
-    Expected hash (String)        : "9d3fe30a4303bd15f0924b9c30e32f54"
-    Obtained hash (String)        : "9d3fe30a4303bd15f0924b9c30e32f54"
+    Expected hash (String)        : "9D3FE30A4303BD15F0924B9C30E32F54"
+    Obtained hash (String)        : "9D3FE30A4303BD15F0924B9C30E32F54"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -3702,21 +3702,21 @@ Vector length:  129
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 1032,  0)
     Obtained bit count (Low, High): ( 1032,  0)
-    Expected hash (String)        : "8c24c61709b9e6484ad6b14dee80a63f"
-    Obtained hash (String)        : "8c24c61709b9e6484ad6b14dee80a63f"
+    Expected hash (String)        : "8C24C61709B9E6484AD6B14DEE80A63F"
+    Obtained hash (String)        : "8C24C61709B9E6484AD6B14DEE80A63F"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
 --------------------------------------------------------------------------------
 Test Case Number: 8
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:21:57
+Finished        : 2017/04/03 - 20:44:27
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 9
 Description     : Testing HAVAL operation (160-bit) at counter offset and block boundary.
-Started         : 2017/03/28 - 13:21:57
+Started         : 2017/04/03 - 20:44:27
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at counter offset boundary.
@@ -3727,8 +3727,8 @@ Vector length:  117
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 936,  0)
     Obtained bit count (Low, High): ( 936,  0)
-    Expected hash (String)        : "4dd612a8f80deeb21fa477013cd0d0768a01738d"
-    Obtained hash (String)        : "4dd612a8f80deeb21fa477013cd0d0768a01738d"
+    Expected hash (String)        : "4DD612A8F80DEEB21FA477013CD0D0768A01738D"
+    Obtained hash (String)        : "4DD612A8F80DEEB21FA477013CD0D0768A01738D"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -3737,8 +3737,8 @@ Vector length:  118
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 944,  0)
     Obtained bit count (Low, High): ( 944,  0)
-    Expected hash (String)        : "cd242e07136ddaa04e2de8feed86fd705a68d9df"
-    Obtained hash (String)        : "cd242e07136ddaa04e2de8feed86fd705a68d9df"
+    Expected hash (String)        : "CD242E07136DDAA04E2DE8FEED86FD705A68D9DF"
+    Obtained hash (String)        : "CD242E07136DDAA04E2DE8FEED86FD705A68D9DF"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -3747,8 +3747,8 @@ Vector length:  119
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 952,  0)
     Obtained bit count (Low, High): ( 952,  0)
-    Expected hash (String)        : "85452238ed0279fd3bb37a02112f23ec627aa2ae"
-    Obtained hash (String)        : "85452238ed0279fd3bb37a02112f23ec627aa2ae"
+    Expected hash (String)        : "85452238ED0279FD3BB37A02112F23EC627AA2AE"
+    Obtained hash (String)        : "85452238ED0279FD3BB37A02112F23EC627AA2AE"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -3759,8 +3759,8 @@ Vector length:  117
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 936,  0)
     Obtained bit count (Low, High): ( 936,  0)
-    Expected hash (String)        : "74d7e61e2e4e0f6598f0dc1caf79615f9f263f6c"
-    Obtained hash (String)        : "74d7e61e2e4e0f6598f0dc1caf79615f9f263f6c"
+    Expected hash (String)        : "74D7E61E2E4E0F6598F0DC1CAF79615F9F263F6C"
+    Obtained hash (String)        : "74D7E61E2E4E0F6598F0DC1CAF79615F9F263F6C"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -3769,8 +3769,8 @@ Vector length:  118
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 944,  0)
     Obtained bit count (Low, High): ( 944,  0)
-    Expected hash (String)        : "a358a7632b9c455e4515a4a319077b8bfa4af60d"
-    Obtained hash (String)        : "a358a7632b9c455e4515a4a319077b8bfa4af60d"
+    Expected hash (String)        : "A358A7632B9C455E4515A4A319077B8BFA4AF60D"
+    Obtained hash (String)        : "A358A7632B9C455E4515A4A319077B8BFA4AF60D"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -3779,8 +3779,8 @@ Vector length:  119
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 952,  0)
     Obtained bit count (Low, High): ( 952,  0)
-    Expected hash (String)        : "990b597b8035f9368659818ae5142e3f474c3beb"
-    Obtained hash (String)        : "990b597b8035f9368659818ae5142e3f474c3beb"
+    Expected hash (String)        : "990B597B8035F9368659818AE5142E3F474C3BEB"
+    Obtained hash (String)        : "990B597B8035F9368659818AE5142E3F474C3BEB"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -3791,8 +3791,8 @@ Vector length:  117
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 936,  0)
     Obtained bit count (Low, High): ( 936,  0)
-    Expected hash (String)        : "5bf719110345cade348e23846b367dee1c0a2fff"
-    Obtained hash (String)        : "5bf719110345cade348e23846b367dee1c0a2fff"
+    Expected hash (String)        : "5BF719110345CADE348E23846B367DEE1C0A2FFF"
+    Obtained hash (String)        : "5BF719110345CADE348E23846B367DEE1C0A2FFF"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -3801,8 +3801,8 @@ Vector length:  118
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 944,  0)
     Obtained bit count (Low, High): ( 944,  0)
-    Expected hash (String)        : "7e02e58c80c983c143df0fa048dde7bfb64db9a9"
-    Obtained hash (String)        : "7e02e58c80c983c143df0fa048dde7bfb64db9a9"
+    Expected hash (String)        : "7E02E58C80C983C143DF0FA048DDE7BFB64DB9A9"
+    Obtained hash (String)        : "7E02E58C80C983C143DF0FA048DDE7BFB64DB9A9"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -3811,8 +3811,8 @@ Vector length:  119
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 952,  0)
     Obtained bit count (Low, High): ( 952,  0)
-    Expected hash (String)        : "5dc7621cac3d399298a776f2405892ecdfc9dc32"
-    Obtained hash (String)        : "5dc7621cac3d399298a776f2405892ecdfc9dc32"
+    Expected hash (String)        : "5DC7621CAC3D399298A776F2405892ECDFC9DC32"
+    Obtained hash (String)        : "5DC7621CAC3D399298A776F2405892ECDFC9DC32"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -3825,8 +3825,8 @@ Vector length:  127
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 1016,  0)
     Obtained bit count (Low, High): ( 1016,  0)
-    Expected hash (String)        : "c07c793852c4afe251eba5d9858186ffb3755f61"
-    Obtained hash (String)        : "c07c793852c4afe251eba5d9858186ffb3755f61"
+    Expected hash (String)        : "C07C793852C4AFE251EBA5D9858186FFB3755F61"
+    Obtained hash (String)        : "C07C793852C4AFE251EBA5D9858186FFB3755F61"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -3835,8 +3835,8 @@ Vector length:  128
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 1024,  0)
     Obtained bit count (Low, High): ( 1024,  0)
-    Expected hash (String)        : "3867dc7ca479ba3b72e64af7d943a3c91b2aca90"
-    Obtained hash (String)        : "3867dc7ca479ba3b72e64af7d943a3c91b2aca90"
+    Expected hash (String)        : "3867DC7CA479BA3B72E64AF7D943A3C91B2ACA90"
+    Obtained hash (String)        : "3867DC7CA479BA3B72E64AF7D943A3C91B2ACA90"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -3845,8 +3845,8 @@ Vector length:  129
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 1032,  0)
     Obtained bit count (Low, High): ( 1032,  0)
-    Expected hash (String)        : "afc2c056cd3de91a8ce37a6874023acb7f5e8005"
-    Obtained hash (String)        : "afc2c056cd3de91a8ce37a6874023acb7f5e8005"
+    Expected hash (String)        : "AFC2C056CD3DE91A8CE37A6874023ACB7F5E8005"
+    Obtained hash (String)        : "AFC2C056CD3DE91A8CE37A6874023ACB7F5E8005"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -3857,8 +3857,8 @@ Vector length:  127
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 1016,  0)
     Obtained bit count (Low, High): ( 1016,  0)
-    Expected hash (String)        : "98937e0c7ca2b966a7052cc5c05c3f1c312081ec"
-    Obtained hash (String)        : "98937e0c7ca2b966a7052cc5c05c3f1c312081ec"
+    Expected hash (String)        : "98937E0C7CA2B966A7052CC5C05C3F1C312081EC"
+    Obtained hash (String)        : "98937E0C7CA2B966A7052CC5C05C3F1C312081EC"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -3867,8 +3867,8 @@ Vector length:  128
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 1024,  0)
     Obtained bit count (Low, High): ( 1024,  0)
-    Expected hash (String)        : "3c75457a2fc56cb0ee9b8bdbb66955cbf69a0e01"
-    Obtained hash (String)        : "3c75457a2fc56cb0ee9b8bdbb66955cbf69a0e01"
+    Expected hash (String)        : "3C75457A2FC56CB0EE9B8BDBB66955CBF69A0E01"
+    Obtained hash (String)        : "3C75457A2FC56CB0EE9B8BDBB66955CBF69A0E01"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -3877,8 +3877,8 @@ Vector length:  129
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 1032,  0)
     Obtained bit count (Low, High): ( 1032,  0)
-    Expected hash (String)        : "12da1e932588687ff9f21bf8484e581a62c2e8fe"
-    Obtained hash (String)        : "12da1e932588687ff9f21bf8484e581a62c2e8fe"
+    Expected hash (String)        : "12DA1E932588687FF9F21BF8484E581A62C2E8FE"
+    Obtained hash (String)        : "12DA1E932588687FF9F21BF8484E581A62C2E8FE"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -3889,8 +3889,8 @@ Vector length:  127
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 1016,  0)
     Obtained bit count (Low, High): ( 1016,  0)
-    Expected hash (String)        : "8a78081d4612204cae59351adeace1c92caf926f"
-    Obtained hash (String)        : "8a78081d4612204cae59351adeace1c92caf926f"
+    Expected hash (String)        : "8A78081D4612204CAE59351ADEACE1C92CAF926F"
+    Obtained hash (String)        : "8A78081D4612204CAE59351ADEACE1C92CAF926F"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -3899,8 +3899,8 @@ Vector length:  128
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 1024,  0)
     Obtained bit count (Low, High): ( 1024,  0)
-    Expected hash (String)        : "41de0fd9b411bfd979a67da6c0ec22adcef1d7c1"
-    Obtained hash (String)        : "41de0fd9b411bfd979a67da6c0ec22adcef1d7c1"
+    Expected hash (String)        : "41DE0FD9B411BFD979A67DA6C0EC22ADCEF1D7C1"
+    Obtained hash (String)        : "41DE0FD9B411BFD979A67DA6C0EC22ADCEF1D7C1"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -3909,21 +3909,21 @@ Vector length:  129
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 1032,  0)
     Obtained bit count (Low, High): ( 1032,  0)
-    Expected hash (String)        : "88224cc0bbd89d2a15cc663ba9c9820019ed18f2"
-    Obtained hash (String)        : "88224cc0bbd89d2a15cc663ba9c9820019ed18f2"
+    Expected hash (String)        : "88224CC0BBD89D2A15CC663BA9C9820019ED18F2"
+    Obtained hash (String)        : "88224CC0BBD89D2A15CC663BA9C9820019ED18F2"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
 --------------------------------------------------------------------------------
 Test Case Number: 9
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:21:57
+Finished        : 2017/04/03 - 20:44:27
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 10
 Description     : Testing HAVAL operation (192-bit) at counter offset and block boundary.
-Started         : 2017/03/28 - 13:21:57
+Started         : 2017/04/03 - 20:44:27
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at counter offset boundary.
@@ -3934,8 +3934,8 @@ Vector length:  117
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 936,  0)
     Obtained bit count (Low, High): ( 936,  0)
-    Expected hash (String)        : "d7bde85eb8f0a4fb44d39802ec295fa58918d3dfbc0bebdc"
-    Obtained hash (String)        : "d7bde85eb8f0a4fb44d39802ec295fa58918d3dfbc0bebdc"
+    Expected hash (String)        : "D7BDE85EB8F0A4FB44D39802EC295FA58918D3DFBC0BEBDC"
+    Obtained hash (String)        : "D7BDE85EB8F0A4FB44D39802EC295FA58918D3DFBC0BEBDC"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -3944,8 +3944,8 @@ Vector length:  118
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 944,  0)
     Obtained bit count (Low, High): ( 944,  0)
-    Expected hash (String)        : "ccf65b0de7ef20fb6b833b11c107d803701a0891d10b3cb7"
-    Obtained hash (String)        : "ccf65b0de7ef20fb6b833b11c107d803701a0891d10b3cb7"
+    Expected hash (String)        : "CCF65B0DE7EF20FB6B833B11C107D803701A0891D10B3CB7"
+    Obtained hash (String)        : "CCF65B0DE7EF20FB6B833B11C107D803701A0891D10B3CB7"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -3954,8 +3954,8 @@ Vector length:  119
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 952,  0)
     Obtained bit count (Low, High): ( 952,  0)
-    Expected hash (String)        : "ddd88ec36fbe72a4907754b573ec66e782769c732dc6760d"
-    Obtained hash (String)        : "ddd88ec36fbe72a4907754b573ec66e782769c732dc6760d"
+    Expected hash (String)        : "DDD88EC36FBE72A4907754B573EC66E782769C732DC6760D"
+    Obtained hash (String)        : "DDD88EC36FBE72A4907754B573EC66E782769C732DC6760D"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -3966,8 +3966,8 @@ Vector length:  117
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 936,  0)
     Obtained bit count (Low, High): ( 936,  0)
-    Expected hash (String)        : "e782e65f2d5775662583643eb97d797703fab1f101e1a0c0"
-    Obtained hash (String)        : "e782e65f2d5775662583643eb97d797703fab1f101e1a0c0"
+    Expected hash (String)        : "E782E65F2D5775662583643EB97D797703FAB1F101E1A0C0"
+    Obtained hash (String)        : "E782E65F2D5775662583643EB97D797703FAB1F101E1A0C0"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -3976,8 +3976,8 @@ Vector length:  118
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 944,  0)
     Obtained bit count (Low, High): ( 944,  0)
-    Expected hash (String)        : "5f6401d3845f254e3e62462bbf178ed86d5a13831d3ed900"
-    Obtained hash (String)        : "5f6401d3845f254e3e62462bbf178ed86d5a13831d3ed900"
+    Expected hash (String)        : "5F6401D3845F254E3E62462BBF178ED86D5A13831D3ED900"
+    Obtained hash (String)        : "5F6401D3845F254E3E62462BBF178ED86D5A13831D3ED900"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -3986,8 +3986,8 @@ Vector length:  119
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 952,  0)
     Obtained bit count (Low, High): ( 952,  0)
-    Expected hash (String)        : "be832389220598cc5a18498d126a48b1e12c1503fd4670ea"
-    Obtained hash (String)        : "be832389220598cc5a18498d126a48b1e12c1503fd4670ea"
+    Expected hash (String)        : "BE832389220598CC5A18498D126A48B1E12C1503FD4670EA"
+    Obtained hash (String)        : "BE832389220598CC5A18498D126A48B1E12C1503FD4670EA"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -3998,8 +3998,8 @@ Vector length:  117
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 936,  0)
     Obtained bit count (Low, High): ( 936,  0)
-    Expected hash (String)        : "7b92b59f18edd4bd3bf889bee24df108a5e4cf4455046f8d"
-    Obtained hash (String)        : "7b92b59f18edd4bd3bf889bee24df108a5e4cf4455046f8d"
+    Expected hash (String)        : "7B92B59F18EDD4BD3BF889BEE24DF108A5E4CF4455046F8D"
+    Obtained hash (String)        : "7B92B59F18EDD4BD3BF889BEE24DF108A5E4CF4455046F8D"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -4008,8 +4008,8 @@ Vector length:  118
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 944,  0)
     Obtained bit count (Low, High): ( 944,  0)
-    Expected hash (String)        : "035254e8f37b30c875d987ecae0a3a5528d20165fcf5dab1"
-    Obtained hash (String)        : "035254e8f37b30c875d987ecae0a3a5528d20165fcf5dab1"
+    Expected hash (String)        : "035254E8F37B30C875D987ECAE0A3A5528D20165FCF5DAB1"
+    Obtained hash (String)        : "035254E8F37B30C875D987ECAE0A3A5528D20165FCF5DAB1"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -4018,8 +4018,8 @@ Vector length:  119
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 952,  0)
     Obtained bit count (Low, High): ( 952,  0)
-    Expected hash (String)        : "e3fbb513c443dcfea0cad1c4b624104a2f5560582fbbd36d"
-    Obtained hash (String)        : "e3fbb513c443dcfea0cad1c4b624104a2f5560582fbbd36d"
+    Expected hash (String)        : "E3FBB513C443DCFEA0CAD1C4B624104A2F5560582FBBD36D"
+    Obtained hash (String)        : "E3FBB513C443DCFEA0CAD1C4B624104A2F5560582FBBD36D"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -4032,8 +4032,8 @@ Vector length:  127
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 1016,  0)
     Obtained bit count (Low, High): ( 1016,  0)
-    Expected hash (String)        : "2baf732ba73ebc6cc39254f3162e4dbe3a27ecb3c8ba19b9"
-    Obtained hash (String)        : "2baf732ba73ebc6cc39254f3162e4dbe3a27ecb3c8ba19b9"
+    Expected hash (String)        : "2BAF732BA73EBC6CC39254F3162E4DBE3A27ECB3C8BA19B9"
+    Obtained hash (String)        : "2BAF732BA73EBC6CC39254F3162E4DBE3A27ECB3C8BA19B9"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -4042,8 +4042,8 @@ Vector length:  128
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 1024,  0)
     Obtained bit count (Low, High): ( 1024,  0)
-    Expected hash (String)        : "0183da9ae8d79b60210417a0ba962b2819057e7eb9af809f"
-    Obtained hash (String)        : "0183da9ae8d79b60210417a0ba962b2819057e7eb9af809f"
+    Expected hash (String)        : "0183DA9AE8D79B60210417A0BA962B2819057E7EB9AF809F"
+    Obtained hash (String)        : "0183DA9AE8D79B60210417A0BA962B2819057E7EB9AF809F"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -4052,8 +4052,8 @@ Vector length:  129
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 1032,  0)
     Obtained bit count (Low, High): ( 1032,  0)
-    Expected hash (String)        : "b043becfa37ffc984123e022cb747ad2b80430c663b35aae"
-    Obtained hash (String)        : "b043becfa37ffc984123e022cb747ad2b80430c663b35aae"
+    Expected hash (String)        : "B043BECFA37FFC984123E022CB747AD2B80430C663B35AAE"
+    Obtained hash (String)        : "B043BECFA37FFC984123E022CB747AD2B80430C663B35AAE"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -4064,8 +4064,8 @@ Vector length:  127
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 1016,  0)
     Obtained bit count (Low, High): ( 1016,  0)
-    Expected hash (String)        : "3234102d0b5d56e9233c6c7552e574dfee7b09f34b92845b"
-    Obtained hash (String)        : "3234102d0b5d56e9233c6c7552e574dfee7b09f34b92845b"
+    Expected hash (String)        : "3234102D0B5D56E9233C6C7552E574DFEE7B09F34B92845B"
+    Obtained hash (String)        : "3234102D0B5D56E9233C6C7552E574DFEE7B09F34B92845B"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -4074,8 +4074,8 @@ Vector length:  128
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 1024,  0)
     Obtained bit count (Low, High): ( 1024,  0)
-    Expected hash (String)        : "3ca329b6070e5aad9a73f57f1a4a7626d0ae68b594cbc6a3"
-    Obtained hash (String)        : "3ca329b6070e5aad9a73f57f1a4a7626d0ae68b594cbc6a3"
+    Expected hash (String)        : "3CA329B6070E5AAD9A73F57F1A4A7626D0AE68B594CBC6A3"
+    Obtained hash (String)        : "3CA329B6070E5AAD9A73F57F1A4A7626D0AE68B594CBC6A3"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -4084,8 +4084,8 @@ Vector length:  129
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 1032,  0)
     Obtained bit count (Low, High): ( 1032,  0)
-    Expected hash (String)        : "bdbaf7560124a7e77dfd45c6ad15ccec2291f980ba97c882"
-    Obtained hash (String)        : "bdbaf7560124a7e77dfd45c6ad15ccec2291f980ba97c882"
+    Expected hash (String)        : "BDBAF7560124A7E77DFD45C6AD15CCEC2291F980BA97C882"
+    Obtained hash (String)        : "BDBAF7560124A7E77DFD45C6AD15CCEC2291F980BA97C882"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -4096,8 +4096,8 @@ Vector length:  127
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 1016,  0)
     Obtained bit count (Low, High): ( 1016,  0)
-    Expected hash (String)        : "e59c7499e2edbde84eaa4f3bc2f0e7cd17c9866132a22b23"
-    Obtained hash (String)        : "e59c7499e2edbde84eaa4f3bc2f0e7cd17c9866132a22b23"
+    Expected hash (String)        : "E59C7499E2EDBDE84EAA4F3BC2F0E7CD17C9866132A22B23"
+    Obtained hash (String)        : "E59C7499E2EDBDE84EAA4F3BC2F0E7CD17C9866132A22B23"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -4106,8 +4106,8 @@ Vector length:  128
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 1024,  0)
     Obtained bit count (Low, High): ( 1024,  0)
-    Expected hash (String)        : "bb86c5f1bef9d13702f4afd16474d95f82c5dc0dd796f4ce"
-    Obtained hash (String)        : "bb86c5f1bef9d13702f4afd16474d95f82c5dc0dd796f4ce"
+    Expected hash (String)        : "BB86C5F1BEF9D13702F4AFD16474D95F82C5DC0DD796F4CE"
+    Obtained hash (String)        : "BB86C5F1BEF9D13702F4AFD16474D95F82C5DC0DD796F4CE"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -4116,21 +4116,21 @@ Vector length:  129
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 1032,  0)
     Obtained bit count (Low, High): ( 1032,  0)
-    Expected hash (String)        : "eb91837ddd84852333c3633385da019556b4aed76140ea29"
-    Obtained hash (String)        : "eb91837ddd84852333c3633385da019556b4aed76140ea29"
+    Expected hash (String)        : "EB91837DDD84852333C3633385DA019556B4AED76140EA29"
+    Obtained hash (String)        : "EB91837DDD84852333C3633385DA019556B4AED76140EA29"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
 --------------------------------------------------------------------------------
 Test Case Number: 10
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:21:57
+Finished        : 2017/04/03 - 20:44:27
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 11
 Description     : Testing HAVAL operation (224-bit) at counter offset and block boundary.
-Started         : 2017/03/28 - 13:21:57
+Started         : 2017/04/03 - 20:44:27
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at counter offset boundary.
@@ -4141,8 +4141,8 @@ Vector length:  117
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 936,  0)
     Obtained bit count (Low, High): ( 936,  0)
-    Expected hash (String)        : "365601a3c875aeae81f92d0029f1c8ab837148dae077e28fd0a192ea"
-    Obtained hash (String)        : "365601a3c875aeae81f92d0029f1c8ab837148dae077e28fd0a192ea"
+    Expected hash (String)        : "365601A3C875AEAE81F92D0029F1C8AB837148DAE077E28FD0A192EA"
+    Obtained hash (String)        : "365601A3C875AEAE81F92D0029F1C8AB837148DAE077E28FD0A192EA"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -4151,8 +4151,8 @@ Vector length:  118
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 944,  0)
     Obtained bit count (Low, High): ( 944,  0)
-    Expected hash (String)        : "4d37a1750d21d97bd6630181aee196bd3a4489eec647238d940aff9f"
-    Obtained hash (String)        : "4d37a1750d21d97bd6630181aee196bd3a4489eec647238d940aff9f"
+    Expected hash (String)        : "4D37A1750D21D97BD6630181AEE196BD3A4489EEC647238D940AFF9F"
+    Obtained hash (String)        : "4D37A1750D21D97BD6630181AEE196BD3A4489EEC647238D940AFF9F"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -4161,8 +4161,8 @@ Vector length:  119
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 952,  0)
     Obtained bit count (Low, High): ( 952,  0)
-    Expected hash (String)        : "8df2687205636d7b4e0ea980a5cd1fbc59cfc41873effc24d4645416"
-    Obtained hash (String)        : "8df2687205636d7b4e0ea980a5cd1fbc59cfc41873effc24d4645416"
+    Expected hash (String)        : "8DF2687205636D7B4E0EA980A5CD1FBC59CFC41873EFFC24D4645416"
+    Obtained hash (String)        : "8DF2687205636D7B4E0EA980A5CD1FBC59CFC41873EFFC24D4645416"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -4173,8 +4173,8 @@ Vector length:  117
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 936,  0)
     Obtained bit count (Low, High): ( 936,  0)
-    Expected hash (String)        : "749b687606abd9a0df42cfd8b0838d3bbf45cfb3bb4eb69953b3e64d"
-    Obtained hash (String)        : "749b687606abd9a0df42cfd8b0838d3bbf45cfb3bb4eb69953b3e64d"
+    Expected hash (String)        : "749B687606ABD9A0DF42CFD8B0838D3BBF45CFB3BB4EB69953B3E64D"
+    Obtained hash (String)        : "749B687606ABD9A0DF42CFD8B0838D3BBF45CFB3BB4EB69953B3E64D"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -4183,8 +4183,8 @@ Vector length:  118
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 944,  0)
     Obtained bit count (Low, High): ( 944,  0)
-    Expected hash (String)        : "c53ef41dd3a5095d7e3c45d34182f5c4d29c2d28b928a70524246663"
-    Obtained hash (String)        : "c53ef41dd3a5095d7e3c45d34182f5c4d29c2d28b928a70524246663"
+    Expected hash (String)        : "C53EF41DD3A5095D7E3C45D34182F5C4D29C2D28B928A70524246663"
+    Obtained hash (String)        : "C53EF41DD3A5095D7E3C45D34182F5C4D29C2D28B928A70524246663"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -4193,8 +4193,8 @@ Vector length:  119
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 952,  0)
     Obtained bit count (Low, High): ( 952,  0)
-    Expected hash (String)        : "0d4d57845a8a63b3c5975403c7f2543cf906799d615a007965277dcf"
-    Obtained hash (String)        : "0d4d57845a8a63b3c5975403c7f2543cf906799d615a007965277dcf"
+    Expected hash (String)        : "0D4D57845A8A63B3C5975403C7F2543CF906799D615A007965277DCF"
+    Obtained hash (String)        : "0D4D57845A8A63B3C5975403C7F2543CF906799D615A007965277DCF"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -4205,8 +4205,8 @@ Vector length:  117
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 936,  0)
     Obtained bit count (Low, High): ( 936,  0)
-    Expected hash (String)        : "1e4250a6333e3e6a0b9db0e620a359437ab67bf1f49dc9d8e17b1c98"
-    Obtained hash (String)        : "1e4250a6333e3e6a0b9db0e620a359437ab67bf1f49dc9d8e17b1c98"
+    Expected hash (String)        : "1E4250A6333E3E6A0B9DB0E620A359437AB67BF1F49DC9D8E17B1C98"
+    Obtained hash (String)        : "1E4250A6333E3E6A0B9DB0E620A359437AB67BF1F49DC9D8E17B1C98"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -4215,8 +4215,8 @@ Vector length:  118
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 944,  0)
     Obtained bit count (Low, High): ( 944,  0)
-    Expected hash (String)        : "1787a093aaebbd9110001a8113ab44e129971cbf1e69563926747b94"
-    Obtained hash (String)        : "1787a093aaebbd9110001a8113ab44e129971cbf1e69563926747b94"
+    Expected hash (String)        : "1787A093AAEBBD9110001A8113AB44E129971CBF1E69563926747B94"
+    Obtained hash (String)        : "1787A093AAEBBD9110001A8113AB44E129971CBF1E69563926747B94"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -4225,8 +4225,8 @@ Vector length:  119
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 952,  0)
     Obtained bit count (Low, High): ( 952,  0)
-    Expected hash (String)        : "5691ba7d5597157a47b981e51864a58edd093a3e787f911c88059e09"
-    Obtained hash (String)        : "5691ba7d5597157a47b981e51864a58edd093a3e787f911c88059e09"
+    Expected hash (String)        : "5691BA7D5597157A47B981E51864A58EDD093A3E787F911C88059E09"
+    Obtained hash (String)        : "5691BA7D5597157A47B981E51864A58EDD093A3E787F911C88059E09"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -4239,8 +4239,8 @@ Vector length:  127
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 1016,  0)
     Obtained bit count (Low, High): ( 1016,  0)
-    Expected hash (String)        : "b8a13caa59cbe0dbf34eec693d04be7ba9c7252d043551986233172a"
-    Obtained hash (String)        : "b8a13caa59cbe0dbf34eec693d04be7ba9c7252d043551986233172a"
+    Expected hash (String)        : "B8A13CAA59CBE0DBF34EEC693D04BE7BA9C7252D043551986233172A"
+    Obtained hash (String)        : "B8A13CAA59CBE0DBF34EEC693D04BE7BA9C7252D043551986233172A"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -4249,8 +4249,8 @@ Vector length:  128
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 1024,  0)
     Obtained bit count (Low, High): ( 1024,  0)
-    Expected hash (String)        : "a622f22bf634e556d519a4e5bf5b54e47aa3f58a27b8fa612cdfe1a8"
-    Obtained hash (String)        : "a622f22bf634e556d519a4e5bf5b54e47aa3f58a27b8fa612cdfe1a8"
+    Expected hash (String)        : "A622F22BF634E556D519A4E5BF5B54E47AA3F58A27B8FA612CDFE1A8"
+    Obtained hash (String)        : "A622F22BF634E556D519A4E5BF5B54E47AA3F58A27B8FA612CDFE1A8"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -4259,8 +4259,8 @@ Vector length:  129
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 1032,  0)
     Obtained bit count (Low, High): ( 1032,  0)
-    Expected hash (String)        : "5002c7d93d34b3c84fb297009a8406b460243db5a16fa6bb1df65021"
-    Obtained hash (String)        : "5002c7d93d34b3c84fb297009a8406b460243db5a16fa6bb1df65021"
+    Expected hash (String)        : "5002C7D93D34B3C84FB297009A8406B460243DB5A16FA6BB1DF65021"
+    Obtained hash (String)        : "5002C7D93D34B3C84FB297009A8406B460243DB5A16FA6BB1DF65021"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -4271,8 +4271,8 @@ Vector length:  127
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 1016,  0)
     Obtained bit count (Low, High): ( 1016,  0)
-    Expected hash (String)        : "05fc29af9765d1bb0419dcdb58399b5bd14dcf33a5241e76c942c910"
-    Obtained hash (String)        : "05fc29af9765d1bb0419dcdb58399b5bd14dcf33a5241e76c942c910"
+    Expected hash (String)        : "05FC29AF9765D1BB0419DCDB58399B5BD14DCF33A5241E76C942C910"
+    Obtained hash (String)        : "05FC29AF9765D1BB0419DCDB58399B5BD14DCF33A5241E76C942C910"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -4281,8 +4281,8 @@ Vector length:  128
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 1024,  0)
     Obtained bit count (Low, High): ( 1024,  0)
-    Expected hash (String)        : "46e51232728069555880d30ecc8c29c78e3465023e6be20ee08b65fe"
-    Obtained hash (String)        : "46e51232728069555880d30ecc8c29c78e3465023e6be20ee08b65fe"
+    Expected hash (String)        : "46E51232728069555880D30ECC8C29C78E3465023E6BE20EE08B65FE"
+    Obtained hash (String)        : "46E51232728069555880D30ECC8C29C78E3465023E6BE20EE08B65FE"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -4291,8 +4291,8 @@ Vector length:  129
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 1032,  0)
     Obtained bit count (Low, High): ( 1032,  0)
-    Expected hash (String)        : "f97c85db6f8c00cff823a7c3ee721212d52ae847b22289347506570a"
-    Obtained hash (String)        : "f97c85db6f8c00cff823a7c3ee721212d52ae847b22289347506570a"
+    Expected hash (String)        : "F97C85DB6F8C00CFF823A7C3EE721212D52AE847B22289347506570A"
+    Obtained hash (String)        : "F97C85DB6F8C00CFF823A7C3EE721212D52AE847B22289347506570A"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -4303,8 +4303,8 @@ Vector length:  127
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 1016,  0)
     Obtained bit count (Low, High): ( 1016,  0)
-    Expected hash (String)        : "7c2eeb49811fe1a129f4c18c82950c26f943cd4dc8a1db2aec8800a1"
-    Obtained hash (String)        : "7c2eeb49811fe1a129f4c18c82950c26f943cd4dc8a1db2aec8800a1"
+    Expected hash (String)        : "7C2EEB49811FE1A129F4C18C82950C26F943CD4DC8A1DB2AEC8800A1"
+    Obtained hash (String)        : "7C2EEB49811FE1A129F4C18C82950C26F943CD4DC8A1DB2AEC8800A1"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -4313,8 +4313,8 @@ Vector length:  128
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 1024,  0)
     Obtained bit count (Low, High): ( 1024,  0)
-    Expected hash (String)        : "8d80627658498ad9cd535eee5f667c54edcfb9fa71e753ff011f7887"
-    Obtained hash (String)        : "8d80627658498ad9cd535eee5f667c54edcfb9fa71e753ff011f7887"
+    Expected hash (String)        : "8D80627658498AD9CD535EEE5F667C54EDCFB9FA71E753FF011F7887"
+    Obtained hash (String)        : "8D80627658498AD9CD535EEE5F667C54EDCFB9FA71E753FF011F7887"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -4323,21 +4323,21 @@ Vector length:  129
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 1032,  0)
     Obtained bit count (Low, High): ( 1032,  0)
-    Expected hash (String)        : "3e6bfe77e8b9be093f025a7edf9b04dbd2e9826fdfd629348384ba42"
-    Obtained hash (String)        : "3e6bfe77e8b9be093f025a7edf9b04dbd2e9826fdfd629348384ba42"
+    Expected hash (String)        : "3E6BFE77E8B9BE093F025A7EDF9B04DBD2E9826FDFD629348384BA42"
+    Obtained hash (String)        : "3E6BFE77E8B9BE093F025A7EDF9B04DBD2E9826FDFD629348384BA42"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
 --------------------------------------------------------------------------------
 Test Case Number: 11
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:21:57
+Finished        : 2017/04/03 - 20:44:27
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 12
 Description     : Testing HAVAL operation (256-bit) at counter offset and block boundary.
-Started         : 2017/03/28 - 13:21:57
+Started         : 2017/04/03 - 20:44:27
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at counter offset boundary.
@@ -4348,8 +4348,8 @@ Vector length:  117
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 936,  0)
     Obtained bit count (Low, High): ( 936,  0)
-    Expected hash (String)        : "3973ff8c2014d772f2999001c0a264543d1e1e8a968a5e32f81e37650583f639"
-    Obtained hash (String)        : "3973ff8c2014d772f2999001c0a264543d1e1e8a968a5e32f81e37650583f639"
+    Expected hash (String)        : "3973FF8C2014D772F2999001C0A264543D1E1E8A968A5E32F81E37650583F639"
+    Obtained hash (String)        : "3973FF8C2014D772F2999001C0A264543D1E1E8A968A5E32F81E37650583F639"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -4358,8 +4358,8 @@ Vector length:  118
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 944,  0)
     Obtained bit count (Low, High): ( 944,  0)
-    Expected hash (String)        : "712f49ede266ce71c1421c5c90b898d20d96ee712b2c139fc7ff1830919f44f9"
-    Obtained hash (String)        : "712f49ede266ce71c1421c5c90b898d20d96ee712b2c139fc7ff1830919f44f9"
+    Expected hash (String)        : "712F49EDE266CE71C1421C5C90B898D20D96EE712B2C139FC7FF1830919F44F9"
+    Obtained hash (String)        : "712F49EDE266CE71C1421C5C90B898D20D96EE712B2C139FC7FF1830919F44F9"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -4368,8 +4368,8 @@ Vector length:  119
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 952,  0)
     Obtained bit count (Low, High): ( 952,  0)
-    Expected hash (String)        : "0455661f2f02a015d9cf3c411af0509080124a7e628b84ec33e68432e88d7cd2"
-    Obtained hash (String)        : "0455661f2f02a015d9cf3c411af0509080124a7e628b84ec33e68432e88d7cd2"
+    Expected hash (String)        : "0455661F2F02A015D9CF3C411AF0509080124A7E628B84EC33E68432E88D7CD2"
+    Obtained hash (String)        : "0455661F2F02A015D9CF3C411AF0509080124A7E628B84EC33E68432E88D7CD2"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -4380,8 +4380,8 @@ Vector length:  117
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 936,  0)
     Obtained bit count (Low, High): ( 936,  0)
-    Expected hash (String)        : "475d868cb5a11fd207e681b8146cf7fe6b68cde2fa7c203f0f2336991e914052"
-    Obtained hash (String)        : "475d868cb5a11fd207e681b8146cf7fe6b68cde2fa7c203f0f2336991e914052"
+    Expected hash (String)        : "475D868CB5A11FD207E681B8146CF7FE6B68CDE2FA7C203F0F2336991E914052"
+    Obtained hash (String)        : "475D868CB5A11FD207E681B8146CF7FE6B68CDE2FA7C203F0F2336991E914052"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -4390,8 +4390,8 @@ Vector length:  118
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 944,  0)
     Obtained bit count (Low, High): ( 944,  0)
-    Expected hash (String)        : "6907fab59d149a718475b31c472d868038c4bb37ea8c44af442984d016ab0e05"
-    Obtained hash (String)        : "6907fab59d149a718475b31c472d868038c4bb37ea8c44af442984d016ab0e05"
+    Expected hash (String)        : "6907FAB59D149A718475B31C472D868038C4BB37EA8C44AF442984D016AB0E05"
+    Obtained hash (String)        : "6907FAB59D149A718475B31C472D868038C4BB37EA8C44AF442984D016AB0E05"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -4400,8 +4400,8 @@ Vector length:  119
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 952,  0)
     Obtained bit count (Low, High): ( 952,  0)
-    Expected hash (String)        : "07ea6d567c1e222dc2cd5ace86311c15f028ae6469ae51247d2b8749d979877c"
-    Obtained hash (String)        : "07ea6d567c1e222dc2cd5ace86311c15f028ae6469ae51247d2b8749d979877c"
+    Expected hash (String)        : "07EA6D567C1E222DC2CD5ACE86311C15F028AE6469AE51247D2B8749D979877C"
+    Obtained hash (String)        : "07EA6D567C1E222DC2CD5ACE86311C15F028AE6469AE51247D2B8749D979877C"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -4412,8 +4412,8 @@ Vector length:  117
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 936,  0)
     Obtained bit count (Low, High): ( 936,  0)
-    Expected hash (String)        : "5ccc1fcc4aca9ab3a014732dbafee7ed7c0cf1028b4bbaffe92a9d78e634ee02"
-    Obtained hash (String)        : "5ccc1fcc4aca9ab3a014732dbafee7ed7c0cf1028b4bbaffe92a9d78e634ee02"
+    Expected hash (String)        : "5CCC1FCC4ACA9AB3A014732DBAFEE7ED7C0CF1028B4BBAFFE92A9D78E634EE02"
+    Obtained hash (String)        : "5CCC1FCC4ACA9AB3A014732DBAFEE7ED7C0CF1028B4BBAFFE92A9D78E634EE02"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -4422,8 +4422,8 @@ Vector length:  118
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 944,  0)
     Obtained bit count (Low, High): ( 944,  0)
-    Expected hash (String)        : "34e1b82fdea5bf0d5eec513d8bc463d2eeab36a2af5f5183cc98b564e51431b0"
-    Obtained hash (String)        : "34e1b82fdea5bf0d5eec513d8bc463d2eeab36a2af5f5183cc98b564e51431b0"
+    Expected hash (String)        : "34E1B82FDEA5BF0D5EEC513D8BC463D2EEAB36A2AF5F5183CC98B564E51431B0"
+    Obtained hash (String)        : "34E1B82FDEA5BF0D5EEC513D8BC463D2EEAB36A2AF5F5183CC98B564E51431B0"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -4432,8 +4432,8 @@ Vector length:  119
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 952,  0)
     Obtained bit count (Low, High): ( 952,  0)
-    Expected hash (String)        : "e317fa1b993386e8e4c38f6a9a3bb4ae1f903d00df13d16a86f13fbb68a11a28"
-    Obtained hash (String)        : "e317fa1b993386e8e4c38f6a9a3bb4ae1f903d00df13d16a86f13fbb68a11a28"
+    Expected hash (String)        : "E317FA1B993386E8E4C38F6A9A3BB4AE1F903D00DF13D16A86F13FBB68A11A28"
+    Obtained hash (String)        : "E317FA1B993386E8E4C38F6A9A3BB4AE1F903D00DF13D16A86F13FBB68A11A28"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -4446,8 +4446,8 @@ Vector length:  127
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 1016,  0)
     Obtained bit count (Low, High): ( 1016,  0)
-    Expected hash (String)        : "14b6e3418a669865cd25c413c8fbdf680e3420b563a468845271674405f52abd"
-    Obtained hash (String)        : "14b6e3418a669865cd25c413c8fbdf680e3420b563a468845271674405f52abd"
+    Expected hash (String)        : "14B6E3418A669865CD25C413C8FBDF680E3420B563A468845271674405F52ABD"
+    Obtained hash (String)        : "14B6E3418A669865CD25C413C8FBDF680E3420B563A468845271674405F52ABD"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -4456,8 +4456,8 @@ Vector length:  128
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 1024,  0)
     Obtained bit count (Low, High): ( 1024,  0)
-    Expected hash (String)        : "13faa4d94db48282d58e05b69be23ec24d1bf5c724dfdd7f2a1c17763f3d355f"
-    Obtained hash (String)        : "13faa4d94db48282d58e05b69be23ec24d1bf5c724dfdd7f2a1c17763f3d355f"
+    Expected hash (String)        : "13FAA4D94DB48282D58E05B69BE23EC24D1BF5C724DFDD7F2A1C17763F3D355F"
+    Obtained hash (String)        : "13FAA4D94DB48282D58E05B69BE23EC24D1BF5C724DFDD7F2A1C17763F3D355F"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -4466,8 +4466,8 @@ Vector length:  129
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 1032,  0)
     Obtained bit count (Low, High): ( 1032,  0)
-    Expected hash (String)        : "18229631aea1373425523a5e9a11aa8545c98376ebd07525f5f33aaed88bce50"
-    Obtained hash (String)        : "18229631aea1373425523a5e9a11aa8545c98376ebd07525f5f33aaed88bce50"
+    Expected hash (String)        : "18229631AEA1373425523A5E9A11AA8545C98376EBD07525F5F33AAED88BCE50"
+    Obtained hash (String)        : "18229631AEA1373425523A5E9A11AA8545C98376EBD07525F5F33AAED88BCE50"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -4478,8 +4478,8 @@ Vector length:  127
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 1016,  0)
     Obtained bit count (Low, High): ( 1016,  0)
-    Expected hash (String)        : "6380e8e8e2f3907f314fcddb51f48e3a55b0130a6bba01eec3c2b90e195e554e"
-    Obtained hash (String)        : "6380e8e8e2f3907f314fcddb51f48e3a55b0130a6bba01eec3c2b90e195e554e"
+    Expected hash (String)        : "6380E8E8E2F3907F314FCDDB51F48E3A55B0130A6BBA01EEC3C2B90E195E554E"
+    Obtained hash (String)        : "6380E8E8E2F3907F314FCDDB51F48E3A55B0130A6BBA01EEC3C2B90E195E554E"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -4488,8 +4488,8 @@ Vector length:  128
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 1024,  0)
     Obtained bit count (Low, High): ( 1024,  0)
-    Expected hash (String)        : "f30bc5d2ae4d446523b50f780111b79eb5caeceb0a4e6981638e539709776b99"
-    Obtained hash (String)        : "f30bc5d2ae4d446523b50f780111b79eb5caeceb0a4e6981638e539709776b99"
+    Expected hash (String)        : "F30BC5D2AE4D446523B50F780111B79EB5CAECEB0A4E6981638E539709776B99"
+    Obtained hash (String)        : "F30BC5D2AE4D446523B50F780111B79EB5CAECEB0A4E6981638E539709776B99"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -4498,8 +4498,8 @@ Vector length:  129
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 1032,  0)
     Obtained bit count (Low, High): ( 1032,  0)
-    Expected hash (String)        : "2acd67570c738a5a5f19eaaf2e9dd0202dfcd0e8e0129b742f1deda7a929eb0e"
-    Obtained hash (String)        : "2acd67570c738a5a5f19eaaf2e9dd0202dfcd0e8e0129b742f1deda7a929eb0e"
+    Expected hash (String)        : "2ACD67570C738A5A5F19EAAF2E9DD0202DFCD0E8E0129B742F1DEDA7A929EB0E"
+    Obtained hash (String)        : "2ACD67570C738A5A5F19EAAF2E9DD0202DFCD0E8E0129B742F1DEDA7A929EB0E"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
@@ -4510,8 +4510,8 @@ Vector length:  127
 [I] Digest result for test vector:  1
     Expected bit count (Low, High): ( 1016,  0)
     Obtained bit count (Low, High): ( 1016,  0)
-    Expected hash (String)        : "f7eabeec467c8b56af40f90e799ea878d8ea7eff260d49982209364ad0e0c39d"
-    Obtained hash (String)        : "f7eabeec467c8b56af40f90e799ea878d8ea7eff260d49982209364ad0e0c39d"
+    Expected hash (String)        : "F7EABEEC467C8B56AF40F90E799EA878D8EA7EFF260D49982209364AD0E0C39D"
+    Obtained hash (String)        : "F7EABEEC467C8B56AF40F90E799EA878D8EA7EFF260D49982209364AD0E0C39D"
 [I] Counters match
 [I] Hashes match
 [I] Vector  1 results match
@@ -4520,8 +4520,8 @@ Vector length:  128
 [I] Digest result for test vector:  2
     Expected bit count (Low, High): ( 1024,  0)
     Obtained bit count (Low, High): ( 1024,  0)
-    Expected hash (String)        : "93390552a2d23df530a5918c95d095e3914cf476cd1d95bede099c7674b31efe"
-    Obtained hash (String)        : "93390552a2d23df530a5918c95d095e3914cf476cd1d95bede099c7674b31efe"
+    Expected hash (String)        : "93390552A2D23DF530A5918C95D095E3914CF476CD1D95BEDE099C7674B31EFE"
+    Obtained hash (String)        : "93390552A2D23DF530A5918C95D095E3914CF476CD1D95BEDE099C7674B31EFE"
 [I] Counters match
 [I] Hashes match
 [I] Vector  2 results match
@@ -4530,19 +4530,19 @@ Vector length:  129
 [I] Digest result for test vector:  3
     Expected bit count (Low, High): ( 1032,  0)
     Obtained bit count (Low, High): ( 1032,  0)
-    Expected hash (String)        : "a084bcc569ed32e30bb0c79e7b4f82be98c3934d2333ea7f6757c726382d6688"
-    Obtained hash (String)        : "a084bcc569ed32e30bb0c79e7b4f82be98c3934d2333ea7f6757c726382d6688"
+    Expected hash (String)        : "A084BCC569ED32E30BB0C79E7B4F82BE98C3934D2333EA7F6757C726382D6688"
+    Obtained hash (String)        : "A084BCC569ED32E30BB0C79E7B4F82BE98C3934D2333EA7F6757C726382D6688"
 [I] Counters match
 [I] Hashes match
 [I] Vector  3 results match
 --------------------------------------------------------------------------------
 Test Case Number: 12
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:21:57
+Finished        : 2017/04/03 - 20:44:27
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.HAVAL
-Finished                 : 2017/03/28 - 13:21:57
+Finished                 : 2017/04/03 - 20:44:27
 ================================================================================

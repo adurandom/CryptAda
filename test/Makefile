@@ -137,9 +137,19 @@ U_DIG       =   $(CTB_UDIG)/ut_count.exe \
 U_RND       =   $(CTB_URND)/ut_rsaref.exe \
                 $(CTB_URND)/ut_caprng.exe
 
-U_BC        =   $(CTB_UBC)/ut_des.exe \
+U_BC        =   $(CTB_UBC)/ut_keys.exe \
+                $(CTB_UBC)/ut_des.exe \
+                $(CTB_UBC)/ut_desx.exe \
+                $(CTB_UBC)/ut_des2x.exe \
                 $(CTB_UBC)/ut_tdea.exe \
-                $(CTB_UBC)/ut_aes.exe
+                $(CTB_UBC)/ut_aes.exe \
+                $(CTB_UBC)/ut_blowfish.exe \
+                $(CTB_UBC)/ut_rc2.exe \
+                $(CTB_UBC)/ut_idea.exe \
+                $(CTB_UBC)/ut_cast_128.exe \
+                $(CTB_UBC)/ut_key_generators.exe \
+                $(CTB_UBC)/ut_kg_tdea.exe
+                
                 
 T_DIG       =   $(CTB_TDIG)/tt_md2.exe \
                 $(CTB_TDIG)/tt_md4.exe \
@@ -279,15 +289,51 @@ $(CTB_URND)/ut_caprng.exe: $(CTS_URN_DRV)ut_caprng.adb
 
 # Block_Ciphers unit test drivers
 
+$(CTB_UBC)/ut_keys.exe: $(CTS_UBC_DRV)ut_keys.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
+
 $(CTB_UBC)/ut_des.exe: $(CTS_UBC_DRV)ut_des.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
 
+$(CTB_UBC)/ut_desx.exe: $(CTS_UBC_DRV)ut_desx.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBC)/ut_des2x.exe: $(CTS_UBC_DRV)ut_des2x.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
+    
 $(CTB_UBC)/ut_tdea.exe: $(CTS_UBC_DRV)ut_tdea.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
     
 $(CTB_UBC)/ut_aes.exe: $(CTS_UBC_DRV)ut_aes.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBC)/ut_blowfish.exe: $(CTS_UBC_DRV)ut_blowfish.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBC)/ut_rc2.exe: $(CTS_UBC_DRV)ut_rc2.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBC)/ut_idea.exe: $(CTS_UBC_DRV)ut_idea.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBC)/ut_cast_128.exe: $(CTS_UBC_DRV)ut_cast_128.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
+    
+$(CTB_UBC)/ut_key_generators.exe: $(CTS_UBC_DRV)ut_key_generators.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBC)/ut_kg_tdea.exe: $(CTS_UBC_DRV)ut_kg_tdea.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
     

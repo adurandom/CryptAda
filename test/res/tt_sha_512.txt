@@ -1,18 +1,18 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.a (2017/03/31)
+Version: 0.1.b (2017/03/31)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Time.SHA_512
 Description              : Time trial for CryptAda.Digests.Algorithms.SHA_512 functionality.
-Started                  : 2017/03/28 - 13:22:04
+Started                  : 2017/04/03 - 20:44:48
 ================================================================================
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 1
 Description      : SHA_512 hashing
-Started          : 2017/03/28 - 13:22:04
+Started          : 2017/04/03 - 20:44:48
 --------------------------------------------------------------------------------
 [I] Hashing 1MB
 [I] Starting time trial for digest algorithm.
@@ -30,18 +30,18 @@ Started          : 2017/03/28 - 13:22:04
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.008910984 secs.
+    Elapsed time       :           0.032935196 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "b58c2c9ff06a4d5eb62c128453e411c577c0ce66e6d94ccfce2c462550c67966df6b4b8700ff3c87292807f51a57c00a515ac482ae347fa3af7b69776523d567"
+    Obtained hash      : "4C74A75FB4BC8955EC842EAE030435A756AEEEE684E0FBE4E5EB3EEA5E6C3FE95ACF9E5DDE2E8A9B6DE9669AA6A3033C53382C7372ED696FF3E6FEC1C7D6EE9D"
 --------------------------------------------------------------------------------
 Time Trial Number: 1
-Finished         : 2017/03/28 - 13:22:04
+Finished         : 2017/04/03 - 20:44:48
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 2
 Description      : SHA_512 hashing
-Started          : 2017/03/28 - 13:22:04
+Started          : 2017/04/03 - 20:44:48
 --------------------------------------------------------------------------------
 [I] Hashing 10MB
 [I] Starting time trial for digest algorithm.
@@ -59,16 +59,16 @@ Started          : 2017/03/28 - 13:22:04
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.089854504 secs.
+    Elapsed time       :           0.330297333 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "d0ce20ee247fee495e981c1012f8cf5cb2effe7717c7bdb63d2e9156538cd9be57dbfc2b69399b80eb03d6961b5272c6b73ec63c7ba4696c7b7d869dabb3515a"
+    Obtained hash      : "97A0AC29ED6E6A1DB2038A7FCC3D61846AFF6436CB63A6CB5D30CACA1FFB6DAD6BEC000CF8532A9B0A2CDF77ACE1DE6BDE31A8A01F7564ADBAA30184C45C07DB"
 --------------------------------------------------------------------------------
 Time Trial Number: 2
-Finished         : 2017/03/28 - 13:22:04
+Finished         : 2017/04/03 - 20:44:49
 --[End Time Trial]--------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Time.SHA_512
-Finished                 : 2017/03/28 - 13:22:04
+Finished                 : 2017/04/03 - 20:44:49
 ================================================================================

@@ -29,6 +29,8 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170321 ADD   Initial implementation.
+--    1.1   20170329 ADD   Removed Key_Length type, added a Get_Key_Bytes 
+--                         procedure.
 --------------------------------------------------------------------------------
 
 with Ada.Unchecked_Deallocation;
@@ -166,7 +168,7 @@ package body CryptAda.Ciphers.Keys is
    
    function    Get_Key_Length(
                   Of_Key         : in     Key)
-      return   Key_Length
+      return   Cipher_Key_Length
    is
    begin
       if Of_Key.Key_Bytes = null then
@@ -179,14 +181,38 @@ package body CryptAda.Ciphers.Keys is
    --[Get_Key_Bytes]------------------------------------------------------------
    
    function    Get_Key_Bytes(
-                  Of_Key         : in     Key)
+                  From_Key          : in     Key)
       return   Byte_Array
    is
    begin
-      if Of_Key.Key_Bytes = null then
+      if From_Key.Key_Bytes = null then
          raise CryptAda_Null_Argument_Error;
       else
-         return Of_Key.Key_Bytes.all;
+         return From_Key.Key_Bytes.all;
       end if;
    end Get_Key_Bytes;   
+
+   --[Get_Key_Bytes]------------------------------------------------------------
+   
+   procedure   Get_Key_Bytes(
+                  From_Key       : in     Key;
+                  Into           :    out Byte_Array;
+                  Length         :    out Cipher_Key_Length)
+   is
+      L              : Natural;
+   begin
+      if From_Key.Key_Bytes = null then
+         raise CryptAda_Null_Argument_Error;
+      else
+         L := From_Key.Key_Bytes.all'Length;
+         
+         if Into'Length < L then
+            raise CryptAda_Overflow_Error;
+         else
+            Into := (others => 0);
+            Into(Into'First .. Into'First + L - 1) := From_Key.Key_Bytes.all;
+            Length := L;
+         end if;
+      end if;
+   end Get_Key_Bytes;      
 end CryptAda.Ciphers.Keys;

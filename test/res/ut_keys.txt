@@ -1,0 +1,131 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.1.b (2017/03/31)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Keys
+Description              : Unit test driver for CryptAda.Ciphers.Keys functionality.
+Started                  : 2017/04/03 - 20:44:29
+================================================================================
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Attempting operations on Null key
+Started         : 2017/04/03 - 20:44:29
+--------------------------------------------------------------------------------
+[I] Key must be created as a null key
+[I] The key as created:
+Null key
+[I] Trying operations on a Null key
+[I] Must raise CryptAda_Null_Argument_Error
+[I] Trying Get_Key_Length
+[I] Raised CryptAda_Null_Argument_Error
+[I] Trying Get_Key_Bytes (function)
+[I] Raised CryptAda_Null_Argument_Error
+[I] Trying Get_Key_Bytes (procedure)
+[I] Raised CryptAda_Null_Argument_Error
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/04/03 - 20:44:29
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Testing Set_Key
+Started         : 2017/04/03 - 20:44:29
+--------------------------------------------------------------------------------
+[I] Setting key to a given Byte_Array
+[I] The key before Set_Key
+Null key
+[I] Byte_Array to set Key to
+Byte_Array Length:  16
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] The key after Set_Key
+Key length:  16
+Key bytes :
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] Getting key length with Get_Key_Length
+Expected value:  16
+Obtained value:  16
+[I] Setting to a 0 length array must make key null
+[I] The key before Set_Key
+Key length:  16
+Key bytes :
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] The key after Set_Key
+Null key
+[I] Setting key to a given Byte_Array
+[I] The key before Set_Key
+Null key
+[I] Byte_Array to set Key to
+Byte_Array Length:  16
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] The key after Set_Key
+Key length:  16
+Key bytes :
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] Calling Set_Null must make the key null
+[I] The key before Set_Null
+Key length:  16
+Key bytes :
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] The key after Set_Null
+Null key
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/04/03 - 20:44:29
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Retrieving key bytes
+Started         : 2017/04/03 - 20:44:29
+--------------------------------------------------------------------------------
+[I] Testing Get_Key_Bytes subprograms.
+[I] Byte_Array to set Key to
+Byte_Array Length:  8
+16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#
+[I] The key before Set_Key
+Null key
+[I] The key after Set_Key
+Key length:  8
+Key bytes :
+16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#
+[I] Trying Get_Key_Bytes (function)
+[I] Byte_Array obtained
+Byte_Array Length:  8
+16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#
+[I] Trying Get_Key_Bytes (procedure) to a shorter array.
+    Should raise CryptAda_Overflow_Error
+[I] Byte_Array to use to retrieve key bytes
+Byte_Array Length:  4
+16#00#, 16#00#, 16#00#, 16#00#
+[I] Raised CryptAda_Overflow_Error
+[I] Trying Get_Key_Bytes (procedure) to a longer array.
+[I] Using a  24 bytes array
+[I] Byte_Array before Get_Key_Bytes
+Byte_Array Length:  24
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Byte_Array after Get_Key_Bytes
+Byte_Array Length:  24
+16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+Number of bytes copied:  8
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/04/03 - 20:44:29
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Keys
+Finished                 : 2017/04/03 - 20:44:29
+================================================================================

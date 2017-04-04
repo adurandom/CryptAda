@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 13th, 2017
---    Current version   :  1.0
+--    Current version   :  1.2
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Algorithm naming according to SCAN.
@@ -29,6 +29,8 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170313 ADD   Initial implementation.
+--    1.1   20170329 ADD   Changes in CryptAda.Names.
+--    1.2   20170403 ADD   Changes in Symmetric cipher hierachy.
 --------------------------------------------------------------------------------
 
 package CryptAda.Names.SCAN is
@@ -122,32 +124,42 @@ package CryptAda.Names.SCAN is
          others            => Anonymous_Algorithm'Access
       );
 
-   --[Block Cipher Names]-------------------------------------------------------
-   -- Next constants identify the block ciphers algorithms according to
+   --[Symmetric Cipher Names]---------------------------------------------------
+   -- Next constants identify the symmetric ciphers algorithms according to
    -- SCAN (Standard Cryptographic Algorithm Naming) naming schema.
    -----------------------------------------------------------------------------
 
    SCAN_DES                      : aliased constant String := "DES";
+   SCAN_DESX                     : aliased constant String := "DESX";
    SCAN_DESEDE                   : aliased constant String := "DESede";
    SCAN_DES_EDE_2                : aliased constant String := "DES-EDE2";
    SCAN_DES_EDE_3                : aliased constant String := "DES-EDE3";
    SCAN_AES128                   : aliased constant String := "AES128";
    SCAN_AES192                   : aliased constant String := "AES192";
    SCAN_AES256                   : aliased constant String := "AES256";
+   SCAN_Blowfish                 : aliased constant String := "Blowfish";
+   SCAN_RC2                      : aliased constant String := "RC2";
+   SCAN_IDEA                     : aliased constant String := "IDEA";
+   SCAN_CAST_128                 : aliased constant String := "CAST-128";
    
-   --[SCAN_Block_Ciphers]-------------------------------------------------------
+   --[SCAN_Symmetric_Ciphers]---------------------------------------------------
    -- Array of SCAN names of block cipher algorithms.
    -----------------------------------------------------------------------------
 
-   SCAN_Block_Ciphers            : constant array(Block_Cipher_Id) of Algorithm_Name_Ref :=
+   SCAN_Symmetric_Ciphers        : constant array(Symmetric_Cipher_Id) of Algorithm_Name_Ref :=
       (
-         BC_DES            => SCAN_DES'Access,
-         BC_TDEA_EDE_1     => SCAN_DESEDE'Access,
-         BC_TDEA_EDE_2     => SCAN_DES_EDE_2'Access,
-         BC_TDEA_EDE_3     => SCAN_DES_EDE_3'Access,
-         BC_AES_128        => SCAN_AES128'Access,
-         BC_AES_192        => SCAN_AES192'Access,
-         BC_AES_256        => SCAN_AES256'Access,
+         SC_DES            => SCAN_DES'Access,
+         SC_DESX           => SCAN_DESX'Access,
+         SC_TDEA_EDE_1     => SCAN_DESEDE'Access,
+         SC_TDEA_EDE_2     => SCAN_DES_EDE_2'Access,
+         SC_TDEA_EDE_3     => SCAN_DES_EDE_3'Access,
+         SC_AES_128        => SCAN_AES128'Access,
+         SC_AES_192        => SCAN_AES192'Access,
+         SC_AES_256        => SCAN_AES256'Access,
+         SC_Blowfish       => SCAN_Blowfish'Access,
+         SC_RC2            => SCAN_RC2'Access,
+         SC_IDEA           => SCAN_IDEA'Access,
+         SC_CAST_128       => SCAN_CAST_128'Access,
          others            => Anonymous_Algorithm'Access
       );
       

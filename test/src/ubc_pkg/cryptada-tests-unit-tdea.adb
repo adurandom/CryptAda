@@ -31,19 +31,18 @@
 --    1.0   20170328 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with Ada.Exceptions;                      use Ada.Exceptions;
+with Ada.Exceptions;                         use Ada.Exceptions;
 
-with CryptAda.Tests.Utils;                use CryptAda.Tests.Utils;
-with CryptAda.Tests.Utils.Ciphers;        use CryptAda.Tests.Utils.Ciphers;
+with CryptAda.Tests.Utils;                   use CryptAda.Tests.Utils;
+with CryptAda.Tests.Utils.Ciphers;           use CryptAda.Tests.Utils.Ciphers;
 
-with CryptAda.Exceptions;                 use CryptAda.Exceptions;
-with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
-with CryptAda.Ciphers;                    use CryptAda.Ciphers;
-with CryptAda.Ciphers.Keys;               use CryptAda.Ciphers.Keys;
-with CryptAda.Ciphers.Block_Ciphers;      use CryptAda.Ciphers.Block_Ciphers;
-with CryptAda.Ciphers.Block_Ciphers.TDEA; use CryptAda.Ciphers.Block_Ciphers.TDEA;
-with CryptAda.Random.Generators;          use CryptAda.Random.Generators;
-with CryptAda.Random.Generators.RSAREF;   use CryptAda.Random.Generators.RSAREF;
+with CryptAda.Pragmatics;                    use CryptAda.Pragmatics;
+with CryptAda.Exceptions;                    use CryptAda.Exceptions;
+with CryptAda.Ciphers;                       use CryptAda.Ciphers;
+with CryptAda.Ciphers.Keys;                  use CryptAda.Ciphers.Keys;
+with CryptAda.Ciphers.Symmetric;             use CryptAda.Ciphers.Symmetric;
+with CryptAda.Ciphers.Symmetric.Block;       use CryptAda.Ciphers.Symmetric.Block;
+with CryptAda.Ciphers.Symmetric.Block.TDEA;  use CryptAda.Ciphers.Symmetric.Block.TDEA;
 
 package body CryptAda.Tests.Unit.TDEA is
 
@@ -53,7 +52,7 @@ package body CryptAda.Tests.Unit.TDEA is
 
    Driver_Name                   : constant String := "CryptAda.Tests.Unit.TDEA";
 
-   Driver_Description            : constant String := "Unit test driver for CryptAda.Ciphers.Block_Ciphers.TDEA functionality.";
+   Driver_Description            : constant String := "Unit test driver for CryptAda.Ciphers.Symmetric.Block.TDEA functionality.";
 
    --[Standard AES test vectors]------------------------------------------------
    -----------------------------------------------------------------------------
@@ -63,42 +62,42 @@ package body CryptAda.Tests.Unit.TDEA is
       (
          (
             The_Key  => new Byte_Array'(Hex_String_2_Bytes("010101010101010101010101010101010101010101010101")),
-            Plain    => new Byte_Array'(Hex_String_2_Bytes("8000000000000000")), 
+            Plain    => new Byte_Array'(Hex_String_2_Bytes("8000000000000000")),
             Crypt    => new Byte_Array'(Hex_String_2_Bytes("95F8A5E5DD31D900"))
          ),
          (
             The_Key  => new Byte_Array'(Hex_String_2_Bytes("010101010101010101010101010101010101010101010101")),
-            Plain    => new Byte_Array'(Hex_String_2_Bytes("4000000000000000")), 
-            Crypt    => new Byte_Array'(Hex_String_2_Bytes("DD7F121CA5015619")) 
+            Plain    => new Byte_Array'(Hex_String_2_Bytes("4000000000000000")),
+            Crypt    => new Byte_Array'(Hex_String_2_Bytes("DD7F121CA5015619"))
          ),
          (
             The_Key  => new Byte_Array'(Hex_String_2_Bytes("010101010101010101010101010101010101010101010101")),
-            Plain    => new Byte_Array'(Hex_String_2_Bytes("2000000000000000")), 
-            Crypt    => new Byte_Array'(Hex_String_2_Bytes("2E8653104F3834EA")) 
+            Plain    => new Byte_Array'(Hex_String_2_Bytes("2000000000000000")),
+            Crypt    => new Byte_Array'(Hex_String_2_Bytes("2E8653104F3834EA"))
          ),
          (
             The_Key  => new Byte_Array'(Hex_String_2_Bytes("010101010101010101010101010101010101010101010101")),
-            Plain    => new Byte_Array'(Hex_String_2_Bytes("1000000000000000")), 
-            Crypt    => new Byte_Array'(Hex_String_2_Bytes("4BD388FF6CD81D4F")) 
+            Plain    => new Byte_Array'(Hex_String_2_Bytes("1000000000000000")),
+            Crypt    => new Byte_Array'(Hex_String_2_Bytes("4BD388FF6CD81D4F"))
          ),
          (
             The_Key  => new Byte_Array'(Hex_String_2_Bytes("010101010101010101010101010101010101010101010101")),
-            Plain    => new Byte_Array'(Hex_String_2_Bytes("0800000000000000")), 
-            Crypt    => new Byte_Array'(Hex_String_2_Bytes("20B9E767B2FB1456")) 
+            Plain    => new Byte_Array'(Hex_String_2_Bytes("0800000000000000")),
+            Crypt    => new Byte_Array'(Hex_String_2_Bytes("20B9E767B2FB1456"))
          ),
          (
             The_Key  => new Byte_Array'(Hex_String_2_Bytes("010101010101010101010101010101010101010101010101")),
-            Plain    => new Byte_Array'(Hex_String_2_Bytes("0400000000000000")), 
-            Crypt    => new Byte_Array'(Hex_String_2_Bytes("55579380D77138EF")) 
+            Plain    => new Byte_Array'(Hex_String_2_Bytes("0400000000000000")),
+            Crypt    => new Byte_Array'(Hex_String_2_Bytes("55579380D77138EF"))
          ),
          (
             The_Key  => new Byte_Array'(Hex_String_2_Bytes("010101010101010101010101010101010101010101010101")),
-            Plain    => new Byte_Array'(Hex_String_2_Bytes("0200000000000000")), 
-            Crypt    => new Byte_Array'(Hex_String_2_Bytes("6CC5DEFAAF04512F")) 
+            Plain    => new Byte_Array'(Hex_String_2_Bytes("0200000000000000")),
+            Crypt    => new Byte_Array'(Hex_String_2_Bytes("6CC5DEFAAF04512F"))
          ),
          (
             The_Key  => new Byte_Array'(Hex_String_2_Bytes("010101010101010101010101010101010101010101010101")),
-            Plain    => new Byte_Array'(Hex_String_2_Bytes("0100000000000000")), 
+            Plain    => new Byte_Array'(Hex_String_2_Bytes("0100000000000000")),
             Crypt    => new Byte_Array'(Hex_String_2_Bytes("0D9F279BA5D87260"))
          )
       );
@@ -131,30 +130,8 @@ package body CryptAda.Tests.Unit.TDEA is
    is
       C                    : TDEA_Cipher;
    begin
-      Begin_Test_Case(1, "Attempting to use a Block_Cipher without starting it");
-      Print_Information_Message("Must raise CryptAda_Uninitialized_Cipher_Error");
-
-      declare
-         PT_B              : constant TDEA_Block := (others => 0);
-         CT_B              : TDEA_Block;
-      begin
-         Print_Information_Message("Cipher information");
-         Print_Block_Cipher_Info(C);
-         Print_Information_Message("Trying to process a block.");
-         Process_Block(C, PT_B, CT_B);
-         Print_Error_Message("No exception was raised.");
-         raise CryptAda_Test_Error;
-      exception
-         when CryptAda_Uninitialized_Cipher_Error =>
-            Print_Information_Message("Raised CryptAda_Uninitialized_Cipher_Error");
-         when CryptAda_Test_Error =>
-            raise;
-         when X: others =>
-            Print_Error_Message("Unexpected exception: """ & Exception_Name(X) & """");
-            Print_Message("Message             : """ & Exception_Message(X) & """");
-            raise CryptAda_Test_Error;
-      end;
-
+      Begin_Test_Case(1, "Running TDEA_Cipher basic tests");
+      Run_Block_Cipher_Basic_Tests(C, "Basic tests for TDEA_Cipher");
       Print_Information_Message("Test case OK");
       End_Test_Case(1, Passed);
    exception
@@ -170,97 +147,74 @@ package body CryptAda.Tests.Unit.TDEA is
          raise CryptAda_Test_Error;
    end Case_1;
 
-  --[Case_2]-------------------------------------------------------------------
+  --[Case_2]--------------------------------------------------------------------
 
    procedure Case_2
    is
-      G                    : RSAREF_Generator;
+      C                    : TDEA_Cipher;
+      K                    : Key;
+      KBs                  : constant array(TDEA_Keying_Option) of Byte_Array(1 .. TDEA_Key_Length) :=
+                              (
+                                 Keying_Option_1   => (1 .. 8 => 16#01#, 9 .. 16 => 16#02#, others => 16#03#),
+                                 Keying_Option_2   => (1 .. 8 => 16#01#, 9 .. 16 => 16#02#, others => 16#01#),
+                                 Keying_Option_3   => (others => 16#01#)
+                              );
    begin
-      Begin_Test_Case(2, "Cipher life-cycle");
-      Print_Information_Message("Checking Cipher object state along its life cycle.");
+      Begin_Test_Case(2, "Testing TDEA_Cipher non dispatching operations");
+      Print_Information_Message("Interfaces to test:");
+      Print_Message("Get_TDEA_Keying_Option");
 
-      Random_Start_And_Seed(G);
-      
+      Print_Information_Message("Iterating over different keying options");
+
       for I in TDEA_Keying_Option'Range loop
-         Print_Information_Message("TDEA Keying option: " & TDEA_Keying_Option'Image(I));
+         Print_Information_Message("TDEA keying option: " & TDEA_Keying_Option'Image(I));
 
          declare
-            C                    : TDEA_Cipher;
-            PT_B                 : constant TDEA_Block := (others => 0);
-            CT_B                 : TDEA_Block;
-            DPT_B                : TDEA_Block;
-            K                    : Key;
+            KO                : TDEA_Keying_Option;
          begin
-            Print_Information_Message("Before Start_Cipher, state is Idle");
-            Print_Block_Cipher_Info(C);
-
-            if Get_Cipher_State(C) /= Idle then
-               Print_Error_Message("Cipher is not in Idle state");
+            Print_Information_Message("Trying to Get_TDEA_Keying_Option on an Idle Cipher will result in an");
+            Print_Message("CryptAda_Uninitialized_Cipher_Error exception.", "    ");
+            KO := Get_TDEA_Keying_Option(C);
+            Print_Error_Message("No exception raised.");
+            raise CryptAda_Test_Error;
+         exception
+            when CryptAda_Uninitialized_Cipher_Error =>
+               Print_Information_Message("Raised CryptAda_Uninitialized_Cipher_Error");
+            when CryptAda_Test_Error =>
+               raise;
+            when X: others =>
+               Print_Error_Message("Unexpected exception: """ & Exception_Name(X) & """");
+               Print_Message("Message             : """ & Exception_Message(X) & """");
                raise CryptAda_Test_Error;
-            end if;
+         end;
 
-            Generate_Key(C, I, G, K);
-            
-            Print_Information_Message("Starting cipher for encryption");
-            Print_Message("State must be: " & Cipher_State'Image(Encrypting));
-            Print_Key(K, "Key used:");
+         declare
+            KO                : TDEA_Keying_Option;
+         begin
+            Print_Information_Message("Now starting the cipher with an apropriate key");
+            Set_Key(K, KBs(I));
+            Print_Key(K, "Key for " & TDEA_Keying_Option'Image(I));
             Start_Cipher(C, Encrypt, K);
-            Print_Block_Cipher_Info(C);
+            Print_Message("Calling GET_TDEA_Keying_Option", "    ");
+            KO := Get_TDEA_Keying_Option(C);
+            Print_Message("Expected keying option: " & TDEA_Keying_Option'Image(I));
+            Print_Message("Obtained keying option: " & TDEA_Keying_Option'Image(KO));
 
-            if Get_Cipher_State(C) /= Encrypting then
-               Print_Error_Message("Cipher is not in Idle state");
-               raise CryptAda_Test_Error;
-            end if;
-
-            Print_Information_Message("Processing a block");
-            Print_Block(PT_B, "Block to encrypt:");
-            Process_Block(C, PT_B, CT_B);
-            Print_Block(CT_B, "Encrypted block:");
-
-            Print_Information_Message("Stopping cipher");
-            Print_Message("State must be: " & Cipher_State'Image(Idle));
-            Stop_Cipher(C);
-            Print_Block_Cipher_Info(C);
-
-            if Get_Cipher_State(C) /= Idle then
-               Print_Error_Message("Cipher is not in Idle state");
-               raise CryptAda_Test_Error;
-            end if;
-
-            Print_Information_Message("Starting cipher for decryption");
-            Print_Message("State must be: " & Cipher_State'Image(Decrypting));
-            Print_Key(K, "Key used:");
-            Start_Cipher(C, Decrypt, K);
-            Print_Block_Cipher_Info(C);
-
-            if Get_Cipher_State(C) /= Decrypting then
-               Print_Error_Message("Cipher is not in Idle state");
-               raise CryptAda_Test_Error;
-            end if;
-
-            Print_Information_Message("Processing the previously encrypted block");
-            Print_Block(CT_B, "Block to decrypt:");
-            Process_Block(C, CT_B, DPT_B);
-            Print_Block(DPT_B, "Decrypted block:");
-
-            Print_Information_Message("Stopping cipher");
-            Print_Message("State must be: " & Cipher_State'Image(Idle));
-            Stop_Cipher(C);
-            Print_Block_Cipher_Info(C);
-
-            if Get_Cipher_State(C) /= Idle then
-               Print_Error_Message("Cipher is not in Idle state");
-               raise CryptAda_Test_Error;
-            end if;
-
-            Print_Information_Message("Decrypted block must be equal to plain text original block");
-
-            if DPT_B = PT_B then
+            if I = KO then
                Print_Information_Message("Results match");
             else
                Print_Error_Message("Results don't match");
                raise CryptAda_Test_Error;
             end if;
+
+            Stop_Cipher(C);
+         exception
+            when CryptAda_Test_Error =>
+               raise;
+            when X: others =>
+               Print_Error_Message("Unexpected exception: """ & Exception_Name(X) & """");
+               Print_Message("Message             : """ & Exception_Message(X) & """");
+               raise CryptAda_Test_Error;
          end;
       end loop;
 
@@ -279,97 +233,139 @@ package body CryptAda.Tests.Unit.TDEA is
          raise CryptAda_Test_Error;
    end Case_2;
 
-  --[Case_3]-------------------------------------------------------------------
+  --[Case_3]--------------------------------------------------------------------
 
    procedure Case_3
    is
-      C                    : TDEA_Cipher;
-      G                    : RSAREF_Generator;
       K                    : Key;
+      KBs                  : constant array(TDEA_Keying_Option) of Byte_Array(1 .. TDEA_Key_Length + 1) :=
+                              (
+                                 Keying_Option_1   => (1 .. 8 => 16#01#, 9 .. 16 => 16#02#, others => 16#03#),
+                                 Keying_Option_2   => (1 .. 8 => 16#01#, 9 .. 16 => 16#02#, others => 16#01#),
+                                 Keying_Option_3   => (others => 16#01#)
+                              );
    begin
-      Begin_Test_Case(3, "Testing random key generation");
-
-      Print_Information_Message("Using an unitialized random generator");
-      Print_Message("Must raise CryptAda_Generator_Not_Started_Error");
-
-      declare
-      begin
-         Generate_Key(C, G, K);
-         Print_Error_Message("No exception was raised.");
-         raise CryptAda_Test_Error;
-      exception
-         when CryptAda_Generator_Not_Started_Error =>
-            Print_Information_Message("Raised CryptAda_Generator_Not_Started_Error");
-         when CryptAda_Test_Error =>
-            raise;
-         when X: others =>
-            Print_Error_Message("Unexpected exception: """ & Exception_Name(X) & """");
-            Print_Message("Message             : """ & Exception_Message(X) & """");
-            raise CryptAda_Test_Error;
-      end;
-
-      Print_Information_Message("Using an un-seeded random generator");
-      Print_Message("Must raise CryptAda_Generator_Need_Seeding_Error");
-      Random_Start(G);
-
-      declare
-      begin
-         Generate_Key(C, G, K);
-         Print_Error_Message("No exception was raised.");
-         raise CryptAda_Test_Error;
-      exception
-         when CryptAda_Generator_Need_Seeding_Error =>
-            Print_Information_Message("Raised CryptAda_Generator_Need_Seeding_Error");
-         when CryptAda_Test_Error =>
-            raise;
-         when X: others =>
-            Print_Error_Message("Unexpected exception: """ & Exception_Name(X) & """");
-            Print_Message("Message             : """ & Exception_Message(X) & """");
-            raise CryptAda_Test_Error;
-      end;
-
-      Print_Information_Message("Using an internal seeded random generator");
-      Random_Start_And_Seed(G);
-      Print_Information_Message("Generating a Key");
-      Generate_Key(C, G, K);
-      Print_Key(K, "Generated key:");
-
-      Print_Information_Message("Key must be valid");
-
-      if Is_Valid_Key(C, K) then
-         Print_Information_Message("Key is valid");
-      else
-         Print_Error_Message("Key is not valid");
-         raise CryptAda_Test_Error;
-      end if;
-
-      Print_Information_Message("Key must be strong");
-
-      if Is_Strong_Key(C, K) then
-         Print_Information_Message("Key is strong");
-      else
-         Print_Error_Message("Key is weak");
-         raise CryptAda_Test_Error;
-      end if;
-
-      Print_Information_Message("Default key length must be 24 bytes.");
-      Print_Message("Key length: " & Integer'Image(Get_Key_Length(K)));
-
-      if Get_Key_Length(K) = TDEA_Key_Size then
-         Print_Information_Message("Key length OK");
-      else
-         Print_Error_Message("Values don't match");
-         raise CryptAda_Test_Error;
-      end if;
-
-      Print_Information_Message("Generating keys for different keying option");
+      Begin_Test_Case(3, "Testing TDEA_Cipher non dispatching operations");
+      Print_Information_Message("Interfaces to test:");
+      Print_Message("Is_Valid_TDEA_Key");
 
       for I in TDEA_Keying_Option'Range loop
-         Print_Information_Message("Keying option: " & TDEA_Keying_Option'Image(I));
-         Generate_Key(C, I, G, K);
-         Print_Key(K, "Generated key:");
-      end loop;
+         Print_Information_Message("TDEA keying option: " & TDEA_Keying_Option'Image(I));
+         Print_Information_Message("Checking validity of null key");
+         Print_Key(K, "Testing null key:");
 
+         if Is_Valid_TDEA_Key(K, I) then
+            Print_Error_Message("Key must not be valid");
+            raise CryptAda_Test_Error;
+         else
+            Print_Message("Key is not valid: OK");
+         end if;
+
+         Print_Information_Message("Checking validity of invalid key lengths");
+         Set_Key(K, KBs(I)(1 .. TDEA_Key_Length - 1));
+         Print_Key(K, "Testing invalid key 1");
+
+         if Is_Valid_TDEA_Key(K, I) then
+            Print_Error_Message("Key must not be valid");
+            raise CryptAda_Test_Error;
+         else
+            Print_Message("Key is not valid: OK");
+         end if;
+
+         Print_Information_Message("Checking validity of invalid key lengths");
+         Set_Key(K, KBs(I)(1 .. TDEA_Key_Length + 1));
+         Print_Key(K, "Testing invalid key 2");
+
+         if Is_Valid_TDEA_Key(K, I) then
+            Print_Error_Message("Key must not be valid");
+            raise CryptAda_Test_Error;
+         else
+            Print_Message("Key is not valid: OK");
+         end if;
+
+         case I is
+            when Keying_Option_1 =>
+               Print_Information_Message("Checking validity of a " & TDEA_Keying_Option'Image(Keying_Option_2) & " key");
+               Set_Key(K, KBs(Keying_Option_2)(1 .. TDEA_Key_Length));
+               Print_Key(K, "Key to test");
+
+               if Is_Valid_TDEA_Key(K, I) then
+                  Print_Error_Message("Key must not be valid");
+                  raise CryptAda_Test_Error;
+               else
+                  Print_Message("Key is not valid: OK");
+               end if;
+
+               Print_Information_Message("Checking validity of a " & TDEA_Keying_Option'Image(Keying_Option_3) & " key");
+               Set_Key(K, KBs(Keying_Option_3)(1 .. TDEA_Key_Length));
+               Print_Key(K, "Key to test");
+
+               if Is_Valid_TDEA_Key(K, I) then
+                  Print_Error_Message("Key must not be valid");
+                  raise CryptAda_Test_Error;
+               else
+                  Print_Message("Key is not valid: OK");
+               end if;
+
+            when Keying_Option_2 =>
+               Print_Information_Message("Checking validity of a " & TDEA_Keying_Option'Image(Keying_Option_1) & " key");
+               Set_Key(K, KBs(Keying_Option_1)(1 .. TDEA_Key_Length));
+               Print_Key(K, "Key to test");
+
+               if Is_Valid_TDEA_Key(K, I) then
+                  Print_Error_Message("Key must not be valid");
+                  raise CryptAda_Test_Error;
+               else
+                  Print_Message("Key is not valid: OK");
+               end if;
+
+               Print_Information_Message("Checking validity of a " & TDEA_Keying_Option'Image(Keying_Option_3) & " key");
+               Set_Key(K, KBs(Keying_Option_3)(1 .. TDEA_Key_Length));
+               Print_Key(K, "Key to test");
+
+               if Is_Valid_TDEA_Key(K, I) then
+                  Print_Error_Message("Key must not be valid");
+                  raise CryptAda_Test_Error;
+               else
+                  Print_Message("Key is not valid: OK");
+               end if;
+
+            when Keying_Option_3 =>
+               Print_Information_Message("Checking validity of a " & TDEA_Keying_Option'Image(Keying_Option_1) & " key");
+               Set_Key(K, KBs(Keying_Option_1)(1 .. TDEA_Key_Length));
+               Print_Key(K, "Key to test");
+
+               if Is_Valid_TDEA_Key(K, I) then
+                  Print_Error_Message("Key must not be valid");
+                  raise CryptAda_Test_Error;
+               else
+                  Print_Message("Key is not valid: OK");
+               end if;
+
+               Print_Information_Message("Checking validity of a " & TDEA_Keying_Option'Image(Keying_Option_2) & " key");
+               Set_Key(K, KBs(Keying_Option_2)(1 .. TDEA_Key_Length));
+               Print_Key(K, "Key to test");
+
+               if Is_Valid_TDEA_Key(K, I) then
+                  Print_Error_Message("Key must not be valid");
+                  raise CryptAda_Test_Error;
+               else
+                  Print_Message("Key is not valid: OK");
+               end if;
+         end case;
+         
+         Print_Information_Message("Checking validity of valid key");
+         Set_Key(K, KBs(I)(1 .. TDEA_Key_Length));
+         Print_Key(K, "Valid key");
+
+         if Is_Valid_TDEA_Key(K, I) then
+            Print_Message("Key is valid: OK");
+         else
+            Print_Error_Message("Key must not be valid");
+            raise CryptAda_Test_Error;
+         end if;
+      end loop;
+      
       Print_Information_Message("Test case OK");
       End_Test_Case(3, Passed);
    exception
@@ -396,7 +392,7 @@ package body CryptAda.Tests.Unit.TDEA is
       Print_Information_Message("Using test vectors obtained from: ""NIST Special Publication 800-20""");
 
       for I in TDEA_TVs'Range loop
-         Run_Cipher_Test_Vector(
+         Run_Block_Cipher_Test_Vector(
             "TDEA Known Answer Tests: " & Integer'Image(I),
             C,
             TDEA_TVs(I),
@@ -407,7 +403,7 @@ package body CryptAda.Tests.Unit.TDEA is
             raise CryptAda_Test_Error;
          end if;
       end loop;
-      
+
       Print_Information_Message("Test case OK");
       End_Test_Case(4, Passed);
    exception
@@ -430,9 +426,9 @@ package body CryptAda.Tests.Unit.TDEA is
       C                    : TDEA_Cipher;
    begin
       Begin_Test_Case(5, "TDEA Bulk test");
-      
-      Run_Cipher_Bulk_Test(C, TDEA_Key_Size);
-      
+
+      Run_Block_Cipher_Bulk_Tests(C, TDEA_Key_Length);
+
       Print_Information_Message("Test case OK");
       End_Test_Case(5, Passed);
    exception
@@ -447,7 +443,7 @@ package body CryptAda.Tests.Unit.TDEA is
          End_Test_Case(5, Failed);
          raise CryptAda_Test_Error;
    end Case_5;
-   
+
    -----------------------------------------------------------------------------
    --[Spec Declared Subprogram Bodies]------------------------------------------
    -----------------------------------------------------------------------------

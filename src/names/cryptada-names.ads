@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 13th, 2017
---    Current version   :  1.0
+--    Current version   :  1.2
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    This package contains type definitions used to identify object and classes
@@ -30,6 +30,10 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170313 ADD   Initial implementation.
+--    1.1   20170329 ADD   Added a Symmetric_Cipher_Id type and made 
+--                         Block_Cipher_Id a subtype of that type.
+--                         Changes the preffix of enumerated values.
+--    1.2   20170403 ADD   Changes in Symmetric cipher hierachy.
 --------------------------------------------------------------------------------
 
 package CryptAda.Names is
@@ -124,22 +128,43 @@ package CryptAda.Names is
          RG_RSAREF               -- RSA Ref RPRNG.
       );
 
-   --[Block_Cipher_Id]----------------------------------------------------------
-   -- Enumerated type identifies the ciphers implemented in CryptAda
+   --[Symmetric_Cipher_Id]------------------------------------------------------
+   -- Enumerated type identifies the symmetric ciphers implemented in CryptAda
    -----------------------------------------------------------------------------
 
-   type Block_Cipher_Id is
+   type Symmetric_Cipher_Id is
       (
-         BC_NONE,                -- No cipher.
-         BC_DES,                 -- DES cipher.
-         BC_TDEA_EDE_1,          -- Triple DES with keying option 3 (K1 = K2 = K3)
-         BC_TDEA_EDE_2,          -- Triple DES with keying option 2 (K1 = K3 /= K2)
-         BC_TDEA_EDE_3,          -- Triple DES with keying option 1 (K1 /= K2 /= K3)
-         BC_AES_128,             -- AES-128
-         BC_AES_192,             -- AES-192
-         BC_AES_256              -- AES-256
+         SC_NONE,                -- No symmetric cipher.
+         SC_DES,                 -- DES cipher.
+         SC_DESX,                -- DES-X cipher (Ron Rivest).
+         SC_DES2X,               -- DES2X cipher.
+         SC_TDEA_EDE_1,          -- Triple DES with keying option 3 (K1 = K2 = K3)
+         SC_TDEA_EDE_2,          -- Triple DES with keying option 2 (K1 = K3 /= K2)
+         SC_TDEA_EDE_3,          -- Triple DES with keying option 1 (K1 /= K2 /= K3)
+         SC_AES_128,             -- AES-128
+         SC_AES_192,             -- AES-192
+         SC_AES_256,             -- AES-256
+         SC_Blowfish,            -- Blowfish
+         SC_RC2,                 -- RC2
+         SC_IDEA,                -- IDEA block cipher
+         SC_CAST_128,            -- CAST-128
+         SC_RC4                  -- RC4 
       );
       
+   --[Block_Cipher_Id]----------------------------------------------------------
+   -- Enumerated type identifies the symmetric block ciphers implemented in 
+   -- CryptAda.
+   -----------------------------------------------------------------------------
+
+   subtype Block_Cipher_Id is Symmetric_Cipher_Id range SC_DES .. SC_CAST_128;
+
+   --[Stream_Cipher_Id]---------------------------------------------------------
+   -- Enumerated type identifies the symmetric stream ciphers implemented in 
+   -- CryptAda.
+   -----------------------------------------------------------------------------
+
+   subtype Stream_Cipher_Id is Symmetric_Cipher_Id range SC_RC4 .. SC_RC4;
+   
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------

@@ -2,7 +2,7 @@
 
 CryptAda contains a pure Ada implementation of some cryptography primitives. It is based on an early development called Ada Cryptographic Framework (ACF). 
 
-At the moment of this writing (March 22nd, 2017) the following is implemented in CryptAda:
+At the moment of this writing (April 3rd, 2017) the following is implemented in CryptAda:
 
 * _Message Digest Algorithms_
   * MD2
@@ -22,7 +22,7 @@ At the moment of this writing (March 22nd, 2017) the following is implemented in
   * Whirlpool
 * _Secure Pseudorandom Byte Generators_
   * An implementation based on RSAREF
-  * An experimental PRNG
+  * An experimental PRNG (CAPRNG)
 * _Text Encoders_
   * Hexadecimal text encoder
   * Base16 text encoder
@@ -30,7 +30,14 @@ At the moment of this writing (March 22nd, 2017) the following is implemented in
   * MIME text encoder
 * _Symmetric Block Ciphers_
   * DES
+  * DESX
+  * DES2X
   * TDEA (Triple DES EDE)
   * AES
+  * Blowfish
+  * RC2
+  * IDEA
   
+... and all the unit tests for these packages.
+
 Hope you enjoy it!

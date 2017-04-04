@@ -95,7 +95,7 @@ package CryptAda.Tests.Utils is
    procedure   Print_Error_Message(
                   Message        : in     String);
 
-   --[Other Utility Functions]--------------------------------------------------
+   --[Converting To/From Byte_Arrays]-------------------------------------------
 
    function    Chars_2_Bytes(
                   The_String     : in     String)
@@ -108,6 +108,15 @@ package CryptAda.Tests.Utils is
    function    Bytes_2_Hex_String(
                   The_Bytes      : in     CryptAda.Pragmatics.Byte_Array)
       return   String;
+
+   --[Printing Byte_Arrays]-----------------------------------------------------
+   
+   procedure   Print_Byte_Array(
+                  Message        : in     String;
+                  The_Array      : in     CryptAda.Pragmatics.Byte_Array;
+                  Indent         : in     String := "");
+         
+   --[Random]-------------------------------------------------------------------
 
    function    Random_Byte
       return   CryptAda.Pragmatics.Byte;
@@ -126,6 +135,6 @@ package CryptAda.Tests.Utils is
       return   CryptAda.Pragmatics.Byte_Array;
 
    procedure   Random_Byte_Array(
-                  The_Array      :    out CryptAda.Pragmatics.Byte_Array);
+                  The_Array      :    out CryptAda.Pragmatics.Byte_Array);                  
 
 end CryptAda.Tests.Utils;

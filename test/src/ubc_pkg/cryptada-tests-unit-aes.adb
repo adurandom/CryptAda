@@ -31,19 +31,18 @@
 --    1.0   20170327 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with Ada.Exceptions;                      use Ada.Exceptions;
+with Ada.Exceptions;                         use Ada.Exceptions;
 
-with CryptAda.Tests.Utils;                use CryptAda.Tests.Utils;
-with CryptAda.Tests.Utils.Ciphers;        use CryptAda.Tests.Utils.Ciphers;
+with CryptAda.Tests.Utils;                   use CryptAda.Tests.Utils;
+with CryptAda.Tests.Utils.Ciphers;           use CryptAda.Tests.Utils.Ciphers;
 
-with CryptAda.Exceptions;                 use CryptAda.Exceptions;
-with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
-with CryptAda.Ciphers;                    use CryptAda.Ciphers;
-with CryptAda.Ciphers.Keys;               use CryptAda.Ciphers.Keys;
-with CryptAda.Ciphers.Block_Ciphers;      use CryptAda.Ciphers.Block_Ciphers;
-with CryptAda.Ciphers.Block_Ciphers.AES;  use CryptAda.Ciphers.Block_Ciphers.AES;
-with CryptAda.Random.Generators;          use CryptAda.Random.Generators;
-with CryptAda.Random.Generators.RSAREF;   use CryptAda.Random.Generators.RSAREF;
+with CryptAda.Pragmatics;                    use CryptAda.Pragmatics;
+with CryptAda.Exceptions;                    use CryptAda.Exceptions;
+with CryptAda.Ciphers;                       use CryptAda.Ciphers;
+with CryptAda.Ciphers.Keys;                  use CryptAda.Ciphers.Keys;
+with CryptAda.Ciphers.Symmetric;             use CryptAda.Ciphers.Symmetric;
+with CryptAda.Ciphers.Symmetric.Block;       use CryptAda.Ciphers.Symmetric.Block;
+with CryptAda.Ciphers.Symmetric.Block.AES;   use CryptAda.Ciphers.Symmetric.Block.AES;
 
 package body CryptAda.Tests.Unit.AES is
 
@@ -53,7 +52,7 @@ package body CryptAda.Tests.Unit.AES is
 
    Driver_Name                   : constant String := "CryptAda.Tests.Unit.AES";
 
-   Driver_Description            : constant String := "Unit test driver for CryptAda.Ciphers.Block_Ciphers.AES functionality.";
+   Driver_Description            : constant String := "Unit test driver for CryptAda.Ciphers.Symmetric.Block.AES functionality.";
 
    --[Standard AES test vectors]------------------------------------------------
    -----------------------------------------------------------------------------
@@ -175,7 +174,6 @@ package body CryptAda.Tests.Unit.AES is
    procedure   Case_2;
    procedure   Case_3;
    procedure   Case_4;
-   procedure   Case_5;
 
    -----------------------------------------------------------------------------
    --[Internal procedure bodies]------------------------------------------------
@@ -191,30 +189,8 @@ package body CryptAda.Tests.Unit.AES is
    is
       C                    : AES_Cipher;
    begin
-      Begin_Test_Case(1, "Attempting to use a Block_Cipher without starting it");
-      Print_Information_Message("Must raise CryptAda_Uninitialized_Cipher_Error");
-
-      declare
-         PT_B              : constant AES_Block := (others => 0);
-         CT_B              : AES_Block;
-      begin
-         Print_Information_Message("Cipher information");
-         Print_Block_Cipher_Info(C);
-         Print_Information_Message("Trying to process a block.");
-         Process_Block(C, PT_B, CT_B);
-         Print_Error_Message("No exception was raised.");
-         raise CryptAda_Test_Error;
-      exception
-         when CryptAda_Uninitialized_Cipher_Error =>
-            Print_Information_Message("Raised CryptAda_Uninitialized_Cipher_Error");
-         when CryptAda_Test_Error =>
-            raise;
-         when X: others =>
-            Print_Error_Message("Unexpected exception: """ & Exception_Name(X) & """");
-            Print_Message("Message             : """ & Exception_Message(X) & """");
-            raise CryptAda_Test_Error;
-      end;
-
+      Begin_Test_Case(1, "Running AES_Cipher basic tests");
+      Run_Block_Cipher_Basic_Tests(C, "Basic tests for AES_Cipher");
       Print_Information_Message("Test case OK");
       End_Test_Case(1, Passed);
    exception
@@ -230,95 +206,74 @@ package body CryptAda.Tests.Unit.AES is
          raise CryptAda_Test_Error;
    end Case_1;
 
-  --[Case_2]-------------------------------------------------------------------
+  --[Case_2]--------------------------------------------------------------------
 
    procedure Case_2
    is
+      C                    : AES_Cipher;
+      K                    : Key;
+      KBs                  : constant array(AES_Key_Id) of Byte_Array_Ptr :=
+                              (
+                                 AES_128 => new Byte_Array'(Hex_String_2_Bytes("11111111111111111111111111111111")),
+                                 AES_192 => new Byte_Array'(Hex_String_2_Bytes("222222222222222222222222222222222222222222222222")),
+                                 AES_256 => new Byte_Array'(Hex_String_2_Bytes("3333333333333333333333333333333333333333333333333333333333333333"))
+                              );
    begin
-      Begin_Test_Case(2, "Cipher life-cycle");
-      Print_Information_Message("Checking Cipher object state along its life cycle.");
+      Begin_Test_Case(2, "Testing AES_Cipher non dispatching operations");
+      Print_Information_Message("Interfaces to test:");
+      Print_Message("Get_AES_Key_Id");
+
+      Print_Information_Message("Iterating over different key ids");
 
       for I in AES_Key_Id'Range loop
-         Print_Information_Message("Key Id: " & AES_Key_Id'Image(I));
+         Print_Information_Message("AES key id: " & AES_Key_Id'Image(I));
 
          declare
-            C                    : AES_Cipher;
-            KB                   : constant Byte_Array(1 .. AES_Key_Sizes(I)) := (others => 0);
-            PT_B                 : constant AES_Block := (16#F3#, 16#44#, 16#81#, 16#EC#, 16#3C#, 16#C6#, 16#27#, 16#BA#, 16#CD#, 16#5D#, 16#C3#, 16#FB#, 16#08#, 16#F2#, 16#73#, 16#E6#);
-            CT_B                 : AES_Block;
-            DPT_B                : AES_Block;
-            K                    : Key;
+            KID               : AES_Key_Id;
          begin
-            Print_Information_Message("Before Start_Cipher, state is Idle");
-            Print_Block_Cipher_Info(C);
-
-            if Get_Cipher_State(C) /= Idle then
-               Print_Error_Message("Cipher is not in Idle state");
+            Print_Information_Message("Trying to Get_AES_Key_Id on an Idle Cipher will result in an");
+            Print_Message("CryptAda_Uninitialized_Cipher_Error exception.", "    ");
+            KID := Get_AES_Key_Id(C);
+            Print_Error_Message("No exception raised.");
+            raise CryptAda_Test_Error;
+         exception
+            when CryptAda_Uninitialized_Cipher_Error =>
+               Print_Information_Message("Raised CryptAda_Uninitialized_Cipher_Error");
+            when CryptAda_Test_Error =>
+               raise;
+            when X: others =>
+               Print_Error_Message("Unexpected exception: """ & Exception_Name(X) & """");
+               Print_Message("Message             : """ & Exception_Message(X) & """");
                raise CryptAda_Test_Error;
-            end if;
+         end;
 
-            Print_Information_Message("Starting cipher for encryption");
-            Print_Message("State must be: " & Cipher_State'Image(Encrypting));
-            Set_Key(K, KB);
-            Print_Key(K, "Key used:");
+         declare
+            KID               : AES_Key_Id;
+         begin
+            Print_Information_Message("Now starting the cipher with an apropriate key");
+            Set_Key(K, KBs(I).all);
+            Print_Key(K, "Key for " & AES_Key_Id'Image(I));
             Start_Cipher(C, Encrypt, K);
-            Print_Block_Cipher_Info(C);
+            Print_Message("Calling GET_AES_Key_Id", "    ");
+            KID := Get_AES_Key_Id(C);
+            Print_Message("Expected key id: " & AES_Key_Id'Image(I));
+            Print_Message("Obtained key id: " & AES_Key_Id'Image(KID));
 
-            if Get_Cipher_State(C) /= Encrypting then
-               Print_Error_Message("Cipher is not in Idle state");
-               raise CryptAda_Test_Error;
-            end if;
-
-            Print_Information_Message("Processing a block");
-            Print_Block(PT_B, "Block to encrypt:");
-            Process_Block(C, PT_B, CT_B);
-            Print_Block(CT_B, "Encrypted block:");
-
-            Print_Information_Message("Stopping cipher");
-            Print_Message("State must be: " & Cipher_State'Image(Idle));
-            Stop_Cipher(C);
-            Print_Block_Cipher_Info(C);
-
-            if Get_Cipher_State(C) /= Idle then
-               Print_Error_Message("Cipher is not in Idle state");
-               raise CryptAda_Test_Error;
-            end if;
-
-            Print_Information_Message("Starting cipher for decryption");
-            Print_Message("State must be: " & Cipher_State'Image(Decrypting));
-            Set_Key(K, KB);
-            Print_Key(K, "Key used:");
-            Start_Cipher(C, Decrypt, K);
-            Print_Block_Cipher_Info(C);
-
-            if Get_Cipher_State(C) /= Decrypting then
-               Print_Error_Message("Cipher is not in Idle state");
-               raise CryptAda_Test_Error;
-            end if;
-
-            Print_Information_Message("Processing the previously encrypted block");
-            Print_Block(CT_B, "Block to decrypt:");
-            Process_Block(C, CT_B, DPT_B);
-            Print_Block(DPT_B, "Decrypted block:");
-
-            Print_Information_Message("Stopping cipher");
-            Print_Message("State must be: " & Cipher_State'Image(Idle));
-            Stop_Cipher(C);
-            Print_Block_Cipher_Info(C);
-
-            if Get_Cipher_State(C) /= Idle then
-               Print_Error_Message("Cipher is not in Idle state");
-               raise CryptAda_Test_Error;
-            end if;
-
-            Print_Information_Message("Decrypted block must be equal to plain text original block");
-
-            if DPT_B = PT_B then
+            if I = KID then
                Print_Information_Message("Results match");
             else
                Print_Error_Message("Results don't match");
                raise CryptAda_Test_Error;
             end if;
+
+            Stop_Cipher(C);
+         exception
+            when CryptAda_Test_Error =>
+               raise;
+            when X: others =>
+               Print_Error_Message("Unexpected exception: """ & Exception_Name(X) & """");
+               Print_Message("Message             : """ & Exception_Message(X) & """");
+               raise CryptAda_Test_Error;
          end;
       end loop;
 
@@ -342,127 +297,9 @@ package body CryptAda.Tests.Unit.AES is
    procedure Case_3
    is
       C                    : AES_Cipher;
-      G                    : RSAREF_Generator;
-      K                    : Key;
-      EKL                  : Natural;
-      OKL                  : Natural;
-   begin
-      Begin_Test_Case(3, "Testing random key generation");
-
-      Print_Information_Message("Using an unitialized random generator");
-      Print_Message("Must raise CryptAda_Generator_Not_Started_Error");
-
-      declare
-      begin
-         Generate_Key(C, G, K);
-         Print_Error_Message("No exception was raised.");
-         raise CryptAda_Test_Error;
-      exception
-         when CryptAda_Generator_Not_Started_Error =>
-            Print_Information_Message("Raised CryptAda_Generator_Not_Started_Error");
-         when CryptAda_Test_Error =>
-            raise;
-         when X: others =>
-            Print_Error_Message("Unexpected exception: """ & Exception_Name(X) & """");
-            Print_Message("Message             : """ & Exception_Message(X) & """");
-            raise CryptAda_Test_Error;
-      end;
-
-      Print_Information_Message("Using an un-seeded random generator");
-      Print_Message("Must raise CryptAda_Generator_Need_Seeding_Error");
-      Random_Start(G);
-
-      declare
-      begin
-         Generate_Key(C, G, K);
-         Print_Error_Message("No exception was raised.");
-         raise CryptAda_Test_Error;
-      exception
-         when CryptAda_Generator_Need_Seeding_Error =>
-            Print_Information_Message("Raised CryptAda_Generator_Need_Seeding_Error");
-         when CryptAda_Test_Error =>
-            raise;
-         when X: others =>
-            Print_Error_Message("Unexpected exception: """ & Exception_Name(X) & """");
-            Print_Message("Message             : """ & Exception_Message(X) & """");
-            raise CryptAda_Test_Error;
-      end;
-
-      Print_Information_Message("Using an internal seeded random generator");
-      Random_Start_And_Seed(G);
-      Print_Information_Message("Generating a Key");
-      Generate_Key(C, G, K);
-      Print_Key(K, "Generated key:");
-
-      Print_Information_Message("Key must be valid");
-
-      if Is_Valid_Key(C, K) then
-         Print_Information_Message("Key is valid");
-      else
-         Print_Error_Message("Key is not valid");
-         raise CryptAda_Test_Error;
-      end if;
-
-      Print_Information_Message("Key must be strong");
-
-      if Is_Strong_Key(C, K) then
-         Print_Information_Message("Key is strong");
-      else
-         Print_Error_Message("Key is weak");
-         raise CryptAda_Test_Error;
-      end if;
-
-      Print_Information_Message("Default key length must be 32 byte.");
-      Print_Message("Key length: " & Integer'Image(Get_Key_Length(K)));
-
-      if Get_Key_Length(K) = 32 then
-         Print_Information_Message("Key length OK");
-      else
-         Print_Error_Message("Values don't match");
-         raise CryptAda_Test_Error;
-      end if;
-
-      Print_Information_Message("Generating keys of different lengths");
-
-      for I in AES_Key_Id'Range loop
-         Print_Information_Message("Key Id: " & AES_Key_Id'Image(I));
-         Generate_Key(C, I, G, K);
-         EKL := AES_Key_Sizes(I);
-         OKL := Get_Key_Length(K);
-         Print_Message("Expected key length: " & Integer'Image(EKL));
-         Print_Message("Obtained key length: " & Integer'Image(OKL));
-
-         if EKL = OKL then
-            Print_Information_Message("Results match");
-         else
-            Print_Error_Message("Resuts don't match");
-            raise CryptAda_Test_Error;
-         end if;
-      end loop;
-
-      Print_Information_Message("Test case OK");
-      End_Test_Case(3, Passed);
-   exception
-      when CryptAda_Test_Error =>
-         End_Test_Case(3, Failed);
-         raise;
-      when X: others =>
-         Print_Error_Message(
-            "Exception: """ & Exception_Name(X) & """");
-         Print_Message(
-            "Message  : """ & Exception_Message(X) & """");
-         End_Test_Case(3, Failed);
-         raise CryptAda_Test_Error;
-   end Case_3;
-
-  --[Case_4]-------------------------------------------------------------------
-
-   procedure Case_4
-   is
-      C                    : AES_Cipher;
       R                    : Boolean;
    begin
-      Begin_Test_Case(4, "AES standard test vectors 1");
+      Begin_Test_Case(3, "AES standard test vectors 1");
       Print_Information_Message("Using test vectors obtained from: ""The Advanced Encryption Standard");
       Print_Message("Algorithm Validation Suite (AESAVS)""", "    ");
 
@@ -470,7 +307,7 @@ package body CryptAda.Tests.Unit.AES is
       Print_Message("Appendix B.1. Keysize = 128", "    ");
 
       for I in AES_GFSbox_128_TVs'Range loop
-         Run_Cipher_Test_Vector(
+         Run_Block_Cipher_Test_Vector(
             "AES GSFbox 128 Test Vector: " & Integer'Image(I),
             C,
             AES_GFSbox_128_TVs(I),
@@ -486,7 +323,7 @@ package body CryptAda.Tests.Unit.AES is
       Print_Message("Appendix B.2. Keysize = 192", "    ");
 
       for I in AES_GFSbox_192_TVs'Range loop
-         Run_Cipher_Test_Vector(
+         Run_Block_Cipher_Test_Vector(
             "AES GSFbox 192 Test Vector: " & Integer'Image(I),
             C,
             AES_GFSbox_192_TVs(I),
@@ -502,7 +339,7 @@ package body CryptAda.Tests.Unit.AES is
       Print_Message("Appendix B.3. Keysize = 256", "    ");
 
       for I in AES_GFSbox_256_TVs'Range loop
-         Run_Cipher_Test_Vector(
+         Run_Block_Cipher_Test_Vector(
             "AES GSFbox 256 Test Vector: " & Integer'Image(I),
             C,
             AES_GFSbox_256_TVs(I),
@@ -512,6 +349,34 @@ package body CryptAda.Tests.Unit.AES is
             Print_Error_Message("Test failed");
             raise CryptAda_Test_Error;
          end if;
+      end loop;
+      
+      Print_Information_Message("Test case OK");
+      End_Test_Case(3, Passed);
+   exception
+      when CryptAda_Test_Error =>
+         End_Test_Case(3, Failed);
+         raise;
+      when X: others =>
+         Print_Error_Message(
+            "Exception: """ & Exception_Name(X) & """");
+         Print_Message(
+            "Message  : """ & Exception_Message(X) & """");
+         End_Test_Case(3, Failed);
+         raise CryptAda_Test_Error;
+   end Case_3;
+
+  --[Case_4]--------------------------------------------------------------------
+
+   procedure Case_4
+   is
+      C                    : AES_Cipher;
+   begin
+      Begin_Test_Case(4, "AES Bulk test");
+      
+      for I in AES_Key_Id'Range loop
+         Print_Information_Message("Using key size: " & Integer'Image(AES_Key_Lengths(I)));
+         Run_Block_Cipher_Bulk_Tests(C, AES_Key_Lengths(I));
       end loop;
       
       Print_Information_Message("Test case OK");
@@ -528,34 +393,6 @@ package body CryptAda.Tests.Unit.AES is
          End_Test_Case(4, Failed);
          raise CryptAda_Test_Error;
    end Case_4;
-
-  --[Case_5]-------------------------------------------------------------------
-
-   procedure Case_5
-   is
-      C                    : AES_Cipher;
-   begin
-      Begin_Test_Case(5, "AES Bulk test");
-      
-      for I in AES_Key_Id'Range loop
-         Print_Information_Message("Using key size: " & Integer'Image(AES_Key_Sizes(I)));
-         Run_Cipher_Bulk_Test(C, AES_Key_Sizes(I));
-      end loop;
-      
-      Print_Information_Message("Test case OK");
-      End_Test_Case(5, Passed);
-   exception
-      when CryptAda_Test_Error =>
-         End_Test_Case(5, Failed);
-         raise;
-      when X: others =>
-         Print_Error_Message(
-            "Exception: """ & Exception_Name(X) & """");
-         Print_Message(
-            "Message  : """ & Exception_Message(X) & """");
-         End_Test_Case(5, Failed);
-         raise CryptAda_Test_Error;
-   end Case_5;
    
    -----------------------------------------------------------------------------
    --[Spec Declared Subprogram Bodies]------------------------------------------
@@ -572,8 +409,7 @@ package body CryptAda.Tests.Unit.AES is
       Case_2;
       Case_3;
       Case_4;
-      Case_5;
-
+      
       End_Test_Driver(Driver_Name);
    exception
       when others =>

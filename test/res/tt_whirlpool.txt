@@ -1,18 +1,18 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.a (2017/03/31)
+Version: 0.1.b (2017/03/31)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Time.Whirlpool
 Description              : Time trial for CryptAda.Digests.Algorithms.Whirlpool functionality.
-Started                  : 2017/03/28 - 13:22:10
+Started                  : 2017/04/03 - 20:44:58
 ================================================================================
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 1
 Description      : Whirlpool hashing
-Started          : 2017/03/28 - 13:22:10
+Started          : 2017/04/03 - 20:44:58
 --------------------------------------------------------------------------------
 [I] Hashing 1MB
 [I] Starting time trial for digest algorithm.
@@ -30,18 +30,18 @@ Started          : 2017/03/28 - 13:22:10
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.017139564 secs.
+    Elapsed time       :           0.036761736 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "16194d243b0a29f20f6f8ce3d181125e12ff186b5afbc0d384c9a7ad8cc9254b5ab6a70765a92d2e832e529088706404ec733c29c868ef07dbf012bd43702983"
+    Obtained hash      : "B926C4E9DD801D985B2F97EBD84A542864F93C9E3FD453A0360035E75C0A061AD516F0EF45B80B33D2F2C0BA42AD2D1575E910663B4AB22296B075B5500AFFB0"
 --------------------------------------------------------------------------------
 Time Trial Number: 1
-Finished         : 2017/03/28 - 13:22:10
+Finished         : 2017/04/03 - 20:44:58
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 2
 Description      : Whirlpool hashing
-Started          : 2017/03/28 - 13:22:10
+Started          : 2017/04/03 - 20:44:58
 --------------------------------------------------------------------------------
 [I] Hashing 10MB
 [I] Starting time trial for digest algorithm.
@@ -59,16 +59,16 @@ Started          : 2017/03/28 - 13:22:10
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.170834069 secs.
+    Elapsed time       :           0.369109147 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "26d6129f5d3b3d4b32395f09937d678a426d5e78c8c2f022ce0802a117c036ab84808829f60da29e008470fabf9bdd2fe635b8d5255544d3dd9fed537bd7a25e"
+    Obtained hash      : "333EF34C7F1C6BA430086D83A2A425FBB7738C67826906EFA486DD7D35DFF66C5245C95944C926B44823E6F1102CDF5B8683AECC0B856A6FE3553641CC303F41"
 --------------------------------------------------------------------------------
 Time Trial Number: 2
-Finished         : 2017/03/28 - 13:22:10
+Finished         : 2017/04/03 - 20:44:58
 --[End Time Trial]--------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Time.Whirlpool
-Finished                 : 2017/03/28 - 13:22:10
+Finished                 : 2017/04/03 - 20:44:58
 ================================================================================

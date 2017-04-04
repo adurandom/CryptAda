@@ -1,0 +1,789 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.1.b (2017/03/31)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Blowfish
+Description              : Unit test driver for CryptAda.Ciphers.Symmetric.Block.Blowfish functionality.
+Started                  : 2017/04/03 - 20:44:32
+================================================================================
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Running Blowfish_Cipher basic tests
+Started         : 2017/04/03 - 20:44:32
+--------------------------------------------------------------------------------
+[I] Basic tests for Blowfish_Cipher
+    This test case is a 10 step test that will exercise Block_Cipher dispatching operations
+[I] Cipher information:
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_BLOWFISH
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "Blowfish"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.4"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  4
+    Maximum key length            :  56
+    Default key length            :  16
+    Key length increment step     :  1
+    Block size                    :  8
+[I] Basic Test 1
+    Trying to process a block with a cipher in Idle state.
+    Must raise CryptAda_Uninitialized_Cipher_Error exception.
+[I] Block to process:
+Block length:  8
+Block data  :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+[I] Raised CryptAda_Uninitialized_Cipher_Error
+[I] Basic Test 2
+    Trying Start_Cipher with an invalid key
+    Must raise CryptAda_Invalid_Key_Error exception.
+[I] Using a null key
+[I] The key
+Null key
+[I] Calling to Start_Cipher
+[I] Raised CryptAda_Invalid_Key_Error
+[I] Using key with excessive length
+[I] Maximum key length is:  56
+[I] The key
+    Key length:  57
+    Key bytes :
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+[I] Calling to Start_Cipher
+[I] Raised CryptAda_Invalid_Key_Error
+[I] Basic Test 3
+    Checking state after successful Start_Cipher for encryption
+[I] Key set to
+    Key length:  16
+    Key bytes :
+16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#
+[I] Cipher now must be in Encrypting state
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_BLOWFISH
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "Blowfish"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.4"
+    Cipher state                  : ENCRYPTING
+    Started                       : TRUE
+    Minimum key length            :  4
+    Maximum key length            :  56
+    Default key length            :  16
+    Key length increment step     :  1
+    Block size                    :  8
+[I] Basic Test 4
+    Trying to encrypt blocks of invalid length
+    Must raise CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid input block information: 
+Block length:  7
+Block data  :
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid input block information: 
+Block length:  9
+Block data  :
+16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid output block information: 
+Block length:  7
+Block data  :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid output block information: 
+Block length:  9
+Block data  :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Basic Test 5
+    Encrypting a valid block
+[I] Block to encrypt
+Block length:  8
+Block data  :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+[I] Encrypted block
+Block length:  8
+Block data  :
+16#C5#, 16#FD#, 16#FE#, 16#0F#, 16#19#, 16#01#, 16#F3#, 16#E7#
+[I] Basic Test 6
+    Stopping the cipher and check state
+[I] Cipher now must be in Idle state
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_BLOWFISH
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "Blowfish"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.4"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  4
+    Maximum key length            :  56
+    Default key length            :  16
+    Key length increment step     :  1
+    Block size                    :  8
+[I] Basic Test 7
+    Checking cipher state after successful Start_Cipher for decryption
+[I] Cipher now must be in Decrypting state
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_BLOWFISH
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "Blowfish"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.4"
+    Cipher state                  : DECRYPTING
+    Started                       : TRUE
+    Minimum key length            :  4
+    Maximum key length            :  56
+    Default key length            :  16
+    Key length increment step     :  1
+    Block size                    :  8
+[I] Basic Test 8
+    Trying to decryt blocks of invalid length
+    Must raise CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid input block information: 
+Block length:  7
+Block data  :
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid input block information: 
+Block length:  9
+Block data  :
+16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid output block information: 
+Block length:  7
+Block data  :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  8 bytes
+[I] Invalid output block information: 
+Block length:  9
+Block data  :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Basic Test 9
+    Decrypting the block encrypted on basic test 5. Must be equal to original
+    plaintext block
+[I] Block to decrypt
+Block length:  8
+Block data  :
+16#C5#, 16#FD#, 16#FE#, 16#0F#, 16#19#, 16#01#, 16#F3#, 16#E7#
+[I] Decrypted block
+Block length:  8
+Block data  :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+[I] Results match
+[I] Basic Test 10
+    Final Stop_Cipher
+[I] Cipher now must be in Idle state
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_BLOWFISH
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "Blowfish"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.4"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  4
+    Maximum key length            :  56
+    Default key length            :  16
+    Key length increment step     :  1
+    Block size                    :  8
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/04/03 - 20:44:32
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Testing Blowfish_Cipher non dispatching operations
+Started         : 2017/04/03 - 20:44:32
+--------------------------------------------------------------------------------
+[I] Interfaces to test:
+    Is_Valid_Blowfish_Key
+[I] Null Key must not be valid
+[I] Null key
+Null key
+[I] A key of  3 bytes must not be valid
+[I] Invalid key
+    Key length:  3
+    Key bytes :
+16#33#, 16#33#, 16#33#
+[I] Keys from  4 bytes to  56 bytes must be valid
+Key length  4 is valid
+Key length  5 is valid
+Key length  6 is valid
+Key length  7 is valid
+Key length  8 is valid
+Key length  9 is valid
+Key length  10 is valid
+Key length  11 is valid
+Key length  12 is valid
+Key length  13 is valid
+Key length  14 is valid
+Key length  15 is valid
+Key length  16 is valid
+Key length  17 is valid
+Key length  18 is valid
+Key length  19 is valid
+Key length  20 is valid
+Key length  21 is valid
+Key length  22 is valid
+Key length  23 is valid
+Key length  24 is valid
+Key length  25 is valid
+Key length  26 is valid
+Key length  27 is valid
+Key length  28 is valid
+Key length  29 is valid
+Key length  30 is valid
+Key length  31 is valid
+Key length  32 is valid
+Key length  33 is valid
+Key length  34 is valid
+Key length  35 is valid
+Key length  36 is valid
+Key length  37 is valid
+Key length  38 is valid
+Key length  39 is valid
+Key length  40 is valid
+Key length  41 is valid
+Key length  42 is valid
+Key length  43 is valid
+Key length  44 is valid
+Key length  45 is valid
+Key length  46 is valid
+Key length  47 is valid
+Key length  48 is valid
+Key length  49 is valid
+Key length  50 is valid
+Key length  51 is valid
+Key length  52 is valid
+Key length  53 is valid
+Key length  54 is valid
+Key length  55 is valid
+Key length  56 is valid
+[I] A key of  57 bytes must not be valid
+[I] Invalid key
+    Key length:  57
+    Key bytes :
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/04/03 - 20:44:32
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Blowfish standard test vectors
+Started         : 2017/04/03 - 20:44:32
+--------------------------------------------------------------------------------
+[I] Using test vectors obtained from: https://www.schneier.com/code/vectors.txt
+[I] Blowfish Schneier Test Vector:  1
+    Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+    Plain text block        : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+    Expected encrypted block: 16#4E#, 16#F9#, 16#97#, 16#45#, 16#61#, 16#98#, 16#DD#, 16#78#
+    Encrypting ...
+    Obtained encrypted block: 16#4E#, 16#F9#, 16#97#, 16#45#, 16#61#, 16#98#, 16#DD#, 16#78#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  2
+    Key                     : 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+    Plain text block        : 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+    Expected encrypted block: 16#51#, 16#86#, 16#6F#, 16#D5#, 16#B8#, 16#5E#, 16#CB#, 16#8A#
+    Encrypting ...
+    Obtained encrypted block: 16#51#, 16#86#, 16#6F#, 16#D5#, 16#B8#, 16#5E#, 16#CB#, 16#8A#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  3
+    Key                     : 16#30#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+    Plain text block        : 16#10#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#01#
+    Expected encrypted block: 16#7D#, 16#85#, 16#6F#, 16#9A#, 16#61#, 16#30#, 16#63#, 16#F2#
+    Encrypting ...
+    Obtained encrypted block: 16#7D#, 16#85#, 16#6F#, 16#9A#, 16#61#, 16#30#, 16#63#, 16#F2#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#10#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#01#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  4
+    Key                     : 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+    Plain text block        : 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+    Expected encrypted block: 16#24#, 16#66#, 16#DD#, 16#87#, 16#8B#, 16#96#, 16#3C#, 16#9D#
+    Encrypting ...
+    Obtained encrypted block: 16#24#, 16#66#, 16#DD#, 16#87#, 16#8B#, 16#96#, 16#3C#, 16#9D#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  5
+    Key                     : 16#01#, 16#23#, 16#45#, 16#67#, 16#89#, 16#AB#, 16#CD#, 16#EF#
+    Plain text block        : 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+    Expected encrypted block: 16#61#, 16#F9#, 16#C3#, 16#80#, 16#22#, 16#81#, 16#B0#, 16#96#
+    Encrypting ...
+    Obtained encrypted block: 16#61#, 16#F9#, 16#C3#, 16#80#, 16#22#, 16#81#, 16#B0#, 16#96#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  6
+    Key                     : 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+    Plain text block        : 16#01#, 16#23#, 16#45#, 16#67#, 16#89#, 16#AB#, 16#CD#, 16#EF#
+    Expected encrypted block: 16#7D#, 16#0C#, 16#C6#, 16#30#, 16#AF#, 16#DA#, 16#1E#, 16#C7#
+    Encrypting ...
+    Obtained encrypted block: 16#7D#, 16#0C#, 16#C6#, 16#30#, 16#AF#, 16#DA#, 16#1E#, 16#C7#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#01#, 16#23#, 16#45#, 16#67#, 16#89#, 16#AB#, 16#CD#, 16#EF#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  7
+    Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+    Plain text block        : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+    Expected encrypted block: 16#4E#, 16#F9#, 16#97#, 16#45#, 16#61#, 16#98#, 16#DD#, 16#78#
+    Encrypting ...
+    Obtained encrypted block: 16#4E#, 16#F9#, 16#97#, 16#45#, 16#61#, 16#98#, 16#DD#, 16#78#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  8
+    Key                     : 16#FE#, 16#DC#, 16#BA#, 16#98#, 16#76#, 16#54#, 16#32#, 16#10#
+    Plain text block        : 16#01#, 16#23#, 16#45#, 16#67#, 16#89#, 16#AB#, 16#CD#, 16#EF#
+    Expected encrypted block: 16#0A#, 16#CE#, 16#AB#, 16#0F#, 16#C6#, 16#A0#, 16#A2#, 16#8D#
+    Encrypting ...
+    Obtained encrypted block: 16#0A#, 16#CE#, 16#AB#, 16#0F#, 16#C6#, 16#A0#, 16#A2#, 16#8D#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#01#, 16#23#, 16#45#, 16#67#, 16#89#, 16#AB#, 16#CD#, 16#EF#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  9
+    Key                     : 16#7C#, 16#A1#, 16#10#, 16#45#, 16#4A#, 16#1A#, 16#6E#, 16#57#
+    Plain text block        : 16#01#, 16#A1#, 16#D6#, 16#D0#, 16#39#, 16#77#, 16#67#, 16#42#
+    Expected encrypted block: 16#59#, 16#C6#, 16#82#, 16#45#, 16#EB#, 16#05#, 16#28#, 16#2B#
+    Encrypting ...
+    Obtained encrypted block: 16#59#, 16#C6#, 16#82#, 16#45#, 16#EB#, 16#05#, 16#28#, 16#2B#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#01#, 16#A1#, 16#D6#, 16#D0#, 16#39#, 16#77#, 16#67#, 16#42#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  10
+    Key                     : 16#01#, 16#31#, 16#D9#, 16#61#, 16#9D#, 16#C1#, 16#37#, 16#6E#
+    Plain text block        : 16#5C#, 16#D5#, 16#4C#, 16#A8#, 16#3D#, 16#EF#, 16#57#, 16#DA#
+    Expected encrypted block: 16#B1#, 16#B8#, 16#CC#, 16#0B#, 16#25#, 16#0F#, 16#09#, 16#A0#
+    Encrypting ...
+    Obtained encrypted block: 16#B1#, 16#B8#, 16#CC#, 16#0B#, 16#25#, 16#0F#, 16#09#, 16#A0#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#5C#, 16#D5#, 16#4C#, 16#A8#, 16#3D#, 16#EF#, 16#57#, 16#DA#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  11
+    Key                     : 16#07#, 16#A1#, 16#13#, 16#3E#, 16#4A#, 16#0B#, 16#26#, 16#86#
+    Plain text block        : 16#02#, 16#48#, 16#D4#, 16#38#, 16#06#, 16#F6#, 16#71#, 16#72#
+    Expected encrypted block: 16#17#, 16#30#, 16#E5#, 16#77#, 16#8B#, 16#EA#, 16#1D#, 16#A4#
+    Encrypting ...
+    Obtained encrypted block: 16#17#, 16#30#, 16#E5#, 16#77#, 16#8B#, 16#EA#, 16#1D#, 16#A4#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#02#, 16#48#, 16#D4#, 16#38#, 16#06#, 16#F6#, 16#71#, 16#72#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  12
+    Key                     : 16#38#, 16#49#, 16#67#, 16#4C#, 16#26#, 16#02#, 16#31#, 16#9E#
+    Plain text block        : 16#51#, 16#45#, 16#4B#, 16#58#, 16#2D#, 16#DF#, 16#44#, 16#0A#
+    Expected encrypted block: 16#A2#, 16#5E#, 16#78#, 16#56#, 16#CF#, 16#26#, 16#51#, 16#EB#
+    Encrypting ...
+    Obtained encrypted block: 16#A2#, 16#5E#, 16#78#, 16#56#, 16#CF#, 16#26#, 16#51#, 16#EB#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#51#, 16#45#, 16#4B#, 16#58#, 16#2D#, 16#DF#, 16#44#, 16#0A#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  13
+    Key                     : 16#04#, 16#B9#, 16#15#, 16#BA#, 16#43#, 16#FE#, 16#B5#, 16#B6#
+    Plain text block        : 16#42#, 16#FD#, 16#44#, 16#30#, 16#59#, 16#57#, 16#7F#, 16#A2#
+    Expected encrypted block: 16#35#, 16#38#, 16#82#, 16#B1#, 16#09#, 16#CE#, 16#8F#, 16#1A#
+    Encrypting ...
+    Obtained encrypted block: 16#35#, 16#38#, 16#82#, 16#B1#, 16#09#, 16#CE#, 16#8F#, 16#1A#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#42#, 16#FD#, 16#44#, 16#30#, 16#59#, 16#57#, 16#7F#, 16#A2#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  14
+    Key                     : 16#01#, 16#13#, 16#B9#, 16#70#, 16#FD#, 16#34#, 16#F2#, 16#CE#
+    Plain text block        : 16#05#, 16#9B#, 16#5E#, 16#08#, 16#51#, 16#CF#, 16#14#, 16#3A#
+    Expected encrypted block: 16#48#, 16#F4#, 16#D0#, 16#88#, 16#4C#, 16#37#, 16#99#, 16#18#
+    Encrypting ...
+    Obtained encrypted block: 16#48#, 16#F4#, 16#D0#, 16#88#, 16#4C#, 16#37#, 16#99#, 16#18#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#05#, 16#9B#, 16#5E#, 16#08#, 16#51#, 16#CF#, 16#14#, 16#3A#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  15
+    Key                     : 16#01#, 16#70#, 16#F1#, 16#75#, 16#46#, 16#8F#, 16#B5#, 16#E6#
+    Plain text block        : 16#07#, 16#56#, 16#D8#, 16#E0#, 16#77#, 16#47#, 16#61#, 16#D2#
+    Expected encrypted block: 16#43#, 16#21#, 16#93#, 16#B7#, 16#89#, 16#51#, 16#FC#, 16#98#
+    Encrypting ...
+    Obtained encrypted block: 16#43#, 16#21#, 16#93#, 16#B7#, 16#89#, 16#51#, 16#FC#, 16#98#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#07#, 16#56#, 16#D8#, 16#E0#, 16#77#, 16#47#, 16#61#, 16#D2#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  16
+    Key                     : 16#43#, 16#29#, 16#7F#, 16#AD#, 16#38#, 16#E3#, 16#73#, 16#FE#
+    Plain text block        : 16#76#, 16#25#, 16#14#, 16#B8#, 16#29#, 16#BF#, 16#48#, 16#6A#
+    Expected encrypted block: 16#13#, 16#F0#, 16#41#, 16#54#, 16#D6#, 16#9D#, 16#1A#, 16#E5#
+    Encrypting ...
+    Obtained encrypted block: 16#13#, 16#F0#, 16#41#, 16#54#, 16#D6#, 16#9D#, 16#1A#, 16#E5#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#76#, 16#25#, 16#14#, 16#B8#, 16#29#, 16#BF#, 16#48#, 16#6A#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  17
+    Key                     : 16#07#, 16#A7#, 16#13#, 16#70#, 16#45#, 16#DA#, 16#2A#, 16#16#
+    Plain text block        : 16#3B#, 16#DD#, 16#11#, 16#90#, 16#49#, 16#37#, 16#28#, 16#02#
+    Expected encrypted block: 16#2E#, 16#ED#, 16#DA#, 16#93#, 16#FF#, 16#D3#, 16#9C#, 16#79#
+    Encrypting ...
+    Obtained encrypted block: 16#2E#, 16#ED#, 16#DA#, 16#93#, 16#FF#, 16#D3#, 16#9C#, 16#79#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#3B#, 16#DD#, 16#11#, 16#90#, 16#49#, 16#37#, 16#28#, 16#02#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  18
+    Key                     : 16#04#, 16#68#, 16#91#, 16#04#, 16#C2#, 16#FD#, 16#3B#, 16#2F#
+    Plain text block        : 16#26#, 16#95#, 16#5F#, 16#68#, 16#35#, 16#AF#, 16#60#, 16#9A#
+    Expected encrypted block: 16#D8#, 16#87#, 16#E0#, 16#39#, 16#3C#, 16#2D#, 16#A6#, 16#E3#
+    Encrypting ...
+    Obtained encrypted block: 16#D8#, 16#87#, 16#E0#, 16#39#, 16#3C#, 16#2D#, 16#A6#, 16#E3#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#26#, 16#95#, 16#5F#, 16#68#, 16#35#, 16#AF#, 16#60#, 16#9A#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  19
+    Key                     : 16#37#, 16#D0#, 16#6B#, 16#B5#, 16#16#, 16#CB#, 16#75#, 16#46#
+    Plain text block        : 16#16#, 16#4D#, 16#5E#, 16#40#, 16#4F#, 16#27#, 16#52#, 16#32#
+    Expected encrypted block: 16#5F#, 16#99#, 16#D0#, 16#4F#, 16#5B#, 16#16#, 16#39#, 16#69#
+    Encrypting ...
+    Obtained encrypted block: 16#5F#, 16#99#, 16#D0#, 16#4F#, 16#5B#, 16#16#, 16#39#, 16#69#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#16#, 16#4D#, 16#5E#, 16#40#, 16#4F#, 16#27#, 16#52#, 16#32#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  20
+    Key                     : 16#1F#, 16#08#, 16#26#, 16#0D#, 16#1A#, 16#C2#, 16#46#, 16#5E#
+    Plain text block        : 16#6B#, 16#05#, 16#6E#, 16#18#, 16#75#, 16#9F#, 16#5C#, 16#CA#
+    Expected encrypted block: 16#4A#, 16#05#, 16#7A#, 16#3B#, 16#24#, 16#D3#, 16#97#, 16#7B#
+    Encrypting ...
+    Obtained encrypted block: 16#4A#, 16#05#, 16#7A#, 16#3B#, 16#24#, 16#D3#, 16#97#, 16#7B#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#6B#, 16#05#, 16#6E#, 16#18#, 16#75#, 16#9F#, 16#5C#, 16#CA#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  21
+    Key                     : 16#58#, 16#40#, 16#23#, 16#64#, 16#1A#, 16#BA#, 16#61#, 16#76#
+    Plain text block        : 16#00#, 16#4B#, 16#D6#, 16#EF#, 16#09#, 16#17#, 16#60#, 16#62#
+    Expected encrypted block: 16#45#, 16#20#, 16#31#, 16#C1#, 16#E4#, 16#FA#, 16#DA#, 16#8E#
+    Encrypting ...
+    Obtained encrypted block: 16#45#, 16#20#, 16#31#, 16#C1#, 16#E4#, 16#FA#, 16#DA#, 16#8E#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#00#, 16#4B#, 16#D6#, 16#EF#, 16#09#, 16#17#, 16#60#, 16#62#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  22
+    Key                     : 16#02#, 16#58#, 16#16#, 16#16#, 16#46#, 16#29#, 16#B0#, 16#07#
+    Plain text block        : 16#48#, 16#0D#, 16#39#, 16#00#, 16#6E#, 16#E7#, 16#62#, 16#F2#
+    Expected encrypted block: 16#75#, 16#55#, 16#AE#, 16#39#, 16#F5#, 16#9B#, 16#87#, 16#BD#
+    Encrypting ...
+    Obtained encrypted block: 16#75#, 16#55#, 16#AE#, 16#39#, 16#F5#, 16#9B#, 16#87#, 16#BD#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#48#, 16#0D#, 16#39#, 16#00#, 16#6E#, 16#E7#, 16#62#, 16#F2#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  23
+    Key                     : 16#49#, 16#79#, 16#3E#, 16#BC#, 16#79#, 16#B3#, 16#25#, 16#8F#
+    Plain text block        : 16#43#, 16#75#, 16#40#, 16#C8#, 16#69#, 16#8F#, 16#3C#, 16#FA#
+    Expected encrypted block: 16#53#, 16#C5#, 16#5F#, 16#9C#, 16#B4#, 16#9F#, 16#C0#, 16#19#
+    Encrypting ...
+    Obtained encrypted block: 16#53#, 16#C5#, 16#5F#, 16#9C#, 16#B4#, 16#9F#, 16#C0#, 16#19#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#43#, 16#75#, 16#40#, 16#C8#, 16#69#, 16#8F#, 16#3C#, 16#FA#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  24
+    Key                     : 16#4F#, 16#B0#, 16#5E#, 16#15#, 16#15#, 16#AB#, 16#73#, 16#A7#
+    Plain text block        : 16#07#, 16#2D#, 16#43#, 16#A0#, 16#77#, 16#07#, 16#52#, 16#92#
+    Expected encrypted block: 16#7A#, 16#8E#, 16#7B#, 16#FA#, 16#93#, 16#7E#, 16#89#, 16#A3#
+    Encrypting ...
+    Obtained encrypted block: 16#7A#, 16#8E#, 16#7B#, 16#FA#, 16#93#, 16#7E#, 16#89#, 16#A3#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#07#, 16#2D#, 16#43#, 16#A0#, 16#77#, 16#07#, 16#52#, 16#92#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  25
+    Key                     : 16#49#, 16#E9#, 16#5D#, 16#6D#, 16#4C#, 16#A2#, 16#29#, 16#BF#
+    Plain text block        : 16#02#, 16#FE#, 16#55#, 16#77#, 16#81#, 16#17#, 16#F1#, 16#2A#
+    Expected encrypted block: 16#CF#, 16#9C#, 16#5D#, 16#7A#, 16#49#, 16#86#, 16#AD#, 16#B5#
+    Encrypting ...
+    Obtained encrypted block: 16#CF#, 16#9C#, 16#5D#, 16#7A#, 16#49#, 16#86#, 16#AD#, 16#B5#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#02#, 16#FE#, 16#55#, 16#77#, 16#81#, 16#17#, 16#F1#, 16#2A#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  26
+    Key                     : 16#01#, 16#83#, 16#10#, 16#DC#, 16#40#, 16#9B#, 16#26#, 16#D6#
+    Plain text block        : 16#1D#, 16#9D#, 16#5C#, 16#50#, 16#18#, 16#F7#, 16#28#, 16#C2#
+    Expected encrypted block: 16#D1#, 16#AB#, 16#B2#, 16#90#, 16#65#, 16#8B#, 16#C7#, 16#78#
+    Encrypting ...
+    Obtained encrypted block: 16#D1#, 16#AB#, 16#B2#, 16#90#, 16#65#, 16#8B#, 16#C7#, 16#78#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#1D#, 16#9D#, 16#5C#, 16#50#, 16#18#, 16#F7#, 16#28#, 16#C2#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  27
+    Key                     : 16#1C#, 16#58#, 16#7F#, 16#1C#, 16#13#, 16#92#, 16#4F#, 16#EF#
+    Plain text block        : 16#30#, 16#55#, 16#32#, 16#28#, 16#6D#, 16#6F#, 16#29#, 16#5A#
+    Expected encrypted block: 16#55#, 16#CB#, 16#37#, 16#74#, 16#D1#, 16#3E#, 16#F2#, 16#01#
+    Encrypting ...
+    Obtained encrypted block: 16#55#, 16#CB#, 16#37#, 16#74#, 16#D1#, 16#3E#, 16#F2#, 16#01#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#30#, 16#55#, 16#32#, 16#28#, 16#6D#, 16#6F#, 16#29#, 16#5A#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  28
+    Key                     : 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+    Plain text block        : 16#01#, 16#23#, 16#45#, 16#67#, 16#89#, 16#AB#, 16#CD#, 16#EF#
+    Expected encrypted block: 16#FA#, 16#34#, 16#EC#, 16#48#, 16#47#, 16#B2#, 16#68#, 16#B2#
+    Encrypting ...
+    Obtained encrypted block: 16#FA#, 16#34#, 16#EC#, 16#48#, 16#47#, 16#B2#, 16#68#, 16#B2#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#01#, 16#23#, 16#45#, 16#67#, 16#89#, 16#AB#, 16#CD#, 16#EF#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  29
+    Key                     : 16#1F#, 16#1F#, 16#1F#, 16#1F#, 16#0E#, 16#0E#, 16#0E#, 16#0E#
+    Plain text block        : 16#01#, 16#23#, 16#45#, 16#67#, 16#89#, 16#AB#, 16#CD#, 16#EF#
+    Expected encrypted block: 16#A7#, 16#90#, 16#79#, 16#51#, 16#08#, 16#EA#, 16#3C#, 16#AE#
+    Encrypting ...
+    Obtained encrypted block: 16#A7#, 16#90#, 16#79#, 16#51#, 16#08#, 16#EA#, 16#3C#, 16#AE#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#01#, 16#23#, 16#45#, 16#67#, 16#89#, 16#AB#, 16#CD#, 16#EF#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  30
+    Key                     : 16#E0#, 16#FE#, 16#E0#, 16#FE#, 16#F1#, 16#FE#, 16#F1#, 16#FE#
+    Plain text block        : 16#01#, 16#23#, 16#45#, 16#67#, 16#89#, 16#AB#, 16#CD#, 16#EF#
+    Expected encrypted block: 16#C3#, 16#9E#, 16#07#, 16#2D#, 16#9F#, 16#AC#, 16#63#, 16#1D#
+    Encrypting ...
+    Obtained encrypted block: 16#C3#, 16#9E#, 16#07#, 16#2D#, 16#9F#, 16#AC#, 16#63#, 16#1D#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#01#, 16#23#, 16#45#, 16#67#, 16#89#, 16#AB#, 16#CD#, 16#EF#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  31
+    Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+    Plain text block        : 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+    Expected encrypted block: 16#01#, 16#49#, 16#33#, 16#E0#, 16#CD#, 16#AF#, 16#F6#, 16#E4#
+    Encrypting ...
+    Obtained encrypted block: 16#01#, 16#49#, 16#33#, 16#E0#, 16#CD#, 16#AF#, 16#F6#, 16#E4#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  32
+    Key                     : 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+    Plain text block        : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+    Expected encrypted block: 16#F2#, 16#1E#, 16#9A#, 16#77#, 16#B7#, 16#1C#, 16#49#, 16#BC#
+    Encrypting ...
+    Obtained encrypted block: 16#F2#, 16#1E#, 16#9A#, 16#77#, 16#B7#, 16#1C#, 16#49#, 16#BC#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  33
+    Key                     : 16#01#, 16#23#, 16#45#, 16#67#, 16#89#, 16#AB#, 16#CD#, 16#EF#
+    Plain text block        : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+    Expected encrypted block: 16#24#, 16#59#, 16#46#, 16#88#, 16#57#, 16#54#, 16#36#, 16#9A#
+    Encrypting ...
+    Obtained encrypted block: 16#24#, 16#59#, 16#46#, 16#88#, 16#57#, 16#54#, 16#36#, 16#9A#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Cipher test vector, results match
+[I] Blowfish Schneier Test Vector:  34
+    Key                     : 16#FE#, 16#DC#, 16#BA#, 16#98#, 16#76#, 16#54#, 16#32#, 16#10#
+    Plain text block        : 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+    Expected encrypted block: 16#6B#, 16#5C#, 16#5A#, 16#9C#, 16#5D#, 16#9E#, 16#0A#, 16#5A#
+    Encrypting ...
+    Obtained encrypted block: 16#6B#, 16#5C#, 16#5A#, 16#9C#, 16#5D#, 16#9E#, 16#0A#, 16#5A#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] Cipher test vector, results match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/04/03 - 20:44:32
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : Blowfish Bulk test
+Started         : 2017/04/03 - 20:44:32
+--------------------------------------------------------------------------------
+[I] Using key size:  4
+[I] Block cipher bulk test
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_BLOWFISH
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "Blowfish"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.4"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  4
+    Maximum key length            :  56
+    Default key length            :  16
+    Key length increment step     :  1
+    Block size                    :  8
+[I] Bulk test completed OK
+[I] Using key size:  14
+[I] Block cipher bulk test
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_BLOWFISH
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "Blowfish"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.4"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  4
+    Maximum key length            :  56
+    Default key length            :  16
+    Key length increment step     :  1
+    Block size                    :  8
+[I] Bulk test completed OK
+[I] Using key size:  24
+[I] Block cipher bulk test
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_BLOWFISH
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "Blowfish"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.4"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  4
+    Maximum key length            :  56
+    Default key length            :  16
+    Key length increment step     :  1
+    Block size                    :  8
+[I] Bulk test completed OK
+[I] Using key size:  34
+[I] Block cipher bulk test
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_BLOWFISH
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "Blowfish"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.4"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  4
+    Maximum key length            :  56
+    Default key length            :  16
+    Key length increment step     :  1
+    Block size                    :  8
+[I] Bulk test completed OK
+[I] Using key size:  44
+[I] Block cipher bulk test
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_BLOWFISH
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "Blowfish"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.4"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  4
+    Maximum key length            :  56
+    Default key length            :  16
+    Key length increment step     :  1
+    Block size                    :  8
+[I] Bulk test completed OK
+[I] Using key size:  54
+[I] Block cipher bulk test
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_BLOWFISH
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "Blowfish"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.4"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  4
+    Maximum key length            :  56
+    Default key length            :  16
+    Key length increment step     :  1
+    Block size                    :  8
+[I] Bulk test completed OK
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/04/03 - 20:44:42
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Blowfish
+Finished                 : 2017/04/03 - 20:44:42
+================================================================================

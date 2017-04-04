@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 13th, 2017
---    Current version   :  1.0
+--    Current version   :  1.1
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    ASN1 OIDs for CryptAda algorithms.
@@ -29,6 +29,7 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170313 ADD   Initial implementation.
+--    1.1   20170403 ADD   Changes in Symmetric cipher hierachy.
 --------------------------------------------------------------------------------
 
 package CryptAda.Names.ASN1_OIDs is
@@ -120,16 +121,16 @@ package CryptAda.Names.ASN1_OIDs is
          others            => Anonymous_Algorithm'Access
       );
 
-   --[ASN1 OIDS for Block Ciphers]----------------------------------------------
-   -- Next constants provide the ASN1 OIDs for the block ciphers implemented in
-   -- CryptAda.
+   --[ASN1 OIDS for Symmetric Ciphers]------------------------------------------
+   -- Next constants provide the ASN1 OIDs for the symmetric ciphers implemented 
+   -- in CryptAda.
    -----------------------------------------------------------------------------
 
-   --[ASN1_OIDs_Block_Ciphers]--------------------------------------------------
+   --[ASN1_OIDs_Symmetric_Ciphers]----------------------------------------------
    -- Array of ASN1 OIDs of block ciphers.
    -----------------------------------------------------------------------------
 
-   ASN1_OIDs_Block_Ciphers       : constant array(Block_Cipher_Id) of Algorithm_Name_Ref :=
+   ASN1_OIDs_Symmetric_Ciphers   : constant array(Symmetric_Cipher_Id) of Algorithm_Name_Ref :=
       (
          others            => Anonymous_Algorithm'Access
       );

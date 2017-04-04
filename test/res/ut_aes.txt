@@ -1,424 +1,282 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.a (2017/03/31)
+Version: 0.1.b (2017/03/31)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.AES
-Description              : Unit test driver for CryptAda.Ciphers.Block_Ciphers.AES functionality.
-Started                  : 2017/03/28 - 13:22:00
+Description              : Unit test driver for CryptAda.Ciphers.Symmetric.Block.AES functionality.
+Started                  : 2017/04/03 - 20:44:32
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
-Description     : Attempting to use a Block_Cipher without starting it
-Started         : 2017/03/28 - 13:22:00
+Description     : Running AES_Cipher basic tests
+Started         : 2017/04/03 - 20:44:32
 --------------------------------------------------------------------------------
-[I] Must raise CryptAda_Uninitialized_Cipher_Error
-[I] Cipher information
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.AES.AES_CIPHER"
-    CryptAda cipher algorithm id  : "BC_AES_256"
-    Block_Cipher SCAN name        : "AES256"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.9"
-    Block size                    :  16
+[I] Basic tests for AES_Cipher
+    This test case is a 10 step test that will exercise Block_Cipher dispatching operations
+[I] Cipher information:
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.AES.AES_CIPHER"
+    CryptAda cipher algorithm id  : SC_AES_256
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "AES256"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.9"
     Cipher state                  : IDLE
+    Started                       : FALSE
     Minimum key length            :  16
     Maximum key length            :  32
     Default key length            :  32
     Key length increment step     :  8
-[I] Trying to process a block.
+    Block size                    :  16
+[I] Basic Test 1
+    Trying to process a block with a cipher in Idle state.
+    Must raise CryptAda_Uninitialized_Cipher_Error exception.
+[I] Block to process:
+Block length:  16
+Block data  :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
 [I] Raised CryptAda_Uninitialized_Cipher_Error
+[I] Basic Test 2
+    Trying Start_Cipher with an invalid key
+    Must raise CryptAda_Invalid_Key_Error exception.
+[I] Using a null key
+[I] The key
+Null key
+[I] Calling to Start_Cipher
+[I] Raised CryptAda_Invalid_Key_Error
+[I] Using key with excessive length
+[I] Maximum key length is:  32
+[I] The key
+    Key length:  33
+    Key bytes :
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#
+[I] Calling to Start_Cipher
+[I] Raised CryptAda_Invalid_Key_Error
+[I] Basic Test 3
+    Checking state after successful Start_Cipher for encryption
+[I] Key set to
+    Key length:  32
+    Key bytes :
+16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 
+16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#
+[I] Cipher now must be in Encrypting state
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.AES.AES_CIPHER"
+    CryptAda cipher algorithm id  : SC_AES_256
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "AES256"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.9"
+    Cipher state                  : ENCRYPTING
+    Started                       : TRUE
+    Minimum key length            :  16
+    Maximum key length            :  32
+    Default key length            :  32
+    Key length increment step     :  8
+    Block size                    :  16
+[I] Basic Test 4
+    Trying to encrypt blocks of invalid length
+    Must raise CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  16 bytes
+[I] Invalid input block information: 
+Block length:  15
+Block data  :
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  16 bytes
+[I] Invalid input block information: 
+Block length:  17
+Block data  :
+16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 
+16#22#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  16 bytes
+[I] Invalid output block information: 
+Block length:  15
+Block data  :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  16 bytes
+[I] Invalid output block information: 
+Block length:  17
+Block data  :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Basic Test 5
+    Encrypting a valid block
+[I] Block to encrypt
+Block length:  16
+Block data  :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+[I] Encrypted block
+Block length:  16
+Block data  :
+16#B6#, 16#C0#, 16#85#, 16#95#, 16#C1#, 16#C8#, 16#B4#, 16#52#, 16#86#, 16#90#, 16#75#, 16#93#, 16#8C#, 16#10#, 16#00#, 16#1D#
+[I] Basic Test 6
+    Stopping the cipher and check state
+[I] Cipher now must be in Idle state
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.AES.AES_CIPHER"
+    CryptAda cipher algorithm id  : SC_AES_256
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "AES256"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.9"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  16
+    Maximum key length            :  32
+    Default key length            :  32
+    Key length increment step     :  8
+    Block size                    :  16
+[I] Basic Test 7
+    Checking cipher state after successful Start_Cipher for decryption
+[I] Cipher now must be in Decrypting state
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.AES.AES_CIPHER"
+    CryptAda cipher algorithm id  : SC_AES_256
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "AES256"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.9"
+    Cipher state                  : DECRYPTING
+    Started                       : TRUE
+    Minimum key length            :  16
+    Maximum key length            :  32
+    Default key length            :  32
+    Key length increment step     :  8
+    Block size                    :  16
+[I] Basic Test 8
+    Trying to decryt blocks of invalid length
+    Must raise CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  16 bytes
+[I] Invalid input block information: 
+Block length:  15
+Block data  :
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  16 bytes
+[I] Invalid input block information: 
+Block length:  17
+Block data  :
+16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 
+16#22#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  16 bytes
+[I] Invalid output block information: 
+Block length:  15
+Block data  :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  16 bytes
+[I] Invalid output block information: 
+Block length:  17
+Block data  :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Basic Test 9
+    Decrypting the block encrypted on basic test 5. Must be equal to original
+    plaintext block
+[I] Block to decrypt
+Block length:  16
+Block data  :
+16#B6#, 16#C0#, 16#85#, 16#95#, 16#C1#, 16#C8#, 16#B4#, 16#52#, 16#86#, 16#90#, 16#75#, 16#93#, 16#8C#, 16#10#, 16#00#, 16#1D#
+[I] Decrypted block
+Block length:  16
+Block data  :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+[I] Results match
+[I] Basic Test 10
+    Final Stop_Cipher
+[I] Cipher now must be in Idle state
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.AES.AES_CIPHER"
+    CryptAda cipher algorithm id  : SC_AES_256
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "AES256"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.9"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  16
+    Maximum key length            :  32
+    Default key length            :  32
+    Key length increment step     :  8
+    Block size                    :  16
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:22:00
+Finished        : 2017/04/03 - 20:44:32
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
-Description     : Cipher life-cycle
-Started         : 2017/03/28 - 13:22:00
+Description     : Testing AES_Cipher non dispatching operations
+Started         : 2017/04/03 - 20:44:32
 --------------------------------------------------------------------------------
-[I] Checking Cipher object state along its life cycle.
-[I] Key Id: AES_128
-[I] Before Start_Cipher, state is Idle
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.AES.AES_CIPHER"
-    CryptAda cipher algorithm id  : "BC_AES_256"
-    Block_Cipher SCAN name        : "AES256"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.9"
-    Block size                    :  16
-    Cipher state                  : IDLE
-    Minimum key length            :  16
-    Maximum key length            :  32
-    Default key length            :  32
-    Key length increment step     :  8
-[I] Starting cipher for encryption
-State must be: ENCRYPTING
-[I] Key used:
+[I] Interfaces to test:
+Get_AES_Key_Id
+[I] Iterating over different key ids
+[I] AES key id: AES_128
+[I] Trying to Get_AES_Key_Id on an Idle Cipher will result in an
+    CryptAda_Uninitialized_Cipher_Error exception.
+[I] Raised CryptAda_Uninitialized_Cipher_Error
+[I] Now starting the cipher with an apropriate key
+[I] Key for AES_128
     Key length:  16
     Key bytes :
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.AES.AES_CIPHER"
-    CryptAda cipher algorithm id  : "BC_AES_128"
-    Block_Cipher SCAN name        : "AES128"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.7"
-    Block size                    :  16
-    Cipher state                  : ENCRYPTING
-    Minimum key length            :  16
-    Maximum key length            :  32
-    Default key length            :  32
-    Key length increment step     :  8
-[I] Processing a block
-[I] Block to encrypt:
-    Block length:  16
-    Block data  :
-16#F3#, 16#44#, 16#81#, 16#EC#, 16#3C#, 16#C6#, 16#27#, 16#BA#, 16#CD#, 16#5D#, 
-16#C3#, 16#FB#, 16#08#, 16#F2#, 16#73#, 16#E6#
-[I] Encrypted block:
-    Block length:  16
-    Block data  :
-16#03#, 16#36#, 16#76#, 16#3E#, 16#96#, 16#6D#, 16#92#, 16#59#, 16#5A#, 16#56#, 
-16#7C#, 16#C9#, 16#CE#, 16#53#, 16#7F#, 16#5E#
-[I] Stopping cipher
-State must be: IDLE
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.AES.AES_CIPHER"
-    CryptAda cipher algorithm id  : "BC_AES_256"
-    Block_Cipher SCAN name        : "AES256"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.9"
-    Block size                    :  16
-    Cipher state                  : IDLE
-    Minimum key length            :  16
-    Maximum key length            :  32
-    Default key length            :  32
-    Key length increment step     :  8
-[I] Starting cipher for decryption
-State must be: DECRYPTING
-[I] Key used:
-    Key length:  16
-    Key bytes :
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.AES.AES_CIPHER"
-    CryptAda cipher algorithm id  : "BC_AES_128"
-    Block_Cipher SCAN name        : "AES128"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.7"
-    Block size                    :  16
-    Cipher state                  : DECRYPTING
-    Minimum key length            :  16
-    Maximum key length            :  32
-    Default key length            :  32
-    Key length increment step     :  8
-[I] Processing the previously encrypted block
-[I] Block to decrypt:
-    Block length:  16
-    Block data  :
-16#03#, 16#36#, 16#76#, 16#3E#, 16#96#, 16#6D#, 16#92#, 16#59#, 16#5A#, 16#56#, 
-16#7C#, 16#C9#, 16#CE#, 16#53#, 16#7F#, 16#5E#
-[I] Decrypted block:
-    Block length:  16
-    Block data  :
-16#F3#, 16#44#, 16#81#, 16#EC#, 16#3C#, 16#C6#, 16#27#, 16#BA#, 16#CD#, 16#5D#, 
-16#C3#, 16#FB#, 16#08#, 16#F2#, 16#73#, 16#E6#
-[I] Stopping cipher
-State must be: IDLE
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.AES.AES_CIPHER"
-    CryptAda cipher algorithm id  : "BC_AES_256"
-    Block_Cipher SCAN name        : "AES256"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.9"
-    Block size                    :  16
-    Cipher state                  : IDLE
-    Minimum key length            :  16
-    Maximum key length            :  32
-    Default key length            :  32
-    Key length increment step     :  8
-[I] Decrypted block must be equal to plain text original block
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+    Calling GET_AES_Key_Id
+Expected key id: AES_128
+Obtained key id: AES_128
 [I] Results match
-[I] Key Id: AES_192
-[I] Before Start_Cipher, state is Idle
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.AES.AES_CIPHER"
-    CryptAda cipher algorithm id  : "BC_AES_256"
-    Block_Cipher SCAN name        : "AES256"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.9"
-    Block size                    :  16
-    Cipher state                  : IDLE
-    Minimum key length            :  16
-    Maximum key length            :  32
-    Default key length            :  32
-    Key length increment step     :  8
-[I] Starting cipher for encryption
-State must be: ENCRYPTING
-[I] Key used:
+[I] AES key id: AES_192
+[I] Trying to Get_AES_Key_Id on an Idle Cipher will result in an
+    CryptAda_Uninitialized_Cipher_Error exception.
+[I] Raised CryptAda_Uninitialized_Cipher_Error
+[I] Now starting the cipher with an apropriate key
+[I] Key for AES_192
     Key length:  24
     Key bytes :
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
-16#00#, 16#00#, 16#00#, 16#00#
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.AES.AES_CIPHER"
-    CryptAda cipher algorithm id  : "BC_AES_192"
-    Block_Cipher SCAN name        : "AES192"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.8"
-    Block size                    :  16
-    Cipher state                  : ENCRYPTING
-    Minimum key length            :  16
-    Maximum key length            :  32
-    Default key length            :  32
-    Key length increment step     :  8
-[I] Processing a block
-[I] Block to encrypt:
-    Block length:  16
-    Block data  :
-16#F3#, 16#44#, 16#81#, 16#EC#, 16#3C#, 16#C6#, 16#27#, 16#BA#, 16#CD#, 16#5D#, 
-16#C3#, 16#FB#, 16#08#, 16#F2#, 16#73#, 16#E6#
-[I] Encrypted block:
-    Block length:  16
-    Block data  :
-16#B2#, 16#34#, 16#E5#, 16#1C#, 16#9F#, 16#51#, 16#BF#, 16#86#, 16#78#, 16#46#, 
-16#68#, 16#BA#, 16#E8#, 16#91#, 16#7D#, 16#C4#
-[I] Stopping cipher
-State must be: IDLE
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.AES.AES_CIPHER"
-    CryptAda cipher algorithm id  : "BC_AES_256"
-    Block_Cipher SCAN name        : "AES256"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.9"
-    Block size                    :  16
-    Cipher state                  : IDLE
-    Minimum key length            :  16
-    Maximum key length            :  32
-    Default key length            :  32
-    Key length increment step     :  8
-[I] Starting cipher for decryption
-State must be: DECRYPTING
-[I] Key used:
-    Key length:  24
-    Key bytes :
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
-16#00#, 16#00#, 16#00#, 16#00#
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.AES.AES_CIPHER"
-    CryptAda cipher algorithm id  : "BC_AES_192"
-    Block_Cipher SCAN name        : "AES192"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.8"
-    Block size                    :  16
-    Cipher state                  : DECRYPTING
-    Minimum key length            :  16
-    Maximum key length            :  32
-    Default key length            :  32
-    Key length increment step     :  8
-[I] Processing the previously encrypted block
-[I] Block to decrypt:
-    Block length:  16
-    Block data  :
-16#B2#, 16#34#, 16#E5#, 16#1C#, 16#9F#, 16#51#, 16#BF#, 16#86#, 16#78#, 16#46#, 
-16#68#, 16#BA#, 16#E8#, 16#91#, 16#7D#, 16#C4#
-[I] Decrypted block:
-    Block length:  16
-    Block data  :
-16#F3#, 16#44#, 16#81#, 16#EC#, 16#3C#, 16#C6#, 16#27#, 16#BA#, 16#CD#, 16#5D#, 
-16#C3#, 16#FB#, 16#08#, 16#F2#, 16#73#, 16#E6#
-[I] Stopping cipher
-State must be: IDLE
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.AES.AES_CIPHER"
-    CryptAda cipher algorithm id  : "BC_AES_256"
-    Block_Cipher SCAN name        : "AES256"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.9"
-    Block size                    :  16
-    Cipher state                  : IDLE
-    Minimum key length            :  16
-    Maximum key length            :  32
-    Default key length            :  32
-    Key length increment step     :  8
-[I] Decrypted block must be equal to plain text original block
+16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 
+16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#
+    Calling GET_AES_Key_Id
+Expected key id: AES_192
+Obtained key id: AES_192
 [I] Results match
-[I] Key Id: AES_256
-[I] Before Start_Cipher, state is Idle
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.AES.AES_CIPHER"
-    CryptAda cipher algorithm id  : "BC_AES_256"
-    Block_Cipher SCAN name        : "AES256"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.9"
-    Block size                    :  16
-    Cipher state                  : IDLE
-    Minimum key length            :  16
-    Maximum key length            :  32
-    Default key length            :  32
-    Key length increment step     :  8
-[I] Starting cipher for encryption
-State must be: ENCRYPTING
-[I] Key used:
+[I] AES key id: AES_256
+[I] Trying to Get_AES_Key_Id on an Idle Cipher will result in an
+    CryptAda_Uninitialized_Cipher_Error exception.
+[I] Raised CryptAda_Uninitialized_Cipher_Error
+[I] Now starting the cipher with an apropriate key
+[I] Key for AES_256
     Key length:  32
     Key bytes :
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
-16#00#, 16#00#
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.AES.AES_CIPHER"
-    CryptAda cipher algorithm id  : "BC_AES_256"
-    Block_Cipher SCAN name        : "AES256"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.9"
-    Block size                    :  16
-    Cipher state                  : ENCRYPTING
-    Minimum key length            :  16
-    Maximum key length            :  32
-    Default key length            :  32
-    Key length increment step     :  8
-[I] Processing a block
-[I] Block to encrypt:
-    Block length:  16
-    Block data  :
-16#F3#, 16#44#, 16#81#, 16#EC#, 16#3C#, 16#C6#, 16#27#, 16#BA#, 16#CD#, 16#5D#, 
-16#C3#, 16#FB#, 16#08#, 16#F2#, 16#73#, 16#E6#
-[I] Encrypted block:
-    Block length:  16
-    Block data  :
-16#F2#, 16#C3#, 16#75#, 16#AF#, 16#7D#, 16#DF#, 16#51#, 16#7E#, 16#F0#, 16#3E#, 
-16#7C#, 16#B9#, 16#D1#, 16#93#, 16#B7#, 16#2B#
-[I] Stopping cipher
-State must be: IDLE
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.AES.AES_CIPHER"
-    CryptAda cipher algorithm id  : "BC_AES_256"
-    Block_Cipher SCAN name        : "AES256"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.9"
-    Block size                    :  16
-    Cipher state                  : IDLE
-    Minimum key length            :  16
-    Maximum key length            :  32
-    Default key length            :  32
-    Key length increment step     :  8
-[I] Starting cipher for decryption
-State must be: DECRYPTING
-[I] Key used:
-    Key length:  32
-    Key bytes :
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
-16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
-16#00#, 16#00#
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.AES.AES_CIPHER"
-    CryptAda cipher algorithm id  : "BC_AES_256"
-    Block_Cipher SCAN name        : "AES256"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.9"
-    Block size                    :  16
-    Cipher state                  : DECRYPTING
-    Minimum key length            :  16
-    Maximum key length            :  32
-    Default key length            :  32
-    Key length increment step     :  8
-[I] Processing the previously encrypted block
-[I] Block to decrypt:
-    Block length:  16
-    Block data  :
-16#F2#, 16#C3#, 16#75#, 16#AF#, 16#7D#, 16#DF#, 16#51#, 16#7E#, 16#F0#, 16#3E#, 
-16#7C#, 16#B9#, 16#D1#, 16#93#, 16#B7#, 16#2B#
-[I] Decrypted block:
-    Block length:  16
-    Block data  :
-16#F3#, 16#44#, 16#81#, 16#EC#, 16#3C#, 16#C6#, 16#27#, 16#BA#, 16#CD#, 16#5D#, 
-16#C3#, 16#FB#, 16#08#, 16#F2#, 16#73#, 16#E6#
-[I] Stopping cipher
-State must be: IDLE
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.AES.AES_CIPHER"
-    CryptAda cipher algorithm id  : "BC_AES_256"
-    Block_Cipher SCAN name        : "AES256"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.9"
-    Block size                    :  16
-    Cipher state                  : IDLE
-    Minimum key length            :  16
-    Maximum key length            :  32
-    Default key length            :  32
-    Key length increment step     :  8
-[I] Decrypted block must be equal to plain text original block
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#
+    Calling GET_AES_Key_Id
+Expected key id: AES_256
+Obtained key id: AES_256
 [I] Results match
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:22:00
+Finished        : 2017/04/03 - 20:44:32
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
-Description     : Testing random key generation
-Started         : 2017/03/28 - 13:22:00
---------------------------------------------------------------------------------
-[I] Using an unitialized random generator
-Must raise CryptAda_Generator_Not_Started_Error
-[I] Raised CryptAda_Generator_Not_Started_Error
-[I] Using an un-seeded random generator
-Must raise CryptAda_Generator_Need_Seeding_Error
-[I] Raised CryptAda_Generator_Need_Seeding_Error
-[I] Using an internal seeded random generator
-[I] Generating a Key
-[I] Generated key:
-    Key length:  32
-    Key bytes :
-16#A7#, 16#6E#, 16#E3#, 16#85#, 16#95#, 16#1E#, 16#C1#, 16#D1#, 16#66#, 16#FC#, 
-16#BB#, 16#73#, 16#C8#, 16#16#, 16#CE#, 16#68#, 16#7C#, 16#06#, 16#C3#, 16#CB#, 
-16#6B#, 16#31#, 16#E8#, 16#66#, 16#76#, 16#31#, 16#75#, 16#25#, 16#5A#, 16#90#, 
-16#41#, 16#1E#
-[I] Key must be valid
-[I] Key is valid
-[I] Key must be strong
-[I] Key is strong
-[I] Default key length must be 32 byte.
-Key length:  32
-[I] Key length OK
-[I] Generating keys of different lengths
-[I] Key Id: AES_128
-Expected key length:  16
-Obtained key length:  16
-[I] Results match
-[I] Key Id: AES_192
-Expected key length:  24
-Obtained key length:  24
-[I] Results match
-[I] Key Id: AES_256
-Expected key length:  32
-Obtained key length:  32
-[I] Results match
-[I] Test case OK
---------------------------------------------------------------------------------
-Test Case Number: 3
-Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:22:00
---[End Test Case]---------------------------------------------------------------
-
---[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 4
 Description     : AES standard test vectors 1
-Started         : 2017/03/28 - 13:22:00
+Started         : 2017/04/03 - 20:44:32
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from: "The Advanced Encryption Standard
     Algorithm Validation Suite (AESAVS)"
@@ -428,43 +286,71 @@ Started         : 2017/03/28 - 13:22:00
     Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
     Plain text block        : 16#F3#, 16#44#, 16#81#, 16#EC#, 16#3C#, 16#C6#, 16#27#, 16#BA#, 16#CD#, 16#5D#, 16#C3#, 16#FB#, 16#08#, 16#F2#, 16#73#, 16#E6#
     Expected encrypted block: 16#03#, 16#36#, 16#76#, 16#3E#, 16#96#, 16#6D#, 16#92#, 16#59#, 16#5A#, 16#56#, 16#7C#, 16#C9#, 16#CE#, 16#53#, 16#7F#, 16#5E#
+    Encrypting ...
     Obtained encrypted block: 16#03#, 16#36#, 16#76#, 16#3E#, 16#96#, 16#6D#, 16#92#, 16#59#, 16#5A#, 16#56#, 16#7C#, 16#C9#, 16#CE#, 16#53#, 16#7F#, 16#5E#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#F3#, 16#44#, 16#81#, 16#EC#, 16#3C#, 16#C6#, 16#27#, 16#BA#, 16#CD#, 16#5D#, 16#C3#, 16#FB#, 16#08#, 16#F2#, 16#73#, 16#E6#
 [I] Cipher test vector, results match
 [I] AES GSFbox 128 Test Vector:  2
     Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
     Plain text block        : 16#97#, 16#98#, 16#C4#, 16#64#, 16#0B#, 16#AD#, 16#75#, 16#C7#, 16#C3#, 16#22#, 16#7D#, 16#B9#, 16#10#, 16#17#, 16#4E#, 16#72#
     Expected encrypted block: 16#A9#, 16#A1#, 16#63#, 16#1B#, 16#F4#, 16#99#, 16#69#, 16#54#, 16#EB#, 16#C0#, 16#93#, 16#95#, 16#7B#, 16#23#, 16#45#, 16#89#
+    Encrypting ...
     Obtained encrypted block: 16#A9#, 16#A1#, 16#63#, 16#1B#, 16#F4#, 16#99#, 16#69#, 16#54#, 16#EB#, 16#C0#, 16#93#, 16#95#, 16#7B#, 16#23#, 16#45#, 16#89#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#97#, 16#98#, 16#C4#, 16#64#, 16#0B#, 16#AD#, 16#75#, 16#C7#, 16#C3#, 16#22#, 16#7D#, 16#B9#, 16#10#, 16#17#, 16#4E#, 16#72#
 [I] Cipher test vector, results match
 [I] AES GSFbox 128 Test Vector:  3
     Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
     Plain text block        : 16#96#, 16#AB#, 16#5C#, 16#2F#, 16#F6#, 16#12#, 16#D9#, 16#DF#, 16#AA#, 16#E8#, 16#C3#, 16#1F#, 16#30#, 16#C4#, 16#21#, 16#68#
     Expected encrypted block: 16#FF#, 16#4F#, 16#83#, 16#91#, 16#A6#, 16#A4#, 16#0C#, 16#A5#, 16#B2#, 16#5D#, 16#23#, 16#BE#, 16#DD#, 16#44#, 16#A5#, 16#97#
+    Encrypting ...
     Obtained encrypted block: 16#FF#, 16#4F#, 16#83#, 16#91#, 16#A6#, 16#A4#, 16#0C#, 16#A5#, 16#B2#, 16#5D#, 16#23#, 16#BE#, 16#DD#, 16#44#, 16#A5#, 16#97#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#96#, 16#AB#, 16#5C#, 16#2F#, 16#F6#, 16#12#, 16#D9#, 16#DF#, 16#AA#, 16#E8#, 16#C3#, 16#1F#, 16#30#, 16#C4#, 16#21#, 16#68#
 [I] Cipher test vector, results match
 [I] AES GSFbox 128 Test Vector:  4
     Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
     Plain text block        : 16#6A#, 16#11#, 16#8A#, 16#87#, 16#45#, 16#19#, 16#E6#, 16#4E#, 16#99#, 16#63#, 16#79#, 16#8A#, 16#50#, 16#3F#, 16#1D#, 16#35#
     Expected encrypted block: 16#DC#, 16#43#, 16#BE#, 16#40#, 16#BE#, 16#0E#, 16#53#, 16#71#, 16#2F#, 16#7E#, 16#2B#, 16#F5#, 16#CA#, 16#70#, 16#72#, 16#09#
+    Encrypting ...
     Obtained encrypted block: 16#DC#, 16#43#, 16#BE#, 16#40#, 16#BE#, 16#0E#, 16#53#, 16#71#, 16#2F#, 16#7E#, 16#2B#, 16#F5#, 16#CA#, 16#70#, 16#72#, 16#09#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#6A#, 16#11#, 16#8A#, 16#87#, 16#45#, 16#19#, 16#E6#, 16#4E#, 16#99#, 16#63#, 16#79#, 16#8A#, 16#50#, 16#3F#, 16#1D#, 16#35#
 [I] Cipher test vector, results match
 [I] AES GSFbox 128 Test Vector:  5
     Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
     Plain text block        : 16#CB#, 16#9F#, 16#CE#, 16#EC#, 16#81#, 16#28#, 16#6C#, 16#A3#, 16#E9#, 16#89#, 16#BD#, 16#97#, 16#9B#, 16#0C#, 16#B2#, 16#84#
     Expected encrypted block: 16#92#, 16#BE#, 16#ED#, 16#AB#, 16#18#, 16#95#, 16#A9#, 16#4F#, 16#AA#, 16#69#, 16#B6#, 16#32#, 16#E5#, 16#CC#, 16#47#, 16#CE#
+    Encrypting ...
     Obtained encrypted block: 16#92#, 16#BE#, 16#ED#, 16#AB#, 16#18#, 16#95#, 16#A9#, 16#4F#, 16#AA#, 16#69#, 16#B6#, 16#32#, 16#E5#, 16#CC#, 16#47#, 16#CE#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#CB#, 16#9F#, 16#CE#, 16#EC#, 16#81#, 16#28#, 16#6C#, 16#A3#, 16#E9#, 16#89#, 16#BD#, 16#97#, 16#9B#, 16#0C#, 16#B2#, 16#84#
 [I] Cipher test vector, results match
 [I] AES GSFbox 128 Test Vector:  6
     Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
     Plain text block        : 16#B2#, 16#6A#, 16#EB#, 16#18#, 16#74#, 16#E4#, 16#7C#, 16#A8#, 16#35#, 16#8F#, 16#F2#, 16#23#, 16#78#, 16#F0#, 16#91#, 16#44#
     Expected encrypted block: 16#45#, 16#92#, 16#64#, 16#F4#, 16#79#, 16#8F#, 16#6A#, 16#78#, 16#BA#, 16#CB#, 16#89#, 16#C1#, 16#5E#, 16#D3#, 16#D6#, 16#01#
+    Encrypting ...
     Obtained encrypted block: 16#45#, 16#92#, 16#64#, 16#F4#, 16#79#, 16#8F#, 16#6A#, 16#78#, 16#BA#, 16#CB#, 16#89#, 16#C1#, 16#5E#, 16#D3#, 16#D6#, 16#01#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#B2#, 16#6A#, 16#EB#, 16#18#, 16#74#, 16#E4#, 16#7C#, 16#A8#, 16#35#, 16#8F#, 16#F2#, 16#23#, 16#78#, 16#F0#, 16#91#, 16#44#
 [I] Cipher test vector, results match
 [I] AES GSFbox 128 Test Vector:  7
     Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
     Plain text block        : 16#58#, 16#C8#, 16#E0#, 16#0B#, 16#26#, 16#31#, 16#68#, 16#6D#, 16#54#, 16#EA#, 16#B8#, 16#4B#, 16#91#, 16#F0#, 16#AC#, 16#A1#
     Expected encrypted block: 16#08#, 16#A4#, 16#E2#, 16#EF#, 16#EC#, 16#8A#, 16#8E#, 16#33#, 16#12#, 16#CA#, 16#74#, 16#60#, 16#B9#, 16#04#, 16#0B#, 16#BF#
+    Encrypting ...
     Obtained encrypted block: 16#08#, 16#A4#, 16#E2#, 16#EF#, 16#EC#, 16#8A#, 16#8E#, 16#33#, 16#12#, 16#CA#, 16#74#, 16#60#, 16#B9#, 16#04#, 16#0B#, 16#BF#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#58#, 16#C8#, 16#E0#, 16#0B#, 16#26#, 16#31#, 16#68#, 16#6D#, 16#54#, 16#EA#, 16#B8#, 16#4B#, 16#91#, 16#F0#, 16#AC#, 16#A1#
 [I] Cipher test vector, results match
 [I] Appendiz B. GFSbox Known Answer Test Values
     Appendix B.2. Keysize = 192
@@ -472,37 +358,61 @@ Started         : 2017/03/28 - 13:22:00
     Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
     Plain text block        : 16#1B#, 16#07#, 16#7A#, 16#6A#, 16#F4#, 16#B7#, 16#F9#, 16#82#, 16#29#, 16#DE#, 16#78#, 16#6D#, 16#75#, 16#16#, 16#B6#, 16#39#
     Expected encrypted block: 16#27#, 16#5C#, 16#FC#, 16#04#, 16#13#, 16#D8#, 16#CC#, 16#B7#, 16#05#, 16#13#, 16#C3#, 16#85#, 16#9B#, 16#1D#, 16#0F#, 16#72#
+    Encrypting ...
     Obtained encrypted block: 16#27#, 16#5C#, 16#FC#, 16#04#, 16#13#, 16#D8#, 16#CC#, 16#B7#, 16#05#, 16#13#, 16#C3#, 16#85#, 16#9B#, 16#1D#, 16#0F#, 16#72#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#1B#, 16#07#, 16#7A#, 16#6A#, 16#F4#, 16#B7#, 16#F9#, 16#82#, 16#29#, 16#DE#, 16#78#, 16#6D#, 16#75#, 16#16#, 16#B6#, 16#39#
 [I] Cipher test vector, results match
 [I] AES GSFbox 192 Test Vector:  2
     Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
     Plain text block        : 16#9C#, 16#2D#, 16#88#, 16#42#, 16#E5#, 16#F4#, 16#8F#, 16#57#, 16#64#, 16#82#, 16#05#, 16#D3#, 16#9A#, 16#23#, 16#9A#, 16#F1#
     Expected encrypted block: 16#C9#, 16#B8#, 16#13#, 16#5F#, 16#F1#, 16#B5#, 16#AD#, 16#C4#, 16#13#, 16#DF#, 16#D0#, 16#53#, 16#B2#, 16#1B#, 16#D9#, 16#6D#
+    Encrypting ...
     Obtained encrypted block: 16#C9#, 16#B8#, 16#13#, 16#5F#, 16#F1#, 16#B5#, 16#AD#, 16#C4#, 16#13#, 16#DF#, 16#D0#, 16#53#, 16#B2#, 16#1B#, 16#D9#, 16#6D#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#9C#, 16#2D#, 16#88#, 16#42#, 16#E5#, 16#F4#, 16#8F#, 16#57#, 16#64#, 16#82#, 16#05#, 16#D3#, 16#9A#, 16#23#, 16#9A#, 16#F1#
 [I] Cipher test vector, results match
 [I] AES GSFbox 192 Test Vector:  3
     Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
     Plain text block        : 16#BF#, 16#F5#, 16#25#, 16#10#, 16#09#, 16#5F#, 16#51#, 16#8E#, 16#CC#, 16#A6#, 16#0A#, 16#F4#, 16#20#, 16#54#, 16#44#, 16#BB#
     Expected encrypted block: 16#4A#, 16#36#, 16#50#, 16#C3#, 16#37#, 16#1C#, 16#E2#, 16#EB#, 16#35#, 16#E3#, 16#89#, 16#A1#, 16#71#, 16#42#, 16#74#, 16#40#
+    Encrypting ...
     Obtained encrypted block: 16#4A#, 16#36#, 16#50#, 16#C3#, 16#37#, 16#1C#, 16#E2#, 16#EB#, 16#35#, 16#E3#, 16#89#, 16#A1#, 16#71#, 16#42#, 16#74#, 16#40#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#BF#, 16#F5#, 16#25#, 16#10#, 16#09#, 16#5F#, 16#51#, 16#8E#, 16#CC#, 16#A6#, 16#0A#, 16#F4#, 16#20#, 16#54#, 16#44#, 16#BB#
 [I] Cipher test vector, results match
 [I] AES GSFbox 192 Test Vector:  4
     Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
     Plain text block        : 16#51#, 16#71#, 16#97#, 16#83#, 16#D3#, 16#18#, 16#5A#, 16#53#, 16#5B#, 16#D7#, 16#5A#, 16#DC#, 16#65#, 16#07#, 16#1C#, 16#E1#
     Expected encrypted block: 16#4F#, 16#35#, 16#45#, 16#92#, 16#FF#, 16#7C#, 16#88#, 16#47#, 16#D2#, 16#D0#, 16#87#, 16#0C#, 16#A9#, 16#48#, 16#1B#, 16#7C#
+    Encrypting ...
     Obtained encrypted block: 16#4F#, 16#35#, 16#45#, 16#92#, 16#FF#, 16#7C#, 16#88#, 16#47#, 16#D2#, 16#D0#, 16#87#, 16#0C#, 16#A9#, 16#48#, 16#1B#, 16#7C#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#51#, 16#71#, 16#97#, 16#83#, 16#D3#, 16#18#, 16#5A#, 16#53#, 16#5B#, 16#D7#, 16#5A#, 16#DC#, 16#65#, 16#07#, 16#1C#, 16#E1#
 [I] Cipher test vector, results match
 [I] AES GSFbox 192 Test Vector:  5
     Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
     Plain text block        : 16#26#, 16#AA#, 16#49#, 16#DC#, 16#FE#, 16#76#, 16#29#, 16#A8#, 16#90#, 16#1A#, 16#69#, 16#A9#, 16#91#, 16#4E#, 16#6D#, 16#FD#
     Expected encrypted block: 16#D5#, 16#E0#, 16#8B#, 16#F9#, 16#A1#, 16#82#, 16#E8#, 16#57#, 16#CF#, 16#40#, 16#B3#, 16#A3#, 16#6E#, 16#E2#, 16#48#, 16#CC#
+    Encrypting ...
     Obtained encrypted block: 16#D5#, 16#E0#, 16#8B#, 16#F9#, 16#A1#, 16#82#, 16#E8#, 16#57#, 16#CF#, 16#40#, 16#B3#, 16#A3#, 16#6E#, 16#E2#, 16#48#, 16#CC#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#26#, 16#AA#, 16#49#, 16#DC#, 16#FE#, 16#76#, 16#29#, 16#A8#, 16#90#, 16#1A#, 16#69#, 16#A9#, 16#91#, 16#4E#, 16#6D#, 16#FD#
 [I] Cipher test vector, results match
 [I] AES GSFbox 192 Test Vector:  6
     Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
     Plain text block        : 16#94#, 16#1A#, 16#47#, 16#73#, 16#05#, 16#82#, 16#24#, 16#E1#, 16#EF#, 16#66#, 16#D1#, 16#0E#, 16#0A#, 16#6E#, 16#E7#, 16#82#
     Expected encrypted block: 16#06#, 16#7C#, 16#D9#, 16#D3#, 16#74#, 16#92#, 16#07#, 16#79#, 16#18#, 16#41#, 16#56#, 16#25#, 16#07#, 16#FA#, 16#96#, 16#26#
+    Encrypting ...
     Obtained encrypted block: 16#06#, 16#7C#, 16#D9#, 16#D3#, 16#74#, 16#92#, 16#07#, 16#79#, 16#18#, 16#41#, 16#56#, 16#25#, 16#07#, 16#FA#, 16#96#, 16#26#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#94#, 16#1A#, 16#47#, 16#73#, 16#05#, 16#82#, 16#24#, 16#E1#, 16#EF#, 16#66#, 16#D1#, 16#0E#, 16#0A#, 16#6E#, 16#E7#, 16#82#
 [I] Cipher test vector, results match
 [I] Appendiz B. GFSbox Known Answer Test Values
     Appendix B.3. Keysize = 256
@@ -510,104 +420,133 @@ Started         : 2017/03/28 - 13:22:00
     Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
     Plain text block        : 16#01#, 16#47#, 16#30#, 16#F8#, 16#0A#, 16#C6#, 16#25#, 16#FE#, 16#84#, 16#F0#, 16#26#, 16#C6#, 16#0B#, 16#FD#, 16#54#, 16#7D#
     Expected encrypted block: 16#5C#, 16#9D#, 16#84#, 16#4E#, 16#D4#, 16#6F#, 16#98#, 16#85#, 16#08#, 16#5E#, 16#5D#, 16#6A#, 16#4F#, 16#94#, 16#C7#, 16#D7#
+    Encrypting ...
     Obtained encrypted block: 16#5C#, 16#9D#, 16#84#, 16#4E#, 16#D4#, 16#6F#, 16#98#, 16#85#, 16#08#, 16#5E#, 16#5D#, 16#6A#, 16#4F#, 16#94#, 16#C7#, 16#D7#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#01#, 16#47#, 16#30#, 16#F8#, 16#0A#, 16#C6#, 16#25#, 16#FE#, 16#84#, 16#F0#, 16#26#, 16#C6#, 16#0B#, 16#FD#, 16#54#, 16#7D#
 [I] Cipher test vector, results match
 [I] AES GSFbox 256 Test Vector:  2
     Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
     Plain text block        : 16#0B#, 16#24#, 16#AF#, 16#36#, 16#19#, 16#3C#, 16#E4#, 16#66#, 16#5F#, 16#28#, 16#25#, 16#D7#, 16#B4#, 16#74#, 16#9C#, 16#98#
     Expected encrypted block: 16#A9#, 16#FF#, 16#75#, 16#BD#, 16#7C#, 16#F6#, 16#61#, 16#3D#, 16#37#, 16#31#, 16#C7#, 16#7C#, 16#3B#, 16#6D#, 16#0C#, 16#04#
+    Encrypting ...
     Obtained encrypted block: 16#A9#, 16#FF#, 16#75#, 16#BD#, 16#7C#, 16#F6#, 16#61#, 16#3D#, 16#37#, 16#31#, 16#C7#, 16#7C#, 16#3B#, 16#6D#, 16#0C#, 16#04#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#0B#, 16#24#, 16#AF#, 16#36#, 16#19#, 16#3C#, 16#E4#, 16#66#, 16#5F#, 16#28#, 16#25#, 16#D7#, 16#B4#, 16#74#, 16#9C#, 16#98#
 [I] Cipher test vector, results match
 [I] AES GSFbox 256 Test Vector:  3
     Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
     Plain text block        : 16#76#, 16#1C#, 16#1F#, 16#E4#, 16#1A#, 16#18#, 16#AC#, 16#F2#, 16#0D#, 16#24#, 16#16#, 16#50#, 16#61#, 16#1D#, 16#90#, 16#F1#
     Expected encrypted block: 16#62#, 16#3A#, 16#52#, 16#FC#, 16#EA#, 16#5D#, 16#44#, 16#3E#, 16#48#, 16#D9#, 16#18#, 16#1A#, 16#B3#, 16#2C#, 16#74#, 16#21#
+    Encrypting ...
     Obtained encrypted block: 16#62#, 16#3A#, 16#52#, 16#FC#, 16#EA#, 16#5D#, 16#44#, 16#3E#, 16#48#, 16#D9#, 16#18#, 16#1A#, 16#B3#, 16#2C#, 16#74#, 16#21#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#76#, 16#1C#, 16#1F#, 16#E4#, 16#1A#, 16#18#, 16#AC#, 16#F2#, 16#0D#, 16#24#, 16#16#, 16#50#, 16#61#, 16#1D#, 16#90#, 16#F1#
 [I] Cipher test vector, results match
 [I] AES GSFbox 256 Test Vector:  4
     Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
     Plain text block        : 16#8A#, 16#56#, 16#07#, 16#69#, 16#D6#, 16#05#, 16#86#, 16#8A#, 16#D8#, 16#0D#, 16#81#, 16#9B#, 16#DB#, 16#A0#, 16#37#, 16#71#
     Expected encrypted block: 16#38#, 16#F2#, 16#C7#, 16#AE#, 16#10#, 16#61#, 16#24#, 16#15#, 16#D2#, 16#7C#, 16#A1#, 16#90#, 16#D2#, 16#7D#, 16#A8#, 16#B4#
+    Encrypting ...
     Obtained encrypted block: 16#38#, 16#F2#, 16#C7#, 16#AE#, 16#10#, 16#61#, 16#24#, 16#15#, 16#D2#, 16#7C#, 16#A1#, 16#90#, 16#D2#, 16#7D#, 16#A8#, 16#B4#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#8A#, 16#56#, 16#07#, 16#69#, 16#D6#, 16#05#, 16#86#, 16#8A#, 16#D8#, 16#0D#, 16#81#, 16#9B#, 16#DB#, 16#A0#, 16#37#, 16#71#
 [I] Cipher test vector, results match
 [I] AES GSFbox 256 Test Vector:  5
     Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
     Plain text block        : 16#91#, 16#FB#, 16#EF#, 16#2D#, 16#15#, 16#A9#, 16#78#, 16#16#, 16#06#, 16#0B#, 16#EE#, 16#1F#, 16#EA#, 16#A4#, 16#9A#, 16#FE#
     Expected encrypted block: 16#1B#, 16#C7#, 16#04#, 16#F1#, 16#BC#, 16#E1#, 16#35#, 16#CE#, 16#B8#, 16#10#, 16#34#, 16#1B#, 16#21#, 16#6D#, 16#7A#, 16#BE#
+    Encrypting ...
     Obtained encrypted block: 16#1B#, 16#C7#, 16#04#, 16#F1#, 16#BC#, 16#E1#, 16#35#, 16#CE#, 16#B8#, 16#10#, 16#34#, 16#1B#, 16#21#, 16#6D#, 16#7A#, 16#BE#
 [I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#91#, 16#FB#, 16#EF#, 16#2D#, 16#15#, 16#A9#, 16#78#, 16#16#, 16#06#, 16#0B#, 16#EE#, 16#1F#, 16#EA#, 16#A4#, 16#9A#, 16#FE#
+[I] Cipher test vector, results match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/04/03 - 20:44:32
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : AES Bulk test
+Started         : 2017/04/03 - 20:44:32
+--------------------------------------------------------------------------------
+[I] Using key size:  16
+[I] Block cipher bulk test
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.AES.AES_CIPHER"
+    CryptAda cipher algorithm id  : SC_AES_256
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "AES256"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.9"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  16
+    Maximum key length            :  32
+    Default key length            :  32
+    Key length increment step     :  8
+    Block size                    :  16
+[I] Bulk test completed OK
+[I] Using key size:  24
+[I] Block cipher bulk test
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.AES.AES_CIPHER"
+    CryptAda cipher algorithm id  : SC_AES_256
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "AES256"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.9"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  16
+    Maximum key length            :  32
+    Default key length            :  32
+    Key length increment step     :  8
+    Block size                    :  16
+[I] Bulk test completed OK
+[I] Using key size:  32
+[I] Block cipher bulk test
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.AES.AES_CIPHER"
+    CryptAda cipher algorithm id  : SC_AES_256
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "AES256"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.9"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  16
+    Maximum key length            :  32
+    Default key length            :  32
+    Key length increment step     :  8
+    Block size                    :  16
+[I] Bulk test completed OK
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:22:00
---[End Test Case]---------------------------------------------------------------
-
---[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 5
-Description     : AES Bulk test
-Started         : 2017/03/28 - 13:22:00
---------------------------------------------------------------------------------
-[I] Using key size:  16
-[I] Block cipher bulk test
-    Performing  10000 iterations encrypting and decrypting random blocks
-    with random keys.
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.AES.AES_CIPHER"
-    CryptAda cipher algorithm id  : "BC_AES_256"
-    Block_Cipher SCAN name        : "AES256"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.9"
-    Block size                    :  16
-    Cipher state                  : IDLE
-    Minimum key length            :  16
-    Maximum key length            :  32
-    Default key length            :  32
-    Key length increment step     :  8
-[I] Bulk test completed OK
-[I] Using key size:  24
-[I] Block cipher bulk test
-    Performing  10000 iterations encrypting and decrypting random blocks
-    with random keys.
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.AES.AES_CIPHER"
-    CryptAda cipher algorithm id  : "BC_AES_256"
-    Block_Cipher SCAN name        : "AES256"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.9"
-    Block size                    :  16
-    Cipher state                  : IDLE
-    Minimum key length            :  16
-    Maximum key length            :  32
-    Default key length            :  32
-    Key length increment step     :  8
-[I] Bulk test completed OK
-[I] Using key size:  32
-[I] Block cipher bulk test
-    Performing  10000 iterations encrypting and decrypting random blocks
-    with random keys.
-[I] Information of block cipher object:
-    Block_Cipher object tag name  : "CRYPTADA.CIPHERS.BLOCK_CIPHERS.AES.AES_CIPHER"
-    CryptAda cipher algorithm id  : "BC_AES_256"
-    Block_Cipher SCAN name        : "AES256"
-    Block_Cipher ASN1 OID         : ""
-    Block_Cipher OpenPGP name     : "OpenPGP.Cipher.9"
-    Block size                    :  16
-    Cipher state                  : IDLE
-    Minimum key length            :  16
-    Maximum key length            :  32
-    Default key length            :  32
-    Key length increment step     :  8
-[I] Bulk test completed OK
-[I] Test case OK
---------------------------------------------------------------------------------
-Test Case Number: 5
-Test Case Result: PASSED
-Finished        : 2017/03/28 - 13:22:01
+Finished        : 2017/04/03 - 20:44:32
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.AES
-Finished                 : 2017/03/28 - 13:22:01
+Finished                 : 2017/04/03 - 20:44:32
 ================================================================================

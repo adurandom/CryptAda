@@ -16,11 +16,11 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-block_ciphers-aes.adb
+--    Filename          :  cryptada-ciphers-symmetric-block-aes.adb
 --    File kind         :  Ada package body
 --    Author            :  A. Duran
 --    Creation date     :  March 25th, 2017
---    Current version   :  1.0
+--    Current version   :  1.2
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the AES block cipher.
@@ -29,6 +29,8 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170325 ADD   Initial implementation.
+--    1.1   20170330 ADD   Removed key generation subprogram.
+--    1.2   20170403 ADD   Changed symmetric ciphers hierarchy.
 --------------------------------------------------------------------------------
 
 with Ada.Unchecked_Deallocation;
@@ -37,9 +39,8 @@ with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
 with CryptAda.Names;                      use CryptAda.Names;
 with CryptAda.Exceptions;                 use CryptAda.Exceptions;
 with CryptAda.Ciphers.Keys;               use CryptAda.Ciphers.Keys;
-with CryptAda.Random.Generators;          use CryptAda.Random.Generators;
 
-package body CryptAda.Ciphers.Block_Ciphers.AES is
+package body CryptAda.Ciphers.Symmetric.Block.AES is
 
    -----------------------------------------------------------------------------
    --[Generic Instantiation]----------------------------------------------------
@@ -563,7 +564,7 @@ package body CryptAda.Ciphers.Block_Ciphers.AES is
    is
       RK             : AES_Round_Keys := null;
       KB             : constant Byte_Array := Get_Key_Bytes(The_Key);
-      KW             : constant Positive := AES_Key_Sizes(Key_Id) / AES_Word_Size;
+      KW             : constant Positive := AES_Key_Lengths(Key_Id) / AES_Word_Size;
       K              : Positive;
       T              : Four_Bytes;
       Rcon_Ndx       : Positive;
@@ -936,12 +937,46 @@ package body CryptAda.Ciphers.Block_Ciphers.AES is
       
       Output := TI;
    end Decrypt_Block;
-   
+
    -----------------------------------------------------------------------------
-   --[Dispatching Operations]---------------------------------------------------
+   --[Spec declared subprogram bodies]------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Encrypt/Decrypt Interface]------------------------------------------------
+   --[Ada.Finalization interface]-----------------------------------------------
+
+   --[Initialize]---------------------------------------------------------------
+
+   procedure   Initialize(
+                  Object         : in out AES_Cipher)
+   is
+   begin
+      Object.Cipher_Id     := SC_AES_256;
+      Object.Ciph_Type     := CryptAda.Ciphers.Block_Cipher;
+      Object.Key_Info      := AES_Key_Info;
+      Object.State         := Idle;
+      Object.Block_Size    := AES_Block_Size;
+      Object.Key_Id        := AES_256;
+      Object.Round_Keys    := null;
+   end Initialize;
+
+   --[Finalize]-----------------------------------------------------------------
+
+   procedure   Finalize(
+                  Object         : in out AES_Cipher)
+   is
+   begin
+      if Object.Round_Keys /= null then
+         Object.Round_Keys.all := (others => 0);
+         Free(Object.Round_Keys);
+      end if;
+      
+      Object.Cipher_Id        := SC_AES_256;
+      Object.State            := Idle;
+      Object.Key_Id           := AES_256;
+      Object.Round_Keys       := null;
+   end Finalize;
+   
+   --[Dispatching Operations]---------------------------------------------------
 
    --[Start_Cipher]-------------------------------------------------------------
 
@@ -957,7 +992,7 @@ package body CryptAda.Ciphers.Block_Ciphers.AES is
 
       -- Veriify that key is a valid DES EDE key.
       
-      if not Is_Valid_Key(The_Cipher, With_Key) then
+      if not Is_Valid_AES_Key(With_Key) then
          raise CryptAda_Invalid_Key_Error;
       end if;
 
@@ -966,15 +1001,13 @@ package body CryptAda.Ciphers.Block_Ciphers.AES is
       case Get_Key_Length(With_Key) is
          when 16 =>
             K_Id  := AES_128;
-            BC_Id := BC_AES_128;
+            BC_Id := SC_AES_128;
          when 24 =>
             K_Id  := AES_192;
-            BC_Id := BC_AES_192;
-         when 32 =>
-            K_Id  := AES_256;
-            BC_Id := BC_AES_256;
+            BC_Id := SC_AES_192;
          when others =>
-            raise CryptAda_Invalid_Key_Error;
+            K_Id  := AES_256;
+            BC_Id := SC_AES_256;
       end case;
       
       -- Create AES key rounds.
@@ -1002,12 +1035,12 @@ package body CryptAda.Ciphers.Block_Ciphers.AES is
       The_Cipher.Round_Keys      := RK;      
    end Start_Cipher;
 
-   --[Process_Block]------------------------------------------------------------
+   --[Do_Process]---------------------------------------------------------------
 
-   procedure   Process_Block(
+   procedure   Do_Process(
                   With_Cipher    : in out AES_Cipher;
-                  Input          : in     Block;
-                  Output         :    out Block)
+                  Input          : in     Byte_Array;
+                  Output         :    out Byte_Array)
    is
       B_I            : AES_Packed_Block;
       B_O            : AES_Packed_Block;
@@ -1036,7 +1069,7 @@ package body CryptAda.Ciphers.Block_Ciphers.AES is
       end if;
       
       Output := Unpack_Block(B_O);
-   end Process_Block;
+   end Do_Process;
    
    --[Stop_Cipher]--------------------------------------------------------------
       
@@ -1053,109 +1086,48 @@ package body CryptAda.Ciphers.Block_Ciphers.AES is
             The_Cipher.Round_Keys := null;
          end if;
 
-         The_Cipher.Cipher_Id    := BC_AES_256;
+         The_Cipher.Cipher_Id    := SC_AES_256;
          The_Cipher.Key_Id       := AES_256;         
       end if;
    end Stop_Cipher;
    
-   --[Key related operations]---------------------------------------------------
-
-   --[Generate_Key]-------------------------------------------------------------
+   --[Other public subprograms]-------------------------------------------------
    
-   procedure   Generate_Key(
-                  The_Cipher     : in     AES_Cipher;
-                  Generator      : in out Random_Generator'Class;
-                  The_Key        : in out Key)
+   --[Get_AES_Key_Id]-----------------------------------------------------------
+
+   function    Get_AES_Key_Id(
+                  Of_Cipher      : in     AES_Cipher'Class)
+      return   AES_Key_Id
    is
    begin
-      Generate_Key(The_Cipher, AES_256, Generator, The_Key);
-   end Generate_Key;
+      if Of_Cipher.State = Idle then
+         raise CryptAda_Uninitialized_Cipher_Error;
+      else
+         return Of_Cipher.Key_Id;
+      end if;
+   end Get_AES_Key_Id;
    
-   --[Is_Valid_Key]-------------------------------------------------------------
+   --[Is_Valid_AES_Key]---------------------------------------------------------
    
-   function    Is_Valid_Key(
-                  For_Cipher     : in     AES_Cipher;
+   function    Is_Valid_AES_Key(
                   The_Key        : in     Key)
       return   Boolean
    is
+      KL             : Cipher_Key_Length;
    begin
       if Is_Null(The_Key) then
          return False;
       else
-         return Is_Valid_Key_Length(For_Cipher, Get_Key_Length(The_Key));
-      end if;
-   end Is_Valid_Key;
+         KL := Get_Key_Length(The_Key);
          
-   --[Is_Strong_Key]------------------------------------------------------------
-   
-   function    Is_Strong_Key(
-                  For_Cipher     : in     AES_Cipher;
-                  The_Key        : in     Key)
-      return   Boolean
-   is
-   begin
-      return Is_Valid_Key(For_Cipher, The_Key);
-   end Is_Strong_Key;
-   
-   -----------------------------------------------------------------------------
-   --[Non-Dispatching Operations]-----------------------------------------------
-   -----------------------------------------------------------------------------
-
-   --[Generate_Key]-------------------------------------------------------------
-   
-   procedure   Generate_Key(
-                  The_Cipher     : in     AES_Cipher;
-                  Key_Id         : in     AES_Key_Id;
-                  Generator      : in out Random_Generator'Class;
-                  The_Key        : in out Key)
-   is
-      KB             : Byte_Array(1 .. AES_Key_Sizes(Key_Id));
-   begin
-      loop
-         Random_Generate(Generator, KB);
-         Set_Key(The_Key, KB);
-         exit when Is_Strong_Key(The_Cipher, The_Key);
-      end loop;
-   end Generate_Key;
-   
-   --[Ada.Finalization interface]-----------------------------------------------
-
-   --[Initialize]---------------------------------------------------------------
-
-   procedure   Initialize(
-                  Object         : in out AES_Cipher)
-   is
-   begin
-      Object.Cipher_Id        := BC_AES_256;
-      Object.Min_KL           := AES_Min_KL;
-      Object.Max_KL           := AES_Max_KL;
-      Object.Def_KL           := AES_Def_KL;
-      Object.KL_Inc_Step      := AES_KL_Inc_Step;
-      Object.Blk_Size         := AES_Block_Size;
-      Object.State            := Idle;
-      Object.Key_Id           := AES_256;
-      Object.Round_Keys       := null;
-   end Initialize;
-
-   --[Finalize]-----------------------------------------------------------------
-
-   procedure   Finalize(
-                  Object         : in out AES_Cipher)
-   is
-   begin
-      if Object.Round_Keys /= null then
-         Object.Round_Keys.all := (others => 0);
-         Free(Object.Round_Keys);
+         for I in AES_Key_Lengths'Range loop
+            if AES_Key_Lengths(I) = KL then
+               return True;
+            end if;
+         end loop;
+         
+         return False;
       end if;
-      
-      Object.Cipher_Id        := BC_AES_256;
-      Object.Min_KL           := AES_Min_KL;
-      Object.Max_KL           := AES_Max_KL;
-      Object.Def_KL           := AES_Def_KL;
-      Object.KL_Inc_Step      := AES_KL_Inc_Step;
-      Object.Blk_Size         := AES_Block_Size;
-      Object.State            := Idle;
-      Object.Key_Id           := AES_256;
-      Object.Round_Keys       := null;
-   end Finalize;   
-end CryptAda.Ciphers.Block_Ciphers.AES;
+   end Is_Valid_AES_Key;
+         
+end CryptAda.Ciphers.Symmetric.Block.AES;

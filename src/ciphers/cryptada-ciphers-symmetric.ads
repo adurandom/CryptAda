@@ -16,19 +16,39 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-block_ciphers.ads
+--    Filename          :  cryptada-ciphers-symmetric.ads
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
---    Creation date     :  March 21th, 2017
+--    Creation date     :  April 3rd, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Root package for CryptAda implemented block ciphers.
+--    This is the root package for CryptAda symmetric-key cipher algorithms.
+--
+--    Symmetric-key algorithms use the same cryptographic keys for both 
+--    encryption of plaintext and decryption of ciphertext. The keys may be 
+--    identical or there may be a simple transformation to go between the two 
+--    keys. Those keys, in practice, represent a shared secret between two or 
+--    more parties that can be used to maintain a private information link. 
+--    This requirement that both parties have access to the secret key is one of 
+--    the main drawbacks of symmetric key encryption, in comparison to 
+--    public-key encryption (also known as asymmetric key encryption).
+--
+--    There are two types of symmetric key ciphers:
+--    
+--    o  Stream ciphers encrypt the digits (typically bytes) of a message one 
+--       at a time.
+--    o  Block ciphers take a fixed length block of bits and encrypt them as a 
+--       single unit, padding the plaintext so that it is a multiple of the 
+--       block size. 
+--
+--    This package provides an abstract base type (Symmetric_Cipher) and basic 
+--    set of operations for both Stream and Block ciphers.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
---    1.0   20170321 ADD   Initial implementation.
+--    1.0   20170403 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
 with Ada.Finalization;
@@ -36,96 +56,81 @@ with Ada.Finalization;
 with CryptAda.Pragmatics;
 with CryptAda.Names;
 with CryptAda.Ciphers.Keys;
-with CryptAda.Random.Generators;
 
-package CryptAda.Ciphers.Block_Ciphers is
+package CryptAda.Ciphers.Symmetric is
 
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Block_Cipher]-------------------------------------------------------------
-   -- Abstract tagged type that is the base class for Block_Ciphers. 
-   -- Block_Cipher objects maintain the necessary state information for the
+   --[Symmetric_Cipher]---------------------------------------------------------
+   -- Abstract tagged type that is the base class for symmetric ciphers. 
+   -- Symmetric_Cipher objects maintain the necessary state information for the
    -- encrypting/decrypting operations.
    -----------------------------------------------------------------------------
    
-   type Block_Cipher is abstract tagged limited private;
+   type Symmetric_Cipher is abstract tagged limited private;
 
-   --[Block_Cipher_Ref]---------------------------------------------------------
-   -- Class wide access type to Block_Cipher objects.
+   --[Symmetric_Cipher_Ref]-----------------------------------------------------
+   -- Class wide access type to Symmetric_Cipher objects.
    -----------------------------------------------------------------------------
    
-   type Block_Cipher_Ref is access all Block_Cipher'Class;
-   
-   --[Block_Size]---------------------------------------------------------------
-   -- Type for block size values.
-   -----------------------------------------------------------------------------
-   
-   subtype Block_Size is Positive;
-   
-   --[Block]---------------------------------------------------------------
-   -- Type for blocks.
-   -----------------------------------------------------------------------------
-
-   subtype Block is CryptAda.Pragmatics.Byte_Array;
+   type Symmetric_Cipher_Ref is access all Symmetric_Cipher'Class;
    
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Encrypt/Decrypt Interface]------------------------------------------------
-
    --[Start_Cipher]-------------------------------------------------------------
    -- Purpose:
-   -- Initializes a Block_Cipher object for a specific operation (encryption or
-   -- decryption). If the object is already started, the procedure will reset
-   -- object state to its initial state.
+   -- Initializes a Symmetric_Cipher object for a specific operation (Encrypt or
+   -- Decrypt) with a specific key. If the cipher object is already started, all
+   -- state information is lost and the object is left ready for a new 
+   -- encryption/decryption process.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- The_Cipher           Block_Cipher object to initialize.
+   -- The_Cipher           Symmetric_Cipher object to start.
    -- For_Operation        Cipher_Operation value that identifies the operation
    --                      for which the object is to be started.
-   -- With_Key             The cipher key to use.
+   -- With_Key             The symmetric key to use for operation.
    -----------------------------------------------------------------------------
    -- Returned value:
    -- N/A.
    -----------------------------------------------------------------------------
    -- Exceptions:
-   -- CryptAda_Invalid_Key_Error if With_Key is not a valid key.
+   -- CryptAda_Invalid_Key_Error if With_Key is not a valid key for the cipher.
    -----------------------------------------------------------------------------
 
    procedure   Start_Cipher(
-                  The_Cipher     : in out Block_Cipher;
+                  The_Cipher     : in out Symmetric_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     CryptAda.Ciphers.Keys.Key)
       is abstract;
 
-   --[Process_Block]------------------------------------------------------------
+   --[Do_Process]---------------------------------------------------------------
    -- Purpose:
-   -- Processes (ecrypts or decrypts) a block of data returning the 
-   -- corresponding (encrypted or decrypted) block.
+   -- Processes (ecrypts or decrypts) a chunk of input data.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- With_Cipher          Block_Cipher object that is going to process the 
+   -- With_Cipher          Symmetric_Cipher object that is going to process the 
    --                      block.
-   -- Input                Input Block either a plain text (encryption) or 
-   --                      ciphered text (decryption) to process.
-   -- Output               Block resulting from processing.
+   -- Input                Byte_Array containing the data to process (plain text
+   --                      for encryption, ciphered text for decryption).
+   -- Output               Byte_Array that, on return of the subprogram, will
+   --                      contain the result of Input processing.
    -----------------------------------------------------------------------------
    -- Returned value:
    -- N/A.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- CryptAda_Unitialized_Cipher_Error if With_Cipher is not initialized.
-   -- CryptAda_Invalid_Block_Length_Error if either Input or Output block 
-   -- lengths are invalid for the particular algorithm.
+   -- CryptAda_Bad_Argument_Error if Input'Length /= Output'Length.
    -----------------------------------------------------------------------------
 
-   procedure   Process_Block(
-                  With_Cipher    : in out Block_Cipher;
-                  Input          : in     Block;
-                  Output         :    out Block)
+   procedure   Do_Process(
+                  With_Cipher    : in out Symmetric_Cipher;
+                  Input          : in     CryptAda.Pragmatics.Byte_Array;
+                  Output         :    out CryptAda.Pragmatics.Byte_Array)
       is abstract;
 
    --[Stop_Cipher]--------------------------------------------------------------
@@ -134,7 +139,7 @@ package CryptAda.Ciphers.Block_Ciphers is
    -- contains.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- The_Cipher           Block_Cipher object to stop.
+   -- The_Cipher           Symmetric_Cipher object to stop.
    -----------------------------------------------------------------------------
    -- Returned value:
    -- N/A.
@@ -144,161 +149,115 @@ package CryptAda.Ciphers.Block_Ciphers is
    -----------------------------------------------------------------------------
       
    procedure   Stop_Cipher(
-                  The_Cipher     : in out Block_Cipher)
-         is abstract;
-
-   --[Key related operations]---------------------------------------------------
-
-   --[Generate_Key]-------------------------------------------------------------
-   -- Purpose:
-   -- Generates a strong random key for encrypting/decrypting.
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- The_Cipher           Block_Cipher object.
-   -- Generator            Random_Generator used to generate the random key.
-   -- The_Key              The generated key.
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- N/A.
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- CryptAda_Generator_Not_Started_Error
-   -- CryptAda_Generator_Need_Seeding_Error
-   -- CryptAda_Storage_Error
-   -----------------------------------------------------------------------------
-   
-   procedure   Generate_Key(
-                  The_Cipher     : in     Block_Cipher;
-                  Generator      : in out CryptAda.Random.Generators.Random_Generator'Class;
-                  The_Key        : in out CryptAda.Ciphers.Keys.Key)
-         is abstract;
-
-   --[Is_Valid_Key]-------------------------------------------------------------
-   -- Purpose:
-   -- Checks if a Key is valid for the particular cipher algorithm.
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- For_Cipher           Block_Cipher object.
-   -- The_Key              Key to check for validity.
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- Boolean value that indicates if The_Key is valid or not.
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- None.
-   -----------------------------------------------------------------------------
-   
-   function    Is_Valid_Key(
-                  For_Cipher     : in     Block_Cipher;
-                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
-      return   Boolean
-         is abstract;
-         
-   --[Is_Strong_Key]------------------------------------------------------------
-   -- Purpose:
-   -- Checks the strongness of a Key for a particular cipher algorithm.
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- For_Cipher           Block_Cipher object.
-   -- The_Key              Key to check for strongness.
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- Boolean value that indicates if The_Key is strong or not.
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- None.
-   -----------------------------------------------------------------------------
-   
-   function    Is_Strong_Key(
-                  For_Cipher     : in     Block_Cipher;
-                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
-      return   Boolean
+                  The_Cipher     : in out Symmetric_Cipher)
          is abstract;
          
    -----------------------------------------------------------------------------
    --[Non-dispatching Operations]-----------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Get_Block_Cipher_Id]------------------------------------------------------
+   --[Is_Started]---------------------------------------------------------------
    -- Purpose:
-   -- Returns the algorithm identifier of the cipher object.
+   -- Checks if a Cipher_Object is started.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- From                 Block_Cipher object to obtain the Cipher_Id from.
+   -- The_Cipher           Symmetric_Cipher object to check.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Block_Cipher_Id value that identifies the block cipher algorithm.
+   -- Boolean value that indicates whether The_Cipher is started (True) or not
+   -- (False)
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- None.
    -----------------------------------------------------------------------------
 
-   function    Get_Block_Cipher_Id(
-                  From           : in     Block_Cipher'Class)
-      return   CryptAda.Names.Block_Cipher_Id;
-
-   --[Get_Block_Size]-----------------------------------------------------------
+   function    Is_Started(
+                  The_Cipher     : in     Symmetric_Cipher'Class)
+      return   Boolean;
+      
+   --[Get_Symmetric_Cipher_Type]------------------------------------------------
    -- Purpose:
-   -- Returns the size in bytes of blocks processed by a Block_Cipher.
+   -- Returns the type of the symmetric cipher (either stream or block cipher).
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- From                 Block_Cipher object to obtain the block size from.
+   -- Of_Cipher            Symmetric_Cipher object to obtain its type.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Block_Size value with the size in bytes of the block.
+   -- Cipher_Type value that identifies the cipher type.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- None.
    -----------------------------------------------------------------------------
 
-   function    Get_Block_Size(
-                  From           : in     Block_Cipher'Class)
-      return   Block_Size;
-
-   --[Get_Cipher_State]---------------------------------------------------------
+   function    Get_Symmetric_Cipher_Type(
+                  Of_Cipher         : in     Symmetric_Cipher'Class)
+      return   Cipher_Type;
+      
+   --[Get_Symmetric_Cipher_State]-----------------------------------------------
    -- Purpose:
-   -- Returns the state the Block_Cipher is in.
+   -- Returns the state a cipher object is in.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- From                 Block_Cipher object to obtain the state from.
+   -- Of_Cipher            Symmetric_Cipher object to obtain its state.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Cipher_State value with the identifier of the Block_Cipher state.
+   -- Cipher_State value that identifies the cipher state.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- None.
    -----------------------------------------------------------------------------
 
-   function    Get_Cipher_State(
-                  From           : in     Block_Cipher'Class)
+   function    Get_Symmetric_Cipher_State(
+                  Of_Cipher         : in     Symmetric_Cipher'Class)
       return   Cipher_State;
 
-   --[Get_Block_Cipher_Name]----------------------------------------------------
+   --[Get_Symmetric_Cipher_Id]--------------------------------------------------
    -- Purpose:
-   -- Returns the cipher name according to a particular naming schema.
+   -- Returns the symmetric cipher id that identifies a particular symmetric 
+   -- cipher.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- From                 Block_Cipher object to obtain the cipher name.
-   -- Schema               Naming_Schema idetifier.
+   -- Of_Cipher            Symmetric_Cipher object to obtain its id.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- String with algorithm name acording the particular naming schema.
+   -- Symmetric_Cipher_Id value that identifies the cipher.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- None.
    -----------------------------------------------------------------------------
 
-   function    Get_Block_Cipher_Name(
-                  From           : in     Block_Cipher'Class;
-                  Schema         : in     CryptAda.Names.Naming_Schema)
-      return   String;
-
-   --[Is_Valid_Key_Length]------------------------------------------------------
+   function    Get_Symmetric_Cipher_Id(
+                  Of_Cipher         : in     Symmetric_Cipher'Class)
+      return   CryptAda.Names.Symmetric_Cipher_Id;
+      
+   --[Get_Symmetric_Cipher_Name]------------------------------------------------
    -- Purpose:
-   -- Check the validity of the key length.
+   -- Returns the name of a particular symmetric cipher according to a 
+   -- particular naming schema.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- For_Cipher           Block_Cipher object.
+   -- Of_Cipher            Symmetric_Cipher object to obtain its name.
+   -- Schema               Naming_Schema value for which the name is to be 
+   --                      obtained.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- String with the name of the symmetric cipher.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   function    Get_Symmetric_Cipher_Name(
+                  Of_Cipher         : in     Symmetric_Cipher'Class;
+                  Schema            : in     CryptAda.Names.Naming_Schema)
+      return   String;
+      
+   --[Is_Valid_Key_Length]------------------------------------------------------
+   -- Purpose:
+   -- Check the validity of the key length for a particular symmetric cipher.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- For_Cipher           Symmetric_Cipher object.
    -- The_Length           Key length to check for validity.
    -----------------------------------------------------------------------------
    -- Returned value:
@@ -309,67 +268,86 @@ package CryptAda.Ciphers.Block_Ciphers is
    -----------------------------------------------------------------------------
 
    function    Is_Valid_Key_Length(
-                  For_Cipher     : in     Block_Cipher'Class;
-                  The_Length     : in     Positive)
+                  For_Cipher     : in     Symmetric_Cipher'Class;
+                  The_Length     : in     Cipher_Key_Length)
       return   Boolean;
 
-   --[Get_Minimum_Key_Length]---------------------------------------------------
+   --[Get_Cipher_Key_Info]------------------------------------------------------
    -- Purpose:
-   -- Returns the minimum length for keys for a particular block cipher.
+   -- Returns key related information for a particular Symmetric_Cipher object.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- For_Cipher           Block_Cipher object.
+   -- For_Cipher           Symmetric_Cipher object.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Positive value with the minimum number of bytes for a valid key.
+   -- Cipher_Key_Info (CryptAda.Ciphers) record with key information
+   -- For_Cipher.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+   
+   function    Get_Cipher_Key_Info(
+                  For_Cipher     : in     Symmetric_Cipher'Class)
+      return   Cipher_Key_Info;
+      
+   --[Get_Minimum_Key_Length]---------------------------------------------------
+   -- Purpose:
+   -- Returns the minimum length for keys for a particular symmetric cipher.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- For_Cipher           Symmetric_Cipher object.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Cipher_Key_Length value with the minimum number of bytes for a valid key.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- None.
    -----------------------------------------------------------------------------
 
    function    Get_Minimum_Key_Length(
-                  For_Cipher     : in     Block_Cipher'Class)
-      return   Positive;
+                  For_Cipher     : in     Symmetric_Cipher'Class)
+      return   Cipher_Key_Length;
 
    --[Get_Maximum_Key_Length]---------------------------------------------------
    -- Purpose:
-   -- Returns the maximum length for keys for a particular block cipher.
+   -- Returns the maximum length for keys for a particular symmetric cipher.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- For_Cipher           Block_Cipher object.
+   -- For_Cipher           Symmetric_Cipher object.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Positive value with the maximum number of bytes for a valid key.
+   -- Cipher_Key_Length value with the maximum number of bytes for a valid key.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- None.
    -----------------------------------------------------------------------------
 
    function    Get_Maximum_Key_Length(
-                  For_Cipher     : in     Block_Cipher'Class)
-      return   Positive;
+                  For_Cipher     : in     Symmetric_Cipher'Class)
+      return   Cipher_Key_Length;
 
    --[Get_Default_Key_Length]---------------------------------------------------
    -- Purpose:
-   -- Returns the default length for keys for a particular block cipher.
+   -- Returns the default length for keys for a particular symmetric cipher.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- For_Cipher           Block_Cipher object.
+   -- For_Cipher           Symmetric_Cipher object.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Positive value with the default number of bytes for a valid key.
+   -- Cipher_Key_Length value with the default number of bytes for a valid key.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- None.
    -----------------------------------------------------------------------------
 
    function    Get_Default_Key_Length(
-                  For_Cipher     : in     Block_Cipher'Class)
-      return   Positive;
+                  For_Cipher     : in     Symmetric_Cipher'Class)
+      return   Cipher_Key_Length;
 
    --[Get_Key_Length_Increment_Step]--------------------------------------------
    -- Purpose:
-   -- Since some block_cipher algorithms allow multiple key lengths, this 
+   -- Since some symmetric cipher algorithms allow multiple key lengths, this 
    -- function returns the valid key increment length step between the minimum
    -- and maximum allowed key lengths.
    --
@@ -382,17 +360,17 @@ package CryptAda.Ciphers.Block_Ciphers is
    --          0 <= N <= (Maximum_KL - Minimum_KL) / Increment_Step
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- For_Cipher           Block_Cipher object.
+   -- For_Cipher           Symmetric_Cipher object.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Naturla value with the key size increment step.
+   -- Natural value with the key size increment step.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- None.
    -----------------------------------------------------------------------------
    
    function    Get_Key_Length_Increment_Step(
-                  For_Cipher     : in     Block_Cipher'Class)
+                  For_Cipher     : in     Symmetric_Cipher'Class)
       return   Natural;
       
    -----------------------------------------------------------------------------
@@ -405,28 +383,24 @@ private
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
          
-   --[Block_Cipher]-------------------------------------------------------------
+   --[Symmetric_Cipher]---------------------------------------------------------
    -- Full definition of the Block_Cipher tagged type. It extends the
    -- Ada.Finalization.Limited_Controlled with the followitng fields.
    --
    -- Cipher_Id            Enumerated value that identifies the particular
-   --                      block cipher algorithm.
-   -- Min_KL               Minimum key length.
-   -- Max_KL               Maximum key length.
-   -- Def_KL               Default key length.
-   -- KL_Inc_Step          Key length increment step.
-   -- Blk_Size             Size in bytes of the block.
+   --                      symmetric cipher algorithm.
+   -- Ciph_Type            Symmetric_Cipher_Type that identifies the cipher
+   --                      type.
+   -- Key_Info             Cipher's key information.
    -- State                State the cipher object is in.
    -----------------------------------------------------------------------------
 
-   type Block_Cipher is abstract new Ada.Finalization.Limited_Controlled with
+   type Symmetric_Cipher is abstract new Ada.Finalization.Limited_Controlled with
       record
-         Cipher_Id               : CryptAda.Names.Block_Cipher_Id;
-         Min_KL                  : Positive;
-         Max_KL                  : Positive;
-         Def_KL                  : Positive;
-         KL_Inc_Step             : Natural;
-         Blk_Size                : Block_Size;
+         Cipher_Id               : CryptAda.Names.Symmetric_Cipher_Id;
+         Ciph_Type               : Cipher_Type;
+         Key_Info                : Cipher_Key_Info;
          State                   : Cipher_State;
       end record;
-end CryptAda.Ciphers.Block_Ciphers;
+      
+end CryptAda.Ciphers.Symmetric;

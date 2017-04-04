@@ -29,6 +29,8 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170321 ADD   Initial implementation.
+--    1.1   20170329 ADD   Removed Key_Length type, added a Get_Key_Bytes 
+--                         procedure.
 --------------------------------------------------------------------------------
 
 with Ada.Finalization;
@@ -47,12 +49,6 @@ package CryptAda.Ciphers.Keys is
    
    type Key is limited private;
 
-   --[Key_Length]---------------------------------------------------------------
-   -- Type for key length values.
-   -----------------------------------------------------------------------------
-   
-   subtype Key_Length is Natural;
-   
    -----------------------------------------------------------------------------
    --[Subprogram specifications]------------------------------------------------
    -----------------------------------------------------------------------------
@@ -63,7 +59,9 @@ package CryptAda.Ciphers.Keys is
    -----------------------------------------------------------------------------
    -- Arguments:
    -- The_Key              Key to set.
-   -- To                   Byte_Array value to set the key to.
+   -- To                   Byte_Array value to set the key to.  If To'Length = 0
+   --                      The_Key will become Null (the effect is the same that
+   --                      a call to Set_Null).
    -----------------------------------------------------------------------------
    -- Returned value:
    -- N/A.
@@ -119,7 +117,7 @@ package CryptAda.Ciphers.Keys is
    -- Of_Key               Key object to get its length.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Key_Length value with the key length.
+   -- Cipher_Key_Length value with the key length.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- CryptAda_Null_Argument_Error if Of_Key is null.
@@ -127,26 +125,36 @@ package CryptAda.Ciphers.Keys is
    
    function    Get_Key_Length(
                   Of_Key         : in     Key)
-      return   Key_Length;
+      return   Cipher_Key_Length;
 
    --[Get_Key_Bytes]------------------------------------------------------------
    -- Purpose:
-   -- Get the key bytes.
+   -- Returns the key bytes. Two overloaded forms are provided: a function and
+   -- a procedure.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Of_Key               Key object to get the bytes from.
+   -- From_Key                Key object to get the bytes from.
+   -- Into                    (Procedure form) Byte_Array to copy the key bytes
+   --                         into it.
+   -- Length                  (Procedure form) Number of bytes copied into Into.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Byte_Array with the key bytes.
+   -- (Function form) Byte_Array with the key bytes.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- CryptAda_Null_Argument_Error if Of_Key is null.
+   -- CryptAda_Overflow_Error if Into'Length is less than key length.
    -----------------------------------------------------------------------------
    
    function    Get_Key_Bytes(
-                  Of_Key         : in     Key)
+                  From_Key       : in     Key)
       return   CryptAda.Pragmatics.Byte_Array;
 
+   procedure   Get_Key_Bytes(
+                  From_Key       : in     Key;
+                  Into           :    out CryptAda.Pragmatics.Byte_Array;
+                  Length         :    out Cipher_Key_Length);            
+      
    -----------------------------------------------------------------------------
    --[Private Part]-------------------------------------------------------------
    -----------------------------------------------------------------------------
