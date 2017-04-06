@@ -33,6 +33,7 @@ At the moment of this writing (April 6th, 2017) the following is implemented in 
   * DESX
   * DES2X
   * TDEA (Triple DES EDE)
+  * CAST_128
   * AES
   * Blowfish
   * RC2
