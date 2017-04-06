@@ -147,6 +147,7 @@ U_BC        =   $(CTB_UBC)/ut_keys.exe \
                 $(CTB_UBC)/ut_rc2.exe \
                 $(CTB_UBC)/ut_idea.exe \
                 $(CTB_UBC)/ut_cast_128.exe \
+                $(CTB_UBC)/ut_twofish.exe \
                 $(CTB_UBC)/ut_rc4.exe \
                 $(CTB_UBC)/ut_key_generators.exe \
                 $(CTB_UBC)/ut_kg_tdea.exe
@@ -330,6 +331,10 @@ $(CTB_UBC)/ut_cast_128.exe: $(CTS_UBC_DRV)ut_cast_128.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
 
+$(CTB_UBC)/ut_twofish.exe: $(CTS_UBC_DRV)ut_twofish.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
+    
 $(CTB_UBC)/ut_rc4.exe: $(CTS_UBC_DRV)ut_rc4.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<

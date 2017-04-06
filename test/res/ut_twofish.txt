@@ -1,0 +1,697 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.1.c (2017/04/04)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Twofish
+Description              : Unit test driver for CryptAda.Ciphers.Symmetric.Block.Twofish functionality.
+Started                  : 2017/04/06 - 22:10:29
+================================================================================
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Running Twofish_Cipher basic tests
+Started         : 2017/04/06 - 22:10:29
+--------------------------------------------------------------------------------
+[I] Basic tests for Twofish_Cipher
+    This test case is a 10 step test that will exercise Block_Cipher dispatching operations
+[I] Cipher information:
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.TWOFISH.TWOFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_TWOFISH_256
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "Twofish"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.10"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  18
+    Maximum key length            :  32
+    Default key length            :  16
+    Key length increment step     :  8
+    Block size                    :  16
+[I] Basic Test 1
+    Trying to process a block with a cipher in Idle state.
+    Must raise CryptAda_Uninitialized_Cipher_Error exception.
+[I] Block to process:
+Block length:  16
+Block data  :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+[I] Raised CryptAda_Uninitialized_Cipher_Error
+[I] Basic Test 2
+    Trying Start_Cipher with an invalid key
+    Must raise CryptAda_Invalid_Key_Error exception.
+[I] Using a null key
+[I] The key
+Null key
+[I] Calling to Start_Cipher
+[I] Raised CryptAda_Invalid_Key_Error
+[I] Using key with excessive length
+[I] Maximum key length is:  32
+[I] The key
+    Key length:  33
+    Key bytes :
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#
+[I] Calling to Start_Cipher
+[I] Raised CryptAda_Invalid_Key_Error
+[I] Basic Test 3
+    Checking state after successful Start_Cipher for encryption
+[I] Key set to
+    Key length:  16
+    Key bytes :
+16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#
+[I] Cipher now must be in Encrypting state
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.TWOFISH.TWOFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_TWOFISH_128
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "Twofish"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
+    Cipher state                  : ENCRYPTING
+    Started                       : TRUE
+    Minimum key length            :  18
+    Maximum key length            :  32
+    Default key length            :  16
+    Key length increment step     :  8
+    Block size                    :  16
+[I] Basic Test 4
+    Trying to encrypt blocks of invalid length
+    Must raise CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  16 bytes
+[I] Invalid input block information: 
+Block length:  15
+Block data  :
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  16 bytes
+[I] Invalid input block information: 
+Block length:  17
+Block data  :
+16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 
+16#22#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  16 bytes
+[I] Invalid output block information: 
+Block length:  15
+Block data  :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  16 bytes
+[I] Invalid output block information: 
+Block length:  17
+Block data  :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Basic Test 5
+    Encrypting a valid block
+[I] Block to encrypt
+Block length:  16
+Block data  :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+[I] Encrypted block
+Block length:  16
+Block data  :
+16#A2#, 16#7D#, 16#8E#, 16#0B#, 16#0F#, 16#69#, 16#ED#, 16#90#, 16#A1#, 16#70#, 16#7F#, 16#B1#, 16#C2#, 16#91#, 16#57#, 16#5D#
+[I] Basic Test 6
+    Stopping the cipher and check state
+[I] Cipher now must be in Idle state
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.TWOFISH.TWOFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_TWOFISH_256
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "Twofish"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.10"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  18
+    Maximum key length            :  32
+    Default key length            :  16
+    Key length increment step     :  8
+    Block size                    :  16
+[I] Basic Test 7
+    Checking cipher state after successful Start_Cipher for decryption
+[I] Cipher now must be in Decrypting state
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.TWOFISH.TWOFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_TWOFISH_128
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "Twofish"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
+    Cipher state                  : DECRYPTING
+    Started                       : TRUE
+    Minimum key length            :  18
+    Maximum key length            :  32
+    Default key length            :  16
+    Key length increment step     :  8
+    Block size                    :  16
+[I] Basic Test 8
+    Trying to decryt blocks of invalid length
+    Must raise CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  16 bytes
+[I] Invalid input block information: 
+Block length:  15
+Block data  :
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  16 bytes
+[I] Invalid input block information: 
+Block length:  17
+Block data  :
+16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 
+16#22#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  16 bytes
+[I] Invalid output block information: 
+Block length:  15
+Block data  :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+    Cipher block size:  16 bytes
+[I] Invalid output block information: 
+Block length:  17
+Block data  :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#
+[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Basic Test 9
+    Decrypting the block encrypted on basic test 5. Must be equal to original
+    plaintext block
+[I] Block to decrypt
+Block length:  16
+Block data  :
+16#A2#, 16#7D#, 16#8E#, 16#0B#, 16#0F#, 16#69#, 16#ED#, 16#90#, 16#A1#, 16#70#, 16#7F#, 16#B1#, 16#C2#, 16#91#, 16#57#, 16#5D#
+[I] Decrypted block
+Block length:  16
+Block data  :
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+[I] Results match
+[I] Basic Test 10
+    Final Stop_Cipher
+[I] Cipher now must be in Idle state
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.TWOFISH.TWOFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_TWOFISH_256
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "Twofish"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.10"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  18
+    Maximum key length            :  32
+    Default key length            :  16
+    Key length increment step     :  8
+    Block size                    :  16
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/04/06 - 22:10:29
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Testing Twofish_Cipher non dispatching operations
+Started         : 2017/04/06 - 22:10:29
+--------------------------------------------------------------------------------
+[I] Interfaces to test:
+Get_Twofish_Key_Id
+[I] Iterating over different key ids
+[I] Twofish key id: TWOFISH_64
+[I] Trying to Get_Twofish_Key_Id on an Idle Cipher will result in an
+    CryptAda_Uninitialized_Cipher_Error exception.
+[I] Raised CryptAda_Uninitialized_Cipher_Error
+[I] Now starting the cipher with an apropriate key
+[I] Key for TWOFISH_64
+    Key length:  8
+    Key bytes :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+    Calling GET_Twofish_Key_Id
+Expected key id: TWOFISH_64
+Obtained key id: TWOFISH_64
+[I] Results match
+[I] Twofish key id: TWOFISH_128
+[I] Trying to Get_Twofish_Key_Id on an Idle Cipher will result in an
+    CryptAda_Uninitialized_Cipher_Error exception.
+[I] Raised CryptAda_Uninitialized_Cipher_Error
+[I] Now starting the cipher with an apropriate key
+[I] Key for TWOFISH_128
+    Key length:  16
+    Key bytes :
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+    Calling GET_Twofish_Key_Id
+Expected key id: TWOFISH_128
+Obtained key id: TWOFISH_128
+[I] Results match
+[I] Twofish key id: TWOFISH_192
+[I] Trying to Get_Twofish_Key_Id on an Idle Cipher will result in an
+    CryptAda_Uninitialized_Cipher_Error exception.
+[I] Raised CryptAda_Uninitialized_Cipher_Error
+[I] Now starting the cipher with an apropriate key
+[I] Key for TWOFISH_192
+    Key length:  24
+    Key bytes :
+16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 
+16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#
+    Calling GET_Twofish_Key_Id
+Expected key id: TWOFISH_192
+Obtained key id: TWOFISH_192
+[I] Results match
+[I] Twofish key id: TWOFISH_256
+[I] Trying to Get_Twofish_Key_Id on an Idle Cipher will result in an
+    CryptAda_Uninitialized_Cipher_Error exception.
+[I] Raised CryptAda_Uninitialized_Cipher_Error
+[I] Now starting the cipher with an apropriate key
+[I] Key for TWOFISH_256
+    Key length:  32
+    Key bytes :
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#
+    Calling GET_Twofish_Key_Id
+Expected key id: TWOFISH_256
+Obtained key id: TWOFISH_256
+[I] Results match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/04/06 - 22:10:29
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Twofish standard test vectors
+Started         : 2017/04/06 - 22:10:29
+--------------------------------------------------------------------------------
+[I] Using test vectors obtained from: https://www.schneier.com/academic/twofish/download.html
+[I] Twofish standard test vector:  1
+    Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+    Plain text block        : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+    Expected encrypted block: 16#9F#, 16#58#, 16#9F#, 16#5C#, 16#F6#, 16#12#, 16#2C#, 16#32#, 16#B6#, 16#BF#, 16#EC#, 16#2F#, 16#2A#, 16#E8#, 16#C3#, 16#5A#
+    Encrypting ...
+    Obtained encrypted block: 16#9F#, 16#58#, 16#9F#, 16#5C#, 16#F6#, 16#12#, 16#2C#, 16#32#, 16#B6#, 16#BF#, 16#EC#, 16#2F#, 16#2A#, 16#E8#, 16#C3#, 16#5A#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  2
+    Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+    Plain text block        : 16#9F#, 16#58#, 16#9F#, 16#5C#, 16#F6#, 16#12#, 16#2C#, 16#32#, 16#B6#, 16#BF#, 16#EC#, 16#2F#, 16#2A#, 16#E8#, 16#C3#, 16#5A#
+    Expected encrypted block: 16#D4#, 16#91#, 16#DB#, 16#16#, 16#E7#, 16#B1#, 16#C3#, 16#9E#, 16#86#, 16#CB#, 16#08#, 16#6B#, 16#78#, 16#9F#, 16#54#, 16#19#
+    Encrypting ...
+    Obtained encrypted block: 16#D4#, 16#91#, 16#DB#, 16#16#, 16#E7#, 16#B1#, 16#C3#, 16#9E#, 16#86#, 16#CB#, 16#08#, 16#6B#, 16#78#, 16#9F#, 16#54#, 16#19#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#9F#, 16#58#, 16#9F#, 16#5C#, 16#F6#, 16#12#, 16#2C#, 16#32#, 16#B6#, 16#BF#, 16#EC#, 16#2F#, 16#2A#, 16#E8#, 16#C3#, 16#5A#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  3
+    Key                     : 16#9F#, 16#58#, 16#9F#, 16#5C#, 16#F6#, 16#12#, 16#2C#, 16#32#, 16#B6#, 16#BF#, 16#EC#, 16#2F#, 16#2A#, 16#E8#, 16#C3#, 16#5A#
+    Plain text block        : 16#D4#, 16#91#, 16#DB#, 16#16#, 16#E7#, 16#B1#, 16#C3#, 16#9E#, 16#86#, 16#CB#, 16#08#, 16#6B#, 16#78#, 16#9F#, 16#54#, 16#19#
+    Expected encrypted block: 16#01#, 16#9F#, 16#98#, 16#09#, 16#DE#, 16#17#, 16#11#, 16#85#, 16#8F#, 16#AA#, 16#C3#, 16#A3#, 16#BA#, 16#20#, 16#FB#, 16#C3#
+    Encrypting ...
+    Obtained encrypted block: 16#01#, 16#9F#, 16#98#, 16#09#, 16#DE#, 16#17#, 16#11#, 16#85#, 16#8F#, 16#AA#, 16#C3#, 16#A3#, 16#BA#, 16#20#, 16#FB#, 16#C3#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#D4#, 16#91#, 16#DB#, 16#16#, 16#E7#, 16#B1#, 16#C3#, 16#9E#, 16#86#, 16#CB#, 16#08#, 16#6B#, 16#78#, 16#9F#, 16#54#, 16#19#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  4
+    Key                     : 16#D4#, 16#91#, 16#DB#, 16#16#, 16#E7#, 16#B1#, 16#C3#, 16#9E#, 16#86#, 16#CB#, 16#08#, 16#6B#, 16#78#, 16#9F#, 16#54#, 16#19#
+    Plain text block        : 16#01#, 16#9F#, 16#98#, 16#09#, 16#DE#, 16#17#, 16#11#, 16#85#, 16#8F#, 16#AA#, 16#C3#, 16#A3#, 16#BA#, 16#20#, 16#FB#, 16#C3#
+    Expected encrypted block: 16#63#, 16#63#, 16#97#, 16#7D#, 16#E8#, 16#39#, 16#48#, 16#62#, 16#97#, 16#E6#, 16#61#, 16#C6#, 16#C9#, 16#D6#, 16#68#, 16#EB#
+    Encrypting ...
+    Obtained encrypted block: 16#63#, 16#63#, 16#97#, 16#7D#, 16#E8#, 16#39#, 16#48#, 16#62#, 16#97#, 16#E6#, 16#61#, 16#C6#, 16#C9#, 16#D6#, 16#68#, 16#EB#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#01#, 16#9F#, 16#98#, 16#09#, 16#DE#, 16#17#, 16#11#, 16#85#, 16#8F#, 16#AA#, 16#C3#, 16#A3#, 16#BA#, 16#20#, 16#FB#, 16#C3#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  5
+    Key                     : 16#01#, 16#9F#, 16#98#, 16#09#, 16#DE#, 16#17#, 16#11#, 16#85#, 16#8F#, 16#AA#, 16#C3#, 16#A3#, 16#BA#, 16#20#, 16#FB#, 16#C3#
+    Plain text block        : 16#63#, 16#63#, 16#97#, 16#7D#, 16#E8#, 16#39#, 16#48#, 16#62#, 16#97#, 16#E6#, 16#61#, 16#C6#, 16#C9#, 16#D6#, 16#68#, 16#EB#
+    Expected encrypted block: 16#81#, 16#6D#, 16#5B#, 16#D0#, 16#FA#, 16#E3#, 16#53#, 16#42#, 16#BF#, 16#2A#, 16#74#, 16#12#, 16#C2#, 16#46#, 16#F7#, 16#52#
+    Encrypting ...
+    Obtained encrypted block: 16#81#, 16#6D#, 16#5B#, 16#D0#, 16#FA#, 16#E3#, 16#53#, 16#42#, 16#BF#, 16#2A#, 16#74#, 16#12#, 16#C2#, 16#46#, 16#F7#, 16#52#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#63#, 16#63#, 16#97#, 16#7D#, 16#E8#, 16#39#, 16#48#, 16#62#, 16#97#, 16#E6#, 16#61#, 16#C6#, 16#C9#, 16#D6#, 16#68#, 16#EB#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  6
+    Key                     : 16#63#, 16#63#, 16#97#, 16#7D#, 16#E8#, 16#39#, 16#48#, 16#62#, 16#97#, 16#E6#, 16#61#, 16#C6#, 16#C9#, 16#D6#, 16#68#, 16#EB#
+    Plain text block        : 16#81#, 16#6D#, 16#5B#, 16#D0#, 16#FA#, 16#E3#, 16#53#, 16#42#, 16#BF#, 16#2A#, 16#74#, 16#12#, 16#C2#, 16#46#, 16#F7#, 16#52#
+    Expected encrypted block: 16#54#, 16#49#, 16#EC#, 16#A0#, 16#08#, 16#FF#, 16#59#, 16#21#, 16#15#, 16#5F#, 16#59#, 16#8A#, 16#F4#, 16#CE#, 16#D4#, 16#D0#
+    Encrypting ...
+    Obtained encrypted block: 16#54#, 16#49#, 16#EC#, 16#A0#, 16#08#, 16#FF#, 16#59#, 16#21#, 16#15#, 16#5F#, 16#59#, 16#8A#, 16#F4#, 16#CE#, 16#D4#, 16#D0#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#81#, 16#6D#, 16#5B#, 16#D0#, 16#FA#, 16#E3#, 16#53#, 16#42#, 16#BF#, 16#2A#, 16#74#, 16#12#, 16#C2#, 16#46#, 16#F7#, 16#52#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  7
+    Key                     : 16#81#, 16#6D#, 16#5B#, 16#D0#, 16#FA#, 16#E3#, 16#53#, 16#42#, 16#BF#, 16#2A#, 16#74#, 16#12#, 16#C2#, 16#46#, 16#F7#, 16#52#
+    Plain text block        : 16#54#, 16#49#, 16#EC#, 16#A0#, 16#08#, 16#FF#, 16#59#, 16#21#, 16#15#, 16#5F#, 16#59#, 16#8A#, 16#F4#, 16#CE#, 16#D4#, 16#D0#
+    Expected encrypted block: 16#66#, 16#00#, 16#52#, 16#2E#, 16#97#, 16#AE#, 16#B3#, 16#09#, 16#4E#, 16#D5#, 16#F9#, 16#2A#, 16#FC#, 16#BC#, 16#DD#, 16#10#
+    Encrypting ...
+    Obtained encrypted block: 16#66#, 16#00#, 16#52#, 16#2E#, 16#97#, 16#AE#, 16#B3#, 16#09#, 16#4E#, 16#D5#, 16#F9#, 16#2A#, 16#FC#, 16#BC#, 16#DD#, 16#10#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#54#, 16#49#, 16#EC#, 16#A0#, 16#08#, 16#FF#, 16#59#, 16#21#, 16#15#, 16#5F#, 16#59#, 16#8A#, 16#F4#, 16#CE#, 16#D4#, 16#D0#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  8
+    Key                     : 16#54#, 16#49#, 16#EC#, 16#A0#, 16#08#, 16#FF#, 16#59#, 16#21#, 16#15#, 16#5F#, 16#59#, 16#8A#, 16#F4#, 16#CE#, 16#D4#, 16#D0#
+    Plain text block        : 16#66#, 16#00#, 16#52#, 16#2E#, 16#97#, 16#AE#, 16#B3#, 16#09#, 16#4E#, 16#D5#, 16#F9#, 16#2A#, 16#FC#, 16#BC#, 16#DD#, 16#10#
+    Expected encrypted block: 16#34#, 16#C8#, 16#A5#, 16#FB#, 16#2D#, 16#3D#, 16#08#, 16#A1#, 16#70#, 16#D1#, 16#20#, 16#AC#, 16#6D#, 16#26#, 16#DB#, 16#FA#
+    Encrypting ...
+    Obtained encrypted block: 16#34#, 16#C8#, 16#A5#, 16#FB#, 16#2D#, 16#3D#, 16#08#, 16#A1#, 16#70#, 16#D1#, 16#20#, 16#AC#, 16#6D#, 16#26#, 16#DB#, 16#FA#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#66#, 16#00#, 16#52#, 16#2E#, 16#97#, 16#AE#, 16#B3#, 16#09#, 16#4E#, 16#D5#, 16#F9#, 16#2A#, 16#FC#, 16#BC#, 16#DD#, 16#10#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  9
+    Key                     : 16#66#, 16#00#, 16#52#, 16#2E#, 16#97#, 16#AE#, 16#B3#, 16#09#, 16#4E#, 16#D5#, 16#F9#, 16#2A#, 16#FC#, 16#BC#, 16#DD#, 16#10#
+    Plain text block        : 16#34#, 16#C8#, 16#A5#, 16#FB#, 16#2D#, 16#3D#, 16#08#, 16#A1#, 16#70#, 16#D1#, 16#20#, 16#AC#, 16#6D#, 16#26#, 16#DB#, 16#FA#
+    Expected encrypted block: 16#28#, 16#53#, 16#0B#, 16#35#, 16#8C#, 16#1B#, 16#42#, 16#EF#, 16#27#, 16#7D#, 16#E6#, 16#D4#, 16#40#, 16#7F#, 16#C5#, 16#91#
+    Encrypting ...
+    Obtained encrypted block: 16#28#, 16#53#, 16#0B#, 16#35#, 16#8C#, 16#1B#, 16#42#, 16#EF#, 16#27#, 16#7D#, 16#E6#, 16#D4#, 16#40#, 16#7F#, 16#C5#, 16#91#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#34#, 16#C8#, 16#A5#, 16#FB#, 16#2D#, 16#3D#, 16#08#, 16#A1#, 16#70#, 16#D1#, 16#20#, 16#AC#, 16#6D#, 16#26#, 16#DB#, 16#FA#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  10
+    Key                     : 16#34#, 16#C8#, 16#A5#, 16#FB#, 16#2D#, 16#3D#, 16#08#, 16#A1#, 16#70#, 16#D1#, 16#20#, 16#AC#, 16#6D#, 16#26#, 16#DB#, 16#FA#
+    Plain text block        : 16#28#, 16#53#, 16#0B#, 16#35#, 16#8C#, 16#1B#, 16#42#, 16#EF#, 16#27#, 16#7D#, 16#E6#, 16#D4#, 16#40#, 16#7F#, 16#C5#, 16#91#
+    Expected encrypted block: 16#8A#, 16#8A#, 16#B9#, 16#83#, 16#31#, 16#0E#, 16#D7#, 16#8C#, 16#8C#, 16#0E#, 16#CD#, 16#E0#, 16#30#, 16#B8#, 16#DC#, 16#A4#
+    Encrypting ...
+    Obtained encrypted block: 16#8A#, 16#8A#, 16#B9#, 16#83#, 16#31#, 16#0E#, 16#D7#, 16#8C#, 16#8C#, 16#0E#, 16#CD#, 16#E0#, 16#30#, 16#B8#, 16#DC#, 16#A4#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#28#, 16#53#, 16#0B#, 16#35#, 16#8C#, 16#1B#, 16#42#, 16#EF#, 16#27#, 16#7D#, 16#E6#, 16#D4#, 16#40#, 16#7F#, 16#C5#, 16#91#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  11
+    Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+    Plain text block        : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+    Expected encrypted block: 16#EF#, 16#A7#, 16#1F#, 16#78#, 16#89#, 16#65#, 16#BD#, 16#44#, 16#53#, 16#F8#, 16#60#, 16#17#, 16#8F#, 16#C1#, 16#91#, 16#01#
+    Encrypting ...
+    Obtained encrypted block: 16#EF#, 16#A7#, 16#1F#, 16#78#, 16#89#, 16#65#, 16#BD#, 16#44#, 16#53#, 16#F8#, 16#60#, 16#17#, 16#8F#, 16#C1#, 16#91#, 16#01#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  12
+    Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+    Plain text block        : 16#EF#, 16#A7#, 16#1F#, 16#78#, 16#89#, 16#65#, 16#BD#, 16#44#, 16#53#, 16#F8#, 16#60#, 16#17#, 16#8F#, 16#C1#, 16#91#, 16#01#
+    Expected encrypted block: 16#88#, 16#B2#, 16#B2#, 16#70#, 16#6B#, 16#10#, 16#5E#, 16#36#, 16#B4#, 16#46#, 16#BB#, 16#6D#, 16#73#, 16#1A#, 16#1E#, 16#88#
+    Encrypting ...
+    Obtained encrypted block: 16#88#, 16#B2#, 16#B2#, 16#70#, 16#6B#, 16#10#, 16#5E#, 16#36#, 16#B4#, 16#46#, 16#BB#, 16#6D#, 16#73#, 16#1A#, 16#1E#, 16#88#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#EF#, 16#A7#, 16#1F#, 16#78#, 16#89#, 16#65#, 16#BD#, 16#44#, 16#53#, 16#F8#, 16#60#, 16#17#, 16#8F#, 16#C1#, 16#91#, 16#01#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  13
+    Key                     : 16#EF#, 16#A7#, 16#1F#, 16#78#, 16#89#, 16#65#, 16#BD#, 16#44#, 16#53#, 16#F8#, 16#60#, 16#17#, 16#8F#, 16#C1#, 16#91#, 16#01#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+    Plain text block        : 16#88#, 16#B2#, 16#B2#, 16#70#, 16#6B#, 16#10#, 16#5E#, 16#36#, 16#B4#, 16#46#, 16#BB#, 16#6D#, 16#73#, 16#1A#, 16#1E#, 16#88#
+    Expected encrypted block: 16#39#, 16#DA#, 16#69#, 16#D6#, 16#BA#, 16#49#, 16#97#, 16#D5#, 16#85#, 16#B6#, 16#DC#, 16#07#, 16#3C#, 16#A3#, 16#41#, 16#B2#
+    Encrypting ...
+    Obtained encrypted block: 16#39#, 16#DA#, 16#69#, 16#D6#, 16#BA#, 16#49#, 16#97#, 16#D5#, 16#85#, 16#B6#, 16#DC#, 16#07#, 16#3C#, 16#A3#, 16#41#, 16#B2#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#88#, 16#B2#, 16#B2#, 16#70#, 16#6B#, 16#10#, 16#5E#, 16#36#, 16#B4#, 16#46#, 16#BB#, 16#6D#, 16#73#, 16#1A#, 16#1E#, 16#88#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  14
+    Key                     : 16#88#, 16#B2#, 16#B2#, 16#70#, 16#6B#, 16#10#, 16#5E#, 16#36#, 16#B4#, 16#46#, 16#BB#, 16#6D#, 16#73#, 16#1A#, 16#1E#, 16#88#, 16#EF#, 16#A7#, 16#1F#, 16#78#, 16#89#, 16#65#, 16#BD#, 16#44#
+    Plain text block        : 16#39#, 16#DA#, 16#69#, 16#D6#, 16#BA#, 16#49#, 16#97#, 16#D5#, 16#85#, 16#B6#, 16#DC#, 16#07#, 16#3C#, 16#A3#, 16#41#, 16#B2#
+    Expected encrypted block: 16#18#, 16#2B#, 16#02#, 16#D8#, 16#14#, 16#97#, 16#EA#, 16#45#, 16#F9#, 16#DA#, 16#AC#, 16#DC#, 16#29#, 16#19#, 16#3A#, 16#65#
+    Encrypting ...
+    Obtained encrypted block: 16#18#, 16#2B#, 16#02#, 16#D8#, 16#14#, 16#97#, 16#EA#, 16#45#, 16#F9#, 16#DA#, 16#AC#, 16#DC#, 16#29#, 16#19#, 16#3A#, 16#65#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#39#, 16#DA#, 16#69#, 16#D6#, 16#BA#, 16#49#, 16#97#, 16#D5#, 16#85#, 16#B6#, 16#DC#, 16#07#, 16#3C#, 16#A3#, 16#41#, 16#B2#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  15
+    Key                     : 16#39#, 16#DA#, 16#69#, 16#D6#, 16#BA#, 16#49#, 16#97#, 16#D5#, 16#85#, 16#B6#, 16#DC#, 16#07#, 16#3C#, 16#A3#, 16#41#, 16#B2#, 16#88#, 16#B2#, 16#B2#, 16#70#, 16#6B#, 16#10#, 16#5E#, 16#36#
+    Plain text block        : 16#18#, 16#2B#, 16#02#, 16#D8#, 16#14#, 16#97#, 16#EA#, 16#45#, 16#F9#, 16#DA#, 16#AC#, 16#DC#, 16#29#, 16#19#, 16#3A#, 16#65#
+    Expected encrypted block: 16#7A#, 16#FF#, 16#7A#, 16#70#, 16#CA#, 16#2F#, 16#F2#, 16#8A#, 16#C3#, 16#1D#, 16#D8#, 16#AE#, 16#5D#, 16#AA#, 16#AB#, 16#63#
+    Encrypting ...
+    Obtained encrypted block: 16#7A#, 16#FF#, 16#7A#, 16#70#, 16#CA#, 16#2F#, 16#F2#, 16#8A#, 16#C3#, 16#1D#, 16#D8#, 16#AE#, 16#5D#, 16#AA#, 16#AB#, 16#63#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#18#, 16#2B#, 16#02#, 16#D8#, 16#14#, 16#97#, 16#EA#, 16#45#, 16#F9#, 16#DA#, 16#AC#, 16#DC#, 16#29#, 16#19#, 16#3A#, 16#65#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  16
+    Key                     : 16#18#, 16#2B#, 16#02#, 16#D8#, 16#14#, 16#97#, 16#EA#, 16#45#, 16#F9#, 16#DA#, 16#AC#, 16#DC#, 16#29#, 16#19#, 16#3A#, 16#65#, 16#39#, 16#DA#, 16#69#, 16#D6#, 16#BA#, 16#49#, 16#97#, 16#D5#
+    Plain text block        : 16#7A#, 16#FF#, 16#7A#, 16#70#, 16#CA#, 16#2F#, 16#F2#, 16#8A#, 16#C3#, 16#1D#, 16#D8#, 16#AE#, 16#5D#, 16#AA#, 16#AB#, 16#63#
+    Expected encrypted block: 16#D1#, 16#07#, 16#9B#, 16#78#, 16#9F#, 16#66#, 16#66#, 16#49#, 16#B6#, 16#BD#, 16#7D#, 16#16#, 16#29#, 16#F1#, 16#F7#, 16#7E#
+    Encrypting ...
+    Obtained encrypted block: 16#D1#, 16#07#, 16#9B#, 16#78#, 16#9F#, 16#66#, 16#66#, 16#49#, 16#B6#, 16#BD#, 16#7D#, 16#16#, 16#29#, 16#F1#, 16#F7#, 16#7E#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#7A#, 16#FF#, 16#7A#, 16#70#, 16#CA#, 16#2F#, 16#F2#, 16#8A#, 16#C3#, 16#1D#, 16#D8#, 16#AE#, 16#5D#, 16#AA#, 16#AB#, 16#63#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  17
+    Key                     : 16#7A#, 16#FF#, 16#7A#, 16#70#, 16#CA#, 16#2F#, 16#F2#, 16#8A#, 16#C3#, 16#1D#, 16#D8#, 16#AE#, 16#5D#, 16#AA#, 16#AB#, 16#63#, 16#18#, 16#2B#, 16#02#, 16#D8#, 16#14#, 16#97#, 16#EA#, 16#45#
+    Plain text block        : 16#D1#, 16#07#, 16#9B#, 16#78#, 16#9F#, 16#66#, 16#66#, 16#49#, 16#B6#, 16#BD#, 16#7D#, 16#16#, 16#29#, 16#F1#, 16#F7#, 16#7E#
+    Expected encrypted block: 16#3A#, 16#F6#, 16#F7#, 16#CE#, 16#5B#, 16#D3#, 16#5E#, 16#F1#, 16#8B#, 16#EC#, 16#6F#, 16#A7#, 16#87#, 16#AB#, 16#50#, 16#6B#
+    Encrypting ...
+    Obtained encrypted block: 16#3A#, 16#F6#, 16#F7#, 16#CE#, 16#5B#, 16#D3#, 16#5E#, 16#F1#, 16#8B#, 16#EC#, 16#6F#, 16#A7#, 16#87#, 16#AB#, 16#50#, 16#6B#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#D1#, 16#07#, 16#9B#, 16#78#, 16#9F#, 16#66#, 16#66#, 16#49#, 16#B6#, 16#BD#, 16#7D#, 16#16#, 16#29#, 16#F1#, 16#F7#, 16#7E#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  18
+    Key                     : 16#D1#, 16#07#, 16#9B#, 16#78#, 16#9F#, 16#66#, 16#66#, 16#49#, 16#B6#, 16#BD#, 16#7D#, 16#16#, 16#29#, 16#F1#, 16#F7#, 16#7E#, 16#7A#, 16#FF#, 16#7A#, 16#70#, 16#CA#, 16#2F#, 16#F2#, 16#8A#
+    Plain text block        : 16#3A#, 16#F6#, 16#F7#, 16#CE#, 16#5B#, 16#D3#, 16#5E#, 16#F1#, 16#8B#, 16#EC#, 16#6F#, 16#A7#, 16#87#, 16#AB#, 16#50#, 16#6B#
+    Expected encrypted block: 16#AE#, 16#81#, 16#09#, 16#BF#, 16#DA#, 16#85#, 16#C1#, 16#F2#, 16#C5#, 16#03#, 16#8B#, 16#34#, 16#ED#, 16#69#, 16#1B#, 16#FF#
+    Encrypting ...
+    Obtained encrypted block: 16#AE#, 16#81#, 16#09#, 16#BF#, 16#DA#, 16#85#, 16#C1#, 16#F2#, 16#C5#, 16#03#, 16#8B#, 16#34#, 16#ED#, 16#69#, 16#1B#, 16#FF#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#3A#, 16#F6#, 16#F7#, 16#CE#, 16#5B#, 16#D3#, 16#5E#, 16#F1#, 16#8B#, 16#EC#, 16#6F#, 16#A7#, 16#87#, 16#AB#, 16#50#, 16#6B#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  19
+    Key                     : 16#3A#, 16#F6#, 16#F7#, 16#CE#, 16#5B#, 16#D3#, 16#5E#, 16#F1#, 16#8B#, 16#EC#, 16#6F#, 16#A7#, 16#87#, 16#AB#, 16#50#, 16#6B#, 16#D1#, 16#07#, 16#9B#, 16#78#, 16#9F#, 16#66#, 16#66#, 16#49#
+    Plain text block        : 16#AE#, 16#81#, 16#09#, 16#BF#, 16#DA#, 16#85#, 16#C1#, 16#F2#, 16#C5#, 16#03#, 16#8B#, 16#34#, 16#ED#, 16#69#, 16#1B#, 16#FF#
+    Expected encrypted block: 16#89#, 16#3F#, 16#D6#, 16#7B#, 16#98#, 16#C5#, 16#50#, 16#07#, 16#35#, 16#71#, 16#BD#, 16#63#, 16#12#, 16#63#, 16#FC#, 16#78#
+    Encrypting ...
+    Obtained encrypted block: 16#89#, 16#3F#, 16#D6#, 16#7B#, 16#98#, 16#C5#, 16#50#, 16#07#, 16#35#, 16#71#, 16#BD#, 16#63#, 16#12#, 16#63#, 16#FC#, 16#78#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#AE#, 16#81#, 16#09#, 16#BF#, 16#DA#, 16#85#, 16#C1#, 16#F2#, 16#C5#, 16#03#, 16#8B#, 16#34#, 16#ED#, 16#69#, 16#1B#, 16#FF#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  20
+    Key                     : 16#AE#, 16#81#, 16#09#, 16#BF#, 16#DA#, 16#85#, 16#C1#, 16#F2#, 16#C5#, 16#03#, 16#8B#, 16#34#, 16#ED#, 16#69#, 16#1B#, 16#FF#, 16#3A#, 16#F6#, 16#F7#, 16#CE#, 16#5B#, 16#D3#, 16#5E#, 16#F1#
+    Plain text block        : 16#89#, 16#3F#, 16#D6#, 16#7B#, 16#98#, 16#C5#, 16#50#, 16#07#, 16#35#, 16#71#, 16#BD#, 16#63#, 16#12#, 16#63#, 16#FC#, 16#78#
+    Expected encrypted block: 16#16#, 16#43#, 16#4F#, 16#C9#, 16#C8#, 16#84#, 16#1A#, 16#63#, 16#D5#, 16#87#, 16#00#, 16#B5#, 16#57#, 16#8E#, 16#8F#, 16#67#
+    Encrypting ...
+    Obtained encrypted block: 16#16#, 16#43#, 16#4F#, 16#C9#, 16#C8#, 16#84#, 16#1A#, 16#63#, 16#D5#, 16#87#, 16#00#, 16#B5#, 16#57#, 16#8E#, 16#8F#, 16#67#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#89#, 16#3F#, 16#D6#, 16#7B#, 16#98#, 16#C5#, 16#50#, 16#07#, 16#35#, 16#71#, 16#BD#, 16#63#, 16#12#, 16#63#, 16#FC#, 16#78#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  21
+    Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+    Plain text block        : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+    Expected encrypted block: 16#57#, 16#FF#, 16#73#, 16#9D#, 16#4D#, 16#C9#, 16#2C#, 16#1B#, 16#D7#, 16#FC#, 16#01#, 16#70#, 16#0C#, 16#C8#, 16#21#, 16#6F#
+    Encrypting ...
+    Obtained encrypted block: 16#57#, 16#FF#, 16#73#, 16#9D#, 16#4D#, 16#C9#, 16#2C#, 16#1B#, 16#D7#, 16#FC#, 16#01#, 16#70#, 16#0C#, 16#C8#, 16#21#, 16#6F#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  22
+    Key                     : 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+    Plain text block        : 16#57#, 16#FF#, 16#73#, 16#9D#, 16#4D#, 16#C9#, 16#2C#, 16#1B#, 16#D7#, 16#FC#, 16#01#, 16#70#, 16#0C#, 16#C8#, 16#21#, 16#6F#
+    Expected encrypted block: 16#D4#, 16#3B#, 16#B7#, 16#55#, 16#6E#, 16#A3#, 16#2E#, 16#46#, 16#F2#, 16#A2#, 16#82#, 16#B7#, 16#D4#, 16#5B#, 16#4E#, 16#0D#
+    Encrypting ...
+    Obtained encrypted block: 16#D4#, 16#3B#, 16#B7#, 16#55#, 16#6E#, 16#A3#, 16#2E#, 16#46#, 16#F2#, 16#A2#, 16#82#, 16#B7#, 16#D4#, 16#5B#, 16#4E#, 16#0D#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#57#, 16#FF#, 16#73#, 16#9D#, 16#4D#, 16#C9#, 16#2C#, 16#1B#, 16#D7#, 16#FC#, 16#01#, 16#70#, 16#0C#, 16#C8#, 16#21#, 16#6F#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  23
+    Key                     : 16#57#, 16#FF#, 16#73#, 16#9D#, 16#4D#, 16#C9#, 16#2C#, 16#1B#, 16#D7#, 16#FC#, 16#01#, 16#70#, 16#0C#, 16#C8#, 16#21#, 16#6F#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+    Plain text block        : 16#D4#, 16#3B#, 16#B7#, 16#55#, 16#6E#, 16#A3#, 16#2E#, 16#46#, 16#F2#, 16#A2#, 16#82#, 16#B7#, 16#D4#, 16#5B#, 16#4E#, 16#0D#
+    Expected encrypted block: 16#90#, 16#AF#, 16#E9#, 16#1B#, 16#B2#, 16#88#, 16#54#, 16#4F#, 16#2C#, 16#32#, 16#DC#, 16#23#, 16#9B#, 16#26#, 16#35#, 16#E6#
+    Encrypting ...
+    Obtained encrypted block: 16#90#, 16#AF#, 16#E9#, 16#1B#, 16#B2#, 16#88#, 16#54#, 16#4F#, 16#2C#, 16#32#, 16#DC#, 16#23#, 16#9B#, 16#26#, 16#35#, 16#E6#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#D4#, 16#3B#, 16#B7#, 16#55#, 16#6E#, 16#A3#, 16#2E#, 16#46#, 16#F2#, 16#A2#, 16#82#, 16#B7#, 16#D4#, 16#5B#, 16#4E#, 16#0D#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  24
+    Key                     : 16#D4#, 16#3B#, 16#B7#, 16#55#, 16#6E#, 16#A3#, 16#2E#, 16#46#, 16#F2#, 16#A2#, 16#82#, 16#B7#, 16#D4#, 16#5B#, 16#4E#, 16#0D#, 16#57#, 16#FF#, 16#73#, 16#9D#, 16#4D#, 16#C9#, 16#2C#, 16#1B#, 16#D7#, 16#FC#, 16#01#, 16#70#, 16#0C#, 16#C8#, 16#21#, 16#6F#
+    Plain text block        : 16#90#, 16#AF#, 16#E9#, 16#1B#, 16#B2#, 16#88#, 16#54#, 16#4F#, 16#2C#, 16#32#, 16#DC#, 16#23#, 16#9B#, 16#26#, 16#35#, 16#E6#
+    Expected encrypted block: 16#6C#, 16#B4#, 16#56#, 16#1C#, 16#40#, 16#BF#, 16#0A#, 16#97#, 16#05#, 16#93#, 16#1C#, 16#B6#, 16#D4#, 16#08#, 16#E7#, 16#FA#
+    Encrypting ...
+    Obtained encrypted block: 16#6C#, 16#B4#, 16#56#, 16#1C#, 16#40#, 16#BF#, 16#0A#, 16#97#, 16#05#, 16#93#, 16#1C#, 16#B6#, 16#D4#, 16#08#, 16#E7#, 16#FA#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#90#, 16#AF#, 16#E9#, 16#1B#, 16#B2#, 16#88#, 16#54#, 16#4F#, 16#2C#, 16#32#, 16#DC#, 16#23#, 16#9B#, 16#26#, 16#35#, 16#E6#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  25
+    Key                     : 16#90#, 16#AF#, 16#E9#, 16#1B#, 16#B2#, 16#88#, 16#54#, 16#4F#, 16#2C#, 16#32#, 16#DC#, 16#23#, 16#9B#, 16#26#, 16#35#, 16#E6#, 16#D4#, 16#3B#, 16#B7#, 16#55#, 16#6E#, 16#A3#, 16#2E#, 16#46#, 16#F2#, 16#A2#, 16#82#, 16#B7#, 16#D4#, 16#5B#, 16#4E#, 16#0D#
+    Plain text block        : 16#6C#, 16#B4#, 16#56#, 16#1C#, 16#40#, 16#BF#, 16#0A#, 16#97#, 16#05#, 16#93#, 16#1C#, 16#B6#, 16#D4#, 16#08#, 16#E7#, 16#FA#
+    Expected encrypted block: 16#30#, 16#59#, 16#D6#, 16#D6#, 16#17#, 16#53#, 16#B9#, 16#58#, 16#D9#, 16#2F#, 16#47#, 16#81#, 16#C8#, 16#64#, 16#0E#, 16#58#
+    Encrypting ...
+    Obtained encrypted block: 16#30#, 16#59#, 16#D6#, 16#D6#, 16#17#, 16#53#, 16#B9#, 16#58#, 16#D9#, 16#2F#, 16#47#, 16#81#, 16#C8#, 16#64#, 16#0E#, 16#58#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#6C#, 16#B4#, 16#56#, 16#1C#, 16#40#, 16#BF#, 16#0A#, 16#97#, 16#05#, 16#93#, 16#1C#, 16#B6#, 16#D4#, 16#08#, 16#E7#, 16#FA#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  26
+    Key                     : 16#6C#, 16#B4#, 16#56#, 16#1C#, 16#40#, 16#BF#, 16#0A#, 16#97#, 16#05#, 16#93#, 16#1C#, 16#B6#, 16#D4#, 16#08#, 16#E7#, 16#FA#, 16#90#, 16#AF#, 16#E9#, 16#1B#, 16#B2#, 16#88#, 16#54#, 16#4F#, 16#2C#, 16#32#, 16#DC#, 16#23#, 16#9B#, 16#26#, 16#35#, 16#E6#
+    Plain text block        : 16#30#, 16#59#, 16#D6#, 16#D6#, 16#17#, 16#53#, 16#B9#, 16#58#, 16#D9#, 16#2F#, 16#47#, 16#81#, 16#C8#, 16#64#, 16#0E#, 16#58#
+    Expected encrypted block: 16#E6#, 16#94#, 16#65#, 16#77#, 16#05#, 16#05#, 16#D7#, 16#F8#, 16#0E#, 16#F6#, 16#8C#, 16#A3#, 16#8A#, 16#B3#, 16#A3#, 16#D6#
+    Encrypting ...
+    Obtained encrypted block: 16#E6#, 16#94#, 16#65#, 16#77#, 16#05#, 16#05#, 16#D7#, 16#F8#, 16#0E#, 16#F6#, 16#8C#, 16#A3#, 16#8A#, 16#B3#, 16#A3#, 16#D6#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#30#, 16#59#, 16#D6#, 16#D6#, 16#17#, 16#53#, 16#B9#, 16#58#, 16#D9#, 16#2F#, 16#47#, 16#81#, 16#C8#, 16#64#, 16#0E#, 16#58#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  27
+    Key                     : 16#30#, 16#59#, 16#D6#, 16#D6#, 16#17#, 16#53#, 16#B9#, 16#58#, 16#D9#, 16#2F#, 16#47#, 16#81#, 16#C8#, 16#64#, 16#0E#, 16#58#, 16#6C#, 16#B4#, 16#56#, 16#1C#, 16#40#, 16#BF#, 16#0A#, 16#97#, 16#05#, 16#93#, 16#1C#, 16#B6#, 16#D4#, 16#08#, 16#E7#, 16#FA#
+    Plain text block        : 16#E6#, 16#94#, 16#65#, 16#77#, 16#05#, 16#05#, 16#D7#, 16#F8#, 16#0E#, 16#F6#, 16#8C#, 16#A3#, 16#8A#, 16#B3#, 16#A3#, 16#D6#
+    Expected encrypted block: 16#5A#, 16#B6#, 16#7A#, 16#5F#, 16#85#, 16#39#, 16#A4#, 16#A5#, 16#FD#, 16#9F#, 16#03#, 16#73#, 16#BA#, 16#46#, 16#34#, 16#66#
+    Encrypting ...
+    Obtained encrypted block: 16#5A#, 16#B6#, 16#7A#, 16#5F#, 16#85#, 16#39#, 16#A4#, 16#A5#, 16#FD#, 16#9F#, 16#03#, 16#73#, 16#BA#, 16#46#, 16#34#, 16#66#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#E6#, 16#94#, 16#65#, 16#77#, 16#05#, 16#05#, 16#D7#, 16#F8#, 16#0E#, 16#F6#, 16#8C#, 16#A3#, 16#8A#, 16#B3#, 16#A3#, 16#D6#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  28
+    Key                     : 16#E6#, 16#94#, 16#65#, 16#77#, 16#05#, 16#05#, 16#D7#, 16#F8#, 16#0E#, 16#F6#, 16#8C#, 16#A3#, 16#8A#, 16#B3#, 16#A3#, 16#D6#, 16#30#, 16#59#, 16#D6#, 16#D6#, 16#17#, 16#53#, 16#B9#, 16#58#, 16#D9#, 16#2F#, 16#47#, 16#81#, 16#C8#, 16#64#, 16#0E#, 16#58#
+    Plain text block        : 16#5A#, 16#B6#, 16#7A#, 16#5F#, 16#85#, 16#39#, 16#A4#, 16#A5#, 16#FD#, 16#9F#, 16#03#, 16#73#, 16#BA#, 16#46#, 16#34#, 16#66#
+    Expected encrypted block: 16#DC#, 16#09#, 16#6B#, 16#CD#, 16#99#, 16#FC#, 16#72#, 16#F7#, 16#99#, 16#36#, 16#D4#, 16#C7#, 16#48#, 16#E7#, 16#5A#, 16#F7#
+    Encrypting ...
+    Obtained encrypted block: 16#DC#, 16#09#, 16#6B#, 16#CD#, 16#99#, 16#FC#, 16#72#, 16#F7#, 16#99#, 16#36#, 16#D4#, 16#C7#, 16#48#, 16#E7#, 16#5A#, 16#F7#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#5A#, 16#B6#, 16#7A#, 16#5F#, 16#85#, 16#39#, 16#A4#, 16#A5#, 16#FD#, 16#9F#, 16#03#, 16#73#, 16#BA#, 16#46#, 16#34#, 16#66#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  29
+    Key                     : 16#5A#, 16#B6#, 16#7A#, 16#5F#, 16#85#, 16#39#, 16#A4#, 16#A5#, 16#FD#, 16#9F#, 16#03#, 16#73#, 16#BA#, 16#46#, 16#34#, 16#66#, 16#E6#, 16#94#, 16#65#, 16#77#, 16#05#, 16#05#, 16#D7#, 16#F8#, 16#0E#, 16#F6#, 16#8C#, 16#A3#, 16#8A#, 16#B3#, 16#A3#, 16#D6#
+    Plain text block        : 16#DC#, 16#09#, 16#6B#, 16#CD#, 16#99#, 16#FC#, 16#72#, 16#F7#, 16#99#, 16#36#, 16#D4#, 16#C7#, 16#48#, 16#E7#, 16#5A#, 16#F7#
+    Expected encrypted block: 16#C5#, 16#A3#, 16#E7#, 16#CE#, 16#E0#, 16#F1#, 16#B7#, 16#26#, 16#05#, 16#28#, 16#A6#, 16#8F#, 16#B4#, 16#EA#, 16#05#, 16#F2#
+    Encrypting ...
+    Obtained encrypted block: 16#C5#, 16#A3#, 16#E7#, 16#CE#, 16#E0#, 16#F1#, 16#B7#, 16#26#, 16#05#, 16#28#, 16#A6#, 16#8F#, 16#B4#, 16#EA#, 16#05#, 16#F2#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#DC#, 16#09#, 16#6B#, 16#CD#, 16#99#, 16#FC#, 16#72#, 16#F7#, 16#99#, 16#36#, 16#D4#, 16#C7#, 16#48#, 16#E7#, 16#5A#, 16#F7#
+[I] Cipher test vector, results match
+[I] Twofish standard test vector:  30
+    Key                     : 16#DC#, 16#09#, 16#6B#, 16#CD#, 16#99#, 16#FC#, 16#72#, 16#F7#, 16#99#, 16#36#, 16#D4#, 16#C7#, 16#48#, 16#E7#, 16#5A#, 16#F7#, 16#5A#, 16#B6#, 16#7A#, 16#5F#, 16#85#, 16#39#, 16#A4#, 16#A5#, 16#FD#, 16#9F#, 16#03#, 16#73#, 16#BA#, 16#46#, 16#34#, 16#66#
+    Plain text block        : 16#C5#, 16#A3#, 16#E7#, 16#CE#, 16#E0#, 16#F1#, 16#B7#, 16#26#, 16#05#, 16#28#, 16#A6#, 16#8F#, 16#B4#, 16#EA#, 16#05#, 16#F2#
+    Expected encrypted block: 16#43#, 16#D5#, 16#CE#, 16#C3#, 16#27#, 16#B2#, 16#4A#, 16#B9#, 16#0A#, 16#D3#, 16#4A#, 16#79#, 16#D0#, 16#46#, 16#91#, 16#51#
+    Encrypting ...
+    Obtained encrypted block: 16#43#, 16#D5#, 16#CE#, 16#C3#, 16#27#, 16#B2#, 16#4A#, 16#B9#, 16#0A#, 16#D3#, 16#4A#, 16#79#, 16#D0#, 16#46#, 16#91#, 16#51#
+[I] Cipher test vector, results match
+    Decrypting ...
+    Obtained decrypted block: 16#C5#, 16#A3#, 16#E7#, 16#CE#, 16#E0#, 16#F1#, 16#B7#, 16#26#, 16#05#, 16#28#, 16#A6#, 16#8F#, 16#B4#, 16#EA#, 16#05#, 16#F2#
+[I] Cipher test vector, results match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/04/06 - 22:10:29
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : Twofish Bulk test
+Started         : 2017/04/06 - 22:10:29
+--------------------------------------------------------------------------------
+[I] Using key size:  8
+[I] Block cipher bulk test
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.TWOFISH.TWOFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_TWOFISH_256
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "Twofish"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.10"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  18
+    Maximum key length            :  32
+    Default key length            :  16
+    Key length increment step     :  8
+    Block size                    :  16
+[I] Bulk test completed OK
+[I] Using key size:  16
+[I] Block cipher bulk test
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.TWOFISH.TWOFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_TWOFISH_256
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "Twofish"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.10"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  18
+    Maximum key length            :  32
+    Default key length            :  16
+    Key length increment step     :  8
+    Block size                    :  16
+[I] Bulk test completed OK
+[I] Using key size:  24
+[I] Block cipher bulk test
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.TWOFISH.TWOFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_TWOFISH_256
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "Twofish"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.10"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  18
+    Maximum key length            :  32
+    Default key length            :  16
+    Key length increment step     :  8
+    Block size                    :  16
+[I] Bulk test completed OK
+[I] Using key size:  32
+[I] Block cipher bulk test
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.TWOFISH.TWOFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_TWOFISH_256
+    Cipher type                   : BLOCK_CIPHER
+    SCAN name                     : "Twofish"
+    ASN1 OID                      : ""
+    OpenPGP name                  : "OpenPGP.Cipher.10"
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  18
+    Maximum key length            :  32
+    Default key length            :  16
+    Key length increment step     :  8
+    Block size                    :  16
+[I] Bulk test completed OK
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/04/06 - 22:10:30
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Twofish
+Finished                 : 2017/04/06 - 22:10:30
+================================================================================

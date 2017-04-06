@@ -46,12 +46,6 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Max_Key_Bits]-------------------------------------------------------------
-   -- Maximum number of bits ina Twofish key.
-   -----------------------------------------------------------------------------
-
-   Max_Key_Bits                  : constant Positive := 8 * Twofish_Key_Lengths(Twofish_Key_Id'Last);
-   
    --[RS_GF_FDBK]---------------------------------------------------------------
    -- Field generator.
    -----------------------------------------------------------------------------
@@ -70,25 +64,21 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
    -- Next constants define the fixed permutations used in S-Box lookup.
    -----------------------------------------------------------------------------
    
-   P_00                          : constant Byte   := 1;
    P_01                          : constant Byte   := 0;
    P_02                          : constant Byte   := 0;
    P_03                          : constant Byte   := P_01 xor 1;
    P_04                          : constant Byte   := 1;
 
-   P_10                          : constant Byte   := 0;
    P_11                          : constant Byte   := 0;
    P_12                          : constant Byte   := 1;
    P_13                          : constant Byte   := P_11 xor 1;
    P_14                          : constant Byte   := 0;
 
-   P_20                          : constant Byte   := 1;
    P_21                          : constant Byte   := 1;
    P_22                          : constant Byte   := 0;
    P_23                          : constant Byte   := P_21 xor 1;
    P_24                          : constant Byte   := 0;
 
-   P_30                          : constant Byte   := 0;
    P_31                          : constant Byte   := 1;
    P_32                          : constant Byte   := 1;
    P_33                          : constant Byte   := P_31 xor 1;
@@ -385,11 +375,10 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
       return   Four_Bytes
    is
       R              : Four_Bytes;
-      B              : Four_Bytes;
+      B              : constant Four_Bytes := (Shift_Right(X, 24) and 16#000000FF#);
       G2             : Four_Bytes;
       G3             : Four_Bytes;
    begin
-      B  := (Shift_Right(X, 24) and 16#000000FF#);
       G2 := Shift_Left(B, 1);
       
       if (B and 16#00000080#) /= 0 then
@@ -403,7 +392,7 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
       G3 := Shift_Right(B, 1);
       
       if (B and 16#00000001#) /= 0 then
-         G3 := G3 xor (Shift_Right(RS_GF_FDBK, 1));
+         G3 := G3 xor Shift_Right(RS_GF_FDBK, 1);
       else 
          G3 := G3 xor 16#00000000#;
       end if;
@@ -448,14 +437,15 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
                   K32            : in        Twofish_Key_Block)
       return   Four_Bytes
    is
+      K64C           : constant Four_Bytes := Four_Bytes(K64_Cnt) and 3;
       B              : Unpacked_Four_Bytes := Unpack(X, Little_Endian);
       UK1            : constant Unpacked_Four_Bytes := Unpack(K32(1), Little_Endian);
       UK2            : constant Unpacked_Four_Bytes := Unpack(K32(2), Little_Endian);
       UK3            : constant Unpacked_Four_Bytes := Unpack(K32(3), Little_Endian);
       UK4            : constant Unpacked_Four_Bytes := Unpack(K32(4), Little_Endian);
       R              : Four_Bytes := 0;
-   begin
-      case (K64_Cnt mod 4) is
+   begin   
+      case K64C is
          when 0 =>
             B(1)  := P(P_04, B(1)) xor UK4(1);
             B(2)  := P(P_14, B(2)) xor UK4(2);
@@ -467,33 +457,36 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
             B(3)  := P(P_23, B(3)) xor UK3(3);
             B(4)  := P(P_33, B(4)) xor UK3(4);
             
-            R :=  MDS_Mattrix(1, P(P_01, P(P_02, B(1) xor UK2(1))) xor UK1(1))   xor
-                  MDS_Mattrix(1, P(P_11, P(P_12, B(2) xor UK2(2))) xor UK1(2))   xor
-                  MDS_Mattrix(1, P(P_21, P(P_22, B(3) xor UK2(3))) xor UK1(3))   xor
-                  MDS_Mattrix(1, P(P_31, P(P_32, B(4) xor UK2(4))) xor UK1(4));
+            R :=  MDS_Mattrix(1, P(P_01, (P(P_02, B(1)) xor UK2(1))) xor UK1(1)) xor
+                  MDS_Mattrix(2, P(P_11, (P(P_12, B(2)) xor UK2(2))) xor UK1(2)) xor
+                  MDS_Mattrix(3, P(P_21, (P(P_22, B(3)) xor UK2(3))) xor UK1(3)) xor
+                  MDS_Mattrix(4, P(P_31, (P(P_32, B(4)) xor UK2(4))) xor UK1(4));
+                  
          when 1 =>
             R :=  MDS_Mattrix(1, P(P_01, B(1)) xor UK1(1))  xor
                   MDS_Mattrix(2, P(P_11, B(2)) xor UK1(2))  xor
                   MDS_Mattrix(3, P(P_21, B(3)) xor UK1(3))  xor     
                   MDS_Mattrix(4, P(P_31, B(4)) xor UK1(4)); 
+                  
          when 2 =>
-            R :=  MDS_Mattrix(1, P(P_01, P(P_02, B(1) xor UK2(1))) xor UK1(1))   xor
-                  MDS_Mattrix(1, P(P_11, P(P_12, B(2) xor UK2(2))) xor UK1(2))   xor
-                  MDS_Mattrix(1, P(P_21, P(P_22, B(3) xor UK2(3))) xor UK1(3))   xor
-                  MDS_Mattrix(1, P(P_31, P(P_32, B(4) xor UK2(4))) xor UK1(4));
+            R :=  MDS_Mattrix(1, P(P_01, (P(P_02, B(1)) xor UK2(1))) xor UK1(1)) xor
+                  MDS_Mattrix(2, P(P_11, (P(P_12, B(2)) xor UK2(2))) xor UK1(2)) xor
+                  MDS_Mattrix(3, P(P_21, (P(P_22, B(3)) xor UK2(3))) xor UK1(3)) xor
+                  MDS_Mattrix(4, P(P_31, (P(P_32, B(4)) xor UK2(4))) xor UK1(4));
+                  
          when others =>
             B(1)  := P(P_03, B(1)) xor UK3(1);
             B(2)  := P(P_13, B(2)) xor UK3(2);
             B(3)  := P(P_23, B(3)) xor UK3(3);
             B(4)  := P(P_33, B(4)) xor UK3(4);
 
-            R :=  MDS_Mattrix(1, P(P_01, P(P_02, B(1) xor UK2(1))) xor UK1(1))   xor
-                  MDS_Mattrix(1, P(P_11, P(P_12, B(2) xor UK2(2))) xor UK1(2))   xor
-                  MDS_Mattrix(1, P(P_21, P(P_22, B(3) xor UK2(3))) xor UK1(3))   xor
-                  MDS_Mattrix(1, P(P_31, P(P_32, B(4) xor UK2(4))) xor UK1(4));
+            R :=  MDS_Mattrix(1, P(P_01, (P(P_02, B(1)) xor UK2(1))) xor UK1(1)) xor
+                  MDS_Mattrix(2, P(P_11, (P(P_12, B(2)) xor UK2(2))) xor UK1(2)) xor
+                  MDS_Mattrix(3, P(P_21, (P(P_22, B(3)) xor UK2(3))) xor UK1(3)) xor
+                  MDS_Mattrix(4, P(P_31, (P(P_32, B(4)) xor UK2(4))) xor UK1(4));
       end case;
       
-      return R;
+      return R;      
    end F_32;
    
    --[Make_Key]-----------------------------------------------------------------
@@ -509,7 +502,7 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
       KB_Odd         : Twofish_Key_Block := (others => 0);
       KB_S_Box       : Twofish_Key_Block := (others => 0);
    begin
-   
+      
       -- Split external key material into even and odd Four_Bytes words and 
       -- compute S-Box keys using (12, 8) Reed-Solomon code over GF(2 ^ 8).
 
@@ -541,7 +534,7 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
          while J <= (Subkeys'Length / 2) loop
             A := F_32(KBL_8, Q, KB_Even);
             B := F_32(KBL_8, Q + SK_Bump, KB_Odd);
-            B := Rotate_Left(B, 8);
+            B := Rotate_Right(B, 24);
             A := A + B;
             Subkeys((2 * J) - 1) := A;
             A := A + B;
@@ -550,7 +543,7 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
             Q := Q + SK_Step;
          end loop;
       end;
-      
+
       -- Expand table.
       
       declare
@@ -564,8 +557,8 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
       begin
          for I in Byte'Range loop
             B := (others => I);
-            J := Positive(1 + (2 * I));
-            K := 16#00000200# + J;
+            J := 1 + (2 * Natural(I));
+            K := 16#00000201# + (2 * Natural(I));
             
             case (KBL_8 mod 4) is
                when 0 =>
@@ -580,9 +573,9 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
                   B(4) := P(P_33, B(4)) xor K3(4);
                   
                   S_Boxes(J)     := MDS_Mattrix(1, P(P_01, P(P_02, B(1)) xor K2(1)) xor K1(1));
-                  S_Boxes(J)     := MDS_Mattrix(2, P(P_11, P(P_12, B(2)) xor K2(2)) xor K1(2));
-                  S_Boxes(J)     := MDS_Mattrix(3, P(P_21, P(P_22, B(3)) xor K2(3)) xor K1(3));
-                  S_Boxes(J)     := MDS_Mattrix(4, P(P_31, P(P_32, B(4)) xor K2(4)) xor K1(4));
+                  S_Boxes(J + 1) := MDS_Mattrix(2, P(P_11, P(P_12, B(2)) xor K2(2)) xor K1(2));
+                  S_Boxes(K)     := MDS_Mattrix(3, P(P_21, P(P_22, B(3)) xor K2(3)) xor K1(3));
+                  S_Boxes(K + 1) := MDS_Mattrix(4, P(P_31, P(P_32, B(4)) xor K2(4)) xor K1(4));
                   
                when 1 =>
                   S_Boxes(J)     := MDS_Mattrix(1, P(P_01, B(1)) xor K1(1));
@@ -592,10 +585,10 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
                   
                when 2 =>
                   S_Boxes(J)     := MDS_Mattrix(1, P(P_01, P(P_02, B(1)) xor K2(1)) xor K1(1));
-                  S_Boxes(J)     := MDS_Mattrix(2, P(P_11, P(P_12, B(2)) xor K2(2)) xor K1(2));
-                  S_Boxes(J)     := MDS_Mattrix(3, P(P_21, P(P_22, B(3)) xor K2(3)) xor K1(3));
-                  S_Boxes(J)     := MDS_Mattrix(4, P(P_31, P(P_32, B(4)) xor K2(4)) xor K1(4));
-
+                  S_Boxes(J + 1) := MDS_Mattrix(2, P(P_11, P(P_12, B(2)) xor K2(2)) xor K1(2));
+                  S_Boxes(K)     := MDS_Mattrix(3, P(P_21, P(P_22, B(3)) xor K2(3)) xor K1(3));
+                  S_Boxes(K + 1) := MDS_Mattrix(4, P(P_31, P(P_32, B(4)) xor K2(4)) xor K1(4));
+                  
                when others =>
                   B(1) := P(P_03, B(1)) xor K3(1);
                   B(2) := P(P_13, B(2)) xor K3(2);
@@ -603,13 +596,12 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
                   B(4) := P(P_33, B(4)) xor K3(4);
                   
                   S_Boxes(J)     := MDS_Mattrix(1, P(P_01, P(P_02, B(1)) xor K2(1)) xor K1(1));
-                  S_Boxes(J)     := MDS_Mattrix(2, P(P_11, P(P_12, B(2)) xor K2(2)) xor K1(2));
-                  S_Boxes(J)     := MDS_Mattrix(3, P(P_21, P(P_22, B(3)) xor K2(3)) xor K1(3));
-                  S_Boxes(J)     := MDS_Mattrix(4, P(P_31, P(P_32, B(4)) xor K2(4)) xor K1(4));
-
+                  S_Boxes(J + 1) := MDS_Mattrix(2, P(P_11, P(P_12, B(2)) xor K2(2)) xor K1(2));
+                  S_Boxes(K)     := MDS_Mattrix(3, P(P_21, P(P_22, B(3)) xor K2(3)) xor K1(3));
+                  S_Boxes(K + 1) := MDS_Mattrix(4, P(P_31, P(P_32, B(4)) xor K2(4)) xor K1(4));
             end case;
          end loop;
-      end;
+      end;            
    end Make_Key;
    
    --[Fe_32]--------------------------------------------------------------------
@@ -621,34 +613,19 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
       return   Four_Bytes
    is
       UX             : constant Unpacked_Four_Bytes := Unpack(X, Little_Endian);
-      J              : Positive;
       N              : Positive := 1 + (R mod 4);
+      J              : Positive;
       Res            : Four_Bytes := 0;
    begin
       J     := 1 + 2 * Natural(UX(N));
       Res   := S_Box(J);
-      N     := N + 1;
-      
-      if N > UX'Last then
-         N  := UX'First;
-      end if;
-      
+      N     := 1 + ((R + 1) mod 4);      
       J     := 2 + 2 * Natural(UX(N));
       Res   := Res xor S_Box(J);      
-      N     := N + 1;
-      
-      if N > UX'Last then
-         N  := UX'First;
-      end if;
-      
+      N     := 1 + ((R + 2) mod 4);      
       J     := 16#00000201# + 2 * Natural(UX(N));
       Res   := Res xor S_Box(J);
-      N     := N + 1;
-      
-      if N > UX'Last then
-         N  := UX'First;
-      end if;
-         
+      N     := 1 + ((R + 3) mod 4);      
       J     := 16#00000202# + 2 * Natural(UX(N));
       Res   := Res xor S_Box(J);
       
@@ -670,7 +647,7 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
       -- Pack input block.
       
       Pack_Block(Input, PB);
-      
+
       -- Xor block with input whiten.
       
       J := Cipher.Subkeys'First + Input_Whiten_Offset;   
@@ -679,7 +656,7 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
          PB(I) := PB(I) xor Cipher.Subkeys(J);
          J := J + 1;
       end loop;
-      
+
       -- Encryption rounds.
       
       declare
@@ -699,7 +676,7 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
             PB(4) := Rotate_Left(PB(4), 1);
             PB(4) := PB(4) xor (T0 + 2 * T1 + Cipher.Subkeys(K));
             K     := K + 1;
-            
+
             T0    := Fe_32(Cipher.S_Boxes, PB(3), 0);
             T1    := Fe_32(Cipher.S_Boxes, PB(4), 3);
             PB(1) := PB(1) xor (T0 + T1 + Cipher.Subkeys(K));
@@ -728,7 +705,7 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
          PB(I) := PB(I) xor Cipher.Subkeys(J);
          J := J + 1;
       end loop;
-
+      
       -- Unpack output block.
 
       Unpack_Block(PB, Output);
@@ -750,12 +727,6 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
       
       Pack_Block(Input, PB);
 
-      -- Rotate
-     
-      T           := PB(1 .. 2);
-      PB(1 .. 2)  := PB(3 .. 4);
-      PB(3 .. 4)  := T;
-      
       -- Xor block with output whiten.
       
       J := Cipher.Subkeys'First + Output_Whiten_Offset;   
@@ -764,7 +735,13 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
          PB(I) := PB(I) xor Cipher.Subkeys(J);
          J := J + 1;
       end loop;
-
+      
+      -- Rotate
+     
+      T           := PB(1 .. 2);
+      PB(1 .. 2)  := PB(3 .. 4);
+      PB(3 .. 4)  := T;
+      
       -- Decryption rounds.
       
       declare
@@ -791,7 +768,7 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
             PB(3) := Rotate_Left(PB(3), 1);
             PB(3) := PB(3) xor (T0 + T1 + Cipher.Subkeys(K));
             K := K - 1;
-            
+
             R := R + 2;
          end loop;
       end;
@@ -804,10 +781,10 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
          PB(I) := PB(I) xor Cipher.Subkeys(J);
          J := J + 1;
       end loop;
-
+      
       -- Unpack output block.
 
-      Unpack_Block(PB, Output);
+      Unpack_Block(PB, Output);      
    end Decrypt_Block;
    
    -----------------------------------------------------------------------------
