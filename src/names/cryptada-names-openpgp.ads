@@ -77,6 +77,7 @@ package CryptAda.Names.OpenPGP is
    OpenPGP_AES_128            : aliased constant String := "OpenPGP.Cipher.7";
    OpenPGP_AES_192            : aliased constant String := "OpenPGP.Cipher.8";
    OpenPGP_AES_256            : aliased constant String := "OpenPGP.Cipher.9";
+   OpenPGP_Twofish_256        : aliased constant String := "OpenPGP.Cipher.10";
    
    --[OpenPGP_Symmetric_Ciphers]------------------------------------------------
    -- Array of OpenPGP names of block ciphers.
@@ -91,6 +92,7 @@ package CryptAda.Names.OpenPGP is
          SC_Blowfish       => OpenPGP_Blowfish'Access,
          SC_IDEA           => OpenPGP_IDEA'Access,
          SC_CAST_128       => OpenPGP_CAST_128'Access,
+         SC_Twofish_256    => OpenPGP_Twofish_256'Access,
          others            => Anonymous_Algorithm'Access
       );
       

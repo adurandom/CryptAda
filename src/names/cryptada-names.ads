@@ -148,6 +148,10 @@ package CryptAda.Names is
          SC_RC2,                 -- RC2
          SC_IDEA,                -- IDEA block cipher
          SC_CAST_128,            -- CAST-128
+         SC_Twofish_64,          -- Twofish 64-bit key
+         SC_Twofish_128,         -- Twofish 128-bit key
+         SC_Twofish_192,         -- Twofish 192-bit key
+         SC_Twofish_256,         -- Twofish 256-bit key
          SC_RC4                  -- RC4 
       );
       
@@ -156,7 +160,7 @@ package CryptAda.Names is
    -- CryptAda.
    -----------------------------------------------------------------------------
 
-   subtype Block_Cipher_Id is Symmetric_Cipher_Id range SC_DES .. SC_CAST_128;
+   subtype Block_Cipher_Id is Symmetric_Cipher_Id range SC_DES .. SC_Twofish_256;
 
    --[Stream_Cipher_Id]---------------------------------------------------------
    -- Enumerated type identifies the symmetric stream ciphers implemented in 

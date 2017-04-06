@@ -112,4 +112,37 @@ package CryptAda.Utils.Format is
                   Zero_Pad       : in     Boolean := True)
       return   String;
 
+   function    To_Hex_String(
+                  Value          : in     CryptAda.Pragmatics.Two_Bytes_Array;
+                  Items_Per_Line : in     Natural := No_Line_Breaks;
+                  EOL_Seq        : in     End_Of_Line := LF_Only;
+                  Item_Separator : in     String := Default_Item_Separator;
+                  Item_Preffix   : in     String := Default_Preffix;
+                  Item_Suffix    : in     String := Default_Suffix;
+                  Digit_Case     : in     Hex_Digit_Case := Upper_Case;
+                  Zero_Pad       : in     Boolean := True)
+      return   String;
+
+   function    To_Hex_String(
+                  Value          : in     CryptAda.Pragmatics.Four_Bytes_Array;
+                  Items_Per_Line : in     Natural := No_Line_Breaks;
+                  EOL_Seq        : in     End_Of_Line := LF_Only;
+                  Item_Separator : in     String := Default_Item_Separator;
+                  Item_Preffix   : in     String := Default_Preffix;
+                  Item_Suffix    : in     String := Default_Suffix;
+                  Digit_Case     : in     Hex_Digit_Case := Upper_Case;
+                  Zero_Pad       : in     Boolean := True)
+      return   String;
+
+   function    To_Hex_String(
+                  Value          : in     CryptAda.Pragmatics.Eight_Bytes_Array;
+                  Items_Per_Line : in     Natural := No_Line_Breaks;
+                  EOL_Seq        : in     End_Of_Line := LF_Only;
+                  Item_Separator : in     String := Default_Item_Separator;
+                  Item_Preffix   : in     String := Default_Preffix;
+                  Item_Suffix    : in     String := Default_Suffix;
+                  Digit_Case     : in     Hex_Digit_Case := Upper_Case;
+                  Zero_Pad       : in     Boolean := True)
+      return   String;
+
 end CryptAda.Utils.Format;
