@@ -390,7 +390,7 @@ package CryptAda.Pragmatics.Lists is
    -- CryptAda_Index_Error if At_Position is not a valid position in In_List.
    -- CryptAda_Syntax_Error if the Identifier_Text does not conform the syntax
    --    for identifiers.
-   -- CryptAda_Identifier_Error if the identifier is an undefined identifier.
+   -- CryptAda_Identifier_Error if the identifier is a null identifier.
    -- CryptAda_Named_List_Error in forms b. or c. if In_List current list is an
    --    unnamed list.
    -- CryptAda_Item_Not_Found_Error there is no Item_Name in From_List.
@@ -443,12 +443,12 @@ package CryptAda.Pragmatics.Lists is
                   The_List       : in     List'Class);
 
    --[Concatenate]--------------------------------------------------------------
-   -- This procedure returns in Result a list constructed by concatenating the 
-   -- current ist of Back to the end of the current list of Front. The current 
-   -- lists of Front and Back must be of the same kind or one must be an empty 
-   -- fist. 
-   -- The values of Front and Back are not affected. Subsequent modifications to 
-   -- the value of Front or of Back or to the value of the returned Result list 
+   -- This procedure returns in Result a list constructed by concatenating the
+   -- current ist of Back to the end of the current list of Front. The current
+   -- lists of Front and Back must be of the same kind or one must be an empty
+   -- fist.
+   -- The values of Front and Back are not affected. Subsequent modifications to
+   -- the value of Front or of Back or to the value of the returned Result list
    -- do not affect either of the other (unmodified) lists.
    -----------------------------------------------------------------------------
    -- Arguments:
@@ -476,11 +476,11 @@ package CryptAda.Pragmatics.Lists is
                   Result         : in out List'Class);
 
    --[Extract_List]-------------------------------------------------------------
-   -- This procedure extracts a sequence of items from the current list of 
-   -- From_List, forming a new list from them. The items to be extracted are 
-   -- those in the positions from Start_Position through End_Position inclusive. 
+   -- This procedure extracts a sequence of items from the current list of
+   -- From_List, forming a new list from them. The items to be extracted are
+   -- those in the positions from Start_Position through End_Position inclusive.
    -- The procedure copies the items From_List to Result leaving From_List
-   -- unmodified. Subsequent modifications to the value of From_List or Result 
+   -- unmodified. Subsequent modifications to the value of From_List or Result
    -- do not affect either of the other (unmodified) lists.
    -----------------------------------------------------------------------------
    -- Arguments:
@@ -498,7 +498,7 @@ package CryptAda.Pragmatics.Lists is
    --    greater than the number of items in From_List or if Start_Position is
    --    greater than End_Position.
    -----------------------------------------------------------------------------
-                  
+
    procedure   Extract_List(
                   From_List      : in     List'Class;
                   Start_Position : in     Position_Count;
@@ -510,7 +510,7 @@ package CryptAda.Pragmatics.Lists is
    -- In_List contains.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- In_List              List object for which the number of items in its 
+   -- In_List              List object for which the number of items in its
    --                      current list is to be obtained.
    -----------------------------------------------------------------------------
    -- Returned value:
@@ -525,7 +525,7 @@ package CryptAda.Pragmatics.Lists is
       return   List_Size;
 
    --[Position_Of_Current_List]-------------------------------------------------
-   -- This function returns the position of In_List current list within its 
+   -- This function returns the position of In_List current list within its
    -- container list.
    -----------------------------------------------------------------------------
    -- Arguments:
@@ -533,7 +533,7 @@ package CryptAda.Pragmatics.Lists is
    --                      list is to be obtained.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Position_Count value with the position of current list within its 
+   -- Position_Count value with the position of current list within its
    -- containing list.
    -----------------------------------------------------------------------------
    -- Exceptions:
@@ -575,13 +575,13 @@ package CryptAda.Pragmatics.Lists is
    -- Exceptions:
    -- CryptAda_Index_Error if the current list In_List is the outermost list.
    -----------------------------------------------------------------------------
-                  
+
    procedure   Make_Containing_List_Current(
                   In_List        : in out List'Class);
 
    --[Make_List_Item_Current]---------------------------------------------------
-   -- This procedure causes the list value of an item in the current list of 
-   -- In_List to become the (new) current list.   
+   -- This procedure causes the list value of an item in the current list of
+   -- In_List to become the (new) current list.
    --
    -- Three overloaded forms are provided
    --
@@ -603,14 +603,14 @@ package CryptAda.Pragmatics.Lists is
    -- CryptAda_Index_Error if At_Position is not a valid position in In_List.
    -- CryptAda_Syntax_Error if the Identifier_Text does not conform the syntax
    --    for identifiers.
-   -- CryptAda_Identifier_Error if the identifier is an undefined identifier.
+   -- CryptAda_Identifier_Error if the identifier is a null identifier.
    -- CryptAda_Named_List_Error in forms b. or c. if In_List current list is an
    --    unnamed list.
-   -- CryptAda_Item_Kind_Error if the item identified by At_Position or 
+   -- CryptAda_Item_Kind_Error if the item identified by At_Position or
    --    Item_Name is not a list (List_Item_Kind) item.
    -- CryptAda_Item_Not_Found_Error there is no Item_Name in In_List.
    -----------------------------------------------------------------------------
-                  
+
    procedure   Make_List_Item_Current(
                   In_List        : in out List'Class;
                   At_Position    : in     Position_Count);
@@ -624,14 +624,14 @@ package CryptAda.Pragmatics.Lists is
                   Item_Name      : in     Identifier_Text);
 
    --[Get_Item_Name]------------------------------------------------------------
-   -- This procedure returns, in Name, the Identifier form of the name of item 
-   -- that is in the position indicated by At_Position in the (named) current 
-   -- list of the In_List.  
+   -- This procedure returns, in Name, the Identifier form of the name of item
+   -- that is in the position indicated by At_Position in the (named) current
+   -- list of the In_List.
    -----------------------------------------------------------------------------
    -- Arguments:
    -- In_List              List object from which current list the name of the
    --                      item is to be obtained.
-   -- At_Position          Position of the item for which its name is to be 
+   -- At_Position          Position of the item for which its name is to be
    --                      obtained.
    -- Name                 Identifier object that, at procedure's return will
    --                      be set to the name of the item.
@@ -651,17 +651,17 @@ package CryptAda.Pragmatics.Lists is
                   Name           : in out Identifier'Class);
 
    --[Get_Item_Position]--------------------------------------------------------
-   -- This function returns the position that a item, specified by name, 
+   -- This function returns the position that a item, specified by name,
    -- occupies in the current list of In_List.
    -----------------------------------------------------------------------------
    -- Arguments:
    -- In_List              List object.
-   -- With_Name            Either a Identifier_Text or an Identifier with the 
+   -- With_Name            Either a Identifier_Text or an Identifier with the
    --                      name of the item whose position in the current list
    --                      is to be returned.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Position_Count value with the position of item in the current list of 
+   -- Position_Count value with the position of item in the current list of
    -- In_List.
    -----------------------------------------------------------------------------
    -- Exceptions:
@@ -683,341 +683,6 @@ package CryptAda.Pragmatics.Lists is
                   In_List        : in     List'Class;
                   With_Name      : in     Identifier_Text)
       return   Position_Count;
-      
-   --[Handling Identifiers]-----------------------------------------------------
-   -- Next subprograms allow to handle identifier values in either text form or
-   -- Identifier form.
-   --
-   -- Identifier syntax is equivalent to Ada identifier syntax:
-   --
-   -- 1. First character must be a letter (Ada.Characters.Handling.Is_Letter)
-   --    returns True.
-   -- 2. Next characters must be either alphanumeric characters or the underscore
-   --    '_' character.
-   -- 3. No two or more consecutive underscore characters are allowed and the
-   --    underscore could not be the last character of the identifier.
-   -- 4. Ada reserved words are not allowed as identifiers.
-   --
-   -- Identifier comparison is case unsensitive, when converting from identifier
-   -- text to Identifier, any whitespace (' ' | HT .. CR) before first
-   -- identifier character or after the last identifier character is removed.
-   -- Case, when returning back the text from an Identifier object is preserved.
-   -- In the case of enumerated identifiers, text representation is always
-   -- upper-case (as returned by teh Image attribute).
-   --
-   -- Maximum length for identifier is defined by the constant
-   -- Identifier_Max_Length.
-   -----------------------------------------------------------------------------
-
-   package Identifier_Item is
-
-      --[Copy_Identifier]-------------------------------------------------------
-      -- Purpose:
-      -- Copies an Identifier.
-      --------------------------------------------------------------------------
-      -- Arguments:
-      -- From                 Source identifier of copy.
-      -- To                   Copy destination identifier.
-      --------------------------------------------------------------------------
-      -- Returned value:
-      -- N/A.
-      --------------------------------------------------------------------------
-      -- Exceptions:
-      -- CryptAda_Identifier_Error if From is a null identifier.
-      -- CryptAda_Storage_Error if an error is raised when allocating space for
-      -- the identifier.
-      --------------------------------------------------------------------------
-
-      procedure   Copy_Identifier(
-                     From           : in     Identifier;
-                     To             : in out Identifier);
-
-      --[Text_2_Identifier]-----------------------------------------------------
-      -- Purpose:
-      -- Converts a identifier from text form to Identifier.
-      --------------------------------------------------------------------------
-      -- Arguments:
-      -- From                 Identifier text representation.
-      -- To                   Destination identifier.
-      --------------------------------------------------------------------------
-      -- Returned value:
-      -- N/A.
-      --------------------------------------------------------------------------
-      -- Exceptions:
-      -- CryptAda_Overflow_Error if identifier length is greater than
-      -- Identifier_Max_Length.
-      -- CryptAda_Syntax_Error if identifier does not meet the syntax for Ada
-      -- identifiers.
-      -- CryptAda_Storage_Error if an error is raised when allocating space for
-      -- the token.
-      --------------------------------------------------------------------------
-
-      procedure   Text_2_Identifier(
-                     From           : in     Identifier_Text;
-                     To             : in out Identifier);
-
-      --[Identifier_2_Text]-----------------------------------------------------
-      -- Purpose:
-      -- Returns the text representation of an identifier value. Two overloaded
-      -- forms are provided: a procedure and a function. The text returned is
-      -- canocalized that means, identifier letters case will be upper case.
-      --------------------------------------------------------------------------
-      -- Arguments:
-      -- From                 Identifier to obtain the text representation from.
-      -- To                   (Procedure form) Identifier_Text to hold the text
-      --                      represenation of From.
-      -- Length               (Procedure form) Positive value that, at procedure
-      --                      return will contain the length of From text
-      --                      representation.
-      --------------------------------------------------------------------------
-      -- Returned value:
-      -- (Function form) Identifier_Text containing the text representation of
-      -- token in canonical form (upper case).
-      --------------------------------------------------------------------------
-      -- Exceptions:
-      -- CryptAda_Identifier_Error if From is a null identifier.
-      -- CryptAda_Overflow_Error (procedure form) if To'Length is less than
-      -- the number of characters in From text representation.
-      --------------------------------------------------------------------------
-
-      procedure   Identifier_2_Text(
-                     From           : in     Identifier;
-                     To             :    out Identifier_Text;
-                     Length         :    out Positive);
-
-      function    Identifier_2_Text(
-                     From           : in     Identifier)
-         return   Identifier_Text;
-
-      --[Is_Null]---------------------------------------------------------------
-      -- Purpose:
-      -- Tests if a given identifier is null.
-      --------------------------------------------------------------------------
-      -- Arguments:
-      -- What                 Identifier to test for nullness.
-      --------------------------------------------------------------------------
-      -- Returned value:
-      -- Boolean value that indicates whether The_Token is null (True) or not
-      -- (False).
-      --------------------------------------------------------------------------
-      -- Exceptions:
-      -- None.
-      --------------------------------------------------------------------------
-
-      function    Is_Null(
-                     What           : in     Identifier)
-         return   Boolean;
-
-      --[Make_Null]-------------------------------------------------------------
-      -- Purpose:
-      -- Makes a given identifier null. It has no effect if token is already
-      -- null.
-      --------------------------------------------------------------------------
-      -- Arguments:
-      -- What                 Identifier to make null.
-      --------------------------------------------------------------------------
-      -- Returned value:
-      -- N/A.
-      --------------------------------------------------------------------------
-      -- Exceptions:
-      -- None.
-      --------------------------------------------------------------------------
-
-      procedure   Make_Null(
-                     What           : in out Identifier);
-
-      --[Is_Equal]--------------------------------------------------------------
-      -- Purpose:
-      -- Equality test for Identifiers.
-      --------------------------------------------------------------------------
-      -- Arguments:
-      -- Left                 First Identifier to test.
-      -- Right                Second Identifier to test.
-      --------------------------------------------------------------------------
-      -- Returned value:
-      -- Boolean value that indicates the result of equality test. True if Left
-      -- and Right are equal, False otherwise.
-      --------------------------------------------------------------------------
-      -- Exceptions:
-      -- None.
-      --------------------------------------------------------------------------
-
-      function    Is_Equal(
-                     Left           : in     Identifier;
-                     Right          : in     Identifier)
-         return   Boolean;
-
-      --[Text_Length]-----------------------------------------------------------
-      -- Purpose:
-      -- Returns the text length of an identifier.
-      --------------------------------------------------------------------------
-      -- Arguments:
-      -- Of_Id                Identifier to get its test length.
-      --------------------------------------------------------------------------
-      -- Returned value:
-      -- Natural value with identifier text length (0 means Of_Id is null).
-      --------------------------------------------------------------------------
-      -- Exceptions:
-      -- None.
-      --------------------------------------------------------------------------
-
-      function    Text_Length(
-                     Of_Id          : in     Identifier)
-         return   Natural;
-
-      --[Get_Value]-------------------------------------------------------------
-      -- Purpose:
-      -- Gets the value of an Identifier item from a list. Three forms are
-      -- provided:
-      -- a. Gets the item given its position.
-      -- b. Gets the item given its identifier.
-      -- c. Gets the item given its identifier text.
-      --------------------------------------------------------------------------
-      -- Arguments:
-      -- From_List         List object whose current list contains the item to
-      --                   be extracted.
-      -- At_Position       Form a. Position in the current list of From_List
-      --                   where is the Item whose value is to be get.
-      -- Item_Name         Forms b. or c. The name of the item whose value is
-      --                   to be get in Identifier_Text or Identifier form.
-      -- Value             Identifier value returned by the procedure.
-      --------------------------------------------------------------------------
-      -- Returned value:
-      -- N/A.
-      --------------------------------------------------------------------------
-      -- Exceptions:
-      -- CryptAda_List_Kind_Error if In_List current list is Empty.
-      -- CryptAda_Index_Error if At_Position is not a valid position in
-      --    From_List.
-      -- CryptAda_Syntax_Error if the Identifier_Text does not conform the syntax
-      --    for identifiers.
-      -- CryptAda_Identifier_Error if the identifier is an undefined identifier.
-      -- CryptAda_Named_List_Error in forms b. or c. if From_List current list
-      --    is an unnamed list.
-      -- CryptAda_Item_Not_Found_Error there is no Item_Name in current list it
-      --    From_List.
-      -- CryptAda_Item_Kind_Error if At_Position or Item_Name identify an item
-      --    whose kind is not Identifier_Item_Kind.
-      --------------------------------------------------------------------------
-
-      procedure   Get_Value(
-                     From_List         : in     List;
-                     At_Position       : in     Position_Count;
-                     Value             : in out Identifier);
-
-      procedure   Get_Value(
-                     From_List         : in     List;
-                     Item_Name         : in     Identifier;
-                     Value             : in out Identifier);
-
-      procedure   Get_Value(
-                     From_List         : in     List;
-                     Item_Name         : in     Identifier_Text;
-                     Value             : in out Identifier);
-
-      --[Replace_Value]---------------------------------------------------------
-      -- Purpose:
-      -- Replaces the value of an Identifier item from a list. Three forms are
-      -- provided:
-      -- a. Replaces item value given its position.
-      -- b. Replaces item value given its identifier.
-      -- c. Replaces item value given its identifier text.
-      --------------------------------------------------------------------------
-      -- Arguments:
-      -- In_List           List object whose current list contains the item 
-      --                   whose value is to be replaced.
-      -- At_Position       Form a. Position in the current list of From_List
-      --                   where is the Item whose value is to be replaced.
-      -- Item_Name         Forms b. or c. The name of the item whose value is
-      --                   to be replaced in Identifier_Text or Identifier form.
-      -- Value             New value to set for the item.
-      --------------------------------------------------------------------------
-      -- Returned value:
-      -- N/A.
-      --------------------------------------------------------------------------
-      -- Exceptions:
-      -- CryptAda_List_Kind_Error if In_List current list is Empty.
-      -- CryptAda_Index_Error if At_Position is not a valid position in
-      --    From_List.
-      -- CryptAda_Syntax_Error if the Identifier_Text does not conform the syntax
-      --    for identifiers.
-      -- CryptAda_Identifier_Error if Value or Item_Name (Identifier) is a
-      --    null identifier.
-      -- CryptAda_Named_List_Error in forms b. or c. if From_List current list
-      --    is an unnamed list.
-      -- CryptAda_Item_Not_Found_Error there is no Item_Name in current list it
-      --    From_List.
-      -- CryptAda_Item_Kind_Error if At_Position or Item_Name identify an item
-      --    whose kind is not Identifier_Item_Kind.
-      --------------------------------------------------------------------------
-
-      procedure   Replace_Value(
-                     In_List           : in out List;
-                     At_Position       : in     Position_Count;
-                     Value             : in     Identifier);
-
-      procedure   Replace_Value(
-                     In_List           : in out List;
-                     Item_Name         : in     Identifier;
-                     Value             : in     Identifier);
-
-      procedure   Replace_Value(
-                     In_List           : in out List;
-                     Item_Name         : in     Identifier_Text;
-                     Value             : in out Identifier);
-
-      --[Insert_Value]----------------------------------------------------------
-      -- Purpose:
-      -- Inserts an identifier item at a specific position of the current list 
-      -- of a List. Three forms are provided:
-      -- a. Inserts an unnamed identifier item.
-      -- b. Inserts a named identifier item given its name as identifier
-      -- c. Inserts a named identifier item given its name as identifier text.
-      --------------------------------------------------------------------------
-      -- Arguments:
-      -- In_List           List object where the item is to be inserted.
-      -- At_Position       Position after which the item is to be inserted, 0 to
-      --                   insert at the beginning.
-      -- Value             Identifier with the value of the item.
-      -- Item_Name         Forms b. and c. name of the item in either identifier
-      --                   text or as an identifier.
-      --------------------------------------------------------------------------
-      -- Returned value:
-      -- N/A.
-      --------------------------------------------------------------------------
-      -- Exceptions:
-      -- CryptAda_List_Kind_Error if an attempt is made to insert a named 
-      --    element in an unamed list or an item without a name in a named list.
-      -- CryptAda_Index_Error if At_Position is greater than the index of the 
-      --    last element In_List.
-      -- CryptAda_Syntax_Error if the Identifier_Text does not conform the syntax
-      --    for identifiers.
-      -- CryptAda_Identifier_Error if Value or Item_Name (Identifier) is a
-      --    null identifier.
-      -- CryptAda_Named_List_Error in forms b. or c. if In_List current list
-      --    already contains an item with Item_Name name.
-      -- CryptAda_Overflow_Error if the number of items iIn_List current list
-      --    after the operation would be larger than List_Lrngth.
-      --------------------------------------------------------------------------
-
-      procedure   Insert_Value(
-                     In_List           : in out List;
-                     At_Position       : in     Insert_Count;
-                     Value             : in     Identifier);
-
-      procedure   Insert_Value(
-                     In_List           : in out List;
-                     At_Position       : in     Insert_Count;
-                     Item_Name         : in     Identifier;
-                     Value             : in     Identifier);
-
-      procedure   Insert_Value(
-                     In_List           : in out List;
-                     At_Position       : in     Insert_Count;
-                     Item_Name         : in     Identifier_Text;
-                     Value             : in out Identifier);
-                     
-   end Identifier_Item;
 
    -----------------------------------------------------------------------------
    --[Private Part]-------------------------------------------------------------
@@ -1201,6 +866,10 @@ private
    procedure   Finalize(
                   Object         : in out List);
 
+   -----------------------------------------------------------------------------
+   --[Identifier Type]----------------------------------------------------------
+   -----------------------------------------------------------------------------
+
    --[Identifier]---------------------------------------------------------------
    -- Full definition of Identifier type
    --
@@ -1222,4 +891,95 @@ private
    procedure   Finalize(
                   Object         : in out Identifier);
 
+   -----------------------------------------------------------------------------
+   --[Subprogram Specification for Children Packages]---------------------------
+   -----------------------------------------------------------------------------
+
+   --[Memory Allocation and Deallocation]---------------------------------------
+
+   --[Allocate_Identifier_Text]-------------------------------------------------
+
+   function    Allocate_Identifier_Text(
+                  Id             : in     Identifier_Text)
+      return   Identifier_Text_Ptr;
+
+   --[Allocate_Item]------------------------------------------------------------
+
+   function    Allocate_Item(
+                  Kind           : in     Item_Kind)
+      return   Item_Ptr;
+
+   --[Clone_List_Record]--------------------------------------------------------
+
+   function    Clone_List_Record(
+                  From           : in     List_Record_Ptr)
+      return   List_Record_Ptr;
+      
+   --[Deallocate_Identifier_Text]-----------------------------------------------
+
+   procedure   Deallocate_Identifier_Text(
+                  Id             : in out Identifier_Text_Ptr);
+
+   --[Deallocate_Item]----------------------------------------------------------
+
+   procedure   Deallocate_Item(
+                  IP             : in out Item_Ptr);
+
+   --[Deallocate_List_Record]---------------------------------------------------
+
+   procedure   Deallocate_List_Record(
+                  LRP            : in out List_Record_Ptr);
+                  
+   --[Equality tests]-----------------------------------------------------------
+
+   --[Is_Equal]-----------------------------------------------------------------
+
+   function    Is_Equal(
+                  Left           : in     Identifier_Text;
+                  Right          : in     Identifier_Text)
+      return   Boolean;
+
+   --[Is_Equal]-----------------------------------------------------------------
+
+   function    Is_Equal(
+                  Left           : in     List_Record_Ptr;
+                  Right          : in     List_Record_Ptr)
+      return   Boolean;
+      
+   --[Get_Identifier]-----------------------------------------------------------
+
+   function    Get_Identifier(
+                  From_String    : in     String)
+      return   Identifier_Text_Ptr;
+
+   --[Item search and retrieval]------------------------------------------------
+
+   --[Contains_Item]------------------------------------------------------------
+
+   function    Contains_Item(
+                  The_List       : in     List_Record_Ptr;
+                  Item_Name      : in     Identifier_Text)
+      return   Boolean;
+
+   --[Get_Item]-----------------------------------------------------------------
+
+   function    Get_Item(
+                  From_List      : in     List_Record_Ptr;
+                  At_Position    : in     Position_Count)
+      return   Item_Ptr;
+
+   --[Get_Item]-----------------------------------------------------------------
+
+   function    Get_Item(
+                  From_List      : in     List_Record_Ptr;
+                  With_Name      : in     Identifier_Text)
+      return   Item_Ptr;
+
+    --[Insert_Item]-------------------------------------------------------------
+
+   procedure   Insert_Item(
+                  In_List        : in     List_Record_Ptr;
+                  At_Position    : in     Insert_Count;
+                  The_Item       : in     Item_Ptr);
+                  
 end CryptAda.Pragmatics.Lists;

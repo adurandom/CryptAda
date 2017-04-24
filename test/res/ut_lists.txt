@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Lists
 Description              : Unit test driver for CryptAda.Pragmatics.Lists functionality.
-Started                  : 2017/04/23 - 17:14:53
+Started                  : 2017/04/24 - 16:03:27
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Basic List tests
-Started         : 2017/04/23 - 17:14:53
+Started         : 2017/04/24 - 16:03:27
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
     - Get_List_Kind
@@ -53,13 +53,13 @@ Text representation of obtained list is: "()"
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/23 - 17:14:53
+Finished        : 2017/04/24 - 16:03:27
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Basic handling of unnamed lists
-Started         : 2017/04/23 - 17:14:53
+Started         : 2017/04/24 - 16:03:27
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
     - Get_List_Kind
@@ -102,13 +102,13 @@ List text: "()"
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/23 - 17:14:53
+Finished        : 2017/04/24 - 16:03:27
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Basic handling of named lists
-Started         : 2017/04/23 - 17:14:53
+Started         : 2017/04/24 - 16:03:27
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
     - Get_List_Kind
@@ -152,13 +152,13 @@ List text: "()"
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/04/23 - 17:14:53
+Finished        : 2017/04/24 - 16:03:27
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : List text syntax
-Started         : 2017/04/23 - 17:14:53
+Started         : 2017/04/24 - 16:03:27
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
     - Text_2_List
@@ -225,13 +225,13 @@ List text: "(My_Ident => Hel__lo)"
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/04/23 - 17:14:53
+Finished        : 2017/04/24 - 16:03:27
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Copying lists
-Started         : 2017/04/23 - 17:14:53
+Started         : 2017/04/24 - 16:03:27
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
     - Copy_List
@@ -276,13 +276,13 @@ Deleting first element of L1 and last element of L2
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/04/23 - 17:14:53
+Finished        : 2017/04/24 - 16:03:27
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : List equality
-Started         : 2017/04/23 - 17:14:53
+Started         : 2017/04/24 - 16:03:27
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
     - Is_Equal
@@ -487,13 +487,13 @@ Obtained result: TRUE
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/04/23 - 17:14:53
+Finished        : 2017/04/24 - 16:03:27
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
 Description     : Deleting elements from lists
-Started         : 2017/04/23 - 17:14:53
+Started         : 2017/04/24 - 16:03:27
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
     - Delete
@@ -618,13 +618,13 @@ Started         : 2017/04/23 - 17:14:53
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/04/23 - 17:14:53
+Finished        : 2017/04/24 - 16:03:27
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 8
 Description     : Getting the kind of items in lists
-Started         : 2017/04/23 - 17:14:53
+Started         : 2017/04/24 - 16:03:27
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
     - Get_Item_Kind
@@ -734,13 +734,13 @@ Item  5. Identifier: "Five". Kind: LIST_ITEM_KIND
 --------------------------------------------------------------------------------
 Test Case Number: 8
 Test Case Result: PASSED
-Finished        : 2017/04/23 - 17:14:53
+Finished        : 2017/04/24 - 16:03:27
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 9
 Description     : Inserting lists in to lists
-Started         : 2017/04/23 - 17:14:53
+Started         : 2017/04/24 - 16:03:27
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
     - Splice
@@ -890,13 +890,13 @@ Started         : 2017/04/23 - 17:14:53
 --------------------------------------------------------------------------------
 Test Case Number: 9
 Test Case Result: PASSED
-Finished        : 2017/04/23 - 17:14:53
+Finished        : 2017/04/24 - 16:03:27
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 10
 Description     : Concatenating lists
-Started         : 2017/04/23 - 17:14:53
+Started         : 2017/04/24 - 16:03:27
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
     - Concatenate
@@ -1029,13 +1029,13 @@ Started         : 2017/04/23 - 17:14:53
 --------------------------------------------------------------------------------
 Test Case Number: 10
 Test Case Result: PASSED
-Finished        : 2017/04/23 - 17:14:53
+Finished        : 2017/04/24 - 16:03:27
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 11
 Description     : Extracting lists from lists
-Started         : 2017/04/23 - 17:14:53
+Started         : 2017/04/24 - 16:03:27
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
     - Extract_List
@@ -1114,13 +1114,13 @@ End_Position  :  4
 --------------------------------------------------------------------------------
 Test Case Number: 11
 Test Case Result: PASSED
-Finished        : 2017/04/23 - 17:14:53
+Finished        : 2017/04/24 - 16:03:27
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 12
 Description     : Handling "current" lists
-Started         : 2017/04/23 - 17:14:53
+Started         : 2017/04/24 - 16:03:27
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
     - Make_List_Item_Current
@@ -1233,11 +1233,151 @@ Started         : 2017/04/23 - 17:14:53
 --------------------------------------------------------------------------------
 Test Case Number: 12
 Test Case Result: PASSED
-Finished        : 2017/04/23 - 17:14:53
+Finished        : 2017/04/24 - 16:03:27
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 13
+Description     : Making list items current
+Started         : 2017/04/24 - 16:03:27
+--------------------------------------------------------------------------------
+[I] Interfaces tested:
+    - Make_List_Item_Current
+[I] Trying to make a list item current in an empty list ...
+    Must raise CryptAda_List_Kind_Error
+[I] List: The List
+    Kind           : EMPTY
+    Number of items:  0
+    List text      : ()
+[I] Caught CryptAda_List_Kind_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+    Message  : "In_List current list is empty"
+[I] Trying to make a list item current with an invalid position value ...
+    Must raise CryptAda_Index_Error
+[I] List: The list
+    Kind           : UNNAMED
+    Number of items:  3
+    List text      : (1,(1,2,(Three=>3)),"Three")
+[I] Caught CryptAda_Index_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+    Message  : "Invalid list position value"
+[I] Trying to make a list item current with an invalid identifier text ...
+    Must raise CryptAda_Syntax_Error
+[I] List: The list
+    Kind           : NAMED
+    Number of items:  3
+    List text      : (One=>1,Two=>(2,"Two"),Three=>(1.00000E+00,2.00000E+00,3.00000E+00,(())))
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "Identifier first character is not a letter"
+[I] Trying to make a list current with a null identifier ...
+    Must raise CryptAda_Identifier_Error
+[I] List: The list
+    Kind           : NAMED
+    Number of items:  3
+    List text      : (One=>1,Two=>(2,"Two"),Three=>(1.00000E+00,2.00000E+00,3.00000E+00,(())))
+[I] Caught CryptAda_Identifier_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_IDENTIFIER_ERROR"
+    Message  : "Null identifier"
+[I] Trying to make a list item current by name (Identifier_Text) in an unnamed list ...
+    Must raise CryptAda_Named_List_Error
+[I] List: The list
+    Kind           : UNNAMED
+    Number of items:  3
+    List text      : (1,(1,2,(Three=>3)),"Three")
+[I] Caught CryptAda_Named_List_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
+    Message  : "In_List current list is unnamed"
+[I] Trying to make a list item current by name (Identifier) in an unnamed list ...
+    Must raise CryptAda_Named_List_Error
+[I] List: The list
+    Kind           : UNNAMED
+    Number of items:  3
+    List text      : (1,(1,2,(Three=>3)),"Three")
+[I] Caught CryptAda_Named_List_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
+    Message  : "In_List current list is unnamed"
+[I] Trying to make a list item current name (Identifier_Text) that not exists in a named list ...
+    Must raise CryptAda_Item_Not_Found_Error
+[I] List: The list
+    Kind           : NAMED
+    Number of items:  3
+    List text      : (One=>1,Two=>(2,"Two"),Three=>(1.00000E+00,2.00000E+00,3.00000E+00,(())))
+[I] Caught CryptAda_Item_Not_Found_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
+    Message  : "List doesn't contains a: "Eight" item"
+[I] Trying to make a list item current by name (Identifier) that not exists in a named list ...
+    Must raise CryptAda_Item_Not_Found_Error
+[I] List: The list
+    Kind           : NAMED
+    Number of items:  3
+    List text      : (One=>1,Two=>(2,"Two"),Three=>(1.00000E+00,2.00000E+00,3.00000E+00,(())))
+[I] Caught CryptAda_Item_Not_Found_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
+    Message  : "List doesn't contains a: "Eight" item"
+[I] Trying to make a list item current that is not a list item in an unnamed list ...
+    Must raise CryptAda_Item_Kind_Error
+[I] List: The list
+    Kind           : UNNAMED
+    Number of items:  3
+    List text      : (1,(1,2,(Three=>3)),"Three")
+[I] Caught CryptAda_Item_Kind_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+    Message  : "Item is not a list item"
+[I] Trying to make a list item current that is not a list item in an named list (Identifier_Text) ...
+    Must raise CryptAda_Item_Kind_Error
+[I] List: The list
+    Kind           : NAMED
+    Number of items:  3
+    List text      : (One=>1,Two=>(2,"Two"),Three=>(1.00000E+00,2.00000E+00,3.00000E+00,(())))
+[I] Caught CryptAda_Item_Kind_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+    Message  : "Item is not a list item"
+[I] Trying to make a list item current that is not a list item in an named list (Identifier) ...
+    Must raise CryptAda_Item_Kind_Error
+[I] List: The list
+    Kind           : NAMED
+    Number of items:  3
+    List text      : (One=>1,Two=>(2,"Two"),Three=>(1.00000E+00,2.00000E+00,3.00000E+00,(())))
+[I] Caught CryptAda_Item_Kind_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+    Message  : "Item is not a list item"
+[I] Making a list item current in an unamed list
+[I] List: Before
+    Kind           : UNNAMED
+    Number of items:  3
+    List text      : (1,(1,2,(Three=>3)),"Three")
+[I] List: After
+    Kind           : UNNAMED
+    Number of items:  3
+    List text      : (1,2,(Three=>3))
+[I] Making a list item current in an named list (Identifier_Text)
+[I] List: Before
+    Kind           : NAMED
+    Number of items:  3
+    List text      : (One=>1,Two=>(2,"Two"),Three=>(1.00000E+00,2.00000E+00,3.00000E+00,(())))
+[I] List: After
+    Kind           : UNNAMED
+    Number of items:  2
+    List text      : (2,"Two")
+[I] Making a list item current in an named list (Identifier)
+[I] List: Before
+    Kind           : NAMED
+    Number of items:  3
+    List text      : (One=>1,Two=>(2,"Two"),Three=>(1.00000E+00,2.00000E+00,3.00000E+00,(())))
+[I] List: After
+    Kind           : UNNAMED
+    Number of items:  2
+    List text      : (2,"Two")
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 13
+Test Case Result: PASSED
+Finished        : 2017/04/24 - 16:03:27
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Lists
-Finished                 : 2017/04/23 - 17:14:53
+Finished                 : 2017/04/24 - 16:03:27
 ================================================================================

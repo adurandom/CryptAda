@@ -31,8 +31,6 @@
 --    1.0   20170407 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with System.Address_Image;
-
 with Ada.Unchecked_Deallocation;
 with Ada.Exceptions;                      use Ada.Exceptions;
 with Ada.Characters.Latin_1;              use Ada.Characters.Latin_1;
@@ -308,20 +306,6 @@ package body CryptAda.Pragmatics.Lists is
    --[Subprogram Specs]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   -->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-   --Debug subprograms
-   --<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-   procedure   Print_Token_List(
-                  LT             : in     List_Text;
-                  TL             : in     Token_List);
-
-   procedure   Print_Item(
-                  IP             : in     Item_Ptr);
-
-   procedure   Print_List_Record(
-                  LRP            : in     List_Record_Ptr);
-                  
    --[Memory Allocation]--------------------------------------------------------
    -- Next subprograms allocate heap memory for different objects managed in
    -- this package. These subprograms will raise CryptAda_Storage_Error if
@@ -332,18 +316,6 @@ package body CryptAda.Pragmatics.Lists is
 
    function    Allocate_List_Record
       return   List_Record_Ptr;
-
-   --[Allocate_Identifier_Text]-------------------------------------------------
-
-   function    Allocate_Identifier_Text(
-                  Id             : in     Identifier_Text)
-      return   Identifier_Text_Ptr;
-
-   --[Allocate_Item]------------------------------------------------------------
-
-   function    Allocate_Item(
-                  Kind           : in     Item_Kind)
-      return   Item_Ptr;
 
    --[Allocate_String]----------------------------------------------------------
 
@@ -369,16 +341,6 @@ package body CryptAda.Pragmatics.Lists is
    -- Next subprograms deallocate memory assigned to different objects handled
    -- in this package.
    -----------------------------------------------------------------------------
-
-   --[Deallocate_List_Record]---------------------------------------------------
-
-   procedure   Deallocate_List_Record(
-                  LRP            : in out List_Record_Ptr);
-
-   --[Deallocate_Item]----------------------------------------------------------
-
-   procedure   Deallocate_Item(
-                  IP             : in out Item_Ptr);
 
    --[Deallocate_Token_List]----------------------------------------------------
 
@@ -406,12 +368,6 @@ package body CryptAda.Pragmatics.Lists is
    function    Get_Hash_Key(
                   For_Id         : in     Identifier_Text)
       return   Byte;
-
-   --[Get_Identifier]-----------------------------------------------------------
-
-   function    Get_Identifier(
-                  From_String    : in     String)
-      return   Identifier_Text_Ptr;
 
    --[Low Level List Operations]------------------------------------------------
    -- Thesea are low level list operations.
@@ -469,27 +425,6 @@ package body CryptAda.Pragmatics.Lists is
 
    --[List Operations]----------------------------------------------------------
 
-   --[Contains_Item]------------------------------------------------------------
-
-   function    Contains_Item(
-                  The_List       : in     List_Record_Ptr;
-                  Item_Name      : in     Identifier_Text)
-      return   Boolean;
-
-   --[Get_Item]-----------------------------------------------------------------
-
-   function    Get_Item(
-                  From_List      : in     List_Record_Ptr;
-                  At_Position    : in     Position_Count)
-      return   Item_Ptr;
-
-   --[Get_Item]-----------------------------------------------------------------
-
-   function    Get_Item(
-                  From_List      : in     List_Record_Ptr;
-                  With_Name      : in     Identifier_Text)
-      return   Item_Ptr;
-
    --[Get_Item_Position]--------------------------------------------------------
 
    function    Get_Item_Position(
@@ -503,7 +438,7 @@ package body CryptAda.Pragmatics.Lists is
                   In_List        : in     List_Record_Ptr;
                   Of_List        : in     List_Record_Ptr)
       return   Position_Count;
-      
+
    --[Delete_Item]--------------------------------------------------------------
 
    procedure   Delete_Item(
@@ -516,13 +451,6 @@ package body CryptAda.Pragmatics.Lists is
                   To_List        : in     List_Record_Ptr;
                   The_Item       : in     Item_Ptr);
 
-    --[Insert_Item]-------------------------------------------------------------
-
-   procedure   Insert_Item(
-                  In_List        : in     List_Record_Ptr;
-                  At_Position    : in     Insert_Count;
-                  The_Item       : in     Item_Ptr);
-
     --[Insert_Items]------------------------------------------------------------
 
    procedure   Insert_Items(
@@ -530,12 +458,6 @@ package body CryptAda.Pragmatics.Lists is
                   At_Position    : in     Insert_Count;
                   From_List      : in     List_Record_Ptr;
                   Count          : in     List_Size := List_Size'Last);
-
-   --[Clone_List_Record]--------------------------------------------------------
-
-   function    Clone_List_Record(
-                  From           : in     List_Record_Ptr)
-      return   List_Record_Ptr;
 
    --[Clone_Item]---------------------------------------------------------------
 
@@ -698,22 +620,8 @@ package body CryptAda.Pragmatics.Lists is
    --[Is_Equal]-----------------------------------------------------------------
 
    function    Is_Equal(
-                  Left           : in     Identifier_Text;
-                  Right          : in     Identifier_Text)
-      return   Boolean;
-
-   --[Is_Equal]-----------------------------------------------------------------
-
-   function    Is_Equal(
                   Left           : in     Item_Ptr;
                   Right          : in     Item_Ptr)
-      return   Boolean;
-
-   --[Is_Equal]-----------------------------------------------------------------
-
-   function    Is_Equal(
-                  Left           : in     List_Record_Ptr;
-                  Right          : in     List_Record_Ptr)
       return   Boolean;
 
    -----------------------------------------------------------------------------
@@ -743,59 +651,6 @@ package body CryptAda.Pragmatics.Lists is
       when Storage_Error =>
          Raise_Exception(CryptAda_Storage_Error'Identity, "Allocating List_Record");
    end Allocate_List_Record;
-
-   --[Allocate_Identifier_Text]-------------------------------------------------
-
-   function    Allocate_Identifier_Text(
-                  Id             : in     Identifier_Text)
-      return   Identifier_Text_Ptr
-   is
-      ITP            : Identifier_Text_Ptr;
-   begin
-      ITP      := new Identifier_Text(1 .. Id'Length);
-      ITP.all  := Id;
-
-      return ITP;
-   exception
-      when Storage_Error =>
-         Raise_Exception(CryptAda_Storage_Error'Identity, "Allocating Identifier_Text");
-   end Allocate_Identifier_Text;
-
-   --[Allocate_Item]------------------------------------------------------------
-
-   function    Allocate_Item(
-                  Kind           : in     Item_Kind)
-      return   Item_Ptr
-   is
-      IP             : Item_Ptr;
-   begin
-      IP                            := new Item(Kind);
-
-      IP.all.Name                   := null;
-      IP.all.Container              := null;
-      IP.all.Prev_Item              := null;
-      IP.all.Next_Item              := null;
-
-      case Kind is
-         when List_Item_Kind =>
-            IP.all.List_Value       := null;
-         when String_Item_Kind =>
-            IP.all.String_Value     := null;
-         when Float_Item_Kind =>
-            IP.all.Float_Value      := 0.0;
-         when Integer_Item_Kind =>
-            IP.all.Integer_Value    := 0;
-         when Identifier_Item_Kind =>
-            IP.all.Identifier_Value := null;
-            IP.all.Enumerated       := False;
-            IP.all.Enum_Pos         := Integer'First;
-      end case;
-
-      return IP;
-   exception
-      when Storage_Error =>
-         Raise_Exception(CryptAda_Storage_Error'Identity, "Allocating Item");
-   end Allocate_Item;
 
    --[Allocate_String]----------------------------------------------------------
 
@@ -843,116 +698,6 @@ package body CryptAda.Pragmatics.Lists is
    end Allocate_Token;
 
    --[Memory Deallocation]------------------------------------------------------
-
-   --[Deallocate_List_Record]---------------------------------------------------
-
-   procedure   Deallocate_List_Record(
-                  LRP            : in out List_Record_Ptr)
-   is
-      CI             : Item_Ptr;
-      NCI            : Item_Ptr;
-      CHTEP          : Hash_Table_Entry_Ptr;
-      NCHTEP         : Hash_Table_Entry_Ptr;
-   begin
-      if LRP = null then
-         return;
-      end if;
-
-      -- Deallocate items.
-
-      CI := LRP.all.First_Item;
-
-      while CI /= null loop
-         NCI := CI.all.Next_Item;
-         Deallocate_Item(CI);
-         CI := NCI;
-      end loop;
-
-      -- Deallocate hash table entries.
-
-      for I in LRP.all.Hash_Table'Range loop
-         CHTEP := LRP.all.Hash_Table(I);
-
-         while CHTEP /= null loop
-            NCHTEP := CHTEP.all.Next_Entry;
-            Free_Hash_Table_Entry(CHTEP);
-            CHTEP := NCHTEP;
-         end loop;
-
-         LRP.all.Hash_Table(I) := null;
-      end loop;
-
-      -- Nullify list record field
-
-      LRP.all.Kind            := Empty;
-      LRP.all.Item_Count      := 0;
-      LRP.all.This            := null;
-      LRP.all.Parent          := null;
-      LRP.all.First_Item      := null;
-      LRP.all.Last_Item       := null;
-
-      -- Now free list record.
-
-      Free_List_Record(LRP);
-
-      LRP := null;
-   end Deallocate_List_Record;
-
-   --[Deallocate_Item]----------------------------------------------------------
-
-   procedure   Deallocate_Item(
-                  IP             : in out Item_Ptr)
-   is
-   begin
-      if IP = null then
-         return;
-      end if;
-
-      -- Common fields ...
-
-      if IP.all.Name /= null then
-         Free_Identifier_Text(IP.all.Name);
-         IP.all.Name := null;
-      end if;
-
-      IP.all.Container := null;
-      IP.all.Prev_Item := null;
-      IP.all.Next_Item := null;
-
-      -- Value fields ...
-
-      case IP.all.Kind is
-         when List_Item_Kind =>
-            Deallocate_List_Record(IP.all.List_Value);
-            IP.all.List_Value := null;
-
-         when String_Item_Kind =>
-            if IP.all.String_Value /= null then
-               Free_String(IP.all.String_Value);
-               IP.all.String_Value := null;
-            end if;
-
-         when Float_Item_Kind =>
-            IP.all.Float_Value := 0.0;
-
-         when Integer_Item_Kind =>
-            IP.all.Integer_Value := 0;
-
-         when Identifier_Item_Kind =>
-            if IP.all.Identifier_Value /= null then
-               Free_Identifier_Text(IP.all.Identifier_Value);
-               IP.all.Identifier_Value := null;
-            end if;
-
-            IP.all.Enumerated := False;
-            IP.all.Enum_Pos := Integer'First;
-      end case;
-
-      -- Free record.
-
-      Free_Item(IP);
-      IP := null;
-   end Deallocate_Item;
 
    --[Deallocate_Token_List]----------------------------------------------------
 
@@ -1012,99 +757,6 @@ package body CryptAda.Pragmatics.Lists is
 
       return False;
    end Is_Ada_Reserved_Word;
-
-   --[Get_Identifier]-----------------------------------------------------------
-
-   function    Get_Identifier(
-                  From_String    : in     String)
-      return   Identifier_Text_Ptr
-   is
-      IB             : Positive  := From_String'First;
-      IE             : Natural   := From_String'Last;
-      US             : Boolean   := False;
-      Id_US          : Unbounded_String;
-      L              : Natural;
-   begin
-      -- Trim left whitespace.
-
-      while IB <= From_String'Last loop
-         exit when not Is_In(From_String(IB), Whitespace_Set);
-         IB := IB + 1;
-      end loop;
-
-      if IB > From_String'Last then
-         Raise_Exception(CryptAda_Syntax_Error'Identity, "Identifier text is empty");
-      end if;
-
-      -- Trim right whitespace.
-
-      while IE > IB loop
-         exit when not Is_In(From_String(IE), Whitespace_Set);
-         IE := IE - 1;
-      end loop;
-
-      -- First non whitespace character must be a letter.
-
-      if Is_Letter(From_String(IB)) then
-         Append(Id_US, From_String(IB));
-      else
-         Raise_Exception(CryptAda_Syntax_Error'Identity, "Identifier first character is not a letter");
-      end if;
-
-      -- Next, if any must be letters, digits or underscore.
-
-      for I in IB + 1 .. IE loop
-         if US then
-            -- Previous character was an underscore, current must be an
-            -- alphanumeric character.
-
-            if Is_Alphanumeric(From_String(I)) then
-               US := False;
-               Append(Id_US, From_String(I));
-            else
-               Raise_Exception(CryptAda_Syntax_Error'Identity, "Invalid character '" & From_String(I) & "' in identifier");
-            end if;
-         else
-            -- Previous character was an alphanumeric character, this character
-            -- must be either alphanumeric or an underscore.
-
-            if Is_Alphanumeric(From_String(I)) then
-               Append(Id_US, From_String(I));
-            else
-               if From_String(I) = '_' then
-                  US := True;
-                  Append(Id_US, From_String(I));
-               else
-                  Raise_Exception(CryptAda_Syntax_Error'Identity, "Invalid character '" & From_String(I) & "' in identifier");
-               end if;
-            end if;
-         end if;
-      end loop;
-
-      -- Last character must not be an underscore.
-
-      if US then
-         Raise_Exception(CryptAda_Syntax_Error'Identity, "Identifier last character must not be '_'");
-      end if;
-
-      -- Check identifier length.
-
-      L := Length(Id_US);
-
-      if L = 0 then
-         Raise_Exception(CryptAda_Syntax_Error'Identity, "Empty identifier");
-      end if;
-
-      if L > Identifier_Max_Length then
-         Raise_Exception(CryptAda_Syntax_Error'Identity, "Identifier too long");
-      end if;
-
-      if Is_Ada_Reserved_Word(To_String(Id_US)) then
-         Raise_Exception(CryptAda_Syntax_Error'Identity, "Identifier is an Ada reserved word");
-      end if;
-
-      return Allocate_Identifier_Text(To_String(Id_US));
-   end Get_Identifier;
 
    --[Low Level List Operations]------------------------------------------------
 
@@ -1351,96 +1003,6 @@ package body CryptAda.Pragmatics.Lists is
 
    --[List Operations]----------------------------------------------------------
 
-   --[Contains_Item]------------------------------------------------------------
-
-   function    Contains_Item(
-                  The_List       : in     List_Record_Ptr;
-                  Item_Name      : in     Identifier_Text)
-      return   Boolean
-   is
-      IP             : Item_Ptr;
-   begin
-      if The_List = null then
-         Raise_Exception(CryptAda_Null_Argument_Error'Identity, "Null List_Record_Ptr");
-      end if;
-
-      -- List must be named.
-
-      if The_List.all.Kind = Empty then
-         Raise_Exception(CryptAda_List_Kind_Error'Identity, "Querying by name an empty list");
-      elsif The_List.all.Kind = Unnamed then
-         Raise_Exception(CryptAda_Named_List_Error'Identity, "Querying by name an unnamed list");
-      end if;
-
-      -- Get hash table entry. If result is null means that there is no item
-      -- in The_List with Item_Name.
-
-      IP := Get_Hash_Table_Entry(The_List, Item_Name);
-
-      return (IP /= null);
-   end Contains_Item;
-
-   --[Get_Item]-----------------------------------------------------------------
-
-   function    Get_Item(
-                  From_List      : in     List_Record_Ptr;
-                  At_Position    : in     Position_Count)
-      return   Item_Ptr
-   is
-   begin
-      if From_List = null then
-         Raise_Exception(CryptAda_Null_Argument_Error'Identity, "Null List_Record_Ptr");
-      end if;
-
-      -- Check list is not empty and position is within bounds.
-
-      if From_List.all.Kind = Empty then
-         Raise_Exception(CryptAda_List_Kind_Error'Identity, "List is empty");
-      end if;
-
-      if At_Position > From_List.all.Item_Count then
-         Raise_Exception(CryptAda_Index_Error'Identity, "Position is out of bounds");
-      end if;
-
-      -- Get the item at position.
-
-      return Get_Item_At_Position(From_List, At_Position);
-   end Get_Item;
-
-   --[Get_Item]-----------------------------------------------------------------
-
-   function    Get_Item(
-                  From_List      : in     List_Record_Ptr;
-                  With_Name      : in     Identifier_Text)
-      return   Item_Ptr
-   is
-      IP             : Item_Ptr;
-   begin
-      if From_List = null then
-         Raise_Exception(CryptAda_Null_Argument_Error'Identity, "Null List_Record_Ptr");
-      end if;
-
-      -- Check From_List is not empty and that is a named list.
-
-      if From_List.all.Kind = Empty then
-         Raise_Exception(CryptAda_List_Kind_Error'Identity, "List is empty");
-      elsif From_List.all.Kind = Unnamed then
-         Raise_Exception(CryptAda_Named_List_Error'Identity, "List is unnamed");
-      end if;
-
-      -- Get Item.
-
-      IP := Get_Hash_Table_Entry(From_List, With_Name);
-
-      -- If not found raise an exception otherwise return the item.
-
-      if IP = null then
-         Raise_Exception(CryptAda_Item_Not_Found_Error'Identity, "List doesn't contains a: """ & With_Name & """ item");
-      else
-         return IP;
-      end if;
-   end Get_Item;
-
    --[Get_Item_Position]--------------------------------------------------------
 
    function    Get_Item_Position(
@@ -1462,21 +1024,21 @@ package body CryptAda.Pragmatics.Lists is
       if Of_Item.all.Container /= In_List then
          Raise_Exception(CryptAda_Item_Not_Found_Error'Identity, "Item does not belong to list");
       end if;
-      
+
       -- Traverse list to found the item.
-      
+
       CI := In_List.all.First_Item;
       PC := 1;
-      
+
       while CI /= null loop
          if CI = Of_Item then
             return PC;
          end if;
-         
+
          PC := PC + 1;
          CI := CI.all.Next_Item;
       end loop;
-      
+
       Raise_Exception(CryptAda_Item_Not_Found_Error'Identity, "Item does not belong to list");
    end Get_Item_Position;
 
@@ -1501,26 +1063,26 @@ package body CryptAda.Pragmatics.Lists is
       if Of_List.all.Parent /= In_List then
          Raise_Exception(CryptAda_Item_Not_Found_Error'Identity, "Of_List does not belong to In_List");
       end if;
-      
+
       -- Traverse list to found the item.
-      
+
       CI := In_List.all.First_Item;
       PC := 1;
-      
+
       while CI /= null loop
          if CI.all.Kind = List_Item_Kind then
             if CI.all.List_Value = Of_List then
                return PC;
             end if;
          end if;
-         
+
          PC := PC + 1;
          CI := CI.all.Next_Item;
       end loop;
-      
+
       Raise_Exception(CryptAda_Item_Not_Found_Error'Identity, "Of_List does not belong to In_List");
    end Get_Container_Item_Position;
-   
+
    --[Delete_Item]--------------------------------------------------------------
 
    procedure   Delete_Item(
@@ -1639,89 +1201,6 @@ package body CryptAda.Pragmatics.Lists is
       end if;
    end Append_Item;
 
-   --[Insert_Item]--------------------------------------------------------------
-
-   procedure   Insert_Item(
-                  In_List        : in     List_Record_Ptr;
-                  At_Position    : in     Insert_Count;
-                  The_Item       : in     Item_Ptr)
-   is
-      AI             : Item_Ptr;
-   begin
-      -- Check that arguments are not null.
-
-      if In_List = null then
-         Raise_Exception(CryptAda_Null_Argument_Error'Identity, "Null List_Record_Ptr");
-      end if;
-
-      if The_Item = null then
-         Raise_Exception(CryptAda_Null_Argument_Error'Identity, "Null Item_Ptr");
-      end if;
-
-      -- Check list is not full.
-
-      if In_List.all.Item_Count = List_Length then
-         Raise_Exception(CryptAda_Overflow_Error'Identity, "List is full");
-      end if;
-
-      -- Check item compatibility.
-
-      case In_List.all.Kind is
-         when Empty =>
-            -- The list will become either named or unnamed depending on whether
-            -- the item has name or not.
-
-            if The_Item.all.Name = null then
-               In_List.all.Kind := Unnamed;
-            else
-               In_List.all.Kind := Named;
-               Add_Hash_Table_Entry(In_List, The_Item);
-            end if;
-
-         when Unnamed =>
-            -- Unnamed list, free item name if any.
-
-            if The_Item.all.Name /= null then
-               Free_Identifier_Text(The_Item.all.Name);
-               The_Item.all.Name := null;
-            end if;
-
-         when Named =>
-            -- Named list. Item must have a name and that name must not be
-            -- already in list.
-
-            if The_Item.all.Name = null then
-               Raise_Exception(CryptAda_Unnamed_Item_Error'Identity, "Trying to add an unnamed item to a named list");
-            else
-               if Contains_Item(In_List, The_Item.all.Name.all) then
-                  Raise_Exception(CryptAda_Named_List_Error'Identity, "List already contains a """ & The_Item.all.Name.all & """ item");
-               end if;
-            end if;
-
-            -- Add the hash table entry for item.
-
-            Add_Hash_Table_Entry(In_List, The_Item);
-      end case;
-
-      -- Get the item after which the item is to be inserted.
-
-      if At_Position = 0 then
-         AI := null;
-      else
-         AI := Get_Item_At_Position(In_List, At_Position);
-      end if;
-
-      Insert_Item_In_List(In_List, AI, The_Item);
-
-      -- Update item.
-
-      The_Item.all.Container := In_List.all.This;
-
-      if The_Item.all.Kind = List_Item_Kind then
-         The_Item.all.List_Value.all.Parent := In_List.all.This;
-      end if;
-   end Insert_Item;
-
    --[Insert_Items]------------------------------------------------------------
 
    procedure   Insert_Items(
@@ -1797,41 +1276,6 @@ package body CryptAda.Pragmatics.Lists is
          end if;
       end if;
    end Insert_Items;
-
-   --[Clone_List_Record]--------------------------------------------------------
-
-   function    Clone_List_Record(
-                  From           : in     List_Record_Ptr)
-      return   List_Record_Ptr
-   is
-      LRP            : List_Record_Ptr := null;
-      F_IP           : Item_Ptr;
-      C_IP           : Item_Ptr;
-   begin
-      if From = null then
-         return null;
-      end if;
-
-      -- Allocate List_Record
-
-      LRP := Allocate_List_Record;
-
-      -- Traverse From clonning items and appending to the new list.
-
-      F_IP  := From.all.First_Item;
-
-      while F_IP /= null loop
-         C_IP := Clone_Item(F_IP);
-         Append_Item(LRP, C_IP);
-         F_IP := F_IP.all.Next_Item;
-      end loop;
-
-      return LRP;
-   exception
-      when others =>
-         Deallocate_List_Record(LRP);
-         raise;
-   end Clone_List_Record;
 
    --[Clone_Item]---------------------------------------------------------------
 
@@ -2540,11 +1984,11 @@ package body CryptAda.Pragmatics.Lists is
 
                if Dot then
                   FIO.Get(Text(Current_Token.all.BOT .. Current_Token.all.EOT), FV, Last);
-                  
+
                   if Last /= Current_Token.all.EOT then
                      Raise_Exception(CryptAda_Syntax_Error'Identity, "List_Text parser. Invalid numeric literal: """ & Text(Current_token.all.BOT .. Current_Token.all.EOT) & """");
                   end if;
-                  
+
                   Item                    := Allocate_Item(Float_Item_Kind);
                   Item.all.Float_Value    := FV;
                else
@@ -2553,7 +1997,7 @@ package body CryptAda.Pragmatics.Lists is
                   if Last /= Current_Token.all.EOT then
                      Raise_Exception(CryptAda_Syntax_Error'Identity, "List_Text parser. Invalid numeric literal: """ & Text(Current_token.all.BOT .. Current_Token.all.EOT) & """");
                   end if;
-                  
+
                   Item                    := Allocate_Item(Integer_Item_Kind);
                   Item.all.Integer_Value  := IV;
                end if;
@@ -2655,15 +2099,15 @@ package body CryptAda.Pragmatics.Lists is
       -- Perform lexical analysis.
 
       TL := Scan_List_Text(Text);
-      
+
       -- [Debug] Print_Token_List(Text, TL);
-      
+
       -- Perform syntactic analysis.
 
       Parse_Token_List(Text, TL, TL.First, LRP, LT);
 
       -- [Debug] Print_List_Record(LRP);
-      
+
       -- Return result.
 
       return LRP;
@@ -2767,19 +2211,6 @@ package body CryptAda.Pragmatics.Lists is
    --[Is_Equal]-----------------------------------------------------------------
 
    function    Is_Equal(
-                  Left           : in     Identifier_Text;
-                  Right          : in     Identifier_Text)
-      return   Boolean
-   is
-      L              : constant Identifier_Text := Normalize_Identifier_Text(Left);
-      R              : constant Identifier_Text := Normalize_Identifier_Text(Right);
-   begin
-      return (L = R);
-   end Is_Equal;
-
-   --[Is_Equal]-----------------------------------------------------------------
-
-   function    Is_Equal(
                   Left           : in     Item_Ptr;
                   Right          : in     Item_Ptr)
       return   Boolean
@@ -2854,47 +2285,6 @@ package body CryptAda.Pragmatics.Lists is
             end if;
 
       end case;
-   end Is_Equal;
-
-   --[Is_Equal]-----------------------------------------------------------------
-
-   function    Is_Equal(
-                  Left           : in     List_Record_Ptr;
-                  Right          : in     List_Record_Ptr)
-      return   Boolean
-   is
-      CIL            : Item_Ptr;
-      CIR            : Item_Ptr;
-   begin
-      if Left = Right then
-         return True;
-      end if;
-
-      if Left = null or else Right = null then
-         return False;
-      end if;
-
-      if Left.all.Kind /= Right.all.Kind then
-         return False;
-      end if;
-
-      if Left.all.Item_Count /= Right.all.Item_Count then
-         return False;
-      end if;
-
-      CIL := Left.all.First_Item;
-      CIR := Right.all.First_Item;
-
-      while CIL /= null loop
-         if not Is_Equal(CIL, CIR) then
-            return False;
-         end if;
-
-         CIL := CIL.all.Next_Item;
-         CIR := CIR.all.Next_Item;
-      end loop;
-
-      return True;
    end Is_Equal;
 
    -----------------------------------------------------------------------------
@@ -3438,7 +2828,7 @@ package body CryptAda.Pragmatics.Lists is
       --[Argument Checks]-------------------------------------------------------
       -- In_List.Current = In_List.Outermost    CryptAda_Index_Error
       --------------------------------------------------------------------------
-   
+
       if In_List.Current = In_List.Outermost then
          Raise_Exception(CryptAda_Index_Error'Identity, "Current list is the outermost list In_List");
       end if;
@@ -3465,12 +2855,12 @@ package body CryptAda.Pragmatics.Lists is
       --[Process]---------------------------------------------------------------
       -- 1. Check equality of references.
       --------------------------------------------------------------------------
-   
+
       return (Of_List.Outermost = Of_List.Current);
    end Current_List_Is_Outermost;
 
    --[Make_Containing_List_Current]---------------------------------------------
-                  
+
    procedure   Make_Containing_List_Current(
                   In_List        : in out List'Class)
    is
@@ -3482,16 +2872,16 @@ package body CryptAda.Pragmatics.Lists is
       if In_List.Current = In_List.Outermost then
          Raise_Exception(CryptAda_Index_Error'Identity, "Current list is the outermost list In_List");
       end if;
-      
+
       --[Process]---------------------------------------------------------------
       -- 1. Set current list to the parent of the current list.
       --------------------------------------------------------------------------
-   
+
       In_List.Current := In_List.Current.all.Parent;
    end Make_Containing_List_Current;
 
    --[Make_List_Item_Current]---------------------------------------------------
-                  
+
    procedure   Make_List_Item_Current(
                   In_List        : in out List'Class;
                   At_Position    : in     Position_Count)
@@ -3518,7 +2908,7 @@ package body CryptAda.Pragmatics.Lists is
       --------------------------------------------------------------------------
 
       IP := Get_Item(In_List.Current, At_Position);
-      
+
       if IP.all.Kind /= List_Item_Kind then
          Raise_Exception(CryptAda_Item_Kind_Error'Identity, "Item is not a list item");
       end if;
@@ -3564,7 +2954,7 @@ package body CryptAda.Pragmatics.Lists is
          Raise_Exception(CryptAda_Item_Kind_Error'Identity, "Item is not a list item");
       end if;
 
-      In_List.Current := IP.all.List_Value;   
+      In_List.Current := IP.all.List_Value;
    end Make_List_Item_Current;
 
    --[Make_List_Item_Current]---------------------------------------------------
@@ -3608,12 +2998,12 @@ package body CryptAda.Pragmatics.Lists is
             Free_Identifier_Text(ITP);
             raise;
       end;
-      
+
       if IP.all.Kind /= List_Item_Kind then
          Raise_Exception(CryptAda_Item_Kind_Error'Identity, "Item is not a list item");
       end if;
 
-      In_List.Current := IP.all.List_Value;   
+      In_List.Current := IP.all.List_Value;
    end Make_List_Item_Current;
 
    --[Get_Item_Name]------------------------------------------------------------
@@ -3644,13 +3034,13 @@ package body CryptAda.Pragmatics.Lists is
       -- 2. Copy its name to Name.
       --------------------------------------------------------------------------
 
-      IP    := Get_Item(In_List.Current, At_Position);      
+      IP    := Get_Item(In_List.Current, At_Position);
       ITP   := Allocate_Identifier_Text(IP.all.Name.all);
-      
+
       if Name.Text /= null then
          Free_Identifier_Text(Name.Text);
       end if;
-      
+
       Name.Text := ITP;
    end Get_Item_Name;
 
@@ -3687,7 +3077,7 @@ package body CryptAda.Pragmatics.Lists is
       --------------------------------------------------------------------------
 
       IP := Get_Item(In_List.Current, With_Name.Text.all);
-      
+
       return Get_Item_Position(In_List.Current, IP);
    end Get_Item_Position;
 
@@ -3734,7 +3124,7 @@ package body CryptAda.Pragmatics.Lists is
 
       return Get_Item_Position(In_List.Current, IP);
    end Get_Item_Position;
-   
+
    --[Ada.Finalization interface for identifiers]-------------------------------
 
    --[Initialize]---------------------------------------------------------------
@@ -3759,773 +3149,538 @@ package body CryptAda.Pragmatics.Lists is
    end Finalize;
 
    -----------------------------------------------------------------------------
-   --[Identifier_Item package body]---------------------------------------------
+   --[Subprogram Bodies for Children Packages]----------------------------------
    -----------------------------------------------------------------------------
 
-   package body Identifier_Item is
-
-      --[Copy_Identifier]-------------------------------------------------------
-
-      procedure   Copy_Identifier(
-                     From           : in     Identifier;
-                     To             : in out Identifier)
-      is
-         ITP            : Identifier_Text_Ptr;
-      begin
-         -- Argument checks:
-         -- Condition                        Exception
-         -- From is null                     CryptAda_Identifier_Error;
-
-         if From.Text = null then
-            Raise_Exception(CryptAda_Identifier_Error'Identity, "Null identifier");
-         end if;
-
-         -- Process:
-         -- Allocate identifier text and set To.
-
-         ITP := Allocate_Identifier_Text(From.Text.all);
-
-         if To.Text /= null then
-            Free_Identifier_Text(To.Text);
-         end if;
-
-         To.Text := ITP;
-      end Copy_Identifier;
-
-      --[Text_2_Identifier]-----------------------------------------------------
-
-      procedure   Text_2_Identifier(
-                     From           : in     Identifier_Text;
-                     To             : in out Identifier)
-      is
-         ITP            : Identifier_Text_Ptr;
-      begin
-         -- Get_Identifier will raise CryptAda_Syntax_Error if argument does not
-         -- meet the syntax for identifiers.
-
-         ITP := Get_Identifier(From);
-
-         if To.Text /= null then
-            Free_Identifier_Text(To.Text);
-         end if;
-
-         To.Text := ITP;
-      end Text_2_Identifier;
-
-      --[Identifier_2_Text]-----------------------------------------------------
-
-      procedure   Identifier_2_Text(
-                     From           : in     Identifier;
-                     To             :    out Identifier_Text;
-                     Length         :    out Positive)
-      is
-         I_F            : constant Positive := To'First;
-         I_L            : Positive;
-      begin
-         -- Argument checks:
-         -- Condition                        Exception
-         -- From is null                     CryptAda_Identifier_Error
-         -- From.Text.all'Length > To'Length CryptAda_Overflow_Error
-
-         if From.Text = null then
-            Raise_Exception(CryptAda_Identifier_Error'Identity, "Null identifier");
-         end if;
-
-         if From.Text.all'Length > To'Length then
-            Raise_Exception(CryptAda_Overflow_Error'Identity, "To'Length is not enough to hold From characters");
-         end if;
-
-         -- Process
-         -- Copy from From to To.
-
-         I_L                     := I_F + From.Text.all'Length - 1;
-         To(I_F .. I_L)          := From.Text.all;
-         TO(I_L + 1 .. To'Last)  := (others => ' ');
-         Length                  := From.Text.all'Length;
-      end Identifier_2_Text;
-
-      --[Identifier_2_Text]--------------------------------------------------------
-
-      function    Identifier_2_Text(
-                     From           : in     Identifier)
-         return   Identifier_Text
-      is
-      begin
-         -- Argument checks:
-         -- Condition                        Exception
-         -- From is null                     CryptAda_Identifier_Error
-
-         if From.Text = null then
-            Raise_Exception(CryptAda_Identifier_Error'Identity, "Null identifier");
-         end if;
-
-         -- Process
-         -- Return the identifier text.
-
-         return From.Text.all;
-      end Identifier_2_Text;
-
-      --[Is_Null]------------------------------------------------------------------
-
-      function    Is_Null(
-                     What           : in     Identifier)
-         return   Boolean
-      is
-      begin
-         return What.Text = null;
-      end Is_Null;
-
-      --[Make_Null]----------------------------------------------------------------
-
-      procedure   Make_Null(
-                     What           : in out Identifier)
-      is
-      begin
-         if What.Text /= null then
-            Free_Identifier_Text(What.Text);
-            What.Text := null;
-         end if;
-      end Make_Null;
-
-      --[Is_Equal]-----------------------------------------------------------------
-
-      function    Is_Equal(
-                     Left           : in     Identifier;
-                     Right          : in     Identifier)
-         return   Boolean
-      is
-      begin
-         if Left.Text = Right.Text then
-            return True;
-         else
-            if Left.Text = null or else Right.Text = null then
-               return False;
-            else
-               return Is_Equal(Left.Text.all, Right.Text.all);
-            end if;
-         end if;
-      end Is_Equal;
-
-      --[Text_Length]--------------------------------------------------------------
-
-      function    Text_Length(
-                     Of_Id          : in     Identifier)
-         return   Natural
-      is
-      begin
-         if Of_Id.Text = null then
-            return 0;
-         else
-            return Of_Id.Text.all'Length;
-         end if;
-      end Text_Length;
-
-      --[Get_Value]-------------------------------------------------------------
-
-      procedure   Get_Value(
-                     From_List         : in     List;
-                     At_Position       : in     Position_Count;
-                     Value             : in out Identifier)
-      is
-         IP             : Item_Ptr;
-      begin
-         -- Argument checks:
-         -- Condition                        Exception
-         -- From_List is Empty               CryptAda_List_Kind_Error
-         -- At_Position not valid            CryptAda_Index_Error
-
-         if From_List.Current.all.Kind = Empty then
-            Raise_Exception(CryptAda_List_Kind_Error'Identity, "From_List current list is empty");
-         end if;
-
-         if From_List.Current.all.Item_Count < At_Position then
-            Raise_Exception(CryptAda_Index_Error'Identity, "Invalid list position value");
-         end if;
-
-         -- Process:
-         -- Get the item At_Position if Item kind is not Identifier_Item_Kind
-         -- raise CryptAda_Item_Kind_Error otherwise return the item.
-
-         IP := Get_Item(From_List.Current, At_Position);
-
-         if IP.all.Kind = Identifier_Item_Kind then
-            Text_2_Identifier(IP.all.Identifier_Value.all, Value);
-         else
-            Raise_Exception(CryptAda_Item_Kind_Error'Identity, "Item is not an identifier");
-         end if;
-      end Get_Value;
-
-      --[Get_Value]-------------------------------------------------------------
-
-      procedure   Get_Value(
-                     From_List         : in     List;
-                     Item_Name         : in     Identifier;
-                     Value             : in out Identifier)
-      is
-         IP             : Item_Ptr;
-      begin
-         -- Argument checks:
-         -- Condition                        Exception
-         -- From_List is Empty               CryptAda_List_Kind_Error
-         -- From_List is Unnamed             CryptAda_Named_List_Error
-         -- Item_Name is null                CryptAda_Identifier_Error
-
-         if From_List.Current.all.Kind = Empty then
-            Raise_Exception(CryptAda_List_Kind_Error'Identity, "From_List current list is empty");
-         elsif From_List.Current.all.Kind = Unnamed then
-            Raise_Exception(CryptAda_Named_List_Error'Identity, "From_List current list is unnamed");
-         end if;
-
-         if Item_Name.Text = null then
-            Raise_Exception(CryptAda_Identifier_Error'Identity, "Null identifier");
-         end if;
-
-         -- Process:
-         -- Get the item if Item kind is not Identifier_Item_Kind
-         -- raise CryptAda_Item_Kind_Error otherwise return the item.
-
-         IP := Get_Item(From_List.Current, Item_Name.Text.all);
-
-         if IP.all.Kind = Identifier_Item_Kind then
-            Text_2_Identifier(IP.all.Identifier_Value.all, Value);
-         else
-            Raise_Exception(CryptAda_Item_Kind_Error'Identity, "Item is not an identifier");
-         end if;
-      end Get_Value;
-
-      --[Get_Value]-------------------------------------------------------------
-
-      procedure   Get_Value(
-                     From_List         : in     List;
-                     Item_Name         : in     Identifier_Text;
-                     Value             : in out Identifier)
-      is
-         IP             : Item_Ptr;
-         ITP            : Identifier_Text_Ptr;
-      begin
-         -- Argument checks:
-         -- Condition                        Exception
-         -- From_List is Empty               CryptAda_List_Kind_Error
-         -- From_List is Unnamed             CryptAda_Named_List_Error
-         -- Item_Name is null                CryptAda_Identifier_Error
-
-         if From_List.Current.all.Kind = Empty then
-            Raise_Exception(CryptAda_List_Kind_Error'Identity, "From_List current list is empty");
-         elsif From_List.Current.all.Kind = Unnamed then
-            Raise_Exception(CryptAda_Named_List_Error'Identity, "From_List current list is unnamed");
-         end if;
-
-         -- Process:
-         -- Get the identifier (it will raise CryptAda_Syntax_Error if the
-         -- identifier text does not meet the syntax for identifiers).
-         -- Get the item. Check that item kind is Identifier_Item_Kind and
-         -- if so, return the item.
-
-         ITP := Get_Identifier(Item_Name);
-
-         declare
-         begin
-            IP := Get_Item(From_List.Current, ITP.all);
-            Free_Identifier_Text(ITP);
-         exception
-            when others =>
-               Free_Identifier_Text(ITP);
-               raise;
-         end;
-
-         if IP.all.Kind = Identifier_Item_Kind then
-            Text_2_Identifier(IP.all.Identifier_Value.all, Value);
-         else
-            Raise_Exception(CryptAda_Item_Kind_Error'Identity, "Item is not an identifier");
-         end if;
-      end Get_Value;
-
-      --[Replace_Value]---------------------------------------------------------
-
-      procedure   Replace_Value(
-                     In_List           : in out List;
-                     At_Position       : in     Position_Count;
-                     Value             : in     Identifier)
-      is
-         IP             : Item_Ptr;
-         New_Value      : Identifier_Text_Ptr;
-      begin
-         -- Argument checks:
-         -- Condition                        Exception
-         -- In_List is Empty                 CryptAda_List_Kind_Error
-         -- At_Position is not valid         CryptAda_Index_Error
-         -- Value is null                    CryptAda_Identifier_Error
-
-         if In_List.Current.all.Kind = Empty then
-            Raise_Exception(CryptAda_List_Kind_Error'Identity, "In_List current list is empty");
-         end if;
-
-         if In_List.Current.all.Item_Count < At_Position then
-            Raise_Exception(CryptAda_Index_Error'Identity, "Invalid list position value");
-         end if;
-
-         if Value.Text = null then
-            Raise_Exception(CryptAda_Identifier_Error'Identity, "Value is null");
-         end if;
-
-         -- Process:
-         -- Get the item at position, check that item kind is
-         -- Identifier_Item_Kind and set its value to Value.
-
-         IP := Get_Item(In_List.Current, At_Position);
-
-         if IP.all.Kind /= Identifier_Item_Kind then
-            Raise_Exception(CryptAda_Item_Kind_Error'Identity, "Item is not an identifier");
-         end if;
-
-         New_Value := Allocate_Identifier_Text(Value.Text.all);
-
-         if IP.all.Identifier_Value /= null then
-            Free_Identifier_Text(IP.all.Identifier_Value);
-         end if;
-
-         IP.all.Identifier_Value := New_Value;
-      end Replace_Value;
-
-      --[Replace_Value]---------------------------------------------------------
-
-      procedure   Replace_Value(
-                     In_List           : in out List;
-                     Item_Name         : in     Identifier;
-                     Value             : in     Identifier)
-      is
-         IP             : Item_Ptr;
-         New_Value      : Identifier_Text_Ptr;
-      begin
-         -- Argument checks:
-         -- Condition                        Exception
-         -- In_List is Empty                 CryptAda_List_Kind_Error
-         -- In_List is Unnamed               CryptAda_Named_List_Error
-         -- Item_Name is null                CryptAda_Identifier_Error
-         -- Value is null                    CryptAda_Identifier_Error
-
-         if In_List.Current.all.Kind = Empty then
-            Raise_Exception(CryptAda_List_Kind_Error'Identity, "In_List current list is empty");
-         elsif In_List.Current.all.Kind = Unnamed then
-            Raise_Exception(CryptAda_Named_List_Error'Identity, "In_List current list is unnamed");
-         end if;
-
-         if Item_Name.Text = null then
-            Raise_Exception(CryptAda_Identifier_Error'Identity, "Item_Name is null");
-         end if;
-
-         if Value.Text = null then
-            Raise_Exception(CryptAda_Identifier_Error'Identity, "Value is null");
-         end if;
-
-         -- Process:
-         -- Get the item by name (it will raise CryptAda_Item_Not_Found_Error if
-         -- there is no item with that name in the list). Check that item kind
-         -- is Identifier_Item_Kind and set its value to Value.
-
-         IP := Get_Item(In_List.Current, Item_Name.Text.all);
-
-         if IP.all.Kind /= Identifier_Item_Kind then
-            Raise_Exception(CryptAda_Item_Kind_Error'Identity, "Item is not an identifier");
-         end if;
-
-         New_Value := Allocate_Identifier_Text(Value.Text.all);
-
-         if IP.all.Identifier_Value /= null then
-            Free_Identifier_Text(IP.all.Identifier_Value);
-         end if;
-
-         IP.all.Identifier_Value := New_Value;
-      end Replace_Value;
-
-      --[Replace_Value]---------------------------------------------------------
-
-      procedure   Replace_Value(
-                     In_List           : in out List;
-                     Item_Name         : in     Identifier_Text;
-                     Value             : in out Identifier)
-      is
-         IP             : Item_Ptr;
-         ITP            : Identifier_Text_Ptr;
-         New_Value      : Identifier_Text_Ptr;
-      begin
-         -- Argument checks:
-         -- Condition                        Exception
-         -- In_List is Empty                 CryptAda_List_Kind_Error
-         -- In_List is Unnamed               CryptAda_Named_List_Error
-         -- Value is null                    CryptAda_Identifier_Error
-
-         if In_List.Current.all.Kind = Empty then
-            Raise_Exception(CryptAda_List_Kind_Error'Identity, "In_List current list is empty");
-         elsif In_List.Current.all.Kind = Unnamed then
-            Raise_Exception(CryptAda_Named_List_Error'Identity, "In_List current list is unnamed");
-         end if;
-
-         if Value.Text = null then
-            Raise_Exception(CryptAda_Identifier_Error'Identity, "Value is null");
-         end if;
-
-         -- Process:
-         -- 1. Get the identifier from Item_Name text. It will raise
-         --    CryptAda_Syntax_Error if Item_Name does not meet the syntax
-         --    rules for identifiers.
-         -- 2. Get the item from the list. It will raise
-         --    CryptAda_Item_Not_Found_Error if there is no item with Item_Name
-         --    in the list.
-         -- 3. Check the item is of Identifier_Item_Kind and if so, set the
-         --    new value for the item.
-
-         ITP := Get_Identifier(Item_Name);
-
-         declare
-         begin
-            IP := Get_Item(In_List.Current, ITP.all);
-            Free_Identifier_Text(ITP);
-         exception
-            when others =>
-               Free_Identifier_Text(ITP);
-               raise;
-         end;
-
-         if IP.all.Kind /= Identifier_Item_Kind then
-            Raise_Exception(CryptAda_Item_Kind_Error'Identity, "Item is not an identifier");
-         end if;
-
-         New_Value := Allocate_Identifier_Text(Value.Text.all);
-
-         if IP.all.Identifier_Value /= null then
-            Free_Identifier_Text(IP.all.Identifier_Value);
-         end if;
-
-         IP.all.Identifier_Value := New_Value;
-      end Replace_Value;
-
-      --[Insert_Value]----------------------------------------------------------
-
-      procedure   Insert_Value(
-                     In_List           : in out List;
-                     At_Position       : in     Insert_Count;
-                     Value             : in     Identifier)
-      is
-         IP             : Item_Ptr;
-      begin
-         -- Argument checks:
-         -- Condition                        Exception
-         -- At_Position is not valid         CryptAda_Index_Error
-         -- Value is null                    CryptAda_Identifier_Error
-         -- Current list length is maximum   CryptAda_Overflow_Error
-
-         if In_List.Current.all.Item_Count < At_Position then
-            Raise_Exception(CryptAda_Index_Error'Identity, "Invalid list position value");
-         end if;
-
-         if Value.Text = null then
-            Raise_Exception(CryptAda_Identifier_Error'Identity, "Value is null");
-         end if;
-
-         if In_List.Current.all.Item_Count = List_Length  then
-            Raise_Exception(CryptAda_Overflow_Error'Identity, "List is full");
-         end if;
-
-         -- Process:
-         -- 1. Allocate a new item of Identifier_Item_Kind kind (might raise
-         --    CryptAda_Storage_Error).
-         -- 2. Set item value to Value.
-         -- 3. Insert the item in the list after At_Position.
-
-         IP                      := Allocate_Item(Identifier_Item_Kind);
-
-         IP.all.Identifier_Value := Allocate_Identifier_Text(Value.Text.all);
-         IP.all.Enumerated       := False;
-         IP.all.Enum_Pos         := Integer'First;
-
-         Insert_Item(In_List.Current, At_Position, IP);
-      end Insert_Value;
-
-      --[Insert_Value]----------------------------------------------------------
-
-      procedure   Insert_Value(
-                     In_List           : in out List;
-                     At_Position       : in     Insert_Count;
-                     Item_Name         : in     Identifier;
-                     Value             : in     Identifier)
-      is
-         IP             : Item_Ptr;
-      begin
-         -- Argument checks:
-         -- Condition                        Exception
-         -- In_List is Unnamed               CryptAda_List_Kind_Error
-         -- Item_Name is null                CryptAda_Identifier_Error
-         -- Value is null                    CryptAda_Identifier_Error
-         -- Current list length is maximum   CryptAda_Overflow_Error
-         -- In_List already contains an
-         -- item named Item_Name             CryptAda_Named_List_Error
-
-         if In_List.Current.all.Kind = Unnamed then
-            Raise_Exception(CryptAda_List_Kind_Error'Identity, "In_List current list is unnamed");
-         end if;
-
-         if Item_Name.Text = null then
-            Raise_Exception(CryptAda_Identifier_Error'Identity, "Item_Name is null");
-         end if;
-
-         if Value.Text = null then
-            Raise_Exception(CryptAda_Identifier_Error'Identity, "Value is null");
-         end if;
-
-         if In_List.Current.all.Item_Count = List_Length  then
-            Raise_Exception(CryptAda_Overflow_Error'Identity, "List is full");
-         end if;
-
-         if Contains_Item(In_List.Current, Item_Name.Text.all) then
-            Raise_Exception(CryptAda_Named_List_Error'Identity, "List already contains the item: """ & Item_Name.Text.all & """");
-         end if;
-
-         -- Process:
-         -- 1. Allocate a new item of Identifier_Item_Kind kind (might raise
-         --    CryptAda_Storage_Error).
-         -- 2. Set item value to Value.
-         -- 3. Insert the item in the list after At_Position.
-
-         IP                      := Allocate_Item(Identifier_Item_Kind);
-
-         IP.all.Identifier_Value := Allocate_Identifier_Text(Value.Text.all);
-         IP.all.Enumerated       := False;
-         IP.all.Enum_Pos         := Integer'First;
-
-         Insert_Item(In_List.Current, At_Position, IP);
-      end Insert_Value;
-
-      --[Insert_Value]----------------------------------------------------------
-
-      procedure   Insert_Value(
-                     In_List           : in out List;
-                     At_Position       : in     Insert_Count;
-                     Item_Name         : in     Identifier_Text;
-                     Value             : in out Identifier)
-      is
-         IP             : Item_Ptr;
-         ITP            : Identifier_Text_Ptr;
-      begin
-         -- Argument checks:
-         -- Condition                        Exception
-         -- In_List is Unnamed               CryptAda_List_Kind_Error
-         -- Value is null                    CryptAda_Identifier_Error
-         -- Current list length is maximum   CryptAda_Overflow_Error
-         -- Item_Name is not valid           CryptAda_Syntax_Error
-         -- In_List already contains an
-         -- item named Item_Name             CryptAda_Named_List_Error
-
-         if In_List.Current.all.Kind = Unnamed then
-            Raise_Exception(CryptAda_List_Kind_Error'Identity, "In_List current list is unnamed");
-         end if;
-
-         if Value.Text = null then
-            Raise_Exception(CryptAda_Identifier_Error'Identity, "Value is null");
-         end if;
-
-         if In_List.Current.all.Item_Count = List_Length  then
-            Raise_Exception(CryptAda_Overflow_Error'Identity, "List is full");
-         end if;
-
-         ITP := Get_Identifier(Item_Name);
-
-         if Contains_Item(In_List.Current, ITP.all) then
-            Free_Identifier_Text(ITP);
-            Raise_Exception(CryptAda_Named_List_Error'Identity, "List already contains the item: """ & Item_Name & """");
-         end if;
-
-         -- Process:
-         -- 1. Allocate a new item of Identifier_Item_Kind kind (might raise
-         --    CryptAda_Storage_Error).
-         -- 2. Set item value to Value.
-         -- 3. Insert the item in the list after At_Position.
-
-         declare
-         begin
-            IP                      := Allocate_Item(Identifier_Item_Kind);
-
-            IP.all.Identifier_Value := Allocate_Identifier_Text(ITP.all);
+   --[Memory Allocation and Deallocation]---------------------------------------
+
+   --[Allocate_Identifier_Text]-------------------------------------------------
+
+   function    Allocate_Identifier_Text(
+                  Id             : in     Identifier_Text)
+      return   Identifier_Text_Ptr
+   is
+      ITP            : Identifier_Text_Ptr;
+   begin
+      ITP      := new Identifier_Text(1 .. Id'Length);
+      ITP.all  := Id;
+
+      return ITP;
+   exception
+      when Storage_Error =>
+         Raise_Exception(CryptAda_Storage_Error'Identity, "Allocating Identifier_Text");
+   end Allocate_Identifier_Text;
+
+   --[Allocate_Item]------------------------------------------------------------
+
+   function    Allocate_Item(
+                  Kind           : in     Item_Kind)
+      return   Item_Ptr
+   is
+      IP             : Item_Ptr;
+   begin
+      IP                            := new Item(Kind);
+
+      IP.all.Name                   := null;
+      IP.all.Container              := null;
+      IP.all.Prev_Item              := null;
+      IP.all.Next_Item              := null;
+
+      case Kind is
+         when List_Item_Kind =>
+            IP.all.List_Value       := null;
+         when String_Item_Kind =>
+            IP.all.String_Value     := null;
+         when Float_Item_Kind =>
+            IP.all.Float_Value      := 0.0;
+         when Integer_Item_Kind =>
+            IP.all.Integer_Value    := 0;
+         when Identifier_Item_Kind =>
+            IP.all.Identifier_Value := null;
             IP.all.Enumerated       := False;
             IP.all.Enum_Pos         := Integer'First;
+      end case;
 
-            Free_Identifier_Text(ITP);
-         exception
-            when others =>
-               Free_Identifier_Text(ITP);
-               raise;
-         end;
+      return IP;
+   exception
+      when Storage_Error =>
+         Raise_Exception(CryptAda_Storage_Error'Identity, "Allocating Item");
+   end Allocate_Item;
 
-         Insert_Item(In_List.Current, At_Position, IP);
-      end Insert_Value;
+   --[Clone_List_Record]--------------------------------------------------------
 
-   end Identifier_Item;
-
-   -->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-   --Debug subprograms
-   --<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-   procedure   Print_Token_List(
-                  LT             : in     List_Text;
-                  TL             : in     Token_List)
+   function    Clone_List_Record(
+                  From           : in     List_Record_Ptr)
+      return   List_Record_Ptr
    is
-      TP             : Token_Ptr;
-      I              : Integer := 1;
+      LRP            : List_Record_Ptr := null;
+      F_IP           : Item_Ptr;
+      C_IP           : Item_Ptr;
    begin
-      Ada.Text_IO.Put_Line("===[Begin Token List]===========================================================");
-      Ada.Text_IO.Put_Line("Length of List_Text   : " & Integer'Image(LT'Length));
-      Ada.Text_IO.Put_Line("List_Text First       : " & Integer'Image(LT'First));
-      Ada.Text_IO.Put_Line("List_Text Last        : " & Integer'Image(LT'Last));
-      Ada.Text_IO.Put_Line("Number of tokens found: " & Integer'Image(TL.Count));
-
-      TP := TL.First;
-
-      while TP /= null loop
-         Ada.Text_IO.Put_Line("---[Begin Token]----------------------------------------------------------------");
-         Ada.Text_IO.Put_Line("Token #    : " & Integer'Image(I));
-         Ada.Text_IO.Put_Line("Kind       : " & Token_Kind'Image(TP.all.Kind));
-         Ada.Text_IO.Put_Line("Start index: " & Integer'Image(TP.all.BOT));
-         Ada.Text_IO.Put_Line("End index  : " & Integer'Image(TP.all.EOT));
-         Ada.Text_IO.Put_Line("Value      : [" & LT(TP.all.BOT .. TP.all.EOT) & "]");
-         Ada.Text_IO.Put_Line("---[End Token]------------------------------------------------------------------");
-         Ada.Text_IO.New_Line;
-
-         I := I + 1;
-         TP := TP.all.Next_Token;
-      end loop;
-      Ada.Text_IO.Put_Line("===[End Token List]=============================================================");
-      Ada.Text_IO.New_Line;
-   end Print_Token_List;
-
-   procedure   Print_Item(
-                  IP             : in     Item_Ptr)
-   is
-   begin
-      Ada.Text_IO.Put_Line("---[Begin Item]-----------------------------------------------------------------");
-
-      Ada.Text_IO.Put("Item address    : ");
-
-      if IP = null then
-         Ada.Text_IO.Put_Line("[null]");
-      else
-         Ada.Text_IO.Put_Line(System.Address_Image(IP.all'Address));
-
-         Ada.Text_IO.Put_Line("Kind            : " & Item_Kind'Image(IP.all.Kind));
-
-         Ada.Text_IO.Put("Name            : ");
-
-         if IP.all.Name = null then
-            Ada.Text_IO.Put_Line("[null]");
-         else
-            Ada.Text_IO.Put_Line(IP.all.Name.all);
-         end if;
-
-         Ada.Text_IO.Put("Container       : ");
-
-         if IP.all.Container = null then
-            Ada.Text_IO.Put_Line("[null]");
-         else
-            Ada.Text_IO.Put_Line(System.Address_Image(IP.all.Container.all'Address));
-         end if;
-
-         Ada.Text_IO.Put("Next_Item       : ");
-
-         if IP.all.Next_Item = null then
-            Ada.Text_IO.Put_Line("[null]");
-         else
-            Ada.Text_IO.Put_Line(System.Address_Image(IP.all.Next_Item.all'Address));
-         end if;
-
-         case IP.all.Kind is
-            when List_Item_Kind        =>
-               Print_List_Record(IP.all.List_Value);
-
-            when String_Item_Kind      =>
-               Ada.Text_IO.Put_Line("String_Value    : """ & IP.all.String_Value.all & """");
-
-            when Float_Item_Kind       =>
-               Ada.Text_IO.Put("Float_Value     : ");
-               FIO.Put(IP.all.Float_Value);
-               Ada.Text_IO.New_Line;
-
-            when Integer_Item_Kind     =>
-               Ada.Text_IO.Put("Integer_Value   : ");
-               IIO.Put(IP.all.Integer_Value);
-               Ada.Text_IO.New_Line;
-
-            when Identifier_Item_Kind  =>
-               Ada.Text_IO.Put_Line("Identifier_Value: " & IP.all.Identifier_Value.all);
-               Ada.Text_IO.Put_Line("Enumerated      : " & Boolean'Image(IP.all.Enumerated));
-               Ada.Text_IO.Put_Line("Enum_Pos        : " & Integer'Image(IP.all.Enum_Pos));
-
-         end case;
+      if From = null then
+         return null;
       end if;
-      Ada.Text_IO.Put_Line("---[End Item]-------------------------------------------------------------------");
-   end Print_Item;
 
-   procedure   Print_List_Record(
-                  LRP            : in     List_Record_Ptr)
+      -- Allocate List_Record
+
+      LRP := Allocate_List_Record;
+
+      -- Traverse From clonning items and appending to the new list.
+
+      F_IP  := From.all.First_Item;
+
+      while F_IP /= null loop
+         C_IP := Clone_Item(F_IP);
+         Append_Item(LRP, C_IP);
+         F_IP := F_IP.all.Next_Item;
+      end loop;
+
+      return LRP;
+   exception
+      when others =>
+         Deallocate_List_Record(LRP);
+         raise;
+   end Clone_List_Record;
+   
+   --[Deallocate_Identifier_Text]-----------------------------------------------
+
+   procedure   Deallocate_Identifier_Text(
+                  Id             : in out Identifier_Text_Ptr)
+   is
+   begin
+      if Id /= null then
+         Free_Identifier_Text(Id);
+         Id := null;
+      end if;
+   end Deallocate_Identifier_Text;
+
+   --[Deallocate_Item]----------------------------------------------------------
+
+   procedure   Deallocate_Item(
+                  IP             : in out Item_Ptr)
+   is
+   begin
+      if IP = null then
+         return;
+      end if;
+
+      -- Common fields ...
+
+      if IP.all.Name /= null then
+         Free_Identifier_Text(IP.all.Name);
+         IP.all.Name := null;
+      end if;
+
+      IP.all.Container := null;
+      IP.all.Prev_Item := null;
+      IP.all.Next_Item := null;
+
+      -- Value fields ...
+
+      case IP.all.Kind is
+         when List_Item_Kind =>
+            Deallocate_List_Record(IP.all.List_Value);
+            IP.all.List_Value := null;
+
+         when String_Item_Kind =>
+            if IP.all.String_Value /= null then
+               Free_String(IP.all.String_Value);
+               IP.all.String_Value := null;
+            end if;
+
+         when Float_Item_Kind =>
+            IP.all.Float_Value := 0.0;
+
+         when Integer_Item_Kind =>
+            IP.all.Integer_Value := 0;
+
+         when Identifier_Item_Kind =>
+            if IP.all.Identifier_Value /= null then
+               Free_Identifier_Text(IP.all.Identifier_Value);
+               IP.all.Identifier_Value := null;
+            end if;
+
+            IP.all.Enumerated := False;
+            IP.all.Enum_Pos := Integer'First;
+      end case;
+
+      -- Free record.
+
+      Free_Item(IP);
+      IP := null;
+   end Deallocate_Item;
+
+   --[Deallocate_List_Record]---------------------------------------------------
+
+   procedure   Deallocate_List_Record(
+                  LRP            : in out List_Record_Ptr)
    is
       CI             : Item_Ptr;
-      I              : Positive;
+      NCI            : Item_Ptr;
+      CHTEP          : Hash_Table_Entry_Ptr;
+      NCHTEP         : Hash_Table_Entry_Ptr;
    begin
-      Ada.Text_IO.New_Line;
-      Ada.Text_IO.Put_Line(">>>[Begin List Record]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-
-      Ada.Text_IO.Put("List record address: ");
-
       if LRP = null then
-         Ada.Text_IO.Put_Line("[null]");
-      else
-         Ada.Text_IO.Put_Line(System.Address_Image(LRP.all'Address));
-
-         Ada.Text_IO.Put_Line("Kind               : " & List_Kind'Image(LRP.all.Kind));
-         Ada.Text_IO.Put_Line("Item_Count         : " & List_Size'Image(LRP.all.Item_Count));
-         Ada.Text_IO.Put("This               : ");
-
-         if LRP.all.This = null then
-            Ada.Text_IO.Put_Line("[null]");
-         else
-            Ada.Text_IO.Put_Line(System.Address_Image(LRP.all.This.all'Address));
-         end if;
-
-         Ada.Text_IO.Put("Parent             : ");
-
-         if LRP.all.Parent = null then
-            Ada.Text_IO.Put_Line("[null]");
-         else
-            Ada.Text_IO.Put_Line(System.Address_Image(LRP.all.Parent.all'Address));
-         end if;
-
-         Ada.Text_IO.Put("First_Item         : ");
-
-         if LRP.all.First_Item = null then
-            Ada.Text_IO.Put_Line("[null]");
-         else
-            Ada.Text_IO.Put_Line(System.Address_Image(LRP.all.First_Item.all'Address));
-         end if;
-
-         Ada.Text_IO.Put("Last_Item          : ");
-
-         if LRP.all.Last_Item = null then
-            Ada.Text_IO.Put_Line("[null]");
-         else
-            Ada.Text_IO.Put_Line(System.Address_Image(LRP.all.Last_Item.all'Address));
-         end if;
-
-         CI := LRP.all.First_Item;
-         I := 1;
-
-         while CI /= null loop
-            Ada.Text_IO.Put_Line("Item " & Integer'Image(I));
-            Print_Item(CI);
-            CI := CI.all.Next_Item;
-            I := I + 1;
-         end loop;
+         return;
       end if;
 
-      Ada.Text_IO.Put_Line(">>>[End List Record]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-      Ada.Text_IO.New_Line;
-   end Print_List_Record;
+      -- Deallocate items.
 
+      CI := LRP.all.First_Item;
+
+      while CI /= null loop
+         NCI := CI.all.Next_Item;
+         Deallocate_Item(CI);
+         CI := NCI;
+      end loop;
+
+      -- Deallocate hash table entries.
+
+      for I in LRP.all.Hash_Table'Range loop
+         CHTEP := LRP.all.Hash_Table(I);
+
+         while CHTEP /= null loop
+            NCHTEP := CHTEP.all.Next_Entry;
+            Free_Hash_Table_Entry(CHTEP);
+            CHTEP := NCHTEP;
+         end loop;
+
+         LRP.all.Hash_Table(I) := null;
+      end loop;
+
+      -- Nullify list record field
+
+      LRP.all.Kind            := Empty;
+      LRP.all.Item_Count      := 0;
+      LRP.all.This            := null;
+      LRP.all.Parent          := null;
+      LRP.all.First_Item      := null;
+      LRP.all.Last_Item       := null;
+
+      -- Now free list record.
+
+      Free_List_Record(LRP);
+
+      LRP := null;
+   end Deallocate_List_Record;
+   
+   --[Is_Equal]-----------------------------------------------------------------
+
+   function    Is_Equal(
+                  Left           : in     Identifier_Text;
+                  Right          : in     Identifier_Text)
+      return   Boolean
+   is
+      L              : constant Identifier_Text := Normalize_Identifier_Text(Left);
+      R              : constant Identifier_Text := Normalize_Identifier_Text(Right);
+   begin
+      return (L = R);
+   end Is_Equal;
+
+   --[Is_Equal]-----------------------------------------------------------------
+
+   function    Is_Equal(
+                  Left           : in     List_Record_Ptr;
+                  Right          : in     List_Record_Ptr)
+      return   Boolean
+   is
+      CIL            : Item_Ptr;
+      CIR            : Item_Ptr;
+   begin
+      if Left = Right then
+         return True;
+      end if;
+
+      if Left = null or else Right = null then
+         return False;
+      end if;
+
+      if Left.all.Kind /= Right.all.Kind then
+         return False;
+      end if;
+
+      if Left.all.Item_Count /= Right.all.Item_Count then
+         return False;
+      end if;
+
+      CIL := Left.all.First_Item;
+      CIR := Right.all.First_Item;
+
+      while CIL /= null loop
+         if not Is_Equal(CIL, CIR) then
+            return False;
+         end if;
+
+         CIL := CIL.all.Next_Item;
+         CIR := CIR.all.Next_Item;
+      end loop;
+
+      return True;
+   end Is_Equal;
+   
+   --[Get_Identifier]-----------------------------------------------------------
+
+   function    Get_Identifier(
+                  From_String    : in     String)
+      return   Identifier_Text_Ptr
+   is
+      IB             : Positive  := From_String'First;
+      IE             : Natural   := From_String'Last;
+      US             : Boolean   := False;
+      Id_US          : Unbounded_String;
+      L              : Natural;
+   begin
+      -- Trim left whitespace.
+
+      while IB <= From_String'Last loop
+         exit when not Is_In(From_String(IB), Whitespace_Set);
+         IB := IB + 1;
+      end loop;
+
+      if IB > From_String'Last then
+         Raise_Exception(CryptAda_Syntax_Error'Identity, "Identifier text is empty");
+      end if;
+
+      -- Trim right whitespace.
+
+      while IE > IB loop
+         exit when not Is_In(From_String(IE), Whitespace_Set);
+         IE := IE - 1;
+      end loop;
+
+      -- First non whitespace character must be a letter.
+
+      if Is_Letter(From_String(IB)) then
+         Append(Id_US, From_String(IB));
+      else
+         Raise_Exception(CryptAda_Syntax_Error'Identity, "Identifier first character is not a letter");
+      end if;
+
+      -- Next, if any must be letters, digits or underscore.
+
+      for I in IB + 1 .. IE loop
+         if US then
+            -- Previous character was an underscore, current must be an
+            -- alphanumeric character.
+
+            if Is_Alphanumeric(From_String(I)) then
+               US := False;
+               Append(Id_US, From_String(I));
+            else
+               Raise_Exception(CryptAda_Syntax_Error'Identity, "Invalid character '" & From_String(I) & "' in identifier");
+            end if;
+         else
+            -- Previous character was an alphanumeric character, this character
+            -- must be either alphanumeric or an underscore.
+
+            if Is_Alphanumeric(From_String(I)) then
+               Append(Id_US, From_String(I));
+            else
+               if From_String(I) = '_' then
+                  US := True;
+                  Append(Id_US, From_String(I));
+               else
+                  Raise_Exception(CryptAda_Syntax_Error'Identity, "Invalid character '" & From_String(I) & "' in identifier");
+               end if;
+            end if;
+         end if;
+      end loop;
+
+      -- Last character must not be an underscore.
+
+      if US then
+         Raise_Exception(CryptAda_Syntax_Error'Identity, "Identifier last character must not be '_'");
+      end if;
+
+      -- Check identifier length.
+
+      L := Length(Id_US);
+
+      if L = 0 then
+         Raise_Exception(CryptAda_Syntax_Error'Identity, "Empty identifier");
+      end if;
+
+      if L > Identifier_Max_Length then
+         Raise_Exception(CryptAda_Syntax_Error'Identity, "Identifier too long");
+      end if;
+
+      if Is_Ada_Reserved_Word(To_String(Id_US)) then
+         Raise_Exception(CryptAda_Syntax_Error'Identity, "Identifier is an Ada reserved word");
+      end if;
+
+      return Allocate_Identifier_Text(To_String(Id_US));
+   end Get_Identifier;
+
+   --[Contains_Item]------------------------------------------------------------
+
+   function    Contains_Item(
+                  The_List       : in     List_Record_Ptr;
+                  Item_Name      : in     Identifier_Text)
+      return   Boolean
+   is
+      IP             : Item_Ptr;
+   begin
+      if The_List = null then
+         Raise_Exception(CryptAda_Null_Argument_Error'Identity, "Null List_Record_Ptr");
+      end if;
+
+      -- List must be named.
+
+      if The_List.all.Kind = Empty then
+         Raise_Exception(CryptAda_List_Kind_Error'Identity, "Querying by name an empty list");
+      elsif The_List.all.Kind = Unnamed then
+         Raise_Exception(CryptAda_Named_List_Error'Identity, "Querying by name an unnamed list");
+      end if;
+
+      -- Get hash table entry. If result is null means that there is no item
+      -- in The_List with Item_Name.
+
+      IP := Get_Hash_Table_Entry(The_List, Item_Name);
+
+      return (IP /= null);
+   end Contains_Item;
+
+   --[Get_Item]-----------------------------------------------------------------
+
+   function    Get_Item(
+                  From_List      : in     List_Record_Ptr;
+                  At_Position    : in     Position_Count)
+      return   Item_Ptr
+   is
+   begin
+      if From_List = null then
+         Raise_Exception(CryptAda_Null_Argument_Error'Identity, "Null List_Record_Ptr");
+      end if;
+
+      -- Check list is not empty and position is within bounds.
+
+      if From_List.all.Kind = Empty then
+         Raise_Exception(CryptAda_List_Kind_Error'Identity, "List is empty");
+      end if;
+
+      if At_Position > From_List.all.Item_Count then
+         Raise_Exception(CryptAda_Index_Error'Identity, "Position is out of bounds");
+      end if;
+
+      -- Get the item at position.
+
+      return Get_Item_At_Position(From_List, At_Position);
+   end Get_Item;
+
+   --[Get_Item]-----------------------------------------------------------------
+
+   function    Get_Item(
+                  From_List      : in     List_Record_Ptr;
+                  With_Name      : in     Identifier_Text)
+      return   Item_Ptr
+   is
+      IP             : Item_Ptr;
+   begin
+      if From_List = null then
+         Raise_Exception(CryptAda_Null_Argument_Error'Identity, "Null List_Record_Ptr");
+      end if;
+
+      -- Check From_List is not empty and that is a named list.
+
+      if From_List.all.Kind = Empty then
+         Raise_Exception(CryptAda_List_Kind_Error'Identity, "List is empty");
+      elsif From_List.all.Kind = Unnamed then
+         Raise_Exception(CryptAda_Named_List_Error'Identity, "List is unnamed");
+      end if;
+
+      -- Get Item.
+
+      IP := Get_Hash_Table_Entry(From_List, With_Name);
+
+      -- If not found raise an exception otherwise return the item.
+
+      if IP = null then
+         Raise_Exception(CryptAda_Item_Not_Found_Error'Identity, "List doesn't contains a: """ & With_Name & """ item");
+      else
+         return IP;
+      end if;
+   end Get_Item;
+
+   --[Insert_Item]--------------------------------------------------------------
+
+   procedure   Insert_Item(
+                  In_List        : in     List_Record_Ptr;
+                  At_Position    : in     Insert_Count;
+                  The_Item       : in     Item_Ptr)
+   is
+      AI             : Item_Ptr;
+   begin
+      -- Check that arguments are not null.
+
+      if In_List = null then
+         Raise_Exception(CryptAda_Null_Argument_Error'Identity, "Null List_Record_Ptr");
+      end if;
+
+      if The_Item = null then
+         Raise_Exception(CryptAda_Null_Argument_Error'Identity, "Null Item_Ptr");
+      end if;
+
+      -- Check list is not full.
+
+      if In_List.all.Item_Count = List_Length then
+         Raise_Exception(CryptAda_Overflow_Error'Identity, "List is full");
+      end if;
+
+      -- Check item compatibility.
+
+      case In_List.all.Kind is
+         when Empty =>
+            -- The list will become either named or unnamed depending on whether
+            -- the item has name or not.
+
+            if The_Item.all.Name = null then
+               In_List.all.Kind := Unnamed;
+            else
+               In_List.all.Kind := Named;
+               Add_Hash_Table_Entry(In_List, The_Item);
+            end if;
+
+         when Unnamed =>
+            -- Unnamed list, free item name if any.
+
+            if The_Item.all.Name /= null then
+               Free_Identifier_Text(The_Item.all.Name);
+               The_Item.all.Name := null;
+            end if;
+
+         when Named =>
+            -- Named list. Item must have a name and that name must not be
+            -- already in list.
+
+            if The_Item.all.Name = null then
+               Raise_Exception(CryptAda_Unnamed_Item_Error'Identity, "Trying to add an unnamed item to a named list");
+            else
+               if Contains_Item(In_List, The_Item.all.Name.all) then
+                  Raise_Exception(CryptAda_Named_List_Error'Identity, "List already contains a """ & The_Item.all.Name.all & """ item");
+               end if;
+            end if;
+
+            -- Add the hash table entry for item.
+
+            Add_Hash_Table_Entry(In_List, The_Item);
+      end case;
+
+      -- Get the item after which the item is to be inserted.
+
+      if At_Position = 0 then
+         AI := null;
+      else
+         AI := Get_Item_At_Position(In_List, At_Position);
+      end if;
+
+      Insert_Item_In_List(In_List, AI, The_Item);
+
+      -- Update item.
+
+      The_Item.all.Container := In_List.all.This;
+
+      if The_Item.all.Kind = List_Item_Kind then
+         The_Item.all.List_Value.all.Parent := In_List.all.This;
+      end if;
+   end Insert_Item;
 end CryptAda.Pragmatics.Lists;

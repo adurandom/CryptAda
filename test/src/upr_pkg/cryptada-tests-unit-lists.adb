@@ -31,13 +31,14 @@
 --    1.0   20170422 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with Ada.Exceptions;                use Ada.Exceptions;
-with Ada.Characters.Latin_1;        use Ada.Characters.Latin_1;
+with Ada.Exceptions;                               use Ada.Exceptions;
+with Ada.Characters.Latin_1;                       use Ada.Characters.Latin_1;
 
-with CryptAda.Exceptions;           use CryptAda.Exceptions;
-with CryptAda.Tests.Utils;          use CryptAda.Tests.Utils;
-with CryptAda.Pragmatics;           use CryptAda.Pragmatics;
-with CryptAda.Pragmatics.Lists;     use CryptAda.Pragmatics.Lists;
+with CryptAda.Exceptions;                          use CryptAda.Exceptions;
+with CryptAda.Tests.Utils;                         use CryptAda.Tests.Utils;
+with CryptAda.Pragmatics;                          use CryptAda.Pragmatics;
+with CryptAda.Pragmatics.Lists;                    use CryptAda.Pragmatics.Lists;
+with CryptAda.Pragmatics.Lists.Identifier_Item;    use CryptAda.Pragmatics.Lists.Identifier_Item;
 
 package body CryptAda.Tests.Unit.Lists is
 
@@ -188,6 +189,7 @@ package body CryptAda.Tests.Unit.Lists is
    procedure Case_10;
    procedure Case_11;
    procedure Case_12;
+   procedure Case_13;
 
    -----------------------------------------------------------------------------
    --[Internal Subprogram Bodies]-----------------------------------------------
@@ -481,7 +483,7 @@ package body CryptAda.Tests.Unit.Lists is
 
       for I in 1 .. OLS loop
          Get_Item_Name(L, I, Id);
-         Print_Message("Item " & Position_Count'Image(I) & ". Name: """ & Identifier_Item.Identifier_2_Text(Id) & """. Kind: " & Item_Kind'Image(Get_Item_Kind(L, I)));
+         Print_Message("Item " & Position_Count'Image(I) & ". Name: """ & Identifier_2_Text(Id) & """. Kind: " & Item_Kind'Image(Get_Item_Kind(L, I)));
       end loop;
 
       Print_Information_Message("Converting back to test must eliminate whitespace between tokens ...");
@@ -834,7 +836,7 @@ package body CryptAda.Tests.Unit.Lists is
       Print_Information_Message("Trying to delete an item by name (Identifier) in an unnamed list ...");
       Print_Message("Must raise CryptAda_Named_List_Error", "    ");
       Print_List("List to delete item ""Two"" using Identifier", UL);
-      Identifier_Item.Text_2_Identifier("Two", Id);
+      Text_2_Identifier("Two", Id);
       
       declare
       begin
@@ -881,7 +883,7 @@ package body CryptAda.Tests.Unit.Lists is
       Print_Information_Message("Trying to delete an item by name (Identifier) that not exists in a named list ...");
       Print_Message("Must raise CryptAda_Item_Not_Found_Error", "    ");
       Print_List("List to delete item ""Four"" using Identifier", NL);
-      Identifier_Item.Text_2_Identifier("Four", Id);
+      Text_2_Identifier("Four", Id);
       
       declare
       begin
@@ -925,7 +927,7 @@ package body CryptAda.Tests.Unit.Lists is
 
       Print_Information_Message("Deleting item ""Two"" by name (Identifier) in named list");
       Print_List("Before Delete", NL);
-      Identifier_Item.Text_2_Identifier("Two", Id);
+      Text_2_Identifier("Two", Id);
       Delete(NL, Id);
       Print_List("After Delete", NL);
       
@@ -1082,7 +1084,7 @@ package body CryptAda.Tests.Unit.Lists is
       Print_Information_Message("Trying to get the kind of item by name (Identifier) in an unnamed list ...");
       Print_Message("Must raise CryptAda_Named_List_Error", "    ");
       Print_List("The list", UL);
-      Identifier_Item.Text_2_Identifier("Two", Id);
+      Text_2_Identifier("Two", Id);
       
       declare
       begin
@@ -1129,7 +1131,7 @@ package body CryptAda.Tests.Unit.Lists is
       Print_Information_Message("Trying to get the kind of an item by name (Identifier) that not exists in a named list ...");
       Print_Message("Must raise CryptAda_Item_Not_Found_Error", "    ");
       Print_List("The list", NL);
-      Identifier_Item.Text_2_Identifier("Eight", Id);
+      Text_2_Identifier("Eight", Id);
       
       declare
       begin
@@ -1165,8 +1167,8 @@ package body CryptAda.Tests.Unit.Lists is
       
       for I in 1 .. NOI loop
          Get_Item_Name(NL, I, Id);
-         IK := Get_Item_Kind(NL, Identifier_Item.Identifier_2_Text(Id));
-         Print_Message("Item " & List_Size'Image(I) & ". Identifier: """ & Identifier_Item.Identifier_2_Text(Id) & """. Kind: " & Item_Kind'Image(IK));
+         IK := Get_Item_Kind(NL, Identifier_2_Text(Id));
+         Print_Message("Item " & List_Size'Image(I) & ". Identifier: """ & Identifier_2_Text(Id) & """. Kind: " & Item_Kind'Image(IK));
       end loop;
 
       Print_Information_Message("Getting the kind of the items of a named list using Identifier");
@@ -1175,7 +1177,7 @@ package body CryptAda.Tests.Unit.Lists is
       for I in 1 .. NOI loop
          Get_Item_Name(NL, I, Id);
          IK := Get_Item_Kind(NL, Id);
-         Print_Message("Item " & List_Size'Image(I) & ". Identifier: """ & Identifier_Item.Identifier_2_Text(Id) & """. Kind: " & Item_Kind'Image(IK));
+         Print_Message("Item " & List_Size'Image(I) & ". Identifier: """ & Identifier_2_Text(Id) & """. Kind: " & Item_Kind'Image(IK));
       end loop;
       
       Print_Information_Message("Test case OK");
@@ -1774,6 +1776,312 @@ package body CryptAda.Tests.Unit.Lists is
          End_Test_Case(12, Failed);
          raise CryptAda_Test_Error;
    end Case_12;
+
+   --[Case_13]------------------------------------------------------------------
+
+   procedure   Case_13
+   is
+      TL                : List;
+      UL1               : List;
+      NL1               : List;
+      ULT1              : constant List_Text := "(1, (1, 2, (Three => 3)), ""Three"")";
+      NLT1              : constant List_Text := "(One => 1, Two => (2, ""Two""), Three => (1.0, 2.0, 3.0, (())))";
+      Id                : Identifier;
+   begin
+      Begin_Test_Case(13, "Making list items current");
+      Print_Information_Message("Interfaces tested:");
+      Print_Message("- Make_List_Item_Current", "    ");
+
+      Text_2_List(ULT1, UL1);
+      Text_2_List(NLT1, NL1);
+      
+      Print_Information_Message("Trying to make a list item current in an empty list ...");
+      Print_Message("Must raise CryptAda_List_Kind_Error", "    ");
+      Print_List("The List", TL);
+      
+      declare
+      begin
+         Make_List_Item_Current(TL, 1);
+         Print_Error_Message("No exception raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_List_Kind_Error =>
+            Print_Information_Message("Caught CryptAda_List_Kind_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+         when X: others =>
+            Print_Error_Message("Unexpected exception caught");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+            raise CryptAda_Test_Error;
+      end;
+
+      Print_Information_Message("Trying to make a list item current with an invalid position value ...");
+      Print_Message("Must raise CryptAda_Index_Error", "    ");
+      Print_List("The list", UL1);
+      
+      declare
+      begin
+         Make_List_Item_Current(UL1, 8);
+         Print_Error_Message("No exception raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_Index_Error =>
+            Print_Information_Message("Caught CryptAda_Index_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+         when X: others =>
+            Print_Error_Message("Unexpected exception caught");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+            raise CryptAda_Test_Error;
+      end;
+
+      Print_Information_Message("Trying to make a list item current with an invalid identifier text ...");
+      Print_Message("Must raise CryptAda_Syntax_Error", "    ");
+      Print_List("The list", NL1);
+      
+      declare
+      begin
+         Make_List_Item_Current(NL1, "1One");
+         Print_Error_Message("No exception raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_Syntax_Error =>
+            Print_Information_Message("Caught CryptAda_Syntax_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+         when X: others =>
+            Print_Error_Message("Unexpected exception caught");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+            raise CryptAda_Test_Error;
+      end;
+
+      Print_Information_Message("Trying to make a list current with a null identifier ...");
+      Print_Message("Must raise CryptAda_Identifier_Error", "    ");
+      Print_List("The list", NL1);
+      
+      declare
+      begin
+         Make_List_Item_Current(NL1, Id);
+         Print_Error_Message("No exception raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_Identifier_Error =>
+            Print_Information_Message("Caught CryptAda_Identifier_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+         when X: others =>
+            Print_Error_Message("Unexpected exception caught");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+            raise CryptAda_Test_Error;
+      end;
+
+      Print_Information_Message("Trying to make a list item current by name (Identifier_Text) in an unnamed list ...");
+      Print_Message("Must raise CryptAda_Named_List_Error", "    ");
+      Print_List("The list", UL1);
+      
+      declare
+      begin
+         Make_List_Item_Current(UL1, "Two");
+         Print_Error_Message("No exception raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_Named_List_Error =>
+            Print_Information_Message("Caught CryptAda_Named_List_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+         when X: others =>
+            Print_Error_Message("Unexpected exception caught");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+            raise CryptAda_Test_Error;
+      end;
+
+      Print_Information_Message("Trying to make a list item current by name (Identifier) in an unnamed list ...");
+      Print_Message("Must raise CryptAda_Named_List_Error", "    ");
+      Print_List("The list", UL1);
+      Text_2_Identifier("Two", Id);
+      
+      declare
+      begin
+         Make_List_Item_Current(UL1, Id);
+         Print_Error_Message("No exception raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_Named_List_Error =>
+            Print_Information_Message("Caught CryptAda_Named_List_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+         when X: others =>
+            Print_Error_Message("Unexpected exception caught");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+            raise CryptAda_Test_Error;
+      end;
+
+      Print_Information_Message("Trying to make a list item current name (Identifier_Text) that not exists in a named list ...");
+      Print_Message("Must raise CryptAda_Item_Not_Found_Error", "    ");
+      Print_List("The list", NL1);
+      
+      declare
+      begin
+         Make_List_Item_Current(NL1, "Eight");
+         Print_Error_Message("No exception raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_Item_Not_Found_Error =>
+            Print_Information_Message("Caught CryptAda_Item_Not_Found_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+         when X: others =>
+            Print_Error_Message("Unexpected exception caught");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+            raise CryptAda_Test_Error;
+      end;
+
+      Print_Information_Message("Trying to make a list item current by name (Identifier) that not exists in a named list ...");
+      Print_Message("Must raise CryptAda_Item_Not_Found_Error", "    ");
+      Print_List("The list", NL1);
+      Text_2_Identifier("Eight", Id);
+      
+      declare
+      begin
+         Make_List_Item_Current(NL1, Id);
+         Print_Error_Message("No exception raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_Item_Not_Found_Error =>
+            Print_Information_Message("Caught CryptAda_Item_Not_Found_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+         when X: others =>
+            Print_Error_Message("Unexpected exception caught");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+            raise CryptAda_Test_Error;
+      end;
+
+      Print_Information_Message("Trying to make a list item current that is not a list item in an unnamed list ...");
+      Print_Message("Must raise CryptAda_Item_Kind_Error", "    ");
+      Print_List("The list", UL1);
+      
+      declare
+      begin
+         Make_List_Item_Current(UL1, 3);
+         Print_Error_Message("No exception raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_Item_Kind_Error =>
+            Print_Information_Message("Caught CryptAda_Item_Kind_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+         when X: others =>
+            Print_Error_Message("Unexpected exception caught");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+            raise CryptAda_Test_Error;
+      end;
+
+      Print_Information_Message("Trying to make a list item current that is not a list item in an named list (Identifier_Text) ...");
+      Print_Message("Must raise CryptAda_Item_Kind_Error", "    ");
+      Print_List("The list", NL1);
+      
+      declare
+      begin
+         Make_List_Item_Current(NL1, "One");
+         Print_Error_Message("No exception raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_Item_Kind_Error =>
+            Print_Information_Message("Caught CryptAda_Item_Kind_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+         when X: others =>
+            Print_Error_Message("Unexpected exception caught");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+            raise CryptAda_Test_Error;
+      end;
+
+      Print_Information_Message("Trying to make a list item current that is not a list item in an named list (Identifier) ...");
+      Print_Message("Must raise CryptAda_Item_Kind_Error", "    ");
+      Print_List("The list", NL1);
+      Text_2_Identifier("One", Id);
+      
+      declare
+      begin
+         Make_List_Item_Current(NL1, Id);
+         Print_Error_Message("No exception raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_Item_Kind_Error =>
+            Print_Information_Message("Caught CryptAda_Item_Kind_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+         when X: others =>
+            Print_Error_Message("Unexpected exception caught");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+            raise CryptAda_Test_Error;
+      end;
+            
+      Print_Information_Message("Making a list item current in an unamed list");
+      Print_List("Before", UL1);
+      Make_List_Item_Current(UL1, 2);
+      Print_List("After", UL1);
+
+      Print_Information_Message("Making a list item current in an named list (Identifier_Text)");
+      Print_List("Before", NL1);
+      Make_List_Item_Current(NL1, "Two");
+      Print_List("After", NL1);
+
+      Print_Information_Message("Making a list item current in an named list (Identifier)");
+      Make_Containing_List_Current(NL1);
+      Text_2_Identifier("Two", Id);
+      Print_List("Before", NL1);
+      Make_List_Item_Current(NL1, Id);
+      Print_List("After", NL1);
+            
+      Print_Information_Message("Test case OK");
+      End_Test_Case(13, Passed);
+   exception
+      when CryptAda_Test_Error =>
+         End_Test_Case(13, Failed);
+         raise;
+      when X: others =>
+         Print_Error_Message(
+            "Exception: """ & Exception_Name(X) & """");
+         Print_Message(
+            "Message  : """ & Exception_Message(X) & """");
+         End_Test_Case(13, Failed);
+         raise CryptAda_Test_Error;
+   end Case_13;
    
    -----------------------------------------------------------------------------
    --[Spec Declared Subprogram Bodies]------------------------------------------
@@ -1798,6 +2106,7 @@ package body CryptAda.Tests.Unit.Lists is
       Case_10;
       Case_11;
       Case_12;
+      Case_13;
 
       End_Test_Driver(Driver_Name);
    exception

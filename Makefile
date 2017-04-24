@@ -69,6 +69,10 @@ OBJS     =  cryptada.o \
             cryptada-pragmatics.o \
             cryptada-pragmatics-byte_vectors.o \
             cryptada-pragmatics-lists.o \
+            cryptada-pragmatics-lists-identifier_item.o \
+            cryptada-pragmatics-lists-enumeration_item.o \
+            cryptada-pragmatics-lists-list_item.o \
+            cryptada-pragmatics-lists-integer_item.o \
             cryptada-utils.o \
             cryptada-utils-format.o \
             cryptada-encoders.o \
@@ -172,7 +176,23 @@ cryptada-pragmatics-byte_vectors.o: $(PRAGMADIR)/cryptada-pragmatics-byte_vector
 cryptada-pragmatics-lists.o: $(PRAGMADIR)/cryptada-pragmatics-lists.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
-    
+
+cryptada-pragmatics-lists-identifier_item.o: $(PRAGMADIR)/cryptada-pragmatics-lists-identifier_item.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-pragmatics-lists-enumeration_item.o: $(PRAGMADIR)/cryptada-pragmatics-lists-enumeration_item.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-pragmatics-lists-list_item.o: $(PRAGMADIR)/cryptada-pragmatics-lists-list_item.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-pragmatics-lists-integer_item.o: $(PRAGMADIR)/cryptada-pragmatics-lists-integer_item.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+        
 # Utils packages
 
 cryptada-utils.o: $(UTILSDIR)/cryptada-utils.ads
