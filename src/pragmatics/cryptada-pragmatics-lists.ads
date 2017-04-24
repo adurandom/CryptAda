@@ -909,6 +909,12 @@ private
                   Kind           : in     Item_Kind)
       return   Item_Ptr;
 
+   --[Allocate_String]----------------------------------------------------------
+
+   function    Allocate_String(
+                  Value          : in     String)
+      return   String_Ptr;
+      
    --[Clone_List_Record]--------------------------------------------------------
 
    function    Clone_List_Record(
@@ -925,6 +931,11 @@ private
    procedure   Deallocate_Item(
                   IP             : in out Item_Ptr);
 
+   --[Deallocate_String]--------------------------------------------------------
+
+   procedure   Deallocate_String(
+                  SP             : in out String_Ptr);
+                  
    --[Deallocate_List_Record]---------------------------------------------------
 
    procedure   Deallocate_List_Record(

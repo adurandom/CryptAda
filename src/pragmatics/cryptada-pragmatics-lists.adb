@@ -317,12 +317,6 @@ package body CryptAda.Pragmatics.Lists is
    function    Allocate_List_Record
       return   List_Record_Ptr;
 
-   --[Allocate_String]----------------------------------------------------------
-
-   function    Allocate_String(
-                  Value          : in     String)
-      return   String_Ptr;
-
    --[Allocate_Hash_Table_Entry]------------------------------------------------
 
    function    Allocate_Hash_Table_Entry(
@@ -651,23 +645,6 @@ package body CryptAda.Pragmatics.Lists is
       when Storage_Error =>
          Raise_Exception(CryptAda_Storage_Error'Identity, "Allocating List_Record");
    end Allocate_List_Record;
-
-   --[Allocate_String]----------------------------------------------------------
-
-   function    Allocate_String(
-                  Value          : in     String)
-      return   String_Ptr
-   is
-      SP             : String_Ptr;
-   begin
-      SP       := new String(1 .. Value'Length);
-      SP.all   := Value;
-
-      return SP;
-   exception
-      when Storage_Error =>
-         Raise_Exception(CryptAda_Storage_Error'Identity, "Allocating String");
-   end Allocate_String;
 
    --[Allocate_Hash_Table_Entry]------------------------------------------------
 
@@ -3207,6 +3184,23 @@ package body CryptAda.Pragmatics.Lists is
          Raise_Exception(CryptAda_Storage_Error'Identity, "Allocating Item");
    end Allocate_Item;
 
+   --[Allocate_String]----------------------------------------------------------
+
+   function    Allocate_String(
+                  Value          : in     String)
+      return   String_Ptr
+   is
+      SP             : String_Ptr;
+   begin
+      SP       := new String(1 .. Value'Length);
+      SP.all   := Value;
+
+      return SP;
+   exception
+      when Storage_Error =>
+         Raise_Exception(CryptAda_Storage_Error'Identity, "Allocating String");
+   end Allocate_String;
+   
    --[Clone_List_Record]--------------------------------------------------------
 
    function    Clone_List_Record(
@@ -3310,6 +3304,18 @@ package body CryptAda.Pragmatics.Lists is
       IP := null;
    end Deallocate_Item;
 
+   --[Deallocate_String]--------------------------------------------------------
+
+   procedure   Deallocate_String(
+                  SP             : in out String_Ptr)
+   is
+   begin
+      if SP /= null then
+         Free_String(SP);
+         SP := null;
+      end if;
+   end Deallocate_String;
+   
    --[Deallocate_List_Record]---------------------------------------------------
 
    procedure   Deallocate_List_Record(

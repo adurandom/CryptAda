@@ -73,6 +73,8 @@ OBJS     =  cryptada.o \
             cryptada-pragmatics-lists-enumeration_item.o \
             cryptada-pragmatics-lists-list_item.o \
             cryptada-pragmatics-lists-integer_item.o \
+            cryptada-pragmatics-lists-float_item.o \
+            cryptada-pragmatics-lists-string_item.o \
             cryptada-utils.o \
             cryptada-utils-format.o \
             cryptada-encoders.o \
@@ -192,7 +194,15 @@ cryptada-pragmatics-lists-list_item.o: $(PRAGMADIR)/cryptada-pragmatics-lists-li
 cryptada-pragmatics-lists-integer_item.o: $(PRAGMADIR)/cryptada-pragmatics-lists-integer_item.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
-        
+
+cryptada-pragmatics-lists-float_item.o: $(PRAGMADIR)/cryptada-pragmatics-lists-float_item.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-pragmatics-lists-string_item.o: $(PRAGMADIR)/cryptada-pragmatics-lists-string_item.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+    
 # Utils packages
 
 cryptada-utils.o: $(UTILSDIR)/cryptada-utils.ads
