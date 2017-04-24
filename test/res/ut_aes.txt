@@ -1,18 +1,18 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.b (2017/03/31)
+Version: 0.1.c (2017/04/04)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.AES
 Description              : Unit test driver for CryptAda.Ciphers.Symmetric.Block.AES functionality.
-Started                  : 2017/04/03 - 20:44:32
+Started                  : 2017/04/18 - 20:18:54
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Running AES_Cipher basic tests
-Started         : 2017/04/03 - 20:44:32
+Started         : 2017/04/18 - 20:18:54
 --------------------------------------------------------------------------------
 [I] Basic tests for AES_Cipher
     This test case is a 10 step test that will exercise Block_Cipher dispatching operations
@@ -214,13 +214,13 @@ Block data  :
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:32
+Finished        : 2017/04/18 - 20:18:54
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Testing AES_Cipher non dispatching operations
-Started         : 2017/04/03 - 20:44:32
+Started         : 2017/04/18 - 20:18:54
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
 Get_AES_Key_Id
@@ -270,13 +270,13 @@ Obtained key id: AES_256
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:32
+Finished        : 2017/04/18 - 20:18:54
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : AES standard test vectors 1
-Started         : 2017/04/03 - 20:44:32
+Started         : 2017/04/18 - 20:18:54
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from: "The Advanced Encryption Standard
     Algorithm Validation Suite (AESAVS)"
@@ -470,13 +470,13 @@ Started         : 2017/04/03 - 20:44:32
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:32
+Finished        : 2017/04/18 - 20:18:54
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : AES Bulk test
-Started         : 2017/04/03 - 20:44:32
+Started         : 2017/04/18 - 20:18:54
 --------------------------------------------------------------------------------
 [I] Using key size:  16
 [I] Block cipher bulk test
@@ -542,11 +542,11 @@ Started         : 2017/04/03 - 20:44:32
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:32
+Finished        : 2017/04/18 - 20:18:54
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.AES
-Finished                 : 2017/04/03 - 20:44:32
+Finished                 : 2017/04/18 - 20:18:54
 ================================================================================

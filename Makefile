@@ -68,6 +68,7 @@ OBJS     =  cryptada.o \
             cryptada-names-openpgp.o \
             cryptada-pragmatics.o \
             cryptada-pragmatics-byte_vectors.o \
+            cryptada-pragmatics-lists.o \
             cryptada-utils.o \
             cryptada-utils-format.o \
             cryptada-encoders.o \
@@ -168,6 +169,10 @@ cryptada-pragmatics-byte_vectors.o: $(PRAGMADIR)/cryptada-pragmatics-byte_vector
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
+cryptada-pragmatics-lists.o: $(PRAGMADIR)/cryptada-pragmatics-lists.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+    
 # Utils packages
 
 cryptada-utils.o: $(UTILSDIR)/cryptada-utils.ads

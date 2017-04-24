@@ -53,6 +53,15 @@ package CryptAda.Exceptions is
    CryptAda_Division_By_Zero_Error        : exception;   -- Zero divisor.
    CryptAda_Unexpected_Error              : exception;   -- Any unexpected error condition.
 
+   --[CryptAda.Pragmatics.Lists exceptions]-------------------------------------
+
+   CryptAda_Item_Kind_Error               : exception;   -- Incorrect kind of item for the operation.
+   CryptAda_List_Kind_Error               : exception;   -- Incorrect list kind for the operation.
+   CryptAda_Named_List_Error              : exception;   -- Errors related to named lists.
+   CryptAda_Unnamed_Item_Error            : exception;   -- Trying to add an unamed item to a named list.
+   CryptAda_Identifier_Error              : exception;   -- Attempt to use a null identifier.
+   CryptAda_Item_Not_Found_Error          : exception;   -- An item was not found in list.
+   
    --[Random Number Generation Exceptions]--------------------------------------
 
    CryptAda_Generator_Not_Started_Error   : exception;   -- Attempting to use a non-started random generator.

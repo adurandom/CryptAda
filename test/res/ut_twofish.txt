@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Twofish
 Description              : Unit test driver for CryptAda.Ciphers.Symmetric.Block.Twofish functionality.
-Started                  : 2017/04/06 - 22:10:29
+Started                  : 2017/04/18 - 20:19:08
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Running Twofish_Cipher basic tests
-Started         : 2017/04/06 - 22:10:29
+Started         : 2017/04/18 - 20:19:08
 --------------------------------------------------------------------------------
 [I] Basic tests for Twofish_Cipher
     This test case is a 10 step test that will exercise Block_Cipher dispatching operations
@@ -213,13 +213,13 @@ Block data  :
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/06 - 22:10:29
+Finished        : 2017/04/18 - 20:19:08
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Testing Twofish_Cipher non dispatching operations
-Started         : 2017/04/06 - 22:10:29
+Started         : 2017/04/18 - 20:19:08
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
 Get_Twofish_Key_Id
@@ -282,13 +282,13 @@ Obtained key id: TWOFISH_256
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/06 - 22:10:29
+Finished        : 2017/04/18 - 20:19:08
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Twofish standard test vectors
-Started         : 2017/04/06 - 22:10:29
+Started         : 2017/04/18 - 20:19:08
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from: https://www.schneier.com/academic/twofish/download.html
 [I] Twofish standard test vector:  1
@@ -595,13 +595,13 @@ Started         : 2017/04/06 - 22:10:29
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/04/06 - 22:10:29
+Finished        : 2017/04/18 - 20:19:08
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Twofish Bulk test
-Started         : 2017/04/06 - 22:10:29
+Started         : 2017/04/18 - 20:19:08
 --------------------------------------------------------------------------------
 [I] Using key size:  8
 [I] Block cipher bulk test
@@ -687,11 +687,11 @@ Started         : 2017/04/06 - 22:10:29
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/04/06 - 22:10:30
+Finished        : 2017/04/18 - 20:19:08
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Twofish
-Finished                 : 2017/04/06 - 22:10:30
+Finished                 : 2017/04/18 - 20:19:08
 ================================================================================

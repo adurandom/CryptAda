@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.RC4
 Description              : Unit test driver for CryptAda.Ciphers.Symmetric.Stream.RC4 functionality.
-Started                  : 2017/04/04 - 18:56:16
+Started                  : 2017/04/18 - 20:19:08
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Running RC4_Cipher basic tests
-Started         : 2017/04/04 - 18:56:16
+Started         : 2017/04/18 - 20:19:08
 --------------------------------------------------------------------------------
 [I] Basic test for RC4_Cipher
     This test case will exercise Stream_Cipher dispatching operations
@@ -220,13 +220,13 @@ Block data  :
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/04 - 18:56:16
+Finished        : 2017/04/18 - 20:19:08
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Testing RC4_Cipher non dispatching operations
-Started         : 2017/04/04 - 18:56:16
+Started         : 2017/04/18 - 20:19:08
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     Is_Valid_RC4_Key
@@ -515,13 +515,13 @@ Key length  256 is valid
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/04 - 18:56:16
+Finished        : 2017/04/18 - 20:19:08
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : RC4 standard test vectors
-Started         : 2017/04/04 - 18:56:16
+Started         : 2017/04/18 - 20:19:08
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from: RFC 6229
 [I] Key length 40-bits
@@ -1195,13 +1195,13 @@ Started         : 2017/04/04 - 18:56:16
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/04/04 - 18:56:16
+Finished        : 2017/04/18 - 20:19:09
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : RC4 Bulk test
-Started         : 2017/04/04 - 18:56:16
+Started         : 2017/04/18 - 20:19:09
 --------------------------------------------------------------------------------
 [I] Using key size:  5
 [I] Stream cipher bulk test
@@ -1340,11 +1340,11 @@ Started         : 2017/04/04 - 18:56:16
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/04/04 - 18:56:17
+Finished        : 2017/04/18 - 20:19:09
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.RC4
-Finished                 : 2017/04/04 - 18:56:17
+Finished                 : 2017/04/18 - 20:19:09
 ================================================================================

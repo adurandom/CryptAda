@@ -1,18 +1,18 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.b (2017/03/31)
+Version: 0.1.c (2017/04/04)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.SHA_3
 Description              : Unit test driver for CryptAda.Digests.Algorithms.SHA_3 functionality.
-Started                  : 2017/04/03 - 20:44:26
+Started                  : 2017/04/18 - 20:18:48
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : CryptAda message digest basic operation
-Started         : 2017/04/03 - 20:44:26
+Started         : 2017/04/18 - 20:18:48
 --------------------------------------------------------------------------------
 [I] SHA-3 digest parameters:
     Hash size id                  : "SHA_3_224"
@@ -229,13 +229,13 @@ Started         : 2017/04/03 - 20:44:26
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:26
+Finished        : 2017/04/18 - 20:18:48
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Standard SHA-3 224-bit test vectors
-Started         : 2017/04/03 - 20:44:26
+Started         : 2017/04/18 - 20:18:48
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from http://www.di-mgt.com.au/sha_testvectors.html
     Number of vectors to test:  4
@@ -310,13 +310,13 @@ Started         : 2017/04/03 - 20:44:26
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:26
+Finished        : 2017/04/18 - 20:18:48
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Standard SHA-3 256-bit test vectors
-Started         : 2017/04/03 - 20:44:26
+Started         : 2017/04/18 - 20:18:48
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from http://www.di-mgt.com.au/sha_testvectors.html
     Number of vectors to test:  4
@@ -391,13 +391,13 @@ Started         : 2017/04/03 - 20:44:26
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:26
+Finished        : 2017/04/18 - 20:18:48
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Standard SHA-3 384-bit test vectors
-Started         : 2017/04/03 - 20:44:26
+Started         : 2017/04/18 - 20:18:48
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from http://www.di-mgt.com.au/sha_testvectors.html
     Number of vectors to test:  4
@@ -472,13 +472,13 @@ Started         : 2017/04/03 - 20:44:26
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:26
+Finished        : 2017/04/18 - 20:18:48
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Standard SHA-3 512-bit test vectors
-Started         : 2017/04/03 - 20:44:26
+Started         : 2017/04/18 - 20:18:48
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from http://www.di-mgt.com.au/sha_testvectors.html
     Number of vectors to test:  4
@@ -553,13 +553,13 @@ Started         : 2017/04/03 - 20:44:26
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:26
+Finished        : 2017/04/18 - 20:18:48
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : CryptAda SHA-3 224-bit test vectors
-Started         : 2017/04/03 - 20:44:26
+Started         : 2017/04/18 - 20:18:48
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
     Number of vectors to test:  9
@@ -723,13 +723,13 @@ Started         : 2017/04/03 - 20:44:26
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:26
+Finished        : 2017/04/18 - 20:18:48
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
 Description     : CryptAda SHA-3 256-bit test vectors
-Started         : 2017/04/03 - 20:44:26
+Started         : 2017/04/18 - 20:18:48
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
     Number of vectors to test:  9
@@ -893,13 +893,13 @@ Started         : 2017/04/03 - 20:44:26
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:26
+Finished        : 2017/04/18 - 20:18:48
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 8
 Description     : CryptAda SHA-3 384-bit test vectors
-Started         : 2017/04/03 - 20:44:26
+Started         : 2017/04/18 - 20:18:48
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
     Number of vectors to test:  9
@@ -1063,13 +1063,13 @@ Started         : 2017/04/03 - 20:44:26
 --------------------------------------------------------------------------------
 Test Case Number: 8
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:26
+Finished        : 2017/04/18 - 20:18:48
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 9
 Description     : CryptAda SHA-3 512-bit test vectors
-Started         : 2017/04/03 - 20:44:26
+Started         : 2017/04/18 - 20:18:48
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
     Number of vectors to test:  9
@@ -1233,13 +1233,13 @@ Started         : 2017/04/03 - 20:44:26
 --------------------------------------------------------------------------------
 Test Case Number: 9
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:26
+Finished        : 2017/04/18 - 20:18:48
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 10
 Description     : Testing SHA-3 224-bit operation at block boundary.
-Started         : 2017/04/03 - 20:44:26
+Started         : 2017/04/18 - 20:18:48
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at block boundary.
@@ -1307,13 +1307,13 @@ Vector length:  145
 --------------------------------------------------------------------------------
 Test Case Number: 10
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:26
+Finished        : 2017/04/18 - 20:18:48
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 11
 Description     : Testing SHA-3 256-bit operation at block boundary.
-Started         : 2017/04/03 - 20:44:26
+Started         : 2017/04/18 - 20:18:48
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at block boundary.
@@ -1381,13 +1381,13 @@ Vector length:  137
 --------------------------------------------------------------------------------
 Test Case Number: 11
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:26
+Finished        : 2017/04/18 - 20:18:48
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 12
 Description     : Testing SHA-3 384-bit operation at block boundary.
-Started         : 2017/04/03 - 20:44:26
+Started         : 2017/04/18 - 20:18:48
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at block boundary.
@@ -1455,13 +1455,13 @@ Vector length:  105
 --------------------------------------------------------------------------------
 Test Case Number: 12
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:26
+Finished        : 2017/04/18 - 20:18:48
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 13
 Description     : Testing SHA-3 512-bit operation at block boundary.
-Started         : 2017/04/03 - 20:44:26
+Started         : 2017/04/18 - 20:18:48
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at block boundary.
@@ -1529,13 +1529,13 @@ Vector length:  73
 --------------------------------------------------------------------------------
 Test Case Number: 13
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:26
+Finished        : 2017/04/18 - 20:18:48
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 14
 Description     : Another standard SHA-3 test vector: 1,000,000 repetitions of 'a'
-Started         : 2017/04/03 - 20:44:26
+Started         : 2017/04/18 - 20:18:48
 --------------------------------------------------------------------------------
 [I] Hash size: SHA_3_224
     Performng 1,000 iteratios with a 1,000 bytes buffer
@@ -1572,11 +1572,11 @@ Started         : 2017/04/03 - 20:44:26
 --------------------------------------------------------------------------------
 Test Case Number: 14
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:26
+Finished        : 2017/04/18 - 20:18:48
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.SHA_3
-Finished                 : 2017/04/03 - 20:44:26
+Finished                 : 2017/04/18 - 20:18:48
 ================================================================================

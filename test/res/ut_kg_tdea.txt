@@ -1,18 +1,18 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.b (2017/03/31)
+Version: 0.1.c (2017/04/04)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.KG_TDEA
 Description              : Unit test driver for CryptAda.Ciphers.Key_Generators.TDEA functionality.
-Started                  : 2017/04/03 - 20:44:43
+Started                  : 2017/04/18 - 20:19:09
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Testing basic Key_Generator operation
-Started         : 2017/04/03 - 20:44:43
+Started         : 2017/04/18 - 20:19:09
 --------------------------------------------------------------------------------
 [I] Trying Start_Key_Generator with a null Random_Generator_Ref
     Must raise CryptAda_Null_Argument_Error
@@ -29,19 +29,19 @@ Started         : 2017/04/03 - 20:44:43
 [I] Generated key
     Key length:  24
     Key bytes :
-16#87#, 16#C3#, 16#E2#, 16#14#, 16#EE#, 16#DD#, 16#24#, 16#8D#, 16#3A#, 16#2B#, 16#2D#, 16#DD#, 16#30#, 16#30#, 16#B1#, 16#21#, 
-16#81#, 16#60#, 16#F5#, 16#74#, 16#24#, 16#DB#, 16#0C#, 16#A6#
+16#B4#, 16#8B#, 16#7D#, 16#4B#, 16#D7#, 16#1E#, 16#0F#, 16#7E#, 16#74#, 16#18#, 16#1B#, 16#72#, 16#12#, 16#CF#, 16#CC#, 16#88#, 
+16#39#, 16#AF#, 16#EE#, 16#DD#, 16#E8#, 16#05#, 16#39#, 16#E4#
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:43
+Finished        : 2017/04/18 - 20:19:09
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Creating multiple keys
-Started         : 2017/04/03 - 20:44:43
+Started         : 2017/04/18 - 20:19:09
 --------------------------------------------------------------------------------
 [I] Performing  100000 iterations.
 [I] Performing  100000 iterations for TDEA keying option: KEYING_OPTION_1
@@ -51,11 +51,11 @@ Started         : 2017/04/03 - 20:44:43
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:44
+Finished        : 2017/04/18 - 20:19:11
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.KG_TDEA
-Finished                 : 2017/04/03 - 20:44:44
+Finished                 : 2017/04/18 - 20:19:11
 ================================================================================

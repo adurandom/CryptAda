@@ -1,18 +1,18 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.b (2017/03/31)
+Version: 0.1.c (2017/04/04)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.TDEA
 Description              : Unit test driver for CryptAda.Ciphers.Symmetric.Block.TDEA functionality.
-Started                  : 2017/04/03 - 20:44:31
+Started                  : 2017/04/18 - 20:18:53
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Running TDEA_Cipher basic tests
-Started         : 2017/04/03 - 20:44:31
+Started         : 2017/04/18 - 20:18:53
 --------------------------------------------------------------------------------
 [I] Basic tests for TDEA_Cipher
     This test case is a 10 step test that will exercise Block_Cipher dispatching operations
@@ -209,13 +209,13 @@ Block data  :
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:31
+Finished        : 2017/04/18 - 20:18:53
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Testing TDEA_Cipher non dispatching operations
-Started         : 2017/04/03 - 20:44:31
+Started         : 2017/04/18 - 20:18:53
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
 Get_TDEA_Keying_Option
@@ -266,13 +266,13 @@ Obtained keying option: KEYING_OPTION_3
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:31
+Finished        : 2017/04/18 - 20:18:53
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Testing TDEA_Cipher non dispatching operations
-Started         : 2017/04/03 - 20:44:31
+Started         : 2017/04/18 - 20:18:53
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
 Is_Valid_TDEA_Key
@@ -406,13 +406,13 @@ Key is valid: OK
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:31
+Finished        : 2017/04/18 - 20:18:53
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : TDEA standard test vectors 1
-Started         : 2017/04/03 - 20:44:31
+Started         : 2017/04/18 - 20:18:53
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from: "NIST Special Publication 800-20"
 [I] TDEA Known Answer Tests:  1
@@ -499,13 +499,13 @@ Started         : 2017/04/03 - 20:44:31
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:31
+Finished        : 2017/04/18 - 20:18:53
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : TDEA Bulk test
-Started         : 2017/04/03 - 20:44:31
+Started         : 2017/04/18 - 20:18:53
 --------------------------------------------------------------------------------
 [I] Block cipher bulk test
     Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
@@ -530,11 +530,11 @@ Started         : 2017/04/03 - 20:44:31
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:32
+Finished        : 2017/04/18 - 20:18:54
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.TDEA
-Finished                 : 2017/04/03 - 20:44:32
+Finished                 : 2017/04/18 - 20:18:54
 ================================================================================

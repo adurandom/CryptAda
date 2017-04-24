@@ -110,7 +110,9 @@ U_UTILS     =   $(CTB_UUTILS)/ut_utils.exe \
                 $(CTB_UUTILS)/ut_format.exe
 
 U_PRAG      =   $(CTB_UPRAG)/ut_pragmatics.exe \
-                $(CTB_UPRAG)/ut_bvectors.exe
+                $(CTB_UPRAG)/ut_bvectors.exe \
+                $(CTB_UPRAG)/ut_lists.exe \
+                $(CTB_UPRAG)/ut_lists_ids.exe
 
 U_ENC       =   $(CTB_UENC)/ut_hexenc.exe \
                 $(CTB_UENC)/ut_b16enc.exe \
@@ -195,6 +197,14 @@ $(CTB_UPRAG)/ut_bvectors.exe: $(CTS_UPR_DRV)ut_bvectors.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UPR) $(ADAFLAGS) -o $@ $<
 
+$(CTB_UPRAG)/ut_lists.exe: $(CTS_UPR_DRV)ut_lists.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UPR) $(ADAFLAGS) -o $@ $<
+    
+$(CTB_UPRAG)/ut_lists_ids.exe: $(CTS_UPR_DRV)ut_lists_ids.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UPR) $(ADAFLAGS) -o $@ $<
+    
 # Encoders unit test drivers.
 
 $(CTB_UENC)/ut_hexenc.exe: $(CTS_UEN_DRV)ut_hexenc.adb
