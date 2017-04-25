@@ -419,7 +419,7 @@ package CryptAda.Pragmatics.Lists.Identifier_Item is
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- CryptAda_List_Kind_Error if In_List current list is empty.
-   -- CryptAda_Index_Error if At_Position is not valid.
+   -- CryptAda_Index_Error if Start_Position is not valid.
    -- CryptAda_Named_List_Error if the list is unnamed and querying by name
    --    is attempted.
    -- CryptAda_Identifier_Error if Item_Name (Identifier) is a null

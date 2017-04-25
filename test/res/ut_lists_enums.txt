@@ -1,0 +1,645 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.1.c (2017/04/04)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Lists_Ids
+Description              : Unit test driver for CryptAda.Pragmatics.Lists.Enumeration_Item
+Started                  : 2017/04/25 - 16:49:10
+================================================================================
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Getting text representation of enumeration values
+Started         : 2017/04/25 - 16:49:10
+--------------------------------------------------------------------------------
+[I] Interfaces to test:
+    - Enumeration_2_Text
+[I] For Rainbow_Color values:
+[I] Text representation: RED
+[I] Text representation: ORANGE
+[I] Text representation: YELLOW
+[I] Text representation: GREEN
+[I] Text representation: BLUE
+[I] Text representation: INDIGO
+[I] Text representation: VIOLET
+[I] For Traffic_Light values:
+[I] Text representation: GREEN
+[I] Text representation: ORANGE
+[I] Text representation: RED
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/04/25 - 16:49:10
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Testing Identifier_Item.Is_Enumerated
+Started         : 2017/04/25 - 16:49:10
+--------------------------------------------------------------------------------
+[I] Testing subprograms that could not be tested in Identifier_Item test driver
+    - Is_Enumerated
+[I] Checking whether or not the identifier items are enumerated (by position)
+    On the unnamed list: (1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)
+    Item         :  1
+    Kind         : INTEGER_ITEM_KIND
+    Item         :  2
+    Kind         : FLOAT_ITEM_KIND
+    Item         :  3
+    Kind         : LIST_ITEM_KIND
+    Item         :  4
+    Kind         : IDENTIFIER_ITEM_KIND
+    Is_Enumerated: FALSE
+    Item         :  5
+    Kind         : STRING_ITEM_KIND
+    Item         :  6
+    Kind         : IDENTIFIER_ITEM_KIND
+    Is_Enumerated: TRUE
+    Item         :  7
+    Kind         : IDENTIFIER_ITEM_KIND
+    Is_Enumerated: TRUE
+    On the named list: (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+    Item         :  1
+    Kind         : INTEGER_ITEM_KIND
+    Item         :  2
+    Kind         : FLOAT_ITEM_KIND
+    Item         :  3
+    Kind         : LIST_ITEM_KIND
+    Item         :  4
+    Kind         : IDENTIFIER_ITEM_KIND
+    Is_Enumerated: FALSE
+    Item         :  5
+    Kind         : STRING_ITEM_KIND
+    Item         :  6
+    Kind         : IDENTIFIER_ITEM_KIND
+    Is_Enumerated: TRUE
+    Item         :  7
+    Kind         : IDENTIFIER_ITEM_KIND
+    Is_Enumerated: TRUE
+[I] Checking whether or not the identifier items are enumerated (by identifier)
+    On the named list: (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+    Item         :  1
+    Name         : One
+    Kind         : INTEGER_ITEM_KIND
+    Item         :  2
+    Name         : Two
+    Kind         : FLOAT_ITEM_KIND
+    Item         :  3
+    Name         : Three
+    Kind         : LIST_ITEM_KIND
+    Item         :  4
+    Name         : Four
+    Kind         : IDENTIFIER_ITEM_KIND
+    Is_Enumerated: FALSE
+    Item         :  5
+    Name         : Five
+    Kind         : STRING_ITEM_KIND
+    Item         :  6
+    Name         : Rainbow
+    Kind         : IDENTIFIER_ITEM_KIND
+    Is_Enumerated: TRUE
+    Item         :  7
+    Name         : Traffic
+    Kind         : IDENTIFIER_ITEM_KIND
+    Is_Enumerated: TRUE
+[I] Checking whether or not the identifier items are enumerated (by identifier text)
+    On the named list: (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+    Item         :  1
+    Name         : One
+    Kind         : INTEGER_ITEM_KIND
+    Item         :  2
+    Name         : Two
+    Kind         : FLOAT_ITEM_KIND
+    Item         :  3
+    Name         : Three
+    Kind         : LIST_ITEM_KIND
+    Item         :  4
+    Name         : Four
+    Kind         : IDENTIFIER_ITEM_KIND
+    Is_Enumerated: FALSE
+    Item         :  5
+    Name         : Five
+    Kind         : STRING_ITEM_KIND
+    Item         :  6
+    Name         : Rainbow
+    Kind         : IDENTIFIER_ITEM_KIND
+    Is_Enumerated: TRUE
+    Item         :  7
+    Name         : Traffic
+    Kind         : IDENTIFIER_ITEM_KIND
+    Is_Enumerated: TRUE
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/04/25 - 16:49:10
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Testing Identifier_Item.Enumeration_Pos
+Started         : 2017/04/25 - 16:49:10
+--------------------------------------------------------------------------------
+[I] Testing subprograms that could not be tested in Identifier_Item test driver
+    - Enumeration_Pos (Position)
+[I] For this test case we'll use three different lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
+[I] Trying Enumeration_Pos on an empty list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "In_List current list is empty"
+[I] Trying Enumeration_Pos with an invalid position
+    Will raise CryptAda_Index_Error
+    On an unnamed list
+[I] Caught CryptAda_Index_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid list position value"
+    On an named list
+[I] Caught CryptAda_Index_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid list position value"
+[I] Trying Enumeration_Pos with a non-identifier item
+    Will raise CryptAda_Item_Kind_Error
+    On an unnamed list
+[I] Caught CryptAda_Item_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not an identifier"
+    On an named list
+[I] Caught CryptAda_Item_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not an identifier"
+[I] Trying Enumeration_Pos with an identifier no-enumeration item
+    Will raise CryptAda_Item_Kind_Error
+    On an unnamed list
+[I] Caught CryptAda_Item_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not an enumeration value"
+    On an named list
+[I] Caught CryptAda_Item_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not an enumeration value"
+[I] Attempting Enumeration_Pos on enumeration items
+    On the unnamed list, items 6 and 7 are enumeration
+    Item 6, enumeraton pos is:  5
+    Item 7, enumeraton pos is:  0
+    On the named list, items 6 and 7 are enumeration
+    Item 6, enumeraton pos is:  5
+    Item 7, enumeraton pos is:  0
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/04/25 - 16:49:10
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : Testing Identifier_Item.Enumeration_Pos
+Started         : 2017/04/25 - 16:49:10
+--------------------------------------------------------------------------------
+[I] Testing subprograms that could not be tested in Identifier_Item test driver
+    - Enumeration_Pos (Identifier)
+[I] For this test case we'll use three different lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
+[I] Trying Enumeration_Pos on an empty list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "In_List current list is empty"
+[I] Trying Enumeration_Pos on an unnamed list
+    Will raise CryptAda_Named_List_Error
+[I] Caught CryptAda_Named_List_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
+Message  : "In_List current list is unnamed"
+[I] Trying Enumeration_Pos with a null identifier
+    Will raise CryptAda_Identifier_Error
+[I] Caught CryptAda_Identifier_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_IDENTIFIER_ERROR"
+Message  : "Item_Name is null"
+[I] Trying Enumeration_Pos with an inexistent name
+    Will raise CryptAda_Item_Not_Found_Error
+[I] Caught CryptAda_Item_Not_Found_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
+Message  : "List doesn't contains a: "Eight" item"
+[I] Trying Enumeration_Pos with a non-identifier item
+    Will raise CryptAda_Item_Kind_Error
+[I] Caught CryptAda_Item_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not an identifier"
+[I] Trying Enumeration_Pos with an identifier no-enumeration item
+    Will raise CryptAda_Item_Kind_Error
+[I] Caught CryptAda_Item_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not an enumeration value"
+[I] Attempting Enumeration_Pos on enumeration items
+    On the unnamed list, items Rainbow and Traffic are enumeration
+    Item "Rainbow", enumeraton pos is:  5
+    Item "Traffic", enumeraton pos is:  0
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/04/25 - 16:49:10
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 5
+Description     : Testing Identifier_Item.Enumeration_Pos
+Started         : 2017/04/25 - 16:49:10
+--------------------------------------------------------------------------------
+[I] Testing subprograms that could not be tested in Identifier_Item test driver
+    - Enumeration_Pos (Identifier_Text)
+[I] For this test case we'll use three different lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
+[I] Trying Enumeration_Pos on an empty list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "In_List current list is empty"
+[I] Trying Enumeration_Pos on an unnamed list
+    Will raise CryptAda_Named_List_Error
+[I] Caught CryptAda_Named_List_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
+Message  : "In_List current list is unnamed"
+[I] Trying Enumeration_Pos with a syntax erroneous identifier text
+    Will raise CryptAda_Syntax_Error
+[I] Caught CryptAda_Syntax_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+Message  : "Invalid character '_' in identifier"
+[I] Trying Enumeration_Pos with an inexistent name
+    Will raise CryptAda_Item_Not_Found_Error
+[I] Caught CryptAda_Item_Not_Found_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
+Message  : "List doesn't contains a: "Eight" item"
+[I] Trying Enumeration_Pos with a non-identifier item
+    Will raise CryptAda_Item_Kind_Error
+[I] Caught CryptAda_Item_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not an identifier"
+[I] Trying Enumeration_Pos with an identifier no-enumeration item
+    Will raise CryptAda_Item_Kind_Error
+[I] Caught CryptAda_Item_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not an enumeration value"
+[I] Attempting Enumeration_Pos on enumeration items
+    On the unnamed list, items Rainbow and Traffic are enumeration
+    Item "Rainbow", enumeraton pos is:  5
+    Item "Traffic", enumeraton pos is:  0
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 5
+Test Case Result: PASSED
+Finished        : 2017/04/25 - 16:49:10
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 6
+Description     : Getting enumeration items from lists
+Started         : 2017/04/25 - 16:49:10
+--------------------------------------------------------------------------------
+[I] Interfaces to test:
+    - Get_Value (Position)
+[I] For this test case we'll use three different lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
+[I] Trying Get_Value on an empty list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "From_List current list is empty"
+[I] Trying Get_Value using an invalid position
+    Will raise CryptAda_Index_Error
+    Over an unnamed list
+[I] Caught CryptAda_Index_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid list position value"
+    Over a named list
+[I] Caught CryptAda_Index_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid list position value"
+[I] Trying Get_Value over a non-identifier valued item
+    Will raise CryptAda_Item_Kind_Error
+    Over an unnamed list
+[I] Caught CryptAda_Item_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not an enumeration value"
+    Over a named list
+[I] Caught CryptAda_Item_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not an enumeration value"
+[I] Trying Get_Value over an identifier non enumeration valued item
+    Will raise CryptAda_Item_Kind_Error
+    Over an unnamed list
+[I] Caught CryptAda_Item_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not an enumeration value"
+    Over a named list
+[I] Caught CryptAda_Item_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not an enumeration value"
+[I] Trying Get_Value of the enumeration item at position 6 in the unnamed list
+    Expected result: "INDIGO"
+    Obtained result: "INDIGO"
+[I] Results match
+[I] Trying Get_Value of the enumeration item at position 6 in the named list
+    Expected result: "INDIGO"
+    Obtained result: "INDIGO"
+[I] Results match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 6
+Test Case Result: PASSED
+Finished        : 2017/04/25 - 16:49:10
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 7
+Description     : Getting enumeration items from lists
+Started         : 2017/04/25 - 16:49:10
+--------------------------------------------------------------------------------
+[I] Interfaces to test:
+    - Get_Value (Identifier)
+[I] For this test case we'll use three different lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
+[I] Trying Get_Value from an empty list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "From_List current list is empty"
+[I] Trying Get_Value from an unnamed list
+    Will raise CryptAda_Named_List_Error
+[I] Caught CryptAda_Named_List_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
+Message  : "From_List current list is unnamed"
+[I] Trying Get_Value from a named list with a null identifier
+    Will raise CryptAda_Identifier_Error
+[I] Caught CryptAda_Identifier_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_IDENTIFIER_ERROR"
+Message  : "Null identifier"
+[I] Trying to get a value that does not exist in a named list
+    Will raise CryptAda_Item_Not_Found_Error
+    Getting value for "Eight"
+[I] Caught CryptAda_Item_Not_Found_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
+Message  : "List doesn't contains a: "Eight" item"
+[I] Trying get a value that is not an identifier
+    Will raise CryptAda_Item_Kind_Error
+    Getting value for "Three"
+[I] Caught CryptAda_Item_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not an enumeration value"
+[I] Trying get a value that is an identifier but not an enumeration
+    Will raise CryptAda_Item_Kind_Error
+    Getting value for "Four"
+[I] Caught CryptAda_Item_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not an enumeration value"
+[I] Getting an identifier value from a named list
+    Expected result: "INDIGO"
+    Obtained result: "INDIGO"
+[I] Results match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 7
+Test Case Result: PASSED
+Finished        : 2017/04/25 - 16:49:10
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 8
+Description     : Getting enumeration items from lists
+Started         : 2017/04/25 - 16:49:10
+--------------------------------------------------------------------------------
+[I] Interfaces to test:
+    - Get_Value (Identifier_Text)
+[I] For this test case we'll use three different lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
+[I] Trying Get_Value from an empty list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "From_List current list is empty"
+[I] Trying Get_Value from an unnamed list
+    Will raise CryptAda_Named_List_Error
+[I] Caught CryptAda_Named_List_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
+Message  : "From_List current list is unnamed"
+[I] Trying Get_Value from a named list with a syntax invalid identifier text
+    Will raise CryptAda_Syntax_Error
+[I] Caught CryptAda_Syntax_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+Message  : "Identifier is an Ada reserved word"
+[I] Trying to get a value that does not exist in a named list
+    Will raise CryptAda_Item_Not_Found_Error
+    Getting value for "Eight"
+[I] Caught CryptAda_Item_Not_Found_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
+Message  : "List doesn't contains a: "Eight" item"
+[I] Trying get a value that is not an identifier
+    Will raise CryptAda_Item_Kind_Error
+    Getting value for "Three"
+[I] Caught CryptAda_Item_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not an enumeration value"
+[I] Trying get a value that is an identifier but not an enumeration
+    Will raise CryptAda_Item_Kind_Error
+    Getting value for "Four"
+[I] Caught CryptAda_Item_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not an enumeration value"
+[I] Getting an identifier value from a named list
+    Expected result: "INDIGO"
+    Obtained result: "INDIGO"
+[I] Results match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 8
+Test Case Result: PASSED
+Finished        : 2017/04/25 - 16:49:10
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 8
+Description     : Replacing enumeration item values in lists
+Started         : 2017/04/25 - 16:49:10
+--------------------------------------------------------------------------------
+[I] Interfaces to test:
+    - Replace_Value (Position)
+[I] For this test case we'll use three different lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
+[I] Trying Replace_Value on an empty list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "In_List current list is empty"
+[I] Trying Replace_Value using an invalid position
+    Will raise CryptAda_Index_Error
+    On an unnamed list
+[I] Caught CryptAda_Index_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid list position value"
+    On a named list
+[I] Caught CryptAda_Index_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid list position value"
+[I] Trying Replace_Value on a non-identifier valued item
+    Will raise CryptAda_Item_Kind_Error
+    On an unnamed list
+[I] Caught CryptAda_Item_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not an identifier"
+    On a named list
+[I] Caught CryptAda_Item_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not an identifier"
+[I] Trying Replace_Value on an enumeration value item in an unnamed list
+Replacing value of item 6 to : "YELLOW"
+    List before replace: "(1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)"
+    List after replace : "(1,2.00000E+00,(3),Four,"Five",YELLOW,GREEN)"
+[I] It is also possible to replace an identifier value with a enumeration value
+Replacing value of item 4 to : "VIOLET"
+    List before replace: "(1,2.00000E+00,(3),Four,"Five",YELLOW,GREEN)"
+    List after replace : "(1,2.00000E+00,(3),VIOLET,"Five",YELLOW,GREEN)"
+[I] Trying Replace_Value on an enumeration value item in an named list
+Replacing value of item 6 (Rainbow) to : "YELLOW"
+    List before replace: "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
+    List after replace : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)"
+[I] It is also possible to replace an identifier value with a enumeration value
+Replacing value of item 4 (Four) to : "VIOLET"
+    List before replace: "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)"
+    List after replace : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>VIOLET,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)"
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 9
+Test Case Result: PASSED
+Finished        : 2017/04/25 - 16:49:10
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 10
+Description     : Replacing enumeration item values in lists
+Started         : 2017/04/25 - 16:49:10
+--------------------------------------------------------------------------------
+[I] Interfaces to test:
+    - Replace_Value (Identifier)
+[I] For this test case we'll use three different lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
+[I] Trying Replace_Value on an empty list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "In_List current list is empty"
+[I] Trying Replace_Value on an unnamed list
+    Will raise CryptAda_Named_List_Error
+[I] Caught CryptAda_Named_List_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
+Message  : "In_List current list is unnamed"
+[I] Trying Replace_Value on a named list with a null identifier as item identifier
+    Will raise CryptAda_Identifier_Error
+[I] Caught CryptAda_Identifier_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_IDENTIFIER_ERROR"
+Message  : "Item_Name is null"
+[I] Trying to replace a value that does not exist in a named list
+    Will raise CryptAda_Item_Not_Found_Error
+    Replacing value for "Eight"
+[I] Caught CryptAda_Item_Not_Found_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
+Message  : "List doesn't contains a: "Eight" item"
+[I] Trying replace a value that is not an identifier
+    Will raise CryptAda_Item_Kind_Error
+    Replacing value for "Three"
+[I] Caught CryptAda_Item_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not an identifier"
+[I] Trying Replace_Value on an enumeration value item in an named list
+Replacing value of item "Rainbow" to : "YELLOW"
+    List before replace: "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
+    List after replace : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)"
+[I] It is also possible to replace an identifier value with a enumeration value
+Replacing value of item "Four" to : "VIOLET"
+    List before replace: "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)"
+    List after replace : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>VIOLET,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)"
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 10
+Test Case Result: PASSED
+Finished        : 2017/04/25 - 16:49:10
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 11
+Description     : Replacing enumeration item values in lists
+Started         : 2017/04/25 - 16:49:10
+--------------------------------------------------------------------------------
+[I] Interfaces to test:
+    - Replace_Value (Identifier_Text)
+[I] For this test case we'll use three different lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
+[I] Trying Replace_Value on an empty list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "In_List current list is empty"
+[I] Trying Replace_Value on an unnamed list
+    Will raise CryptAda_Named_List_Error
+[I] Caught CryptAda_Named_List_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
+Message  : "In_List current list is unnamed"
+[I] Trying Replace_Value on a named list with a syntax erroneous identifier text as item identifier
+    Will raise CryptAda_Syntax_Error
+[I] Caught CryptAda_Syntax_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+Message  : "Identifier last character must not be '_'"
+[I] Trying to replace a value that does not exist in a named list
+    Will raise CryptAda_Item_Not_Found_Error
+    Replacing value for "Eight"
+[I] Caught CryptAda_Item_Not_Found_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
+Message  : "List doesn't contains a: "Eight" item"
+[I] Trying replace a value that is not an identifier
+    Will raise CryptAda_Item_Kind_Error
+    Replacing value for "Three"
+[I] Caught CryptAda_Item_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not an identifier"
+[I] Trying Replace_Value on an enumeration value item in an named list
+Replacing value of item "Rainbow" to : "YELLOW"
+    List before replace: "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
+    List after replace : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)"
+[I] It is also possible to replace an identifier value with a enumeration value
+Replacing value of item "Four" to : "VIOLET"
+    List before replace: "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)"
+    List after replace : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>VIOLET,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)"
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 11
+Test Case Result: PASSED
+Finished        : 2017/04/25 - 16:49:10
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Lists_Ids
+Finished                 : 2017/04/25 - 16:49:10
+================================================================================
