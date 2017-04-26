@@ -205,7 +205,7 @@ package CryptAda.Pragmatics.Lists.Enumeration_Item is
    --    last element In_List.
    -- CryptAda_Syntax_Error if the Identifier_Text does not conform the syntax
    --    for identifiers.
-   -- CryptAda_Identifier_Error if Value or Item_Name (Identifier) is a
+   -- CryptAda_Identifier_Error if Item_Name (Identifier) is a
    --    null identifier.
    -- CryptAda_Named_List_Error in forms b. or c. if In_List current list
    --    already contains an item with Item_Name name.

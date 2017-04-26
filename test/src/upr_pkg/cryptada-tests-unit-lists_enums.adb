@@ -61,7 +61,7 @@ package body CryptAda.Tests.Unit.Lists_Enums is
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   Driver_Name                   : constant String := "CryptAda.Tests.Unit.Lists_Ids";
+   Driver_Name                   : constant String := "CryptAda.Tests.Unit.Lists_Enums";
    Driver_Description            : constant String := "Unit test driver for CryptAda.Pragmatics.Lists.Enumeration_Item";
 
    Unnamed_List_Text             : constant String := "(1, 2.0, (3), Four, ""Five"")";
@@ -77,6 +77,10 @@ package body CryptAda.Tests.Unit.Lists_Enums is
    --[Internal Subprogram Specs]------------------------------------------------
    -----------------------------------------------------------------------------
 
+   procedure   Print_List(
+                  Message        : in     String;
+                  The_List       : in     List);
+   
    -----------------------------------------------------------------------------
    --[Test Case Specs]----------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -92,11 +96,26 @@ package body CryptAda.Tests.Unit.Lists_Enums is
    procedure Case_9;
    procedure Case_10;
    procedure Case_11;
+   procedure Case_12;
+   procedure Case_13;
+   procedure Case_14;
+   procedure Case_15;
 
    -----------------------------------------------------------------------------
    --[Internal Subprogram Bodies]-----------------------------------------------
    -----------------------------------------------------------------------------
 
+   procedure   Print_List(
+                  Message        : in     String;
+                  The_List       : in     List)
+   is
+   begin
+      Print_Information_Message("List           : " & Message);
+      Print_Message("Kind           : " & List_Kind'Image(Get_List_Kind(The_List)), "    ");
+      Print_Message("Number of items: " & List_Size'Image(Number_Of_Items(The_List)), "    ");
+      Print_Message("List text      : " & List_2_Text(The_List), "    ");
+   end Print_List;
+   
    -----------------------------------------------------------------------------
    --[Test Case Bodies]---------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -162,7 +181,7 @@ package body CryptAda.Tests.Unit.Lists_Enums is
       Traffic_Light_Item.Insert_Value(NL, Number_Of_Items(NL), "Traffic", Green);
 
       Print_Information_Message("Checking whether or not the identifier items are enumerated (by position)");
-      Print_Message("On the unnamed list: " & List_2_Text(UL), "    ");
+      Print_List("Unnamed list", UL);
       
       for I in 1 .. Number_Of_Items(UL) loop
          Print_Message("Item         : " & Integer'Image(I), "    ");
@@ -175,7 +194,7 @@ package body CryptAda.Tests.Unit.Lists_Enums is
          end if;
       end loop;
                
-      Print_Message("On the named list: " & List_2_Text(NL), "    ");
+      Print_List("Named list", NL);
       
       for I in 1 .. Number_Of_Items(NL) loop
          Print_Message("Item         : " & Integer'Image(I), "    ");
@@ -189,7 +208,7 @@ package body CryptAda.Tests.Unit.Lists_Enums is
       end loop;
 
       Print_Information_Message("Checking whether or not the identifier items are enumerated (by identifier)");
-      Print_Message("On the named list: " & List_2_Text(NL), "    ");
+      Print_List("Named list", NL);
 
       for I in 1 .. Number_Of_Items(NL) loop
          Print_Message("Item         : " & Integer'Image(I), "    ");
@@ -205,7 +224,7 @@ package body CryptAda.Tests.Unit.Lists_Enums is
       end loop;
 
       Print_Information_Message("Checking whether or not the identifier items are enumerated (by identifier text)");
-      Print_Message("On the named list: " & List_2_Text(NL), "    ");
+      Print_List("Named list", NL);
 
       for I in 1 .. Number_Of_Items(NL) loop
          Print_Message("Item         : " & Integer'Image(I), "    ");
@@ -259,9 +278,9 @@ package body CryptAda.Tests.Unit.Lists_Enums is
       Traffic_Light_Item.Insert_Value(NL, Number_Of_Items(NL), "Traffic", Green);
 
       Print_Information_Message("For this test case we'll use three different lists");
-      Print_Message("- An empty list  : """ & List_2_Text(EL) & """", "    ");
-      Print_Message("- An unnamed list: """ & List_2_Text(UL) & """", "    ");
-      Print_Message("- A named list   : """ & List_2_Text(NL) & """", "    ");
+      Print_List("Empty list", EL);
+      Print_List("Unnamed list", UL);
+      Print_List("Named list", NL);
 
       Print_Information_Message("Trying Enumeration_Pos on an empty list");
       Print_Message("Will raise CryptAda_List_Kind_Error", "    ");
@@ -474,9 +493,9 @@ package body CryptAda.Tests.Unit.Lists_Enums is
       Traffic_Light_Item.Insert_Value(NL, Number_Of_Items(NL), "Traffic", Green);
 
       Print_Information_Message("For this test case we'll use three different lists");
-      Print_Message("- An empty list  : """ & List_2_Text(EL) & """", "    ");
-      Print_Message("- An unnamed list: """ & List_2_Text(UL) & """", "    ");
-      Print_Message("- A named list   : """ & List_2_Text(NL) & """", "    ");
+      Print_List("Empty list", EL);
+      Print_List("Unnamed list", UL);
+      Print_List("Named list", NL);
 
       Text_2_Identifier("Two", Id_N);
       
@@ -671,9 +690,9 @@ package body CryptAda.Tests.Unit.Lists_Enums is
       Traffic_Light_Item.Insert_Value(NL, Number_Of_Items(NL), "Traffic", Green);
 
       Print_Information_Message("For this test case we'll use three different lists");
-      Print_Message("- An empty list  : """ & List_2_Text(EL) & """", "    ");
-      Print_Message("- An unnamed list: """ & List_2_Text(UL) & """", "    ");
-      Print_Message("- A named list   : """ & List_2_Text(NL) & """", "    ");
+      Print_List("Empty list", EL);
+      Print_List("Unnamed list", UL);
+      Print_List("Named list", NL);
 
       Print_Information_Message("Trying Enumeration_Pos on an empty list");
       Print_Message("Will raise CryptAda_List_Kind_Error", "    ");
@@ -863,9 +882,9 @@ package body CryptAda.Tests.Unit.Lists_Enums is
       Traffic_Light_Item.Insert_Value(NL, Number_Of_Items(NL), "Traffic", Green);
       
       Print_Information_Message("For this test case we'll use three different lists");
-      Print_Message("- An empty list  : """ & List_2_Text(EL) & """", "    ");
-      Print_Message("- An unnamed list: """ & List_2_Text(UL) & """", "    ");
-      Print_Message("- A named list   : """ & List_2_Text(NL) & """", "    ");
+      Print_List("Empty list", EL);
+      Print_List("Unnamed list", UL);
+      Print_List("Named list", NL);
 
       Print_Information_Message("Trying Get_Value on an empty list");
       Print_Message("Will raise CryptAda_List_Kind_Error", "    ");
@@ -1084,9 +1103,9 @@ package body CryptAda.Tests.Unit.Lists_Enums is
       Traffic_Light_Item.Insert_Value(NL, Number_Of_Items(NL), "Traffic", Green);
       
       Print_Information_Message("For this test case we'll use three different lists");
-      Print_Message("- An empty list  : """ & List_2_Text(EL) & """", "    ");
-      Print_Message("- An unnamed list: """ & List_2_Text(UL) & """", "    ");
-      Print_Message("- A named list   : """ & List_2_Text(NL) & """", "    ");
+      Print_List("Empty list", EL);
+      Print_List("Unnamed list", UL);
+      Print_List("Named list", NL);
 
       Print_Information_Message("Trying Get_Value from an empty list");
       Print_Message("Will raise CryptAda_List_Kind_Error", "    ");
@@ -1284,9 +1303,9 @@ package body CryptAda.Tests.Unit.Lists_Enums is
       Traffic_Light_Item.Insert_Value(NL, Number_Of_Items(NL), "Traffic", Green);
       
       Print_Information_Message("For this test case we'll use three different lists");
-      Print_Message("- An empty list  : """ & List_2_Text(EL) & """", "    ");
-      Print_Message("- An unnamed list: """ & List_2_Text(UL) & """", "    ");
-      Print_Message("- A named list   : """ & List_2_Text(NL) & """", "    ");
+      Print_List("Empty list", EL);
+      Print_List("Unnamed list", UL);
+      Print_List("Named list", NL);
 
       Print_Information_Message("Trying Get_Value from an empty list");
       Print_Message("Will raise CryptAda_List_Kind_Error", "    ");
@@ -1475,9 +1494,9 @@ package body CryptAda.Tests.Unit.Lists_Enums is
       Traffic_Light_Item.Insert_Value(NL, Number_Of_Items(NL), "Traffic", Green);
       
       Print_Information_Message("For this test case we'll use three different lists");
-      Print_Message("- An empty list  : """ & List_2_Text(EL) & """", "    ");
-      Print_Message("- An unnamed list: """ & List_2_Text(UL) & """", "    ");
-      Print_Message("- A named list   : """ & List_2_Text(NL) & """", "    ");
+      Print_List("Empty list", EL);
+      Print_List("Unnamed list", UL);
+      Print_List("Named list", NL);
 
       Print_Information_Message("Trying Replace_Value on an empty list");
       Print_Message("Will raise CryptAda_List_Kind_Error", "    ");
@@ -1589,25 +1608,26 @@ package body CryptAda.Tests.Unit.Lists_Enums is
 
       Print_Information_Message("Trying Replace_Value on an enumeration value item in an unnamed list");
       Print_Message("Replacing value of item 6 to : """ & Rainbow_Color'Image(Yellow) & """");
-      Print_Message("List before replace: """ & List_2_Text(UL) & """", "    ");
+
+      Print_List("List before replace", UL);
       Replace_Value(UL, 6, Yellow);
-      Print_Message("List after replace : """ & List_2_Text(UL) & """", "    ");
+      Print_List("List after replace", UL);
       Print_Information_Message("It is also possible to replace an identifier value with a enumeration value");
       Print_Message("Replacing value of item 4 to : """ & Rainbow_Color'Image(Violet) & """");
-      Print_Message("List before replace: """ & List_2_Text(UL) & """", "    ");
+      Print_List("List before replace", UL);
       Replace_Value(UL, 4, Violet);
-      Print_Message("List after replace : """ & List_2_Text(UL) & """", "    ");
+      Print_List("List after replace", UL);
 
       Print_Information_Message("Trying Replace_Value on an enumeration value item in an named list");
       Print_Message("Replacing value of item 6 (Rainbow) to : """ & Rainbow_Color'Image(Yellow) & """");
-      Print_Message("List before replace: """ & List_2_Text(NL) & """", "    ");
+      Print_List("List before replace", NL);
       Replace_Value(NL, 6, Yellow);
-      Print_Message("List after replace : """ & List_2_Text(NL) & """", "    ");
+      Print_List("List after replace", NL);
       Print_Information_Message("It is also possible to replace an identifier value with a enumeration value");
       Print_Message("Replacing value of item 4 (Four) to : """ & Rainbow_Color'Image(Violet) & """");
-      Print_Message("List before replace: """ & List_2_Text(NL) & """", "    ");
+      Print_List("List before replace", NL);
       Replace_Value(NL, 4, Violet);
-      Print_Message("List after replace : """ & List_2_Text(NL) & """", "    ");
+      Print_List("List after replace", NL);
       
       Print_Information_Message("Test case OK");
       End_Test_Case(9, Passed);
@@ -1650,9 +1670,9 @@ package body CryptAda.Tests.Unit.Lists_Enums is
       Traffic_Light_Item.Insert_Value(NL, Number_Of_Items(NL), "Traffic", Green);
       
       Print_Information_Message("For this test case we'll use three different lists");
-      Print_Message("- An empty list  : """ & List_2_Text(EL) & """", "    ");
-      Print_Message("- An unnamed list: """ & List_2_Text(UL) & """", "    ");
-      Print_Message("- A named list   : """ & List_2_Text(NL) & """", "    ");
+      Print_List("Empty list", EL);
+      Print_List("Unnamed list", UL);
+      Print_List("Named list", NL);
 
       Print_Information_Message("Trying Replace_Value on an empty list");
       Print_Message("Will raise CryptAda_List_Kind_Error", "    ");
@@ -1775,16 +1795,16 @@ package body CryptAda.Tests.Unit.Lists_Enums is
       
       Print_Information_Message("Trying Replace_Value on an enumeration value item in an named list");
       Print_Message("Replacing value of item """ & Identifier_2_Text(Id_N) & """ to : """ & Rainbow_Color'Image(Yellow) & """");
-      Print_Message("List before replace: """ & List_2_Text(NL) & """", "    ");
+      Print_List("List before replace", NL);
       Replace_Value(NL, Id_N, Yellow);
-      Print_Message("List after replace : """ & List_2_Text(NL) & """", "    ");
+      Print_List("List after replace", NL);
 
       Text_2_Identifier("Four", Id_N);
       Print_Information_Message("It is also possible to replace an identifier value with a enumeration value");
       Print_Message("Replacing value of item """ & Identifier_2_Text(Id_N) & """ to : """ & Rainbow_Color'Image(Violet) & """");
-      Print_Message("List before replace: """ & List_2_Text(NL) & """", "    ");
+      Print_List("List before replace", NL);
       Replace_Value(NL, Id_N, Violet);
-      Print_Message("List after replace : """ & List_2_Text(NL) & """", "    ");
+      Print_List("List after replace", NL);
       
       Print_Information_Message("Test case OK");
       End_Test_Case(10, Passed);
@@ -1826,9 +1846,9 @@ package body CryptAda.Tests.Unit.Lists_Enums is
       Traffic_Light_Item.Insert_Value(NL, Number_Of_Items(NL), "Traffic", Green);
       
       Print_Information_Message("For this test case we'll use three different lists");
-      Print_Message("- An empty list  : """ & List_2_Text(EL) & """", "    ");
-      Print_Message("- An unnamed list: """ & List_2_Text(UL) & """", "    ");
-      Print_Message("- A named list   : """ & List_2_Text(NL) & """", "    ");
+      Print_List("Empty list", EL);
+      Print_List("Unnamed list", UL);
+      Print_List("Named list", NL);
 
       Print_Information_Message("Trying Replace_Value on an empty list");
       Print_Message("Will raise CryptAda_List_Kind_Error", "    ");
@@ -1944,15 +1964,15 @@ package body CryptAda.Tests.Unit.Lists_Enums is
 
       Print_Information_Message("Trying Replace_Value on an enumeration value item in an named list");
       Print_Message("Replacing value of item ""Rainbow"" to : """ & Rainbow_Color'Image(Yellow) & """");
-      Print_Message("List before replace: """ & List_2_Text(NL) & """", "    ");
+      Print_List("List before replace", NL);
       Replace_Value(NL, "Rainbow", Yellow);
-      Print_Message("List after replace : """ & List_2_Text(NL) & """", "    ");
+      Print_List("List after replace", NL);
 
       Print_Information_Message("It is also possible to replace an identifier value with a enumeration value");
       Print_Message("Replacing value of item ""Four"" to : """ & Rainbow_Color'Image(Violet) & """");
-      Print_Message("List before replace: """ & List_2_Text(NL) & """", "    ");
+      Print_List("List before replace", NL);
       Replace_Value(NL, "Four", Violet);
-      Print_Message("List after replace : """ & List_2_Text(NL) & """", "    ");
+      Print_List("List after replace", NL);
       
       Print_Information_Message("Test case OK");
       End_Test_Case(11, Passed);
@@ -1968,7 +1988,621 @@ package body CryptAda.Tests.Unit.Lists_Enums is
          End_Test_Case(11, Failed);
          raise CryptAda_Test_Error;
    end Case_11;
+
+   --[Case_12]------------------------------------------------------------------
+
+   procedure   Case_12
+   is
+      EL          : List;
+      UL          : List;
+      NL          : List;
+      
+      use Rainbow_Color_Item;
+   begin
+      Begin_Test_Case(12, "Inserting enumeration item values in lists");
+      Print_Information_Message("Interfaces to test:");
+      Print_Message("- Insert_Value (Position)", "    ");
+
+      -- Create lists for tests.
+      
+      Copy_List(Unnamed_List, UL);
+      Copy_List(Named_List, NL);
+      
+      Rainbow_Color_Item.Insert_Value(UL, Number_Of_Items(UL), Indigo);
+      Traffic_Light_Item.Insert_Value(UL, Number_Of_Items(UL), Green);
+      Rainbow_Color_Item.Insert_Value(NL, Number_Of_Items(NL), "Rainbow", Indigo);
+      Traffic_Light_Item.Insert_Value(NL, Number_Of_Items(NL), "Traffic", Green);
+      
+      Print_Information_Message("For this test case we'll use three different lists");
+      Print_List("Empty list", EL);
+      Print_List("Unnamed list", UL);
+      Print_List("Named list", NL);
+
+      Print_Information_Message("Trying Insert_Value on an unnamed list at an invalid position");
+      Print_Message("Will raise CryptAda_Index_Error", "    ");
+      
+      declare
+      begin
+         Insert_Value(UL, 10, Blue);
+         Print_Error_Message("No exception was raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_Index_Error =>
+            Print_Information_Message("Caught CryptAda_Index_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+         when X: others =>
+            Print_Error_Message("Unexpected exception raised");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;
+      end;
+      
+      Print_Information_Message("Trying Insert_Value (form 1 - Unnamed) on a named list");
+      Print_Message("Will raise CryptAda_List_Kind_Error", "    ");
+            
+      declare
+      begin
+         Insert_Value(NL, 0, Blue);
+         Print_Error_Message("No exception was raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_List_Kind_Error =>
+            Print_Information_Message("Caught CryptAda_List_Kind_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+         when X: others =>
+            Print_Error_Message("Unexpected exception raised");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;
+      end;
+      
+      Print_Information_Message("Inserting an enumeration value in an empty list (at position 0)");
+      Print_Message("Inserting the value : """ & Rainbow_Color'Image(Yellow) & """");
+      Print_List("List before insert", EL);
+      Insert_Value(EL, 0, Yellow);
+      Print_Information_Message("List must become Unnamed");
+      Print_List("List after insert", EL);      
+
+      Print_Information_Message("Inserting an identifier value at the begining of an unnamed list (at position 0)");
+      Print_Message("Inserting the value : """ & Rainbow_Color'Image(Yellow) & """");
+      Print_List("List before insert", UL);
+      Insert_Value(UL, 0, Yellow);
+      Print_List("List after insert", UL);      
+
+      Print_Information_Message("Inserting an identifier value after the third item of an unnamed list (at position 3)");
+      Print_Message("Inserting the value : """ & Rainbow_Color'Image(Red) & """");
+      Print_List("List before insert", UL);
+      Insert_Value(UL, 3, Red);
+      Print_List("List after insert", UL);      
+
+      Print_Information_Message("Inserting an identifier value after the last item of an unnamed list (at position " & List_Size'Image(Number_Of_Items(UL)) & ")");
+      Print_Message("Inserting the value : """ & Rainbow_Color'Image(Violet) & """");
+      Print_List("List before insert", UL);
+      Insert_Value(UL, Number_Of_Items(UL), Violet);
+      Print_List("List after insert", UL);      
+      
+      Print_Information_Message("Test case OK");
+      End_Test_Case(12, Passed);
+   exception
+      when CryptAda_Test_Error =>
+         End_Test_Case(12, Failed);
+         raise;
+      when X: others =>
+         Print_Error_Message(
+            "Exception: """ & Exception_Name(X) & """");
+         Print_Message(
+            "Message  : """ & Exception_Message(X) & """");
+         End_Test_Case(12, Failed);
+         raise CryptAda_Test_Error;
+   end Case_12;
+
+   --[Case_13]------------------------------------------------------------------
+
+   procedure   Case_13
+   is
+      EL          : List;
+      UL          : List;
+      NL          : List;
+      Id_N        : Identifier;
+      
+      use Rainbow_Color_Item;
+   begin
+      Begin_Test_Case(13, "Inserting enumeration item values in lists");
+      Print_Information_Message("Interfaces to test:");
+      Print_Message("- Insert_Value (Identifier)", "    ");
+
+      -- Create lists for tests.
+      
+      Copy_List(Unnamed_List, UL);
+      Copy_List(Named_List, NL);
+      
+      Rainbow_Color_Item.Insert_Value(UL, Number_Of_Items(UL), Indigo);
+      Traffic_Light_Item.Insert_Value(UL, Number_Of_Items(UL), Green);
+      Rainbow_Color_Item.Insert_Value(NL, Number_Of_Items(NL), "Rainbow", Indigo);
+      Traffic_Light_Item.Insert_Value(NL, Number_Of_Items(NL), "Traffic", Green);
+      
+      Print_Information_Message("For this test case we'll use three different lists");
+      Print_List("Empty list", EL);
+      Print_List("Unnamed list", UL);
+      Print_List("Named list", NL);
+
+      Print_Information_Message("Trying Insert_Value on an named list at an invalid position");
+      Print_Message("Will raise CryptAda_Index_Error", "    ");
+      
+      Text_2_Identifier("New_Item", Id_N);
+      
+      declare
+      begin
+         Insert_Value(NL, 10, Id_N, Blue);
+         Print_Error_Message("No exception was raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_Index_Error =>
+            Print_Information_Message("Caught CryptAda_Index_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+         when X: others =>
+            Print_Error_Message("Unexpected exception raised");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;
+      end;
+      
+      Print_Information_Message("Trying Insert_Value (form 2 - Named using Identifier) on an unnamed list");
+      Print_Message("Will raise CryptAda_List_Kind_Error", "    ");
+            
+      declare
+      begin
+         Insert_Value(UL, 0, Id_N, Blue);
+         Print_Error_Message("No exception was raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_List_Kind_Error =>
+            Print_Information_Message("Caught CryptAda_List_Kind_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+         when X: others =>
+            Print_Error_Message("Unexpected exception raised");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;
+      end;
+      
+      Print_Information_Message("Trying Insert_Value using a null name identifier");
+      Print_Message("Will raise CryptAda_Identifier_Error", "    ");
+      Make_Null(Id_N);
+            
+      declare
+      begin
+         Insert_Value(NL, 0, Id_N, Blue);
+         Print_Error_Message("No exception was raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_Identifier_Error =>
+            Print_Information_Message("Caught CryptAda_Identifier_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+         when X: others =>
+            Print_Error_Message("Unexpected exception raised");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;
+      end;
+      
+      Print_Information_Message("Trying Insert_Value using a duplicated name identifier");
+      Print_Message("Will raise CryptAda_Named_List_Error", "    ");
+      Text_2_Identifier("Two", Id_N);
+      
+      declare
+      begin
+         Insert_Value(NL, 0, Id_N, Blue);
+         Print_Error_Message("No exception was raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_Named_List_Error =>
+            Print_Information_Message("Caught CryptAda_Named_List_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+         when X: others =>
+            Print_Error_Message("Unexpected exception raised");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;
+      end;
+
+      Text_2_Identifier("First", Id_N);
+      
+      Print_Information_Message("Inserting an identifier value in an empty list (at position 0)");
+      Print_Message("Inserting the value : """ & Rainbow_Color'Image(Yellow) & """");
+      Print_Message("With name           : """ & Identifier_2_Text(Id_N) & """");
+      Print_List("List before insert", EL);
+      Insert_Value(EL, 0, Id_N, Yellow);
+      Print_Information_Message("List must become Named");
+      Print_List("List after insert", EL);      
+
+      Text_2_Identifier("Zero", Id_N);
+
+      Print_Information_Message("Inserting an identifier value at the begining of a named list (at position 0)");
+      Print_Message("Inserting the value : """ & Rainbow_Color'Image(Red) & """");
+      Print_Message("With name           : """ & Identifier_2_Text(Id_N) & """");
+      Print_List("List before insert", NL);
+      Insert_Value(NL, 0, Id_N, Red);
+      Print_List("List after insert", NL);      
+
+      Text_2_Identifier("After_Third", Id_N);
+
+      Print_Information_Message("Inserting an identifier value after the third item of a named list (at position 3)");
+      Print_Message("Inserting the value : """ & Rainbow_Color'Image(Blue) & """");
+      Print_Message("With name           : """ & Identifier_2_Text(Id_N) & """");
+      Print_List("List before insert", NL);
+      Insert_Value(NL, 3, Id_N, Blue);
+      Print_List("List after insert", NL);      
+
+      Text_2_Identifier("Last", Id_N);
+
+      Print_Information_Message("Inserting an identifier value after the last item of a named list (at position " & List_Size'Image(Number_Of_Items(NL)) & ")");
+      Print_Message("Inserting the value : """ & Rainbow_Color'Image(Violet) & """");
+      Print_Message("With name           : """ & Identifier_2_Text(Id_N) & """");
+      Print_List("List before insert", NL);
+      Insert_Value(NL, Number_Of_Items(NL), Id_N, Violet);
+      Print_List("List after insert", NL);      
+      
+      Print_Information_Message("Test case OK");
+      End_Test_Case(13, Passed);
+   exception
+      when CryptAda_Test_Error =>
+         End_Test_Case(13, Failed);
+         raise;
+      when X: others =>
+         Print_Error_Message(
+            "Exception: """ & Exception_Name(X) & """");
+         Print_Message(
+            "Message  : """ & Exception_Message(X) & """");
+         End_Test_Case(13, Failed);
+         raise CryptAda_Test_Error;
+   end Case_13;
+
+   --[Case_14]------------------------------------------------------------------
+
+   procedure   Case_14
+   is
+      EL          : List;
+      UL          : List;
+      NL          : List;
+      
+      use Rainbow_Color_Item;
+   begin
+      Begin_Test_Case(14, "Inserting enumeration item values in lists");
+      Print_Information_Message("Interfaces to test:");
+      Print_Message("- Insert_Value (Identifier_Text)", "    ");
+
+      -- Create lists for tests.
+      
+      Copy_List(Unnamed_List, UL);
+      Copy_List(Named_List, NL);
+      
+      Rainbow_Color_Item.Insert_Value(UL, Number_Of_Items(UL), Indigo);
+      Traffic_Light_Item.Insert_Value(UL, Number_Of_Items(UL), Green);
+      Rainbow_Color_Item.Insert_Value(NL, Number_Of_Items(NL), "Rainbow", Indigo);
+      Traffic_Light_Item.Insert_Value(NL, Number_Of_Items(NL), "Traffic", Green);
+      
+      Print_Information_Message("For this test case we'll use three different lists");
+      Print_List("Empty list", EL);
+      Print_List("Unnamed list", UL);
+      Print_List("Named list", NL);
+
+      Print_Information_Message("Trying Insert_Value on an named list at an invalid position");
+      Print_Message("Will raise CryptAda_Index_Error", "    ");
+      
+      declare
+      begin
+         Insert_Value(NL, 10, "Ten", Blue);
+         Print_Error_Message("No exception was raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_Index_Error =>
+            Print_Information_Message("Caught CryptAda_Index_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+         when X: others =>
+            Print_Error_Message("Unexpected exception raised");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;
+      end;
+      
+      Print_Information_Message("Trying Insert_Value (form 3 - Named using Identifier) on an unnamed list");
+      Print_Message("Will raise CryptAda_List_Kind_Error", "    ");
+            
+      declare
+      begin
+         Insert_Value(UL, 0, "Eight", Blue);
+         Print_Error_Message("No exception was raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_List_Kind_Error =>
+            Print_Information_Message("Caught CryptAda_List_Kind_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+         when X: others =>
+            Print_Error_Message("Unexpected exception raised");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;
+      end;
+      
+      Print_Information_Message("Trying Insert_Value using a syntax incorrect name");
+      Print_Message("Will raise CryptAda_Syntax_Error", "    ");
+            
+      declare
+      begin
+         Insert_Value(NL, 0, "Package", Blue);
+         Print_Error_Message("No exception was raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_Syntax_Error =>
+            Print_Information_Message("Caught CryptAda_Syntax_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+         when X: others =>
+            Print_Error_Message("Unexpected exception raised");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;
+      end;
+            
+      Print_Information_Message("Trying Insert_Value using a duplicated name identifier");
+      Print_Message("Will raise CryptAda_Named_List_Error", "    ");
+      
+      declare
+      begin
+         Insert_Value(NL, 0, "Two", Blue);
+         Print_Error_Message("No exception was raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_Named_List_Error =>
+            Print_Information_Message("Caught CryptAda_Named_List_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+         when X: others =>
+            Print_Error_Message("Unexpected exception raised");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;
+      end;
+
+      Print_Information_Message("Inserting an identifier value in an empty list (at position 0)");
+      Print_Message("Inserting the value : """ & Rainbow_Color'Image(Yellow) & """");
+      Print_Message("With name           : ""First""");
+      Print_List("List before insert", EL);
+      Insert_Value(EL, 0, "First", Yellow);
+      Print_Information_Message("List must become Named");
+      Print_List("List after insert", EL);
+
+      Print_Information_Message("Inserting an identifier value at the begining of a named list (at position 0)");
+      Print_Message("Inserting the value : """ & Rainbow_Color'Image(Red) & """");
+      Print_Message("With name           : ""Zero""");
+      Print_List("List before insert", NL);
+      Insert_Value(NL, 0, "Zero", Red);
+      Print_List("List after insert", NL);
+
+      Print_Information_Message("Inserting an identifier value after the third item of a named list (at position 3)");
+      Print_Message("Inserting the value : """ & Rainbow_Color'Image(Blue) & """");
+      Print_Message("With name           : ""After_Third""");
+      Print_List("List before insert", NL);
+      Insert_Value(NL, 0, "After_Third", Blue);
+      Print_List("List after insert", NL);
+
+      Print_Information_Message("Inserting an identifier value after the last item of a named list (at position " & List_Size'Image(Number_Of_Items(NL)) & ")");
+      Print_Message("Inserting the value : """ & Rainbow_Color'Image(Violet) & """");
+      Print_Message("With name           : ""Last""");
+      Print_List("List before insert", NL);
+      Insert_Value(NL, Number_Of_Items(NL), "Last", Violet);
+      Print_List("List after insert", NL);
+            
+      Print_Information_Message("Test case OK");
+      End_Test_Case(14, Passed);
+   exception
+      when CryptAda_Test_Error =>
+         End_Test_Case(14, Failed);
+         raise;
+      when X: others =>
+         Print_Error_Message(
+            "Exception: """ & Exception_Name(X) & """");
+         Print_Message(
+            "Message  : """ & Exception_Message(X) & """");
+         End_Test_Case(14, Failed);
+         raise CryptAda_Test_Error;
+   end Case_14;
    
+   --[Case_15]------------------------------------------------------------------
+
+   procedure   Case_15
+   is
+      EL          : List;
+      UL          : List;
+      NL          : List;
+      PC          : Position_Count;
+      
+      use Rainbow_Color_Item;
+   begin
+      Begin_Test_Case(15, "Getting element position by value");
+      Print_Information_Message("Interfaces to test:");
+      Print_Message("- Position_By_Value", "    ");
+
+      -- Create lists for tests.
+      
+      Copy_List(Unnamed_List, UL);
+      Copy_List(Named_List, NL);
+      
+      Rainbow_Color_Item.Insert_Value(UL, Number_Of_Items(UL), Indigo);
+      Traffic_Light_Item.Insert_Value(UL, Number_Of_Items(UL), Green);
+      Rainbow_Color_Item.Insert_Value(NL, Number_Of_Items(NL), "Rainbow", Indigo);
+      Traffic_Light_Item.Insert_Value(NL, Number_Of_Items(NL), "Traffic", Green);
+      
+      Print_Information_Message("For this test case we'll use three different lists");
+      Print_List("Empty list", EL);
+      Print_List("Unnamed list", UL);
+      Print_List("Named list", NL);
+
+      Print_Information_Message("Trying Position_By_Value on an empty list");
+      Print_Message("Will raise CryptAda_List_Kind_Error", "    ");
+      
+      declare
+         PC          : Position_Count;
+      begin
+         PC := Position_By_Value(EL, Indigo);
+         Print_Error_Message("Obtained position: " & Position_Count'Image(PC));
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_List_Kind_Error =>
+            Print_Information_Message("Caught CryptAda_List_Kind_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+         when X: others =>
+            Print_Error_Message("Unexpected exception raised");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;
+      end;
+
+      Print_Information_Message("Trying Position_By_Value with invalids start and end positions");
+      Print_Message("Will raise CryptAda_Index_Error", "    ");
+      
+      declare
+         PC          : Position_Count;
+      begin
+         PC := Position_By_Value(UL, Indigo, 10, 11);
+         Print_Error_Message("Obtained position: " & Position_Count'Image(PC));
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_Index_Error =>
+            Print_Information_Message("Caught CryptAda_Index_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+         when X: others =>
+            Print_Error_Message("Unexpected exception raised");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;
+      end;
+
+      declare
+         PC          : Position_Count;
+      begin
+         PC := Position_By_Value(NL, Indigo, 3, 1);
+         Print_Error_Message("Obtained position: " & Position_Count'Image(PC));
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_Index_Error =>
+            Print_Information_Message("Caught CryptAda_Index_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+         when X: others =>
+            Print_Error_Message("Unexpected exception raised");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;
+      end;
+      
+      Print_Information_Message("Trying Position_By_Value with an inexistent value");
+      Print_Message("Will raise CryptAda_Item_Not_Found_Error", "    ");
+      
+      declare
+         PC          : Position_Count;
+      begin
+         Print_Information_Message("On the unnamed list ...");
+         PC := Position_By_Value(UL, Red);
+         Print_Error_Message("Obtained position: " & Position_Count'Image(PC));
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_Item_Not_Found_Error =>
+            Print_Information_Message("Caught CryptAda_Item_Not_Found_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+         when X: others =>
+            Print_Error_Message("Unexpected exception raised");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;
+      end;
+
+      declare
+         PC          : Position_Count;
+      begin
+         Print_Information_Message("On the named list ...");
+         PC := Position_By_Value(NL, Red);
+         Print_Error_Message("Obtained position: " & Position_Count'Image(PC));
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+         when X: CryptAda_Item_Not_Found_Error =>
+            Print_Information_Message("Caught CryptAda_Item_Not_Found_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+         when X: others =>
+            Print_Error_Message("Unexpected exception raised");
+            Print_Message("Exception: """ & Exception_Name(X) & """");
+            Print_Message("Message  : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;
+      end;
+            
+      Print_List("The unnamed list", UL);
+      Print_Information_Message("On unnamed list. Getting the position of enumeration: """ & Rainbow_Color'Image(Indigo) & """ from the beginning of list");
+      PC := Position_By_Value(UL, Indigo, Start_Position => 1);
+      Print_Information_Message("Position obtained: " & Position_Count'Image(PC));
+
+      Print_List("The Named list", NL);
+      Print_Information_Message("On unnamed list. Getting the position of enumeration: """ & Rainbow_Color'Image(Indigo) & """ from the beginning of list");
+      PC := Position_By_Value(NL, Indigo, Start_Position => 1);
+      Print_Information_Message("Position obtained: " & Position_Count'Image(PC));
+      
+      Print_Information_Message("Test case OK");
+      End_Test_Case(15, Passed);
+   exception
+      when CryptAda_Test_Error =>
+         End_Test_Case(15, Failed);
+         raise;
+      when X: others =>
+         Print_Error_Message(
+            "Exception: """ & Exception_Name(X) & """");
+         Print_Message(
+            "Message  : """ & Exception_Message(X) & """");
+         End_Test_Case(15, Failed);
+         raise CryptAda_Test_Error;
+   end Case_15;
+
    -----------------------------------------------------------------------------
    --[Spec Declared Subprogram Bodies]------------------------------------------
    -----------------------------------------------------------------------------
@@ -1991,6 +2625,10 @@ package body CryptAda.Tests.Unit.Lists_Enums is
       Case_9;
       Case_10;
       Case_11;
+      Case_12;
+      Case_13;
+      Case_14;
+      Case_15;
 
       End_Test_Driver(Driver_Name);
    exception

@@ -4,15 +4,15 @@ Version: 0.1.c (2017/04/04)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
-CryptAda Test Driver Name: CryptAda.Tests.Unit.Lists_Ids
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Lists_Enums
 Description              : Unit test driver for CryptAda.Pragmatics.Lists.Enumeration_Item
-Started                  : 2017/04/25 - 16:49:10
+Started                  : 2017/04/26 - 08:27:46
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Getting text representation of enumeration values
-Started         : 2017/04/25 - 16:49:10
+Started         : 2017/04/26 - 08:27:46
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Enumeration_2_Text
@@ -32,18 +32,21 @@ Started         : 2017/04/25 - 16:49:10
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 16:49:10
+Finished        : 2017/04/26 - 08:27:46
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Testing Identifier_Item.Is_Enumerated
-Started         : 2017/04/25 - 16:49:10
+Started         : 2017/04/26 - 08:27:46
 --------------------------------------------------------------------------------
 [I] Testing subprograms that could not be tested in Identifier_Item test driver
     - Is_Enumerated
 [I] Checking whether or not the identifier items are enumerated (by position)
-    On the unnamed list: (1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)
+[I] List           : Unnamed list
+    Kind           : UNNAMED
+    Number of items:  7
+    List text      : (1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)
     Item         :  1
     Kind         : INTEGER_ITEM_KIND
     Item         :  2
@@ -61,7 +64,10 @@ Started         : 2017/04/25 - 16:49:10
     Item         :  7
     Kind         : IDENTIFIER_ITEM_KIND
     Is_Enumerated: TRUE
-    On the named list: (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+[I] List           : Named list
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
     Item         :  1
     Kind         : INTEGER_ITEM_KIND
     Item         :  2
@@ -80,7 +86,10 @@ Started         : 2017/04/25 - 16:49:10
     Kind         : IDENTIFIER_ITEM_KIND
     Is_Enumerated: TRUE
 [I] Checking whether or not the identifier items are enumerated (by identifier)
-    On the named list: (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+[I] List           : Named list
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
     Item         :  1
     Name         : One
     Kind         : INTEGER_ITEM_KIND
@@ -106,7 +115,10 @@ Started         : 2017/04/25 - 16:49:10
     Kind         : IDENTIFIER_ITEM_KIND
     Is_Enumerated: TRUE
 [I] Checking whether or not the identifier items are enumerated (by identifier text)
-    On the named list: (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+[I] List           : Named list
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
     Item         :  1
     Name         : One
     Kind         : INTEGER_ITEM_KIND
@@ -135,20 +147,29 @@ Started         : 2017/04/25 - 16:49:10
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 16:49:10
+Finished        : 2017/04/26 - 08:27:46
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Testing Identifier_Item.Enumeration_Pos
-Started         : 2017/04/25 - 16:49:10
+Started         : 2017/04/26 - 08:27:46
 --------------------------------------------------------------------------------
 [I] Testing subprograms that could not be tested in Identifier_Item test driver
     - Enumeration_Pos (Position)
 [I] For this test case we'll use three different lists
-    - An empty list  : "()"
-    - An unnamed list: "(1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)"
-    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
+[I] List           : Empty list
+    Kind           : EMPTY
+    Number of items:  0
+    List text      : ()
+[I] List           : Unnamed list
+    Kind           : UNNAMED
+    Number of items:  7
+    List text      : (1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)
+[I] List           : Named list
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
 [I] Trying Enumeration_Pos on an empty list
     Will raise CryptAda_List_Kind_Error
 [I] Caught CryptAda_List_Kind_Error
@@ -195,20 +216,29 @@ Message  : "Item is not an enumeration value"
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 16:49:10
+Finished        : 2017/04/26 - 08:27:46
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Testing Identifier_Item.Enumeration_Pos
-Started         : 2017/04/25 - 16:49:10
+Started         : 2017/04/26 - 08:27:46
 --------------------------------------------------------------------------------
 [I] Testing subprograms that could not be tested in Identifier_Item test driver
     - Enumeration_Pos (Identifier)
 [I] For this test case we'll use three different lists
-    - An empty list  : "()"
-    - An unnamed list: "(1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)"
-    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
+[I] List           : Empty list
+    Kind           : EMPTY
+    Number of items:  0
+    List text      : ()
+[I] List           : Unnamed list
+    Kind           : UNNAMED
+    Number of items:  7
+    List text      : (1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)
+[I] List           : Named list
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
 [I] Trying Enumeration_Pos on an empty list
     Will raise CryptAda_List_Kind_Error
 [I] Caught CryptAda_List_Kind_Error
@@ -247,20 +277,29 @@ Message  : "Item is not an enumeration value"
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 16:49:10
+Finished        : 2017/04/26 - 08:27:46
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Testing Identifier_Item.Enumeration_Pos
-Started         : 2017/04/25 - 16:49:10
+Started         : 2017/04/26 - 08:27:46
 --------------------------------------------------------------------------------
 [I] Testing subprograms that could not be tested in Identifier_Item test driver
     - Enumeration_Pos (Identifier_Text)
 [I] For this test case we'll use three different lists
-    - An empty list  : "()"
-    - An unnamed list: "(1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)"
-    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
+[I] List           : Empty list
+    Kind           : EMPTY
+    Number of items:  0
+    List text      : ()
+[I] List           : Unnamed list
+    Kind           : UNNAMED
+    Number of items:  7
+    List text      : (1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)
+[I] List           : Named list
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
 [I] Trying Enumeration_Pos on an empty list
     Will raise CryptAda_List_Kind_Error
 [I] Caught CryptAda_List_Kind_Error
@@ -299,20 +338,29 @@ Message  : "Item is not an enumeration value"
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 16:49:10
+Finished        : 2017/04/26 - 08:27:46
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : Getting enumeration items from lists
-Started         : 2017/04/25 - 16:49:10
+Started         : 2017/04/26 - 08:27:46
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Get_Value (Position)
 [I] For this test case we'll use three different lists
-    - An empty list  : "()"
-    - An unnamed list: "(1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)"
-    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
+[I] List           : Empty list
+    Kind           : EMPTY
+    Number of items:  0
+    List text      : ()
+[I] List           : Unnamed list
+    Kind           : UNNAMED
+    Number of items:  7
+    List text      : (1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)
+[I] List           : Named list
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
 [I] Trying Get_Value on an empty list
     Will raise CryptAda_List_Kind_Error
 [I] Caught CryptAda_List_Kind_Error
@@ -360,20 +408,29 @@ Message  : "Item is not an enumeration value"
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 16:49:10
+Finished        : 2017/04/26 - 08:27:46
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
 Description     : Getting enumeration items from lists
-Started         : 2017/04/25 - 16:49:10
+Started         : 2017/04/26 - 08:27:46
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Get_Value (Identifier)
 [I] For this test case we'll use three different lists
-    - An empty list  : "()"
-    - An unnamed list: "(1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)"
-    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
+[I] List           : Empty list
+    Kind           : EMPTY
+    Number of items:  0
+    List text      : ()
+[I] List           : Unnamed list
+    Kind           : UNNAMED
+    Number of items:  7
+    List text      : (1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)
+[I] List           : Named list
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
 [I] Trying Get_Value from an empty list
     Will raise CryptAda_List_Kind_Error
 [I] Caught CryptAda_List_Kind_Error
@@ -415,20 +472,29 @@ Message  : "Item is not an enumeration value"
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 16:49:10
+Finished        : 2017/04/26 - 08:27:46
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 8
 Description     : Getting enumeration items from lists
-Started         : 2017/04/25 - 16:49:10
+Started         : 2017/04/26 - 08:27:46
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Get_Value (Identifier_Text)
 [I] For this test case we'll use three different lists
-    - An empty list  : "()"
-    - An unnamed list: "(1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)"
-    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
+[I] List           : Empty list
+    Kind           : EMPTY
+    Number of items:  0
+    List text      : ()
+[I] List           : Unnamed list
+    Kind           : UNNAMED
+    Number of items:  7
+    List text      : (1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)
+[I] List           : Named list
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
 [I] Trying Get_Value from an empty list
     Will raise CryptAda_List_Kind_Error
 [I] Caught CryptAda_List_Kind_Error
@@ -470,20 +536,29 @@ Message  : "Item is not an enumeration value"
 --------------------------------------------------------------------------------
 Test Case Number: 8
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 16:49:10
+Finished        : 2017/04/26 - 08:27:46
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 8
 Description     : Replacing enumeration item values in lists
-Started         : 2017/04/25 - 16:49:10
+Started         : 2017/04/26 - 08:27:46
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Replace_Value (Position)
 [I] For this test case we'll use three different lists
-    - An empty list  : "()"
-    - An unnamed list: "(1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)"
-    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
+[I] List           : Empty list
+    Kind           : EMPTY
+    Number of items:  0
+    List text      : ()
+[I] List           : Unnamed list
+    Kind           : UNNAMED
+    Number of items:  7
+    List text      : (1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)
+[I] List           : Named list
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
 [I] Trying Replace_Value on an empty list
     Will raise CryptAda_List_Kind_Error
 [I] Caught CryptAda_List_Kind_Error
@@ -511,38 +586,71 @@ Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
 Message  : "Item is not an identifier"
 [I] Trying Replace_Value on an enumeration value item in an unnamed list
 Replacing value of item 6 to : "YELLOW"
-    List before replace: "(1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)"
-    List after replace : "(1,2.00000E+00,(3),Four,"Five",YELLOW,GREEN)"
+[I] List           : List before replace
+    Kind           : UNNAMED
+    Number of items:  7
+    List text      : (1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)
+[I] List           : List after replace
+    Kind           : UNNAMED
+    Number of items:  7
+    List text      : (1,2.00000E+00,(3),Four,"Five",YELLOW,GREEN)
 [I] It is also possible to replace an identifier value with a enumeration value
 Replacing value of item 4 to : "VIOLET"
-    List before replace: "(1,2.00000E+00,(3),Four,"Five",YELLOW,GREEN)"
-    List after replace : "(1,2.00000E+00,(3),VIOLET,"Five",YELLOW,GREEN)"
+[I] List           : List before replace
+    Kind           : UNNAMED
+    Number of items:  7
+    List text      : (1,2.00000E+00,(3),Four,"Five",YELLOW,GREEN)
+[I] List           : List after replace
+    Kind           : UNNAMED
+    Number of items:  7
+    List text      : (1,2.00000E+00,(3),VIOLET,"Five",YELLOW,GREEN)
 [I] Trying Replace_Value on an enumeration value item in an named list
 Replacing value of item 6 (Rainbow) to : "YELLOW"
-    List before replace: "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
-    List after replace : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)"
+[I] List           : List before replace
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+[I] List           : List after replace
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)
 [I] It is also possible to replace an identifier value with a enumeration value
 Replacing value of item 4 (Four) to : "VIOLET"
-    List before replace: "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)"
-    List after replace : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>VIOLET,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)"
+[I] List           : List before replace
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)
+[I] List           : List after replace
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>VIOLET,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 9
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 16:49:10
+Finished        : 2017/04/26 - 08:27:46
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 10
 Description     : Replacing enumeration item values in lists
-Started         : 2017/04/25 - 16:49:10
+Started         : 2017/04/26 - 08:27:46
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Replace_Value (Identifier)
 [I] For this test case we'll use three different lists
-    - An empty list  : "()"
-    - An unnamed list: "(1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)"
-    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
+[I] List           : Empty list
+    Kind           : EMPTY
+    Number of items:  0
+    List text      : ()
+[I] List           : Unnamed list
+    Kind           : UNNAMED
+    Number of items:  7
+    List text      : (1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)
+[I] List           : Named list
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
 [I] Trying Replace_Value on an empty list
     Will raise CryptAda_List_Kind_Error
 [I] Caught CryptAda_List_Kind_Error
@@ -572,30 +680,51 @@ Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
 Message  : "Item is not an identifier"
 [I] Trying Replace_Value on an enumeration value item in an named list
 Replacing value of item "Rainbow" to : "YELLOW"
-    List before replace: "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
-    List after replace : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)"
+[I] List           : List before replace
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+[I] List           : List after replace
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)
 [I] It is also possible to replace an identifier value with a enumeration value
 Replacing value of item "Four" to : "VIOLET"
-    List before replace: "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)"
-    List after replace : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>VIOLET,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)"
+[I] List           : List before replace
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)
+[I] List           : List after replace
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>VIOLET,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 10
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 16:49:10
+Finished        : 2017/04/26 - 08:27:46
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 11
 Description     : Replacing enumeration item values in lists
-Started         : 2017/04/25 - 16:49:10
+Started         : 2017/04/26 - 08:27:46
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Replace_Value (Identifier_Text)
 [I] For this test case we'll use three different lists
-    - An empty list  : "()"
-    - An unnamed list: "(1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)"
-    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
+[I] List           : Empty list
+    Kind           : EMPTY
+    Number of items:  0
+    List text      : ()
+[I] List           : Unnamed list
+    Kind           : UNNAMED
+    Number of items:  7
+    List text      : (1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)
+[I] List           : Named list
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
 [I] Trying Replace_Value on an empty list
     Will raise CryptAda_List_Kind_Error
 [I] Caught CryptAda_List_Kind_Error
@@ -625,21 +754,357 @@ Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
 Message  : "Item is not an identifier"
 [I] Trying Replace_Value on an enumeration value item in an named list
 Replacing value of item "Rainbow" to : "YELLOW"
-    List before replace: "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)"
-    List after replace : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)"
+[I] List           : List before replace
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+[I] List           : List after replace
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)
 [I] It is also possible to replace an identifier value with a enumeration value
 Replacing value of item "Four" to : "VIOLET"
-    List before replace: "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)"
-    List after replace : "(One=>1,Two=>2.00000E+00,Three=>(3),Four=>VIOLET,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)"
+[I] List           : List before replace
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)
+[I] List           : List after replace
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>VIOLET,Five=>"Five",Rainbow=>YELLOW,Traffic=>GREEN)
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 11
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 16:49:10
+Finished        : 2017/04/26 - 08:27:46
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 12
+Description     : Inserting enumeration item values in lists
+Started         : 2017/04/26 - 08:27:46
+--------------------------------------------------------------------------------
+[I] Interfaces to test:
+    - Insert_Value (Position)
+[I] For this test case we'll use three different lists
+[I] List           : Empty list
+    Kind           : EMPTY
+    Number of items:  0
+    List text      : ()
+[I] List           : Unnamed list
+    Kind           : UNNAMED
+    Number of items:  7
+    List text      : (1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)
+[I] List           : Named list
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+[I] Trying Insert_Value on an unnamed list at an invalid position
+    Will raise CryptAda_Index_Error
+[I] Caught CryptAda_Index_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid list position value"
+[I] Trying Insert_Value (form 1 - Unnamed) on a named list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "In_List current list is named"
+[I] Inserting an enumeration value in an empty list (at position 0)
+Inserting the value : "YELLOW"
+[I] List           : List before insert
+    Kind           : EMPTY
+    Number of items:  0
+    List text      : ()
+[I] List must become Unnamed
+[I] List           : List after insert
+    Kind           : UNNAMED
+    Number of items:  1
+    List text      : (YELLOW)
+[I] Inserting an identifier value at the begining of an unnamed list (at position 0)
+Inserting the value : "YELLOW"
+[I] List           : List before insert
+    Kind           : UNNAMED
+    Number of items:  7
+    List text      : (1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)
+[I] List           : List after insert
+    Kind           : UNNAMED
+    Number of items:  8
+    List text      : (YELLOW,1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)
+[I] Inserting an identifier value after the third item of an unnamed list (at position 3)
+Inserting the value : "RED"
+[I] List           : List before insert
+    Kind           : UNNAMED
+    Number of items:  8
+    List text      : (YELLOW,1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)
+[I] List           : List after insert
+    Kind           : UNNAMED
+    Number of items:  9
+    List text      : (YELLOW,1,2.00000E+00,RED,(3),Four,"Five",INDIGO,GREEN)
+[I] Inserting an identifier value after the last item of an unnamed list (at position  9)
+Inserting the value : "VIOLET"
+[I] List           : List before insert
+    Kind           : UNNAMED
+    Number of items:  9
+    List text      : (YELLOW,1,2.00000E+00,RED,(3),Four,"Five",INDIGO,GREEN)
+[I] List           : List after insert
+    Kind           : UNNAMED
+    Number of items:  10
+    List text      : (YELLOW,1,2.00000E+00,RED,(3),Four,"Five",INDIGO,GREEN,VIOLET)
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 12
+Test Case Result: PASSED
+Finished        : 2017/04/26 - 08:27:46
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 13
+Description     : Inserting enumeration item values in lists
+Started         : 2017/04/26 - 08:27:46
+--------------------------------------------------------------------------------
+[I] Interfaces to test:
+    - Insert_Value (Identifier)
+[I] For this test case we'll use three different lists
+[I] List           : Empty list
+    Kind           : EMPTY
+    Number of items:  0
+    List text      : ()
+[I] List           : Unnamed list
+    Kind           : UNNAMED
+    Number of items:  7
+    List text      : (1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)
+[I] List           : Named list
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+[I] Trying Insert_Value on an named list at an invalid position
+    Will raise CryptAda_Index_Error
+[I] Caught CryptAda_Index_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid list position value"
+[I] Trying Insert_Value (form 2 - Named using Identifier) on an unnamed list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "In_List current list is unnamed"
+[I] Trying Insert_Value using a null name identifier
+    Will raise CryptAda_Identifier_Error
+[I] Caught CryptAda_Identifier_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_IDENTIFIER_ERROR"
+Message  : "Item_Name is null"
+[I] Trying Insert_Value using a duplicated name identifier
+    Will raise CryptAda_Named_List_Error
+[I] Caught CryptAda_Named_List_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
+Message  : "List already contains the item: "Two""
+[I] Inserting an identifier value in an empty list (at position 0)
+Inserting the value : "YELLOW"
+With name           : "First"
+[I] List           : List before insert
+    Kind           : EMPTY
+    Number of items:  0
+    List text      : ()
+[I] List must become Named
+[I] List           : List after insert
+    Kind           : NAMED
+    Number of items:  1
+    List text      : (First=>YELLOW)
+[I] Inserting an identifier value at the begining of a named list (at position 0)
+Inserting the value : "RED"
+With name           : "Zero"
+[I] List           : List before insert
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+[I] List           : List after insert
+    Kind           : NAMED
+    Number of items:  8
+    List text      : (Zero=>RED,One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+[I] Inserting an identifier value after the third item of a named list (at position 3)
+Inserting the value : "BLUE"
+With name           : "After_Third"
+[I] List           : List before insert
+    Kind           : NAMED
+    Number of items:  8
+    List text      : (Zero=>RED,One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+[I] List           : List after insert
+    Kind           : NAMED
+    Number of items:  9
+    List text      : (Zero=>RED,One=>1,Two=>2.00000E+00,After_Third=>BLUE,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+[I] Inserting an identifier value after the last item of a named list (at position  9)
+Inserting the value : "VIOLET"
+With name           : "Last"
+[I] List           : List before insert
+    Kind           : NAMED
+    Number of items:  9
+    List text      : (Zero=>RED,One=>1,Two=>2.00000E+00,After_Third=>BLUE,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+[I] List           : List after insert
+    Kind           : NAMED
+    Number of items:  10
+    List text      : (Zero=>RED,One=>1,Two=>2.00000E+00,After_Third=>BLUE,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN,Last=>VIOLET)
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 13
+Test Case Result: PASSED
+Finished        : 2017/04/26 - 08:27:46
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 14
+Description     : Inserting enumeration item values in lists
+Started         : 2017/04/26 - 08:27:46
+--------------------------------------------------------------------------------
+[I] Interfaces to test:
+    - Insert_Value (Identifier_Text)
+[I] For this test case we'll use three different lists
+[I] List           : Empty list
+    Kind           : EMPTY
+    Number of items:  0
+    List text      : ()
+[I] List           : Unnamed list
+    Kind           : UNNAMED
+    Number of items:  7
+    List text      : (1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)
+[I] List           : Named list
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+[I] Trying Insert_Value on an named list at an invalid position
+    Will raise CryptAda_Index_Error
+[I] Caught CryptAda_Index_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid list position value"
+[I] Trying Insert_Value (form 3 - Named using Identifier) on an unnamed list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "In_List current list is unnamed"
+[I] Trying Insert_Value using a syntax incorrect name
+    Will raise CryptAda_Syntax_Error
+[I] Caught CryptAda_Syntax_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+Message  : "Identifier is an Ada reserved word"
+[I] Trying Insert_Value using a duplicated name identifier
+    Will raise CryptAda_Named_List_Error
+[I] Caught CryptAda_Named_List_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
+Message  : "List already contains the item: "Two""
+[I] Inserting an identifier value in an empty list (at position 0)
+Inserting the value : "YELLOW"
+With name           : "First"
+[I] List           : List before insert
+    Kind           : EMPTY
+    Number of items:  0
+    List text      : ()
+[I] List must become Named
+[I] List           : List after insert
+    Kind           : NAMED
+    Number of items:  1
+    List text      : (First=>YELLOW)
+[I] Inserting an identifier value at the begining of a named list (at position 0)
+Inserting the value : "RED"
+With name           : "Zero"
+[I] List           : List before insert
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+[I] List           : List after insert
+    Kind           : NAMED
+    Number of items:  8
+    List text      : (Zero=>RED,One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+[I] Inserting an identifier value after the third item of a named list (at position 3)
+Inserting the value : "BLUE"
+With name           : "After_Third"
+[I] List           : List before insert
+    Kind           : NAMED
+    Number of items:  8
+    List text      : (Zero=>RED,One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+[I] List           : List after insert
+    Kind           : NAMED
+    Number of items:  9
+    List text      : (After_Third=>BLUE,Zero=>RED,One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+[I] Inserting an identifier value after the last item of a named list (at position  9)
+Inserting the value : "VIOLET"
+With name           : "Last"
+[I] List           : List before insert
+    Kind           : NAMED
+    Number of items:  9
+    List text      : (After_Third=>BLUE,Zero=>RED,One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+[I] List           : List after insert
+    Kind           : NAMED
+    Number of items:  10
+    List text      : (After_Third=>BLUE,Zero=>RED,One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN,Last=>VIOLET)
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 14
+Test Case Result: PASSED
+Finished        : 2017/04/26 - 08:27:46
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 15
+Description     : Getting element position by value
+Started         : 2017/04/26 - 08:27:46
+--------------------------------------------------------------------------------
+[I] Interfaces to test:
+    - Position_By_Value
+[I] For this test case we'll use three different lists
+[I] List           : Empty list
+    Kind           : EMPTY
+    Number of items:  0
+    List text      : ()
+[I] List           : Unnamed list
+    Kind           : UNNAMED
+    Number of items:  7
+    List text      : (1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)
+[I] List           : Named list
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+[I] Trying Position_By_Value on an empty list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "In_List current list is empty"
+[I] Trying Position_By_Value with invalids start and end positions
+    Will raise CryptAda_Index_Error
+[I] Caught CryptAda_Index_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalids Start position"
+[I] Caught CryptAda_Index_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalids Start position"
+[I] Trying Position_By_Value with an inexistent value
+    Will raise CryptAda_Item_Not_Found_Error
+[I] On the unnamed list ...
+[I] Caught CryptAda_Item_Not_Found_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
+Message  : "Not found an enumerated item with value: "RED""
+[I] On the named list ...
+[I] Caught CryptAda_Item_Not_Found_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
+Message  : "Not found an enumerated item with value: "RED""
+[I] List           : The unnamed list
+    Kind           : UNNAMED
+    Number of items:  7
+    List text      : (1,2.00000E+00,(3),Four,"Five",INDIGO,GREEN)
+[I] On unnamed list. Getting the position of enumeration: "INDIGO" from the beginning of list
+[I] Position obtained:  6
+[I] List           : The Named list
+    Kind           : NAMED
+    Number of items:  7
+    List text      : (One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+[I] On unnamed list. Getting the position of enumeration: "INDIGO" from the beginning of list
+[I] Position obtained:  6
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 15
+Test Case Result: PASSED
+Finished        : 2017/04/26 - 08:27:46
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
-CryptAda Test Driver Name: CryptAda.Tests.Unit.Lists_Ids
-Finished                 : 2017/04/25 - 16:49:10
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Lists_Enums
+Finished                 : 2017/04/26 - 08:27:46
 ================================================================================
