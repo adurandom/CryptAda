@@ -141,6 +141,8 @@ package CryptAda.Names.SCAN is
    SCAN_RC2                      : aliased constant String := "RC2";
    SCAN_IDEA                     : aliased constant String := "IDEA";
    SCAN_CAST_128                 : aliased constant String := "CAST-128";
+   SCAN_Twofish                  : aliased constant String := "Twofish";
+   SCAN_RC4                      : aliased constant String := "RC4";
    
    --[SCAN_Symmetric_Ciphers]---------------------------------------------------
    -- Array of SCAN names of block cipher algorithms.
@@ -160,6 +162,11 @@ package CryptAda.Names.SCAN is
          SC_RC2            => SCAN_RC2'Access,
          SC_IDEA           => SCAN_IDEA'Access,
          SC_CAST_128       => SCAN_CAST_128'Access,
+         SC_Twofish_64     => SCAN_Twofish'Access,
+         SC_Twofish_128    => SCAN_Twofish'Access,
+         SC_Twofish_192    => SCAN_Twofish'Access,
+         SC_Twofish_256    => SCAN_Twofish'Access,
+         SC_RC4            => SCAN_RC4'Access,
          others            => Anonymous_Algorithm'Access
       );
       

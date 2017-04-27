@@ -42,6 +42,7 @@ with CryptAda.Ciphers;                    use CryptAda.Ciphers;
 with CryptAda.Ciphers.Keys;               use CryptAda.Ciphers.Keys;
 with CryptAda.Ciphers.Symmetric;          use CryptAda.Ciphers.Symmetric;
 with CryptAda.Ciphers.Symmetric.Block;    use CryptAda.Ciphers.Symmetric.Block;
+with CryptAda.Ciphers.Symmetric.Stream;   use CryptAda.Ciphers.Symmetric.Stream;
 with CryptAda.Random.Generators;          use CryptAda.Random.Generators;
 with CryptAda.Random.Generators.RSAREF;   use CryptAda.Random.Generators.RSAREF;
 
@@ -415,6 +416,234 @@ package body CryptAda.Tests.Utils.Ciphers is
       end if;
    end Run_Block_Cipher_Basic_Tests;
 
+   --[Run_Stream_Cipher_Basic_Tests]--------------------------------------------
+
+   procedure   Run_Stream_Cipher_Basic_Tests(
+                  The_Cipher     : in out CryptAda.Ciphers.Symmetric.Stream.Stream_Cipher'Class;
+                  Message        : in     String)
+   is
+      DKL            : constant Positive := Get_Default_Key_Length(The_Cipher);
+      KB             : constant Byte_Array(1 .. DKL) := (others => 16#CC#);
+      K              : Key;
+      PT_B1          : constant  Cipher_Block(1 .. 80) := (others => 16#11#);
+      CT_B           : Cipher_Block(1 .. 80) := (others => 0);
+      PT_B2          : Cipher_Block(1 .. 80) := (others => 0);
+   begin
+      Print_Information_Message(Message);
+      Print_Message("This test case will exercise Stream_Cipher dispatching operations", Indent_Str);
+      
+      if Get_Symmetric_Cipher_State(The_Cipher) /= Idle then
+         Print_Information_Message("The cipher is not idle, stopping it.");
+         Stop_Cipher(The_Cipher);
+      end if;
+      
+      Print_Information_Message("Cipher information:");
+      Print_Cipher_Info(The_Cipher);
+      
+      -- 1. Trying to process a block when cipher is Idle.
+      
+      Print_Information_Message("Basic Test 1");
+      Print_Message("Trying to encrypt in Idle state.", Indent_Str);
+      Print_Message("Must raise CryptAda_Uninitialized_Cipher_Error exception.", Indent_Str);
+   
+      declare
+      begin
+         Print_Block(PT_B1, "Input to process:");
+         Do_Process(The_Cipher, PT_B1, CT_B);
+         Print_Error_Message("No exception was raised.");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Uninitialized_Cipher_Error =>
+            Print_Information_Message("Raised CryptAda_Uninitialized_Cipher_Error");
+         when CryptAda_Test_Error =>
+            raise;
+         when X: others =>
+            Print_Error_Message("Unexpected exception: """ & Exception_Name(X) & """");
+            Print_Message("Message             : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;         
+      end;
+      
+      -- 2. Trying to start a cipher with an invalid key
+
+      Print_Information_Message("Basic Test 2");
+      Print_Message("Trying Start_Cipher with an invalid key", Indent_Str);
+      Print_Message("Must raise CryptAda_Invalid_Key_Error exception.", Indent_Str);
+   
+      declare
+         MK          : Key;
+      begin
+         Print_Information_Message("Using a null key");
+         Print_Key(MK, "The key");
+         Print_Information_Message("Calling to Start_Cipher");
+         Start_Cipher(The_Cipher, Encrypt, MK);
+         Print_Error_Message("No exception was raised.");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Invalid_Key_Error =>
+            Print_Information_Message("Raised CryptAda_Invalid_Key_Error");
+         when CryptAda_Test_Error =>
+            raise;
+         when X: others =>
+            Print_Error_Message("Unexpected exception: """ & Exception_Name(X) & """");
+            Print_Message("Message             : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;         
+      end;
+
+      declare
+         MKL         : constant Positive := 1 + Get_Maximum_Key_Length(The_Cipher);
+         MKB         : constant Byte_Array(1 .. MKL) := (others => 16#11#);
+         MK          : Key;
+      begin
+         Print_Information_Message("Using key with excessive length");
+         Print_Information_Message("Maximum key length is: " & Positive'Image(Get_Maximum_Key_Length(The_Cipher)));
+         Set_Key(MK, MKB);
+         Print_Key(MK, "The key");
+         Print_Information_Message("Calling to Start_Cipher");
+         Start_Cipher(The_Cipher, Encrypt, MK);
+         Print_Error_Message("No exception was raised.");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Invalid_Key_Error =>
+            Print_Information_Message("Raised CryptAda_Invalid_Key_Error");
+         when CryptAda_Test_Error =>
+            raise;
+         when X: others =>
+            Print_Error_Message("Unexpected exception: """ & Exception_Name(X) & """");
+            Print_Message("Message             : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;         
+      end;
+      
+      -- 3. Checking cipher state after successful Start_Cipher for encryption
+
+      Print_Information_Message("Basic Test 3");
+      Print_Message("Checking state after successful Start_Cipher for encryption", Indent_Str);
+      Set_Key(K, KB);
+      Print_Key(K, "Key set to");
+      Start_Cipher(The_Cipher, Encrypt, K);
+      Print_Information_Message("Cipher now must be in Encrypting state");
+      Print_Cipher_Info(The_Cipher);
+      
+      if Get_Symmetric_Cipher_State(The_Cipher) /= Encrypting then
+         Print_Error_Message("The cipher is not encrypting");
+         raise CryptAda_Test_Error;
+      end if;
+      
+      -- 4. Trying to encrypt with buffers of invalid length.
+
+      Print_Information_Message("Basic Test 4");
+      Print_Message("Using input and output buffers of different lengths", Indent_Str);
+      Print_Message("Must raise CryptAda_Bad_Argument_Error", Indent_Str);
+
+      declare
+         IB          : constant Byte_Array(1 .. 50) := (others => 16#11#);
+         OB          : Byte_Array(1 .. 60) := (others => 0);
+      begin
+         Print_Block(IB, "Input buffer");
+         Print_Block(OB, "Output buffer");
+         Do_Process(The_Cipher, IB, OB);
+         Print_Error_Message("No exception raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Bad_Argument_Error =>
+            Print_Information_Message("Raised CryptAda_Bad_Argument_Error");
+         when CryptAda_Test_Error =>
+            raise;
+         when X: others =>
+            Print_Error_Message("Unexpected exception: """ & Exception_Name(X) & """");
+            Print_Message("Message             : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;         
+      end;
+
+      -- 5. Encrypting a valid block.
+
+      Print_Information_Message("Basic Test 5");
+      Print_Message("Encrypting", Indent_Str);
+      Print_Block(PT_B1, "Buffer to encrypt");     
+      Do_Process(The_Cipher, PT_B1, CT_B);
+      Print_Block(CT_B, "Encrypted buffer");     
+
+      -- 6. Stopping the cipher.
+
+      Print_Information_Message("Basic Test 6");
+      Print_Message("Stopping the cipher and check state", Indent_Str);
+      Stop_Cipher(The_Cipher);
+      Print_Information_Message("Cipher now must be in Idle state");
+      Print_Cipher_Info(The_Cipher);
+      
+      if Get_Symmetric_Cipher_State(The_Cipher) /= Idle then
+         Print_Error_Message("The cipher is not Idle");
+         raise CryptAda_Test_Error;
+      end if;
+      
+      -- 7. Checking cipher state after successful Start_Cipher for decryption
+
+      Print_Information_Message("Basic Test 7");
+      Print_Message("Checking cipher state after successful Start_Cipher for decryption", Indent_Str);
+      Start_Cipher(The_Cipher, Decrypt, K);
+      Print_Information_Message("Cipher now must be in Decrypting state");
+      Print_Cipher_Info(The_Cipher);
+      
+      if Get_Symmetric_Cipher_State(The_Cipher) /= Decrypting then
+         Print_Error_Message("The cipher is not decrypting");
+         raise CryptAda_Test_Error;
+      end if;
+      
+      -- 8. Trying to decrypt blocks of invalid length
+
+      Print_Information_Message("Basic Test 8");
+      Print_Message("Using input and output buffers of different lengths", Indent_Str);
+      Print_Message("Must raise CryptAda_Bad_Argument_Error", Indent_Str);
+
+      declare
+         IB          : constant Cipher_Block(1 .. 50) := (others => 16#11#);
+         OB          : Cipher_Block(1 .. 60) := (others => 0);
+      begin
+         Print_Block(IB, "Input buffer");
+         Print_Block(OB, "Output buffer");
+         Do_Process(The_Cipher, IB, OB);
+         Print_Error_Message("No exception raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Bad_Argument_Error =>
+            Print_Information_Message("Raised CryptAda_Bad_Argument_Error");
+         when CryptAda_Test_Error =>
+            raise;
+         when X: others =>
+            Print_Error_Message("Unexpected exception: """ & Exception_Name(X) & """");
+            Print_Message("Message             : """ & Exception_Message(X) & """");
+            raise CryptAda_Test_Error;         
+      end;
+
+      -- 9. Decrypting the block encrypted on step 5
+      
+      Print_Information_Message("Basic Test 9");
+      Print_Message("Decrypting the block encrypted on basic test 5. Must be equal to original", Indent_Str); 
+      Print_Message("plaintext block", Indent_Str);
+      Print_Block(CT_B, "Block to decrypt");     
+      Do_Process(The_Cipher, CT_B, PT_B2);
+      Print_Block(PT_B2, "Decrypted block");     
+      
+      if PT_B1 = PT_B2 then
+         Print_Information_Message("Results match");
+      else
+         Print_Error_Message("Results don't match");
+         raise CryptAda_Test_Error;
+      end if;
+      
+      -- 10. Final Stop_Cipher
+      
+      Print_Information_Message("Basic Test 10");
+      Print_Message("Final Stop_Cipher", Indent_Str);
+      Stop_Cipher(The_Cipher);
+      Print_Information_Message("Cipher now must be in Idle state");
+      Print_Cipher_Info(The_Cipher);
+      
+      if Get_Symmetric_Cipher_State(The_Cipher) /= Idle then
+         Print_Error_Message("The cipher is not Idle");
+         raise CryptAda_Test_Error;
+      end if;
+   end Run_Stream_Cipher_Basic_Tests;
+   
    --[Run_Block_Cipher_Bulk_Tests]----------------------------------------------
 
    procedure   Run_Block_Cipher_Bulk_Tests(
@@ -463,6 +692,55 @@ package body CryptAda.Tests.Utils.Ciphers is
       
       Print_Information_Message("Bulk test completed OK");
    end Run_Block_Cipher_Bulk_Tests;
+
+   --[Run_Stream_Cipher_Bulk_Tests]---------------------------------------------
+
+   procedure   Run_Stream_Cipher_Bulk_Tests(
+                  With_Cipher    : in out CryptAda.Ciphers.Symmetric.Stream.Stream_Cipher'Class;
+                  Key_Size       : in     Positive;
+                  Buffer_Size    : in     Positive)
+   is
+      G              : RSAREF_Generator;
+      IB             : Cipher_Block(1 .. Buffer_Size);
+      OB             : Cipher_Block(1 .. Buffer_Size);
+      OB_2           : Cipher_Block(1 .. Buffer_Size);
+      K              : Key;
+      KB             : Byte_Array(1 .. Key_Size);
+   begin
+      Print_Information_Message("Stream cipher bulk test");
+      Print_Message("Performing " & Positive'Image(Iterations) & " iterations of decrypt(encrypt(plain_text)), checking that", Indent_Str);
+      Print_Message("resulting block is equal to original plaintext block.", Indent_Str);
+      Print_Message("Both, original plaintext block and key are random generated.", Indent_Str);
+
+      Print_Cipher_Info(With_Cipher);
+      
+      Random_Start_And_Seed(G);
+      
+      for I in 1 .. Iterations loop
+         Random_Generate(G, KB);
+         Set_Key(K, KB);
+         
+         Start_Cipher(With_Cipher, Encrypt, K);
+         Random_Generate(G, IB);
+         Do_Process(With_Cipher, IB, OB);
+         Stop_Cipher(With_Cipher);
+         Start_Cipher(With_Cipher, Decrypt, K);
+         Do_Process(With_Cipher, OB, OB_2);
+         Stop_Cipher(With_Cipher);
+         
+         if IB /= OB_2 then
+            Print_Error_Message("Iteration: " & Positive'Image(I) & ". Results don't match.");
+            Print_Key(K, "Key:");
+            Print_Block(IB, "Input block:");
+            Print_Block(OB, "Encrypted block:");
+            Print_Block(OB_2, "Decrypted block:");
+            
+            raise CryptAda_Test_Error;
+         end if;
+      end loop;
+      
+      Print_Information_Message("Bulk test completed OK");
+   end Run_Stream_Cipher_Bulk_Tests;
 
    --[Run_Block_Cipher_Test_Vector]---------------------------------------------
 

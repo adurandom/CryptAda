@@ -1,0 +1,1350 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.1.c (2017/04/04)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.RC4
+Description              : Unit test driver for CryptAda.Ciphers.Symmetric.Stream.RC4 functionality.
+Started                  : 2017/04/18 - 20:19:08
+================================================================================
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Running RC4_Cipher basic tests
+Started         : 2017/04/18 - 20:19:08
+--------------------------------------------------------------------------------
+[I] Basic test for RC4_Cipher
+    This test case will exercise Stream_Cipher dispatching operations
+[I] Cipher information:
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
+    CryptAda cipher algorithm id  : SC_RC4
+    Cipher type                   : STREAM_CIPHER
+    SCAN name                     : "RC4"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  1
+    Maximum key length            :  256
+    Default key length            :  16
+    Key length increment step     :  1
+[I] Basic Test 1
+    Trying to encrypt in Idle state.
+    Must raise CryptAda_Uninitialized_Cipher_Error exception.
+[I] Input to process:
+Block length:  80
+Block data  :
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+[I] Raised CryptAda_Uninitialized_Cipher_Error
+[I] Basic Test 2
+    Trying Start_Cipher with an invalid key
+    Must raise CryptAda_Invalid_Key_Error exception.
+[I] Using a null key
+[I] The key
+Null key
+[I] Calling to Start_Cipher
+[I] Raised CryptAda_Invalid_Key_Error
+[I] Using key with excessive length
+[I] Maximum key length is:  256
+[I] The key
+    Key length:  257
+    Key bytes :
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#
+[I] Calling to Start_Cipher
+[I] Raised CryptAda_Invalid_Key_Error
+[I] Basic Test 3
+    Checking state after successful Start_Cipher for encryption
+[I] Key set to
+    Key length:  16
+    Key bytes :
+16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#, 16#CC#
+[I] Cipher now must be in Encrypting state
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
+    CryptAda cipher algorithm id  : SC_RC4
+    Cipher type                   : STREAM_CIPHER
+    SCAN name                     : "RC4"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
+    Cipher state                  : ENCRYPTING
+    Started                       : TRUE
+    Minimum key length            :  1
+    Maximum key length            :  256
+    Default key length            :  16
+    Key length increment step     :  1
+[I] Basic Test 4
+    Using input and output buffers of different lengths
+    Must raise CryptAda_Bad_Argument_Error
+[I] Input buffer
+Block length:  50
+Block data  :
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#
+[I] Output buffer
+Block length:  60
+Block data  :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Raised CryptAda_Bad_Argument_Error
+[I] Basic Test 5
+    Encrypting
+[I] Buffer to encrypt
+Block length:  80
+Block data  :
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+[I] Encrypted buffer
+Block length:  80
+Block data  :
+16#10#, 16#54#, 16#05#, 16#4B#, 16#B9#, 16#2B#, 16#7F#, 16#DD#, 16#2E#, 16#29#, 16#C0#, 16#DB#, 16#59#, 16#CC#, 16#DE#, 16#D1#, 
+16#67#, 16#71#, 16#D9#, 16#BE#, 16#26#, 16#A8#, 16#BA#, 16#C5#, 16#B1#, 16#18#, 16#6F#, 16#E4#, 16#DC#, 16#6C#, 16#0F#, 16#04#, 
+16#B4#, 16#ED#, 16#67#, 16#5A#, 16#8C#, 16#18#, 16#75#, 16#88#, 16#5C#, 16#43#, 16#F4#, 16#AF#, 16#EF#, 16#11#, 16#17#, 16#2F#, 
+16#5E#, 16#40#, 16#C5#, 16#8D#, 16#82#, 16#96#, 16#DF#, 16#93#, 16#F3#, 16#00#, 16#FD#, 16#AC#, 16#24#, 16#75#, 16#41#, 16#B7#, 
+16#E0#, 16#37#, 16#79#, 16#8F#, 16#0B#, 16#0D#, 16#AD#, 16#27#, 16#56#, 16#F4#, 16#51#, 16#0C#, 16#E7#, 16#D5#, 16#F5#, 16#66#
+[I] Basic Test 6
+    Stopping the cipher and check state
+[I] Cipher now must be in Idle state
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
+    CryptAda cipher algorithm id  : SC_RC4
+    Cipher type                   : STREAM_CIPHER
+    SCAN name                     : "RC4"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  1
+    Maximum key length            :  256
+    Default key length            :  16
+    Key length increment step     :  1
+[I] Basic Test 7
+    Checking cipher state after successful Start_Cipher for decryption
+[I] Cipher now must be in Decrypting state
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
+    CryptAda cipher algorithm id  : SC_RC4
+    Cipher type                   : STREAM_CIPHER
+    SCAN name                     : "RC4"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
+    Cipher state                  : DECRYPTING
+    Started                       : TRUE
+    Minimum key length            :  1
+    Maximum key length            :  256
+    Default key length            :  16
+    Key length increment step     :  1
+[I] Basic Test 8
+    Using input and output buffers of different lengths
+    Must raise CryptAda_Bad_Argument_Error
+[I] Input buffer
+Block length:  50
+Block data  :
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#
+[I] Output buffer
+Block length:  60
+Block data  :
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Raised CryptAda_Bad_Argument_Error
+[I] Basic Test 9
+    Decrypting the block encrypted on basic test 5. Must be equal to original
+    plaintext block
+[I] Block to decrypt
+Block length:  80
+Block data  :
+16#10#, 16#54#, 16#05#, 16#4B#, 16#B9#, 16#2B#, 16#7F#, 16#DD#, 16#2E#, 16#29#, 16#C0#, 16#DB#, 16#59#, 16#CC#, 16#DE#, 16#D1#, 
+16#67#, 16#71#, 16#D9#, 16#BE#, 16#26#, 16#A8#, 16#BA#, 16#C5#, 16#B1#, 16#18#, 16#6F#, 16#E4#, 16#DC#, 16#6C#, 16#0F#, 16#04#, 
+16#B4#, 16#ED#, 16#67#, 16#5A#, 16#8C#, 16#18#, 16#75#, 16#88#, 16#5C#, 16#43#, 16#F4#, 16#AF#, 16#EF#, 16#11#, 16#17#, 16#2F#, 
+16#5E#, 16#40#, 16#C5#, 16#8D#, 16#82#, 16#96#, 16#DF#, 16#93#, 16#F3#, 16#00#, 16#FD#, 16#AC#, 16#24#, 16#75#, 16#41#, 16#B7#, 
+16#E0#, 16#37#, 16#79#, 16#8F#, 16#0B#, 16#0D#, 16#AD#, 16#27#, 16#56#, 16#F4#, 16#51#, 16#0C#, 16#E7#, 16#D5#, 16#F5#, 16#66#
+[I] Decrypted block
+Block length:  80
+Block data  :
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
+16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
+[I] Results match
+[I] Basic Test 10
+    Final Stop_Cipher
+[I] Cipher now must be in Idle state
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
+    CryptAda cipher algorithm id  : SC_RC4
+    Cipher type                   : STREAM_CIPHER
+    SCAN name                     : "RC4"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  1
+    Maximum key length            :  256
+    Default key length            :  16
+    Key length increment step     :  1
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/04/18 - 20:19:08
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Testing RC4_Cipher non dispatching operations
+Started         : 2017/04/18 - 20:19:08
+--------------------------------------------------------------------------------
+[I] Interfaces to test:
+    Is_Valid_RC4_Key
+[I] Null Key must not be valid
+[I] Null key
+Null key
+[I] Keys from  1 bytes to  256 bytes must be valid
+Key length  1 is valid
+Key length  2 is valid
+Key length  3 is valid
+Key length  4 is valid
+Key length  5 is valid
+Key length  6 is valid
+Key length  7 is valid
+Key length  8 is valid
+Key length  9 is valid
+Key length  10 is valid
+Key length  11 is valid
+Key length  12 is valid
+Key length  13 is valid
+Key length  14 is valid
+Key length  15 is valid
+Key length  16 is valid
+Key length  17 is valid
+Key length  18 is valid
+Key length  19 is valid
+Key length  20 is valid
+Key length  21 is valid
+Key length  22 is valid
+Key length  23 is valid
+Key length  24 is valid
+Key length  25 is valid
+Key length  26 is valid
+Key length  27 is valid
+Key length  28 is valid
+Key length  29 is valid
+Key length  30 is valid
+Key length  31 is valid
+Key length  32 is valid
+Key length  33 is valid
+Key length  34 is valid
+Key length  35 is valid
+Key length  36 is valid
+Key length  37 is valid
+Key length  38 is valid
+Key length  39 is valid
+Key length  40 is valid
+Key length  41 is valid
+Key length  42 is valid
+Key length  43 is valid
+Key length  44 is valid
+Key length  45 is valid
+Key length  46 is valid
+Key length  47 is valid
+Key length  48 is valid
+Key length  49 is valid
+Key length  50 is valid
+Key length  51 is valid
+Key length  52 is valid
+Key length  53 is valid
+Key length  54 is valid
+Key length  55 is valid
+Key length  56 is valid
+Key length  57 is valid
+Key length  58 is valid
+Key length  59 is valid
+Key length  60 is valid
+Key length  61 is valid
+Key length  62 is valid
+Key length  63 is valid
+Key length  64 is valid
+Key length  65 is valid
+Key length  66 is valid
+Key length  67 is valid
+Key length  68 is valid
+Key length  69 is valid
+Key length  70 is valid
+Key length  71 is valid
+Key length  72 is valid
+Key length  73 is valid
+Key length  74 is valid
+Key length  75 is valid
+Key length  76 is valid
+Key length  77 is valid
+Key length  78 is valid
+Key length  79 is valid
+Key length  80 is valid
+Key length  81 is valid
+Key length  82 is valid
+Key length  83 is valid
+Key length  84 is valid
+Key length  85 is valid
+Key length  86 is valid
+Key length  87 is valid
+Key length  88 is valid
+Key length  89 is valid
+Key length  90 is valid
+Key length  91 is valid
+Key length  92 is valid
+Key length  93 is valid
+Key length  94 is valid
+Key length  95 is valid
+Key length  96 is valid
+Key length  97 is valid
+Key length  98 is valid
+Key length  99 is valid
+Key length  100 is valid
+Key length  101 is valid
+Key length  102 is valid
+Key length  103 is valid
+Key length  104 is valid
+Key length  105 is valid
+Key length  106 is valid
+Key length  107 is valid
+Key length  108 is valid
+Key length  109 is valid
+Key length  110 is valid
+Key length  111 is valid
+Key length  112 is valid
+Key length  113 is valid
+Key length  114 is valid
+Key length  115 is valid
+Key length  116 is valid
+Key length  117 is valid
+Key length  118 is valid
+Key length  119 is valid
+Key length  120 is valid
+Key length  121 is valid
+Key length  122 is valid
+Key length  123 is valid
+Key length  124 is valid
+Key length  125 is valid
+Key length  126 is valid
+Key length  127 is valid
+Key length  128 is valid
+Key length  129 is valid
+Key length  130 is valid
+Key length  131 is valid
+Key length  132 is valid
+Key length  133 is valid
+Key length  134 is valid
+Key length  135 is valid
+Key length  136 is valid
+Key length  137 is valid
+Key length  138 is valid
+Key length  139 is valid
+Key length  140 is valid
+Key length  141 is valid
+Key length  142 is valid
+Key length  143 is valid
+Key length  144 is valid
+Key length  145 is valid
+Key length  146 is valid
+Key length  147 is valid
+Key length  148 is valid
+Key length  149 is valid
+Key length  150 is valid
+Key length  151 is valid
+Key length  152 is valid
+Key length  153 is valid
+Key length  154 is valid
+Key length  155 is valid
+Key length  156 is valid
+Key length  157 is valid
+Key length  158 is valid
+Key length  159 is valid
+Key length  160 is valid
+Key length  161 is valid
+Key length  162 is valid
+Key length  163 is valid
+Key length  164 is valid
+Key length  165 is valid
+Key length  166 is valid
+Key length  167 is valid
+Key length  168 is valid
+Key length  169 is valid
+Key length  170 is valid
+Key length  171 is valid
+Key length  172 is valid
+Key length  173 is valid
+Key length  174 is valid
+Key length  175 is valid
+Key length  176 is valid
+Key length  177 is valid
+Key length  178 is valid
+Key length  179 is valid
+Key length  180 is valid
+Key length  181 is valid
+Key length  182 is valid
+Key length  183 is valid
+Key length  184 is valid
+Key length  185 is valid
+Key length  186 is valid
+Key length  187 is valid
+Key length  188 is valid
+Key length  189 is valid
+Key length  190 is valid
+Key length  191 is valid
+Key length  192 is valid
+Key length  193 is valid
+Key length  194 is valid
+Key length  195 is valid
+Key length  196 is valid
+Key length  197 is valid
+Key length  198 is valid
+Key length  199 is valid
+Key length  200 is valid
+Key length  201 is valid
+Key length  202 is valid
+Key length  203 is valid
+Key length  204 is valid
+Key length  205 is valid
+Key length  206 is valid
+Key length  207 is valid
+Key length  208 is valid
+Key length  209 is valid
+Key length  210 is valid
+Key length  211 is valid
+Key length  212 is valid
+Key length  213 is valid
+Key length  214 is valid
+Key length  215 is valid
+Key length  216 is valid
+Key length  217 is valid
+Key length  218 is valid
+Key length  219 is valid
+Key length  220 is valid
+Key length  221 is valid
+Key length  222 is valid
+Key length  223 is valid
+Key length  224 is valid
+Key length  225 is valid
+Key length  226 is valid
+Key length  227 is valid
+Key length  228 is valid
+Key length  229 is valid
+Key length  230 is valid
+Key length  231 is valid
+Key length  232 is valid
+Key length  233 is valid
+Key length  234 is valid
+Key length  235 is valid
+Key length  236 is valid
+Key length  237 is valid
+Key length  238 is valid
+Key length  239 is valid
+Key length  240 is valid
+Key length  241 is valid
+Key length  242 is valid
+Key length  243 is valid
+Key length  244 is valid
+Key length  245 is valid
+Key length  246 is valid
+Key length  247 is valid
+Key length  248 is valid
+Key length  249 is valid
+Key length  250 is valid
+Key length  251 is valid
+Key length  252 is valid
+Key length  253 is valid
+Key length  254 is valid
+Key length  255 is valid
+Key length  256 is valid
+[I] A key of  257 bytes must not be valid
+[I] Invalid key
+    Key length:  257
+    Key bytes :
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 
+16#33#
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/04/18 - 20:19:08
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : RC4 standard test vectors
+Started         : 2017/04/18 - 20:19:08
+--------------------------------------------------------------------------------
+[I] Using test vectors obtained from: RFC 6229
+[I] Key length 40-bits
+[I] Key to use
+    Key length:  5
+    Key bytes :
+16#01#, 16#02#, 16#03#, 16#04#, 16#05#
+[I] Vector:  1
+    Offset:  1
+    Expected stream: B2396305F03DC027CCC3524A0A1118A8
+    Obtained stream: B2396305F03DC027CCC3524A0A1118A8
+[I] Results match
+[I] Vector:  2
+    Offset:  17
+    Expected stream: 6982944F18FC82D589C403A47A0D0919
+    Obtained stream: 6982944F18FC82D589C403A47A0D0919
+[I] Results match
+[I] Vector:  3
+    Offset:  241
+    Expected stream: 28CB1132C96CE286421DCAADB8B69EAE
+    Obtained stream: 28CB1132C96CE286421DCAADB8B69EAE
+[I] Results match
+[I] Vector:  4
+    Offset:  257
+    Expected stream: 1CFCF62B03EDDB641D77DFCF7F8D8C93
+    Obtained stream: 1CFCF62B03EDDB641D77DFCF7F8D8C93
+[I] Results match
+[I] Vector:  5
+    Offset:  497
+    Expected stream: 42B7D0CDD918A8A33DD51781C81F4041
+    Obtained stream: 42B7D0CDD918A8A33DD51781C81F4041
+[I] Results match
+[I] Vector:  6
+    Offset:  513
+    Expected stream: 6459844432A7DA923CFB3EB4980661F6
+    Obtained stream: 6459844432A7DA923CFB3EB4980661F6
+[I] Results match
+[I] Vector:  7
+    Offset:  753
+    Expected stream: EC10327BDE2BEEFD18F9277680457E22
+    Obtained stream: EC10327BDE2BEEFD18F9277680457E22
+[I] Results match
+[I] Vector:  8
+    Offset:  769
+    Expected stream: EB62638D4F0BA1FE9FCA20E05BF8FF2B
+    Obtained stream: EB62638D4F0BA1FE9FCA20E05BF8FF2B
+[I] Results match
+[I] Vector:  9
+    Offset:  1009
+    Expected stream: 45129048E6A0ED0B56B490338F078DA5
+    Obtained stream: 45129048E6A0ED0B56B490338F078DA5
+[I] Results match
+[I] Vector:  10
+    Offset:  1025
+    Expected stream: 30ABBCC7C20B01609F23EE2D5F6BB7DF
+    Obtained stream: 30ABBCC7C20B01609F23EE2D5F6BB7DF
+[I] Results match
+[I] Vector:  11
+    Offset:  1521
+    Expected stream: 3294F744D8F9790507E70F62E5BBCEEA
+    Obtained stream: 3294F744D8F9790507E70F62E5BBCEEA
+[I] Results match
+[I] Vector:  12
+    Offset:  1537
+    Expected stream: D8729DB41882259BEE4F825325F5A130
+    Obtained stream: D8729DB41882259BEE4F825325F5A130
+[I] Results match
+[I] Vector:  13
+    Offset:  2033
+    Expected stream: 1EB14A0C13B3BF47FA2A0BA93AD45B8B
+    Obtained stream: 1EB14A0C13B3BF47FA2A0BA93AD45B8B
+[I] Results match
+[I] Vector:  14
+    Offset:  2049
+    Expected stream: CC582F8BA9F265E2B1BE9112E975D2D7
+    Obtained stream: CC582F8BA9F265E2B1BE9112E975D2D7
+[I] Results match
+[I] Vector:  15
+    Offset:  3057
+    Expected stream: F2E30F9BD102ECBF75AAADE9BC35C43C
+    Obtained stream: F2E30F9BD102ECBF75AAADE9BC35C43C
+[I] Results match
+[I] Vector:  16
+    Offset:  3073
+    Expected stream: EC0E11C479DC329DC8DA7968FE965681
+    Obtained stream: EC0E11C479DC329DC8DA7968FE965681
+[I] Results match
+[I] Vector:  17
+    Offset:  4081
+    Expected stream: 068326A2118416D21F9D04B2CD1CA050
+    Obtained stream: 068326A2118416D21F9D04B2CD1CA050
+[I] Results match
+[I] Vector:  18
+    Offset:  4097
+    Expected stream: FF25B58995996707E51FBDF08B34D875
+    Obtained stream: FF25B58995996707E51FBDF08B34D875
+[I] Results match
+[I] Key length 56-bits
+[I] Key to use
+    Key length:  7
+    Key bytes :
+16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#
+[I] Vector:  1
+    Offset:  1
+    Expected stream: 293F02D47F37C9B633F2AF5285FEB46B
+    Obtained stream: 293F02D47F37C9B633F2AF5285FEB46B
+[I] Results match
+[I] Vector:  2
+    Offset:  17
+    Expected stream: E620F1390D19BD84E2E0FD752031AFC1
+    Obtained stream: E620F1390D19BD84E2E0FD752031AFC1
+[I] Results match
+[I] Vector:  3
+    Offset:  241
+    Expected stream: 914F02531C9218810DF60F67E338154C
+    Obtained stream: 914F02531C9218810DF60F67E338154C
+[I] Results match
+[I] Vector:  4
+    Offset:  257
+    Expected stream: D0FDB583073CE85AB83917740EC011D5
+    Obtained stream: D0FDB583073CE85AB83917740EC011D5
+[I] Results match
+[I] Vector:  5
+    Offset:  497
+    Expected stream: 75F81411E871CFFA70B90C74C592E454
+    Obtained stream: 75F81411E871CFFA70B90C74C592E454
+[I] Results match
+[I] Vector:  6
+    Offset:  513
+    Expected stream: 0BB87202938DAD609E87A5A1B079E5E4
+    Obtained stream: 0BB87202938DAD609E87A5A1B079E5E4
+[I] Results match
+[I] Vector:  7
+    Offset:  753
+    Expected stream: C2911246B612E7E7B903DFEDA1DAD866
+    Obtained stream: C2911246B612E7E7B903DFEDA1DAD866
+[I] Results match
+[I] Vector:  8
+    Offset:  769
+    Expected stream: 32828F91502B6291368DE8081DE36FC2
+    Obtained stream: 32828F91502B6291368DE8081DE36FC2
+[I] Results match
+[I] Vector:  9
+    Offset:  1009
+    Expected stream: F3B9A7E3B297BF9AD804512F9063EFF1
+    Obtained stream: F3B9A7E3B297BF9AD804512F9063EFF1
+[I] Results match
+[I] Vector:  10
+    Offset:  1025
+    Expected stream: 8ECB67A9BA1F55A5A067E2B026A3676F
+    Obtained stream: 8ECB67A9BA1F55A5A067E2B026A3676F
+[I] Results match
+[I] Vector:  11
+    Offset:  1521
+    Expected stream: D2AA902BD42D0D7CFD340CD45810529F
+    Obtained stream: D2AA902BD42D0D7CFD340CD45810529F
+[I] Results match
+[I] Vector:  12
+    Offset:  1537
+    Expected stream: 78B272C96E42EAB4C60BD914E39D06E3
+    Obtained stream: 78B272C96E42EAB4C60BD914E39D06E3
+[I] Results match
+[I] Vector:  13
+    Offset:  2033
+    Expected stream: F4332FD31A079396EE3CEE3F2A4FF049
+    Obtained stream: F4332FD31A079396EE3CEE3F2A4FF049
+[I] Results match
+[I] Vector:  14
+    Offset:  2049
+    Expected stream: 05459781D41FDA7F30C1BE7E1246C623
+    Obtained stream: 05459781D41FDA7F30C1BE7E1246C623
+[I] Results match
+[I] Vector:  15
+    Offset:  3057
+    Expected stream: ADFD3868B8E51485D5E610017E3DD609
+    Obtained stream: ADFD3868B8E51485D5E610017E3DD609
+[I] Results match
+[I] Vector:  16
+    Offset:  3073
+    Expected stream: AD26581C0C5BE45F4CEA01DB2F3805D5
+    Obtained stream: AD26581C0C5BE45F4CEA01DB2F3805D5
+[I] Results match
+[I] Vector:  17
+    Offset:  4081
+    Expected stream: F3172CEFFC3B3D997C85CCD5AF1A950C
+    Obtained stream: F3172CEFFC3B3D997C85CCD5AF1A950C
+[I] Results match
+[I] Vector:  18
+    Offset:  4097
+    Expected stream: E74B0B9731227FD37C0EC08A47DDD8B8
+    Obtained stream: E74B0B9731227FD37C0EC08A47DDD8B8
+[I] Results match
+[I] Key length 64-bits
+[I] Key to use
+    Key length:  8
+    Key bytes :
+16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#
+[I] Vector:  1
+    Offset:  1
+    Expected stream: 97AB8A1BF0AFB96132F2F67258DA15A8
+    Obtained stream: 97AB8A1BF0AFB96132F2F67258DA15A8
+[I] Results match
+[I] Vector:  2
+    Offset:  17
+    Expected stream: 8263EFDB45C4A18684EF87E6B19E5B09
+    Obtained stream: 8263EFDB45C4A18684EF87E6B19E5B09
+[I] Results match
+[I] Vector:  3
+    Offset:  241
+    Expected stream: 9636EBC9841926F4F7D1F362BDDF6E18
+    Obtained stream: 9636EBC9841926F4F7D1F362BDDF6E18
+[I] Results match
+[I] Vector:  4
+    Offset:  257
+    Expected stream: D0A990FF2C05FEF5B90373C9FF4B870A
+    Obtained stream: D0A990FF2C05FEF5B90373C9FF4B870A
+[I] Results match
+[I] Vector:  5
+    Offset:  497
+    Expected stream: 73239F1DB7F41D80B643C0C52518EC63
+    Obtained stream: 73239F1DB7F41D80B643C0C52518EC63
+[I] Results match
+[I] Vector:  6
+    Offset:  513
+    Expected stream: 163B319923A6BDB4527C626126703C0F
+    Obtained stream: 163B319923A6BDB4527C626126703C0F
+[I] Results match
+[I] Vector:  7
+    Offset:  753
+    Expected stream: 49D6C8AF0F97144A87DF21D91472F966
+    Obtained stream: 49D6C8AF0F97144A87DF21D91472F966
+[I] Results match
+[I] Vector:  8
+    Offset:  769
+    Expected stream: 44173A103B6616C5D5AD1CEE40C863D0
+    Obtained stream: 44173A103B6616C5D5AD1CEE40C863D0
+[I] Results match
+[I] Vector:  9
+    Offset:  1009
+    Expected stream: 273C9C4B27F322E4E716EF53A47DE7A4
+    Obtained stream: 273C9C4B27F322E4E716EF53A47DE7A4
+[I] Results match
+[I] Vector:  10
+    Offset:  1025
+    Expected stream: C6D0E7B226259FA9023490B26167AD1D
+    Obtained stream: C6D0E7B226259FA9023490B26167AD1D
+[I] Results match
+[I] Vector:  11
+    Offset:  1521
+    Expected stream: 1FE8986713F07C3D9AE1C163FF8CF9D3
+    Obtained stream: 1FE8986713F07C3D9AE1C163FF8CF9D3
+[I] Results match
+[I] Vector:  12
+    Offset:  1537
+    Expected stream: 8369E1A965610BE887FBD0C79162AAFB
+    Obtained stream: 8369E1A965610BE887FBD0C79162AAFB
+[I] Results match
+[I] Vector:  13
+    Offset:  2033
+    Expected stream: 0A0127ABB44484B9FBEF5ABCAE1B579F
+    Obtained stream: 0A0127ABB44484B9FBEF5ABCAE1B579F
+[I] Results match
+[I] Vector:  14
+    Offset:  2049
+    Expected stream: C2CDADC6402E8EE866E1F37BDB47E42C
+    Obtained stream: C2CDADC6402E8EE866E1F37BDB47E42C
+[I] Results match
+[I] Vector:  15
+    Offset:  3057
+    Expected stream: 26B51EA37DF8E1D6F76FC3B66A7429B3
+    Obtained stream: 26B51EA37DF8E1D6F76FC3B66A7429B3
+[I] Results match
+[I] Vector:  16
+    Offset:  3073
+    Expected stream: BC7683205D4F443DC1F29DDA3315C87B
+    Obtained stream: BC7683205D4F443DC1F29DDA3315C87B
+[I] Results match
+[I] Vector:  17
+    Offset:  4081
+    Expected stream: D5FA5A3469D29AAAF83D23589DB8C85B
+    Obtained stream: D5FA5A3469D29AAAF83D23589DB8C85B
+[I] Results match
+[I] Vector:  18
+    Offset:  4097
+    Expected stream: 3FB46E2C8F0F068EDCE8CDCD7DFC5862
+    Obtained stream: 3FB46E2C8F0F068EDCE8CDCD7DFC5862
+[I] Results match
+[I] Key length 80-bits
+[I] Key to use
+    Key length:  10
+    Key bytes :
+16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#
+[I] Vector:  1
+    Offset:  1
+    Expected stream: EDE3B04643E586CC907DC21851709902
+    Obtained stream: EDE3B04643E586CC907DC21851709902
+[I] Results match
+[I] Vector:  2
+    Offset:  17
+    Expected stream: 03516BA78F413BEB223AA5D4D2DF6711
+    Obtained stream: 03516BA78F413BEB223AA5D4D2DF6711
+[I] Results match
+[I] Vector:  3
+    Offset:  241
+    Expected stream: 3CFD6CB58EE0FDDE640176AD0000044D
+    Obtained stream: 3CFD6CB58EE0FDDE640176AD0000044D
+[I] Results match
+[I] Vector:  4
+    Offset:  257
+    Expected stream: 48532B21FB6079C9114C0FFD9C04A1AD
+    Obtained stream: 48532B21FB6079C9114C0FFD9C04A1AD
+[I] Results match
+[I] Vector:  5
+    Offset:  497
+    Expected stream: 3E8CEA98017109979084B1EF92F99D86
+    Obtained stream: 3E8CEA98017109979084B1EF92F99D86
+[I] Results match
+[I] Vector:  6
+    Offset:  513
+    Expected stream: E20FB49BDB337EE48B8D8DC0F4AFEFFE
+    Obtained stream: E20FB49BDB337EE48B8D8DC0F4AFEFFE
+[I] Results match
+[I] Vector:  7
+    Offset:  753
+    Expected stream: 5C2521EACD7966F15E056544BEA0D315
+    Obtained stream: 5C2521EACD7966F15E056544BEA0D315
+[I] Results match
+[I] Vector:  8
+    Offset:  769
+    Expected stream: E067A7031931A246A6C3875D2F678ACB
+    Obtained stream: E067A7031931A246A6C3875D2F678ACB
+[I] Results match
+[I] Vector:  9
+    Offset:  1009
+    Expected stream: A64F70AF88AE56B6F87581C0E23E6B08
+    Obtained stream: A64F70AF88AE56B6F87581C0E23E6B08
+[I] Results match
+[I] Vector:  10
+    Offset:  1025
+    Expected stream: F449031DE312814EC6F319291F4A0516
+    Obtained stream: F449031DE312814EC6F319291F4A0516
+[I] Results match
+[I] Vector:  11
+    Offset:  1521
+    Expected stream: BDAE85924B3CB1D0A2E33A30C6D79599
+    Obtained stream: BDAE85924B3CB1D0A2E33A30C6D79599
+[I] Results match
+[I] Vector:  12
+    Offset:  1537
+    Expected stream: 8A0FEDDBAC865A09BCD127FB562ED60A
+    Obtained stream: 8A0FEDDBAC865A09BCD127FB562ED60A
+[I] Results match
+[I] Vector:  13
+    Offset:  2033
+    Expected stream: B55A0A5B51A12A8BE34899C3E047511A
+    Obtained stream: B55A0A5B51A12A8BE34899C3E047511A
+[I] Results match
+[I] Vector:  14
+    Offset:  2049
+    Expected stream: D9A09CEA3CE75FE39698070317A71339
+    Obtained stream: D9A09CEA3CE75FE39698070317A71339
+[I] Results match
+[I] Vector:  15
+    Offset:  3057
+    Expected stream: 552225ED1177F44584AC8CFA6C4EB5FC
+    Obtained stream: 552225ED1177F44584AC8CFA6C4EB5FC
+[I] Results match
+[I] Vector:  16
+    Offset:  3073
+    Expected stream: 7E82CBABFC95381B080998442129C2F8
+    Obtained stream: 7E82CBABFC95381B080998442129C2F8
+[I] Results match
+[I] Vector:  17
+    Offset:  4081
+    Expected stream: 1F135ED14CE60A91369D2322BEF25E3C
+    Obtained stream: 1F135ED14CE60A91369D2322BEF25E3C
+[I] Results match
+[I] Vector:  18
+    Offset:  4097
+    Expected stream: 08B6BE45124A43E2EB77953F84DC8553
+    Obtained stream: 08B6BE45124A43E2EB77953F84DC8553
+[I] Results match
+[I] Key length 128-bits
+[I] Key to use
+    Key length:  16
+    Key bytes :
+16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 16#10#
+[I] Vector:  1
+    Offset:  1
+    Expected stream: 9AC7CC9A609D1EF7B2932899CDE41B97
+    Obtained stream: 9AC7CC9A609D1EF7B2932899CDE41B97
+[I] Results match
+[I] Vector:  2
+    Offset:  17
+    Expected stream: 5248C4959014126A6E8A84F11D1A9E1C
+    Obtained stream: 5248C4959014126A6E8A84F11D1A9E1C
+[I] Results match
+[I] Vector:  3
+    Offset:  241
+    Expected stream: 065902E4B620F6CC36C8589F66432F2B
+    Obtained stream: 065902E4B620F6CC36C8589F66432F2B
+[I] Results match
+[I] Vector:  4
+    Offset:  257
+    Expected stream: D39D566BC6BCE3010768151549F3873F
+    Obtained stream: D39D566BC6BCE3010768151549F3873F
+[I] Results match
+[I] Vector:  5
+    Offset:  497
+    Expected stream: B6D1E6C4A5E4771CAD79538DF295FB11
+    Obtained stream: B6D1E6C4A5E4771CAD79538DF295FB11
+[I] Results match
+[I] Vector:  6
+    Offset:  513
+    Expected stream: C68C1D5C559A974123DF1DBC52A43B89
+    Obtained stream: C68C1D5C559A974123DF1DBC52A43B89
+[I] Results match
+[I] Vector:  7
+    Offset:  753
+    Expected stream: C5ECF88DE897FD57FED301701B82A259
+    Obtained stream: C5ECF88DE897FD57FED301701B82A259
+[I] Results match
+[I] Vector:  8
+    Offset:  769
+    Expected stream: ECCBE13DE1FCC91C11A0B26C0BC8FA4D
+    Obtained stream: ECCBE13DE1FCC91C11A0B26C0BC8FA4D
+[I] Results match
+[I] Vector:  9
+    Offset:  1009
+    Expected stream: E7A72574F8782AE26AABCF9EBCD66065
+    Obtained stream: E7A72574F8782AE26AABCF9EBCD66065
+[I] Results match
+[I] Vector:  10
+    Offset:  1025
+    Expected stream: BDF0324E6083DCC6D3CEDD3CA8C53C16
+    Obtained stream: BDF0324E6083DCC6D3CEDD3CA8C53C16
+[I] Results match
+[I] Vector:  11
+    Offset:  1521
+    Expected stream: B40110C4190B5622A96116B0017ED297
+    Obtained stream: B40110C4190B5622A96116B0017ED297
+[I] Results match
+[I] Vector:  12
+    Offset:  1537
+    Expected stream: FFA0B514647EC04F6306B892AE661181
+    Obtained stream: FFA0B514647EC04F6306B892AE661181
+[I] Results match
+[I] Vector:  13
+    Offset:  2033
+    Expected stream: D03D1BC03CD33D70DFF9FA5D71963EBD
+    Obtained stream: D03D1BC03CD33D70DFF9FA5D71963EBD
+[I] Results match
+[I] Vector:  14
+    Offset:  2049
+    Expected stream: 8A44126411EAA78BD51E8D87A8879BF5
+    Obtained stream: 8A44126411EAA78BD51E8D87A8879BF5
+[I] Results match
+[I] Vector:  15
+    Offset:  3057
+    Expected stream: FABEB76028ADE2D0E48722E46C4615A3
+    Obtained stream: FABEB76028ADE2D0E48722E46C4615A3
+[I] Results match
+[I] Vector:  16
+    Offset:  3073
+    Expected stream: C05D88ABD50357F935A63C59EE537623
+    Obtained stream: C05D88ABD50357F935A63C59EE537623
+[I] Results match
+[I] Vector:  17
+    Offset:  4081
+    Expected stream: FF38265C1642C1ABE8D3C2FE5E572BF8
+    Obtained stream: FF38265C1642C1ABE8D3C2FE5E572BF8
+[I] Results match
+[I] Vector:  18
+    Offset:  4097
+    Expected stream: A36A4C301AE8AC13610CCBC12256CACC
+    Obtained stream: A36A4C301AE8AC13610CCBC12256CACC
+[I] Results match
+[I] Key length 192-bits
+[I] Key to use
+    Key length:  24
+    Key bytes :
+16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 16#10#, 
+16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#
+[I] Vector:  1
+    Offset:  1
+    Expected stream: 0595E57FE5F0BB3C706EDAC8A4B2DB11
+    Obtained stream: 0595E57FE5F0BB3C706EDAC8A4B2DB11
+[I] Results match
+[I] Vector:  2
+    Offset:  17
+    Expected stream: DFDE31344A1AF769C74F070AEE9E2326
+    Obtained stream: DFDE31344A1AF769C74F070AEE9E2326
+[I] Results match
+[I] Vector:  3
+    Offset:  241
+    Expected stream: B06B9B1E195D13D8F4A7995C4553AC05
+    Obtained stream: B06B9B1E195D13D8F4A7995C4553AC05
+[I] Results match
+[I] Vector:  4
+    Offset:  257
+    Expected stream: 6BD2378EC341C9A42F37BA79F88A32FF
+    Obtained stream: 6BD2378EC341C9A42F37BA79F88A32FF
+[I] Results match
+[I] Vector:  5
+    Offset:  497
+    Expected stream: E70BCE1DF7645ADB5D2C4130215C3522
+    Obtained stream: E70BCE1DF7645ADB5D2C4130215C3522
+[I] Results match
+[I] Vector:  6
+    Offset:  513
+    Expected stream: 9A5730C7FCB4C9AF51FFDA89C7F1AD22
+    Obtained stream: 9A5730C7FCB4C9AF51FFDA89C7F1AD22
+[I] Results match
+[I] Vector:  7
+    Offset:  753
+    Expected stream: 0485055FD4F6F0D963EF5AB9A5476982
+    Obtained stream: 0485055FD4F6F0D963EF5AB9A5476982
+[I] Results match
+[I] Vector:  8
+    Offset:  769
+    Expected stream: 591FC66BCDA10E452B03D4551F6B62AC
+    Obtained stream: 591FC66BCDA10E452B03D4551F6B62AC
+[I] Results match
+[I] Vector:  9
+    Offset:  1009
+    Expected stream: 2753CC83988AFA3E1688A1D3B42C9A02
+    Obtained stream: 2753CC83988AFA3E1688A1D3B42C9A02
+[I] Results match
+[I] Vector:  10
+    Offset:  1025
+    Expected stream: 93610D523D1D3F0062B3C2A3BBC7C7F0
+    Obtained stream: 93610D523D1D3F0062B3C2A3BBC7C7F0
+[I] Results match
+[I] Vector:  11
+    Offset:  1521
+    Expected stream: 96C248610AADEDFEAF8978C03DE8205A
+    Obtained stream: 96C248610AADEDFEAF8978C03DE8205A
+[I] Results match
+[I] Vector:  12
+    Offset:  1537
+    Expected stream: 0E317B3D1C73B9E9A4688F296D133A19
+    Obtained stream: 0E317B3D1C73B9E9A4688F296D133A19
+[I] Results match
+[I] Vector:  13
+    Offset:  2033
+    Expected stream: BDF0E6C3CCA5B5B9D533B69C56ADA120
+    Obtained stream: BDF0E6C3CCA5B5B9D533B69C56ADA120
+[I] Results match
+[I] Vector:  14
+    Offset:  2049
+    Expected stream: 88A218B6E2ECE1E6246D44C759D19B10
+    Obtained stream: 88A218B6E2ECE1E6246D44C759D19B10
+[I] Results match
+[I] Vector:  15
+    Offset:  3057
+    Expected stream: 6866397E95C140534F94263421006E40
+    Obtained stream: 6866397E95C140534F94263421006E40
+[I] Results match
+[I] Vector:  16
+    Offset:  3073
+    Expected stream: 32CB0A1E9542C6B3B8B398ABC3B0F1D5
+    Obtained stream: 32CB0A1E9542C6B3B8B398ABC3B0F1D5
+[I] Results match
+[I] Vector:  17
+    Offset:  4081
+    Expected stream: 29A0B8AED54A132324C62E423F54B4C8
+    Obtained stream: 29A0B8AED54A132324C62E423F54B4C8
+[I] Results match
+[I] Vector:  18
+    Offset:  4097
+    Expected stream: 3CB0F3B5020A98B82AF9FE154484A168
+    Obtained stream: 3CB0F3B5020A98B82AF9FE154484A168
+[I] Results match
+[I] Key length 256-bits
+[I] Key to use
+    Key length:  32
+    Key bytes :
+16#1A#, 16#DA#, 16#31#, 16#D5#, 16#CF#, 16#68#, 16#82#, 16#21#, 16#C1#, 16#09#, 16#16#, 16#39#, 16#08#, 16#EB#, 16#E5#, 16#1D#, 
+16#EB#, 16#B4#, 16#62#, 16#27#, 16#C6#, 16#CC#, 16#8B#, 16#37#, 16#64#, 16#19#, 16#10#, 16#83#, 16#32#, 16#22#, 16#77#, 16#2A#
+[I] Vector:  1
+    Offset:  1
+    Expected stream: DD5BCB0018E922D494759D7C395D02D3
+    Obtained stream: DD5BCB0018E922D494759D7C395D02D3
+[I] Results match
+[I] Vector:  2
+    Offset:  17
+    Expected stream: C8446F8F77ABF737685353EB89A1C9EB
+    Obtained stream: C8446F8F77ABF737685353EB89A1C9EB
+[I] Results match
+[I] Vector:  3
+    Offset:  241
+    Expected stream: AF3E30F9C095045938151575C3FB9098
+    Obtained stream: AF3E30F9C095045938151575C3FB9098
+[I] Results match
+[I] Vector:  4
+    Offset:  257
+    Expected stream: F8CB6274DB99B80B1D2012A98ED48F0E
+    Obtained stream: F8CB6274DB99B80B1D2012A98ED48F0E
+[I] Results match
+[I] Vector:  5
+    Offset:  497
+    Expected stream: 25C3005A1CB85DE076259839AB7198AB
+    Obtained stream: 25C3005A1CB85DE076259839AB7198AB
+[I] Results match
+[I] Vector:  6
+    Offset:  513
+    Expected stream: 9DCBC183E8CB994B727B75BE3180769C
+    Obtained stream: 9DCBC183E8CB994B727B75BE3180769C
+[I] Results match
+[I] Vector:  7
+    Offset:  753
+    Expected stream: A1D3078DFA9169503ED9D4491DEE4EB2
+    Obtained stream: A1D3078DFA9169503ED9D4491DEE4EB2
+[I] Results match
+[I] Vector:  8
+    Offset:  769
+    Expected stream: 8514A5495858096F596E4BCD66B10665
+    Obtained stream: 8514A5495858096F596E4BCD66B10665
+[I] Results match
+[I] Vector:  9
+    Offset:  1009
+    Expected stream: 5F40D59EC1B03B33738EFA60B2255D31
+    Obtained stream: 5F40D59EC1B03B33738EFA60B2255D31
+[I] Results match
+[I] Vector:  10
+    Offset:  1025
+    Expected stream: 3477C7F764A41BACEFF90BF14F92B7CC
+    Obtained stream: 3477C7F764A41BACEFF90BF14F92B7CC
+[I] Results match
+[I] Vector:  11
+    Offset:  1521
+    Expected stream: AC4E95368D99B9EB78B8DA8F81FFA795
+    Obtained stream: AC4E95368D99B9EB78B8DA8F81FFA795
+[I] Results match
+[I] Vector:  12
+    Offset:  1537
+    Expected stream: 8C3C13F8C2388BB73F38576E65B7C446
+    Obtained stream: 8C3C13F8C2388BB73F38576E65B7C446
+[I] Results match
+[I] Vector:  13
+    Offset:  2033
+    Expected stream: 13C4B9C1DFB66579EDDD8A280B9F7316
+    Obtained stream: 13C4B9C1DFB66579EDDD8A280B9F7316
+[I] Results match
+[I] Vector:  14
+    Offset:  2049
+    Expected stream: DDD27820550126698EFAADC64B64F66E
+    Obtained stream: DDD27820550126698EFAADC64B64F66E
+[I] Results match
+[I] Vector:  15
+    Offset:  3057
+    Expected stream: F08F2E66D28ED143F3A237CF9DE73559
+    Obtained stream: F08F2E66D28ED143F3A237CF9DE73559
+[I] Results match
+[I] Vector:  16
+    Offset:  3073
+    Expected stream: 9EA36C525531B880BA124334F57B0B70
+    Obtained stream: 9EA36C525531B880BA124334F57B0B70
+[I] Results match
+[I] Vector:  17
+    Offset:  4081
+    Expected stream: D5A39E3DFCC50280BAC4A6B5AA0DCA7D
+    Obtained stream: D5A39E3DFCC50280BAC4A6B5AA0DCA7D
+[I] Results match
+[I] Vector:  18
+    Offset:  4097
+    Expected stream: 370B1C1FE655916D97FD0D47CA1D72B8
+    Obtained stream: 370B1C1FE655916D97FD0D47CA1D72B8
+[I] Results match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/04/18 - 20:19:09
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : RC4 Bulk test
+Started         : 2017/04/18 - 20:19:09
+--------------------------------------------------------------------------------
+[I] Using key size:  5
+[I] Stream cipher bulk test
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
+    CryptAda cipher algorithm id  : SC_RC4
+    Cipher type                   : STREAM_CIPHER
+    SCAN name                     : "RC4"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  1
+    Maximum key length            :  256
+    Default key length            :  16
+    Key length increment step     :  1
+[I] Bulk test completed OK
+[I] Using key size:  7
+[I] Stream cipher bulk test
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
+    CryptAda cipher algorithm id  : SC_RC4
+    Cipher type                   : STREAM_CIPHER
+    SCAN name                     : "RC4"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  1
+    Maximum key length            :  256
+    Default key length            :  16
+    Key length increment step     :  1
+[I] Bulk test completed OK
+[I] Using key size:  8
+[I] Stream cipher bulk test
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
+    CryptAda cipher algorithm id  : SC_RC4
+    Cipher type                   : STREAM_CIPHER
+    SCAN name                     : "RC4"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  1
+    Maximum key length            :  256
+    Default key length            :  16
+    Key length increment step     :  1
+[I] Bulk test completed OK
+[I] Using key size:  10
+[I] Stream cipher bulk test
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
+    CryptAda cipher algorithm id  : SC_RC4
+    Cipher type                   : STREAM_CIPHER
+    SCAN name                     : "RC4"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  1
+    Maximum key length            :  256
+    Default key length            :  16
+    Key length increment step     :  1
+[I] Bulk test completed OK
+[I] Using key size:  16
+[I] Stream cipher bulk test
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
+    CryptAda cipher algorithm id  : SC_RC4
+    Cipher type                   : STREAM_CIPHER
+    SCAN name                     : "RC4"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  1
+    Maximum key length            :  256
+    Default key length            :  16
+    Key length increment step     :  1
+[I] Bulk test completed OK
+[I] Using key size:  24
+[I] Stream cipher bulk test
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
+    CryptAda cipher algorithm id  : SC_RC4
+    Cipher type                   : STREAM_CIPHER
+    SCAN name                     : "RC4"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  1
+    Maximum key length            :  256
+    Default key length            :  16
+    Key length increment step     :  1
+[I] Bulk test completed OK
+[I] Using key size:  32
+[I] Stream cipher bulk test
+    Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
+    resulting block is equal to original plaintext block.
+    Both, original plaintext block and key are random generated.
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
+    CryptAda cipher algorithm id  : SC_RC4
+    Cipher type                   : STREAM_CIPHER
+    SCAN name                     : "RC4"
+    ASN1 OID                      : ""
+    OpenPGP name                  : ""
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  1
+    Maximum key length            :  256
+    Default key length            :  16
+    Key length increment step     :  1
+[I] Bulk test completed OK
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/04/18 - 20:19:09
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.RC4
+Finished                 : 2017/04/18 - 20:19:09
+================================================================================

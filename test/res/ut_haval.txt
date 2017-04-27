@@ -1,18 +1,18 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.b (2017/03/31)
+Version: 0.1.c (2017/04/04)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.HAVAL
 Description              : Unit test driver for CryptAda.Digests.Algorithms.HAVAL functionality.
-Started                  : 2017/04/03 - 20:44:27
+Started                  : 2017/04/18 - 20:18:49
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : CryptAda message digest basic operation
-Started         : 2017/04/03 - 20:44:27
+Started         : 2017/04/18 - 20:18:49
 --------------------------------------------------------------------------------
 [I] HAVAL digest parameters:
     Passes                        : " 3"
@@ -887,13 +887,13 @@ Started         : 2017/04/03 - 20:44:27
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:27
+Finished        : 2017/04/18 - 20:18:49
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Standard HAVAL test vectors
-Started         : 2017/04/03 - 20:44:27
+Started         : 2017/04/18 - 20:18:49
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from https://web.archive.org/web/20150111210116/http://labs.calyptix.com/haval.php
     Number of vectors to test:  6
@@ -1058,13 +1058,13 @@ Started         : 2017/04/03 - 20:44:27
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:27
+Finished        : 2017/04/18 - 20:18:49
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : CryptAda HAVAL (128-bit) test vectors
-Started         : 2017/04/03 - 20:44:27
+Started         : 2017/04/18 - 20:18:49
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Number of passes:  3
@@ -1547,13 +1547,13 @@ Started         : 2017/04/03 - 20:44:27
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:27
+Finished        : 2017/04/18 - 20:18:49
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : CryptAda HAVAL (160-bit) test vectors
-Started         : 2017/04/03 - 20:44:27
+Started         : 2017/04/18 - 20:18:49
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Number of passes:  3
@@ -2036,13 +2036,13 @@ Started         : 2017/04/03 - 20:44:27
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:27
+Finished        : 2017/04/18 - 20:18:49
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : CryptAda HAVAL (192-bit) test vectors
-Started         : 2017/04/03 - 20:44:27
+Started         : 2017/04/18 - 20:18:49
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Number of passes:  3
@@ -2525,13 +2525,13 @@ Started         : 2017/04/03 - 20:44:27
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:27
+Finished        : 2017/04/18 - 20:18:49
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : CryptAda HAVAL (224-bit) test vectors
-Started         : 2017/04/03 - 20:44:27
+Started         : 2017/04/18 - 20:18:49
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Number of passes:  3
@@ -3014,13 +3014,13 @@ Started         : 2017/04/03 - 20:44:27
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:27
+Finished        : 2017/04/18 - 20:18:49
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
 Description     : CryptAda HAVAL (256-bit) test vectors
-Started         : 2017/04/03 - 20:44:27
+Started         : 2017/04/18 - 20:18:49
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Number of passes:  3
@@ -3503,13 +3503,13 @@ Started         : 2017/04/03 - 20:44:27
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:27
+Finished        : 2017/04/18 - 20:18:49
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 8
 Description     : Testing HAVAL operation (128-bit) at counter offset and block boundary.
-Started         : 2017/04/03 - 20:44:27
+Started         : 2017/04/18 - 20:18:49
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at counter offset boundary.
@@ -3710,13 +3710,13 @@ Vector length:  129
 --------------------------------------------------------------------------------
 Test Case Number: 8
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:27
+Finished        : 2017/04/18 - 20:18:49
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 9
 Description     : Testing HAVAL operation (160-bit) at counter offset and block boundary.
-Started         : 2017/04/03 - 20:44:27
+Started         : 2017/04/18 - 20:18:49
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at counter offset boundary.
@@ -3917,13 +3917,13 @@ Vector length:  129
 --------------------------------------------------------------------------------
 Test Case Number: 9
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:27
+Finished        : 2017/04/18 - 20:18:49
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 10
 Description     : Testing HAVAL operation (192-bit) at counter offset and block boundary.
-Started         : 2017/04/03 - 20:44:27
+Started         : 2017/04/18 - 20:18:49
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at counter offset boundary.
@@ -4124,13 +4124,13 @@ Vector length:  129
 --------------------------------------------------------------------------------
 Test Case Number: 10
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:27
+Finished        : 2017/04/18 - 20:18:49
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 11
 Description     : Testing HAVAL operation (224-bit) at counter offset and block boundary.
-Started         : 2017/04/03 - 20:44:27
+Started         : 2017/04/18 - 20:18:49
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at counter offset boundary.
@@ -4331,13 +4331,13 @@ Vector length:  129
 --------------------------------------------------------------------------------
 Test Case Number: 11
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:27
+Finished        : 2017/04/18 - 20:18:49
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 12
 Description     : Testing HAVAL operation (256-bit) at counter offset and block boundary.
-Started         : 2017/04/03 - 20:44:27
+Started         : 2017/04/18 - 20:18:49
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at counter offset boundary.
@@ -4538,11 +4538,11 @@ Vector length:  129
 --------------------------------------------------------------------------------
 Test Case Number: 12
 Test Case Result: PASSED
-Finished        : 2017/04/03 - 20:44:27
+Finished        : 2017/04/18 - 20:18:49
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.HAVAL
-Finished                 : 2017/04/03 - 20:44:27
+Finished                 : 2017/04/18 - 20:18:49
 ================================================================================

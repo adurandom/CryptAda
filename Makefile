@@ -41,12 +41,15 @@ ENCSDIR     =  $(SRCDIR)/encoders
 DIGDIR      =  $(SRCDIR)/digests
 RNDDIR      =  $(SRCDIR)/random
 CIPHDIR     =  $(SRCDIR)/ciphers
+UTILITYDIR  =  $(SRCDIR)/utility
 
 #>>>[Compilation]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-ADACC       =  gnatmake -c 
-SOURCEDIRS  =  -I$(BASEDIR)/ -I$(NAMESDIR)/ -I$(PRAGMADIR)/ -I$(ENCSDIR)/ -I$(DIGDIR)/ -I$(RNDDIR)/ -I$(BNDIR)/ -I$(CIPHDIR)/
+ADACC       =  gnatmake -c
+SOURCEDIRS  =  -I$(BASEDIR)/ -I$(UTILSDIR)/ -I$(NAMESDIR)/ -I$(PRAGMADIR)/ -I$(ENCSDIR)/ -I$(DIGDIR)/ -I$(RNDDIR)/ -I$(BNDIR)/ -I$(CIPHDIR)/
 CFLAGS      =  $(SOURCEDIRS) -D $(OBJDIR) -O3 -gnat05 -gnata -gnatn -gnatwa
+ADAMAKER    = gnatmake
+ADAFLAGS    = -O3 -gnat05 -gnata -gnatn -gnatwa -D $(OBJDIR)
 
 #>>>[Delete command]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -65,6 +68,13 @@ OBJS     =  cryptada.o \
             cryptada-names-openpgp.o \
             cryptada-pragmatics.o \
             cryptada-pragmatics-byte_vectors.o \
+            cryptada-pragmatics-lists.o \
+            cryptada-pragmatics-lists-identifier_item.o \
+            cryptada-pragmatics-lists-enumeration_item.o \
+            cryptada-pragmatics-lists-list_item.o \
+            cryptada-pragmatics-lists-integer_item.o \
+            cryptada-pragmatics-lists-float_item.o \
+            cryptada-pragmatics-lists-string_item.o \
             cryptada-utils.o \
             cryptada-utils-format.o \
             cryptada-encoders.o \
@@ -108,9 +118,14 @@ OBJS     =  cryptada.o \
             cryptada-ciphers-symmetric-block-rc2.o \
             cryptada-ciphers-symmetric-block-idea.o \
             cryptada-ciphers-symmetric-block-cast_128.o \
+            cryptada-ciphers-symmetric-block-twofish.o \
             cryptada-ciphers-symmetric-stream.o \
+            cryptada-ciphers-symmetric-stream-rc4.o \
             cryptada-ciphers-key_generators.o \
-            cryptada-ciphers-key_generators-tdea.o 
+            cryptada-ciphers-key_generators-tdea.o
+
+UTILITY  =  $(BINDIR)/gen_twofish_mds.exe
+
 
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -122,15 +137,15 @@ OBJS     =  cryptada.o \
 
 cryptada.o: $(BASEDIR)/cryptada.ads
 	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $< 
+	$(ADACC) $(CFLAGS) $<
 
 cryptada-identification.o: $(BASEDIR)/cryptada-identification.ads
 	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $< 
+	$(ADACC) $(CFLAGS) $<
 
 cryptada-exceptions.o: $(BASEDIR)/cryptada-exceptions.ads
 	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $< 
+	$(ADACC) $(CFLAGS) $<
 
 # Names packages
 
@@ -140,15 +155,15 @@ cryptada-names.o: $(NAMESDIR)/cryptada-names.ads
 
 cryptada-names-asn1_oids.o: $(NAMESDIR)/cryptada-names-asn1_oids.ads
 	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $< 
+	$(ADACC) $(CFLAGS) $<
 
 cryptada-names-scan.o: $(NAMESDIR)/cryptada-names-scan.ads
 	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $< 
+	$(ADACC) $(CFLAGS) $<
 
 cryptada-names-openpgp.o: $(NAMESDIR)/cryptada-names-openpgp.ads
 	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $< 
+	$(ADACC) $(CFLAGS) $<
 
 # Pragmatics packages
 
@@ -160,6 +175,34 @@ cryptada-pragmatics-byte_vectors.o: $(PRAGMADIR)/cryptada-pragmatics-byte_vector
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
+cryptada-pragmatics-lists.o: $(PRAGMADIR)/cryptada-pragmatics-lists.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-pragmatics-lists-identifier_item.o: $(PRAGMADIR)/cryptada-pragmatics-lists-identifier_item.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-pragmatics-lists-enumeration_item.o: $(PRAGMADIR)/cryptada-pragmatics-lists-enumeration_item.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-pragmatics-lists-list_item.o: $(PRAGMADIR)/cryptada-pragmatics-lists-list_item.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-pragmatics-lists-integer_item.o: $(PRAGMADIR)/cryptada-pragmatics-lists-integer_item.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-pragmatics-lists-float_item.o: $(PRAGMADIR)/cryptada-pragmatics-lists-float_item.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-pragmatics-lists-string_item.o: $(PRAGMADIR)/cryptada-pragmatics-lists-string_item.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+    
 # Utils packages
 
 cryptada-utils.o: $(UTILSDIR)/cryptada-utils.ads
@@ -297,7 +340,7 @@ cryptada-ciphers.o: $(CIPHDIR)/cryptada-ciphers.ads
 cryptada-ciphers-keys.o: $(CIPHDIR)/cryptada-ciphers-keys.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
-    
+
 cryptada-ciphers-symmetric.o: $(CIPHDIR)/cryptada-ciphers-symmetric.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
@@ -309,7 +352,7 @@ cryptada-ciphers-symmetric-block.o: $(CIPHDIR)/cryptada-ciphers-symmetric-block.
 cryptada-ciphers-symmetric-block-des.o: $(CIPHDIR)/cryptada-ciphers-symmetric-block-des.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
-    
+
 cryptada-ciphers-symmetric-block-desx.o: $(CIPHDIR)/cryptada-ciphers-symmetric-block-desx.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
@@ -341,11 +384,19 @@ cryptada-ciphers-symmetric-block-idea.o: $(CIPHDIR)/cryptada-ciphers-symmetric-b
 cryptada-ciphers-symmetric-block-cast_128.o: $(CIPHDIR)/cryptada-ciphers-symmetric-block-cast_128.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
-            
-cryptada-ciphers-symmetric-stream.o: $(CIPHDIR)/cryptada-ciphers-symmetric-stream.ads
+
+cryptada-ciphers-symmetric-block-twofish.o: $(CIPHDIR)/cryptada-ciphers-symmetric-block-twofish.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
     
+cryptada-ciphers-symmetric-stream.o: $(CIPHDIR)/cryptada-ciphers-symmetric-stream.ads
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-ciphers-symmetric-stream-rc4.o: $(CIPHDIR)/cryptada-ciphers-symmetric-stream-rc4.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
 cryptada-ciphers-key_generators.o: $(CIPHDIR)/cryptada-ciphers-key_generators.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
@@ -353,14 +404,23 @@ cryptada-ciphers-key_generators.o: $(CIPHDIR)/cryptada-ciphers-key_generators.ad
 cryptada-ciphers-key_generators-tdea.o: $(CIPHDIR)/cryptada-ciphers-key_generators-tdea.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
-    
+
+# Utility tools
+
+$(BINDIR)/gen_twofish_mds.exe: $(UTILITYDIR)/gen_twofish_mds.adb
+	@echo Building $<
+	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
+
 #>>>[Targets]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-all: objs
+all: objs utility
 
 objs: $(OBJS)
+
+utility: $(UTILITY)
 
 clean:
 	$(DELCMD) $(OBJDIR)/*.o
 	$(DELCMD) $(OBJDIR)/*.ali
+	$(DELCMD) $(BINDIR)/*.exe
 

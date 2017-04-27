@@ -277,4 +277,133 @@ package body CryptAda.Utils.Format is
       return Ada.Strings.Unbounded.To_String(R);
    end To_Hex_String;
 
+   --[To_Hex_String]------------------------------------------------------------
+
+   function    To_Hex_String(
+                  Value          : in     Two_Bytes_Array;
+                  Items_Per_Line : in     Natural := No_Line_Breaks;
+                  EOL_Seq        : in     End_Of_Line := LF_Only;
+                  Item_Separator : in     String := Default_Item_Separator;
+                  Item_Preffix   : in     String := Default_Preffix;
+                  Item_Suffix    : in     String := Default_Suffix;
+                  Digit_Case     : in     Hex_Digit_Case := Upper_Case;
+                  Zero_Pad       : in     Boolean := True)
+      return   String
+   is
+      R              : Ada.Strings.Unbounded.Unbounded_String;
+      Item_Cnt       : Natural := 0;
+   begin
+      for I in Value'Range loop
+         Ada.Strings.Unbounded.Append(
+            R,
+            To_Hex_String(
+               Value(I),
+               Item_Preffix,
+               Item_Suffix,
+               Digit_Case,
+               Zero_Pad));
+
+         if I /= Value'Last then
+            Ada.Strings.Unbounded.Append(R, Item_Separator);
+
+            if Items_Per_Line /= No_Line_Breaks then
+               Item_Cnt := Item_Cnt + 1;
+
+               if Item_Cnt = Items_Per_Line then
+                  Ada.Strings.Unbounded.Append(R, EOL_Sequences(EOL_Seq).all);
+                  Item_Cnt := 0;
+               end if;
+            end if;
+         end if;
+      end loop;
+
+      return Ada.Strings.Unbounded.To_String(R);
+   end To_Hex_String;
+
+   --[To_Hex_String]------------------------------------------------------------
+
+   function    To_Hex_String(
+                  Value          : in     Four_Bytes_Array;
+                  Items_Per_Line : in     Natural := No_Line_Breaks;
+                  EOL_Seq        : in     End_Of_Line := LF_Only;
+                  Item_Separator : in     String := Default_Item_Separator;
+                  Item_Preffix   : in     String := Default_Preffix;
+                  Item_Suffix    : in     String := Default_Suffix;
+                  Digit_Case     : in     Hex_Digit_Case := Upper_Case;
+                  Zero_Pad       : in     Boolean := True)
+      return   String
+   is
+      R              : Ada.Strings.Unbounded.Unbounded_String;
+      Item_Cnt       : Natural := 0;
+   begin
+      for I in Value'Range loop
+         Ada.Strings.Unbounded.Append(
+            R,
+            To_Hex_String(
+               Value(I),
+               Item_Preffix,
+               Item_Suffix,
+               Digit_Case,
+               Zero_Pad));
+
+         if I /= Value'Last then
+            Ada.Strings.Unbounded.Append(R, Item_Separator);
+
+            if Items_Per_Line /= No_Line_Breaks then
+               Item_Cnt := Item_Cnt + 1;
+
+               if Item_Cnt = Items_Per_Line then
+                  Ada.Strings.Unbounded.Append(R, EOL_Sequences(EOL_Seq).all);
+                  Item_Cnt := 0;
+               end if;
+            end if;
+         end if;
+      end loop;
+
+      return Ada.Strings.Unbounded.To_String(R);
+   end To_Hex_String;
+
+   --[To_Hex_String]------------------------------------------------------------
+
+   function    To_Hex_String(
+                  Value          : in     Eight_Bytes_Array;
+                  Items_Per_Line : in     Natural := No_Line_Breaks;
+                  EOL_Seq        : in     End_Of_Line := LF_Only;
+                  Item_Separator : in     String := Default_Item_Separator;
+                  Item_Preffix   : in     String := Default_Preffix;
+                  Item_Suffix    : in     String := Default_Suffix;
+                  Digit_Case     : in     Hex_Digit_Case := Upper_Case;
+                  Zero_Pad       : in     Boolean := True)
+      return   String
+   is
+      R              : Ada.Strings.Unbounded.Unbounded_String;
+      Item_Cnt       : Natural := 0;
+   begin
+      for I in Value'Range loop
+         Ada.Strings.Unbounded.Append(
+            R,
+            To_Hex_String(
+               Value(I),
+               Item_Preffix,
+               Item_Suffix,
+               Digit_Case,
+               Zero_Pad));
+
+         if I /= Value'Last then
+            Ada.Strings.Unbounded.Append(R, Item_Separator);
+
+            if Items_Per_Line /= No_Line_Breaks then
+               Item_Cnt := Item_Cnt + 1;
+
+               if Item_Cnt = Items_Per_Line then
+                  Ada.Strings.Unbounded.Append(R, EOL_Sequences(EOL_Seq).all);
+                  Item_Cnt := 0;
+               end if;
+            end if;
+         end if;
+      end loop;
+
+      return Ada.Strings.Unbounded.To_String(R);
+   end To_Hex_String;
+
 end CryptAda.Utils.Format;

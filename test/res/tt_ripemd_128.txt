@@ -1,18 +1,18 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.b (2017/03/31)
+Version: 0.1.c (2017/04/04)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Time.RIPEMD_128
 Description              : Time trial for CryptAda.Digests.Algorithms.RIPEMD_128 functionality.
-Started                  : 2017/04/03 - 20:44:47
+Started                  : 2017/04/18 - 20:19:13
 ================================================================================
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 1
 Description      : RIPEMD_128 hashing
-Started          : 2017/04/03 - 20:44:47
+Started          : 2017/04/18 - 20:19:13
 --------------------------------------------------------------------------------
 [I] Hashing 1MB
 [I] Starting time trial for digest algorithm.
@@ -30,18 +30,18 @@ Started          : 2017/04/03 - 20:44:47
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.006169077 secs.
+    Elapsed time       :           0.006143280 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "DF60D5D6AE33DAEB651FE81367C0904C"
+    Obtained hash      : "2ECA72393496E876792A81908BB8F7B6"
 --------------------------------------------------------------------------------
 Time Trial Number: 1
-Finished         : 2017/04/03 - 20:44:47
+Finished         : 2017/04/18 - 20:19:13
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 2
 Description      : RIPEMD_128 hashing
-Started          : 2017/04/03 - 20:44:47
+Started          : 2017/04/18 - 20:19:13
 --------------------------------------------------------------------------------
 [I] Hashing 10MB
 [I] Starting time trial for digest algorithm.
@@ -59,16 +59,16 @@ Started          : 2017/04/03 - 20:44:47
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.061284033 secs.
+    Elapsed time       :           0.061386101 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "C565178F6279CED2058667F11384DC9F"
+    Obtained hash      : "2F2462A195AD2193AC06512CD1330E0D"
 --------------------------------------------------------------------------------
 Time Trial Number: 2
-Finished         : 2017/04/03 - 20:44:47
+Finished         : 2017/04/18 - 20:19:13
 --[End Time Trial]--------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Time.RIPEMD_128
-Finished                 : 2017/04/03 - 20:44:47
+Finished                 : 2017/04/18 - 20:19:13
 ================================================================================
