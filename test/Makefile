@@ -114,7 +114,10 @@ U_PRAG      =   $(CTB_UPRAG)/ut_pragmatics.exe \
                 $(CTB_UPRAG)/ut_lists.exe \
                 $(CTB_UPRAG)/ut_lists_ids.exe \
                 $(CTB_UPRAG)/ut_lists_enums.exe \
-                $(CTB_UPRAG)/ut_lists_strings.exe
+                $(CTB_UPRAG)/ut_lists_strings.exe \
+                $(CTB_UPRAG)/ut_lists_integers.exe \
+                $(CTB_UPRAG)/ut_lists_floats.exe \
+                $(CTB_UPRAG)/ut_lists_lists.exe
 
 U_ENC       =   $(CTB_UENC)/ut_hexenc.exe \
                 $(CTB_UENC)/ut_b16enc.exe \
@@ -212,6 +215,18 @@ $(CTB_UPRAG)/ut_lists_enums.exe: $(CTS_UPR_DRV)ut_lists_enums.adb
 	$(ADAMAKER) $(IDIR_UPR) $(ADAFLAGS) -o $@ $<
 
 $(CTB_UPRAG)/ut_lists_strings.exe: $(CTS_UPR_DRV)ut_lists_strings.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UPR) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UPRAG)/ut_lists_integers.exe: $(CTS_UPR_DRV)ut_lists_integers.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UPR) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UPRAG)/ut_lists_floats.exe: $(CTS_UPR_DRV)ut_lists_floats.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UPR) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UPRAG)/ut_lists_lists.exe: $(CTS_UPR_DRV)ut_lists_lists.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UPR) $(ADAFLAGS) -o $@ $<
     

@@ -249,6 +249,10 @@ package body CryptAda.Pragmatics.Lists.List_Item is
    is
       IP             : Item_Ptr;
    begin
+      if In_List.Current.all.Kind = Named then
+         Raise_Exception(CryptAda_List_Kind_Error'Identity, "In_List current list is named");
+      end if;
+
       if In_List.Current.all.Item_Count < At_Position then
          Raise_Exception(CryptAda_Index_Error'Identity, "Invalid list position value");
       end if;
@@ -280,12 +284,18 @@ package body CryptAda.Pragmatics.Lists.List_Item is
          Raise_Exception(CryptAda_Identifier_Error'Identity, "Item_Name is null");
       end if;
 
+      if In_List.Current.all.Item_Count < At_Position then
+         Raise_Exception(CryptAda_Index_Error'Identity, "Invalid list position value");
+      end if;
+      
       if In_List.Current.all.Item_Count = List_Length  then
          Raise_Exception(CryptAda_Overflow_Error'Identity, "List is full");
       end if;
 
-      if Contains_Item(In_List.Current, Item_Name.Text.all) then
-         Raise_Exception(CryptAda_Named_List_Error'Identity, "List already contains the item: """ & Item_Name.Text.all & """");
+      if In_List.Current.all.Kind /= Empty then
+         if Contains_Item(In_List.Current, Item_Name.Text.all) then
+            Raise_Exception(CryptAda_Named_List_Error'Identity, "List already contains the item: """ & Item_Name.Text.all & """");
+         end if;
       end if;
 
       IP                := Allocate_Item(List_Item_Kind);
@@ -309,15 +319,21 @@ package body CryptAda.Pragmatics.Lists.List_Item is
          Raise_Exception(CryptAda_List_Kind_Error'Identity, "In_List current list is unnamed");
       end if;
 
+      if In_List.Current.all.Item_Count < At_Position then
+         Raise_Exception(CryptAda_Index_Error'Identity, "Invalid list position value");
+      end if;
+
       if In_List.Current.all.Item_Count = List_Length  then
          Raise_Exception(CryptAda_Overflow_Error'Identity, "List is full");
       end if;
 
       ITP := Get_Identifier(Item_Name);
 
-      if Contains_Item(In_List.Current, ITP.all) then
-         Deallocate_Identifier_Text(ITP);
-         Raise_Exception(CryptAda_Named_List_Error'Identity, "List already contains the item: """ & Item_Name & """");
+      if In_List.Current.all.Kind /= Empty then
+         if Contains_Item(In_List.Current, ITP.all) then
+            Deallocate_Identifier_Text(ITP);
+            Raise_Exception(CryptAda_Named_List_Error'Identity, "List already contains the item: """ & Item_Name & """");
+         end if;
       end if;
 
       IP                := Allocate_Item(List_Item_Kind);
