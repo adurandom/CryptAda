@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Lists_Enums
 Description              : Unit test driver for CryptAda.Pragmatics.Lists.Enumeration_Item
-Started                  : 2017/04/26 - 08:27:46
+Started                  : 2017/04/27 - 07:50:34
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Getting text representation of enumeration values
-Started         : 2017/04/26 - 08:27:46
+Started         : 2017/04/27 - 07:50:34
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Enumeration_2_Text
@@ -32,13 +32,13 @@ Started         : 2017/04/26 - 08:27:46
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/26 - 08:27:46
+Finished        : 2017/04/27 - 07:50:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Testing Identifier_Item.Is_Enumerated
-Started         : 2017/04/26 - 08:27:46
+Started         : 2017/04/27 - 07:50:34
 --------------------------------------------------------------------------------
 [I] Testing subprograms that could not be tested in Identifier_Item test driver
     - Is_Enumerated
@@ -147,13 +147,13 @@ Started         : 2017/04/26 - 08:27:46
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/26 - 08:27:46
+Finished        : 2017/04/27 - 07:50:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Testing Identifier_Item.Enumeration_Pos
-Started         : 2017/04/26 - 08:27:46
+Started         : 2017/04/27 - 07:50:34
 --------------------------------------------------------------------------------
 [I] Testing subprograms that could not be tested in Identifier_Item test driver
     - Enumeration_Pos (Position)
@@ -216,13 +216,13 @@ Message  : "Item is not an enumeration value"
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/04/26 - 08:27:46
+Finished        : 2017/04/27 - 07:50:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Testing Identifier_Item.Enumeration_Pos
-Started         : 2017/04/26 - 08:27:46
+Started         : 2017/04/27 - 07:50:34
 --------------------------------------------------------------------------------
 [I] Testing subprograms that could not be tested in Identifier_Item test driver
     - Enumeration_Pos (Identifier)
@@ -277,13 +277,13 @@ Message  : "Item is not an enumeration value"
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/04/26 - 08:27:46
+Finished        : 2017/04/27 - 07:50:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Testing Identifier_Item.Enumeration_Pos
-Started         : 2017/04/26 - 08:27:46
+Started         : 2017/04/27 - 07:50:34
 --------------------------------------------------------------------------------
 [I] Testing subprograms that could not be tested in Identifier_Item test driver
     - Enumeration_Pos (Identifier_Text)
@@ -338,13 +338,13 @@ Message  : "Item is not an enumeration value"
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/04/26 - 08:27:46
+Finished        : 2017/04/27 - 07:50:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : Getting enumeration items from lists
-Started         : 2017/04/26 - 08:27:46
+Started         : 2017/04/27 - 07:50:34
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Get_Value (Position)
@@ -408,13 +408,13 @@ Message  : "Item is not an enumeration value"
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/04/26 - 08:27:46
+Finished        : 2017/04/27 - 07:50:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
 Description     : Getting enumeration items from lists
-Started         : 2017/04/26 - 08:27:46
+Started         : 2017/04/27 - 07:50:34
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Get_Value (Identifier)
@@ -472,13 +472,13 @@ Message  : "Item is not an enumeration value"
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/04/26 - 08:27:46
+Finished        : 2017/04/27 - 07:50:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 8
 Description     : Getting enumeration items from lists
-Started         : 2017/04/26 - 08:27:46
+Started         : 2017/04/27 - 07:50:34
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Get_Value (Identifier_Text)
@@ -536,13 +536,13 @@ Message  : "Item is not an enumeration value"
 --------------------------------------------------------------------------------
 Test Case Number: 8
 Test Case Result: PASSED
-Finished        : 2017/04/26 - 08:27:46
+Finished        : 2017/04/27 - 07:50:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 8
 Description     : Replacing enumeration item values in lists
-Started         : 2017/04/26 - 08:27:46
+Started         : 2017/04/27 - 07:50:34
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Replace_Value (Position)
@@ -628,13 +628,13 @@ Replacing value of item 4 (Four) to : "VIOLET"
 --------------------------------------------------------------------------------
 Test Case Number: 9
 Test Case Result: PASSED
-Finished        : 2017/04/26 - 08:27:46
+Finished        : 2017/04/27 - 07:50:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 10
 Description     : Replacing enumeration item values in lists
-Started         : 2017/04/26 - 08:27:46
+Started         : 2017/04/27 - 07:50:34
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Replace_Value (Identifier)
@@ -702,13 +702,13 @@ Replacing value of item "Four" to : "VIOLET"
 --------------------------------------------------------------------------------
 Test Case Number: 10
 Test Case Result: PASSED
-Finished        : 2017/04/26 - 08:27:46
+Finished        : 2017/04/27 - 07:50:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 11
 Description     : Replacing enumeration item values in lists
-Started         : 2017/04/26 - 08:27:46
+Started         : 2017/04/27 - 07:50:34
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Replace_Value (Identifier_Text)
@@ -776,13 +776,13 @@ Replacing value of item "Four" to : "VIOLET"
 --------------------------------------------------------------------------------
 Test Case Number: 11
 Test Case Result: PASSED
-Finished        : 2017/04/26 - 08:27:46
+Finished        : 2017/04/27 - 07:50:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 12
 Description     : Inserting enumeration item values in lists
-Started         : 2017/04/26 - 08:27:46
+Started         : 2017/04/27 - 07:50:34
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Insert_Value (Position)
@@ -854,13 +854,13 @@ Inserting the value : "VIOLET"
 --------------------------------------------------------------------------------
 Test Case Number: 12
 Test Case Result: PASSED
-Finished        : 2017/04/26 - 08:27:46
+Finished        : 2017/04/27 - 07:50:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 13
 Description     : Inserting enumeration item values in lists
-Started         : 2017/04/26 - 08:27:46
+Started         : 2017/04/27 - 07:50:34
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Insert_Value (Identifier)
@@ -946,13 +946,13 @@ With name           : "Last"
 --------------------------------------------------------------------------------
 Test Case Number: 13
 Test Case Result: PASSED
-Finished        : 2017/04/26 - 08:27:46
+Finished        : 2017/04/27 - 07:50:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 14
 Description     : Inserting enumeration item values in lists
-Started         : 2017/04/26 - 08:27:46
+Started         : 2017/04/27 - 07:50:34
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Insert_Value (Identifier_Text)
@@ -1022,29 +1022,29 @@ With name           : "After_Third"
 [I] List           : List after insert
     Kind           : NAMED
     Number of items:  9
-    List text      : (After_Third=>BLUE,Zero=>RED,One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+    List text      : (Zero=>RED,One=>1,Two=>2.00000E+00,After_Third=>BLUE,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
 [I] Inserting an identifier value after the last item of a named list (at position  9)
 Inserting the value : "VIOLET"
 With name           : "Last"
 [I] List           : List before insert
     Kind           : NAMED
     Number of items:  9
-    List text      : (After_Third=>BLUE,Zero=>RED,One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
+    List text      : (Zero=>RED,One=>1,Two=>2.00000E+00,After_Third=>BLUE,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN)
 [I] List           : List after insert
     Kind           : NAMED
     Number of items:  10
-    List text      : (After_Third=>BLUE,Zero=>RED,One=>1,Two=>2.00000E+00,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN,Last=>VIOLET)
+    List text      : (Zero=>RED,One=>1,Two=>2.00000E+00,After_Third=>BLUE,Three=>(3),Four=>Four,Five=>"Five",Rainbow=>INDIGO,Traffic=>GREEN,Last=>VIOLET)
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 14
 Test Case Result: PASSED
-Finished        : 2017/04/26 - 08:27:46
+Finished        : 2017/04/27 - 07:50:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 15
 Description     : Getting element position by value
-Started         : 2017/04/26 - 08:27:46
+Started         : 2017/04/27 - 07:50:34
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Position_By_Value
@@ -1100,11 +1100,11 @@ Message  : "Not found an enumerated item with value: "RED""
 --------------------------------------------------------------------------------
 Test Case Number: 15
 Test Case Result: PASSED
-Finished        : 2017/04/26 - 08:27:46
+Finished        : 2017/04/27 - 07:50:34
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Lists_Enums
-Finished                 : 2017/04/26 - 08:27:46
+Finished                 : 2017/04/27 - 07:50:34
 ================================================================================
