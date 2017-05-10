@@ -1,18 +1,18 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.c (2017/04/04)
+Version: 0.1.d (2017/04/30)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.PRNG_CAPRNG
 Description              : Unit test driver for CryptAda.Random.Generators.CAPRNG functionality.
-Started                  : 2017/04/18 - 20:18:50
+Started                  : 2017/05/10 - 08:16:16
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Trying to call operations without starting the PRNG
-Started         : 2017/04/18 - 20:18:50
+Started         : 2017/05/10 - 08:16:16
 --------------------------------------------------------------------------------
 [I] Random generator not started
 Operations must raise CryptAda_Generator_Not_Started_Error
@@ -31,13 +31,13 @@ Operations must raise CryptAda_Generator_Not_Started_Error
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:50
+Finished        : 2017/05/10 - 08:16:16
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Trying to call operations without seeding the PRNG
-Started         : 2017/04/18 - 20:18:50
+Started         : 2017/05/10 - 08:16:16
 --------------------------------------------------------------------------------
 [I] Operations must raise CryptAda_Generator_Need_Seeding_Error
 [I] Information of random generator object:
@@ -66,13 +66,13 @@ Started         : 2017/04/18 - 20:18:50
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:50
+Finished        : 2017/05/10 - 08:16:16
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Seeding with external seeder.
-Started         : 2017/04/18 - 20:18:50
+Started         : 2017/05/10 - 08:16:16
 --------------------------------------------------------------------------------
 [I] Seeding random generator with external seeder ...
 [I] Information of random generator object:
@@ -187,8 +187,8 @@ Random_Seed call  13
     Seed bytes needed             : " 0"
 [I] Getting a random byte array ...
 [I] Obtained byte array:
-16#44#, 16#66#, 16#F0#, 16#1B#, 16#05#, 16#EF#, 16#CA#, 16#A7#, 16#E8#, 16#9F#, 
-16#30#, 16#1F#, 16#1F#, 16#E6#, 16#8E#, 16#AC#, 16#0E#, 16#1E#, 16#85#, 16#99#
+16#B1#, 16#EB#, 16#21#, 16#80#, 16#B0#, 16#39#, 16#3C#, 16#1C#, 16#E3#, 16#26#, 
+16#28#, 16#02#, 16#22#, 16#B8#, 16#23#, 16#9B#, 16#F0#, 16#D7#, 16#72#, 16#AA#
 [I] Calling Random_Stop
 [I] Information of random generator object:
     Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
@@ -199,13 +199,13 @@ Random_Seed call  13
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:50
+Finished        : 2017/05/10 - 08:16:16
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Seeding with internal seeder.
-Started         : 2017/04/18 - 20:18:50
+Started         : 2017/05/10 - 08:16:16
 --------------------------------------------------------------------------------
 [I] Seeding random generator with internal seeder ...
 [I] Information of random generator object:
@@ -222,8 +222,8 @@ Started         : 2017/04/18 - 20:18:50
     Seed bytes needed             : " 0"
 [I] Getting a random byte array ...
 [I] Obtained byte array:
-16#68#, 16#2F#, 16#73#, 16#84#, 16#B6#, 16#22#, 16#C6#, 16#8F#, 16#3A#, 16#C8#, 
-16#13#, 16#B7#, 16#DD#, 16#B6#, 16#47#, 16#C7#, 16#63#, 16#F4#, 16#92#, 16#47#
+16#80#, 16#69#, 16#2C#, 16#EE#, 16#45#, 16#B6#, 16#98#, 16#7B#, 16#4E#, 16#CE#, 
+16#74#, 16#45#, 16#E6#, 16#EB#, 16#FC#, 16#E6#, 16#CD#, 16#3D#, 16#E0#, 16#4E#
 [I] Calling Random_Stop
 [I] Information of random generator object:
     Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.CAPRNG.CAPRNG_GENERATOR"
@@ -234,13 +234,13 @@ Started         : 2017/04/18 - 20:18:50
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:50
+Finished        : 2017/05/10 - 08:16:16
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Chi-square test
-Started         : 2017/04/18 - 20:18:50
+Started         : 2017/05/10 - 08:16:16
 --------------------------------------------------------------------------------
 [I] Running Chi-Square test for random generator:
 [I] Information of random generator object:
@@ -263,19 +263,19 @@ Started         : 2017/04/18 - 20:18:50
 [I] Running test on Ada.Numerics.Discrete_Random ...
 [I] Test completed.
 [I] Chi-Square test results for CryptAda PRNG:
-    - Computed chi-square: 303.000. Test result => out of bounds!!!
+    - Computed chi-square: 251.000. Test result => OK
 [I] Chi-Square test results for Ada.Numerics.Discrete_Random:
-    - Computed chi-square: 229.000. Test result => OK
+    - Computed chi-square: 254.000. Test result => OK
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:51
+Finished        : 2017/05/10 - 08:16:17
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : FIPS PUB 140-2 RNG statistical tests
-Started         : 2017/04/18 - 20:18:51
+Started         : 2017/05/10 - 08:16:17
 --------------------------------------------------------------------------------
 [I] Running FIPS PUB 140-2 tests for random generator:
 [I] Information of random generator object:
@@ -306,49 +306,49 @@ Started         : 2017/04/18 - 20:18:51
        - Acceptable bounds:
          Lower =>  9725
          Upper =>  10275
-       - Obtained result: 10102. Test result => OK
+       - Obtained result: 10008. Test result => OK
     2. Poker test
        - Acceptable bounds:
          Lower =>  2.160
          Upper => 46.170
-       - Obtained result:  9.018. Test result => OK
+       - Obtained result: 17.767. Test result => OK
     3. Runs test
        * Run length:  1
        - Acceptable bounds:
          Lower =>  2315
          Upper =>  2685
-       - Obtained result (bit 0):  2559. Test result => OK
-       - Obtained result (bit 1):  2440. Test result => OK
+       - Obtained result (bit 0):  2557. Test result => OK
+       - Obtained result (bit 1):  2565. Test result => OK
        * Run length:  2
        - Acceptable bounds:
          Lower =>  1114
          Upper =>  1386
-       - Obtained result (bit 0):  1235. Test result => OK
-       - Obtained result (bit 1):  1281. Test result => OK
+       - Obtained result (bit 0):  1280. Test result => OK
+       - Obtained result (bit 1):  1276. Test result => OK
        * Run length:  3
        - Acceptable bounds:
          Lower =>  527
          Upper =>  723
-       - Obtained result (bit 0):  564. Test result => OK
-       - Obtained result (bit 1):  662. Test result => OK
+       - Obtained result (bit 0):  614. Test result => OK
+       - Obtained result (bit 1):  597. Test result => OK
        * Run length:  4
        - Acceptable bounds:
          Lower =>  240
          Upper =>  384
-       - Obtained result (bit 0):  316. Test result => OK
-       - Obtained result (bit 1):  300. Test result => OK
+       - Obtained result (bit 0):  309. Test result => OK
+       - Obtained result (bit 1):  336. Test result => OK
        * Run length:  5
        - Acceptable bounds:
          Lower =>  103
          Upper =>  209
-       - Obtained result (bit 0):  165. Test result => OK
-       - Obtained result (bit 1):  148. Test result => OK
+       - Obtained result (bit 0):  179. Test result => OK
+       - Obtained result (bit 1):  155. Test result => OK
        * Run length:  6
        - Acceptable bounds:
          Lower =>  103
          Upper =>  209
-       - Obtained result (bit 0):  155. Test result => OK
-       - Obtained result (bit 1):  164. Test result => OK
+       - Obtained result (bit 0):  130. Test result => OK
+       - Obtained result (bit 1):  141. Test result => OK
 
     4. Long runs test
        - Acceptable result: 0
@@ -357,11 +357,11 @@ Started         : 2017/04/18 - 20:18:51
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:51
+Finished        : 2017/05/10 - 08:16:17
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.PRNG_CAPRNG
-Finished                 : 2017/04/18 - 20:18:51
+Finished                 : 2017/05/10 - 08:16:17
 ================================================================================

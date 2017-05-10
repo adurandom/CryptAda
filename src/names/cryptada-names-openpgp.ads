@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 13th, 2017
---    Current version   :  1.2
+--    Current version   :  1.3
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    OpenPGP naming for algorithms.
@@ -31,9 +31,12 @@
 --    1.0   20170313 ADD   Initial implementation.
 --    1.1   20170329 ADD   Changes in CryptAda.Names.
 --    1.2   20170403 ADD   Changes in Symmetric cipher hierachy.
+--    1.3   20170430 ADD   Added pragma Pure
 --------------------------------------------------------------------------------
 
 package CryptAda.Names.OpenPGP is
+
+   pragma Pure(OpenPGP);
 
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
@@ -78,7 +81,7 @@ package CryptAda.Names.OpenPGP is
    OpenPGP_AES_192            : aliased constant String := "OpenPGP.Cipher.8";
    OpenPGP_AES_256            : aliased constant String := "OpenPGP.Cipher.9";
    OpenPGP_Twofish_256        : aliased constant String := "OpenPGP.Cipher.10";
-   
+
    --[OpenPGP_Symmetric_Ciphers]------------------------------------------------
    -- Array of OpenPGP names of block ciphers.
    -----------------------------------------------------------------------------
@@ -95,5 +98,5 @@ package CryptAda.Names.OpenPGP is
          SC_Twofish_256    => OpenPGP_Twofish_256'Access,
          others            => Anonymous_Algorithm'Access
       );
-      
+
 end CryptAda.Names.OpenPGP;

@@ -107,22 +107,23 @@ DELCMD = rm -f
 #>>>[Objects]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 U_UTILS     =   $(CTB_UUTILS)/ut_utils.exe \
-                $(CTB_UUTILS)/ut_format.exe
+                $(CTB_UUTILS)/ut_format.exe \
+                $(CTB_UUTILS)/ut_lists.exe \
+                $(CTB_UUTILS)/ut_lists_ids.exe \
+                $(CTB_UUTILS)/ut_lists_enums.exe \
+                $(CTB_UUTILS)/ut_lists_integers.exe \
+                $(CTB_UUTILS)/ut_lists_floats.exe \
+                $(CTB_UUTILS)/ut_lists_strings.exe \
+                $(CTB_UUTILS)/ut_lists_lists.exe 
 
 U_PRAG      =   $(CTB_UPRAG)/ut_pragmatics.exe \
-                $(CTB_UPRAG)/ut_bvectors.exe \
-                $(CTB_UPRAG)/ut_lists.exe \
-                $(CTB_UPRAG)/ut_lists_ids.exe \
-                $(CTB_UPRAG)/ut_lists_enums.exe \
-                $(CTB_UPRAG)/ut_lists_strings.exe \
-                $(CTB_UPRAG)/ut_lists_integers.exe \
-                $(CTB_UPRAG)/ut_lists_floats.exe \
-                $(CTB_UPRAG)/ut_lists_lists.exe
+                $(CTB_UPRAG)/ut_bvectors.exe
 
-U_ENC       =   $(CTB_UENC)/ut_hexenc.exe \
-                $(CTB_UENC)/ut_b16enc.exe \
-                $(CTB_UENC)/ut_b64enc.exe \
-                $(CTB_UENC)/ut_mimeenc.exe
+U_ENC       =   $(CTB_UENC)/ut_enc_hex.exe \
+                $(CTB_UENC)/ut_enc_base16.exe \
+                $(CTB_UENC)/ut_enc_base64.exe \
+                $(CTB_UENC)/ut_enc_mime.exe
+                
 
 U_DIG       =   $(CTB_UDIG)/ut_count.exe \
                 $(CTB_UDIG)/ut_md2.exe \
@@ -192,6 +193,34 @@ $(CTB_UUTILS)/ut_format.exe: $(CTS_UUT_DRV)ut_format.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UUT) $(ADAFLAGS) -o $@ $<
 
+$(CTB_UUTILS)/ut_lists.exe: $(CTS_UUT_DRV)ut_lists.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UUT) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UUTILS)/ut_lists_ids.exe: $(CTS_UUT_DRV)ut_lists_ids.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UUT) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UUTILS)/ut_lists_enums.exe: $(CTS_UUT_DRV)ut_lists_enums.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UUT) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UUTILS)/ut_lists_integers.exe: $(CTS_UUT_DRV)ut_lists_integers.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UUT) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UUTILS)/ut_lists_floats.exe: $(CTS_UUT_DRV)ut_lists_floats.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UUT) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UUTILS)/ut_lists_strings.exe: $(CTS_UUT_DRV)ut_lists_strings.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UUT) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UUTILS)/ut_lists_lists.exe: $(CTS_UUT_DRV)ut_lists_lists.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UUT) $(ADAFLAGS) -o $@ $<
+        
 # Pragmatics unit test drivers.
 
 $(CTB_UPRAG)/ut_pragmatics.exe: $(CTS_UPR_DRV)ut_pragmatics.adb
@@ -201,53 +230,25 @@ $(CTB_UPRAG)/ut_pragmatics.exe: $(CTS_UPR_DRV)ut_pragmatics.adb
 $(CTB_UPRAG)/ut_bvectors.exe: $(CTS_UPR_DRV)ut_bvectors.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UPR) $(ADAFLAGS) -o $@ $<
-
-$(CTB_UPRAG)/ut_lists.exe: $(CTS_UPR_DRV)ut_lists.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UPR) $(ADAFLAGS) -o $@ $<
-    
-$(CTB_UPRAG)/ut_lists_ids.exe: $(CTS_UPR_DRV)ut_lists_ids.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UPR) $(ADAFLAGS) -o $@ $<
-
-$(CTB_UPRAG)/ut_lists_enums.exe: $(CTS_UPR_DRV)ut_lists_enums.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UPR) $(ADAFLAGS) -o $@ $<
-
-$(CTB_UPRAG)/ut_lists_strings.exe: $(CTS_UPR_DRV)ut_lists_strings.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UPR) $(ADAFLAGS) -o $@ $<
-
-$(CTB_UPRAG)/ut_lists_integers.exe: $(CTS_UPR_DRV)ut_lists_integers.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UPR) $(ADAFLAGS) -o $@ $<
-
-$(CTB_UPRAG)/ut_lists_floats.exe: $(CTS_UPR_DRV)ut_lists_floats.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UPR) $(ADAFLAGS) -o $@ $<
-
-$(CTB_UPRAG)/ut_lists_lists.exe: $(CTS_UPR_DRV)ut_lists_lists.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UPR) $(ADAFLAGS) -o $@ $<
     
 # Encoders unit test drivers.
 
-$(CTB_UENC)/ut_hexenc.exe: $(CTS_UEN_DRV)ut_hexenc.adb
+$(CTB_UENC)/ut_enc_hex.exe: $(CTS_UEN_DRV)ut_enc_hex.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UEN) $(ADAFLAGS) -o $@ $<
 
-$(CTB_UENC)/ut_b16enc.exe: $(CTS_UEN_DRV)ut_b16enc.adb
+$(CTB_UENC)/ut_enc_base16.exe: $(CTS_UEN_DRV)ut_enc_base16.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UEN) $(ADAFLAGS) -o $@ $<
 
-$(CTB_UENC)/ut_b64enc.exe: $(CTS_UEN_DRV)ut_b64enc.adb
+$(CTB_UENC)/ut_enc_base64.exe: $(CTS_UEN_DRV)ut_enc_base64.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UEN) $(ADAFLAGS) -o $@ $<
 
-$(CTB_UENC)/ut_mimeenc.exe: $(CTS_UEN_DRV)ut_mimeenc.adb
+$(CTB_UENC)/ut_enc_mime.exe: $(CTS_UEN_DRV)ut_enc_mime.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UEN) $(ADAFLAGS) -o $@ $<
-
+    
 # Digests unit test drivers.
 
 $(CTB_UDIG)/ut_count.exe: $(CTS_UDI_DRV)ut_count.adb

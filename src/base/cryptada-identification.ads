@@ -30,6 +30,7 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170313 ADD   Initial implementation.
+--    1.1   20170430 ADD   Release 0.1.d.
 --------------------------------------------------------------------------------
 
 package CryptAda.Identification is
@@ -45,14 +46,16 @@ package CryptAda.Identification is
    -- information of CryptAda.
    -----------------------------------------------------------------------------
 
-   CryptAda_Name              : constant String    := "TCantos Ada Cryptography Library";
-   CryptAda_Acronym           : constant String    := "CryptAda";
-   CryptAda_Copyright         : constant String    := "Copyright (c) 2017, Antonio Duran";
-   CryptAda_Version_Major     : constant Natural   := 0;
-   CryptAda_Version_Minor     : constant Natural   := 1;
-   CryptAda_Release           : constant Character := 'c';
-   CryptAda_Version_String    : constant String    := "0.1.c";
-   CryptAda_Version_Comments  : constant String    := "First alpha release";
-   CryptAda_Release_Date      : constant String    := "2017/04/04";
+   CryptAda_Name              : aliased constant String     := "TCantos Ada Cryptography Library";
+   CryptAda_Acronym           : aliased constant String     := "CryptAda";
+   CryptAda_Copyright         : aliased constant String     := "Copyright (c) 2017, Antonio Duran";
+   CryptAda_Version_Major     : aliased constant String     := "0";
+   CryptAda_Version_Minor     : aliased constant String     := "1";
+   CryptAda_Release           : aliased constant String     := "d";
+   CryptAda_Version_String    : aliased constant String     := CryptAda_Version_Major & "." &
+                                                               CryptAda_Version_Minor & "." &
+                                                               CryptAda_Release;
+   CryptAda_Version_Comments  : aliased constant String     := "Second alpha release";
+   CryptAda_Release_Date      : aliased constant String     := "2017/04/30";
 
 end CryptAda.Identification;

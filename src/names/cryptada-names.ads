@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 13th, 2017
---    Current version   :  1.2
+--    Current version   :  1.4
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    This package contains type definitions used to identify object and classes
@@ -30,14 +30,19 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170313 ADD   Initial implementation.
---    1.1   20170329 ADD   Added a Symmetric_Cipher_Id type and made 
+--    1.1   20170329 ADD   Added a Symmetric_Cipher_Id type and made
 --                         Block_Cipher_Id a subtype of that type.
 --                         Changes the preffix of enumerated values.
 --    1.2   20170403 ADD   Changes in Symmetric cipher hierachy.
+--    1.3   20170427 ADD   Added an enumerated type to identify the text
+--                         encoders.
+--    1.4   20170429 ADD   Added pragma Pure
 --------------------------------------------------------------------------------
 
 package CryptAda.Names is
 
+   pragma Pure(Names);
+   
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -64,6 +69,20 @@ package CryptAda.Names is
    -----------------------------------------------------------------------------
 
    type Algorithm_Name_Ref is access constant String;
+   for Algorithm_Name_Ref'Storage_Size use 0;
+   
+   --[Text_Encoder_Id]----------------------------------------------------------
+   -- Next enumerated type identifies the text encoding algorithms implemented
+   -- in CryptAda.
+   -----------------------------------------------------------------------------
+
+   type Text_Encoder_Id is
+      (
+         TE_Hexadecimal,         -- Hexadecimal text encoder.
+         TE_Base16,              -- Base16 text encoder.
+         TE_Base64,              -- Base64 text encoder.
+         TE_MIME                 -- MIME encoder.
+      );
 
    --[Digest_Algorithm_Id]------------------------------------------------------
    -- Next enumerated type identifies the digest algorithms implemented in
@@ -152,23 +171,23 @@ package CryptAda.Names is
          SC_Twofish_128,         -- Twofish 128-bit key
          SC_Twofish_192,         -- Twofish 192-bit key
          SC_Twofish_256,         -- Twofish 256-bit key
-         SC_RC4                  -- RC4 
+         SC_RC4                  -- RC4
       );
-      
+
    --[Block_Cipher_Id]----------------------------------------------------------
-   -- Enumerated type identifies the symmetric block ciphers implemented in 
+   -- Enumerated type identifies the symmetric block ciphers implemented in
    -- CryptAda.
    -----------------------------------------------------------------------------
 
    subtype Block_Cipher_Id is Symmetric_Cipher_Id range SC_DES .. SC_Twofish_256;
 
    --[Stream_Cipher_Id]---------------------------------------------------------
-   -- Enumerated type identifies the symmetric stream ciphers implemented in 
+   -- Enumerated type identifies the symmetric stream ciphers implemented in
    -- CryptAda.
    -----------------------------------------------------------------------------
 
    subtype Stream_Cipher_Id is Symmetric_Cipher_Id range SC_RC4 .. SC_RC4;
-   
+
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------

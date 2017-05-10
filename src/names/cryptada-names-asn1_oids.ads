@@ -30,9 +30,12 @@
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170313 ADD   Initial implementation.
 --    1.1   20170403 ADD   Changes in Symmetric cipher hierachy.
+--    1.2   20170430 ADD   Added pragma Pure
 --------------------------------------------------------------------------------
 
 package CryptAda.Names.ASN1_OIDs is
+
+   pragma Pure(ASN1_OIDs);
 
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
@@ -122,7 +125,7 @@ package CryptAda.Names.ASN1_OIDs is
       );
 
    --[ASN1 OIDS for Symmetric Ciphers]------------------------------------------
-   -- Next constants provide the ASN1 OIDs for the symmetric ciphers implemented 
+   -- Next constants provide the ASN1 OIDs for the symmetric ciphers implemented
    -- in CryptAda.
    -----------------------------------------------------------------------------
 
@@ -134,5 +137,5 @@ package CryptAda.Names.ASN1_OIDs is
       (
          others            => Anonymous_Algorithm'Access
       );
-      
+
 end CryptAda.Names.ASN1_OIDs;

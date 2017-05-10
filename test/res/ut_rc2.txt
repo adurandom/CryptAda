@@ -1,18 +1,18 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.c (2017/04/04)
+Version: 0.1.d (2017/04/30)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.RC2
 Description              : Unit test driver for CryptAda.Ciphers.Symmetric.Block.RC2 functionality.
-Started                  : 2017/04/18 - 20:19:04
+Started                  : 2017/05/10 - 08:16:30
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Running RC2_Cipher basic tests
-Started         : 2017/04/18 - 20:19:04
+Started         : 2017/05/10 - 08:16:30
 --------------------------------------------------------------------------------
 [I] Basic test for RC2_Cipher
     This test case is a 10 step test that will exercise Block_Cipher dispatching operations
@@ -215,13 +215,13 @@ Block data  :
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:19:04
+Finished        : 2017/05/10 - 08:16:30
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Testing specific RC2_Cipher interfaces.
-Started         : 2017/04/18 - 20:19:04
+Started         : 2017/05/10 - 08:16:30
 --------------------------------------------------------------------------------
 [I] Trying to Get_Effective_Key_Bits on an Idle Cipher will result in a
     CryptAda_Uninitialized_Cipher_Error exception.
@@ -238,13 +238,13 @@ Effective key bits obtained:  96
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:19:04
+Finished        : 2017/05/10 - 08:16:30
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Standard RC2 test vectors
-Started         : 2017/04/18 - 20:19:04
+Started         : 2017/05/10 - 08:16:30
 --------------------------------------------------------------------------------
 [I] Test vectors obtained from RFC 2268 Section 5.
 [I] RC2 test vector index:  1
@@ -323,13 +323,13 @@ Block data  :
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:19:04
+Finished        : 2017/05/10 - 08:16:30
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : RC2 Bulk test
-Started         : 2017/04/18 - 20:19:04
+Started         : 2017/05/10 - 08:16:30
 --------------------------------------------------------------------------------
 [I] Using key size:  16
 [I] Block cipher bulk test
@@ -355,11 +355,11 @@ Started         : 2017/04/18 - 20:19:04
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:19:04
+Finished        : 2017/05/10 - 08:16:30
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.RC2
-Finished                 : 2017/04/18 - 20:19:04
+Finished                 : 2017/05/10 - 08:16:30
 ================================================================================

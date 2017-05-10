@@ -1,0 +1,1768 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.1.d (2017/04/30)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Enc_Base64
+Description              : Unit test driver for CryptAda.Text_Encoders.Base64 functionality.
+Started                  : 2017/05/10 - 08:16:11
+================================================================================
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Testing object state during encoding
+Started         : 2017/05/10 - 08:16:11
+--------------------------------------------------------------------------------
+[I] Before allocating encoder encoder must be null
+[I] Information of Text_Encoder object:
+    Object reference is null
+[I] Allocating encoder object. Object state must be State_Idle
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] State is State_Idle
+[I] Calling Start_Encoding. State must be State_Encoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] State is State_Encoding
+[I] Encoding an array
+Array to encode :
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+Array Length    :  26
+Encoding results: "KGMpIDIwMTcsIFRDYW50b3MgU29mdHdh"
+[I] Calling End_Encoding
+Expected encoding results: "KGMpIDIwMTcsIFRDYW50b3MgU29mdHdhcmU="
+Obtained encoding results: "KGMpIDIwMTcsIFRDYW50b3MgU29mdHdhcmU="
+[I] State must be State_Idle
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] State is State_Idle
+[I] Deallocating encoder object
+[I] After deallocating encoder encoder must be null
+[I] Information of Text_Encoder object:
+    Object reference is null
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/05/10 - 08:16:11
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Start encoding
+Started         : 2017/05/10 - 08:16:11
+--------------------------------------------------------------------------------
+[I] Testing Start_Encoding procedures
+[I] Default Start_Encoding procedure
+    Before Start_Encoding, the object is in State_Idle
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+    After Start_Encoding, the object is in State_Encoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start_Encoding with parameters
+    Parameter list only admits a parameter 'Alphabet'
+[I] Start_Encoding with an empty list will start the encoder with the default alphabet
+    Using list: ()
+    Before Start_Encoding:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+    After Start_Encoding:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start_Encoding with an unnamed list will raise CryptAda_Bad_Argument_Error
+    Using list: (Standard_Alphabet)
+    Before Start_Encoding:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Caught exception: CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR when processing parameter list. Message: Invalid parameter list"
+[I] Start_Encoding with a named list containing an invalid parameter name will raise CryptAda_Bad_Argument_Error
+    Using list: (Base64_Alphabet=>Standard_Alphabet)
+    Before Start_Encoding:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Caught exception: CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR when processing parameter list. Message: List doesn't contains a: 'Alphabet' item"
+[I] Start_Encoding with a named list containing an invalid parameter value CryptAda_Bad_Argument_Error
+    Using list: (Alphabet=>Base64_Standard_Alphabet)
+    Before Start_Encoding:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Caught exception: CONSTRAINT_ERROR when processing parameter list. Message: bad input for 'Value: "Base64_Standard_Alphabet""
+[I] Start_Encoding with a valid parameter list
+    Using list: (Alphabet=>URL_Safe_Alphabet)
+    Before Start_Encoding:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+    After Start_Encoding:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : URL_SAFE_ALPHABET
+    Decoding stopped            : FALSE
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/05/10 - 08:16:11
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Encode
+Started         : 2017/05/10 - 08:16:11
+--------------------------------------------------------------------------------
+[I] Testing Encode (procedure form)
+[I] Trying encode will raise CryptAda_Bad_Operation_Error if encoder was not initialized for encoding
+    Encoder object:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Caught CryptAda_Bad_Operation_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
+    Message  : "Encoder is not in encoding state"
+[I] Start encoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Trying Encode with a buffer too short will raise CryptAda_Overflow_Error
+Array to encode :
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+Array Length    :  26
+[I] Caught CryptAda_Overflow_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_OVERFLOW_ERROR"
+    Message  : "Output buffer length is not enough"
+[I] Now we perform encoding ...
+Encoding length          :  32
+Obtained encoding results: "KGMpIDIwMTcsIFRDYW50b3MgU29mdHdh"
+[I] Ending encoding ...
+     Expected final result    : "KGMpIDIwMTcsIFRDYW50b3MgU29mdHdhcmU="
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+Encoding length          :  4
+Obtained encoding results: "KGMpIDIwMTcsIFRDYW50b3MgU29mdHdhcmU="
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/05/10 - 08:16:11
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : Encode
+Started         : 2017/05/10 - 08:16:11
+--------------------------------------------------------------------------------
+[I] Testing Encode (function form)
+[I] Trying encode will raise CryptAda_Bad_Operation_Error if encoder was not initialized for encoding
+    Encoder object:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Caught CryptAda_Bad_Operation_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
+    Message  : "Encoder is not in encoding state"
+[I] Start encoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Now we perform encoding ...
+[I] Encoded so far: "KGMpIDIwMTcsIFRDYW50b3MgU29mdHdh"
+[I] End encoding ...
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+     Expected final result    : "KGMpIDIwMTcsIFRDYW50b3MgU29mdHdhcmU="
+     Obtained final result    : "KGMpIDIwMTcsIFRDYW50b3MgU29mdHdhcmU="
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/05/10 - 08:16:11
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 5
+Description     : End encoding
+Started         : 2017/05/10 - 08:16:11
+--------------------------------------------------------------------------------
+[I] Testing End_Encoding (procedure form)
+[I] Trying End_Encoding will raise CryptAda_Bad_Operation_Error if encoder was not initialized for encoding
+    Encoder object:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Caught CryptAda_Bad_Operation_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
+    Message  : "Encoder is not in encoding state"
+[I] End_Encoding will raise CryptAda_Overflow_Error if output buffer is not long enough
+    Encoder object:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Caught CryptAda_Overflow_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_OVERFLOW_ERROR"
+    Message  : "Output buffer length is not enough"
+[I] End encoding will return always 0 or 4 as encoding length
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start encoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Encoding array: 
+16#28#
+Obained encoded length:  0
+Obained encoded string: ""
+[I] End encoding
+Obained encoded length:  4
+Obained encoded string: "KA=="
+Total encoded length  :  4
+Final encoded string  : "KA=="
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start encoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Encoding array: 
+16#28#, 16#63#
+Obained encoded length:  0
+Obained encoded string: ""
+[I] End encoding
+Obained encoded length:  4
+Obained encoded string: "KGM="
+Total encoded length  :  4
+Final encoded string  : "KGM="
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start encoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Encoding array: 
+16#28#, 16#63#, 16#29#
+Obained encoded length:  4
+Obained encoded string: "KGMp"
+[I] End encoding
+Obained encoded length:  0
+Obained encoded string: ""
+Total encoded length  :  4
+Final encoded string  : "KGMp"
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start encoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Encoding array: 
+16#28#, 16#63#, 16#29#, 16#20#
+Obained encoded length:  4
+Obained encoded string: "KGMp"
+[I] End encoding
+Obained encoded length:  4
+Obained encoded string: ""
+Total encoded length  :  8
+Final encoded string  : "KGMpIA=="
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start encoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Encoding array: 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#
+Obained encoded length:  4
+Obained encoded string: "KGMp"
+[I] End encoding
+Obained encoded length:  4
+Obained encoded string: ""
+Total encoded length  :  8
+Final encoded string  : "KGMpIDI="
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start encoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Encoding array: 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#
+Obained encoded length:  8
+Obained encoded string: "KGMpIDIw"
+[I] End encoding
+Obained encoded length:  0
+Obained encoded string: ""
+Total encoded length  :  8
+Final encoded string  : "KGMpIDIw"
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start encoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Encoding array: 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#
+Obained encoded length:  8
+Obained encoded string: "KGMpIDIw"
+[I] End encoding
+Obained encoded length:  4
+Obained encoded string: ""
+Total encoded length  :  12
+Final encoded string  : "KGMpIDIwMQ=="
+--------------------------------------------------------------------------------
+Test Case Number: 5
+Test Case Result: PASSED
+Finished        : 2017/05/10 - 08:16:11
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 6
+Description     : End encoding
+Started         : 2017/05/10 - 08:16:11
+--------------------------------------------------------------------------------
+[I] Testing End_Encoding (function form)
+[I] Trying End_Encoding will raise CryptAda_Bad_Operation_Error if encoder was not initialized for encoding
+    Encoder object:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Caught CryptAda_Bad_Operation_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
+    Message  : "Encoder is not in encoding state"
+[I] End encoding will return either an empty string or a 4 character string
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start encoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Encoding array: 
+16#28#
+Encoded length so far:  0
+Encoded string so far: ""
+[I] End encoding
+Final encoded length :  4
+Final encoded string : "KA=="
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start encoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Encoding array: 
+16#28#, 16#63#
+Encoded length so far:  0
+Encoded string so far: ""
+[I] End encoding
+Final encoded length :  4
+Final encoded string : "KGM="
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start encoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Encoding array: 
+16#28#, 16#63#, 16#29#
+Encoded length so far:  4
+Encoded string so far: "KGMp"
+[I] End encoding
+Final encoded length :  4
+Final encoded string : "KGMp"
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start encoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Encoding array: 
+16#28#, 16#63#, 16#29#, 16#20#
+Encoded length so far:  4
+Encoded string so far: "KGMp"
+[I] End encoding
+Final encoded length :  8
+Final encoded string : "KGMpIA=="
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start encoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Encoding array: 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#
+Encoded length so far:  4
+Encoded string so far: "KGMp"
+[I] End encoding
+Final encoded length :  8
+Final encoded string : "KGMpIDI="
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start encoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Encoding array: 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#
+Encoded length so far:  8
+Encoded string so far: "KGMpIDIw"
+[I] End encoding
+Final encoded length :  8
+Final encoded string : "KGMpIDIw"
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start encoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Encoding array: 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#
+Encoded length so far:  8
+Encoded string so far: "KGMpIDIw"
+[I] End encoding
+Final encoded length :  12
+Final encoded string : "KGMpIDIwMQ=="
+--------------------------------------------------------------------------------
+Test Case Number: 6
+Test Case Result: PASSED
+Finished        : 2017/05/10 - 08:16:11
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 7
+Description     : Testing object state during decoding
+Started         : 2017/05/10 - 08:16:11
+--------------------------------------------------------------------------------
+[I] Before allocating encoder encoder must be null
+[I] Information of Text_Encoder object:
+    Object reference is null
+[I] Allocating encoder object. Object state must be State_Idle
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] State is State_Idle
+[I] Calling Start_Decoding. State must be State_Decoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] State is State_Decoding
+[I] Decoding a string
+String to decode : "KGMpIDIwMTcsIFRDYW50b3MgU29mdHdhcmU="
+String length    :  36
+[I] Decoding results so far: 
+- Decoded bytes:  26
+- Decoded array: 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+[I] Calling End_Decoding
+[I] Final decoding results: 
+- Decoded bytes:  26
+- Decoded array: 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+[I] State must be State_Idle
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] State is State_Idle
+[I] Deallocating encoder object
+[I] After deallocating encoder encoder must be null
+[I] Information of Text_Encoder object:
+    Object reference is null
+--------------------------------------------------------------------------------
+Test Case Number: 7
+Test Case Result: PASSED
+Finished        : 2017/05/10 - 08:16:11
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 8
+Description     : Start decoding
+Started         : 2017/05/10 - 08:16:11
+--------------------------------------------------------------------------------
+[I] Testing Start_Decoding procedures
+[I] Default Start_Decoding procedure
+    Before Start_Decoding, the object is in State_Idle
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+    After Start_Decoding, the object is in State_Decoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start_Decoding with parameters
+    Parameter list only admits a parameter 'Alphabet'
+[I] Start_Decoding with an empty list will start the encoder with the default alphabet
+    Using list: ()
+    Before Start_Decoding:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+    After Start_Decoding:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start_Decoding with an unnamed list will raise CryptAda_Bad_Argument_Error
+    Using list: (Standard_Alphabet)
+    Before Start_Decoding:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Caught exception: CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR when processing parameter list. Message: Invalid parameter list"
+[I] Start_Decoding with a named list containing an invalid parameter name will raise CryptAda_Bad_Argument_Error
+    Using list: (Base64_Alphabet=>Standard_Alphabet)
+    Before Start_Decoding:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Caught exception: CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR when processing parameter list. Message: List doesn't contains a: 'Alphabet' item"
+[I] Start_Decoding with a named list containing an invalid parameter value CryptAda_Bad_Argument_Error
+    Using list: (Alphabet=>Base64_Standard_Alphabet)
+    Before Start_Decoding:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Caught exception: CONSTRAINT_ERROR when processing parameter list. Message: bad input for 'Value: "Base64_Standard_Alphabet""
+[I] Start_Decoding with a valid parameter list
+    Using list: (Alphabet=>URL_Safe_Alphabet)
+    Before Start_Decoding:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+    After Start_Decoding:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : URL_SAFE_ALPHABET
+    Decoding stopped            : FALSE
+--------------------------------------------------------------------------------
+Test Case Number: 8
+Test Case Result: PASSED
+Finished        : 2017/05/10 - 08:16:11
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 9
+Description     : Decode
+Started         : 2017/05/10 - 08:16:11
+--------------------------------------------------------------------------------
+[I] Testing Decode (procedure form)
+[I] Trying Decode will raise CryptAda_Bad_Operation_Error if encoder was not initialized for decoding
+    Encoder object:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Caught CryptAda_Bad_Operation_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
+    Message  : "Encoder is not in decoding state"
+[I] Start decoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Trying Decode with a buffer too short will raise CryptAda_Overflow_Error
+String to decode : "KGMpIDIwMTcsIFRDYW50b3MgU29mdHdhcmU="
+String Length    :  36
+[I] Caught CryptAda_Overflow_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_OVERFLOW_ERROR"
+    Message  : "Output buffer length is not enough"
+[I] Now we perform decoding ...
+Decoding length          :  26
+Obtained decoding results:
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+[I] Ending decoding ...
+Expected final result    :
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+End_Decoding length      :  0
+Obtained decoding results:
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+--------------------------------------------------------------------------------
+Test Case Number: 9
+Test Case Result: PASSED
+Finished        : 2017/05/10 - 08:16:11
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 10
+Description     : Decode
+Started         : 2017/05/10 - 08:16:11
+--------------------------------------------------------------------------------
+[I] Testing Decode (function form)
+[I] Trying decode will raise CryptAda_Bad_Operation_Error if encoder was not initialized for decoding
+    Encoder object:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Caught CryptAda_Bad_Operation_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
+    Message  : "Encoder is not in decoding state"
+[I] Start decoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Now we perform decoding ...
+Decoding length          :  26
+Obtained decoding results:
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+[I] Ending decoding ...
+Expected final result    :
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+Obtained decoding results:
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+--------------------------------------------------------------------------------
+Test Case Number: 10
+Test Case Result: PASSED
+Finished        : 2017/05/10 - 08:16:11
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 11
+Description     : End decoding
+Started         : 2017/05/10 - 08:16:11
+--------------------------------------------------------------------------------
+[I] Testing End_Decoding (procedure form)
+[I] Trying End_Decoding will raise CryptAda_Bad_Operation_Error if encoder was not initialized for decoding
+    Encoder object:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Caught CryptAda_Bad_Operation_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
+    Message  : "Encoder is not in decoding state"
+[I] End decoding will return always 0
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start decoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Decoding string: "KGMp"
+Obained decoded length:  3
+Obained decoded array : 
+16#28#, 16#63#, 16#29#
+[I] End decoding
+Obained decoded length:  0
+Obained decoded array : 
+
+Total decoded length  :  3
+Final decoded array   : 
+16#28#, 16#63#, 16#29#
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start decoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Decoding string: "KGMpIDIw"
+Obained decoded length:  6
+Obained decoded array : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#
+[I] End decoding
+Obained decoded length:  0
+Obained decoded array : 
+
+Total decoded length  :  6
+Final decoded array   : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start decoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Decoding string: "KGMpIDIwMTcs"
+Obained decoded length:  9
+Obained decoded array : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#
+[I] End decoding
+Obained decoded length:  0
+Obained decoded array : 
+
+Total decoded length  :  9
+Final decoded array   : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start decoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Decoding string: "KGMpIDIwMTcsIFRD"
+Obained decoded length:  12
+Obained decoded array : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#
+[I] End decoding
+Obained decoded length:  0
+Obained decoded array : 
+
+Total decoded length  :  12
+Final decoded array   : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start decoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Decoding string: "KGMpIDIwMTcsIFRDYW50"
+Obained decoded length:  15
+Obained decoded array : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#
+[I] End decoding
+Obained decoded length:  0
+Obained decoded array : 
+
+Total decoded length  :  15
+Final decoded array   : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start decoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Decoding string: "KGMpIDIwMTcsIFRDYW50b3Mg"
+Obained decoded length:  18
+Obained decoded array : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#
+[I] End decoding
+Obained decoded length:  0
+Obained decoded array : 
+
+Total decoded length  :  18
+Final decoded array   : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start decoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Decoding string: "KGMpIDIwMTcsIFRDYW50b3MgU29m"
+Obained decoded length:  21
+Obained decoded array : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#
+[I] End decoding
+Obained decoded length:  0
+Obained decoded array : 
+
+Total decoded length  :  21
+Final decoded array   : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start decoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Decoding string: "KGMpIDIwMTcsIFRDYW50b3MgU29mdHdh"
+Obained decoded length:  24
+Obained decoded array : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#
+[I] End decoding
+Obained decoded length:  0
+Obained decoded array : 
+
+Total decoded length  :  24
+Final decoded array   : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Start decoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Decoding string: "KGMpIDIwMTcsIFRDYW50b3MgU29mdHdhcmU="
+Obained decoded length:  26
+Obained decoded array : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+[I] End decoding
+Obained decoded length:  0
+Obained decoded array : 
+
+Total decoded length  :  26
+Final decoded array   : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+--------------------------------------------------------------------------------
+Test Case Number: 11
+Test Case Result: PASSED
+Finished        : 2017/05/10 - 08:16:12
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 12
+Description     : End decoding
+Started         : 2017/05/10 - 08:16:12
+--------------------------------------------------------------------------------
+[I] Testing End_Decoding (function form)
+[I] Trying End_Decoding will raise CryptAda_Bad_Operation_Error if encoder was not initialized for decoding
+    Encoder object:
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_IDLE
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Caught CryptAda_Bad_Operation_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
+    Message  : "Encoder is not in decoding state"
+[I] End decoding will return an empty (0 length) byte array
+[I] Start decoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Decoding string: "KGMp"
+Obained decoded length:  3
+Obained decoded array : 
+16#28#, 16#63#, 16#29#
+[I] End decoding
+Obained decoded length:  0
+Obained decoded array : 
+
+Total decoded length  :  3
+Final decoded array   : 
+16#28#, 16#63#, 16#29#
+[I] Start decoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Decoding string: "KGMpIDIw"
+Obained decoded length:  6
+Obained decoded array : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#
+[I] End decoding
+Obained decoded length:  0
+Obained decoded array : 
+
+Total decoded length  :  6
+Final decoded array   : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#
+[I] Start decoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Decoding string: "KGMpIDIwMTcs"
+Obained decoded length:  9
+Obained decoded array : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#
+[I] End decoding
+Obained decoded length:  0
+Obained decoded array : 
+
+Total decoded length  :  9
+Final decoded array   : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#
+[I] Start decoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Decoding string: "KGMpIDIwMTcsIFRD"
+Obained decoded length:  12
+Obained decoded array : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#
+[I] End decoding
+Obained decoded length:  0
+Obained decoded array : 
+
+Total decoded length  :  12
+Final decoded array   : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#
+[I] Start decoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Decoding string: "KGMpIDIwMTcsIFRDYW50"
+Obained decoded length:  15
+Obained decoded array : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#
+[I] End decoding
+Obained decoded length:  0
+Obained decoded array : 
+
+Total decoded length  :  15
+Final decoded array   : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#
+[I] Start decoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Decoding string: "KGMpIDIwMTcsIFRDYW50b3Mg"
+Obained decoded length:  18
+Obained decoded array : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#
+[I] End decoding
+Obained decoded length:  0
+Obained decoded array : 
+
+Total decoded length  :  18
+Final decoded array   : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#
+[I] Start decoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Decoding string: "KGMpIDIwMTcsIFRDYW50b3MgU29m"
+Obained decoded length:  21
+Obained decoded array : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#
+[I] End decoding
+Obained decoded length:  0
+Obained decoded array : 
+
+Total decoded length  :  21
+Final decoded array   : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#
+[I] Start decoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Decoding string: "KGMpIDIwMTcsIFRDYW50b3MgU29mdHdh"
+Obained decoded length:  24
+Obained decoded array : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#
+[I] End decoding
+Obained decoded length:  0
+Obained decoded array : 
+
+Total decoded length  :  24
+Final decoded array   : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#
+[I] Start decoding
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Decoding string: "KGMpIDIwMTcsIFRDYW50b3MgU29mdHdhcmU="
+Obained decoded length:  26
+Obained decoded array : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+[I] End decoding
+Obained decoded length:  0
+Obained decoded array : 
+
+Total decoded length  :  26
+Final decoded array   : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+--------------------------------------------------------------------------------
+Test Case Number: 12
+Test Case Result: PASSED
+Finished        : 2017/05/10 - 08:16:12
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 13
+Description     : Step by step encoding
+Started         : 2017/05/10 - 08:16:12
+--------------------------------------------------------------------------------
+[I] Encoding a test byte array one byte at a time
+Encoding byte  1 (16#28#)
+Encoded so far: ""
+Encoding byte  2 (16#63#)
+Encoded so far: ""
+Encoding byte  3 (16#29#)
+Encoded so far: "KGMp"
+Encoding byte  4 (16#20#)
+Encoded so far: "KGMp"
+Encoding byte  5 (16#32#)
+Encoded so far: "KGMp"
+Encoding byte  6 (16#30#)
+Encoded so far: "KGMpIDIw"
+Encoding byte  7 (16#31#)
+Encoded so far: "KGMpIDIw"
+Encoding byte  8 (16#37#)
+Encoded so far: "KGMpIDIw"
+Encoding byte  9 (16#2C#)
+Encoded so far: "KGMpIDIwMTcs"
+Encoding byte  10 (16#20#)
+Encoded so far: "KGMpIDIwMTcs"
+Encoding byte  11 (16#54#)
+Encoded so far: "KGMpIDIwMTcs"
+Encoding byte  12 (16#43#)
+Encoded so far: "KGMpIDIwMTcsIFRD"
+Encoding byte  13 (16#61#)
+Encoded so far: "KGMpIDIwMTcsIFRD"
+Encoding byte  14 (16#6E#)
+Encoded so far: "KGMpIDIwMTcsIFRD"
+Encoding byte  15 (16#74#)
+Encoded so far: "KGMpIDIwMTcsIFRDYW50"
+Encoding byte  16 (16#6F#)
+Encoded so far: "KGMpIDIwMTcsIFRDYW50"
+Encoding byte  17 (16#73#)
+Encoded so far: "KGMpIDIwMTcsIFRDYW50"
+Encoding byte  18 (16#20#)
+Encoded so far: "KGMpIDIwMTcsIFRDYW50b3Mg"
+Encoding byte  19 (16#53#)
+Encoded so far: "KGMpIDIwMTcsIFRDYW50b3Mg"
+Encoding byte  20 (16#6F#)
+Encoded so far: "KGMpIDIwMTcsIFRDYW50b3Mg"
+Encoding byte  21 (16#66#)
+Encoded so far: "KGMpIDIwMTcsIFRDYW50b3MgU29m"
+Encoding byte  22 (16#74#)
+Encoded so far: "KGMpIDIwMTcsIFRDYW50b3MgU29m"
+Encoding byte  23 (16#77#)
+Encoded so far: "KGMpIDIwMTcsIFRDYW50b3MgU29m"
+Encoding byte  24 (16#61#)
+Encoded so far: "KGMpIDIwMTcsIFRDYW50b3MgU29mdHdh"
+Encoding byte  25 (16#72#)
+Encoded so far: "KGMpIDIwMTcsIFRDYW50b3MgU29mdHdh"
+Encoding byte  26 (16#65#)
+Encoded so far: "KGMpIDIwMTcsIFRDYW50b3MgU29mdHdh"
+[I] End encoding
+Final encoded : "KGMpIDIwMTcsIFRDYW50b3MgU29mdHdhcmU="
+--------------------------------------------------------------------------------
+Test Case Number: 13
+Test Case Result: PASSED
+Finished        : 2017/05/10 - 08:16:12
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 14
+Description     : Step by step decoding
+Started         : 2017/05/10 - 08:16:12
+--------------------------------------------------------------------------------
+[I] Decoding a test encoded string one code at a time
+Decoding code  1 ('K')
+Decoded so far:  0
+
+Decoding code  2 ('G')
+Decoded so far:  0
+
+Decoding code  3 ('M')
+Decoded so far:  0
+
+Decoding code  4 ('p')
+Decoded so far:  3
+16#28#, 16#63#, 16#29#
+Decoding code  5 ('I')
+Decoded so far:  3
+16#28#, 16#63#, 16#29#
+Decoding code  6 ('D')
+Decoded so far:  3
+16#28#, 16#63#, 16#29#
+Decoding code  7 ('I')
+Decoded so far:  3
+16#28#, 16#63#, 16#29#
+Decoding code  8 ('w')
+Decoded so far:  6
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#
+Decoding code  9 ('M')
+Decoded so far:  6
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#
+Decoding code  10 ('T')
+Decoded so far:  6
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#
+Decoding code  11 ('c')
+Decoded so far:  6
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#
+Decoding code  12 ('s')
+Decoded so far:  9
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#
+Decoding code  13 ('I')
+Decoded so far:  9
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#
+Decoding code  14 ('F')
+Decoded so far:  9
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#
+Decoding code  15 ('R')
+Decoded so far:  9
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#
+Decoding code  16 ('D')
+Decoded so far:  12
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#
+Decoding code  17 ('Y')
+Decoded so far:  12
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#
+Decoding code  18 ('W')
+Decoded so far:  12
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#
+Decoding code  19 ('5')
+Decoded so far:  12
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#
+Decoding code  20 ('0')
+Decoded so far:  15
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#
+Decoding code  21 ('b')
+Decoded so far:  15
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#
+Decoding code  22 ('3')
+Decoded so far:  15
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#
+Decoding code  23 ('M')
+Decoded so far:  15
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#
+Decoding code  24 ('g')
+Decoded so far:  18
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#
+Decoding code  25 ('U')
+Decoded so far:  18
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#
+Decoding code  26 ('2')
+Decoded so far:  18
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#
+Decoding code  27 ('9')
+Decoded so far:  18
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#
+Decoding code  28 ('m')
+Decoded so far:  21
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#
+Decoding code  29 ('d')
+Decoded so far:  21
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#
+Decoding code  30 ('H')
+Decoded so far:  21
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#
+Decoding code  31 ('d')
+Decoded so far:  21
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#
+Decoding code  32 ('h')
+Decoded so far:  24
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#
+Decoding code  33 ('c')
+Decoded so far:  24
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#
+Decoding code  34 ('m')
+Decoded so far:  24
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#
+Decoding code  35 ('U')
+Decoded so far:  24
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#
+Decoding code  36 ('=')
+Decoded so far:  26
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+[I] End decoding
+Final decoded : 
+16#28#, 16#63#, 16#29#, 16#20#, 16#32#, 16#30#, 16#31#, 16#37#, 16#2C#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 
+16#73#, 16#20#, 16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+--------------------------------------------------------------------------------
+Test Case Number: 14
+Test Case Result: PASSED
+Finished        : 2017/05/10 - 08:16:12
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 15
+Description     : Testing alphabet differences when encoding
+Started         : 2017/05/10 - 08:16:12
+--------------------------------------------------------------------------------
+[I] Start encoding with standard alphabet
+Start encoding using parameter list: (Alphabet => Standard_Alphabet)
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] Array to encode
+16#FB#, 16#FF#, 16#FE#
+Expected encoded string (standard alphabet): "+//+"
+[I] Encode (procedure form)
+Obtained encoded string (standard alphabet): "+//+"
+[I] Array to encode
+16#FB#, 16#FF#, 16#FE#
+Expected encoded string (standard alphabet): "+//+"
+[I] Encode (function form)
+Obtained encoded string (standard alphabet): "+//+"
+[I] Start encoding with URL safe alphabet
+Start encoding using parameter list: (Alphabet => URL_Safe_Alphabet)
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_ENCODING
+    Base64 Alphabet             : URL_SAFE_ALPHABET
+    Decoding stopped            : FALSE
+[I] Array to encode
+16#FB#, 16#FF#, 16#FE#
+Expected encoded string (URL safe alphabet): "-__-"
+[I] Encode (procedure form)
+Obtained encoded string (URL safe alphabet): "-__-"
+[I] Array to encode
+16#FB#, 16#FF#, 16#FE#
+Expected encoded string (URL safe alphabet): "-__-"
+[I] Encode (function form)
+Obtained encoded string (URL safe alphabet): "-__-"
+--------------------------------------------------------------------------------
+Test Case Number: 15
+Test Case Result: PASSED
+Finished        : 2017/05/10 - 08:16:12
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 16
+Description     : Testing alphabet differences when decoding
+Started         : 2017/05/10 - 08:16:12
+--------------------------------------------------------------------------------
+[I] Start decoding with standard alphabet
+Start decoding using parameter list: (Alphabet => Standard_Alphabet)
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : STANDARD_ALPHABET
+    Decoding stopped            : FALSE
+[I] String to decode: "+//+"
+Expected decoded array:
+16#FB#, 16#FF#, 16#FE#
+[I] Decode (procedure form)
+Obtained decoded array:
+16#FB#, 16#FF#, 16#FE#
+[I] String to decode: "+//+"
+Expected decoded array:
+16#FB#, 16#FF#, 16#FE#
+[I] Decode (function form)
+Obtained decoded array:
+16#FB#, 16#FF#, 16#FE#
+[I] Start decoding with URL safe alphabet
+Start decoding using parameter list: (Alphabet => URL_Safe_Alphabet)
+[I] Information of Text_Encoder object:
+    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Text_Encoder state          : STATE_DECODING
+    Base64 Alphabet             : URL_SAFE_ALPHABET
+    Decoding stopped            : FALSE
+[I] String to decode: "-__-"
+Expected decoded array:
+16#FB#, 16#FF#, 16#FE#
+[I] Decode (procedure form)
+Obtained decoded array:
+16#FB#, 16#FF#, 16#FE#
+[I] String to decode: "-__-"
+Expected decoded array:
+16#FB#, 16#FF#, 16#FE#
+[I] Decode (function form)
+Obtained decoded array:
+16#FB#, 16#FF#, 16#FE#
+--------------------------------------------------------------------------------
+Test Case Number: 16
+Test Case Result: PASSED
+Finished        : 2017/05/10 - 08:16:12
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 17
+Description     : Testing Decoding_Stopped
+Started         : 2017/05/10 - 08:16:12
+--------------------------------------------------------------------------------
+[I] Decoding process is stopped when a valid pad sequence is found in output
+Decoding code by code the string: "abc=aaaaaaaa"
+Decoding shall stop after 4th code
+Decoding code  1 ('a')
+Decoded so far:  0
+
+Decoding_Stopped: FALSE
+Decoding code  2 ('b')
+Decoded so far:  0
+
+Decoding_Stopped: FALSE
+Decoding code  3 ('c')
+Decoded so far:  0
+
+Decoding_Stopped: FALSE
+Decoding code  4 ('=')
+Decoded so far:  2
+16#69#, 16#B7#
+Decoding_Stopped: TRUE
+Decoding code  5 ('a')
+Decoded so far:  2
+16#69#, 16#B7#
+Decoding_Stopped: TRUE
+Decoding code  6 ('a')
+Decoded so far:  2
+16#69#, 16#B7#
+Decoding_Stopped: TRUE
+Decoding code  7 ('a')
+Decoded so far:  2
+16#69#, 16#B7#
+Decoding_Stopped: TRUE
+Decoding code  8 ('a')
+Decoded so far:  2
+16#69#, 16#B7#
+Decoding_Stopped: TRUE
+Decoding code  9 ('a')
+Decoded so far:  2
+16#69#, 16#B7#
+Decoding_Stopped: TRUE
+Decoding code  10 ('a')
+Decoded so far:  2
+16#69#, 16#B7#
+Decoding_Stopped: TRUE
+Decoding code  11 ('a')
+Decoded so far:  2
+16#69#, 16#B7#
+Decoding_Stopped: TRUE
+Decoding code  12 ('a')
+Decoded so far:  2
+16#69#, 16#B7#
+Decoding_Stopped: TRUE
+[I] End decoding
+Final decoded : 
+16#69#, 16#B7#
+--------------------------------------------------------------------------------
+Test Case Number: 17
+Test Case Result: PASSED
+Finished        : 2017/05/10 - 08:16:12
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 18
+Description     : Testing encoding/decoding RFC 4648 test vectors
+Started         : 2017/05/10 - 08:16:12
+--------------------------------------------------------------------------------
+[I] Encoding test vectors
+[I] Decoded (as string)     : ""
+Decoded (as byte array) :
+
+Expected encoding result: ""
+Obtained encoding result: ""
+[I] Result matches
+[I] Decoded (as string)     : "f"
+Decoded (as byte array) :
+16#66#
+Expected encoding result: "Zg=="
+Obtained encoding result: "Zg=="
+[I] Result matches
+[I] Decoded (as string)     : "fo"
+Decoded (as byte array) :
+16#66#, 16#6F#
+Expected encoding result: "Zm8="
+Obtained encoding result: "Zm8="
+[I] Result matches
+[I] Decoded (as string)     : "foo"
+Decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#
+Expected encoding result: "Zm9v"
+Obtained encoding result: "Zm9v"
+[I] Result matches
+[I] Decoded (as string)     : "foob"
+Decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#
+Expected encoding result: "Zm9vYg=="
+Obtained encoding result: "Zm9vYg=="
+[I] Result matches
+[I] Decoded (as string)     : "fooba"
+Decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#
+Expected encoding result: "Zm9vYmE="
+Obtained encoding result: "Zm9vYmE="
+[I] Result matches
+[I] Decoded (as string)     : "foobar"
+Decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Expected encoding result: "Zm9vYmFy"
+Obtained encoding result: "Zm9vYmFy"
+[I] Result matches
+[I] Decoding test vectors
+[I] Encoded                          : ""
+Expected decoded (as string)     : ""
+Expected decoded (as byte array) :
+
+Obtained decoded (as byte array) :
+
+[I] Result matches
+[I] Encoded                          : "Zg=="
+Expected decoded (as string)     : "f"
+Expected decoded (as byte array) :
+16#66#
+Obtained decoded (as byte array) :
+16#66#
+[I] Result matches
+[I] Encoded                          : "Zm8="
+Expected decoded (as string)     : "fo"
+Expected decoded (as byte array) :
+16#66#, 16#6F#
+Obtained decoded (as byte array) :
+16#66#, 16#6F#
+[I] Result matches
+[I] Encoded                          : "Zm9v"
+Expected decoded (as string)     : "foo"
+Expected decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#
+Obtained decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#
+[I] Result matches
+[I] Encoded                          : "Zm9vYg=="
+Expected decoded (as string)     : "foob"
+Expected decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#
+Obtained decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#
+[I] Result matches
+[I] Encoded                          : "Zm9vYmE="
+Expected decoded (as string)     : "fooba"
+Expected decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#
+Obtained decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#
+[I] Result matches
+[I] Encoded                          : "Zm9vYmFy"
+Expected decoded (as string)     : "foobar"
+Expected decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Result matches
+--------------------------------------------------------------------------------
+Test Case Number: 18
+Test Case Result: PASSED
+Finished        : 2017/05/10 - 08:16:12
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 19
+Description     : Testing syntactic erroneous Base64 encoded strings
+Started         : 2017/05/10 - 08:16:12
+--------------------------------------------------------------------------------
+[I] Using standard alphabet
+[I] Trying to decode: "       "
+Must raise CryptAda_Syntax_Error
+Calling to Decode
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "Invalid code: ' '"
+[I] Trying to decode: "Z==="
+Must raise CryptAda_Syntax_Error
+Calling to Decode
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "Invalid code: '='"
+[I] Trying to decode: "Zm8b**"
+Must raise CryptAda_Syntax_Error
+Calling to Decode
+Calling to End_Decoding
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "Internal buffer contains some codes"
+[I] Trying to decode: "Zm9v=="
+Must raise CryptAda_Syntax_Error
+Calling to Decode
+Calling to End_Decoding
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "Internal buffer contains some codes"
+[I] Trying to decode: " Zm9vYmE="
+Must raise CryptAda_Syntax_Error
+Calling to Decode
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "Invalid code: ' '"
+[I] Trying to decode: "Zm9vYmFya="
+Must raise CryptAda_Syntax_Error
+Calling to Decode
+Calling to End_Decoding
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "Internal buffer contains some codes"
+[I] Using URL safe alphabet
+[I] Trying to decode: "       "
+Must raise CryptAda_Syntax_Error
+Calling to Decode
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "Invalid code: ' '"
+[I] Trying to decode: "Z==="
+Must raise CryptAda_Syntax_Error
+Calling to Decode
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "Invalid code: '='"
+[I] Trying to decode: "Zm8b**"
+Must raise CryptAda_Syntax_Error
+Calling to Decode
+Calling to End_Decoding
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "Internal buffer contains some codes"
+[I] Trying to decode: "Zm9v=="
+Must raise CryptAda_Syntax_Error
+Calling to Decode
+Calling to End_Decoding
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "Internal buffer contains some codes"
+[I] Trying to decode: " Zm9vYmE="
+Must raise CryptAda_Syntax_Error
+Calling to Decode
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "Invalid code: ' '"
+[I] Trying to decode: "Zm9vYmFya="
+Must raise CryptAda_Syntax_Error
+Calling to Decode
+Calling to End_Decoding
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "Internal buffer contains some codes"
+--------------------------------------------------------------------------------
+Test Case Number: 19
+Test Case Result: PASSED
+Finished        : 2017/05/10 - 08:16:12
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Enc_Base64
+Finished                 : 2017/05/10 - 08:16:12
+================================================================================

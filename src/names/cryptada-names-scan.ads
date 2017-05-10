@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 13th, 2017
---    Current version   :  1.2
+--    Current version   :  1.3
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Algorithm naming according to SCAN.
@@ -31,9 +31,12 @@
 --    1.0   20170313 ADD   Initial implementation.
 --    1.1   20170329 ADD   Changes in CryptAda.Names.
 --    1.2   20170403 ADD   Changes in Symmetric cipher hierachy.
+--    1.3   20170430 ADD   Added pragma Pure.
 --------------------------------------------------------------------------------
 
 package CryptAda.Names.SCAN is
+
+   pragma Pure(SCAN);
 
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
@@ -143,7 +146,7 @@ package CryptAda.Names.SCAN is
    SCAN_CAST_128                 : aliased constant String := "CAST-128";
    SCAN_Twofish                  : aliased constant String := "Twofish";
    SCAN_RC4                      : aliased constant String := "RC4";
-   
+
    --[SCAN_Symmetric_Ciphers]---------------------------------------------------
    -- Array of SCAN names of block cipher algorithms.
    -----------------------------------------------------------------------------
@@ -169,5 +172,5 @@ package CryptAda.Names.SCAN is
          SC_RC4            => SCAN_RC4'Access,
          others            => Anonymous_Algorithm'Access
       );
-      
+
 end CryptAda.Names.SCAN;

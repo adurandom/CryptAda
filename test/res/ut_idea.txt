@@ -1,18 +1,18 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.c (2017/04/04)
+Version: 0.1.d (2017/04/30)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.IDEA
 Description              : Unit test driver for CryptAda.Ciphers.Symmetric.Block.IDEA functionality.
-Started                  : 2017/04/18 - 20:19:05
+Started                  : 2017/05/10 - 08:16:30
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Running IDEA_Cipher basic tests
-Started         : 2017/04/18 - 20:19:05
+Started         : 2017/05/10 - 08:16:30
 --------------------------------------------------------------------------------
 [I] Basic tests for IDEA_Cipher
     This test case is a 10 step test that will exercise Block_Cipher dispatching operations
@@ -208,13 +208,13 @@ Block data  :
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:19:05
+Finished        : 2017/05/10 - 08:16:30
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Testing IDEA_Cipher non dispatching operations
-Started         : 2017/04/18 - 20:19:05
+Started         : 2017/05/10 - 08:16:30
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     Is_Valid_IDEA_Key
@@ -238,13 +238,13 @@ Key length  16 is valid
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:19:05
+Finished        : 2017/05/10 - 08:16:30
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : IDEA standard test vectors
-Started         : 2017/04/18 - 20:19:05
+Started         : 2017/05/10 - 08:16:30
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from: http://web.archive.org/web/20000613182108/http://www.ascom.ch/infosec/downloads.html
 [I] IDEA Test Vector:  1
@@ -331,13 +331,13 @@ Started         : 2017/04/18 - 20:19:05
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:19:05
+Finished        : 2017/05/10 - 08:16:30
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : IDEA Bulk test
-Started         : 2017/04/18 - 20:19:05
+Started         : 2017/05/10 - 08:16:30
 --------------------------------------------------------------------------------
 [I] Block cipher bulk test
     Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
@@ -362,11 +362,11 @@ Started         : 2017/04/18 - 20:19:05
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:19:05
+Finished        : 2017/05/10 - 08:16:30
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.IDEA
-Finished                 : 2017/04/18 - 20:19:05
+Finished                 : 2017/05/10 - 08:16:30
 ================================================================================

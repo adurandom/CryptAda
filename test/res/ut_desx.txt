@@ -1,18 +1,18 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.c (2017/04/04)
+Version: 0.1.d (2017/04/30)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.DESX
 Description              : Unit test driver for CryptAda.Ciphers.Symmetric.Block.DESX functionality.
-Started                  : 2017/04/18 - 20:18:52
+Started                  : 2017/05/10 - 08:16:18
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Running DESX_Cipher basic tests
-Started         : 2017/04/18 - 20:18:52
+Started         : 2017/05/10 - 08:16:18
 --------------------------------------------------------------------------------
 [I] Basic tests for DESX_Cipher
     This test case is a 10 step test that will exercise Block_Cipher dispatching operations
@@ -209,13 +209,13 @@ Block data  :
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:52
+Finished        : 2017/05/10 - 08:16:18
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Testing DESX_Cipher non dispatching operations
-Started         : 2017/04/18 - 20:18:52
+Started         : 2017/05/10 - 08:16:18
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
 Is_Valid_DESX_Key
@@ -247,13 +247,13 @@ Key is valid: OK
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:52
+Finished        : 2017/05/10 - 08:16:18
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : DESX standard test vectors
-Started         : 2017/04/18 - 20:18:52
+Started         : 2017/05/10 - 08:16:18
 --------------------------------------------------------------------------------
 [I] Poor, just found 1 vector
 [I] DESX Test vector:  1
@@ -270,13 +270,13 @@ Started         : 2017/04/18 - 20:18:52
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:52
+Finished        : 2017/05/10 - 08:16:18
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : DESX Bulk test
-Started         : 2017/04/18 - 20:18:52
+Started         : 2017/05/10 - 08:16:18
 --------------------------------------------------------------------------------
 [I] Block cipher bulk test
     Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
@@ -301,11 +301,11 @@ Started         : 2017/04/18 - 20:18:52
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:52
+Finished        : 2017/05/10 - 08:16:18
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.DESX
-Finished                 : 2017/04/18 - 20:18:52
+Finished                 : 2017/05/10 - 08:16:18
 ================================================================================

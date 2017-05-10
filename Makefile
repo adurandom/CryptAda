@@ -33,6 +33,7 @@ OBJDIR      =  ./obj
 LIBDIR      =  ./lib
 BINDIR      =  ./bin
 
+3RDPARTY    =  $(SRCDIR)/3rd_party
 BASEDIR     =  $(SRCDIR)/base
 NAMESDIR    =  $(SRCDIR)/names
 PRAGMADIR   =  $(SRCDIR)/pragmatics
@@ -42,11 +43,12 @@ DIGDIR      =  $(SRCDIR)/digests
 RNDDIR      =  $(SRCDIR)/random
 CIPHDIR     =  $(SRCDIR)/ciphers
 UTILITYDIR  =  $(SRCDIR)/utility
+FACTDIR     =  $(SRCDIR)/factories
 
 #>>>[Compilation]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 ADACC       =  gnatmake -c
-SOURCEDIRS  =  -I$(BASEDIR)/ -I$(UTILSDIR)/ -I$(NAMESDIR)/ -I$(PRAGMADIR)/ -I$(ENCSDIR)/ -I$(DIGDIR)/ -I$(RNDDIR)/ -I$(BNDIR)/ -I$(CIPHDIR)/
+SOURCEDIRS  =  -I$(3RDPARTY)/ -I$(BASEDIR)/ -I$(UTILSDIR)/ -I$(NAMESDIR)/ -I$(PRAGMADIR)/ -I$(ENCSDIR)/ -I$(DIGDIR)/ -I$(RNDDIR)/ -I$(BNDIR)/ -I$(CIPHDIR)/ -I$(FACTDIR)/
 CFLAGS      =  $(SOURCEDIRS) -D $(OBJDIR) -O3 -gnat05 -gnata -gnatn -gnatwa
 ADAMAKER    = gnatmake
 ADAFLAGS    = -O3 -gnat05 -gnata -gnatn -gnatwa -D $(OBJDIR)
@@ -62,26 +64,27 @@ DELCMD = rm -f
 OBJS     =  cryptada.o \
             cryptada-identification.o \
             cryptada-exceptions.o \
+            cryptada-lists.o \
+            cryptada-lists-identifier_item.o \
+            cryptada-lists-enumeration_item.o \
+            cryptada-lists-integer_item.o \
+            cryptada-lists-float_item.o \
+            cryptada-lists-string_item.o \
+            cryptada-lists-list_item.o \
+            cryptada-ref_counters.o \
             cryptada-names.o \
             cryptada-names-asn1_oids.o \
             cryptada-names-scan.o \
             cryptada-names-openpgp.o \
             cryptada-pragmatics.o \
             cryptada-pragmatics-byte_vectors.o \
-            cryptada-pragmatics-lists.o \
-            cryptada-pragmatics-lists-identifier_item.o \
-            cryptada-pragmatics-lists-enumeration_item.o \
-            cryptada-pragmatics-lists-list_item.o \
-            cryptada-pragmatics-lists-integer_item.o \
-            cryptada-pragmatics-lists-float_item.o \
-            cryptada-pragmatics-lists-string_item.o \
             cryptada-utils.o \
             cryptada-utils-format.o \
-            cryptada-encoders.o \
-            cryptada-encoders-hex_encoders.o \
-            cryptada-encoders-base16_encoders.o \
-            cryptada-encoders-base64_encoders.o \
-            cryptada-encoders-base64_encoders-mime_encoders.o \
+            cryptada-text_encoders.o \
+            cryptada-text_encoders-hex.o \
+            cryptada-text_encoders-base16.o \
+            cryptada-text_encoders-base64.o \
+            cryptada-text_encoders-base64-mime.o \
             cryptada-digests.o \
             cryptada-digests-hashes.o \
             cryptada-digests-counters.o \
@@ -122,7 +125,9 @@ OBJS     =  cryptada.o \
             cryptada-ciphers-symmetric-stream.o \
             cryptada-ciphers-symmetric-stream-rc4.o \
             cryptada-ciphers-key_generators.o \
-            cryptada-ciphers-key_generators-tdea.o
+            cryptada-ciphers-key_generators-tdea.o \
+            cryptada-factories.o \
+            cryptada-factories-text_encoder_factory.o
 
 UTILITY  =  $(BINDIR)/gen_twofish_mds.exe
 
@@ -147,6 +152,38 @@ cryptada-exceptions.o: $(BASEDIR)/cryptada-exceptions.ads
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
+cryptada-ref_counters.o: $(BASEDIR)/cryptada-ref_counters.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-lists.o: $(BASEDIR)/cryptada-lists.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-lists-identifier_item.o: $(BASEDIR)/cryptada-lists-identifier_item.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-lists-enumeration_item.o: $(BASEDIR)/cryptada-lists-enumeration_item.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-lists-integer_item.o: $(BASEDIR)/cryptada-lists-integer_item.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-lists-float_item.o: $(BASEDIR)/cryptada-lists-float_item.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-lists-string_item.o: $(BASEDIR)/cryptada-lists-string_item.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-lists-list_item.o: $(BASEDIR)/cryptada-lists-list_item.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+    
 # Names packages
 
 cryptada-names.o: $(NAMESDIR)/cryptada-names.ads
@@ -172,34 +209,6 @@ cryptada-pragmatics.o: $(PRAGMADIR)/cryptada-pragmatics.adb
 	$(ADACC) $(CFLAGS) $<
 
 cryptada-pragmatics-byte_vectors.o: $(PRAGMADIR)/cryptada-pragmatics-byte_vectors.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-pragmatics-lists.o: $(PRAGMADIR)/cryptada-pragmatics-lists.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-pragmatics-lists-identifier_item.o: $(PRAGMADIR)/cryptada-pragmatics-lists-identifier_item.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-pragmatics-lists-enumeration_item.o: $(PRAGMADIR)/cryptada-pragmatics-lists-enumeration_item.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-pragmatics-lists-list_item.o: $(PRAGMADIR)/cryptada-pragmatics-lists-list_item.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-pragmatics-lists-integer_item.o: $(PRAGMADIR)/cryptada-pragmatics-lists-integer_item.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-pragmatics-lists-float_item.o: $(PRAGMADIR)/cryptada-pragmatics-lists-float_item.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-pragmatics-lists-string_item.o: $(PRAGMADIR)/cryptada-pragmatics-lists-string_item.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
     
@@ -235,6 +244,26 @@ cryptada-encoders-base64_encoders-mime_encoders.o: $(ENCSDIR)/cryptada-encoders-
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
+cryptada-text_encoders.o: $(ENCSDIR)/cryptada-text_encoders.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-text_encoders-hex.o: $(ENCSDIR)/cryptada-text_encoders-hex.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-text_encoders-base16.o: $(ENCSDIR)/cryptada-text_encoders-base16.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+    
+cryptada-text_encoders-base64.o: $(ENCSDIR)/cryptada-text_encoders-base64.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-text_encoders-base64-mime.o: $(ENCSDIR)/cryptada-text_encoders-base64-mime.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+    
 # Digests packages
 
 cryptada-digests.o: $(DIGDIR)/cryptada-digests.ads
@@ -405,6 +434,16 @@ cryptada-ciphers-key_generators-tdea.o: $(CIPHDIR)/cryptada-ciphers-key_generato
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
+# Factories pakages
+
+cryptada-factories.o: $(FACTDIR)/cryptada-factories.ads
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-factories-text_encoder_factory.o: $(FACTDIR)/cryptada-factories-text_encoder_factory.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+    
 # Utility tools
 
 $(BINDIR)/gen_twofish_mds.exe: $(UTILITYDIR)/gen_twofish_mds.adb

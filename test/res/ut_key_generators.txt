@@ -1,18 +1,18 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.c (2017/04/04)
+Version: 0.1.d (2017/04/30)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Key_Generators
 Description              : Unit test driver for CryptAda.Ciphers.Key_Generators functionality.
-Started                  : 2017/04/18 - 20:19:09
+Started                  : 2017/05/10 - 08:16:35
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Testing basic Key_Generator operation
-Started         : 2017/04/18 - 20:19:09
+Started         : 2017/05/10 - 08:16:35
 --------------------------------------------------------------------------------
 [I] Trying Start_Key_Generator with a null Random_Generator_Ref
     Must raise CryptAda_Null_Argument_Error
@@ -29,30 +29,30 @@ Started         : 2017/04/18 - 20:19:09
 [I] Generated key
     Key length:  24
     Key bytes :
-16#42#, 16#AB#, 16#A2#, 16#EF#, 16#40#, 16#55#, 16#B0#, 16#11#, 16#2E#, 16#66#, 16#5C#, 16#9D#, 16#80#, 16#CA#, 16#E0#, 16#22#, 
-16#53#, 16#A2#, 16#65#, 16#49#, 16#14#, 16#12#, 16#23#, 16#A7#
+16#FB#, 16#D2#, 16#AB#, 16#6B#, 16#AC#, 16#A1#, 16#84#, 16#7C#, 16#E0#, 16#C2#, 16#9A#, 16#5F#, 16#84#, 16#61#, 16#D1#, 16#50#, 
+16#36#, 16#09#, 16#99#, 16#1B#, 16#06#, 16#F4#, 16#48#, 16#57#
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:19:09
+Finished        : 2017/05/10 - 08:16:35
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Creating multiple keys
-Started         : 2017/04/18 - 20:19:09
+Started         : 2017/05/10 - 08:16:35
 --------------------------------------------------------------------------------
 [I] Performing  10000 iterations.
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:19:09
+Finished        : 2017/05/10 - 08:16:35
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Key_Generators
-Finished                 : 2017/04/18 - 20:19:09
+Finished                 : 2017/05/10 - 08:16:35
 ================================================================================
