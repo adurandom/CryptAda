@@ -52,6 +52,7 @@ CAS_ENCODERS    =  $(CA_SRC)/encoders
 CAS_DIGESTS     =  $(CA_SRC)/digests
 CAS_RANDOM      =  $(CA_SRC)/random
 CAS_CIPHERS     =  $(CA_SRC)/ciphers
+CAS_FACTORIES   =  $(CA_SRC)/factories
 
 # CryptAda test source directories CTS_
 
@@ -92,7 +93,7 @@ ADAFLAGS    = -O3 -gnat05 -gnata -gnatn -gnatwa -D $(CT_OBJ)
 
 IDIR_UUT    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UUT_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS)
 IDIR_UPR    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UPR_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS)
-IDIR_UEN    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UEN_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_ENCODERS)
+IDIR_UEN    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UEN_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_ENCODERS) -I$(CAS_FACTORIES)
 IDIR_UDI    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UDI_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_DIGESTS)
 IDIR_URN    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_URN_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_DIGESTS) -I$(CAS_RANDOM)
 IDIR_UBC    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UBC_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_DIGESTS) -I$(CAS_RANDOM) -I$(CAS_CIPHERS)
@@ -123,7 +124,8 @@ U_PRAG      =   $(CTB_UPRAG)/ut_pragmatics.exe \
 U_ENC       =   $(CTB_UENC)/ut_enc_hex.exe \
                 $(CTB_UENC)/ut_enc_base16.exe \
                 $(CTB_UENC)/ut_enc_base64.exe \
-                $(CTB_UENC)/ut_enc_mime.exe
+                $(CTB_UENC)/ut_enc_mime.exe \
+                $(CTB_UENC)/ut_enc_factory.exe 
                 
 
 U_DIG       =   $(CTB_UDIG)/ut_count.exe \
@@ -247,6 +249,10 @@ $(CTB_UENC)/ut_enc_base64.exe: $(CTS_UEN_DRV)ut_enc_base64.adb
 	$(ADAMAKER) $(IDIR_UEN) $(ADAFLAGS) -o $@ $<
 
 $(CTB_UENC)/ut_enc_mime.exe: $(CTS_UEN_DRV)ut_enc_mime.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UEN) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UENC)/ut_enc_factory.exe: $(CTS_UEN_DRV)ut_enc_factory.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UEN) $(ADAFLAGS) -o $@ $<
     

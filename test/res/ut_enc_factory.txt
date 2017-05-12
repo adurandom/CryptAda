@@ -1,0 +1,291 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.1.d (2017/04/30)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Enc_Factory
+Description              : Unit test driver for CryptAda.Factories.Text_Encoder_Factory functionality.
+Started                  : 2017/05/12 - 18:18:13
+================================================================================
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Creating text encoders
+Started         : 2017/05/12 - 18:18:13
+--------------------------------------------------------------------------------
+[I] Testing Create_Text_Encoder
+[I] Getting handles for all implemented encoders and encode and decode a random byte array
+Random byte array to encode/decode:
+16#BE#, 16#70#, 16#B7#, 16#66#, 16#E2#, 16#D9#, 16#F9#, 16#9F#, 16#55#, 16#D8#, 16#4C#, 16#86#, 16#DE#, 16#43#, 16#B0#, 16#C4#, 
+16#73#, 16#E9#, 16#16#, 16#A2#, 16#5D#, 16#87#, 16#07#, 16#AB#, 16#6C#, 16#22#, 16#2A#, 16#E5#, 16#86#, 16#28#, 16#1F#, 16#72#, 
+16#A8#, 16#34#, 16#6A#, 16#43#, 16#65#, 16#04#, 16#8E#, 16#E5#, 16#29#, 16#31#, 16#CA#, 16#BD#, 16#D7#, 16#C2#, 16#52#, 16#F8#, 
+16#79#, 16#D5#, 16#4E#, 16#DE#, 16#F1#, 16#42#, 16#3E#, 16#65#, 16#2A#, 16#CA#, 16#6B#, 16#1B#, 16#47#, 16#65#, 16#A7#, 16#7A#, 
+16#8E#, 16#37#, 16#F4#, 16#22#, 16#64#, 16#89#, 16#C4#, 16#AB#, 16#2E#, 16#61#, 16#39#, 16#26#, 16#35#, 16#EB#, 16#D0#, 16#BD#, 
+16#46#, 16#DD#, 16#D2#, 16#01#, 16#6B#, 16#83#, 16#E1#, 16#75#, 16#C2#, 16#9B#, 16#8B#, 16#4F#, 16#38#, 16#36#, 16#6B#, 16#AD#, 
+16#AB#, 16#C1#, 16#E1#, 16#7B#
+[I] Getting a handle for encoder: TE_HEXADECIMAL
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+[I] Getting an encoder pointer
+[I] Start encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+[I] Encoding ...
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  100
+    Encoder code count     :  200
+[I] End encoding ...
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  100
+    Encoder code count     :  200
+[I] Encoding result: "be70b766e2d9f99f55d84c86de43b0c473e916a25d8707ab6c222ae586281f72a8346a4365048ee52931cabdd7c252f879d54edef1423e652aca6b1b4765a77a8e37f4226489c4ab2e61392635ebd0bd46ddd2016b83e175c29b8b4f38366badabc1e17b"
+[I] Start decoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+[I] Decoding ...
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  100
+    Encoder code count     :  200
+[I] End decoding ...
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  100
+    Encoder code count     :  200
+[I] Decoding result: 
+16#BE#, 16#70#, 16#B7#, 16#66#, 16#E2#, 16#D9#, 16#F9#, 16#9F#, 16#55#, 16#D8#, 16#4C#, 16#86#, 16#DE#, 16#43#, 16#B0#, 16#C4#, 
+16#73#, 16#E9#, 16#16#, 16#A2#, 16#5D#, 16#87#, 16#07#, 16#AB#, 16#6C#, 16#22#, 16#2A#, 16#E5#, 16#86#, 16#28#, 16#1F#, 16#72#, 
+16#A8#, 16#34#, 16#6A#, 16#43#, 16#65#, 16#04#, 16#8E#, 16#E5#, 16#29#, 16#31#, 16#CA#, 16#BD#, 16#D7#, 16#C2#, 16#52#, 16#F8#, 
+16#79#, 16#D5#, 16#4E#, 16#DE#, 16#F1#, 16#42#, 16#3E#, 16#65#, 16#2A#, 16#CA#, 16#6B#, 16#1B#, 16#47#, 16#65#, 16#A7#, 16#7A#, 
+16#8E#, 16#37#, 16#F4#, 16#22#, 16#64#, 16#89#, 16#C4#, 16#AB#, 16#2E#, 16#61#, 16#39#, 16#26#, 16#35#, 16#EB#, 16#D0#, 16#BD#, 
+16#46#, 16#DD#, 16#D2#, 16#01#, 16#6B#, 16#83#, 16#E1#, 16#75#, 16#C2#, 16#9B#, 16#8B#, 16#4F#, 16#38#, 16#36#, 16#6B#, 16#AD#, 
+16#AB#, 16#C1#, 16#E1#, 16#7B#
+[I] Results match
+[I] Invalidating handle ...
+[I] Information of Encoder object:
+    Invalid encoder handle
+[I] Getting a handle for encoder: TE_BASE16
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE16.BASE16_ENCODER"
+    Encoder id             : TE_BASE16
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+[I] Getting an encoder pointer
+[I] Start encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE16.BASE16_ENCODER"
+    Encoder id             : TE_BASE16
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+[I] Encoding ...
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE16.BASE16_ENCODER"
+    Encoder id             : TE_BASE16
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  100
+    Encoder code count     :  200
+[I] End encoding ...
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE16.BASE16_ENCODER"
+    Encoder id             : TE_BASE16
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  100
+    Encoder code count     :  200
+[I] Encoding result: "BE70B766E2D9F99F55D84C86DE43B0C473E916A25D8707AB6C222AE586281F72A8346A4365048EE52931CABDD7C252F879D54EDEF1423E652ACA6B1B4765A77A8E37F4226489C4AB2E61392635EBD0BD46DDD2016B83E175C29B8B4F38366BADABC1E17B"
+[I] Start decoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE16.BASE16_ENCODER"
+    Encoder id             : TE_BASE16
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+[I] Decoding ...
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE16.BASE16_ENCODER"
+    Encoder id             : TE_BASE16
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  100
+    Encoder code count     :  200
+[I] End decoding ...
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE16.BASE16_ENCODER"
+    Encoder id             : TE_BASE16
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  100
+    Encoder code count     :  200
+[I] Decoding result: 
+16#BE#, 16#70#, 16#B7#, 16#66#, 16#E2#, 16#D9#, 16#F9#, 16#9F#, 16#55#, 16#D8#, 16#4C#, 16#86#, 16#DE#, 16#43#, 16#B0#, 16#C4#, 
+16#73#, 16#E9#, 16#16#, 16#A2#, 16#5D#, 16#87#, 16#07#, 16#AB#, 16#6C#, 16#22#, 16#2A#, 16#E5#, 16#86#, 16#28#, 16#1F#, 16#72#, 
+16#A8#, 16#34#, 16#6A#, 16#43#, 16#65#, 16#04#, 16#8E#, 16#E5#, 16#29#, 16#31#, 16#CA#, 16#BD#, 16#D7#, 16#C2#, 16#52#, 16#F8#, 
+16#79#, 16#D5#, 16#4E#, 16#DE#, 16#F1#, 16#42#, 16#3E#, 16#65#, 16#2A#, 16#CA#, 16#6B#, 16#1B#, 16#47#, 16#65#, 16#A7#, 16#7A#, 
+16#8E#, 16#37#, 16#F4#, 16#22#, 16#64#, 16#89#, 16#C4#, 16#AB#, 16#2E#, 16#61#, 16#39#, 16#26#, 16#35#, 16#EB#, 16#D0#, 16#BD#, 
+16#46#, 16#DD#, 16#D2#, 16#01#, 16#6B#, 16#83#, 16#E1#, 16#75#, 16#C2#, 16#9B#, 16#8B#, 16#4F#, 16#38#, 16#36#, 16#6B#, 16#AD#, 
+16#AB#, 16#C1#, 16#E1#, 16#7B#
+[I] Results match
+[I] Invalidating handle ...
+[I] Information of Encoder object:
+    Invalid encoder handle
+[I] Getting a handle for encoder: TE_BASE64
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Encoder id             : TE_BASE64
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+[I] Getting an encoder pointer
+[I] Start encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Encoder id             : TE_BASE64
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+[I] Encoding ...
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Encoder id             : TE_BASE64
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  100
+    Encoder code count     :  132
+[I] End encoding ...
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Encoder id             : TE_BASE64
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  100
+    Encoder code count     :  136
+[I] Encoding result: "vnC3ZuLZ+Z9V2EyG3kOwxHPpFqJdhwerbCIq5YYoH3KoNGpDZQSO5Skxyr3XwlL4edVO3vFCPmUqymsbR2Wneo439CJkicSrLmE5JjXr0L1G3dIBa4PhdcKbi084Nmutq8Hhew=="
+[I] Start decoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Encoder id             : TE_BASE64
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+[I] Decoding ...
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Encoder id             : TE_BASE64
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  100
+    Encoder code count     :  136
+[I] End decoding ...
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.BASE64.BASE64_ENCODER"
+    Encoder id             : TE_BASE64
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  100
+    Encoder code count     :  136
+[I] Decoding result: 
+16#BE#, 16#70#, 16#B7#, 16#66#, 16#E2#, 16#D9#, 16#F9#, 16#9F#, 16#55#, 16#D8#, 16#4C#, 16#86#, 16#DE#, 16#43#, 16#B0#, 16#C4#, 
+16#73#, 16#E9#, 16#16#, 16#A2#, 16#5D#, 16#87#, 16#07#, 16#AB#, 16#6C#, 16#22#, 16#2A#, 16#E5#, 16#86#, 16#28#, 16#1F#, 16#72#, 
+16#A8#, 16#34#, 16#6A#, 16#43#, 16#65#, 16#04#, 16#8E#, 16#E5#, 16#29#, 16#31#, 16#CA#, 16#BD#, 16#D7#, 16#C2#, 16#52#, 16#F8#, 
+16#79#, 16#D5#, 16#4E#, 16#DE#, 16#F1#, 16#42#, 16#3E#, 16#65#, 16#2A#, 16#CA#, 16#6B#, 16#1B#, 16#47#, 16#65#, 16#A7#, 16#7A#, 
+16#8E#, 16#37#, 16#F4#, 16#22#, 16#64#, 16#89#, 16#C4#, 16#AB#, 16#2E#, 16#61#, 16#39#, 16#26#, 16#35#, 16#EB#, 16#D0#, 16#BD#, 
+16#46#, 16#DD#, 16#D2#, 16#01#, 16#6B#, 16#83#, 16#E1#, 16#75#, 16#C2#, 16#9B#, 16#8B#, 16#4F#, 16#38#, 16#36#, 16#6B#, 16#AD#, 
+16#AB#, 16#C1#, 16#E1#, 16#7B#
+[I] Results match
+[I] Invalidating handle ...
+[I] Information of Encoder object:
+    Invalid encoder handle
+[I] Getting a handle for encoder: TE_MIME
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+[I] Getting an encoder pointer
+[I] Start encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+[I] Encoding ...
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  100
+    Encoder code count     :  78
+[I] End encoding ...
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  100
+    Encoder code count     :  138
+[I] Encoding result: "vnC3ZuLZ+Z9V2EyG3kOwxHPpFqJdhwerbCIq5YYoH3KoNGpDZQSO5Skxyr3XwlL4edVO3vFCPmUq
+ymsbR2Wneo439CJkicSrLmE5JjXr0L1G3dIBa4PhdcKbi084Nmutq8Hhew=="
+[I] Start decoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+[I] Decoding ...
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  100
+    Encoder code count     :  136
+[I] End decoding ...
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  100
+    Encoder code count     :  136
+[I] Decoding result: 
+16#BE#, 16#70#, 16#B7#, 16#66#, 16#E2#, 16#D9#, 16#F9#, 16#9F#, 16#55#, 16#D8#, 16#4C#, 16#86#, 16#DE#, 16#43#, 16#B0#, 16#C4#, 
+16#73#, 16#E9#, 16#16#, 16#A2#, 16#5D#, 16#87#, 16#07#, 16#AB#, 16#6C#, 16#22#, 16#2A#, 16#E5#, 16#86#, 16#28#, 16#1F#, 16#72#, 
+16#A8#, 16#34#, 16#6A#, 16#43#, 16#65#, 16#04#, 16#8E#, 16#E5#, 16#29#, 16#31#, 16#CA#, 16#BD#, 16#D7#, 16#C2#, 16#52#, 16#F8#, 
+16#79#, 16#D5#, 16#4E#, 16#DE#, 16#F1#, 16#42#, 16#3E#, 16#65#, 16#2A#, 16#CA#, 16#6B#, 16#1B#, 16#47#, 16#65#, 16#A7#, 16#7A#, 
+16#8E#, 16#37#, 16#F4#, 16#22#, 16#64#, 16#89#, 16#C4#, 16#AB#, 16#2E#, 16#61#, 16#39#, 16#26#, 16#35#, 16#EB#, 16#D0#, 16#BD#, 
+16#46#, 16#DD#, 16#D2#, 16#01#, 16#6B#, 16#83#, 16#E1#, 16#75#, 16#C2#, 16#9B#, 16#8B#, 16#4F#, 16#38#, 16#36#, 16#6B#, 16#AD#, 
+16#AB#, 16#C1#, 16#E1#, 16#7B#
+[I] Results match
+[I] Invalidating handle ...
+[I] Information of Encoder object:
+    Invalid encoder handle
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/05/12 - 18:18:13
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Enc_Factory
+Finished                 : 2017/05/12 - 18:18:13
+================================================================================
