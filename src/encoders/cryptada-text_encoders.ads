@@ -35,10 +35,12 @@
 --    1.0   20170427 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with Ada.Finalization;
+with Object;
+with Object.Handle;
 
 with CryptAda.Pragmatics;
 with CryptAda.Lists;
+with CryptAda.Names;
 
 package CryptAda.Text_Encoders is
 
@@ -46,18 +48,24 @@ package CryptAda.Text_Encoders is
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Text_Encoder]-------------------------------------------------------------
-   -- Base type for Text_Encoder classes.
+   --[Encoder]------------------------------------------------------------------
+   -- Base type for Encoder classes.
    -----------------------------------------------------------------------------
 
-   type Text_Encoder (<>) is abstract tagged limited private;
+   type Encoder (<>) is abstract new Object.Entity with private;
 
-   --[Text_Encoder_Ref]---------------------------------------------------------
-   -- Class wide access type to Text_Encoder objects.
+   --[Encoder_Ptr]--------------------------------------------------------------
+   -- Class wide access type to Encoder objects.
    -----------------------------------------------------------------------------
 
-   type Text_Encoder_Ref is access all Text_Encoder'Class;
+   type Encoder_Ptr is access all Encoder'Class;
 
+   --[Encoder_Handle]-----------------------------------------------------------
+   -- Smart pointer ro encoder objects.
+   -----------------------------------------------------------------------------
+
+   type Encoder_Handle is private;
+         
    --[Encoder_State]------------------------------------------------------------
    -- Enumerated type that identifies the states the text encoder could be in.
    --
@@ -73,6 +81,63 @@ package CryptAda.Text_Encoders is
       );
 
    -----------------------------------------------------------------------------
+   --[Encoder_Handle Operations]------------------------------------------------
+   -----------------------------------------------------------------------------
+
+   --[Is_Valid_Handle]----------------------------------------------------------
+   -- Purpose:
+   -- Checks if a handle is valid.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Handle           Handle to check for validity.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Boolean value that indicates whether the handle is valid or not.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   function    Is_Valid_Handle(
+                  The_Handle     : in     Encoder_Handle)
+      return   Boolean;
+
+   --[Invalidate_Handle]--------------------------------------------------------
+   -- Purpose:
+   -- Invalidates a habndle.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Handle           Handle to invalidate.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   procedure   Invalidate_Handle(
+                  The_Handle     : in out Encoder_Handle);
+      
+   --[Get_Encoder_Ptr]----------------------------------------------------------
+   -- Purpose:
+   -- Returns a Encoder_Ptr from a Encoder_Handle.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- From_Handle          Handle to get the Encoder_Ptr from.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Encoder_Ptr associated to Handle.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   function    Get_Encoder_Ptr(
+                  From_Handle    : in     Encoder_Handle)
+      return   Encoder_Ptr;
+
+   -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
 
@@ -81,7 +146,7 @@ package CryptAda.Text_Encoders is
    -- Starts encoding operation.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Encoder              Access to the Encoder object which will be
+   -- The_Encoder          Access to the Encoder object which will be
    --                      initialized for encoding.
    -----------------------------------------------------------------------------
    -- Returned value:
@@ -92,7 +157,7 @@ package CryptAda.Text_Encoders is
    -----------------------------------------------------------------------------
 
    procedure   Start_Encoding(
-                  Encoder        : access Text_Encoder)
+                  The_Encoder    : access Encoder)
          is abstract;
 
    --[Start_Encoding]-----------------------------------------------------------
@@ -100,7 +165,7 @@ package CryptAda.Text_Encoders is
    -- Starts encoding operation.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Encoder              Access to the Encoder object which will be
+   -- The_Encoder          Access to the Encoder object which will be
    --                      initialized for encoding.
    -- Parameters           List containing the initialization parameters for
    --                      the encoder.
@@ -114,7 +179,7 @@ package CryptAda.Text_Encoders is
    -----------------------------------------------------------------------------
 
    procedure   Start_Encoding(
-                  Encoder        : access Text_Encoder;
+                  The_Encoder    : access Encoder;
                   Parameters     : in     CryptAda.Lists.List)
          is abstract;
 
@@ -124,7 +189,7 @@ package CryptAda.Text_Encoders is
    -- returning the number of codes copied.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Encoder              Access to the encoder object used for computation.
+   -- With_Encoder         Access to the encoder object used for computation.
    -- Input                Byte_Array to encode.
    -- Output               String that at procedure return will contain the
    --                      result of encoding.
@@ -140,7 +205,7 @@ package CryptAda.Text_Encoders is
    -----------------------------------------------------------------------------
 
    procedure   Encode(
-                  Encoder        : access Text_Encoder;
+                  With_Encoder   : access Encoder;
                   Input          : in     CryptAda.Pragmatics.Byte_Array;
                   Output         :    out String;
                   Codes          :    out Natural)
@@ -151,7 +216,7 @@ package CryptAda.Text_Encoders is
    -- Encodes a byte array returning a string with encoding results.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Encoder              Access to the encoder object used for computation.
+   -- With_Encoder         Access to the encoder object used for computation.
    -- Input                Byte_Array to encode.
    -----------------------------------------------------------------------------
    -- Returned value:
@@ -162,7 +227,7 @@ package CryptAda.Text_Encoders is
    -----------------------------------------------------------------------------
 
    function    Encode(
-                  Encoder        : access Text_Encoder;
+                  With_Encoder   : access Encoder;
                   Input          : in     CryptAda.Pragmatics.Byte_Array)
       return   String
          is abstract;
@@ -173,7 +238,7 @@ package CryptAda.Text_Encoders is
    -- buffering of previous Encode operations.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Encoder              Access to the encoder object used for computation.
+   -- With_Encoder         Access to the encoder object used for computation.
    --                      After completion, the encoder will be in Idle_State.
    -- Output               String that at procedure return will contain the
    --                      result of encoding any buffered input byte.
@@ -189,7 +254,7 @@ package CryptAda.Text_Encoders is
    -----------------------------------------------------------------------------
 
    procedure   End_Encoding(
-                  Encoder        : access Text_Encoder;
+                  With_Encoder   : access Encoder;
                   Output         :    out String;
                   Codes          :    out Natural)
          is abstract;
@@ -200,7 +265,7 @@ package CryptAda.Text_Encoders is
    -- from the final encode operation on any buffered input byte (if any).
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Encoder              Access to the encoder object used for computation.
+   -- With_Encoder         Access to the encoder object used for computation.
    --                      After completion, the encoder will be in Idle_State.
    -----------------------------------------------------------------------------
    -- Returned value:
@@ -212,7 +277,7 @@ package CryptAda.Text_Encoders is
    -----------------------------------------------------------------------------
 
    function    End_Encoding(
-                  Encoder        : access Text_Encoder)
+                  With_Encoder      : access Encoder)
       return   String
          is abstract;
 
@@ -221,7 +286,7 @@ package CryptAda.Text_Encoders is
    -- Starts decoding operation.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Encoder              Access to the Encoder object which will be
+   -- The_Encoder          Access to the Encoder object which will be
    --                      initialized for decoding.
    -----------------------------------------------------------------------------
    -- Returned value:
@@ -232,7 +297,7 @@ package CryptAda.Text_Encoders is
    -----------------------------------------------------------------------------
 
    procedure   Start_Decoding(
-                  Encoder        : access Text_Encoder)
+                  The_Encoder       : access Encoder)
          is abstract;
 
    --[Start_Decoding]-----------------------------------------------------------
@@ -240,7 +305,7 @@ package CryptAda.Text_Encoders is
    -- Starts decoding operation.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Encoder              Access to the Encoder object which will be
+   -- The_Encoder          Access to the Encoder object which will be
    --                      initialized for decoding.
    -- Parameters           List containing the initialization parameters for
    --                      the encoder.
@@ -254,7 +319,7 @@ package CryptAda.Text_Encoders is
    -----------------------------------------------------------------------------
 
    procedure   Start_Decoding(
-                  Encoder        : access Text_Encoder;
+                  The_Encoder    : access Encoder;
                   Parameters     : in     CryptAda.Lists.List)
          is abstract;
 
@@ -264,7 +329,7 @@ package CryptAda.Text_Encoders is
    -- copies the decoded bytes into a Byte_Array.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Encoder              Access to the encoder object used for decoding.
+   -- With_Encoder         Access to the encoder object used for decoding.
    -- Input                String containing the codes to decode.
    -- Output               Byte_Array where the decoded bytes will be copied.
    -- Bytes                Number of bytes copied to Output.
@@ -281,7 +346,7 @@ package CryptAda.Text_Encoders is
    -----------------------------------------------------------------------------
 
    procedure   Decode(
-                  Encoder        : access Text_Encoder;
+                  With_Encoder   : access Encoder;
                   Input          : in     String;
                   Output         :    out CryptAda.Pragmatics.Byte_Array;
                   Bytes          :    out Natural)
@@ -293,7 +358,7 @@ package CryptAda.Text_Encoders is
    -- decoding results.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Encoder              Access to the encoder object used for decoding.
+   -- With_Encoder         Access to the encoder object used for decoding.
    -- Input                String containing the codes to decode.
    -----------------------------------------------------------------------------
    -- Returned value:
@@ -306,7 +371,7 @@ package CryptAda.Text_Encoders is
    -----------------------------------------------------------------------------
 
    function    Decode(
-                  Encoder        : access Text_Encoder;
+                  With_Encoder   : access Encoder;
                   Input          : in     String)
       return   CryptAda.Pragmatics.Byte_Array
          is abstract;
@@ -317,7 +382,7 @@ package CryptAda.Text_Encoders is
    -- decoding any code buffered in the process (if any).
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Encoder              Access to the encoder object used for decoding. The
+   -- With_Encoder         Access to the encoder object used for decoding. The
    --                      encoder will be set to State_Idle at return of this
    --                      subprogram.
    -- Output               Byte_Array where the bytes resulting of decoding any
@@ -336,7 +401,7 @@ package CryptAda.Text_Encoders is
    -----------------------------------------------------------------------------
 
    procedure   End_Decoding(
-                  Encoder        : access Text_Encoder;
+                  With_Encoder   : access Encoder;
                   Output         :    out CryptAda.Pragmatics.Byte_Array;
                   Bytes          :    out Natural)
          is abstract;
@@ -347,7 +412,7 @@ package CryptAda.Text_Encoders is
    -- any buffered codes kept in the encoder object.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Encoder              Access to the encoder object used for decoding. The
+   -- With_Encoder         Access to the encoder object used for decoding. The
    --                      encoder will be set to State_Idle at return of this
    --                      subprogram.
    -----------------------------------------------------------------------------
@@ -361,18 +426,17 @@ package CryptAda.Text_Encoders is
    -----------------------------------------------------------------------------
 
    function    End_Decoding(
-                  Encoder        : access Text_Encoder)
+                  With_Encoder   : access Encoder)
       return   CryptAda.Pragmatics.Byte_Array
          is abstract;
 
-   --[End_Process]--------------------------------------------------------------
+   --[Set_To_Idle]--------------------------------------------------------------
    -- Purpose:
    -- Inmediately ends any encoder process (either encodig or decoding) leaving
-   -- the encoder object ready for start procedures. Any buffered codes or bytes
-   -- will be lost.
+   -- the encoder leaving the object in State_Idle.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Encoder              Access to the encoder object to end process.
+   -- The_Encoder          Access to the encoder object to end process.
    -----------------------------------------------------------------------------
    -- Returned value:
    -- N/A.
@@ -381,20 +445,38 @@ package CryptAda.Text_Encoders is
    -- None.
    -----------------------------------------------------------------------------
 
-   procedure   End_Process(
-                  Encoder        : access Text_Encoder)
+   procedure   Set_To_Idle(
+                  The_Encoder    : access Encoder)
          is abstract;
          
    -----------------------------------------------------------------------------
    --[Non-Dispathing Operations]------------------------------------------------
    -----------------------------------------------------------------------------
 
+   --[Get_Encoder_Id]-----------------------------------------------------------
+   -- Purpose:
+   -- Returns the Id of the encoder
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- Of_Encoder           Access to the encoder object to get the id
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Text_Encoder_Id value that identifies the particular encoder.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   function    Get_Encoder_Id(
+                  Of_Encoder     : access Encoder'Class)
+      return   CryptAda.Names.Encoder_Id;
+
    --[Get_State]----------------------------------------------------------------
    -- Purpose:
    -- Returns the state the encoder object is in.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Encoder              Access to the encoder object to get the state.
+   -- Of_Encoder           Access to the encoder object to get the state.
    -----------------------------------------------------------------------------
    -- Returned value:
    -- Encoder_State value that identifies the state the encoder is in.
@@ -404,9 +486,46 @@ package CryptAda.Text_Encoders is
    -----------------------------------------------------------------------------
 
    function    Get_State(
-                  Of_Encoder     : access Text_Encoder'Class)
+                  Of_Encoder     : access Encoder'Class)
       return   Encoder_State;
+      
+   --[Get_Byte_Count]-----------------------------------------------------------
+   -- Purpose:
+   -- Returns the number of bytes encoded or decoded during current operation.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- In_Encoder           Access to the encoder object to get the byte count.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Natural value with the number of bytes processed.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
 
+   function    Get_Byte_Count(
+                  In_Encoder     : access Encoder'Class)
+      return   Natural;
+
+   --[Get_Code_Count]-----------------------------------------------------------
+   -- Purpose:
+   -- Returns the number of codes either resulting from encoding or decoded 
+   -- during current operation.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- In_Encoder           Access to the encoder object to get the code count.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Natural value with the number of codes generated or processed.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   function    Get_Code_Count(
+                  In_Encoder     : access Encoder'Class)
+      return   Natural;
+                  
    -----------------------------------------------------------------------------
    --[Private Part]-------------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -417,16 +536,163 @@ private
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Text_Encoder]-------------------------------------------------------------
+   --[Encoder]------------------------------------------------------------------
    -- Full definition of the Text_Encoder object.
    --
-   -- Count                Reference count.
+   -- Id                   The encoder identifier.
+   -- Ref_Count            Reference count.
    -- State                State the encoder is in.
+   -- Byte_Count           Byte counter.
+   -- Code_Count           Code counter.
    -----------------------------------------------------------------------------
 
-   type Text_Encoder is abstract new Ada.Finalization.Limited_Controlled with
+   type Encoder(Id : CryptAda.Names.Encoder_Id) is abstract new Object.Entity with 
       record
          State                   : Encoder_State   := State_Idle;
+         Byte_Count              : Natural         := 0;
+         Code_Count              : Natural         := 0;
       end record;
 
+   -----------------------------------------------------------------------------
+   --[Encoder Private Subprograms]----------------------------------------------
+   -----------------------------------------------------------------------------
+   
+   --[Increment_Byte_Counter]---------------------------------------------------
+   -- Purpose:
+   -- Increments the encoder byte counter in a specific amount.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- In_Encoder           Access to the encoder object whose byte counter is to
+   --                      be incremented.
+   -- Amount               Amount to increment the byte counter into.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   procedure   Increment_Byte_Counter(
+                  In_Encoder     : access Encoder;
+                  Amount         : in     Natural);
+
+   --[Increment_Code_Counter]---------------------------------------------------
+   -- Purpose:
+   -- Increments the encoder code counter in a specific amount.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- In_Encoder           Access to the encoder object whose code counter is to
+   --                      be incremented.
+   -- Amount               Amount to increment the code counter into.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   procedure   Increment_Code_Counter(
+                  In_Encoder     : access Encoder;
+                  Amount         : in     Natural);
+
+   --[Private_Clear_Encoder]----------------------------------------------------
+   -- Purpose:
+   -- Clears the root part of the encoder.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Encoder          Encoder to clear.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   procedure   Private_Clear_Encoder(
+                  The_Encoder    : in out Encoder);
+
+   --[Private_Start_Encoding]---------------------------------------------------
+   -- Purpose:
+   -- Performs the initialization of the root part of the encoder for encoding.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- With_Encoder         Encoder to be initialized for encoding.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   procedure   Private_Start_Encoding(
+                  With_Encoder    : access Encoder);
+
+   --[Private_End_Encoding]-----------------------------------------------------
+   -- Purpose:
+   -- Performs the finalization of the root part of the encoder for encoding.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- With_Encoder         Encoder to be finalized for encoding.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   procedure   Private_End_Encoding(
+                  With_Encoder    : access Encoder);
+
+   --[Private_Start_Decoding]---------------------------------------------------
+   -- Purpose:
+   -- Performs the initialization of the root part of the encoder for decoding.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- With_Encoder         Encoder to be initialized for decoding.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   procedure   Private_Start_Decoding(
+                  With_Encoder    : access Encoder);
+
+   --[Private_End_Decoding]-----------------------------------------------------
+   -- Purpose:
+   -- Performs the finalization of the root part of the encoder for decoding.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- With_Encoder         Encoder to be finalized for decoding.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   procedure   Private_End_Decoding(
+                  With_Encoder    : access Encoder);
+
+   -----------------------------------------------------------------------------
+   --[Encoder_Handle]-----------------------------------------------------------
+   -----------------------------------------------------------------------------
+
+   package Encoder_Handles is new Object.Handle(Encoder, Encoder_Ptr);
+   type Encoder_Handle is new Encoder_Handles.Handle with null record;
+   
+   --[Ref]----------------------------------------------------------------------
+   
+   function    Ref(
+                  Thing          : in     Encoder_Ptr)
+      return   Encoder_Handle;
+   
 end CryptAda.Text_Encoders;

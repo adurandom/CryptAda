@@ -56,13 +56,34 @@ package CryptAda.Text_Encoders.Hex is
    --    any whitespace is considered a syntax error.
    -----------------------------------------------------------------------------
 
-   type Hex_Encoder is new Text_Encoder with private;
+   type Hex_Encoder is new Encoder with private;
 
-   --[Hex_Encoder_Ref]----------------------------------------------------------
+   --[Hex_Encoder_Ptr]----------------------------------------------------------
    -- Access type to Hex_Encoder objects.
    -----------------------------------------------------------------------------
 
-   type Hex_Encoder_Ref is access all Hex_Encoder'Class;
+   type Hex_Encoder_Ptr is access all Hex_Encoder'Class;
+
+   -----------------------------------------------------------------------------
+   --[Getting a handle for Hex encoder]-----------------------------------------
+   -----------------------------------------------------------------------------
+   
+   --[Get_Encoder_Handle]-------------------------------------------------------
+   -- Purpose:
+   -- Creates a Encoder object and returns a handle for that object.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- None.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Encoder_Handle value that references the encoder object created.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CrtyptAda_Storage_Error if an error is raised during encoder allocation.
+   -----------------------------------------------------------------------------
+
+   function    Get_Encoder_Handle
+      return   Encoder_Handle;
    
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
@@ -70,134 +91,111 @@ package CryptAda.Text_Encoders.Hex is
 
    --[Start_Encoding]-----------------------------------------------------------
 
+   overriding
    procedure   Start_Encoding(
-                  Encoder        : access Hex_Encoder);
+                  The_Encoder    : access Hex_Encoder);
 
    --[Start_Encoding]-----------------------------------------------------------
 
+   overriding
    procedure   Start_Encoding(
-                  Encoder        : access Hex_Encoder;
+                  The_Encoder    : access Hex_Encoder;
                   Parameters     : in     CryptAda.Lists.List);
 
    --[Encode]-------------------------------------------------------------------
 
+   overriding
    procedure   Encode(
-                  Encoder        : access Hex_Encoder;
+                  With_Encoder   : access Hex_Encoder;
                   Input          : in     CryptAda.Pragmatics.Byte_Array;
                   Output         :    out String;
                   Codes          :    out Natural);
 
    --[Encode]-------------------------------------------------------------------
 
+   overriding
    function    Encode(
-                  Encoder        : access Hex_Encoder;
+                  With_Encoder   : access Hex_Encoder;
                   Input          : in     CryptAda.Pragmatics.Byte_Array)
       return   String;
 
 
    --[End_Encoding]-------------------------------------------------------------
 
+   overriding
    procedure   End_Encoding(
-                  Encoder        : access Hex_Encoder;
+                  With_Encoder   : access Hex_Encoder;
                   Output         :    out String;
                   Codes          :    out Natural);
 
    --[End_Encoding]-------------------------------------------------------------
 
+   overriding
    function    End_Encoding(
-                  Encoder        : access Hex_Encoder)
+                  With_Encoder   : access Hex_Encoder)
       return   String;
 
    --[Start_Decoding]-----------------------------------------------------------
 
+   overriding
    procedure   Start_Decoding(
-                  Encoder        : access Hex_Encoder);
+                  The_Encoder    : access Hex_Encoder);
 
    --[Start_Decoding]-----------------------------------------------------------
 
+   overriding
    procedure   Start_Decoding(
-                  Encoder        : access Hex_Encoder;
+                  The_Encoder    : access Hex_Encoder;
                   Parameters     : in     CryptAda.Lists.List);
 
    --[Decode]-------------------------------------------------------------------
 
+   overriding
    procedure   Decode(
-                  Encoder        : access Hex_Encoder;
+                  With_Encoder   : access Hex_Encoder;
                   Input          : in     String;
                   Output         :    out CryptAda.Pragmatics.Byte_Array;
                   Bytes          :    out Natural);
 
    --[Decode]-------------------------------------------------------------------
 
+   overriding
    function    Decode(
-                  Encoder        : access Hex_Encoder;
+                  With_Encoder   : access Hex_Encoder;
                   Input          : in     String)
       return   CryptAda.Pragmatics.Byte_Array;
 
    --[End_Decoding]-------------------------------------------------------------
 
+   overriding
    procedure   End_Decoding(
-                  Encoder        : access Hex_Encoder;
+                  With_Encoder   : access Hex_Encoder;
                   Output         :    out CryptAda.Pragmatics.Byte_Array;
                   Bytes          :    out Natural);
 
    --[End_Decoding]-------------------------------------------------------------
 
+   overriding
    function    End_Decoding(
-                  Encoder        : access Hex_Encoder)
+                  With_Encoder   : access Hex_Encoder)
       return   CryptAda.Pragmatics.Byte_Array;
 
-   --[End_Process]--------------------------------------------------------------
+   --[Set_To_Idle]--------------------------------------------------------------
 
-   procedure   End_Process(
-                  Encoder        : access Hex_Encoder);
+   overriding
+   procedure   Set_To_Idle(
+                  The_Encoder    : access Hex_Encoder);
       
    -----------------------------------------------------------------------------
    --[Additional Operations]----------------------------------------------------
    -----------------------------------------------------------------------------
-
-   --[Allocate_Encoder]---------------------------------------------------------
-   -- Purpose:
-   -- Allocates memory for an encoder object and returns the referente to the
-   -- allocated encoder.
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- N/A.
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- Reference to the allocated object.
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- CrtyptAda_Storage_Error if an error is raised during encoder allocation.
-   -----------------------------------------------------------------------------
-
-   function    Allocate_Encoder
-      return   Hex_Encoder_Ref;
-
-   --[Deallocate_Encoder]-------------------------------------------------------
-   -- Purpose:
-   -- Deallocates an encoder object previously allocated in a call to 
-   -- Allocate_Encoder.
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- Encoder              Reference to the object to deallocate.
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- N/A.
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- None.
-   -----------------------------------------------------------------------------
-
-   procedure   Deallocate_Encoder(
-                  Encoder        : in out Hex_Encoder_Ref);
    
    --[Has_Buffered_Code]--------------------------------------------------------
    -- Purpose:
-   -- Checks if a Encoder has aa buffered code.
+   -- Checks if a Encoder has a buffered code.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Encoder              Access to the Encoder object which will be
+   -- The_Encoder          Access to the Encoder object which will be
    --                      tested for buffered code.
    -----------------------------------------------------------------------------
    -- Returned value:
@@ -208,9 +206,13 @@ package CryptAda.Text_Encoders.Hex is
    -----------------------------------------------------------------------------
 
    function    Has_Buffered_Code(
-                  Encoder        : access Hex_Encoder'Class)
+                  The_Encoder    : access Hex_Encoder'Class)
       return   Boolean;
 
+   -----------------------------------------------------------------------------
+   --[Private Part]-------------------------------------------------------------
+   -----------------------------------------------------------------------------
+      
 private
 
    -----------------------------------------------------------------------------
@@ -225,24 +227,26 @@ private
    -- The_Code             Code buffered (only for decoding).
    -----------------------------------------------------------------------------
 
-   type Hex_Encoder is new Text_Encoder with
+   type Hex_Encoder is new Encoder with
       record
          Buffered          : Boolean      := False;
          The_Code          : Character    := Character'First;
       end record;
 
    -----------------------------------------------------------------------------
-   --[Ada.Finalization]---------------------------------------------------------
+   --[Subprograms]--------------------------------------------------------------
    -----------------------------------------------------------------------------
-
+      
    --[Initialize]---------------------------------------------------------------
 
+   overriding
    procedure   Initialize(
                   Object         : in out Hex_Encoder);
 
    --[Finalize]-----------------------------------------------------------------
 
+   overriding
    procedure   Finalize(
                   Object         : in out Hex_Encoder);
-
+                  
 end CryptAda.Text_Encoders.Hex;

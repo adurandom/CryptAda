@@ -31,21 +31,19 @@
 --    1.0   20170428 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with Ada.Exceptions;                            use Ada.Exceptions;
-with Ada.Unchecked_Deallocation;
+with Ada.Exceptions;                   use Ada.Exceptions;
 
-with CryptAda.Pragmatics;                       use CryptAda.Pragmatics;
-with CryptAda.Lists;                            use CryptAda.Lists;
-with CryptAda.Lists.Identifier_Item;            use CryptAda.Lists.Identifier_Item;
-with CryptAda.Exceptions;                       use CryptAda.Exceptions;
+with CryptAda.Names;                   use CryptAda.Names;
+with CryptAda.Pragmatics;              use CryptAda.Pragmatics;
+with CryptAda.Lists;                   use CryptAda.Lists;
+with CryptAda.Lists.Identifier_Item;   use CryptAda.Lists.Identifier_Item;
+with CryptAda.Exceptions;              use CryptAda.Exceptions;
 
 package body CryptAda.Text_Encoders.Base64 is
 
    -----------------------------------------------------------------------------
    --[Generic Instantiations]---------------------------------------------------
    -----------------------------------------------------------------------------
-
-   procedure Free is new Ada.Unchecked_Deallocation(Base64_Encoder'Class, Base64_Encoder_Ref);
 
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
@@ -140,6 +138,12 @@ package body CryptAda.Text_Encoders.Base64 is
          )
       );
 
+   --[Pad_Code]-----------------------------------------------------------------
+   -- Character used as pad code.
+   -----------------------------------------------------------------------------
+
+   Pad_Code                      : constant Character := Base64_Pad_Code;
+      
    --[Alphabet_Param_Name]------------------------------------------------------
    -- String with the name of the Alphaber parameter in the parameter lists.
    -----------------------------------------------------------------------------
@@ -189,7 +193,6 @@ package body CryptAda.Text_Encoders.Base64 is
                   Object         : access Base64_Encoder)
    is
    begin
-      Object.all.State     := State_Idle;
       Object.all.Alphabet  := Standard_Alphabet;
       Object.all.BIB       := 0;
       Object.all.E_Buffer  := (others => 16#00#);
@@ -213,7 +216,9 @@ package body CryptAda.Text_Encoders.Base64 is
       if Get_List_Kind(Parameters) = Empty then
          return Standard_Alphabet;
       elsif Get_List_Kind(Parameters) = Unnamed then
-         Raise_Exception(CryptAda_Bad_Argument_Error'Identity, "Invalid parameter list");
+         Raise_Exception(
+            CryptAda_Bad_Argument_Error'Identity, 
+            "Invalid parameter list. Parameter list must be named");
       end if;
 
       -- List is named, get the Alphabet value.
@@ -366,6 +371,69 @@ package body CryptAda.Text_Encoders.Base64 is
    end Decode_Chunk;
 
    -----------------------------------------------------------------------------
+   --[Getting a handle for Base64 encoder]--------------------------------------
+   -----------------------------------------------------------------------------
+   
+   --[Get_Encoder_Handle]-------------------------------------------------------
+
+   function    Get_Encoder_Handle
+      return   Encoder_Handle
+   is
+      Ptr      : Base64_Encoder_Ptr;
+   begin
+      Ptr := new Base64_Encoder'(Encoder with
+                                    Id          => TE_Base64,
+                                    Alphabet    => Standard_Alphabet,
+                                    BIB         => 0,
+                                    E_Buffer    => (others => 16#00#),
+                                    D_Stopped   => False,
+                                    CIB         => 0,
+                                    D_Buffer    => (others => Character'First));                                 
+      return Ref(Encoder_Ptr(Ptr));
+   exception
+      when others =>
+         Raise_Exception(
+            CryptAda_Storage_Error'Identity, 
+            "Error when allocating Base64_Encoder object");
+   end Get_Encoder_Handle;
+
+   -----------------------------------------------------------------------------
+   --[Ada.Finalization]---------------------------------------------------------
+   -----------------------------------------------------------------------------
+      
+   --[Initialize]---------------------------------------------------------------
+
+   overriding
+   procedure   Initialize(
+                  Object         : in out Base64_Encoder)
+   is
+   begin
+      Private_Clear_Encoder(Object);
+      Object.Alphabet   := Standard_Alphabet;
+      Object.BIB        := 0;
+      Object.E_Buffer   := (others => 16#00#);
+      Object.D_Stopped  := False;
+      Object.CIB        := 0;
+      Object.D_Buffer   := (others => Character'First);
+   end Initialize;
+
+   --[Finalize]-----------------------------------------------------------------
+
+   overriding
+   procedure   Finalize(
+                  Object         : in out Base64_Encoder)
+   is
+   begin
+      Private_Clear_Encoder(Object);
+      Object.Alphabet   := Standard_Alphabet;
+      Object.BIB        := 0;
+      Object.E_Buffer   := (others => 16#00#);
+      Object.D_Stopped  := False;
+      Object.CIB        := 0;
+      Object.D_Buffer   := (others => Character'First);
+   end Finalize;
+   
+   -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
 
@@ -373,200 +441,480 @@ package body CryptAda.Text_Encoders.Base64 is
 
    overriding
    procedure   Start_Encoding(
-                  Encoder        : access Base64_Encoder)
+                  The_Encoder    : access Base64_Encoder)
    is
    begin
-      -- Set encoder object attributes.
-
-      Initialize_Object(Encoder);
-      Encoder.all.State := State_Encoding;
+      Private_Start_Encoding(The_Encoder);
+      Initialize_Object(The_Encoder);
    end Start_Encoding;
 
    --[Start_Encoding]-----------------------------------------------------------
 
    overriding
    procedure   Start_Encoding(
-                  Encoder        : access Base64_Encoder;
+                  The_Encoder    : access Base64_Encoder;
                   Parameters     : in     List)
    is
    begin
-      -- Set encoder object attributes.
-
-      Initialize_Object(Encoder);
-      Encoder.all.State    := State_Encoding;
-      Encoder.all.Alphabet := Get_Alphabet_From_List(Parameters);
+      Private_Start_Encoding(The_Encoder);
+      Initialize_Object(The_Encoder);
+      The_Encoder.all.Alphabet := Get_Alphabet_From_List(Parameters);
+   exception
+      when others =>
+         Private_Clear_Encoder(The_Encoder.all);
+         Initialize_Object(The_Encoder);
+         raise;
    end Start_Encoding;
 
    --[Encode]-------------------------------------------------------------------
 
    overriding
    procedure   Encode(
-                  Encoder        : access Base64_Encoder;
+                  With_Encoder   : access Base64_Encoder;
                   Input          : in     Byte_Array;
                   Output         :    out String;
                   Codes          :    out Natural)
    is
    begin
-      Base64_Encode(Encoder, Input, Output, Codes);
-   end Encode;
+      -- Check arguments.
 
+      if With_Encoder.all.State /= State_Encoding then
+         Raise_Exception(
+            CryptAda_Bad_Operation_Error'Identity, 
+            "Encoder is not in encoding state");
+      end if;
+
+      -- If no input, return.
+      
+      if Input'Length = 0 then
+         Codes := 0;
+         return;
+      end if;
+      
+      -- Perform encoding.
+      
+      declare
+         TB       : constant Natural := With_Encoder.all.BIB + Input'Length;
+         Chunks   : Natural := TB / Decoded_Chunk_Size;
+         OL       : constant Natural := Encoded_Chunk_Size * Chunks;
+         New_BIB  : constant Natural := TB mod Decoded_Chunk_Size;
+         To_Copy  : Natural := 0;
+         I        : Positive := Input'First;
+         J        : Positive := Output'First;
+      begin
+         -- Check for enough space on output buffer.
+         
+         if Output'Length < OL then
+            Raise_Exception(
+               CryptAda_Overflow_Error'Identity, 
+               "Output buffer length is not enough");
+         end if;
+
+         -- Are there any chunks to encode?
+
+         if Chunks > 0 then
+            -- At least one chunk must be encoded. Check if there are any
+            -- bytes in encoding buffer.
+
+            if With_Encoder.all.BIB > 0 then
+               -- Fill encoder internal buffer with bytes from Input. Encode
+               -- the internal encoding buffer and append the encoded chunk
+               -- to Output.
+
+               To_Copy := Decoded_Chunk_Size - With_Encoder.all.BIB;
+               With_Encoder.all.E_Buffer(With_Encoder.all.BIB + 1 .. Decoded_Chunk_Size) := Input(I .. I + To_Copy - 1);
+               Encode_Chunk(
+                  With_Encoder.all.Alphabet,
+                  With_Encoder.all.E_Buffer,
+                  Output(J .. J + Encoded_Chunk_Size - 1));
+
+               -- Update indexes over Input and Output, and decrement chunk
+               -- counter.
+
+               I := I + To_Copy;
+               J := J + Encoded_Chunk_Size;
+               Chunks := Chunks - 1;
+
+               -- Now all the buffered bytes in Encoder were processed.
+
+               With_Encoder.all.BIB := 0;
+            end if;
+
+            -- Process remaining chunks.
+
+            while Chunks > 0 loop
+               -- Encode chunk and append codes to Codes.
+
+               Encode_Chunk(
+                  With_Encoder.all.Alphabet,
+                  Input(I .. I + Decoded_Chunk_Size - 1),
+                  Output(J .. J + Encoded_Chunk_Size - 1));
+
+               -- Update index over Input. Output, and decrement chunk
+               -- counter.
+
+               I := I + Decoded_Chunk_Size;
+               J := J + Encoded_Chunk_Size;
+               Chunks := Chunks - 1;
+            end loop;
+         end if;
+
+         -- Copy unprocessed bytes to internal buffer (if any)
+
+         if New_BIB > With_Encoder.all.BIB then
+            To_Copy := New_BIB - With_Encoder.all.BIB;
+            With_Encoder.all.E_Buffer(With_Encoder.all.BIB + 1 .. New_BIB) := Input(I .. I + To_Copy - 1);
+            With_Encoder.all.BIB := New_BIB;
+         end if;
+
+         -- Increment counters and set the number of codes copied to output.
+
+         Increment_Byte_Counter(With_Encoder, Input'Length);
+         Increment_Code_Counter(With_Encoder, OL);
+         Codes := OL;
+      end;
+   end Encode;
+   
    --[Encode]-------------------------------------------------------------------
 
    overriding
    function    Encode(
-                  Encoder        : access Base64_Encoder;
+                  With_Encoder   : access Base64_Encoder;
                   Input          : in     Byte_Array)
       return   String
    is
+      TB       : constant Natural := With_Encoder.all.BIB + Input'Length;
+      OL       : constant Natural := Encoded_Chunk_Size * (TB / Decoded_Chunk_Size);
+      S        : String(1 .. OL);
+      C        : Natural;
    begin
-      return Base64_Encode(Encoder, Input);
+      Encode(With_Encoder, Input, S, C);
+      return S(1 .. C);
    end Encode;
 
    --[End_Encoding]-------------------------------------------------------------
 
    overriding
    procedure   End_Encoding(
-                  Encoder        : access Base64_Encoder;
+                  With_Encoder   : access Base64_Encoder;
                   Output         :    out String;
                   Codes          :    out Natural)
    is
+      OL             : Positive;
+      PF             : Positive;
    begin
-      Base64_End_Encoding(Encoder, Output, Codes);
+      -- Check arguments.
+
+      if With_Encoder.all.State /= State_Encoding then
+         Raise_Exception(
+            CryptAda_Bad_Operation_Error'Identity, 
+            "Encoder is not in encoding state");
+      end if;
+
+      -- Check if there are any buffered bytes.
+
+      if With_Encoder.all.BIB = 0 then
+         Codes := 0;
+      else
+         -- One more chunk to go.
+
+         if Output'Length < Encoded_Chunk_Size then
+            Raise_Exception(
+               CryptAda_Overflow_Error'Identity, 
+               "Output buffer length is not enough");
+         end if;
+
+         -- We have either 1 or 2 bytes left in buffer. We need to encode the
+         -- chunk and perform padding as required by RFC 4648. Zeroize remaining
+         -- positions of the internal buffer and encode.
+
+         OL := Output'First + Encoded_Chunk_Size - 1;
+
+         With_Encoder.all.E_Buffer(With_Encoder.all.BIB + 1 .. With_Encoder.all.E_Buffer'Last) := (others => 16#00#);
+         Encode_Chunk(
+            With_Encoder.all.Alphabet,
+            With_Encoder.all.E_Buffer,
+            Output(Output'First .. OL));
+
+         -- Perform padding.
+
+         PF := Output'First + With_Encoder.all.BIB + 1;
+         Output(PF .. OL) := (others => Pad_Code);
+
+         -- Set Codes.
+
+         Increment_Code_Counter(With_Encoder, Encoded_Chunk_Size);
+         Codes := Encoded_Chunk_Size;
+      end if;
+
+      -- Reset encoder object.
+
+      Private_End_Encoding(With_Encoder);
+      Initialize_Object(With_Encoder);
    end End_Encoding;
 
    --[End_Encoding]-------------------------------------------------------------
 
    overriding
    function    End_Encoding(
-                  Encoder        : access Base64_Encoder)
+                  With_Encoder   : access Base64_Encoder)
       return   String
    is
+      S              : String(1 .. Encoded_Chunk_Size);
+      C              : Natural;
    begin
-      return Base64_End_Encoding(Encoder);
+      End_Encoding(With_Encoder, S, C);
+      return S(1 .. C);
    end End_Encoding;
 
    --[Start_Decoding]-----------------------------------------------------------
 
    overriding
    procedure   Start_Decoding(
-                  Encoder        : access Base64_Encoder)
+                  The_Encoder    : access Base64_Encoder)
    is
    begin
-      -- Set encoder object attributes.
-
-      Initialize_Object(Encoder);
-      Encoder.all.State := State_Decoding;
+      Private_Start_Decoding(The_Encoder);
+      Initialize_Object(The_Encoder);
    end Start_Decoding;
 
    --[Start_Decoding]-----------------------------------------------------------
 
    overriding
    procedure   Start_Decoding(
-                  Encoder        : access Base64_Encoder;
+                  The_Encoder    : access Base64_Encoder;
                   Parameters     : in     List)
    is
    begin
-      -- Set encoder object attributes.
-
-      Initialize_Object(Encoder);
-      Encoder.all.State    := State_Decoding;
-      Encoder.all.Alphabet := Get_Alphabet_From_List(Parameters);
+      Private_Start_Decoding(The_Encoder);
+      Initialize_Object(The_Encoder);
+      The_Encoder.all.Alphabet := Get_Alphabet_From_List(Parameters);
+   exception
+      when others =>
+         Private_Clear_Encoder(The_Encoder.all);
+         Initialize_Object(The_Encoder);
+         raise;      
    end Start_Decoding;
 
    --[Decode]-------------------------------------------------------------------
 
    overriding
    procedure   Decode(
-                  Encoder        : access Base64_Encoder;
+                  With_Encoder   : access Base64_Encoder;
                   Input          : in     String;
                   Output         :    out Byte_Array;
                   Bytes          :    out Natural)
    is
    begin
-      Base64_Decode(Encoder, Input, Output, Bytes);
+      -- Check arguments.
+
+      if With_Encoder.all.State /= State_Decoding then
+         Raise_Exception(
+            CryptAda_Bad_Operation_Error'Identity, 
+            "Encoder is not in decoding state");
+      end if;
+
+      -- If Input'Length is 0 or if the decoding is stopped end process.
+
+      if Input'Length = 0 or else With_Encoder.all.D_Stopped then
+         Bytes := 0;
+         return;
+      end if;
+
+      -- Perform decoding.
+
+      declare
+         TC       : constant Natural := With_Encoder.all.CIB + Input'Length;
+         Chunks   : Natural := TC / Encoded_Chunk_Size;
+         OL       : constant Natural := Decoded_Chunk_Size * Chunks;
+         New_CIB  : constant Natural := TC mod Encoded_Chunk_Size;
+         To_Copy  : Natural;
+         I        : Positive := Input'First;
+         J        : Positive := Output'First;
+         Decoded  : Positive;
+         DC       : Decoded_Chunk;
+      begin
+         -- Check output buffer length.
+
+         if Output'Length < OL then
+            Raise_Exception(
+               CryptAda_Overflow_Error'Identity, 
+               "Output buffer length is not enough");
+         end if;
+
+         -- If there are chunks to decode perform decoding.
+
+         if Chunks > 0 then
+            -- At least one chunk has to be decoded. Check if there are any
+            -- codes in encoder buffer.
+
+            if With_Encoder.all.CIB > 0 then
+               -- There are some codes in internal buffer. Fill the buffer with
+               -- codes from Codes and decode that chunk.
+
+               To_Copy := Encoded_Chunk_Size - With_Encoder.all.CIB;
+               With_Encoder.all.D_Buffer(With_Encoder.all.CIB + 1 .. Encoded_Chunk_Size) := Input(I .. I + To_Copy - 1);
+               Decode_Chunk(
+                  With_Encoder.all.Alphabet,
+                  With_Encoder.all.D_Buffer,
+                  DC,
+                  Decoded);
+               Output(J .. J + Decoded - 1) := DC(1 .. Decoded);
+
+               -- We've processed all codes in encoder buffer.
+
+               With_Encoder.all.CIB := 0;
+
+               -- Check if pad sequence was found.
+
+               if Decoded < Decoded_Chunk_Size then
+                  -- Pad was found. Flag decoding as stopped and return.
+
+                  With_Encoder.all.D_Stopped := True;
+                  Bytes := Decoded;
+                  Increment_Byte_Counter(With_Encoder, Bytes);
+                  Increment_Code_Counter(With_Encoder, To_Copy);                              
+                  return;
+               end if;
+
+               -- Increase input and output indexes and decrease chunk counter.
+
+               I := I + To_Copy;
+               J := J + Decoded;
+               Chunks := Chunks - 1;
+            end if;
+
+            -- Process remaining chunks.
+
+            while Chunks > 0 loop
+               -- Decode chunk and append decoded bytes to output buffer.
+
+               Decode_Chunk(
+                  With_Encoder.all.Alphabet,
+                  Input(I .. I + Encoded_Chunk_Size - 1),
+                  DC,
+                  Decoded);
+               Output(J .. J + Decoded - 1) := DC(1 .. Decoded);
+
+               -- Check if pad sequence was found.
+
+               if Decoded < Decoded_Chunk_Size then
+
+                  -- Pad was found. Flag decoding as stopped and return.
+
+                  With_Encoder.all.D_Stopped := True;
+                  Bytes := J + Decoded - Output'First;
+                  Increment_Byte_Counter(With_Encoder, Bytes);
+                  Increment_Code_Counter(With_Encoder, I + Encoded_Chunk_Size - Input'First);                              
+                  return;
+               end if;
+
+               -- Increase input and output indexes and decrease chunk counter.
+
+               I := I + Encoded_Chunk_Size;
+               J := J + Decoded;
+               Chunks := Chunks - 1;
+            end loop;
+         end if;
+
+         -- Fill internal buffer with remaining codes (if any).
+
+         if New_CIB > With_Encoder.all.CIB then
+            To_Copy := New_CIB - With_Encoder.all.CIB;
+            With_Encoder.all.D_Buffer(With_Encoder.all.CIB + 1 .. New_CIB) := Input(I .. I + To_Copy - 1);
+            With_Encoder.all.CIB := New_CIB;
+         end if;
+         
+         -- Set output bytes ...
+         
+         Bytes := OL;
+         Increment_Byte_Counter(With_Encoder, Bytes);
+         Increment_Code_Counter(With_Encoder, Input'Length);                              
+      end;
    end Decode;
 
    --[Decode]-------------------------------------------------------------------
 
    overriding
    function    Decode(
-                  Encoder        : access Base64_Encoder;
+                  With_Encoder   : access Base64_Encoder;
                   Input          : in     String)
       return   Byte_Array
    is
+      TC          : constant Natural := With_Encoder.all.CIB + Input'Length;
+      OL          : constant Natural := Decoded_Chunk_Size * (TC / Encoded_Chunk_Size);
+      BA          : Byte_Array(1 .. OL);
+      B           : Natural;
    begin
-      return Base64_Decode(Encoder, Input);
+      Decode(With_Encoder, Input, BA, B);
+      return BA(1 .. B);
    end Decode;
 
    --[End_Decoding]-------------------------------------------------------------
 
    overriding
    procedure   End_Decoding(
-                  Encoder        : access Base64_Encoder;
+                  With_Encoder   : access Base64_Encoder;
                   Output         :    out Byte_Array;
                   Bytes          :    out Natural)
    is
    begin
-      Base64_End_Decoding(Encoder, Output, Bytes);
+      -- Check arguments.
+
+      if With_Encoder.all.State /= State_Decoding then
+         Raise_Exception(
+            CryptAda_Bad_Operation_Error'Identity, 
+            "Encoder is not in decoding state");
+      end if;
+
+      -- Decoding finished. The two possible situations are:
+      -- 1. Decoding is stopped because a valid pad sequence was found in input,
+      --    or
+      -- 2. Decoding is not stopped AND there are no codes in encoder buffer.
+      --    Any code in internal buffer means that the total input length was
+      --    not an integral multiple of Encoded_Chunk_Size (4).
+      
+      if With_Encoder.all.D_Stopped or else With_Encoder.all.CIB = 0 then
+         Private_End_Decoding(With_Encoder);
+         Initialize_Object(With_Encoder);
+         Bytes := 0;
+      else
+         Private_End_Decoding(With_Encoder);
+         Initialize_Object(With_Encoder);
+         Raise_Exception(
+            CryptAda_Syntax_Error'Identity, 
+            "Internal buffer contains some codes");
+      end if;
    end End_Decoding;
 
    --[End_Decoding]-------------------------------------------------------------
 
    overriding
    function    End_Decoding(
-                  Encoder        : access Base64_Encoder)
+                  With_Encoder   : access Base64_Encoder)
       return   Byte_Array
    is
+      BA             : Byte_Array(1 .. Decoded_Chunk_Size);
+      B              : Natural;
    begin
-      return Base64_End_Decoding(Encoder);
+      End_Decoding(With_Encoder, BA, B);
+      return BA(1 .. B);
    end End_Decoding;
 
-   --[End_Process]--------------------------------------------------------------
+   --[Set_To_Idle]--------------------------------------------------------------
 
    overriding
-   procedure   End_Process(
-                  Encoder        : access Base64_Encoder)
+   procedure   Set_To_Idle(
+                  The_Encoder    : access Base64_Encoder)
    is
    begin
-      Initialize_Object(Encoder);
-   end End_Process;
+      Private_Clear_Encoder(The_Encoder.all);
+      Initialize_Object(The_Encoder);
+   end Set_To_Idle;
    
    -----------------------------------------------------------------------------
    --[Other Operations]---------------------------------------------------------
    -----------------------------------------------------------------------------
-
-   --[Allocate_Encoder]---------------------------------------------------------
-
-   function    Allocate_Encoder
-      return   Base64_Encoder_Ref
-   is
-   begin
-      return new Base64_Encoder'(Text_Encoder with
-                                    Alphabet    => Standard_Alphabet,
-                                    BIB         => 0,
-                                    E_Buffer    => (others => 16#00#),
-                                    D_Stopped   => False,
-                                    CIB         => 0,
-                                    D_Buffer    => (others => Character'First));
-   exception
-      when others =>
-         Raise_Exception(
-            CryptAda_Storage_Error'Identity, 
-            "Error when allocating Base64_Encoder object");
-   end Allocate_Encoder;
-
-   --[Deallocate_Encoder]-------------------------------------------------------
-
-   procedure   Deallocate_Encoder(
-                  Encoder        : in out Base64_Encoder_Ref)
-   is
-   begin
-      if Encoder /= null then
-         Initialize(Encoder.all);
-         Free(Encoder);
-         Encoder := null;
-      end if;
-   end Deallocate_Encoder;
    
    --[Get_Alphabet]-------------------------------------------------------------
 
@@ -578,6 +926,16 @@ package body CryptAda.Text_Encoders.Base64 is
       return Of_Encoder.all.Alphabet;
    end Get_Alphabet;
 
+   --[Get_Bytes_In_Buffer]------------------------------------------------------
+
+   function    Get_Bytes_In_Buffer(
+                  Of_Encoder     : access Base64_Encoder'Class)
+      return   Natural
+   is
+   begin
+      return Of_Encoder.all.BIB;
+   end Get_Bytes_In_Buffer;
+   
    --[Decoding_Stopped]---------------------------------------------------------
 
    function    Decoding_Stopped(
@@ -599,399 +957,4 @@ package body CryptAda.Text_Encoders.Base64 is
       return (Codes_2_Bytes(For_Alphabet, The_Code) /= Invalid_Code);
    end Is_Valid_Code;
 
-   --[Initialize]---------------------------------------------------------------
-
-   procedure   Initialize(
-                  Object         : in out Base64_Encoder)
-   is
-   begin
-      Object.State      := State_Idle;
-      Object.Alphabet   := Standard_Alphabet;
-      Object.BIB        := 0;
-      Object.E_Buffer   := (others => 16#00#);
-      Object.D_Stopped  := False;
-      Object.CIB        := 0;
-      Object.D_Buffer   := (others => Character'First);
-   end Initialize;
-
-   --[Finalize]-----------------------------------------------------------------
-
-   procedure   Finalize(
-                  Object         : in out Base64_Encoder)
-   is
-   begin
-      Object.State      := State_Idle;
-      Object.Alphabet   := Standard_Alphabet;
-      Object.BIB        := 0;
-      Object.E_Buffer   := (others => 16#00#);
-      Object.D_Stopped  := False;
-      Object.CIB        := 0;
-      Object.D_Buffer   := (others => Character'First);
-   end Finalize;
-
-   --[Base64_Encode]------------------------------------------------------------
-
-   procedure   Base64_Encode(
-                  Encoder        : access Base64_Encoder;
-                  Input          : in     Byte_Array;
-                  Output         :    out String;
-                  Codes          :    out Natural)
-   is
-   begin
-      -- Check arguments.
-
-      if Encoder.all.State /= State_Encoding then
-         Raise_Exception(CryptAda_Bad_Operation_Error'Identity, "Encoder is not in encoding state");
-      end if;
-
-      -- Encode if input length is greater than 0.
-
-      if Input'Length = 0 then
-         Codes := 0;
-      else
-         declare
-            TB       : constant Natural := Encoder.all.BIB + Input'Length;
-            OL       : constant Natural := Encoded_Chunk_Size * (TB / Decoded_Chunk_Size);
-            Chunks   : Natural := TB / Decoded_Chunk_Size;
-            New_BIB  : constant Natural := TB mod Decoded_Chunk_Size;
-            To_Copy  : Natural := 0;
-            I        : Positive := Input'First;
-            J        : Positive := Output'First;
-         begin
-            if Output'Length < OL then
-               Raise_Exception(CryptAda_Overflow_Error'Identity, "Output buffer length is not enough");
-            end if;
-
-            -- Are there any chunks to encode?
-
-            if Chunks > 0 then
-               -- At least one chunk must be encoded. Check if there are any
-               -- bytes in encoding buffer.
-
-               if Encoder.all.BIB > 0 then
-                  -- Fill encoder internal buffer with bytes from Input. Encode
-                  -- the internal encoding buffer and append the encoded chunk
-                  -- to Output.
-
-                  To_Copy := Decoded_Chunk_Size - Encoder.all.BIB;
-                  Encoder.all.E_Buffer(Encoder.all.BIB + 1 .. Decoded_Chunk_Size) := Input(I .. I + To_Copy - 1);
-                  Encode_Chunk(
-                     Encoder.all.Alphabet,
-                     Encoder.all.E_Buffer,
-                     Output(J .. J + Encoded_Chunk_Size - 1));
-
-                  -- Update indexes over Input and Output, and decrement chunk
-                  -- counter.
-
-                  I := I + To_Copy;
-                  J := J + Encoded_Chunk_Size;
-                  Chunks := Chunks - 1;
-
-                  -- Now all the buffered bytes in Encoder were processed.
-
-                  Encoder.all.BIB := 0;
-               end if;
-
-               -- Process remaining chunks.
-
-               while Chunks > 0 loop
-                  -- Encode chunk and append codes to Codes.
-
-                  Encode_Chunk(
-                     Encoder.all.Alphabet,
-                     Input(I .. I + Decoded_Chunk_Size - 1),
-                     Output(J .. J + Encoded_Chunk_Size - 1));
-
-                  -- Update index over Input. Output, and decrement chunk
-                  -- counter.
-
-                  I := I + Decoded_Chunk_Size;
-                  J := J + Encoded_Chunk_Size;
-                  Chunks := Chunks - 1;
-               end loop;
-            end if;
-
-            -- Copy unprocessed bytes to internal buffer (if any)
-
-            if New_BIB > Encoder.all.BIB then
-               To_Copy := New_BIB - Encoder.all.BIB;
-               Encoder.all.E_Buffer(Encoder.all.BIB + 1 .. New_BIB) := Input(I .. I + To_Copy - 1);
-               Encoder.all.BIB := New_BIB;
-            end if;
-
-            -- Set the number of copied codes.
-
-            Codes := OL;
-         end;
-      end if;
-   end Base64_Encode;
-
-   --[Base64_Encode]------------------------------------------------------------
-
-   function    Base64_Encode(
-                  Encoder        : access Base64_Encoder;
-                  Input          : in     Byte_Array)
-      return   String
-   is
-      TB       : constant Natural := Encoder.all.BIB + Input'Length;
-      OL       : constant Natural := Encoded_Chunk_Size * (TB / Decoded_Chunk_Size);
-      S        : String(1 .. OL);
-      C        : Natural;
-   begin
-      Encode(Encoder, Input, S, C);
-      return S(1 .. C);
-   end Base64_Encode;
-
-   --[Base64_End_Encoding]------------------------------------------------------
-
-   procedure   Base64_End_Encoding(
-                  Encoder        : access Base64_Encoder;
-                  Output         :    out String;
-                  Codes          :    out Natural)
-   is
-      PF             : Positive;
-      OL             : Positive;
-   begin
-      -- Check arguments.
-
-      if Encoder.all.State /= State_Encoding then
-         Raise_Exception(CryptAda_Bad_Operation_Error'Identity, "Encoder is not in encoding state");
-      end if;
-
-      -- Check if there are any buffered bytes.
-
-      if Encoder.all.BIB = 0 then
-         Codes := 0;
-      else
-         -- One more chunk to go.
-
-         if Output'Length < Encoded_Chunk_Size then
-            Raise_Exception(CryptAda_Overflow_Error'Identity, "Output buffer length is not enough");
-         end if;
-
-         -- We have either 1 or 2 bytes left in buffer. We need to encode the
-         -- chunk and perform padding as required by RFC 4648. Zeroize remaining
-         -- positions of the internal buffer and encode.
-
-         OL := Output'First + Encoded_Chunk_Size - 1;
-
-         Encoder.all.E_Buffer(Encoder.all.BIB + 1 .. Encoder.all.E_Buffer'Last) := (others => 16#00#);
-         Encode_Chunk(
-            Encoder.all.Alphabet,
-            Encoder.all.E_Buffer,
-            Output(Output'First .. OL));
-
-         -- Perform padding.
-
-         PF := Output'First + Encoder.all.BIB + 1;
-         Output(PF .. OL) := (others => Pad_Code);
-
-         -- Set Codes.
-
-         Codes := Encoded_Chunk_Size;
-      end if;
-
-      -- Reset encoder object.
-
-      Initialize_Object(Encoder);
-   end Base64_End_Encoding;
-
-   --[Base64_End_Encoding]------------------------------------------------------
-
-   function    Base64_End_Encoding(
-                  Encoder        : access Base64_Encoder)
-      return   String
-   is
-      S              : String(1 .. Encoded_Chunk_Size);
-      C              : Natural;
-   begin
-      End_Encoding(Encoder, S, C);
-      return S(1 .. C);
-   end Base64_End_Encoding;
-
-   --[Base64_Decode]------------------------------------------------------------
-
-   procedure   Base64_Decode(
-                  Encoder        : access Base64_Encoder;
-                  Input          : in     String;
-                  Output         :    out Byte_Array;
-                  Bytes          :    out Natural)
-   is
-   begin
-      -- Check arguments.
-
-      if Encoder.all.State /= State_Decoding then
-         Raise_Exception(CryptAda_Bad_Operation_Error'Identity, "Encoder is not in decoding state");
-      end if;
-
-      -- If Input'Length is 0 or if the decoding is stopped end process.
-
-      if Input'Length = 0 or else Encoder.all.D_Stopped then
-         Bytes := 0;
-         return;
-      end if;
-
-      -- Perform decoding.
-
-      declare
-         TC       : constant Natural := Encoder.all.CIB + Input'Length;
-         OL       : constant Natural := Decoded_Chunk_Size * (TC / Encoded_Chunk_Size);
-         Chunks   : Natural := TC / Encoded_Chunk_Size;
-         New_CIB  : constant Natural := TC mod Encoded_Chunk_Size;
-         To_Copy  : Natural;
-         I        : Positive := Input'First;
-         J        : Positive := Output'First;
-         Decoded  : Positive;
-         DC       : Decoded_Chunk;
-      begin
-         -- Check output buffer length.
-
-         if Output'Length < OL then
-            Raise_Exception(CryptAda_Overflow_Error'Identity, "Output buffer length is not enough");
-         end if;
-
-         -- If there are chunks to decode perform decoding.
-
-         if Chunks > 0 then
-            -- At least one chunk has to be decoded. Check if there are any
-            -- codes in encoder buffer.
-
-            if Encoder.all.CIB > 0 then
-               -- There are some codes in internal buffer. Fill the buffer with
-               -- codes from Codes and decode that chunk.
-
-               To_Copy := Encoded_Chunk_Size - Encoder.all.CIB;
-               Encoder.all.D_Buffer(Encoder.all.CIB + 1 .. Encoded_Chunk_Size) := Input(I .. I + To_Copy - 1);
-               Decode_Chunk(
-                  Encoder.all.Alphabet,
-                  Encoder.all.D_Buffer,
-                  DC,
-                  Decoded);
-               Output(J .. J + Decoded - 1) := DC(1 .. Decoded);
-
-               -- We've processed all codes in encoder buffer.
-
-               Encoder.all.CIB := 0;
-
-               -- Check if pad sequence was found.
-
-               if Decoded < Decoded_Chunk_Size then
-                  -- Pad was found. Flag decoding as stopped and return.
-
-                  Encoder.all.D_Stopped := True;
-                  Bytes := Decoded;
-                  return;
-               end if;
-
-               -- Increase input and output indexes and decrease chunk counter.
-
-               I := I + To_Copy;
-               J := J + Decoded;
-               Chunks := Chunks - 1;
-            end if;
-
-            -- Process remaining chunks.
-
-            while Chunks > 0 loop
-               -- Decode chunk and append decoded bytes to output buffer.
-
-               Decode_Chunk(
-                  Encoder.all.Alphabet,
-                  Input(I .. I + Encoded_Chunk_Size - 1),
-                  DC,
-                  Decoded);
-               Output(J .. J + Decoded - 1) := DC(1 .. Decoded);
-
-               -- Check if pad sequence was found.
-
-               if Decoded < Decoded_Chunk_Size then
-
-                  -- Pad was found. Flag decoding as stopped and return.
-
-                  Encoder.all.D_Stopped := True;
-                  Bytes := J + Decoded - Output'First;
-                  return;
-               end if;
-
-               -- Increase input and output indexes and decrease chunk counter.
-
-               I := I + Encoded_Chunk_Size;
-               J := J + Decoded;
-               Chunks := Chunks - 1;
-            end loop;
-         end if;
-
-         -- Fill internal buffer with remaining codes (if any).
-
-         if New_CIB > Encoder.all.CIB then
-            To_Copy := New_CIB - Encoder.all.CIB;
-            Encoder.all.D_Buffer(Encoder.all.CIB + 1 .. New_CIB) := Input(I .. I + To_Copy - 1);
-            Encoder.all.CIB := New_CIB;
-         end if;
-         
-         -- Set output bytes ...
-         
-         Bytes := OL;
-      end;
-   end Base64_Decode;
-
-   --[Base64_Decode]------------------------------------------------------------
-
-   function    Base64_Decode(
-                  Encoder        : access Base64_Encoder;
-                  Input          : in     String)
-      return   Byte_Array
-   is
-      TC          : constant Natural := Encoder.all.CIB + Input'Length;
-      OL          : constant Natural := Decoded_Chunk_Size * (TC / Encoded_Chunk_Size);
-      BA          : Byte_Array(1 .. OL);
-      B           : Natural;
-   begin
-      Decode(Encoder, Input, BA, B);
-      return BA(1 .. B);
-   end Base64_Decode;
-
-   --[Base64_End_Decoding]------------------------------------------------------
-
-   procedure   Base64_End_Decoding(
-                  Encoder        : access Base64_Encoder;
-                  Output         :    out Byte_Array;
-                  Bytes          :    out Natural)
-   is
-   begin
-      -- Check arguments.
-
-      if Encoder.all.State /= State_Decoding then
-         Raise_Exception(CryptAda_Bad_Operation_Error'Identity, "Encoder is not in decoding state");
-      end if;
-
-      -- Decoding finished. The two possible situations are:
-      -- 1. Decoding is stopped because a valid pad sequence was found in input,
-      --    or
-      -- 2. Decoding is not stopped AND there are no codes in encoder buffer.
-      --    Any code in internal buffer means that the total input length was
-      --    not an integral multiple of Encoded_Chunk_Size (4).
-
-      if Encoder.all.D_Stopped or else Encoder.all.CIB = 0 then
-         Initialize_Object(Encoder);
-         Bytes := 0;
-      else
-         Initialize_Object(Encoder);
-         Raise_Exception(CryptAda_Syntax_Error'Identity, "Internal buffer contains some codes");
-      end if;
-   end Base64_End_Decoding;
-
-   --[Base64_End_Decoding]------------------------------------------------------
-
-   function    Base64_End_Decoding(
-                  Encoder        : access Base64_Encoder)
-      return   Byte_Array
-   is
-      BA             : Byte_Array(1 .. Decoded_Chunk_Size);
-      B              : Natural;
-   begin
-      End_Decoding(Encoder, BA, B);
-      return BA(1 .. B);
-   end Base64_End_Decoding;
-   
 end CryptAda.Text_Encoders.Base64;

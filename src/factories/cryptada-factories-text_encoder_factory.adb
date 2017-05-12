@@ -42,7 +42,7 @@ with CryptAda.Text_Encoders;              use CryptAda.Text_Encoders;
 with CryptAda.Text_Encoders.Hex;          use CryptAda.Text_Encoders.Hex;
 with CryptAda.Text_Encoders.Base16;       use CryptAda.Text_Encoders.Base16;
 with CryptAda.Text_Encoders.Base64;       use CryptAda.Text_Encoders.Base64;
-with CryptAda.Text_Encoders.Base64.MIME;  use CryptAda.Text_Encoders.Base64.MIME;
+with CryptAda.Text_Encoders.MIME;         use CryptAda.Text_Encoders.MIME;
 
 package body CryptAda.Factories.Text_Encoder_Factory is
 
@@ -50,7 +50,7 @@ package body CryptAda.Factories.Text_Encoder_Factory is
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   Name_Encoder_Id            : constant Identifier_Text := "Encoder_Id";
+   Name_Encoder_Id            : constant Identifier_Text := "Id";
    Name_Operation             : constant Identifier_Text := "Operation";
    Name_Encoder_Params        : constant Identifier_Text := "Encoder_Params";
    
@@ -65,7 +65,7 @@ package body CryptAda.Factories.Text_Encoder_Factory is
 
    procedure   Parse_Parameters_List(
                   Parameters     : in     List;
-                  Encoder_Id     :    out Text_Encoder_Id;
+                  Id             :    out Encoder_Id;
                   Encoding       :    out Boolean;
                   Encoder_Parms  : in out List);
 
@@ -77,7 +77,7 @@ package body CryptAda.Factories.Text_Encoder_Factory is
 
    procedure   Parse_Parameters_List(
                   Parameters     : in     List;
-                  Encoder_Id     :    out Text_Encoder_Id;
+                  Id             :    out Encoder_Id;
                   Encoding       :    out Boolean;
                   Encoder_Parms  : in out List)
    is
@@ -88,7 +88,7 @@ package body CryptAda.Factories.Text_Encoder_Factory is
       -- Get the encoder identifier.
       
       Get_Value(Parameters, Name_Encoder_Id, TE_Id);
-      Encoder_Id := Text_Encoder_Id'Value(Identifier_2_Text(Te_Id));
+      Id := Encoder_Id'Value(Identifier_2_Text(TE_Id));
       
       -- Get operation identifier.
       
@@ -132,55 +132,57 @@ package body CryptAda.Factories.Text_Encoder_Factory is
    --[Create_Text_Encoder]------------------------------------------------------
 
    function    Create_Text_Encoder(
-                  Encoder_Id     : in     Text_Encoder_Id)
-      return   Text_Encoder_Ref
+                  Id             : in     Encoder_Id)
+      return   Encoder_Handle
    is
-      Ref            : Text_Encoder_Ref;
+      EH             : Encoder_Handle;
    begin
-      case Encoder_Id is
+      case Id is
          when TE_Hexadecimal =>
-            Ref := Text_Encoder_Ref(CryptAda.Text_Encoders.Hex.Allocate_Encoder);
+            EH := CryptAda.Text_Encoders.Hex.Get_Encoder_Handle;
          when TE_Base16 =>
-            Ref := Text_Encoder_Ref(CryptAda.Text_Encoders.Base16.Allocate_Encoder);
+            EH := CryptAda.Text_Encoders.Base16.Get_Encoder_Handle;
          when TE_Base64 =>
-            Ref := Text_Encoder_Ref(CryptAda.Text_Encoders.Base64.Allocate_Encoder);
+            EH := CryptAda.Text_Encoders.Base64.Get_Encoder_Handle;
          when TE_MIME =>
-            Ref := Text_Encoder_Ref(CryptAda.Text_Encoders.Base64.MIME.Allocate_Encoder);
+            EH := CryptAda.Text_Encoders.MIME.Get_Encoder_Handle;
       end case;
       
-      return Ref;
+      return EH;
    end Create_Text_Encoder;
       
    --[Create_Text_Encoder_And_Start]--------------------------------------------
       
    function    Create_Text_Encoder_And_Start(
                   Parameters     : in     List)
-      return   Text_Encoder_Ref
+      return   Encoder_Handle
    is
-      Ref            : Text_Encoder_Ref;
-      Encoder_Id     : Text_Encoder_Id;
+      EH             : Encoder_Handle;
+      EP             : Encoder_Ptr;
+      Id             : Encoder_Id;
       Encoding       : Boolean;
       Params         : List;
    begin
       -- Parse parameters list.
       
-      Parse_Parameters_List(Parameters, Encoder_Id, Encoding, Params);
+      Parse_Parameters_List(Parameters, Id, Encoding, Params);
       
       -- Create object.
       
-      Ref := Create_Text_Encoder(Encoder_Id);
+      EH := Create_Text_Encoder(Id);
+      EP := Get_Encoder_Ptr(EH);
       
       -- Start object.
       
       if Encoding then
-         Start_Encoding(Ref, Params);
+         Start_Encoding(EP, Params);
       else
-         Start_Decoding(Ref, Params);
+         Start_Decoding(EP, Params);
       end if;
       
       -- Return reference.
       
-      return Ref;
+      return EH;
    end Create_Text_Encoder_And_Start;
 
 end CryptAda.Factories.Text_Encoder_Factory;

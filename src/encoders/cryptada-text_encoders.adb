@@ -31,20 +31,174 @@
 --    1.0   20170427 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
+with CryptAda.Names;                   use CryptAda.Names;
+
 package body CryptAda.Text_Encoders is
 
    -----------------------------------------------------------------------------
-   --[Text_Encoder operations]--------------------------------------------------
+   --[Encoder_Handle Operations]------------------------------------------------
    -----------------------------------------------------------------------------
 
+   --[Is_Valid_Handle]----------------------------------------------------------
+
+   function    Is_Valid_Handle(
+                  The_Handle     : in     Encoder_Handle)
+      return   Boolean
+   is
+   begin
+      return Encoder_Handles.Is_Valid(Encoder_Handles.Handle(The_Handle));
+   end Is_Valid_Handle;
+
+   --[Invalidate_Handle]--------------------------------------------------------
+
+   procedure   Invalidate_Handle(
+                  The_Handle     : in out Encoder_Handle)
+   is
+   begin
+      Encoder_Handles.Invalidate(Encoder_Handles.Handle(The_Handle));   
+   end Invalidate_Handle;
+   
+   --[Get_Encoder_Ptr]----------------------------------------------------------
+
+   function    Get_Encoder_Ptr(
+                  From_Handle    : in     Encoder_Handle)
+      return   Encoder_Ptr
+   is
+   begin
+      return Encoder_Handles.Ptr(Encoder_Handles.Handle(From_Handle));
+   end Get_Encoder_Ptr;
+
+   -----------------------------------------------------------------------------
+   --[Public Text_Encoder operations]-------------------------------------------
+   -----------------------------------------------------------------------------
+
+   --[Get_Encoder_Id]-----------------------------------------------------------
+
+   function    Get_Encoder_Id(
+                  Of_Encoder     : access Encoder'Class)
+      return   Encoder_Id
+   is
+   begin
+      return Of_Encoder.all.Id;
+   end Get_Encoder_Id;
+   
    --[Get_State]----------------------------------------------------------------
 
    function    Get_State(
-                  Of_Encoder     : access Text_Encoder'Class)
+                  Of_Encoder     : access Encoder'Class)
       return   Encoder_State
    is
    begin
       return Of_Encoder.all.State;
    end Get_State;
 
+   --[Get_Byte_Count]-----------------------------------------------------------
+
+   function    Get_Byte_Count(
+                  In_Encoder     : access Encoder'Class)
+      return   Natural
+   is
+   begin
+      return In_Encoder.all.Byte_Count;
+   end Get_Byte_Count;
+
+   --[Get_Code_Count]-----------------------------------------------------------
+
+   function    Get_Code_Count(
+                  In_Encoder     : access Encoder'Class)
+      return   Natural
+   is
+   begin
+      return In_Encoder.all.Code_Count;
+   end Get_Code_Count;
+
+   -----------------------------------------------------------------------------
+   --[Private Text_Encoder operations]------------------------------------------
+   -----------------------------------------------------------------------------
+
+   --[Increment_Byte_Counter]---------------------------------------------------
+
+   procedure   Increment_Byte_Counter(
+                  In_Encoder     : access Encoder;
+                  Amount         : in     Natural)
+   is
+   begin
+      In_Encoder.all.Byte_Count := In_Encoder.all.Byte_Count + Amount;
+   end Increment_Byte_Counter;
+   
+   --[Increment_Code_Counter]---------------------------------------------------
+
+   procedure   Increment_Code_Counter(
+                  In_Encoder     : access Encoder;
+                  Amount         : in     Natural)
+   is
+   begin
+      In_Encoder.all.Code_Count := In_Encoder.all.Code_Count + Amount;
+   end Increment_Code_Counter;
+
+   --[Private_Clear_Encoder]----------------------------------------------------
+
+   procedure   Private_Clear_Encoder(
+                  The_Encoder    : in out Encoder)
+   is
+   begin
+      The_Encoder.State      := State_Idle;
+      The_Encoder.Byte_Count := 0;
+      The_Encoder.Code_Count := 0;
+   end Private_Clear_Encoder;
+
+   --[Private_Start_Encoding]---------------------------------------------------
+
+   procedure   Private_Start_Encoding(
+                  With_Encoder    : access Encoder)
+   is
+   begin
+      With_Encoder.all.State        := State_Encoding;
+      With_Encoder.all.Byte_Count   := 0;
+      With_Encoder.all.Code_Count   := 0;   
+   end Private_Start_Encoding;
+
+   --[Private_End_Encoding]-----------------------------------------------------
+
+   procedure   Private_End_Encoding(
+                  With_Encoder    : access Encoder)
+   is
+   begin
+      With_Encoder.all.State        := State_Idle;
+   end Private_End_Encoding;
+
+   --[Private_Start_Decoding]---------------------------------------------------
+
+   procedure   Private_Start_Decoding(
+                  With_Encoder    : access Encoder)
+   is
+   begin
+      With_Encoder.all.State        := State_Decoding;
+      With_Encoder.all.Byte_Count   := 0;
+      With_Encoder.all.Code_Count   := 0;   
+   end Private_Start_Decoding;
+
+   --[Private_End_Decoding]-----------------------------------------------------
+
+   procedure   Private_End_Decoding(
+                  With_Encoder    : access Encoder)
+   is
+   begin
+      With_Encoder.all.State        := State_Idle;
+   end Private_End_Decoding;
+
+   -----------------------------------------------------------------------------
+   --[Encoder_Handle Private Subprograms]---------------------------------------
+   -----------------------------------------------------------------------------
+   
+   --[Ref]----------------------------------------------------------------------
+   
+   function    Ref(
+                  Thing          : in     Encoder_Ptr)
+      return   Encoder_Handle
+   is
+   begin
+      return (Encoder_Handles.Ref(Thing) with null record);
+   end Ref;                     
+   
 end CryptAda.Text_Encoders;

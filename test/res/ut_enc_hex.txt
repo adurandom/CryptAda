@@ -6,108 +6,136 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Enc_Hex
 Description              : Unit test driver for CryptAda.Text_Encoders.Hex functionality.
-Started                  : 2017/05/10 - 08:16:11
+Started                  : 2017/05/11 - 12:33:59
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Testing object state during encoding
-Started         : 2017/05/10 - 08:16:11
+Started         : 2017/05/11 - 12:33:59
 --------------------------------------------------------------------------------
-[I] Before allocating encoder encoder must be null
-[I] Information of Text_Encoder object:
-    Object reference is null
-[I] Allocating encoder object. Object state must be State_Idle
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_IDLE
-    Has buffered code           : FALSE
+[I] Before getting an encoder handle ...
+[I] Information of Encoder object:
+    Invalid encoder handle
+[I] Getting an encoder handle object. State must be State_Idle
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] State is State_Idle
 [I] Calling Start_Encoding. State must be State_Encoding
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_ENCODING
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] State is State_Encoding
 [I] Encoding an array
-Array to encode :
+    Array Length    :  16
+    Array to encode :
 16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
-Array Length    :  16
-Encoding results: "000102030405060708090a0b0c0d0e0f"
+    Encoding results: "000102030405060708090a0b0c0d0e0f"
 [I] Calling End_Encoding
-Expected encoding results: "000102030405060708090a0b0c0d0e0f"
-Obtained encoding results: "000102030405060708090a0b0c0d0e0f"
+    Expected encoding results: "000102030405060708090a0b0c0d0e0f"
+    Obtained encoding results: "000102030405060708090a0b0c0d0e0f"
 [I] State must be State_Idle
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_IDLE
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  16
+    Encoder code count     :  32
+    Has buffered code      : FALSE
 [I] State is State_Idle
-[I] Deallocating encoder object
-[I] After deallocating encoder encoder must be null
-[I] Information of Text_Encoder object:
-    Object reference is null
+[I] Invalidating handle
+[I] Information of Encoder object:
+    Invalid encoder handle
+[I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/05/10 - 08:16:11
+Finished        : 2017/05/11 - 12:33:59
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Start encoding
-Started         : 2017/05/10 - 08:16:11
+Started         : 2017/05/11 - 12:33:59
 --------------------------------------------------------------------------------
 [I] Testing Start_Encoding procedures
 [I] Default Start_Encoding procedure
     Before Start_Encoding, the object is in State_Idle
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_IDLE
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
     After Start_Encoding, the object is in State_Encoding
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_ENCODING
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] Start_Encoding with parameters
     Parameter list is ignored for Hexadecimal text encoder
     Calling Start_Encoding with list: ()
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_ENCODING
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
     Calling Start_Encoding with list: (Parameter_1=>"Hello",Parameter_2=>2)
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_ENCODING
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
+[I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/05/10 - 08:16:11
+Finished        : 2017/05/11 - 12:33:59
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Encode
-Started         : 2017/05/10 - 08:16:11
+Started         : 2017/05/11 - 12:33:59
 --------------------------------------------------------------------------------
 [I] Testing Encode (procedure form)
 [I] Trying encode will raise CryptAda_Bad_Operation_Error if encoder was not initialized for encoding
     Encoder object:
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_IDLE
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] Caught CryptAda_Bad_Operation_Error
     Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
     Message  : "Encoder is not in encoding state"
 [I] Start encoding
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_ENCODING
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] Trying Encode with a buffer too short will raise CryptAda_Overflow_Error
 Array to encode :
 16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
@@ -120,129 +148,166 @@ Expected encoding results: "000102030405060708090a0b0c0d0e0f"
 Encoding length          :  32
 Obtained encoding results: "000102030405060708090a0b0c0d0e0f"
 [I] End encoding
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_IDLE
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  16
+    Encoder code count     :  32
+    Has buffered code      : FALSE
+[I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/05/10 - 08:16:11
+Finished        : 2017/05/11 - 12:33:59
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Encode
-Started         : 2017/05/10 - 08:16:11
+Started         : 2017/05/11 - 12:33:59
 --------------------------------------------------------------------------------
 [I] Testing Encode (function form)
 [I] Trying encode will raise CryptAda_Bad_Operation_Error if encoder was not initialized for encoding
     Encoder object:
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_IDLE
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] Caught CryptAda_Bad_Operation_Error
     Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
     Message  : "Encoder is not in encoding state"
 [I] Start encoding
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_ENCODING
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] Now we perform encoding ...
 Expected encoding results: "000102030405060708090a0b0c0d0e0f"
 Obtained encoding results: "000102030405060708090a0b0c0d0e0f"
 [I] End encoding
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_IDLE
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  16
+    Encoder code count     :  32
+    Has buffered code      : FALSE
+[I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/05/10 - 08:16:11
+Finished        : 2017/05/11 - 12:33:59
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : End encoding
-Started         : 2017/05/10 - 08:16:11
+Started         : 2017/05/11 - 12:33:59
 --------------------------------------------------------------------------------
 [I] Testing End_Encoding (procedure form)
 [I] Trying End_Encoding will raise CryptAda_Bad_Operation_Error if encoder was not initialized for encoding
     Encoder object:
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_IDLE
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] Caught CryptAda_Bad_Operation_Error
     Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
     Message  : "Encoder is not in encoding state"
 [I] Start encoding
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_ENCODING
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] End encoding will return always 0 as encoding length
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_IDLE
-    Has buffered code           : FALSE
-Encoding length          :  0
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
+[I] Obtained encoding length:  0
+[I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/05/10 - 08:16:11
+Finished        : 2017/05/11 - 12:33:59
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : End encoding
-Started         : 2017/05/10 - 08:16:11
+Started         : 2017/05/11 - 12:33:59
 --------------------------------------------------------------------------------
 [I] Testing End_Encoding (function form)
 [I] Trying End_Encoding will raise CryptAda_Bad_Operation_Error if encoder was not initialized for encoding
     Encoder object:
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_IDLE
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] Caught CryptAda_Bad_Operation_Error
     Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
     Message  : "Encoder is not in encoding state"
 [I] Start encoding
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_ENCODING
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] End_Encoding will always return a 0 length string
-Obtained String: ""
+[I] Obtained String: ""
+[I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/05/10 - 08:16:11
+Finished        : 2017/05/11 - 12:33:59
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
 Description     : Testing object state during decoding
-Started         : 2017/05/10 - 08:16:11
+Started         : 2017/05/11 - 12:33:59
 --------------------------------------------------------------------------------
-[I] Before allocating encoder encoder must be null
-[I] Information of Text_Encoder object:
-    Object reference is null
-[I] Allocating encoder object. Object state must be State_Idle
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_IDLE
-    Has buffered code           : FALSE
+[I] Before getting an encoder handle ...
+[I] Information of Encoder object:
+    Invalid encoder handle
+[I] Getting an encoder handle object. State must be State_Idle
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] State is State_Idle
 [I] Calling Start_Decoding. State must be State_Decoding
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_DECODING
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] State is State_Decoding
 [I] Decoding a string
 String to decode : "000102030405060708090a0b0c0d0e0f"
@@ -257,76 +322,98 @@ String length    :  32
 - Decoded array: 
 
 [I] State must be State_Idle
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_IDLE
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  16
+    Encoder code count     :  32
+    Has buffered code      : FALSE
 [I] State is State_Idle
-[I] Deallocating encoder object
-[I] After deallocating encoder encoder must be null
-[I] Information of Text_Encoder object:
-    Object reference is null
+[I] Invalidating handle
+[I] Information of Encoder object:
+    Invalid encoder handle
+[I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/05/10 - 08:16:11
+Finished        : 2017/05/11 - 12:33:59
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 8
 Description     : Start decoding
-Started         : 2017/05/10 - 08:16:11
+Started         : 2017/05/11 - 12:33:59
 --------------------------------------------------------------------------------
 [I] Testing Start_Decoding procedures
 [I] Default Start_Decoding procedure
-    Before Start_Encoding, the object is in State_Idle
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_IDLE
-    Has buffered code           : FALSE
-    After Start_Encoding, the object is in State_Encoding
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_ENCODING
-    Has buffered code           : FALSE
+    Before Start_Decoding, the object is in State_Idle
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
+    After Start_Decoding, the object is in State_Decoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] Start_Decoding with parameters
     Parameter list is ignored for Hexadecimal text encoder
     Calling Start_Decoding with list: ()
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_DECODING
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
     Calling Start_Decoding with list: (Parameter_1=>"Hello",Parameter_2=>2)
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_DECODING
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
+[I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 8
 Test Case Result: PASSED
-Finished        : 2017/05/10 - 08:16:11
+Finished        : 2017/05/11 - 12:33:59
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 9
 Description     : Decode
-Started         : 2017/05/10 - 08:16:11
+Started         : 2017/05/11 - 12:33:59
 --------------------------------------------------------------------------------
 [I] Testing Decode (procedure form)
 [I] Decode will raise CryptAda_Bad_Operation_Error if encoder was not initialized for decoding
     Encoder object:
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_IDLE
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] Caught CryptAda_Bad_Operation_Error
     Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
     Message  : "Encoder is not in decoding state"
 [I] Start decoding
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_DECODING
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] Trying Decode with a buffer too short will raise CryptAda_Overflow_Error
 [I] Decoding a string
 String to decode : "000102030405060708090a0b0c0d0e0f"
@@ -342,40 +429,50 @@ Expected decoding results:
 - Decoded array: 
 16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
 [I] End decoding
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_IDLE
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  16
+    Encoder code count     :  32
+    Has buffered code      : FALSE
 [I] End_Decoding results:
 - Decoded bytes:  0
 - Decoded array: 
 
+[I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 9
 Test Case Result: PASSED
-Finished        : 2017/05/10 - 08:16:11
+Finished        : 2017/05/11 - 12:33:59
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 10
 Description     : Decode
-Started         : 2017/05/10 - 08:16:11
+Started         : 2017/05/11 - 12:33:59
 --------------------------------------------------------------------------------
 [I] Testing Decode (function form)
 [I] Decode will raise CryptAda_Bad_Operation_Error if encoder was not initialized for decoding
     Encoder object:
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_IDLE
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] Caught CryptAda_Bad_Operation_Error
     Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
     Message  : "Encoder is not in decoding state"
 [I] Start decoding
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_DECODING
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] Now we perform decoding ...
 Expected decoding results: 
 16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
@@ -384,87 +481,109 @@ Expected decoding results:
 - Decoded array: 
 16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
 [I] End Decoding
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_IDLE
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  16
+    Encoder code count     :  32
+    Has buffered code      : FALSE
 [I] End_Decoding results:
 - Decoded bytes:  0
 - Decoded array: 
 
+[I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 10
 Test Case Result: PASSED
-Finished        : 2017/05/10 - 08:16:11
+Finished        : 2017/05/11 - 12:33:59
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 11
 Description     : End decoding
-Started         : 2017/05/10 - 08:16:11
+Started         : 2017/05/11 - 12:33:59
 --------------------------------------------------------------------------------
 [I] Testing End_Decoding (procedure form)
 [I] Trying End_Decoding will raise CryptAda_Bad_Operation_Error if encoder was not initialized for decoding
     Encoder object:
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_IDLE
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] Caught CryptAda_Bad_Operation_Error
     Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
     Message  : "Encoder is not in decoding state"
 [I] Start decoding
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_DECODING
-    Has buffered code           : FALSE
-[I] End_Decoding will return always 0 as encoding length
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_IDLE
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
+[I] End_Decoding will return always 0 as decoding length
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
+Decoding length:  0
 Decoded array: 
 
-Decoding length          :  0
+[I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 11
 Test Case Result: PASSED
-Finished        : 2017/05/10 - 08:16:11
+Finished        : 2017/05/11 - 12:33:59
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 12
 Description     : End decoding
-Started         : 2017/05/10 - 08:16:11
+Started         : 2017/05/11 - 12:33:59
 --------------------------------------------------------------------------------
 [I] Testing End_Decoding (function form)
 [I] End_Decoding will raise CryptAda_Bad_Operation_Error if encoder was not initialized for decoding
     Encoder object:
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_IDLE
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] Caught CryptAda_Bad_Operation_Error
     Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
     Message  : "Encoder is not in decoding state"
 [I] Start decoding
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_DECODING
-    Has buffered code           : FALSE
-[I] End_Decoding will always return a 0 length string
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
+[I] End_Decoding will always return a 0 length byte array
+Decoded array length:  0
 Decoded array: 
 
+[I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 12
 Test Case Result: PASSED
-Finished        : 2017/05/10 - 08:16:11
+Finished        : 2017/05/11 - 12:33:59
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 13
 Description     : Step by step encoding
-Started         : 2017/05/10 - 08:16:11
+Started         : 2017/05/11 - 12:33:59
 --------------------------------------------------------------------------------
 [I] Encoding a test byte array one byte at a time
 Encoding byte  1 (16#00#)
@@ -500,16 +619,17 @@ Encoded so far: "000102030405060708090a0b0c0d0e"
 Encoding byte  16 (16#0F#)
 Encoded so far: "000102030405060708090a0b0c0d0e0f"
 Final encoded : "000102030405060708090a0b0c0d0e0f"
+[I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 13
 Test Case Result: PASSED
-Finished        : 2017/05/10 - 08:16:11
+Finished        : 2017/05/11 - 12:33:59
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 14
 Description     : Step by step decoding
-Started         : 2017/05/10 - 08:16:11
+Started         : 2017/05/11 - 12:33:59
 --------------------------------------------------------------------------------
 [I] Decoding a test encoded string one code at a time
 Decoding code  1 ('0')
@@ -610,16 +730,17 @@ Decoded so far:  16
 16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
 Final decoded : 
 16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
+[I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 14
 Test Case Result: PASSED
-Finished        : 2017/05/10 - 08:16:11
+Finished        : 2017/05/11 - 12:33:59
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 15
 Description     : Syntax error conditions during decoding
-Started         : 2017/05/10 - 08:16:11
+Started         : 2017/05/11 - 12:33:59
 --------------------------------------------------------------------------------
 [I] Trying to decode some erroneous encoded strings
 [I] Trying to decode: "    "
@@ -644,34 +765,44 @@ Started         : 2017/05/10 - 08:16:11
 [I] Caught CryptAda_Syntax_Error
     Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
     Message  : "Odd number of codes"
+[I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 15
 Test Case Result: PASSED
-Finished        : 2017/05/10 - 08:16:11
+Finished        : 2017/05/11 - 12:33:59
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 16
 Description     : Testing buffering
-Started         : 2017/05/10 - 08:16:11
+Started         : 2017/05/11 - 12:33:59
 --------------------------------------------------------------------------------
 [I] Testing buffering when decoding
 [I] Encoder object before Start_Decoding:
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_IDLE
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] Encoder object after Start_Decoding:
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_DECODING
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] Decoding string: "000102030405060708090a0b0c0d0e0" (odd number of codes)
 [I] Encoder object after Decode:
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_DECODING
-    Has buffered code           : TRUE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  15
+    Encoder code count     :  31
+    Has buffered code      : TRUE
 Decoded so far:  15
 16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#
 [I] Calling to Has_Buffered_Code must return True
@@ -682,16 +813,22 @@ Has_Buffered_Code => TRUE
     Message  : "Odd number of codes"
 [I] Repeating the process now decoding the last code
 [I] Encoder object after Start_Decoding:
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_DECODING
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Has buffered code      : FALSE
 [I] Decoding string: "000102030405060708090a0b0c0d0e0" (odd number of codes)
 [I] Encoder object after Decode:
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_DECODING
-    Has buffered code           : TRUE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  15
+    Encoder code count     :  31
+    Has buffered code      : TRUE
 Decoded so far:  15
 16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#
 [I] Calling to Has_Buffered_Code must return True
@@ -701,10 +838,13 @@ Decoded bytes in last operation:  1
 Decoded so far:  16
 16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
 [I] Encoder object after Decode:
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_DECODING
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  16
+    Encoder code count     :  32
+    Has buffered code      : FALSE
 [I] Calling to Has_Buffered_Code must return False
 Has_Buffered_Code => FALSE
 [I] Calling End_Decoding
@@ -712,18 +852,62 @@ Decoded:  16
 16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
 [I] Encoder object after Start_Decoding:
 [I] Encoder object after Decode:
-[I] Information of Text_Encoder object:
-    Text_Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
-    Text_Encoder state          : STATE_IDLE
-    Has buffered code           : FALSE
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.HEX.HEX_ENCODER"
+    Encoder id             : TE_HEXADECIMAL
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  16
+    Encoder code count     :  32
+    Has buffered code      : FALSE
+[I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 16
 Test Case Result: PASSED
-Finished        : 2017/05/10 - 08:16:11
+Finished        : 2017/05/11 - 12:33:59
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 17
+Description     : Bulk encoding
+Started         : 2017/05/11 - 12:33:59
+--------------------------------------------------------------------------------
+[I] Encoding a random Byte array buffer of  1024
+[I] Performing  10240 iterations
+[I] Total bytes to encode:  10485760
+[I] Start encoding ...
+[I] Encoding ended
+[I] Total encoded bytes  :  10485760
+[I] Total generated codes:  20971520
+[I] Elapsed time       :           0.057246183 secs.
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 17
+Test Case Result: PASSED
+Finished        : 2017/05/11 - 12:33:59
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 18
+Description     : Bulk decoding
+Started         : 2017/05/11 - 12:33:59
+--------------------------------------------------------------------------------
+[I] Encoding a random String of  1024
+[I] Performing  20480 iterations
+[I] Total codes to process:  20971520
+[I] Start decoding ...
+[I] Decoding ended
+[I] Total processed codes:  20971520
+[I] Total decoded bytes  :  10485760
+[I] Elapsed time       :           0.062326532 secs.
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 18
+Test Case Result: PASSED
+Finished        : 2017/05/11 - 12:33:59
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Enc_Hex
-Finished                 : 2017/05/10 - 08:16:11
+Finished                 : 2017/05/11 - 12:33:59
 ================================================================================

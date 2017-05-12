@@ -47,19 +47,19 @@ package CryptAda.Factories.Text_Encoder_Factory is
    -- identifier.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Encoder_Id              Text_Encoder_Id that identifies the encoder to
-   --                         create.
+   -- Id                      Encoder_Id that identifies the encoder to create.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Reference to the allocated encoder. The encoder state is Idle.
+   -- Encoder_Handle that allows the caller to handle the particular encoder.
+   -- The encoder is in State_Idle state.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- TBD
    -----------------------------------------------------------------------------
 
    function    Create_Text_Encoder(
-                  Encoder_Id     : in     CryptAda.Names.Text_Encoder_Id)
-      return   CryptAda.Text_Encoders.Text_Encoder_Ref;
+                  Id             : in     CryptAda.Names.Encoder_Id)
+      return   CryptAda.Text_Encoders.Encoder_Handle;
 
    --[Create_Text_Encoder_And_Start]--------------------------------------------
    -- Purpose:
@@ -70,11 +70,11 @@ package CryptAda.Factories.Text_Encoder_Factory is
    -- Parameters              Parameter list with the creation options. The list
    --                         must be a named list with the following syntax:
    --                   
-   --                         (Encoder_Id => <Text_Encoder_Id>,
+   --                         (Id => <Text_Encoder_Id>,
    --                          Operation => <Operation>,
    --                          Encoder_Params => (<Encoder_Params_List>))
    --
-   --                         Encoder_Id           Identifier of the text 
+   --                         Id                   Identifier of the text 
    --                                              encoder to create.
    --                         Operation            Identifier to the operation
    --                                              for which the encoder is to
@@ -86,8 +86,9 @@ package CryptAda.Factories.Text_Encoder_Factory is
    --                                              for starting object.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Reference to the allocated encoder. The encoder state will be either 
-   -- State_Encoding or Start_Decoding.
+   -- Encoder_Handle that allows the caller to handle the particular encoder.
+   -- Encoder will be in State_Encoding or Start_Decoding depending on the 
+   -- parameters list.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- CryptAda_Bad_Argument_Error if the Parameters list is not valid.
@@ -95,6 +96,6 @@ package CryptAda.Factories.Text_Encoder_Factory is
             
    function    Create_Text_Encoder_And_Start(
                   Parameters     : in     CryptAda.Lists.List)
-      return   CryptAda.Text_Encoders.Text_Encoder_Ref;
+      return   CryptAda.Text_Encoders.Encoder_Handle;
 
 end CryptAda.Factories.Text_Encoder_Factory;

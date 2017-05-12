@@ -45,28 +45,28 @@ package CryptAda.Ref_Counters is
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Ref_Counter]--------------------------------------------------------------
-   -- The reference counter base object. Reference counted objects will extend
+   --[Ref_Counted]--------------------------------------------------------------
+   -- The reference counted base object. Reference counted objects will extend
    -- this type. The type is an abstract tagged limited private type.
    -----------------------------------------------------------------------------
 
-   type Ref_Counter is abstract tagged limited private;
+   type Ref_Counted is abstract tagged limited private;
 
-   --[Ref_Counter_Ref]----------------------------------------------------------
+   --[Ref_Counted_Ref]----------------------------------------------------------
    -- Wide class access type to Ref_Counter objects.
    -----------------------------------------------------------------------------
 
-   type Ref_Counter_Ref is access all Ref_Counter'Class;
+   type Ref_Counted_Ref is access all Ref_Counted'Class;
 
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Ref_Counter_Handle]-------------------------------------------------------
-   -- Tagged type for handling references to Ref_Counter objects.
+   --[Ref_Counted_Handle]-------------------------------------------------------
+   -- Tagged type for handling references to Ref_Counted objects.
    -----------------------------------------------------------------------------
 
-   type Ref_Counter_Handle is tagged private;
+   type Ref_Counted_Handle is tagged private;
 
    -----------------------------------------------------------------------------
    --[Primitive Operations on Handles]------------------------------------------
@@ -85,12 +85,12 @@ package CryptAda.Ref_Counters is
    -- N/A.
    -----------------------------------------------------------------------------
    -- Exceptions:
-   -- CrtyptAda_Null_Argument_Error if Object is null.
+   -- None.
    -----------------------------------------------------------------------------
 
    procedure   Set(
-                  Handle         : in out Ref_Counter_Handle;
-                  Object         : access Ref_Counter'Class);
+                  Handle         : in out Ref_Counted_Handle;
+                  Object         : access Ref_Counted'Class);
 
    --[Get]----------------------------------------------------------------------
    -- Purpose:
@@ -100,15 +100,15 @@ package CryptAda.Ref_Counters is
    -- Handle               Handle from which the reference is to be obtained.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Reference to the Ref_Counter object handled by Handle.
+   -- Reference to the Ref_Counted object handled by Handle.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- None.
    -----------------------------------------------------------------------------
 
    function    Get(
-                  Handle         : in     Ref_Counter_Handle)
-      return   Ref_Counter_Ref;
+                  Handle         : in     Ref_Counted_Handle)
+      return   Ref_Counted_Ref;
 
    -----------------------------------------------------------------------------
    --[Private part]-------------------------------------------------------------
@@ -116,11 +116,11 @@ package CryptAda.Ref_Counters is
 
 private
 
-   --[Ref_Counter]--------------------------------------------------------------
-   -- Full definition of the Ref_Counter type.
+   --[Ref_Counted]--------------------------------------------------------------
+   -- Full definition of the Ref_Counted type.
    -----------------------------------------------------------------------------
 
-   type Ref_Counter is abstract tagged limited
+   type Ref_Counted is abstract tagged limited
       record
          Count                   : Natural := 0;
       end record;
@@ -130,7 +130,7 @@ private
    -- Frees the object.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Ref_Counted          Access to the object to free.
+   -- RC                   Object to free.
    -----------------------------------------------------------------------------
    -- Returned value:
    -- N/A.
@@ -140,16 +140,16 @@ private
    -----------------------------------------------------------------------------
 
    procedure   Free(
-                  Ref_Counted    : access Ref_Counter)
+                  RC             : in out Ref_Counted'Class)
          is null;
       
    --[Ref_Counter_Handle]-------------------------------------------------------
    -- Full definition of the Ref_Counter_Handle type.
    -----------------------------------------------------------------------------
 
-   type Ref_Counter_Handle is new Ada.Finalization.Controlled with
+   type Ref_Counted_Handle is new Ada.Finalization.Controlled with
       record
-         Item                    : Ref_Counter_Ref := null;
+         Item                    : Ref_Counted_Ref := null;
       end record;
 
    -----------------------------------------------------------------------------
@@ -157,9 +157,9 @@ private
    -----------------------------------------------------------------------------
 
    procedure   Adjust(
-                  Object         : in out Ref_Counter_Handle);
+                  Object         : in out Ref_Counted_Handle);
 
    procedure   Finalize(
-                  Object         : in out Ref_Counter_Handle);
+                  Object         : in out Ref_Counted_Handle);
 
 end CryptAda.Ref_Counters;

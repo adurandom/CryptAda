@@ -42,6 +42,6 @@ package CryptAda.Tests.Utils.Encoders is
    --[Print_Text_Encoder_Info]--------------------------------------------------
 
    procedure   Print_Text_Encoder_Info(
-                  Encoder_Ref    : in     CryptAda.Text_Encoders.Text_Encoder_Ref);
+                  Handle         : in     CryptAda.Text_Encoders.Encoder_Handle);
                   
 end CryptAda.Tests.Utils.Encoders;

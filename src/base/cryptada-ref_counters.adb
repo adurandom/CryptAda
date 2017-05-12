@@ -31,12 +31,16 @@
 --    1.0   20170428 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with Ada.Exceptions;                   use Ada.Exceptions;
-
-with CryptAda.Exceptions;              use CryptAda.Exceptions;
+with Ada.Unchecked_Deallocation;
 
 package body CryptAda.Ref_Counters is
 
+   -----------------------------------------------------------------------------
+   --[Generic Instantiations]---------------------------------------------------
+   -----------------------------------------------------------------------------
+
+   procedure Unchecked_Free is new Ada.Unchecked_Deallocation(Ref_Counted'Class, Ref_Counted_Ref);
+   
    -----------------------------------------------------------------------------
    --[Operations on Handles]----------------------------------------------------
    -----------------------------------------------------------------------------
@@ -45,9 +49,11 @@ package body CryptAda.Ref_Counters is
 
    overriding
    procedure   Adjust(
-                  Object         : in out Ref_Counter_Handle)
+                  Object         : in out Ref_Counted_Handle)
    is
    begin
+      -- Increase the reference count if the object is not null.
+      
       if Object.Item /= null then
          Object.Item.all.Count := Object.Item.all.Count + 1;
       end if;
@@ -57,9 +63,9 @@ package body CryptAda.Ref_Counters is
    
    overriding
    procedure   Finalize(
-                  Object         : in out Ref_Counter_Handle)
+                  Object         : in out Ref_Counted_Handle)
    is
-      The_Item       : constant Ref_Counter_Ref := Object.Item;
+      The_Item       : Ref_Counted_Ref := Object.Item;
    begin
       Object.Item := null;
       
@@ -67,7 +73,8 @@ package body CryptAda.Ref_Counters is
          The_Item.all.Count := The_Item.all.Count - 1;
          
          if The_Item.all.Count = 0 then
-            Free(The_Item);
+            Free(The_Item.all);
+            Unchecked_Free(The_Item);
          end if;
       end if;
    end Finalize;
@@ -75,27 +82,23 @@ package body CryptAda.Ref_Counters is
    --[Set]----------------------------------------------------------------------
 
    procedure   Set(
-                  Handle         : in out Ref_Counter_Handle;
-                  Object         : access Ref_Counter'Class)
+                  Handle         : in out Ref_Counted_Handle;
+                  Object         : access Ref_Counted'Class)
    is
    begin
-      if Object = null then
-         Raise_Exception(CryptAda_Null_Argument_Error'Identity, "Null object");
-      end if;
-      
       if Handle.Item /= null then
          Finalize(Handle);
       end if;
    
-      Handle.Item := Ref_Counter_Ref(Object);
+      Handle.Item := Ref_Counted_Ref(Object);
       Adjust(Handle);      
    end Set;
                   
    --[Get]----------------------------------------------------------------------
 
    function    Get(
-                  Handle         : in     Ref_Counter_Handle)
-      return   Ref_Counter_Ref
+                  Handle         : in     Ref_Counted_Handle)
+      return   Ref_Counted_Ref
     is
     begin
         return Handle.Item;

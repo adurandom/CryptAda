@@ -46,148 +46,146 @@ package CryptAda.Text_Encoders.Base16 is
    -- will cause that an CryptAda_Syntax_Error exception will be raised.
    -----------------------------------------------------------------------------
 
-   type Base16_Encoder is new Text_Encoder with private;
+   type Base16_Encoder is new Encoder with private;
 
-   --[Base16_Encoder_Ref]-------------------------------------------------------
+   --[Base16_Encoder_Ptr]-------------------------------------------------------
    -- Access type to Base16_Encoder objects.
    -----------------------------------------------------------------------------
 
-   type Base16_Encoder_Ref is access all Base16_Encoder'Class;
+   type Base16_Encoder_Ptr is access all Base16_Encoder'Class;
 
+   -----------------------------------------------------------------------------
+   --[Getting a handle for Base16 encoder]--------------------------------------
+   -----------------------------------------------------------------------------
+   
+   --[Get_Encoder_Handle]-------------------------------------------------------
+   -- Purpose:
+   -- Creates a Encoder object and returns a handle for that object.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- None.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Encoder_Handle value that references the encoder object created.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CrtyptAda_Storage_Error if an error is raised during encoder allocation.
+   -----------------------------------------------------------------------------
+
+   function    Get_Encoder_Handle
+      return   Encoder_Handle;
+   
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
 
    --[Start_Encoding]-----------------------------------------------------------
-
+ 
+   overriding
    procedure   Start_Encoding(
-                  Encoder        : access Base16_Encoder);
+                  The_Encoder    : access Base16_Encoder);
 
    --[Start_Encoding]-----------------------------------------------------------
 
+   overriding
    procedure   Start_Encoding(
-                  Encoder        : access Base16_Encoder;
+                  The_Encoder    : access Base16_Encoder;
                   Parameters     : in     CryptAda.Lists.List);
 
    --[Encode]-------------------------------------------------------------------
 
+   overriding
    procedure   Encode(
-                  Encoder        : access Base16_Encoder;
+                  With_Encoder   : access Base16_Encoder;
                   Input          : in     CryptAda.Pragmatics.Byte_Array;
                   Output         :    out String;
                   Codes          :    out Natural);
 
    --[Encode]-------------------------------------------------------------------
 
+   overriding
    function    Encode(
-                  Encoder        : access Base16_Encoder;
+                  With_Encoder   : access Base16_Encoder;
                   Input          : in     CryptAda.Pragmatics.Byte_Array)
       return   String;
 
 
    --[End_Encoding]-------------------------------------------------------------
 
+   overriding
    procedure   End_Encoding(
-                  Encoder        : access Base16_Encoder;
+                  With_Encoder   : access Base16_Encoder;
                   Output         :    out String;
                   Codes          :    out Natural);
 
    --[End_Encoding]-------------------------------------------------------------
 
+   overriding
    function    End_Encoding(
-                  Encoder        : access Base16_Encoder)
+                  With_Encoder   : access Base16_Encoder)
       return   String;
 
    --[Start_Decoding]-----------------------------------------------------------
 
+   overriding
    procedure   Start_Decoding(
-                  Encoder        : access Base16_Encoder);
+                  The_Encoder    : access Base16_Encoder);
 
    --[Start_Decoding]-----------------------------------------------------------
 
+   overriding
    procedure   Start_Decoding(
-                  Encoder        : access Base16_Encoder;
+                  The_Encoder    : access Base16_Encoder;
                   Parameters     : in     CryptAda.Lists.List);
 
    --[Decode]-------------------------------------------------------------------
 
+   overriding
    procedure   Decode(
-                  Encoder        : access Base16_Encoder;
+                  With_Encoder   : access Base16_Encoder;
                   Input          : in     String;
                   Output         :    out CryptAda.Pragmatics.Byte_Array;
                   Bytes          :    out Natural);
 
    --[Decode]-------------------------------------------------------------------
 
+   overriding
    function    Decode(
-                  Encoder        : access Base16_Encoder;
+                  With_Encoder   : access Base16_Encoder;
                   Input          : in     String)
       return   CryptAda.Pragmatics.Byte_Array;
 
    --[End_Decoding]-------------------------------------------------------------
 
+   overriding
    procedure   End_Decoding(
-                  Encoder        : access Base16_Encoder;
+                  With_Encoder   : access Base16_Encoder;
                   Output         :    out CryptAda.Pragmatics.Byte_Array;
                   Bytes          :    out Natural);
 
    --[End_Decoding]-------------------------------------------------------------
 
+   overriding
    function    End_Decoding(
-                  Encoder        : access Base16_Encoder)
+                  With_Encoder   : access Base16_Encoder)
       return   CryptAda.Pragmatics.Byte_Array;
 
-   --[End_Process]--------------------------------------------------------------
+   --[Set_To_Idle]--------------------------------------------------------------
 
-   procedure   End_Process(
-                  Encoder        : access Base16_Encoder);
+   overriding
+   procedure   Set_To_Idle(
+                  The_Encoder    : access Base16_Encoder);
             
    -----------------------------------------------------------------------------
    --[Additional Operations]----------------------------------------------------
    -----------------------------------------------------------------------------
    
-   --[Allocate_Encoder]---------------------------------------------------------
-   -- Purpose:
-   -- Allocates memory for an encoder object and returns the referente to the
-   -- allocated encoder.
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- N/A.
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- Reference to the allocated object.
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- CrtyptAda_Storage_Error if an error is raised during encoder allocation.
-   -----------------------------------------------------------------------------
-
-   function    Allocate_Encoder
-      return   Base16_Encoder_Ref;
-
-   --[Deallocate_Encoder]-------------------------------------------------------
-   -- Purpose:
-   -- Deallocates an encoder object previously allocated in a call to 
-   -- Allocate_Encoder.
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- Encoder              Reference to the object to deallocate.
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- N/A.
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- None.
-   -----------------------------------------------------------------------------
-
-   procedure   Deallocate_Encoder(
-                  Encoder        : in out Base16_Encoder_Ref);
-
    --[Has_Buffered_Code]--------------------------------------------------------
    -- Purpose:
    -- Checks if a Encoder has a buffered code.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Encoder              Access to the Encoder object which will be
+   -- The_Encoder          Access to the Encoder object which will be
    --                      tested for buffered code.
    -----------------------------------------------------------------------------
    -- Returned value:
@@ -198,9 +196,13 @@ package CryptAda.Text_Encoders.Base16 is
    -----------------------------------------------------------------------------
 
    function    Has_Buffered_Code(
-                  Encoder        : access Base16_Encoder'Class)
+                  The_Encoder    : access Base16_Encoder'Class)
       return   Boolean;
 
+   -----------------------------------------------------------------------------
+   --[Private Part]-------------------------------------------------------------
+   -----------------------------------------------------------------------------
+      
 private
 
    -----------------------------------------------------------------------------
@@ -215,7 +217,7 @@ private
    -- The_Code             Code buffered (only for decoding).
    -----------------------------------------------------------------------------
 
-   type Base16_Encoder is new Text_Encoder with
+   type Base16_Encoder is new Encoder with
       record
          Buffered          : Boolean      := False;
          The_Code          : Character    := Character'First;
@@ -227,11 +229,13 @@ private
 
    --[Initialize]---------------------------------------------------------------
 
+   overriding
    procedure   Initialize(
                   Object         : in out Base16_Encoder);
 
    --[Finalize]-----------------------------------------------------------------
 
+   overriding
    procedure   Finalize(
                   Object         : in out Base16_Encoder);
 

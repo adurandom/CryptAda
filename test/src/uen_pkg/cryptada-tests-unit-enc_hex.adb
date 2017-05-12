@@ -31,10 +31,10 @@
 --    1.0   20170428 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
+with Ada.Real_Time;                    use Ada.Real_Time;
+with Ada.Text_IO;                      use Ada.Text_IO;
 with Ada.Exceptions;                   use Ada.Exceptions;
 with Ada.Strings.Unbounded;            use Ada.Strings.Unbounded;
-with Ada.Containers;                   use Ada.Containers;
-with Ada.Containers.Vectors;
 
 with CryptAda.Tests.Utils;             use CryptAda.Tests.Utils;
 with CryptAda.Tests.Utils.Encoders;    use CryptAda.Tests.Utils.Encoders;
@@ -75,9 +75,9 @@ package body CryptAda.Tests.Unit.Enc_Hex is
    --[Generic Instantiations]---------------------------------------------------
    -----------------------------------------------------------------------------
 
-   package Byte_Vectors_Pkg is new Ada.Containers.Vectors(Positive, Byte);
-   use Byte_Vectors_Pkg;
-   
+   package Duration_IO is new Ada.Text_IO.Fixed_IO(Duration);
+   use Duration_IO;
+
    -----------------------------------------------------------------------------
    --[Globals]------------------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -87,7 +87,7 @@ package body CryptAda.Tests.Unit.Enc_Hex is
    -----------------------------------------------------------------------------
    
    procedure   Print_Hex_Encoder_Info(
-                  Encoder        : in     Hex_Encoder_Ref);
+                  Handle         : in     Encoder_Handle);
 
    -----------------------------------------------------------------------------
    --[Test Case Specs]----------------------------------------------------------
@@ -109,19 +109,23 @@ package body CryptAda.Tests.Unit.Enc_Hex is
    procedure   Case_14;
    procedure   Case_15;
    procedure   Case_16;
+   procedure   Case_17;
+   procedure   Case_18;
 
    -----------------------------------------------------------------------------
    --[Internal Subprogram Bodies]-----------------------------------------------
    -----------------------------------------------------------------------------
 
    procedure   Print_Hex_Encoder_Info(
-                  Encoder        : in     Hex_Encoder_Ref)
+                  Handle         : in     Encoder_Handle)
    is
+      Ptr            : Hex_Encoder_Ptr;
    begin
-      Print_Text_Encoder_Info(Text_Encoder_Ref(Encoder));
+      Print_Text_Encoder_Info(Handle);
       
-      if Encoder /= null then
-         Print_Message("Has buffered code           : " & Boolean'Image(Has_Buffered_Code(Encoder)), "    ");
+      if Is_Valid_Handle(Handle) then
+         Ptr := Hex_Encoder_Ptr(Get_Encoder_Ptr(Handle));
+         Print_Message("Has buffered code      : " & Boolean'Image(Has_Buffered_Code(Ptr)), "    ");
       end if;      
    end Print_Hex_Encoder_Info;
    
@@ -133,17 +137,18 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
    procedure   Case_1
    is
-      E           : Hex_Encoder_Ref;
+      H           : Encoder_Handle;
+      E           : Encoder_Ptr;
       US          : Unbounded_String;
    begin
       Begin_Test_Case(1, "Testing object state during encoding");
+      Print_Information_Message("Before getting an encoder handle ...");
+      Print_Hex_Encoder_Info(H);
 
-      Print_Information_Message("Before allocating encoder encoder must be null");
-      Print_Hex_Encoder_Info(E);
-
-      Print_Information_Message("Allocating encoder object. Object state must be State_Idle");
-      E := Hex.Allocate_Encoder;
-      Print_Hex_Encoder_Info(E);
+      Print_Information_Message("Getting an encoder handle object. State must be State_Idle");
+      H := Get_Encoder_Handle;
+      E := Get_Encoder_Ptr(H);
+      Print_Hex_Encoder_Info(H);
       
       if Get_State(E) = State_Idle then
          Print_Information_Message("State is State_Idle");
@@ -154,7 +159,7 @@ package body CryptAda.Tests.Unit.Enc_Hex is
       
       Print_Information_Message("Calling Start_Encoding. State must be State_Encoding");
       Start_Encoding(E);
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
       
       if Get_State(E) = State_Encoding then
          Print_Information_Message("State is State_Encoding");
@@ -164,17 +169,17 @@ package body CryptAda.Tests.Unit.Enc_Hex is
       end if;
 
       Print_Information_Message("Encoding an array");
-      Print_Message("Array to encode :");
+      Print_Message("Array Length    : " & Natural'Image(Test_Decoded'Length), "    ");
+      Print_Message("Array to encode :", "    ");
       Print_Message(To_Hex_String(Test_Decoded, 16, LF_Only, ", ", "16#", "#", Upper_Case, True));
-      Print_Message("Array Length    : " & Natural'Image(Test_Decoded'Length));
       
       Append(US, Encode(E, Test_Decoded));
-      Print_Message("Encoding results: """ & To_String(US) & """");
+      Print_Message("Encoding results: """ & To_String(US) & """", "    ");
 
       Print_Information_Message("Calling End_Encoding");
       Append(US, End_Encoding(E));
-      Print_Message("Expected encoding results: """ & Test_Encoded & """");
-      Print_Message("Obtained encoding results: """ & To_String(US) & """");
+      Print_Message("Expected encoding results: """ & Test_Encoded & """", "    ");
+      Print_Message("Obtained encoding results: """ & To_String(US) & """", "    ");
       
       if To_String(US) /= Test_Encoded then
          Print_Error_Message("Results don't match");
@@ -182,7 +187,7 @@ package body CryptAda.Tests.Unit.Enc_Hex is
       end if;
 
       Print_Information_Message("State must be State_Idle");
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
       
       if Get_State(E) = State_Idle then
          Print_Information_Message("State is State_Idle");
@@ -191,20 +196,17 @@ package body CryptAda.Tests.Unit.Enc_Hex is
          raise CryptAda_Test_Error;
       end if;
 
-      Print_Information_Message("Deallocating encoder object");
-      Deallocate_Encoder(E);
-
-      Print_Information_Message("After deallocating encoder encoder must be null");
-      Print_Hex_Encoder_Info(E);
+      Print_Information_Message("Invalidating handle");
+      Invalidate_Handle(H);
+      Print_Hex_Encoder_Info(H);
       
+      Print_Information_Message("Test case OK");      
       End_Test_Case(1, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(1, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -217,7 +219,8 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
    procedure   Case_2
    is
-      E           : Hex_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
       L           : List;
    begin
       Begin_Test_Case(2, "Start encoding");
@@ -225,34 +228,33 @@ package body CryptAda.Tests.Unit.Enc_Hex is
       
       Print_Information_Message("Default Start_Encoding procedure");
       Print_Message("Before Start_Encoding, the object is in State_Idle", "    ");
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
       Start_Encoding(E);
       Print_Message("After Start_Encoding, the object is in State_Encoding", "    ");
-      Print_Hex_Encoder_Info(E);
-      End_Process(E);
+      Print_Hex_Encoder_Info(H);
+      Set_To_Idle(E);
 
       Print_Information_Message("Start_Encoding with parameters");
       Print_Message("Parameter list is ignored for Hexadecimal text encoder", "    ");
       Print_Message("Calling Start_Encoding with list: " & List_2_Text(L), "    ");
       Start_Encoding(E, L);
-      Print_Hex_Encoder_Info(E);
-      End_Process(E);
+      Print_Hex_Encoder_Info(H);
+      Set_To_Idle(E);
 
       Text_2_List("(Parameter_1 => ""Hello"", Parameter_2 => 2)", L);
       Print_Message("Calling Start_Encoding with list: " & List_2_Text(L), "    ");
       Start_Encoding(E, L);
-      Print_Hex_Encoder_Info(E);
-      End_Process(E);
-            
-      Deallocate_Encoder(E);
+      Print_Hex_Encoder_Info(H);
+      Set_To_Idle(E);
+      
+      Invalidate_Handle(H);      
+      Print_Information_Message("Test case OK");
       End_Test_Case(2, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(2, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -265,7 +267,8 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
    procedure   Case_3
    is
-      E           : Hex_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
       S           : String(1 .. 256);
       C           : Natural;
    begin
@@ -274,7 +277,7 @@ package body CryptAda.Tests.Unit.Enc_Hex is
       
       Print_Information_Message("Trying encode will raise CryptAda_Bad_Operation_Error if encoder was not initialized for encoding");
       Print_Message("Encoder object:", "    ");
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
       
       declare
       begin
@@ -297,7 +300,7 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
       Print_Information_Message("Start encoding");
       Start_Encoding(E);
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
 
       Print_Information_Message("Trying Encode with a buffer too short will raise CryptAda_Overflow_Error");
       Print_Message("Array to encode :");
@@ -306,7 +309,7 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
       declare
       begin
-         Encode(E, Test_Decoded, S(1 .. 2), C);
+         Encode(E, Test_Decoded, S(1 .. 1), C);
          Print_Error_Message("No exception was raised");
          raise CryptAda_Test_Error;
       exception
@@ -336,17 +339,16 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
       Print_Information_Message("End encoding");
       End_Encoding(E, S, C);
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
       
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");
       End_Test_Case(3, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(3, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -359,7 +361,8 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
    procedure   Case_4
    is
-      E           : Hex_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
       S           : String(1 .. 256);
       C           : Natural;
    begin
@@ -368,13 +371,14 @@ package body CryptAda.Tests.Unit.Enc_Hex is
       
       Print_Information_Message("Trying encode will raise CryptAda_Bad_Operation_Error if encoder was not initialized for encoding");
       Print_Message("Encoder object:", "    ");
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
       
       declare
          S           : String(1 .. 32);
       begin
          S := Encode(E, Test_Decoded);
          Print_Error_Message("No exception was raised");
+         Print_Message("Returned string: " & S);
          raise CryptAda_Test_Error;
       exception
          when CryptAda_Test_Error =>
@@ -392,7 +396,7 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
       Print_Information_Message("Start encoding");
       Start_Encoding(E);
-      Print_Hex_Encoder_Info(E);      
+      Print_Hex_Encoder_Info(H);      
       Print_Information_Message("Now we perform encoding ...");
 
       declare
@@ -418,17 +422,16 @@ package body CryptAda.Tests.Unit.Enc_Hex is
       
       Print_Information_Message("End encoding");
       End_Encoding(E, S, C);
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
       
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");
       End_Test_Case(4, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(4, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -441,7 +444,8 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
    procedure   Case_5
    is
-      E           : Hex_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
       S           : String(1 .. 256);
       C           : Natural;
    begin
@@ -450,7 +454,7 @@ package body CryptAda.Tests.Unit.Enc_Hex is
       
       Print_Information_Message("Trying End_Encoding will raise CryptAda_Bad_Operation_Error if encoder was not initialized for encoding");
       Print_Message("Encoder object:", "    ");
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
       
       declare
       begin
@@ -473,27 +477,26 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
       Print_Information_Message("Start encoding");
       Start_Encoding(E);
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
 
       Print_Information_Message("End encoding will return always 0 as encoding length");
       End_Encoding(E, S, C);
-      Print_Hex_Encoder_Info(E);
-      Print_Message("Encoding length          : " & Natural'Image(C));
+      Print_Hex_Encoder_Info(H);
+      Print_Information_Message("Obtained encoding length: " & Natural'Image(C));
       
       if C /= 0 then
          Print_Error_Message("Results don't match");
          raise CryptAda_Test_Error;
       end if;
       
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");
       End_Test_Case(5, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(5, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -506,20 +509,22 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
    procedure   Case_6
    is
-      E           : Hex_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
    begin
       Begin_Test_Case(6, "End encoding");
       Print_Information_Message("Testing End_Encoding (function form)");
       
       Print_Information_Message("Trying End_Encoding will raise CryptAda_Bad_Operation_Error if encoder was not initialized for encoding");
       Print_Message("Encoder object:", "    ");
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
       
       declare
          S           : String(1 .. 32);
       begin
          S := End_Encoding(E);
          Print_Error_Message("No exception was raised");
+         Print_Message("Returned string: " & S);
          raise CryptAda_Test_Error;
       exception
          when CryptAda_Test_Error =>
@@ -537,13 +542,13 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
       Print_Information_Message("Start encoding");
       Start_Encoding(E);
-      Print_Hex_Encoder_Info(E);      
+      Print_Hex_Encoder_Info(H);      
       Print_Information_Message("End_Encoding will always return a 0 length string");
       
       declare
          S           : constant String := End_Encoding(E);
       begin
-         Print_Message("Obtained String: """ & S & """");
+         Print_Information_Message("Obtained String: """ & S & """");
       
          if S'Length /= 0 then
             Print_Error_Message("Results don't match");
@@ -560,15 +565,14 @@ package body CryptAda.Tests.Unit.Enc_Hex is
             raise CryptAda_Test_Error;
       end;
             
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");
       End_Test_Case(6, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(6, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -581,18 +585,21 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
    procedure   Case_7
    is
-      E           : Hex_Encoder_Ref;
+      H           : Encoder_Handle;
+      E           : Encoder_Ptr;
       BA          : Byte_Array(1 .. 256);
       B           : Natural;
    begin
       Begin_Test_Case(7, "Testing object state during decoding");
 
-      Print_Information_Message("Before allocating encoder encoder must be null");
-      Print_Hex_Encoder_Info(E);
+      Print_Information_Message("Before getting an encoder handle ...");
+      Print_Hex_Encoder_Info(H);
 
-      Print_Information_Message("Allocating encoder object. Object state must be State_Idle");
-      E := Hex.Allocate_Encoder;
-      Print_Hex_Encoder_Info(E);
+      Print_Information_Message("Getting an encoder handle object. State must be State_Idle");
+      H := Get_Encoder_Handle;
+      Print_Hex_Encoder_Info(H);
+      
+      E := Get_Encoder_Ptr(H);
       
       if Get_State(E) = State_Idle then
          Print_Information_Message("State is State_Idle");
@@ -603,7 +610,7 @@ package body CryptAda.Tests.Unit.Enc_Hex is
       
       Print_Information_Message("Calling Start_Decoding. State must be State_Decoding");
       Start_Decoding(E);
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
       
       if Get_State(E) = State_Decoding then
          Print_Information_Message("State is State_Decoding");
@@ -642,7 +649,7 @@ package body CryptAda.Tests.Unit.Enc_Hex is
       end if;
       
       Print_Information_Message("State must be State_Idle");
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
       
       if Get_State(E) = State_Idle then
          Print_Information_Message("State is State_Idle");
@@ -651,20 +658,17 @@ package body CryptAda.Tests.Unit.Enc_Hex is
          raise CryptAda_Test_Error;
       end if;
 
-      Print_Information_Message("Deallocating encoder object");
-      Deallocate_Encoder(E);
+      Print_Information_Message("Invalidating handle");
+      Invalidate_Handle(H);
+      Print_Hex_Encoder_Info(H);
 
-      Print_Information_Message("After deallocating encoder encoder must be null");
-      Print_Hex_Encoder_Info(E);
-      
+      Print_Information_Message("Test case OK");      
       End_Test_Case(7, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(7, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -677,42 +681,42 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
    procedure   Case_8
    is
-      E           : Hex_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
       L           : List;
    begin
       Begin_Test_Case(8, "Start decoding");
       Print_Information_Message("Testing Start_Decoding procedures");
       
       Print_Information_Message("Default Start_Decoding procedure");
-      Print_Message("Before Start_Encoding, the object is in State_Idle", "    ");
-      Print_Hex_Encoder_Info(E);
-      Start_Encoding(E);
-      Print_Message("After Start_Encoding, the object is in State_Encoding", "    ");
-      Print_Hex_Encoder_Info(E);
-      End_Process(E);
+      Print_Message("Before Start_Decoding, the object is in State_Idle", "    ");
+      Print_Hex_Encoder_Info(H);
+      Start_Decoding(E);
+      Print_Message("After Start_Decoding, the object is in State_Decoding", "    ");
+      Print_Hex_Encoder_Info(H);
+      Set_To_Idle(E);
 
       Print_Information_Message("Start_Decoding with parameters");
       Print_Message("Parameter list is ignored for Hexadecimal text encoder", "    ");
       Print_Message("Calling Start_Decoding with list: " & List_2_Text(L), "    ");
       Start_Decoding(E, L);
-      Print_Hex_Encoder_Info(E);
-      End_Process(E);
+      Print_Hex_Encoder_Info(H);
+      Set_To_Idle(E);
 
       Text_2_List("(Parameter_1 => ""Hello"", Parameter_2 => 2)", L);
       Print_Message("Calling Start_Decoding with list: " & List_2_Text(L), "    ");
       Start_Decoding(E, L);
-      Print_Hex_Encoder_Info(E);
-      End_Process(E);
+      Print_Hex_Encoder_Info(H);
+      Set_To_Idle(E);
             
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");
       End_Test_Case(8, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(8, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -725,7 +729,8 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
    procedure   Case_9
    is
-      E           : Hex_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
       BA          : Byte_Array(1 .. 256);
       B           : Natural;
    begin
@@ -734,7 +739,7 @@ package body CryptAda.Tests.Unit.Enc_Hex is
       
       Print_Information_Message("Decode will raise CryptAda_Bad_Operation_Error if encoder was not initialized for decoding");
       Print_Message("Encoder object:", "    ");
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
       
       declare
       begin
@@ -757,7 +762,7 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
       Print_Information_Message("Start decoding");
       Start_Decoding(E);
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
 
       Print_Information_Message("Trying Decode with a buffer too short will raise CryptAda_Overflow_Error");
       Print_Information_Message("Decoding a string");
@@ -799,7 +804,7 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
       Print_Information_Message("End decoding");
       End_Decoding(E, BA, B);
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
 
       Print_Information_Message("End_Decoding results:");
       Print_Message("- Decoded bytes: " & Natural'Image(B));
@@ -811,15 +816,14 @@ package body CryptAda.Tests.Unit.Enc_Hex is
          raise CryptAda_Test_Error;
       end if;
       
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");
       End_Test_Case(9, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(9, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -832,7 +836,8 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
    procedure   Case_10
    is
-      E           : Hex_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
       BA          : Byte_Array(1 .. 256);
       B           : Natural;
    begin
@@ -841,13 +846,14 @@ package body CryptAda.Tests.Unit.Enc_Hex is
       
       Print_Information_Message("Decode will raise CryptAda_Bad_Operation_Error if encoder was not initialized for decoding");
       Print_Message("Encoder object:", "    ");
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
       
       declare
          BA       : Byte_Array(1 .. 16);
       begin
          BA := Decode(E, Test_Encoded);
          Print_Error_Message("No exception was raised");
+         Print_Message(To_Hex_String(BA, 16, LF_Only, ", ", "16#", "#", Upper_Case, True));
          raise CryptAda_Test_Error;
       exception
          when CryptAda_Test_Error =>
@@ -865,7 +871,7 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
       Print_Information_Message("Start decoding");
       Start_Decoding(E);
-      Print_Hex_Encoder_Info(E);      
+      Print_Hex_Encoder_Info(H);      
       Print_Information_Message("Now we perform decoding ...");
 
       declare
@@ -895,7 +901,7 @@ package body CryptAda.Tests.Unit.Enc_Hex is
       
       Print_Information_Message("End Decoding");
       End_Decoding(E, BA, B);
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
       
       Print_Information_Message("End_Decoding results:");
       Print_Message("- Decoded bytes: " & Natural'Image(B));
@@ -907,15 +913,14 @@ package body CryptAda.Tests.Unit.Enc_Hex is
          raise CryptAda_Test_Error;
       end if;
             
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");
       End_Test_Case(10, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(10, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -928,7 +933,8 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
    procedure   Case_11
    is
-      E           : Hex_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
       BA          : Byte_Array(1 .. 256);
       B           : Natural;
    begin
@@ -937,7 +943,7 @@ package body CryptAda.Tests.Unit.Enc_Hex is
       
       Print_Information_Message("Trying End_Decoding will raise CryptAda_Bad_Operation_Error if encoder was not initialized for decoding");
       Print_Message("Encoder object:", "    ");
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
       
       declare
       begin
@@ -960,29 +966,28 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
       Print_Information_Message("Start decoding");
       Start_Decoding(E);
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
 
-      Print_Information_Message("End_Decoding will return always 0 as encoding length");
+      Print_Information_Message("End_Decoding will return always 0 as decoding length");
       End_Decoding(E, BA, B);
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
+      Print_Message("Decoding length: " & Natural'Image(B));
       Print_Message("Decoded array: ");
       Print_Message(To_Hex_String(BA(1 .. B), 16, LF_Only, ", ", "16#", "#", Upper_Case, True));
-      Print_Message("Decoding length          : " & Natural'Image(B));
       
       if B /= 0 then
          Print_Error_Message("Results don't match");
          raise CryptAda_Test_Error;
       end if;
       
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");
       End_Test_Case(11, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(11, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -995,20 +1000,22 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
    procedure   Case_12
    is
-      E           : Hex_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
    begin
       Begin_Test_Case(12, "End decoding");
       Print_Information_Message("Testing End_Decoding (function form)");
       
       Print_Information_Message("End_Decoding will raise CryptAda_Bad_Operation_Error if encoder was not initialized for decoding");
       Print_Message("Encoder object:", "    ");
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
       
       declare
          BA       : Byte_Array(1 .. 16);
       begin
          BA := End_Decoding(E);
          Print_Error_Message("No exception was raised");
+         Print_Message(To_Hex_String(BA, 16, LF_Only, ", ", "16#", "#", Upper_Case, True));
          raise CryptAda_Test_Error;
       exception
          when CryptAda_Test_Error =>
@@ -1026,12 +1033,13 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
       Print_Information_Message("Start decoding");
       Start_Decoding(E);
-      Print_Hex_Encoder_Info(E);      
-      Print_Information_Message("End_Decoding will always return a 0 length string");
+      Print_Hex_Encoder_Info(H);      
+      Print_Information_Message("End_Decoding will always return a 0 length byte array");
       
       declare
          BA       : constant Byte_Array := End_Decoding(E);
       begin
+         Print_Message("Decoded array length: " & Natural'Image(BA'Length));
          Print_Message("Decoded array: ");
          Print_Message(To_Hex_String(BA, 16, LF_Only, ", ", "16#", "#", Upper_Case, True));
       
@@ -1050,15 +1058,14 @@ package body CryptAda.Tests.Unit.Enc_Hex is
             raise CryptAda_Test_Error;
       end;
             
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");
       End_Test_Case(12, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(12, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -1071,7 +1078,8 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
    procedure   Case_13
    is
-      E           : Hex_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
       S           : String(1 .. 256);
       C           : Natural;
       I           : Positive := Test_Decoded'First;
@@ -1092,15 +1100,14 @@ package body CryptAda.Tests.Unit.Enc_Hex is
       End_Encoding(E, S(J .. S'Last), C);
       Print_Message("Final encoded : """ & S(1 .. J + C - 1) & """");
       
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");
       End_Test_Case(13, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(13, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -1113,7 +1120,8 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
    procedure   Case_14
    is
-      E           : Hex_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
       BA          : Byte_Array(1 .. 256);
       B           : Natural;
       I           : Positive := Test_Encoded'First;
@@ -1136,15 +1144,14 @@ package body CryptAda.Tests.Unit.Enc_Hex is
       Print_Message("Final decoded : ");
       Print_Message(To_Hex_String(BA(1 .. J + B - 1), 16, LF_Only, ", ", "16#", "#", Upper_Case, True));         
       
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");
       End_Test_Case(14, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(14, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -1157,9 +1164,8 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
    procedure   Case_15
    is
-      E           : Hex_Encoder_Ref := Allocate_Encoder;
-      BA          : Byte_Array(1 .. 256);
-      B           : Natural;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
    begin
       Begin_Test_Case(15, "Syntax error conditions during decoding");
       Print_Information_Message("Trying to decode some erroneous encoded strings");
@@ -1191,15 +1197,14 @@ package body CryptAda.Tests.Unit.Enc_Hex is
          end;
       end loop;
       
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");
       End_Test_Case(15, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(15, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -1212,7 +1217,8 @@ package body CryptAda.Tests.Unit.Enc_Hex is
 
    procedure   Case_16
    is
-      E           : Hex_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
       BA          : Byte_Array(1 .. 256);
       B           : Natural;
       D           : Positive;
@@ -1220,21 +1226,21 @@ package body CryptAda.Tests.Unit.Enc_Hex is
       Begin_Test_Case(16, "Testing buffering");
       Print_Information_Message("Testing buffering when decoding");
       Print_Information_Message("Encoder object before Start_Decoding:");
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
       Start_Decoding(E);
       Print_Information_Message("Encoder object after Start_Decoding:");
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
 
       Print_Information_Message("Decoding string: """ & Test_Encoded(1 .. Test_Encoded'Last - 1) & """ (odd number of codes)");
       Decode(E, Test_Encoded(1 .. Test_Encoded'Last - 1), BA, B);
       Print_Information_Message("Encoder object after Decode:");
-      Print_Hex_Encoder_Info(E);      
+      Print_Hex_Encoder_Info(H);      
       Print_Message("Decoded so far: " & Natural'Image(B));
       Print_Message(To_Hex_String(BA(1 .. B), 16, LF_Only, ", ", "16#", "#", Upper_Case, True));
       Print_Information_Message("Calling to Has_Buffered_Code must return True");
-      Print_Message("Has_Buffered_Code => " & Boolean'Image(Has_Buffered_Code(E)));
+      Print_Message("Has_Buffered_Code => " & Boolean'Image(Has_Buffered_Code(Hex_Encoder_Ptr(E))));
       
-      if not Has_Buffered_Code(E) then
+      if not Has_Buffered_Code(Hex_Encoder_Ptr(E)) then
          Print_Error_Message("Encoder must has a buffered code");
          raise CryptAda_Test_Error;
       end if;
@@ -1263,18 +1269,18 @@ package body CryptAda.Tests.Unit.Enc_Hex is
       Print_Information_Message("Repeating the process now decoding the last code");
       Start_Decoding(E);
       Print_Information_Message("Encoder object after Start_Decoding:");
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
 
       Print_Information_Message("Decoding string: """ & Test_Encoded(1 .. Test_Encoded'Last - 1) & """ (odd number of codes)");
       Decode(E, Test_Encoded(1 .. Test_Encoded'Last - 1), BA, B);
       Print_Information_Message("Encoder object after Decode:");
-      Print_Hex_Encoder_Info(E);      
+      Print_Hex_Encoder_Info(H);      
       Print_Message("Decoded so far: " & Natural'Image(B));
       Print_Message(To_Hex_String(BA(1 .. B), 16, LF_Only, ", ", "16#", "#", Upper_Case, True));
       Print_Information_Message("Calling to Has_Buffered_Code must return True");
-      Print_Message("Has_Buffered_Code => " & Boolean'Image(Has_Buffered_Code(E)));
+      Print_Message("Has_Buffered_Code => " & Boolean'Image(Has_Buffered_Code(Hex_Encoder_Ptr(E))));
       
-      if not Has_Buffered_Code(E) then
+      if not Has_Buffered_Code(Hex_Encoder_Ptr(E)) then
          Print_Error_Message("Encoder must have a buffered code");
          raise CryptAda_Test_Error;
       end if;
@@ -1287,12 +1293,12 @@ package body CryptAda.Tests.Unit.Enc_Hex is
       Print_Message("Decoded so far: " & Natural'Image(D));
       Print_Message(To_Hex_String(BA(1 .. D), 16, LF_Only, ", ", "16#", "#", Upper_Case, True));
       Print_Information_Message("Encoder object after Decode:");
-      Print_Hex_Encoder_Info(E);      
+      Print_Hex_Encoder_Info(H);      
 
       Print_Information_Message("Calling to Has_Buffered_Code must return False");
-      Print_Message("Has_Buffered_Code => " & Boolean'Image(Has_Buffered_Code(E)));
+      Print_Message("Has_Buffered_Code => " & Boolean'Image(Has_Buffered_Code(Hex_Encoder_Ptr(E))));
       
-      if Has_Buffered_Code(E) then
+      if Has_Buffered_Code(Hex_Encoder_Ptr(E)) then
          Print_Error_Message("Encoder must not have a buffered code");
          raise CryptAda_Test_Error;
       end if;
@@ -1305,17 +1311,16 @@ package body CryptAda.Tests.Unit.Enc_Hex is
       Print_Message(To_Hex_String(BA(1 .. D), 16, LF_Only, ", ", "16#", "#", Upper_Case, True));
       Print_Information_Message("Encoder object after Start_Decoding:");
       Print_Information_Message("Encoder object after Decode:");
-      Print_Hex_Encoder_Info(E);
+      Print_Hex_Encoder_Info(H);
       
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");
       End_Test_Case(16, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(16, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -1323,6 +1328,124 @@ package body CryptAda.Tests.Unit.Enc_Hex is
          End_Test_Case(16, Failed);
          raise CryptAda_Test_Error;
    end Case_16;
+
+   --[Case_17]------------------------------------------------------------------
+
+   procedure   Case_17
+   is
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
+      Iterations  : constant Positive := 10240;
+      BA          : constant Byte_Array := Random_Byte_Array(1024);
+      S           : String(1 .. 2048);
+      C           : Natural;
+      TB          : Ada.Real_Time.Time;
+      TE          : Ada.Real_Time.Time;
+      TS          : Time_Span;
+   begin
+      Begin_Test_Case(17, "Bulk encoding");
+      Print_Information_Message("Encoding a random Byte array buffer of " & Positive'Image(BA'Length));
+      Print_Information_Message("Performing " & Positive'Image(Iterations) & " iterations");
+      Print_Information_Message("Total bytes to encode: " & Positive'Image(Iterations * BA'Length));  
+
+      Print_Information_Message("Start encoding ...");
+      Start_Encoding(E);
+      
+      TB := Clock;
+
+      for I in 1 .. Iterations loop
+         Encode(E, BA, S, C);
+      end loop;
+
+      End_Encoding(E, S, C);
+
+      TE := Clock;
+      TS := TE - TB;
+
+      Print_Information_Message("Encoding ended");
+      
+      Print_Information_Message("Total encoded bytes  : " & Natural'Image(Get_Byte_Count(E)));     
+      Print_Information_Message("Total generated codes: " & Natural'Image(Get_Code_Count(E)));     
+      Ada.Text_IO.Put("[I] Elapsed time       : ");
+      Duration_IO.Put(To_Duration(TS));
+      Ada.Text_IO.Put_Line(" secs.");
+      
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");
+      End_Test_Case(17, Passed);
+   exception
+      when CryptAda_Test_Error =>
+         End_Test_Case(17, Failed);
+         raise;
+      when X: others =>
+         Print_Error_Message(
+            "Exception: """ & Exception_Name(X) & """");
+         Print_Message(
+            "Message  : """ & Exception_Message(X) & """");
+         End_Test_Case(17, Failed);
+         raise CryptAda_Test_Error;
+   end Case_17;
+
+   --[Case_18]------------------------------------------------------------------
+
+   procedure   Case_18
+   is
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
+      Iterations  : constant Positive := 20480;
+      S           : String(1 .. 1024);
+      BA1         : constant Byte_Array := Random_Byte_Array(S'Length / 2);
+      BA          : Byte_Array(1 .. S'Length / 2);
+      B           : Natural;
+      TB          : Ada.Real_Time.Time;
+      TE          : Ada.Real_Time.Time;
+      TS          : Time_Span;
+   begin
+      Begin_Test_Case(18, "Bulk decoding");
+      Print_Information_Message("Encoding a random String of " & Positive'Image(S'Length));
+      Print_Information_Message("Performing " & Positive'Image(Iterations) & " iterations");
+      Print_Information_Message("Total codes to process: " & Positive'Image(Iterations * S'Length));  
+      Start_Encoding(E);
+      Encode(E, BA1, S, B);
+      End_Encoding(E, S(B + 1 .. S'Last), B);
+
+      Print_Information_Message("Start decoding ...");
+      Start_Decoding(E);
+      
+      TB := Clock;
+
+      for I in 1 .. Iterations loop
+         Decode(E, S, BA, B);
+      end loop;
+
+      End_Decoding(E, BA, B);
+
+      TE := Clock;
+      TS := TE - TB;
+
+      Print_Information_Message("Decoding ended");
+      
+      Print_Information_Message("Total processed codes: " & Natural'Image(Get_Code_Count(E)));     
+      Print_Information_Message("Total decoded bytes  : " & Natural'Image(Get_Byte_Count(E)));     
+      Ada.Text_IO.Put("[I] Elapsed time       : ");
+      Duration_IO.Put(To_Duration(TS));
+      Ada.Text_IO.Put_Line(" secs.");
+      
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");
+      End_Test_Case(18, Passed);
+   exception
+      when CryptAda_Test_Error =>
+         End_Test_Case(18, Failed);
+         raise;
+      when X: others =>
+         Print_Error_Message(
+            "Exception: """ & Exception_Name(X) & """");
+         Print_Message(
+            "Message  : """ & Exception_Message(X) & """");
+         End_Test_Case(18, Failed);
+         raise CryptAda_Test_Error;
+   end Case_18;
    
    -----------------------------------------------------------------------------
    --[Spec Declared Subprogram Bodies]------------------------------------------
@@ -1351,6 +1474,8 @@ package body CryptAda.Tests.Unit.Enc_Hex is
       Case_14;
       Case_15;
       Case_16;
+      Case_17;
+      Case_18;
 
       End_Test_Driver(Driver_Name);
    exception

@@ -33,6 +33,7 @@
 
 with Ada.Tags;                      use Ada.Tags;
 
+with CryptAda.Names;                use CryptAda.Names;
 with CryptAda.Text_Encoders;        use CryptAda.Text_Encoders;
 
 package body CryptAda.Tests.Utils.Encoders is
@@ -50,16 +51,23 @@ package body CryptAda.Tests.Utils.Encoders is
    --[Print_Text_Encoder_Info]--------------------------------------------------
 
    procedure   Print_Text_Encoder_Info(
-                  Encoder_Ref    : in     Text_Encoder_Ref)
+                  Handle         : in     Encoder_Handle)
    is
    begin
-      Print_Information_Message("Information of Text_Encoder object:");
+      Print_Information_Message("Information of Encoder object:");
       
-      if Encoder_Ref = null then
-         Print_Message("Object reference is null", Indent_Str);
+      if Is_Valid_Handle(Handle) then
+         declare
+            P        : Encoder_Ptr renames Get_Encoder_Ptr(Handle);
+         begin
+            Print_Message("Encoder object tag name: """ & Expanded_Name(P.all'Tag) & """", Indent_Str);
+            Print_Message("Encoder id             : " & Encoder_Id'Image(Get_Encoder_Id(P)), Indent_Str);
+            Print_Message("Encoder state          : " & Encoder_State'Image(Get_State(P)), Indent_Str);
+            Print_Message("Encoder byte count     : " & Natural'Image(Get_Byte_Count(P)), Indent_Str);
+            Print_Message("Encoder code count     : " & Natural'Image(Get_Code_Count(P)), Indent_Str);
+         end;
       else
-         Print_Message("Text_Encoder object tag name: """ & Expanded_Name(Encoder_Ref.all'Tag) & """", Indent_Str);
-         Print_Message("Text_Encoder state          : " & Encoder_State'Image(Get_State(Encoder_Ref)), Indent_Str);
+         Print_Message("Invalid encoder handle", Indent_Str);
       end if;
    end Print_Text_Encoder_Info;
                   

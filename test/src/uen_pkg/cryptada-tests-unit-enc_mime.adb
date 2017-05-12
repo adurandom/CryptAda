@@ -23,7 +23,7 @@
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Unit tests for CryptAda.Text_Encoders.Base64.MIME
+--    Unit tests for CryptAda.Text_Encoders.MIME
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
@@ -31,6 +31,8 @@
 --    1.0   20170428 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
+with Ada.Real_Time;                       use Ada.Real_Time;
+with Ada.Text_IO;                         use Ada.Text_IO;
 with Ada.Exceptions;                      use Ada.Exceptions;
 with Ada.Strings.Unbounded;               use Ada.Strings.Unbounded;
 
@@ -42,8 +44,7 @@ with CryptAda.Lists;                      use CryptAda.Lists;
 with CryptAda.Exceptions;                 use CryptAda.Exceptions;
 with CryptAda.Utils.Format;               use CryptAda.Utils.Format;
 with CryptAda.Text_Encoders;              use CryptAda.Text_Encoders;
-with CryptAda.Text_Encoders.Base64;       use CryptAda.Text_Encoders.Base64;
-with CryptAda.Text_Encoders.Base64.MIME;  use CryptAda.Text_Encoders.Base64.MIME;
+with CryptAda.Text_Encoders.MIME;         use CryptAda.Text_Encoders.MIME;
 
 package body CryptAda.Tests.Unit.Enc_MIME is
 
@@ -52,7 +53,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
    -----------------------------------------------------------------------------
 
    Driver_Name                   : constant String := "CryptAda.Tests.Unit.Enc_MIME";
-   Driver_Description            : constant String := "Unit test driver for CryptAda.Text_Encoders.Base64.MIME functionality.";
+   Driver_Description            : constant String := "Unit test driver for CryptAda.Text_Encoders.MIME functionality.";
 
    -- For basic MIME tests.
 
@@ -150,6 +151,9 @@ package body CryptAda.Tests.Unit.Enc_MIME is
    --[Generic Instantiations]---------------------------------------------------
    -----------------------------------------------------------------------------
 
+   package Duration_IO is new Ada.Text_IO.Fixed_IO(Duration);
+   use Duration_IO;
+   
    -----------------------------------------------------------------------------
    --[Globals]------------------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -159,7 +163,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
    -----------------------------------------------------------------------------
    
    procedure   Print_MIME_Encoder_Info(
-                  Encoder        : in     MIME_Encoder_Ref);
+                  Handle         : in     Encoder_Handle);
 
    -----------------------------------------------------------------------------
    --[Test Case Specs]----------------------------------------------------------
@@ -183,22 +187,23 @@ package body CryptAda.Tests.Unit.Enc_MIME is
    procedure   Case_16;
    procedure   Case_17;
    procedure   Case_18;
+   procedure   Case_19;
 
    -----------------------------------------------------------------------------
    --[Internal Subprogram Bodies]-----------------------------------------------
    -----------------------------------------------------------------------------
 
    procedure   Print_MIME_Encoder_Info(
-                  Encoder        : in     MIME_Encoder_Ref)
+                  Handle         : in     Encoder_Handle)
    is
+      E              : constant MIME_Encoder_Ptr := MIME_Encoder_Ptr(Get_Encoder_Ptr(Handle));
    begin
-      Print_Text_Encoder_Info(Text_Encoder_Ref(Encoder));
+      Print_Text_Encoder_Info(Handle);
       
-      if Encoder /= null then
-         Print_Message("MIME Alphabet               : " & Base64_Alphabet'Image(Get_Alphabet(Encoder)), "    ");
-         Print_Message("Decoding stopped            : " & Boolean'Image(Decoding_Stopped(Encoder)), "    ");
-         Print_Message("Line length                 : " & Positive'Image(Get_Line_Length(Encoder)), "    ");
-         Print_Message("Number of buffered codes    : " & Natural'Image(Get_Buffered_Codes(Encoder)), "    ");
+      if Is_Valid_Handle(Handle) then
+         Print_Message("Line length            : " & Natural'Image(Get_Line_Length(E)), "    ");
+         Print_Message("Buffered codes         : " & Natural'Image(Get_Buffered_Codes(E)), "    ");
+         Print_Message("Decoding stopped       : " & Boolean'Image(Decoding_Stopped(E)), "    ");
       end if;      
    end Print_MIME_Encoder_Info;
    
@@ -210,17 +215,20 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
    procedure   Case_1
    is
-      E           : MIME_Encoder_Ref;
+      H           : Encoder_Handle;
+      E           : Encoder_Ptr;
       US          : Unbounded_String;
    begin
       Begin_Test_Case(1, "Testing object state during encoding");
 
-      Print_Information_Message("Before allocating encoder encoder must be null");
-      Print_MIME_Encoder_Info(E);
+      Print_Information_Message("Before getting an encoder handle ...");
+      Print_MIME_Encoder_Info(H);
 
-      Print_Information_Message("Allocating encoder object. Object state must be State_Idle");
-      E := MIME.Allocate_Encoder;
-      Print_MIME_Encoder_Info(E);
+      Print_Information_Message("Getting an encoder handle object. State must be State_Idle");
+      H := Get_Encoder_Handle;
+      Print_MIME_Encoder_Info(H);
+
+      E := Get_Encoder_Ptr(H);
       
       if Get_State(E) = State_Idle then
          Print_Information_Message("State is State_Idle");
@@ -231,7 +239,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
       
       Print_Information_Message("Calling Start_Encoding. State must be State_Encoding");
       Start_Encoding(E);
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(h);
       
       if Get_State(E) = State_Encoding then
          Print_Information_Message("State is State_Encoding");
@@ -259,7 +267,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
       end if;
 
       Print_Information_Message("State must be State_Idle");
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
       
       if Get_State(E) = State_Idle then
          Print_Information_Message("State is State_Idle");
@@ -268,20 +276,17 @@ package body CryptAda.Tests.Unit.Enc_MIME is
          raise CryptAda_Test_Error;
       end if;
 
-      Print_Information_Message("Deallocating encoder object");
-      Deallocate_Encoder(E);
+      Print_Information_Message("Invalidating handle");
+      Invalidate_Handle(H);
+      Print_MIME_Encoder_Info(H);
 
-      Print_Information_Message("After deallocating encoder encoder must be null");
-      Print_MIME_Encoder_Info(E);
-      
+      Print_Information_Message("Test case OK");            
       End_Test_Case(1, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(1, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -294,18 +299,19 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
    procedure   Case_2
    is
-      E           : MIME_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
    begin
       Begin_Test_Case(2, "Start encoding");
       Print_Information_Message("Testing Start_Encoding procedures");
       
       Print_Information_Message("Default Start_Encoding procedure");
       Print_Message("Before Start_Encoding, the object is in State_Idle", "    ");
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
       Start_Encoding(E);
       Print_Message("After Start_Encoding, the object is in State_Encoding", "    ");
-      Print_MIME_Encoder_Info(E);
-      End_Process(E);
+      Print_MIME_Encoder_Info(H);
+      Set_To_Idle(E);
 
       Print_Information_Message("Start_Encoding with parameters");
       Print_Message("Parameter list only admits a parameter 'Line_Length'", "    ");
@@ -317,11 +323,11 @@ package body CryptAda.Tests.Unit.Enc_MIME is
       begin
          Print_Message("Using list: " & List_2_Text(L), "    ");
          Print_Message("Before Start_Encoding:", "    ");
-         Print_MIME_Encoder_Info(E);
+         Print_MIME_Encoder_Info(H);
          Start_Encoding(E, L);
          Print_Message("After Start_Encoding:", "    ");
-         Print_MIME_Encoder_Info(E);
-         End_Process(E);
+         Print_MIME_Encoder_Info(H);
+         Set_To_Idle(E);
       exception
          when X: others =>
             Print_Error_Message("Unexpected exception caught");
@@ -339,7 +345,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
          Text_2_List(LT, L);
          Print_Message("Using list: " & List_2_Text(L), "    ");
          Print_Message("Before Start_Encoding:", "    ");
-         Print_MIME_Encoder_Info(E);
+         Print_MIME_Encoder_Info(H);
          Start_Encoding(E, L);
          Print_Error_Message("No exception was raised");
          raise CryptAda_Test_Error;
@@ -366,7 +372,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
          Text_2_List(LT, L);
          Print_Message("Using list: " & List_2_Text(L), "    ");
          Print_Message("Before Start_Encoding:", "    ");
-         Print_MIME_Encoder_Info(E);
+         Print_MIME_Encoder_Info(H);
          Start_Encoding(E, L);
          Print_Error_Message("No exception was raised");
          raise CryptAda_Test_Error;
@@ -393,7 +399,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
          Text_2_List(LT, L);
          Print_Message("Using list: " & List_2_Text(L), "    ");
          Print_Message("Before Start_Encoding:", "    ");
-         Print_MIME_Encoder_Info(E);
+         Print_MIME_Encoder_Info(H);
          Start_Encoding(E, L);
          Print_Error_Message("No exception was raised");
          raise CryptAda_Test_Error;
@@ -420,11 +426,11 @@ package body CryptAda.Tests.Unit.Enc_MIME is
          Text_2_List(LT, L);
          Print_Message("Using list: " & List_2_Text(L), "    ");
          Print_Message("Before Start_Encoding:", "    ");
-         Print_MIME_Encoder_Info(E);
+         Print_MIME_Encoder_Info(H);
          Start_Encoding(E, L);
          Print_Message("After Start_Encoding:", "    ");
-         Print_MIME_Encoder_Info(E);
-         End_Process(E);
+         Print_MIME_Encoder_Info(H);
+         Set_To_Idle(E);
       exception
          when X: others =>
             Print_Error_Message("Unexpected exception caught");
@@ -433,15 +439,14 @@ package body CryptAda.Tests.Unit.Enc_MIME is
             raise CryptAda_Test_Error;
       end;
                   
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");      
       End_Test_Case(2, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(2, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -454,7 +459,8 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
    procedure   Case_3
    is
-      E           : MIME_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
       S           : String(1 .. 256);
       C           : Natural;
       Enc         : Natural;
@@ -464,7 +470,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
       
       Print_Information_Message("Trying encode will raise CryptAda_Bad_Operation_Error if encoder was not initialized for encoding");
       Print_Message("Encoder object:", "    ");
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
       
       declare
       begin
@@ -487,7 +493,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
       Print_Information_Message("Start encoding");
       Start_Encoding(E);
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
 
       Print_Information_Message("Trying Encode with a buffer too short will raise CryptAda_Overflow_Error");
       Print_Message("Array to encode :");
@@ -521,7 +527,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
       Print_Information_Message("Ending encoding ...");
       Print_Message("Expected final result    : """ & Test_Encoded & """", "     ");
       End_Encoding(E, S(Enc + 1 .. S'Last), C);
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
       Print_Message("Encoding length          : " & Natural'Image(C));
       Enc := Enc + C;
       Print_Message("Obtained encoding results: """ & S(1 .. Enc) & """");
@@ -531,15 +537,14 @@ package body CryptAda.Tests.Unit.Enc_MIME is
          raise CryptAda_Test_Error;
       end if;
 
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");      
       End_Test_Case(3, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(3, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -552,7 +557,8 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
    procedure   Case_4
    is
-      E           : MIME_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
       US          : Unbounded_String;
    begin
       Begin_Test_Case(4, "Encode");
@@ -560,7 +566,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
       
       Print_Information_Message("Trying encode will raise CryptAda_Bad_Operation_Error if encoder was not initialized for encoding");
       Print_Message("Encoder object:", "    ");
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
       
       declare
          S           : String(1 .. 32);
@@ -584,13 +590,13 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
       Print_Information_Message("Start encoding");
       Start_Encoding(E);
-      Print_MIME_Encoder_Info(E);      
+      Print_MIME_Encoder_Info(H);      
       Print_Information_Message("Now we perform encoding ...");
       Append(US, Encode(E, Test_Decoded));
       Print_Information_Message("Encoded so far: """ & To_String(US) & """");
       Print_Information_Message("End encoding ...");
       Append(US, End_Encoding(E));
-      Print_MIME_Encoder_Info(E);      
+      Print_MIME_Encoder_Info(H);      
       Print_Message("Expected final result    : """ & Test_Encoded & """", "     ");
       Print_Message("Obtained final result    : """ & To_String(US) & """", "     ");
       
@@ -599,15 +605,14 @@ package body CryptAda.Tests.Unit.Enc_MIME is
          raise CryptAda_Test_Error;
       end if;
       
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");      
       End_Test_Case(4, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(4, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -620,7 +625,8 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
    procedure   Case_5
    is
-      E           : MIME_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
       S           : String(1 .. 256);
       C           : Natural;
    begin
@@ -629,7 +635,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
       
       Print_Information_Message("Trying End_Encoding will raise CryptAda_Bad_Operation_Error if encoder was not initialized for encoding");
       Print_Message("Encoder object:", "    ");
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
       
       declare
       begin
@@ -652,7 +658,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
       Print_Information_Message("End_Encoding will raise CryptAda_Overflow_Error if output buffer is not long enough");
       Print_Message("Encoder object:", "    ");
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
       Start_Encoding(E);
       Encode(E, Test_Decoded(1 .. 24), S, C);
       
@@ -675,7 +681,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
             raise CryptAda_Test_Error;
       end;
       
-      End_Process(E);
+      Set_To_Idle(E);
       
       Print_Information_Message("End encoding will return the buffered codes plus 0 or plus 4");
       
@@ -683,17 +689,17 @@ package body CryptAda.Tests.Unit.Enc_MIME is
          declare
             Enc   : Natural;
          begin
-            Print_MIME_Encoder_Info(E);
+            Print_MIME_Encoder_Info(H);
             Print_Information_Message("Start encoding");
             Start_Encoding(E);
-            Print_MIME_Encoder_Info(E);
+            Print_MIME_Encoder_Info(H);
             Print_Information_Message("Encoding array: ");
             Print_Message(To_Hex_String(Test_Decoded(1 .. I), 16, LF_Only, ", ", "16#", "#", Upper_Case, True));
             Encode(E, Test_Decoded(1 .. I), S, C);
             Print_Message("Obained encoded length: " & Natural'Image(C));
             Print_Message("Obained encoded string: """ & S(1 .. C) & """");
             Enc := C;
-            Print_MIME_Encoder_Info(E);
+            Print_MIME_Encoder_Info(H);
             Print_Information_Message("End encoding");
             End_Encoding(E, S(Enc + 1 .. S'Last), C);
             Print_Message("Obained encoded length: " & Natural'Image(C));
@@ -704,15 +710,14 @@ package body CryptAda.Tests.Unit.Enc_MIME is
          end;
       end loop;
             
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");      
       End_Test_Case(5, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(5, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -725,14 +730,15 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
    procedure   Case_6
    is
-      E           : MIME_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
    begin
       Begin_Test_Case(6, "End encoding");
       Print_Information_Message("Testing End_Encoding (function form)");
       
       Print_Information_Message("Trying End_Encoding will raise CryptAda_Bad_Operation_Error if encoder was not initialized for encoding");
       Print_Message("Encoder object:", "    ");
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
       
       declare
          S           : String(1 .. 32);
@@ -754,7 +760,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
             raise CryptAda_Test_Error;
       end;
 
-      End_Process(E);
+      Set_To_Idle(E);
       
       Print_Information_Message("End encoding will return the buffered codes plus (or not) a last encoded chunk");
       
@@ -762,33 +768,32 @@ package body CryptAda.Tests.Unit.Enc_MIME is
          declare
             US    : Unbounded_String;
          begin
-            Print_MIME_Encoder_Info(E);
+            Print_MIME_Encoder_Info(H);
             Print_Information_Message("Start encoding");
             Start_Encoding(E);
-            Print_MIME_Encoder_Info(E);
+            Print_MIME_Encoder_Info(H);
             Print_Information_Message("Encoding array: ");
             Print_Message(To_Hex_String(Test_Decoded(1 .. I), 16, LF_Only, ", ", "16#", "#", Upper_Case, True));
             Append(US, Encode(E, Test_Decoded(1 .. I)));
-            Print_MIME_Encoder_Info(E);
+            Print_MIME_Encoder_Info(H);
             Print_Message("Encoded length so far: " & Natural'Image(Length(US)));
             Print_Message("Encoded string so far: """ & To_String(US) & """");
             Print_Information_Message("End encoding");
             Append(US, End_Encoding(E));
-            Print_MIME_Encoder_Info(E);
+            Print_MIME_Encoder_Info(H);
             Print_Message("Final encoded length : " & Natural'Image(Length(US)));
             Print_Message("Final encoded string : """ & To_String(US) & """");
          end;
       end loop;
                   
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");      
       End_Test_Case(6, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(6, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -801,20 +806,23 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
    procedure   Case_7
    is
-      E           : MIME_Encoder_Ref;
+      H           : Encoder_Handle;
+      E           : Encoder_Ptr;
       BA          : Byte_Array(1 .. 256);
       B           : Natural;
       Dec         : Natural;
    begin
       Begin_Test_Case(7, "Testing object state during decoding");
 
-      Print_Information_Message("Before allocating encoder encoder must be null");
-      Print_MIME_Encoder_Info(E);
+      Print_Information_Message("Before getting an encoder handle ...");
+      Print_MIME_Encoder_Info(H);
 
-      Print_Information_Message("Allocating encoder object. Object state must be State_Idle");
-      E := Allocate_Encoder;
-      Print_MIME_Encoder_Info(E);
-      
+      Print_Information_Message("Getting an encoder handle object. State must be State_Idle");
+      H := Get_Encoder_Handle;
+      Print_MIME_Encoder_Info(H);
+
+      E := Get_Encoder_Ptr(H);
+            
       if Get_State(E) = State_Idle then
          Print_Information_Message("State is State_Idle");
       else 
@@ -824,7 +832,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
       
       Print_Information_Message("Calling Start_Decoding. State must be State_Decoding");
       Start_Decoding(E);
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
       
       if Get_State(E) = State_Decoding then
          Print_Information_Message("State is State_Decoding");
@@ -859,7 +867,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
       end if;
             
       Print_Information_Message("State must be State_Idle");
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
       
       if Get_State(E) = State_Idle then
          Print_Information_Message("State is State_Idle");
@@ -868,20 +876,17 @@ package body CryptAda.Tests.Unit.Enc_MIME is
          raise CryptAda_Test_Error;
       end if;
 
-      Print_Information_Message("Deallocating encoder object");
-      Deallocate_Encoder(E);
-
-      Print_Information_Message("After deallocating encoder encoder must be null");
-      Print_MIME_Encoder_Info(E);
+      Print_Information_Message("Invalidating handle");
+      Invalidate_Handle(H);
+      Print_MIME_Encoder_Info(H);
       
+      Print_Information_Message("Test case OK");                  
       End_Test_Case(7, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(7, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -894,31 +899,31 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
    procedure   Case_8
    is
-      E           : MIME_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
    begin
       Begin_Test_Case(8, "Start decoding");
       Print_Information_Message("Testing Start_Decoding procedures");
       
       Print_Information_Message("Default Start_Decoding procedure");
       Print_Message("Before Start_Decoding, the object is in State_Idle", "    ");
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
       Start_Decoding(E);
       Print_Message("After Start_Decoding, the object is in State_Decoding", "    ");
-      Print_MIME_Encoder_Info(E);
-      End_Process(E);
+      Print_MIME_Encoder_Info(H);
+      Set_To_Idle(E);
 
       Print_Information_Message("Start_Decoding with parameters");
       Print_Message("Parameter list is ignored for MIME decoder", "    ");
                   
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");                  
       End_Test_Case(8, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(8, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -931,7 +936,8 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
    procedure   Case_9
    is
-      E           : MIME_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
       BA          : Byte_Array(1 .. 256);
       B           : Natural;
       Dec         : Natural;
@@ -941,7 +947,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
       
       Print_Information_Message("Trying Decode will raise CryptAda_Bad_Operation_Error if encoder was not initialized for decoding");
       Print_Message("Encoder object:", "    ");
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
       
       declare
       begin
@@ -964,7 +970,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
       Print_Information_Message("Start decoding");
       Start_Decoding(E);
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
 
       Print_Information_Message("Trying Decode with a buffer too short will raise CryptAda_Overflow_Error");
       Print_Message("String to decode : """ & Test_Encoded & """");
@@ -999,7 +1005,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
       Print_Message("Expected final result    :");
       Print_Message(To_Hex_String(Test_Decoded, 16, LF_Only, ", ", "16#", "#", Upper_Case, True));            
       End_Decoding(E, BA(Dec + 1 .. BA'Last), B);
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
       Print_Message("End_Decoding length      : " & Natural'Image(B));
       Dec := Dec + B;
       Print_Message("Obtained decoding results:");
@@ -1010,15 +1016,14 @@ package body CryptAda.Tests.Unit.Enc_MIME is
          raise CryptAda_Test_Error;
       end if;
 
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");                  
       End_Test_Case(9, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(9, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -1031,7 +1036,8 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
    procedure   Case_10
    is
-      E           : MIME_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
       BA          : Byte_Array(1 .. 256);
       Dec         : Natural;
    begin
@@ -1040,7 +1046,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
       
       Print_Information_Message("Trying decode will raise CryptAda_Bad_Operation_Error if encoder was not initialized for decoding");
       Print_Message("Encoder object:", "    ");
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
       
       declare
          BA1      : Byte_Array(1 .. Test_Decoded'Length);
@@ -1064,7 +1070,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
       Print_Information_Message("Start decoding");
       Start_Decoding(E);
-      Print_MIME_Encoder_Info(E);      
+      Print_MIME_Encoder_Info(H);      
       Print_Information_Message("Now we perform decoding ...");
       
       declare
@@ -1100,7 +1106,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
             raise CryptAda_Test_Error;
       end;
       
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
       Print_Message("Obtained decoding results:");
       Print_Message(To_Hex_String(BA(1 .. Dec), 16, LF_Only, ", ", "16#", "#", Upper_Case, True));      
       
@@ -1109,15 +1115,14 @@ package body CryptAda.Tests.Unit.Enc_MIME is
          raise CryptAda_Test_Error;
       end if;
             
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");                  
       End_Test_Case(10, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(10, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -1130,7 +1135,8 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
    procedure   Case_11
    is
-      E           : MIME_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
       BA          : Byte_Array(1 .. 256);
       B           : Natural;
       Dec         : Natural;
@@ -1140,7 +1146,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
       
       Print_Information_Message("Trying End_Decoding will raise CryptAda_Bad_Operation_Error if encoder was not initialized for decoding");
       Print_Message("Encoder object:", "    ");
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
       
       declare
       begin
@@ -1161,20 +1167,20 @@ package body CryptAda.Tests.Unit.Enc_MIME is
             raise CryptAda_Test_Error;
       end;
       
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
       Print_Information_Message("Start decoding");
       Start_Decoding(E);
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
       Print_Information_Message("Decoding string: """ & Test_Encoded & """");
       Decode(E, Test_Encoded, BA, B);
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
       Print_Message("Obained decoded length: " & Natural'Image(B));
       Print_Message("Obained decoded array : ");
       Print_Message(To_Hex_String(BA(1 .. B), 16, LF_Only, ", ", "16#", "#", Upper_Case, True));
       Dec := B;
       Print_Information_Message("End decoding");
       End_Decoding(E, BA(Dec + 1 .. BA'Last), B);
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
       Print_Message("Obained decoded length: " & Natural'Image(B));
       Print_Message("Obained decoded array : ");
       Print_Message(To_Hex_String(BA(Dec + 1 .. Dec + B), 16, LF_Only, ", ", "16#", "#", Upper_Case, True));
@@ -1183,15 +1189,14 @@ package body CryptAda.Tests.Unit.Enc_MIME is
       Print_Message("Final decoded array   : ");            
       Print_Message(To_Hex_String(BA(1 .. Dec), 16, LF_Only, ", ", "16#", "#", Upper_Case, True));
             
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");                  
       End_Test_Case(11, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(11, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -1204,7 +1209,8 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
    procedure   Case_12
    is
-      E           : MIME_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
       BA          : Byte_Array(1 .. 256);
       B           : Natural;
       Dec         : Natural;
@@ -1214,7 +1220,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
       
       Print_Information_Message("Trying End_Decoding will raise CryptAda_Bad_Operation_Error if encoder was not initialized for decoding");
       Print_Message("Encoder object:", "    ");
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
       
       declare
          BA1      : Byte_Array(1 .. 0);
@@ -1240,7 +1246,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
       
       Print_Information_Message("Start decoding");
       Start_Decoding(E);
-      Print_MIME_Encoder_Info(E);
+      Print_MIME_Encoder_Info(H);
       Print_Information_Message("Decoding string: """ & Test_Encoded & """");
       Decode(E, Test_Encoded, BA, B);
       Print_Message("Obained decoded length: " & Natural'Image(B));
@@ -1263,15 +1269,14 @@ package body CryptAda.Tests.Unit.Enc_MIME is
       Print_Message("Final decoded array   : ");            
       Print_Message(To_Hex_String(BA(1 .. Dec), 16, LF_Only, ", ", "16#", "#", Upper_Case, True));
                   
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");                  
       End_Test_Case(12, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(12, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -1284,7 +1289,8 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
    procedure   Case_13
    is
-      E           : MIME_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
       S           : String(1 .. 256);
       C           : Natural;
       I           : Positive := Test_Decoded'First;
@@ -1301,7 +1307,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
       while I <= Test_Vector_Decoded(7).all'Last loop
          Print_Message("Encoding byte " & Positive'Image(I) & " (" & To_Hex_String(Test_Vector_Decoded(7).all(I), "16#", "#", Upper_Case, True) & ")");
          Encode(E, Test_Vector_Decoded(7).all(I .. I), S(J .. S'Last), C);
-         Print_MIME_Encoder_Info(E);
+         Print_MIME_Encoder_Info(H);
          Print_Message("Encoded so far: """ & S(1 .. J + C - 1) & """");
          I := I + 1;
          J := J + C;
@@ -1318,15 +1324,14 @@ package body CryptAda.Tests.Unit.Enc_MIME is
          raise CryptAda_Test_Error;
       end if;
       
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");                  
       End_Test_Case(13, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(13, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -1339,7 +1344,8 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
    procedure   Case_14
    is
-      E           : MIME_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
       BA          : Byte_Array(1 .. 256);
       B           : Natural;
       I           : Positive := Test_Encoded'First;
@@ -1349,13 +1355,13 @@ package body CryptAda.Tests.Unit.Enc_MIME is
       Print_Information_Message("Decoding a test encoded string one code at a time");
       Print_Information_Message("String to decode: """ & Test_Vector_Encoded(7).all & """");
       Print_Information_Message("Expected byte array:");
-      Print_Message(To_Hex_String(Test_Vector_Decoded(7).all, 16, LF_Only, ", ", "16#", "#", Upper_Case, True));
+      Print_Message(To_Hex_String(Test_Vector_Decoded(6).all, 16, LF_Only, ", ", "16#", "#", Upper_Case, True));
       Start_Decoding(E);
       
-      while I <= Test_Vector_Encoded(7).all'Last loop
+      while I <= Test_Vector_Encoded(6).all'Last loop
          Print_Message("Decoding code " & Positive'Image(I) & " ('" & Test_Vector_Encoded(7).all(I) & "')");
-         Decode(E, Test_Vector_Encoded(7).all(I .. I), BA(J .. BA'Last), B);
-         Print_MIME_Encoder_Info(E);
+         Decode(E, Test_Vector_Encoded(6).all(I .. I), BA(J .. BA'Last), B);
+         Print_MIME_Encoder_Info(H);
          Print_Message("Decoded so far: " & Natural'Image(J + B - 1));
          Print_Message(To_Hex_String(BA(1 .. J + B - 1), 16, LF_Only, ", ", "16#", "#", Upper_Case, True));         
          I := I + 1;
@@ -1367,22 +1373,21 @@ package body CryptAda.Tests.Unit.Enc_MIME is
       Print_Message("Final decoded : ");
       Print_Message(To_Hex_String(BA(1 .. J + B - 1), 16, LF_Only, ", ", "16#", "#", Upper_Case, True));         
 
-      if BA(1 .. J + B - 1) = Test_Vector_Decoded(7).all then
+      if BA(1 .. J + B - 1) = Test_Vector_Decoded(6).all then
          Print_Information_Message("Results match");
       else
          Print_Error_Message("Results don't match");
          raise CryptAda_Test_Error;
       end if;
       
-      Deallocate_Encoder(E);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");                  
       End_Test_Case(14, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(14, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -1395,65 +1400,15 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
    procedure   Case_15
    is
-      E           : MIME_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
+      S           : String(1 .. 256);
+      C           : Natural;
       BA          : Byte_Array(1 .. 256);
       B           : Natural;
-      ES1         : constant String := "abc=aaaaaaaa";
-      I           : Positive := ES1'First;
-      J           : Positive := BA'First;
+      K           : Natural;
    begin
-      Begin_Test_Case(15, "Testing Decoding_Stopped");
-      
-      Print_Information_Message("Decoding process is stopped when a valid pad sequence is found in output");
-      Print_Message("Decoding code by code the string: """ & ES1 & """");
-      Print_Message("Decoding shall stop after 4th code");
-      
-      Start_Decoding(E);
-
-      while I <= ES1'Last loop
-         Print_Message("Decoding code " & Positive'Image(I) & " ('" & ES1(I) & "')");
-         Decode(E, ES1(I .. I), BA(J .. BA'Last), B);
-         Print_Message("Decoded so far: " & Natural'Image(J + B - 1));
-         Print_Message(To_Hex_String(BA(1 .. J + B - 1), 16, LF_Only, ", ", "16#", "#", Upper_Case, True));         
-         Print_Message("Decoding_Stopped: " & Boolean'Image(Decoding_Stopped(E)));
-         I := I + 1;
-         J := J + B;
-      end loop;
-      
-      Print_Information_Message("End decoding");
-      End_Decoding(E, BA(J .. BA'Last), B);
-      Print_Message("Final decoded : ");
-      Print_Message(To_Hex_String(BA(1 .. J + B - 1), 16, LF_Only, ", ", "16#", "#", Upper_Case, True));         
-      
-      Deallocate_Encoder(E);
-      End_Test_Case(15, Passed);
-   exception
-      when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
-         End_Test_Case(15, Failed);
-         raise;
-      when X: others =>
-         Deallocate_Encoder(E);
-         Print_Error_Message(
-            "Exception: """ & Exception_Name(X) & """");
-         Print_Message(
-            "Message  : """ & Exception_Message(X) & """");
-         End_Test_Case(15, Failed);
-         raise CryptAda_Test_Error;
-   end Case_15;
-
-   --[Case_16]------------------------------------------------------------------
-
-   procedure   Case_16
-   is
-      E              : MIME_Encoder_Ref := Allocate_Encoder;
-      S              : String(1 .. 256);
-      C              : Natural;
-      BA             : Byte_Array(1 .. 256);
-      B              : Natural;
-      K              : Natural;
-   begin
-      Begin_Test_Case(16, "Testing encoding/decoding RFC 4648 test vectors");
+      Begin_Test_Case(15, "Testing encoding/decoding RFC 4648 test vectors");
 
       -- Encoding
 
@@ -1508,29 +1463,30 @@ package body CryptAda.Tests.Unit.Enc_MIME is
          end if;
       end loop;
 
-      End_Test_Case(16, Passed);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");                  
+      End_Test_Case(15, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
-         End_Test_Case(16, Failed);
+         End_Test_Case(15, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
             "Message  : """ & Exception_Message(X) & """");
-         End_Test_Case(16, Failed);
+         End_Test_Case(15, Failed);
          raise CryptAda_Test_Error;
-   end Case_16;
+   end Case_15;
 
-   --[Case_17]------------------------------------------------------------------
+   --[Case_16]------------------------------------------------------------------
 
-   procedure   Case_17
+   procedure   Case_16
    is
-      E              : MIME_Encoder_Ref := Allocate_Encoder;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
    begin
-      Begin_Test_Case(17, "Testing Base64 syntactic erroneous strings that must be accepted by MIME encoder");
+      Begin_Test_Case(16, "Testing Base64 syntactic erroneous strings that must be accepted by MIME encoder");
 
       for I in Syntax_Test'Range loop
          declare
@@ -1570,36 +1526,37 @@ package body CryptAda.Tests.Unit.Enc_MIME is
          end;
       end loop;
 
-      End_Test_Case(17, Passed);
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");                  
+      End_Test_Case(16, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
-         End_Test_Case(17, Failed);
+         End_Test_Case(16, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
             "Message  : """ & Exception_Message(X) & """");
-         End_Test_Case(17, Failed);
+         End_Test_Case(16, Failed);
          raise CryptAda_Test_Error;
-   end Case_17;
+   end Case_16;
 
-   --[Case_18]------------------------------------------------------------------
+   --[Case_17]------------------------------------------------------------------
 
-   procedure   Case_18
+   procedure   Case_17
    is
-      E              : MIME_Encoder_Ref := Allocate_Encoder;
-      L              : List;
-      LL             : Positive;
-      S              : String(1 .. 256);
-      C              : Natural;
-      BA             : Byte_Array(1 .. 256);
-      B              : Natural;
-      K              : Natural;
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
+      L           : List;
+      LL          : Positive;
+      S           : String(1 .. 256);
+      C           : Natural;
+      BA          : Byte_Array(1 .. 256);
+      B           : Natural;
+      K           : Natural;
    begin
-      Begin_Test_Case(18, "Testing MIME encoding/decoding with different line lengths");
+      Begin_Test_Case(17, "Testing MIME encoding/decoding with different line lengths");
 
       Print_Information_Message("Encoding with line length = " & Positive'Image(Positive'Last));
       Print_Message("Must use line length = " & Positive'Image(MIME_Max_Line_Length));
@@ -1611,7 +1568,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
       Start_Encoding(E, L);
 
-      LL := Get_Line_Length(E);
+      LL := Get_Line_Length(MIME_Encoder_Ptr(E));
       Print_Message("Expected line length: " & Positive'Image(MIME_Max_Line_Length));
       Print_Message("Obtained line length: " & Positive'Image(LL));
 
@@ -1658,7 +1615,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
       Start_Encoding(E, L);
 
-      LL := Get_Line_Length(E);
+      LL := Get_Line_Length(MIME_Encoder_Ptr(E));
       Print_Message("Expected line length: " & Positive'Image(50));
       Print_Message("Obtained line length: " & Positive'Image(LL));
 
@@ -1705,7 +1662,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
 
       Start_Encoding(E, L);
 
-      LL := Get_Line_Length(E);
+      LL := Get_Line_Length(MIME_Encoder_Ptr(E));
       Print_Message("Expected line length: " & Positive'Image(25));
       Print_Message("Obtained line length: " & Positive'Image(LL));
 
@@ -1743,15 +1700,71 @@ package body CryptAda.Tests.Unit.Enc_MIME is
          raise CryptAda_Test_Error;
       end if;
       
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");
+      End_Test_Case(17, Passed);
+   exception
+      when CryptAda_Test_Error =>
+         End_Test_Case(17, Failed);
+         raise;
+      when X: others =>
+         Print_Error_Message(
+            "Exception: """ & Exception_Name(X) & """");
+         Print_Message(
+            "Message  : """ & Exception_Message(X) & """");
+         End_Test_Case(17, Failed);
+         raise CryptAda_Test_Error;
+   end Case_17;
+
+   --[Case_18]------------------------------------------------------------------
+
+   procedure   Case_18
+   is
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
+      Iterations  : constant Positive := 10240;
+      BA          : constant Byte_Array := Random_Byte_Array(1024);
+      S           : String(1 .. 2048);
+      C           : Natural;
+      TB          : Ada.Real_Time.Time;
+      TE          : Ada.Real_Time.Time;
+      TS          : Time_Span;
+   begin
+      Begin_Test_Case(18, "Bulk encoding");
+      Print_Information_Message("Encoding a random Byte array buffer of " & Positive'Image(BA'Length));
+      Print_Information_Message("Performing " & Positive'Image(Iterations) & " iterations");
+      Print_Information_Message("Total bytes to encode: " & Positive'Image(Iterations * BA'Length));  
+
+      Print_Information_Message("Start encoding ...");
+      Start_Encoding(E);
+      
+      TB := Clock;
+
+      for I in 1 .. Iterations loop
+         Encode(E, BA, S, C);
+      end loop;
+
+      End_Encoding(E, S, C);
+
+      TE := Clock;
+      TS := TE - TB;
+
+      Print_Information_Message("Encoding ended");
+      
+      Print_Information_Message("Total encoded bytes  : " & Natural'Image(Get_Byte_Count(E)));     
+      Print_Information_Message("Total generated codes: " & Natural'Image(Get_Code_Count(E)));     
+      Ada.Text_IO.Put("[I] Elapsed time       : ");
+      Duration_IO.Put(To_Duration(TS));
+      Ada.Text_IO.Put_Line(" secs.");
+      
+      Invalidate_Handle(H);
       Print_Information_Message("Test case OK");
       End_Test_Case(18, Passed);
    exception
       when CryptAda_Test_Error =>
-         Deallocate_Encoder(E);
          End_Test_Case(18, Failed);
          raise;
       when X: others =>
-         Deallocate_Encoder(E);
          Print_Error_Message(
             "Exception: """ & Exception_Name(X) & """");
          Print_Message(
@@ -1759,6 +1772,69 @@ package body CryptAda.Tests.Unit.Enc_MIME is
          End_Test_Case(18, Failed);
          raise CryptAda_Test_Error;
    end Case_18;
+
+   --[Case_19]------------------------------------------------------------------
+
+   procedure   Case_19
+   is
+      H           : Encoder_Handle := Get_Encoder_Handle;
+      E           : Encoder_Ptr renames Get_Encoder_Ptr(H);
+      Iterations  : constant Positive := 20480;
+      S           : String(1 .. 1024);
+      BA1         : constant Byte_Array := Random_Byte_Array(510);
+      BA          : Byte_Array(1 .. S'Length);
+      C           : Natural;
+      B           : Natural;
+      TB          : Ada.Real_Time.Time;
+      TE          : Ada.Real_Time.Time;
+      TS          : Time_Span;
+   begin
+      Begin_Test_Case(21, "Bulk decoding");
+      Print_Information_Message("Decoding a random Base64 String of " & Positive'Image(S'Length));
+      Print_Information_Message("Performing " & Positive'Image(Iterations) & " iterations");
+      Start_Encoding(E);
+      Encode(E, BA1, S, B);
+      End_Encoding(E, S(B + 1 .. S'Last), C);
+      C := C + B;
+      
+      Print_Information_Message("Total codes to process: " & Positive'Image(Iterations * C));  
+      Print_Information_Message("Start decoding ...");
+      Start_Decoding(E);
+      
+      TB := Clock;
+
+      for I in 1 .. Iterations loop
+         Decode(E, S(1 .. C), BA, B);
+      end loop;
+
+      End_Decoding(E, BA, B);
+
+      TE := Clock;
+      TS := TE - TB;
+
+      Print_Information_Message("Decoding ended");
+      
+      Print_Information_Message("Total processed codes: " & Natural'Image(Get_Code_Count(E)));     
+      Print_Information_Message("Total decoded bytes  : " & Natural'Image(Get_Byte_Count(E)));     
+      Ada.Text_IO.Put("[I] Elapsed time       : ");
+      Duration_IO.Put(To_Duration(TS));
+      Ada.Text_IO.Put_Line(" secs.");
+      
+      Invalidate_Handle(H);
+      Print_Information_Message("Test case OK");
+      End_Test_Case(19, Passed);
+   exception
+      when CryptAda_Test_Error =>
+         End_Test_Case(19, Failed);
+         raise;
+      when X: others =>
+         Print_Error_Message(
+            "Exception: """ & Exception_Name(X) & """");
+         Print_Message(
+            "Message  : """ & Exception_Message(X) & """");
+         End_Test_Case(19, Failed);
+         raise CryptAda_Test_Error;
+   end Case_19;
    
    -----------------------------------------------------------------------------
    --[Spec Declared Subprogram Bodies]------------------------------------------
@@ -1789,6 +1865,7 @@ package body CryptAda.Tests.Unit.Enc_MIME is
       Case_16;
       Case_17;
       Case_18;
+      Case_19;
 
       End_Test_Driver(Driver_Name);
    exception

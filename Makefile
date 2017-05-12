@@ -84,7 +84,7 @@ OBJS     =  cryptada.o \
             cryptada-text_encoders-hex.o \
             cryptada-text_encoders-base16.o \
             cryptada-text_encoders-base64.o \
-            cryptada-text_encoders-base64-mime.o \
+            cryptada-text_encoders-mime.o \
             cryptada-digests.o \
             cryptada-digests-hashes.o \
             cryptada-digests-counters.o \
@@ -224,26 +224,6 @@ cryptada-utils-format.o: $(UTILSDIR)/cryptada-utils-format.adb
 
 # Encoders packages
 
-cryptada-encoders.o: $(ENCSDIR)/cryptada-encoders.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-encoders-hex_encoders.o: $(ENCSDIR)/cryptada-encoders-hex_encoders.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-encoders-base16_encoders.o: $(ENCSDIR)/cryptada-encoders-base16_encoders.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-encoders-base64_encoders.o: $(ENCSDIR)/cryptada-encoders-base64_encoders.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-encoders-base64_encoders-mime_encoders.o: $(ENCSDIR)/cryptada-encoders-base64_encoders-mime_encoders.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
 cryptada-text_encoders.o: $(ENCSDIR)/cryptada-text_encoders.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
@@ -260,7 +240,7 @@ cryptada-text_encoders-base64.o: $(ENCSDIR)/cryptada-text_encoders-base64.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
-cryptada-text_encoders-base64-mime.o: $(ENCSDIR)/cryptada-text_encoders-base64-mime.adb
+cryptada-text_encoders-mime.o: $(ENCSDIR)/cryptada-text_encoders-mime.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
     

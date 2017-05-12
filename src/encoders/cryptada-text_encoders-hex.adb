@@ -32,8 +32,8 @@
 --------------------------------------------------------------------------------
 
 with Ada.Exceptions;                      use Ada.Exceptions;
-with Ada.Unchecked_Deallocation;
 
+with CryptAda.Names;                      use CryptAda.Names;
 with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
 with CryptAda.Lists;                      use CryptAda.Lists;
 with CryptAda.Exceptions;                 use CryptAda.Exceptions;
@@ -43,8 +43,6 @@ package body CryptAda.Text_Encoders.Hex is
    -----------------------------------------------------------------------------
    --[Generic Instantiations]---------------------------------------------------
    -----------------------------------------------------------------------------
-
-   procedure Free is new Ada.Unchecked_Deallocation(Hex_Encoder'Class, Hex_Encoder_Ref);
 
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
@@ -127,7 +125,6 @@ package body CryptAda.Text_Encoders.Hex is
                   Object         : access Hex_Encoder)
    is
    begin
-      Object.all.State     := State_Idle;
       Object.all.Buffered  := False;
       Object.all.The_Code  := Character'First;
    end Initialize_Object;
@@ -184,6 +181,57 @@ package body CryptAda.Text_Encoders.Hex is
    end Decode_Chunk;
 
    -----------------------------------------------------------------------------
+   --[Getting a handle for Hex encoder]-----------------------------------------
+   -----------------------------------------------------------------------------
+   
+   --[Get_Encoder_Handle]-------------------------------------------------------
+
+   function    Get_Encoder_Handle
+      return   Encoder_Handle
+   is
+      Ptr      : Hex_Encoder_Ptr;
+   begin
+      Ptr := new Hex_Encoder'(Encoder with
+                                 Id          => TE_Hexadecimal,
+                                 Buffered    => False,
+                                 The_Code    => Character'First);      
+      return Ref(Encoder_Ptr(Ptr));
+   exception
+      when others =>
+         Raise_Exception(
+            CryptAda_Storage_Error'Identity, 
+            "Error when allocating Hex_Encoder object");
+   end Get_Encoder_Handle;
+
+   -----------------------------------------------------------------------------
+   --[Ada.Finalization]---------------------------------------------------------
+   -----------------------------------------------------------------------------
+      
+   --[Initialize]---------------------------------------------------------------
+
+   overriding
+   procedure   Initialize(
+                  Object         : in out Hex_Encoder)
+   is
+   begin
+      Private_Clear_Encoder(Object);
+      Object.Buffered   := False;
+      Object.The_Code   := Character'First;
+   end Initialize;
+
+   --[Finalize]-----------------------------------------------------------------
+
+   overriding
+   procedure   Finalize(
+                  Object         : in out Hex_Encoder)
+   is
+   begin
+      Private_Clear_Encoder(Object);
+      Object.Buffered   := False;
+      Object.The_Code   := Character'First;
+   end Finalize;
+   
+   -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
 
@@ -191,33 +239,32 @@ package body CryptAda.Text_Encoders.Hex is
 
    overriding
    procedure   Start_Encoding(
-                  Encoder        : access Hex_Encoder)
+                  The_Encoder    : access Hex_Encoder)
    is
    begin
-      Encoder.all.State    := State_Encoding;
-      Encoder.all.Buffered := False;
-      Encoder.all.The_Code := Character'First;
+      Private_Start_Encoding(The_Encoder);
+      Initialize_Object(The_Encoder);
    end Start_Encoding;
 
    --[Start_Encoding]-----------------------------------------------------------
 
    overriding
    procedure   Start_Encoding(
-                  Encoder        : access Hex_Encoder;
+                  The_Encoder    : access Hex_Encoder;
                   Parameters     : in     List)
    is
    begin
       -- This encoder does not expect any parameter so revert to default
       -- Start_Encoding. This will raise a warning when compiling the package.
 
-      Start_Encoding(Encoder);
+      Start_Encoding(The_Encoder);
    end Start_Encoding;
 
    --[Encode]-------------------------------------------------------------------
 
    overriding
    procedure   Encode(
-                  Encoder        : access Hex_Encoder;
+                  With_Encoder   : access Hex_Encoder;
                   Input          : in     Byte_Array;
                   Output         :    out String;
                   Codes          :    out Natural)
@@ -226,7 +273,7 @@ package body CryptAda.Text_Encoders.Hex is
    begin
       -- Check arguments.
 
-      if Encoder.all.State /= State_Encoding then
+      if With_Encoder.all.State /= State_Encoding then
          Raise_Exception(
             CryptAda_Bad_Operation_Error'Identity, 
             "Encoder is not in encoding state");
@@ -245,6 +292,8 @@ package body CryptAda.Text_Encoders.Hex is
 
          Encode_Chunk(Input, Output(Output'First .. Output'First + OL - 1));
          Codes := OL;
+         Increment_Byte_Counter(With_Encoder, Input'Length);
+         Increment_Code_Counter(With_Encoder, OL);
       end if;
    end Encode;
 
@@ -252,14 +301,14 @@ package body CryptAda.Text_Encoders.Hex is
 
    overriding
    function    Encode(
-                  Encoder        : access Hex_Encoder;
+                  With_Encoder   : access Hex_Encoder;
                   Input          : in     Byte_Array)
       return   String
    is
       S              : String(1 .. 2 * Input'Length);
       C              : Natural;
    begin
-      Encode(Encoder, Input, S, C);
+      Encode(With_Encoder, Input, S, C);
       return S(1 .. C);
    end Encode;
 
@@ -267,18 +316,19 @@ package body CryptAda.Text_Encoders.Hex is
 
    overriding
    procedure   End_Encoding(
-                  Encoder        : access Hex_Encoder;
+                  With_Encoder   : access Hex_Encoder;
                   Output         :    out String;
                   Codes          :    out Natural)
    is
    begin
-      if Encoder.all.State /= State_Encoding then
+      if With_Encoder.all.State /= State_Encoding then
          Raise_Exception(
             CryptAda_Bad_Operation_Error'Identity, 
             "Encoder is not in encoding state");
       end if;
 
-      Initialize_Object(Encoder);
+      Private_End_Encoding(With_Encoder);
+      Initialize_Object(With_Encoder);
       Codes := 0;
    end End_Encoding;
 
@@ -286,17 +336,18 @@ package body CryptAda.Text_Encoders.Hex is
 
    overriding
    function    End_Encoding(
-                  Encoder        : access Hex_Encoder)
+                  With_Encoder   : access Hex_Encoder)
       return   String
    is
    begin
-      if Encoder.all.State /= State_Encoding then
+      if With_Encoder.all.State /= State_Encoding then
          Raise_Exception(
             CryptAda_Bad_Operation_Error'Identity, 
             "Encoder is not in encoding state");
       end if;
 
-      Initialize_Object(Encoder);
+      Private_End_Encoding(With_Encoder);
+      Initialize_Object(With_Encoder);
       return Empty_String;
    end End_Encoding;
 
@@ -304,33 +355,32 @@ package body CryptAda.Text_Encoders.Hex is
 
    overriding
    procedure   Start_Decoding(
-                  Encoder        : access Hex_Encoder)
+                  The_Encoder    : access Hex_Encoder)
    is
    begin
-      Encoder.all.State    := State_Decoding;
-      Encoder.all.Buffered := False;
-      Encoder.all.The_Code := Character'First;
+      Private_Start_Decoding(The_Encoder);
+      Initialize_Object(The_Encoder);
    end Start_Decoding;
 
    --[Start_Decoding]-----------------------------------------------------------
 
    overriding
    procedure   Start_Decoding(
-                  Encoder        : access Hex_Encoder;
+                  The_Encoder    : access Hex_Encoder;
                   Parameters     : in     List)
    is
    begin
       -- This encoder does not expect any parameter so revert to default
       -- Start_Encoding. This will raise a warning when compiling.
 
-      Start_Decoding(Encoder);
+      Start_Decoding(The_Encoder);
    end Start_Decoding;
 
    --[Decode]-------------------------------------------------------------------
 
    overriding
    procedure   Decode(
-                  Encoder        : access Hex_Encoder;
+                  With_Encoder   : access Hex_Encoder;
                   Input          : in     String;
                   Output         :    out Byte_Array;
                   Bytes          :    out Natural)
@@ -338,7 +388,7 @@ package body CryptAda.Text_Encoders.Hex is
       TC             : Natural := Input'Length;
       OB             : Natural;
    begin
-      if Encoder.all.State /= State_Decoding then
+      if With_Encoder.all.State /= State_Decoding then
          Raise_Exception(
             CryptAda_Bad_Operation_Error'Identity, 
             "Encoder is not in decoding state");
@@ -350,7 +400,7 @@ package body CryptAda.Text_Encoders.Hex is
          -- Determine the total number of codes to process and bytes to
          -- generate.
 
-         if Encoder.all.Buffered then
+         if With_Encoder.all.Buffered then
             TC := TC + 1;
          end if;
 
@@ -378,8 +428,8 @@ package body CryptAda.Text_Encoders.Hex is
 
             -- If encoder has a buffered character then copy it to I_S.
 
-            if Encoder.all.Buffered then
-               I_S(F) := Encoder.all.The_Code;
+            if With_Encoder.all.Buffered then
+               I_S(F) := With_Encoder.all.The_Code;
                F := F + 1;
             end if;
 
@@ -391,15 +441,17 @@ package body CryptAda.Text_Encoders.Hex is
             -- Set internal buffer if necessary.
 
             if (TC mod 2) = 1 then
-               Encoder.all.Buffered := True;
-               Encoder.all.The_Code := Input(Input'Last);
+               With_Encoder.all.Buffered := True;
+               With_Encoder.all.The_Code := Input(Input'Last);
             else
-               Encoder.all.Buffered := False;
-               Encoder.all.The_Code := Character'First;
+               With_Encoder.all.Buffered := False;
+               With_Encoder.all.The_Code := Character'First;
             end if;
 
-            -- Set out argument.
+            -- Increment counters and set out argument.
 
+            Increment_Byte_Counter(With_Encoder, OB);
+            Increment_Code_Counter(With_Encoder, Input'Length);            
             Bytes := OB;
          end;
       end if;
@@ -409,7 +461,7 @@ package body CryptAda.Text_Encoders.Hex is
 
    overriding
    function    Decode(
-                  Encoder        : access Hex_Encoder;
+                  With_Encoder   : access Hex_Encoder;
                   Input          : in     String)
       return   Byte_Array
    is
@@ -417,7 +469,7 @@ package body CryptAda.Text_Encoders.Hex is
       BA             : Byte_Array(1 .. TC);
       B              : Natural;
    begin
-      Decode(Encoder, Input, BA, B);
+      Decode(With_Encoder, Input, BA, B);
       return BA(1 .. B);
    end Decode;
 
@@ -425,24 +477,25 @@ package body CryptAda.Text_Encoders.Hex is
 
    overriding
    procedure   End_Decoding(
-                  Encoder        : access Hex_Encoder;
+                  With_Encoder   : access Hex_Encoder;
                   Output         :    out Byte_Array;
                   Bytes          :    out Natural)
    is
    begin
-      if Encoder.all.State /= State_Decoding then
+      if With_Encoder.all.State /= State_Decoding then
          Raise_Exception(
             CryptAda_Bad_Operation_Error'Identity, 
             "Encoder is not in decoding state");
       end if;
 
-      if Encoder.all.Buffered then
+      if With_Encoder.all.Buffered then
          Raise_Exception(
             CryptAda_Syntax_Error'Identity, 
             "Odd number of codes");
       end if;
 
-      Initialize_Object(Encoder);
+      Private_End_Decoding(With_Encoder);
+      Initialize_Object(With_Encoder);
       Bytes := 0;
    end End_Decoding;
 
@@ -450,100 +503,50 @@ package body CryptAda.Text_Encoders.Hex is
 
    overriding
    function    End_Decoding(
-                  Encoder        : access Hex_Encoder)
+                  With_Encoder   : access Hex_Encoder)
       return   Byte_Array
    is
    begin
-      if Encoder.all.State /= State_Decoding then
+      if With_Encoder.all.State /= State_Decoding then
          Raise_Exception(
             CryptAda_Bad_Operation_Error'Identity, 
             "Encoder is not in decoding state");
       end if;
 
-      if Encoder.all.Buffered then
+      if With_Encoder.all.Buffered then
          Raise_Exception(
             CryptAda_Syntax_Error'Identity, 
             "Odd number of codes");
       end if;
 
-      Initialize_Object(Encoder);
+      Private_End_Decoding(With_Encoder);
+      Initialize_Object(With_Encoder);
       return Empty_Byte_Array;
    end End_Decoding;
 
-   --[End_Process]--------------------------------------------------------------
+   --[Set_To_Idle]--------------------------------------------------------------
 
    overriding
-   procedure   End_Process(
-                  Encoder        : access Hex_Encoder)
+   procedure   Set_To_Idle(
+                  The_Encoder    : access Hex_Encoder)
    is
    begin
-      Initialize_Object(Encoder);
-   end End_Process;
+      Private_Clear_Encoder(The_Encoder.all);
+      Initialize_Object(The_Encoder);
+   end Set_To_Idle;
    
    -----------------------------------------------------------------------------
    --[Additional Operations]----------------------------------------------------
    -----------------------------------------------------------------------------
-
-   --[Allocate_Encoder]---------------------------------------------------------
-
-   function    Allocate_Encoder
-      return   Hex_Encoder_Ref
-   is
-      Ref         : Hex_Encoder_Ref;
-   begin
-      Ref := new Hex_Encoder'(Text_Encoder with
-                                 Buffered => False,
-                                 The_Code => Character'First);
-      return Ref;
-   exception
-      when others =>
-         Raise_Exception(
-            CryptAda_Storage_Error'Identity, 
-            "Error when allocating Hex_Encoder object");
-   end Allocate_Encoder;
-
-   --[Deallocate_Encoder]-------------------------------------------------------
-
-   procedure   Deallocate_Encoder(
-                  Encoder        : in out Hex_Encoder_Ref)
-   is
-   begin
-      if Encoder /= null then
-         Initialize(Encoder.all);
-         Free(Encoder);
-         Encoder := null;
-      end if;
-   end Deallocate_Encoder;
    
    --[Has_Buffered_Code]--------------------------------------------------------
 
    function    Has_Buffered_Code(
-                  Encoder        : access Hex_Encoder'Class)
+                  The_Encoder    : access Hex_Encoder'Class)
       return   Boolean
    is
    begin
-      return Encoder.all.Buffered;
+      return The_Encoder.all.Buffered;
    end Has_Buffered_Code;
 
-   --[Initialize]---------------------------------------------------------------
-
-   procedure   Initialize(
-                  Object         : in out Hex_Encoder)
-   is
-   begin
-      Object.State      := State_Idle;
-      Object.Buffered   := False;
-      Object.The_Code   := Character'First;
-   end Initialize;
-
-   --[Finalize]-----------------------------------------------------------------
-
-   procedure   Finalize(
-                  Object         : in out Hex_Encoder)
-   is
-   begin
-      Object.State      := State_Idle;
-      Object.Buffered   := False;
-      Object.The_Code   := Character'First;
-   end Finalize;
 end CryptAda.Text_Encoders.Hex;

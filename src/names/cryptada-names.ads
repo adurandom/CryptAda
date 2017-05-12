@@ -71,12 +71,12 @@ package CryptAda.Names is
    type Algorithm_Name_Ref is access constant String;
    for Algorithm_Name_Ref'Storage_Size use 0;
    
-   --[Text_Encoder_Id]----------------------------------------------------------
+   --[Encoder_Id]---------------------------------------------------------------
    -- Next enumerated type identifies the text encoding algorithms implemented
    -- in CryptAda.
    -----------------------------------------------------------------------------
 
-   type Text_Encoder_Id is
+   type Encoder_Id is
       (
          TE_Hexadecimal,         -- Hexadecimal text encoder.
          TE_Base16,              -- Base16 text encoder.
