@@ -43,7 +43,7 @@ with CryptAda.Lists;
 with CryptAda.Names;
 
 package CryptAda.Text_Encoders is
-
+   
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -61,7 +61,7 @@ package CryptAda.Text_Encoders is
    type Encoder_Ptr is access all Encoder'Class;
 
    --[Encoder_Handle]-----------------------------------------------------------
-   -- Smart pointer ro encoder objects.
+   -- Smart pointer to encoder objects.
    -----------------------------------------------------------------------------
 
    type Encoder_Handle is private;

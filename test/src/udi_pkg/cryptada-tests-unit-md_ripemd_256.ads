@@ -16,48 +16,21 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-factories-text_encoder_factory.ads
+--    Filename          :  cryptada-tests-unit-md_ripemd_256.ads
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
---    Creation date     :  May 5th, 2017
+--    Creation date     :  May 15th, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    This package implements a factory for text encoders.
+--    Unit tests for CryptAda.Digests.Message_Digests.RIPEMD_256
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
---    1.0   20170505 ADD   Initial implementation.
+--    1.0   20170517 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with CryptAda.Names;
-with CryptAda.Text_Encoders;
-
-package CryptAda.Factories.Text_Encoder_Factory is
-   
-   -----------------------------------------------------------------------------
-   --[Subprogram Specs]---------------------------------------------------------
-   -----------------------------------------------------------------------------
-   
-   --[Create_Text_Encoder]------------------------------------------------------
-   -- Purpose:
-   -- Creates and returns a reference to a particular text encoder given its 
-   -- identifier.
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- Id                      Encoder_Id that identifies the encoder to create.
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- Encoder_Handle that allows the caller to handle the particular encoder.
-   -- The encoder is in State_Idle state.
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- TBD
-   -----------------------------------------------------------------------------
-
-   function    Create_Text_Encoder(
-                  Id             : in     CryptAda.Names.Encoder_Id)
-      return   CryptAda.Text_Encoders.Encoder_Handle;
-
-end CryptAda.Factories.Text_Encoder_Factory;
+package CryptAda.Tests.Unit.MD_RIPEMD_256 is
+   procedure Test_Driver;
+end CryptAda.Tests.Unit.MD_RIPEMD_256;

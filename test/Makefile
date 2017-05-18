@@ -94,11 +94,11 @@ ADAFLAGS    = -O3 -gnat05 -gnata -gnatn -gnatwa -D $(CT_OBJ)
 IDIR_UUT    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UUT_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS)
 IDIR_UPR    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UPR_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS)
 IDIR_UEN    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UEN_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_ENCODERS) -I$(CAS_FACTORIES)
-IDIR_UDI    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UDI_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_DIGESTS)
-IDIR_URN    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_URN_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_DIGESTS) -I$(CAS_RANDOM)
-IDIR_UBC    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UBC_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_DIGESTS) -I$(CAS_RANDOM) -I$(CAS_CIPHERS)
+IDIR_UDI    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UDI_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_ENCODERS) -I$(CAS_FACTORIES) -I$(CAS_DIGESTS)
+IDIR_URN    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_URN_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_ENCODERS) -I$(CAS_FACTORIES) -I$(CAS_DIGESTS) -I$(CAS_RANDOM)
+IDIR_UBC    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UBC_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_ENCODERS) -I$(CAS_FACTORIES) -I$(CAS_DIGESTS) -I$(CAS_RANDOM) -I$(CAS_CIPHERS)
 
-IDIR_TDI    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_TDI_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_DIGESTS)
+IDIR_TDI    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_TDI_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_ENCODERS) -I$(CAS_FACTORIES) -I$(CAS_DIGESTS)
 
 #>>>[Delete command]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -129,6 +129,15 @@ U_ENC       =   $(CTB_UENC)/ut_enc_hex.exe \
                 
 
 U_DIG       =   $(CTB_UDIG)/ut_count.exe \
+                $(CTB_UDIG)/ut_hashes.exe \
+                $(CTB_UDIG)/ut_md_md2.exe \
+                $(CTB_UDIG)/ut_md_md4.exe \
+                $(CTB_UDIG)/ut_md_md5.exe \
+                $(CTB_UDIG)/ut_md_ripemd_128.exe \
+                $(CTB_UDIG)/ut_md_ripemd_160.exe \
+                $(CTB_UDIG)/ut_md_ripemd_256.exe \
+                $(CTB_UDIG)/ut_md_ripemd_320.exe \
+                $(CTB_UDIG)/ut_md_sha_1.exe \
                 $(CTB_UDIG)/ut_md2.exe \
                 $(CTB_UDIG)/ut_md4.exe \
                 $(CTB_UDIG)/ut_md5.exe \
@@ -262,6 +271,43 @@ $(CTB_UDIG)/ut_count.exe: $(CTS_UDI_DRV)ut_count.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
 
+$(CTB_UDIG)/ut_hashes.exe: $(CTS_UDI_DRV)ut_hashes.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UDIG)/ut_md_md2.exe: $(CTS_UDI_DRV)ut_md_md2.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UDIG)/ut_md_md4.exe: $(CTS_UDI_DRV)ut_md_md4.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UDIG)/ut_md_md5.exe: $(CTS_UDI_DRV)ut_md_md5.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+    
+$(CTB_UDIG)/ut_md_ripemd_128.exe: $(CTS_UDI_DRV)ut_md_ripemd_128.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+    
+$(CTB_UDIG)/ut_md_ripemd_160.exe: $(CTS_UDI_DRV)ut_md_ripemd_160.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+    
+$(CTB_UDIG)/ut_md_ripemd_256.exe: $(CTS_UDI_DRV)ut_md_ripemd_256.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+    
+$(CTB_UDIG)/ut_md_ripemd_320.exe: $(CTS_UDI_DRV)ut_md_ripemd_320.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+    
+$(CTB_UDIG)/ut_md_sha_1.exe: $(CTS_UDI_DRV)ut_md_sha_1.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+    
+    
 $(CTB_UDIG)/ut_md2.exe: $(CTS_UDI_DRV)ut_md2.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<

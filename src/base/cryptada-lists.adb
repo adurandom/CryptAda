@@ -3746,6 +3746,89 @@ package body CryptAda.Lists is
       return Get_Item_Position(In_List.Current, IP);
    end Get_Item_Position;
 
+   --[Contains_Item]------------------------------------------------------------
+
+   function    Contains_Item(
+                  The_List       : in     List'Class;
+                  With_Name      : in     Identifier'Class)
+      return   Boolean
+   is
+   begin
+      --[Argument Checks]-------------------------------------------------------
+      -- The_List is Empty                CryptAda_List_Kind_Error
+      -- The_List is Unnamed              CryptAda_Named_List_Error
+      -- With_Name is null                CryptAda_Identifier_Error
+      --------------------------------------------------------------------------
+
+      if The_List.Current.all.Kind = Empty then
+         Raise_Exception(
+            CryptAda_List_Kind_Error'Identity, 
+            "The_List current list is empty");
+      elsif The_List.Current.all.Kind = Unnamed then
+         Raise_Exception(
+            CryptAda_Named_List_Error'Identity, 
+            "The_List current list is unnamed");
+      end if;
+   
+      if With_Name.Text = null then
+         Raise_Exception(
+            CryptAda_Identifier_Error'Identity, 
+            "Null identifier");
+      end if;
+
+      --[Process]---------------------------------------------------------------
+      -- 1. Check if the current list contains the item.
+      --------------------------------------------------------------------------
+      
+      return Contains_Item(The_List.Current, With_Name.Text.all);      
+   end Contains_Item;
+
+   --[Contains_Item]------------------------------------------------------------
+
+   function    Contains_Item(
+                  The_List       : in     List'Class;
+                  With_Name      : in     Identifier_Text)
+      return   Boolean
+   is
+   begin
+      --[Argument Checks]-------------------------------------------------------
+      -- The_List is Empty                CryptAda_List_Kind_Error
+      -- The_List is Unnamed              CryptAda_Named_List_Error
+      -- With_Name is null                CryptAda_Identifier_Error
+      --------------------------------------------------------------------------
+
+      if The_List.Current.all.Kind = Empty then
+         Raise_Exception(
+            CryptAda_List_Kind_Error'Identity, 
+            "The_List current list is empty");
+      elsif The_List.Current.all.Kind = Unnamed then
+         Raise_Exception(
+            CryptAda_Named_List_Error'Identity, 
+            "The_List current list is unnamed");
+      end if;
+   
+      --[Process]---------------------------------------------------------------
+      -- 1. Check identifier syntax for With_Name. If it doesn't meet identifier
+      --    syntax will raise CryptAda_Syntax_Error.
+      -- 2. Check if current list contains the item.
+      --------------------------------------------------------------------------
+
+      declare
+         ITP         : Identifier_Text_Ptr;
+         R           : Boolean;
+      begin
+         ITP := Get_Identifier(With_Name);
+         R := Contains_Item(The_List.Current, ITP.all);         
+         Free_Identifier_Text(ITP);
+      
+         return R;
+      exception
+         when others =>
+            Free_Identifier_Text(ITP);
+            raise;
+      end;
+   end Contains_Item;
+   
    --[Ada.Finalization interface for identifiers]-------------------------------
 
    --[Initialize]---------------------------------------------------------------

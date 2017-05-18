@@ -31,10 +31,15 @@
 --    1.0   20170313 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
+with Ada.Exceptions;                            use Ada.Exceptions;
 with Ada.Unchecked_Deallocation;
+with Ada.Strings.Unbounded;                     use Ada.Strings.Unbounded;
 
-with CryptAda.Exceptions;                 use CryptAda.Exceptions;
-with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
+with CryptAda.Names;                            use CryptAda.Names;
+with CryptAda.Exceptions;                       use CryptAda.Exceptions;
+with CryptAda.Pragmatics;                       use CryptAda.Pragmatics;
+with CryptAda.Text_Encoders;                    use CryptAda.Text_Encoders;
+with CryptAda.Factories.Text_Encoder_Factory;   use Cryptada.Factories.Text_Encoder_Factory;
 
 package body CryptAda.Digests.Hashes is
 
@@ -46,8 +51,14 @@ package body CryptAda.Digests.Hashes is
    -- An empty Byte_Array
    -----------------------------------------------------------------------------
 
-   Empty_Byte_Array              : constant Byte_Array(1 .. 0) := (others => 16#00#);
+   Empty_Byte_Array              : aliased constant Byte_Array(1 .. 0) := (others => 16#00#);
 
+   --[Empty_String]-------------------------------------------------------------
+   -- An empty String
+   -----------------------------------------------------------------------------
+
+   Empty_String                  : aliased constant String := "";
+   
    -----------------------------------------------------------------------------
    --[Generic Instantiations]---------------------------------------------------
    -----------------------------------------------------------------------------
@@ -64,11 +75,11 @@ package body CryptAda.Digests.Hashes is
 
    --[Allocate_Byte_Array]------------------------------------------------------
    -- Purpose:
-   -- Dynamically allocates a new byte array of a specified size.
+   -- Dynamically allocates a new byte array and copies the contents of 
+   -- another byte array.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Size                 Positive value with the size of the byte array to
-   --                      allocate.
+   -- From                 Byte_Array for which a copy will be allocated.
    -----------------------------------------------------------------------------
    -- Returned value:
    -- Byte_Array_Ptr object that references the newly allocated Byte_Array.
@@ -78,7 +89,7 @@ package body CryptAda.Digests.Hashes is
    -----------------------------------------------------------------------------
 
    function    Allocate_Byte_Array(
-                  Size           : in     Positive)
+                  From           : in     Byte_Array)
       return   Byte_Array_Ptr;
 
    -----------------------------------------------------------------------------
@@ -88,17 +99,25 @@ package body CryptAda.Digests.Hashes is
    --[Allocate_Byte_Array]------------------------------------------------------
 
    function    Allocate_Byte_Array(
-                  Size           : in     Positive)
+                  From           : in     Byte_Array)
       return   Byte_Array_Ptr
    is
       R              : Byte_Array_Ptr := null;
    begin
-      R := new Byte_Array(1 .. Size);
-      R.all := (others => 0);
+      if From'Length > 0 then         
+         R := new Byte_Array(1 .. From'Length);      
+         R.all := From;
+      end if;
+      
       return R;
    exception
-      when others =>
-         raise CryptAda_Storage_Error;
+      when X: others =>
+         Raise_Exception(
+            CryptAda_Storage_Error'Identity,
+            "Error allocating byte array for a hash value. Exception: " &
+               Exception_Name(X) &
+               ". Message: " &
+               Exception_Message(X));
    end Allocate_Byte_Array;
 
    -----------------------------------------------------------------------------
@@ -114,13 +133,47 @@ package body CryptAda.Digests.Hashes is
       R              : Hash := Null_Hash;
    begin
       if From'Length > 0 then
-         R.The_Bytes       := Allocate_Byte_Array(From'Length);
-         R.The_Bytes.all   := From;
+         R.The_Bytes       := Allocate_Byte_Array(From);
       end if;
 
       return R;
    end To_Hash;
 
+   --[To_Hash]------------------------------------------------------------------
+
+   function    To_Hash(
+                  From           : in     String;
+                  Encoding       : in     Encoder_Id := TE_Hexadecimal)
+      return   Hash
+   is
+      H              : Hash := Null_Hash;
+   begin
+      if From'Length > 0 then
+         declare
+            EH       : Encoder_Handle := Create_Text_Encoder(Encoding);
+            EP       : constant Encoder_Ptr := Get_Encoder_Ptr(EH);
+            BA       : Byte_Array(1 .. From'Length);
+            B        : Natural;
+            L        : Natural;
+         begin
+            -- Decode From.
+            
+            Start_Decoding(EP);
+            Decode(EP, From, BA, B);
+            L := B;
+            End_Decoding(EP, BA(L + 1 .. BA'Last), B);
+            L := L + B;
+            
+            -- Create hash.
+            
+            H := To_Hash(BA(1 .. L));
+            Invalidate_Handle(EH);
+         end;
+      end if;
+   
+      return H;      
+   end To_Hash;
+   
    --[Set_Hash]-----------------------------------------------------------------
 
    procedure   Set_Hash(
@@ -132,9 +185,8 @@ package body CryptAda.Digests.Hashes is
       if From'Length = 0 then
          Clear(The_Hash);
       else
-         T := Allocate_Byte_Array(From'Length);
-         T.all := From;
-
+         T := Allocate_Byte_Array(From);
+         
          if The_Hash.The_Bytes /= null then
             Free(The_Hash.The_Bytes);
          end if;
@@ -143,16 +195,29 @@ package body CryptAda.Digests.Hashes is
       end if;
    end Set_Hash;
 
+   --[Set_Hash]-----------------------------------------------------------------
+
+   procedure   Set_Hash(
+                  From           : in     String;
+                  Encoding       : in     Encoder_Id := TE_Hexadecimal;
+                  The_Hash       :    out Hash)
+   is
+   begin
+      The_Hash := To_Hash(From, Encoding);
+   end Set_Hash;
+
    --[Clear]--------------------------------------------------------------------
 
    procedure   Clear(
                   The_Hash       : in out Hash)
    is
+      T              : Byte_Array_Ptr := The_Hash.The_Bytes;
    begin
-      if The_Hash.The_Bytes /= null then
-         The_Hash.The_Bytes.all := (others => 16#00#);
-         Free(The_Hash.The_Bytes);
-         The_Hash.The_Bytes := null;
+      The_Hash.The_Bytes := null;
+      
+      if T /= null then
+         T.all := (others => 16#00#);
+         Free(T);
       end if;
    end Clear;
 
@@ -170,6 +235,32 @@ package body CryptAda.Digests.Hashes is
       end if;
    end Get_Bytes;
 
+   --[Get_Encoded_Hash]---------------------------------------------------------
+
+   function    Get_Encoded_Hash(
+                  From           : in     Hash;
+                  Encoding       : in     Encoder_Id := TE_Hexadecimal)
+      return   String
+   is
+   begin
+      if From.The_Bytes = null then
+         return Empty_String;
+      else
+         declare
+            EH       : Encoder_Handle := Create_Text_Encoder(Encoding);
+            EP       : constant Encoder_Ptr := Get_Encoder_Ptr(EH);
+            US       : Unbounded_String;
+         begin
+            Start_Encoding(EP);
+            Append(US, Encode(EP, From.The_Bytes.all));
+            Append(US, End_Encoding(EP));
+            Invalidate_Handle(EH);
+            
+            return To_String(US);
+         end;
+      end if;      
+   end Get_Encoded_Hash;
+   
    --["="]----------------------------------------------------------------------
 
    function    "="(
@@ -258,8 +349,7 @@ package body CryptAda.Digests.Hashes is
       T              : Byte_Array_Ptr := null;
    begin
       if Object.The_Bytes /= null then
-         T := Allocate_Byte_Array(Object.The_Bytes.all'Length);
-         T.all := Object.The_Bytes.all;
+         T := Allocate_Byte_Array(Object.The_Bytes.all);
          Object.The_Bytes := T;
       end if;
    end Adjust;
@@ -272,5 +362,4 @@ package body CryptAda.Digests.Hashes is
    begin
       Clear(Object);
    end Finalize;
-
 end CryptAda.Digests.Hashes;

@@ -704,6 +704,35 @@ package CryptAda.Lists is
                   With_Name      : in     Identifier_Text)
       return   Position_Count;
 
+   --[Contains_Item]------------------------------------------------------------
+   -- This function checks if the current list contains a specific item.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_List             List object.
+   -- With_Name            Either a Identifier_Text or an Identifier with the
+   --                      name of the item to be checked.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Boolean value indicating if the list contains the item.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CryptAda_List_Kind_Error if In_List current list is Empty.
+   -- CryptAda_Syntax_Error if the Identifier_Text does not conform the syntax
+   --    for identifiers.
+   -- CryptAda_Identifier_Error if the identifier is a null identifier.
+   -- CryptAda_Named_List_Error if In_List current list is an unnamed list.
+   -----------------------------------------------------------------------------
+
+   function    Contains_Item(
+                  The_List       : in     List'Class;
+                  With_Name      : in     Identifier'Class)
+      return   Boolean;
+
+   function    Contains_Item(
+                  The_List       : in     List'Class;
+                  With_Name      : in     Identifier_Text)
+      return   Boolean;
+      
    -----------------------------------------------------------------------------
    --[Private Part]-------------------------------------------------------------
    -----------------------------------------------------------------------------

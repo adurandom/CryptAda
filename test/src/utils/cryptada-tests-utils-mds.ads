@@ -16,10 +16,10 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-tests-utils-digest.ads
+--    Filename          :  cryptada-tests-utils-mds.ads
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
---    Creation date     :  March 13th, 2017
+--    Creation date     :  May 15th, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
@@ -34,9 +34,9 @@
 with CryptAda.Pragmatics;
 with CryptAda.Digests.Hashes;
 with CryptAda.Digests.Counters;
-with CryptAda.Digests.Algorithms;
+with CryptAda.Digests.Message_Digests;
 
-package CryptAda.Tests.Utils.Digests is
+package CryptAda.Tests.Utils.MDs is
 
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
@@ -93,16 +93,17 @@ package CryptAda.Tests.Utils.Digests is
    -----------------------------------------------------------------------------
 
    procedure   Print_Digest_Info(
-                  Digest         : in     CryptAda.Digests.Algorithms.Digest_Algorithm'Class);
+                  Message        : in     String;
+                  Handle         : in     CryptAda.Digests.Message_Digests.Message_Digest_Handle);
 
    procedure   Run_CryptAda_Test_Vector(
-                  Digest         : in out CryptAda.Digests.Algorithms.Digest_Algorithm'Class;
+                  Handle         : in     CryptAda.Digests.Message_Digests.Message_Digest_Handle;
                   Vector_Index   : in     Positive;
                   Exp_Hash       : in     CryptAda.Pragmatics.Byte_Array;
                   Result         :    out Boolean);
 
    procedure   Run_Test_Vector(
-                  Digest         : in out CryptAda.Digests.Algorithms.Digest_Algorithm'Class;
+                  Handle         : in     CryptAda.Digests.Message_Digests.Message_Digest_Handle;
                   Vector_String  : in     String;
                   Vector_Array   : in     CryptAda.Pragmatics.Byte_Array;
                   Exp_Hash       : in     CryptAda.Pragmatics.Byte_Array;
@@ -125,4 +126,4 @@ package CryptAda.Tests.Utils.Digests is
                   Message        : in     String;
                   The_Hash       : in     CryptAda.Digests.Hashes.Hash);
 
-end CryptAda.Tests.Utils.Digests;
+end CryptAda.Tests.Utils.MDs;

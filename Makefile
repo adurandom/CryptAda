@@ -88,6 +88,18 @@ OBJS     =  cryptada.o \
             cryptada-digests.o \
             cryptada-digests-hashes.o \
             cryptada-digests-counters.o \
+            cryptada-digests-message_digests.o \
+            cryptada-digests-message_digests-md2.o \
+            cryptada-digests-message_digests-md4.o \
+            cryptada-digests-message_digests-md5.o \
+            cryptada-digests-message_digests-sha_1.o \
+            cryptada-digests-message_digests-ripemd_128.o \
+            cryptada-digests-message_digests-ripemd_160.o \
+            cryptada-digests-message_digests-ripemd_256.o \
+            cryptada-digests-message_digests-ripemd_320.o \
+            cryptada-digests-message_digests-snefru.o \
+            cryptada-digests-message_digests-blake_224.o \
+            cryptada-digests-message_digests-blake2s.o \
             cryptada-digests-algorithms.o \
             cryptada-digests-algorithms-md2.o \
             cryptada-digests-algorithms-md4.o \
@@ -258,6 +270,54 @@ cryptada-digests-counters.o: $(DIGDIR)/cryptada-digests-counters.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
+cryptada-digests-message_digests.o: $(DIGDIR)/cryptada-digests-message_digests.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-digests-message_digests-md2.o: $(DIGDIR)/cryptada-digests-message_digests-md2.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-digests-message_digests-md4.o: $(DIGDIR)/cryptada-digests-message_digests-md4.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-digests-message_digests-md5.o: $(DIGDIR)/cryptada-digests-message_digests-md5.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-digests-message_digests-sha_1.o: $(DIGDIR)/cryptada-digests-message_digests-sha_1.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-digests-message_digests-ripemd_128.o: $(DIGDIR)/cryptada-digests-message_digests-ripemd_128.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-digests-message_digests-ripemd_160.o: $(DIGDIR)/cryptada-digests-message_digests-ripemd_160.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-digests-message_digests-ripemd_256.o: $(DIGDIR)/cryptada-digests-message_digests-ripemd_256.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-digests-message_digests-ripemd_320.o: $(DIGDIR)/cryptada-digests-message_digests-ripemd_320.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-digests-message_digests-snefru.o: $(DIGDIR)/cryptada-digests-message_digests-snefru.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+    
+cryptada-digests-message_digests-blake_224.o: $(DIGDIR)/cryptada-digests-message_digests-blake_224.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-digests-message_digests-blake2s.o: $(DIGDIR)/cryptada-digests-message_digests-blake2s.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+    
 cryptada-digests-algorithms.o: $(DIGDIR)/cryptada-digests-algorithms.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<

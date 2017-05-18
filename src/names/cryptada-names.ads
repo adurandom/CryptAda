@@ -98,6 +98,8 @@ package CryptAda.Names is
          MD_MD5,                 -- RSA MD5 message digest
          MD_RIPEMD_128,          -- RIPEMD 128 bit
          MD_RIPEMD_160,          -- RIPEMD 160 bit
+         MD_RIPEMD_256,          -- RIPEMD 256 bit
+         MD_RIPEMD_320,          -- RIPEMD 320 bit
          MD_SHA_1,               -- SHA-1
          MD_Tiger_128_3,         -- Tiger 128-bit 3 passes.
          MD_Tiger_128_4,         -- Tiger 128-bit 4 passes
@@ -120,6 +122,7 @@ package CryptAda.Names is
          MD_HAVAL_256_3,         -- HAVAL 256-bit 3 passes.
          MD_HAVAL_256_4,         -- HAVAL 256-bit 4 passes.
          MD_HAVAL_256_5,         -- HAVAL 256-bit 5 passes.
+         MD_Snefru,              -- Snefru.
          MD_Snefru_128_4,        -- Snefru 128-bit 4 passes.
          MD_Snefru_128_8,        -- Snefru 128-bit 8 passes.
          MD_Snefru_256_4,        -- Snefru 256-bit 4 passes.
@@ -132,7 +135,9 @@ package CryptAda.Names is
          MD_SHA_3_256,           -- SHA-3 256-bit
          MD_SHA_3_384,           -- SHA-3 384-bit
          MD_SHA_3_512,           -- SHA-3 512-bit
-         MD_Whirlpool            -- Whirlpool
+         MD_Whirlpool,           -- Whirlpool
+         MD_BLAKE_224,           -- BLAKE-224
+         MD_BLAKE2s              -- BLAKE2s
       );
 
    --[Random_Generator_Id]------------------------------------------------------

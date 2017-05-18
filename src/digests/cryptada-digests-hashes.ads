@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 13th, 2017
---    Current version   :  1.0
+--    Current version   :  1.1
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Defines types and subprograms for handling hash values obtained in
@@ -30,9 +30,12 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170319 ADD   Initial implementation.
+--    1.1   20170513 ADD   Added subprograms to convert to/from text encodings.
 --------------------------------------------------------------------------------
 
 with Ada.Finalization;
+
+with CryptAda.Names;
 with CryptAda.Pragmatics;
 
 package CryptAda.Digests.Hashes is
@@ -80,6 +83,29 @@ package CryptAda.Digests.Hashes is
                   From           : in     CryptAda.Pragmatics.Byte_Array)
       return   Hash;
 
+   --[To_Hash]------------------------------------------------------------------
+   -- Purpose:
+   -- Creates a hash object from a string encoded according to any of the text
+   -- encodings implemented in CryptAda.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- From                 String containing the hash encoded according to the
+   --                      particular Encoding.
+   -- Encoding             Identifier of the encoding From is encoded into.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Newly created hash value.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CryptAda_Storage_Error if memory allocation for hash value fails.
+   -- CryptAda_Syntax_Error if From syntax is incorrect.
+   -----------------------------------------------------------------------------
+
+   function    To_Hash(
+                  From           : in     String;
+                  Encoding       : in     CryptAda.Names.Encoder_Id := CryptAda.Names.TE_Hexadecimal)
+      return   Hash;
+                  
    --[Set_Hash]-----------------------------------------------------------------
    -- Purpose:
    -- Sets the hash to the value provided as Byte_Array.
@@ -100,6 +126,29 @@ package CryptAda.Digests.Hashes is
                   From           : in     CryptAda.Pragmatics.Byte_Array;
                   The_Hash       :    out Hash);
 
+   --[Set_Hash]-----------------------------------------------------------------
+   -- Purpose:
+   -- Sets the hash to the value provided as a String value encoded with a
+   -- particular text encoding schema.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- From                 String containing the hash value encoded.
+   -- Encoding             Identifier of the text encoding used in From.
+   -- The_Hash             Hash object to set.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CryptAda_Storage_Error if memory allocation for hash value fails.
+   -- CryptAda_Syntax_Error if From syntax is incorrect for the chosen Encoding.
+   -----------------------------------------------------------------------------
+
+   procedure   Set_Hash(
+                  From           : in     String;
+                  Encoding       : in     CryptAda.Names.Encoder_Id := CryptAda.Names.TE_Hexadecimal;
+                  The_Hash       :    out Hash);
+                  
    --[Clear]--------------------------------------------------------------------
    -- Purpose:
    -- Clears a hash value making it null.
@@ -122,7 +171,7 @@ package CryptAda.Digests.Hashes is
    -- Returns the bytes in hash object as a Byte_Array.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- The_Hash             Hash object to get the bytes from.
+   -- From                 Hash object to get the bytes from.
    -----------------------------------------------------------------------------
    -- Returned value:
    -- Byte_Array with hash bytes.
@@ -135,6 +184,27 @@ package CryptAda.Digests.Hashes is
                   From           : in     Hash)
       return   CryptAda.Pragmatics.Byte_Array;
 
+   --[Get_Encoded_Hash]---------------------------------------------------------
+   -- Purpose:
+   -- Returns the hash value encoded according to a particular text encoding.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- From                 Hash object to get the bytes from.
+   -- Encoding             Identifier of the encoding to return the encoded 
+   --                      hash into.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- String contianing the encoded hash value.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- Null_Argument_Error if The_Hash is a null hash.
+   -----------------------------------------------------------------------------
+
+   function    Get_Encoded_Hash(
+                  From           : in     Hash;
+                  Encoding       : in     CryptAda.Names.Encoder_Id := CryptAda.Names.TE_Hexadecimal)
+      return   String;
+      
    --["="]----------------------------------------------------------------------
    -- Purpose:
    -- Equality test for hash values.
