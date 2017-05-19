@@ -137,7 +137,9 @@ U_DIG       =   $(CTB_UDIG)/ut_count.exe \
                 $(CTB_UDIG)/ut_md_ripemd_160.exe \
                 $(CTB_UDIG)/ut_md_ripemd_256.exe \
                 $(CTB_UDIG)/ut_md_ripemd_320.exe \
+                $(CTB_UDIG)/ut_md_snefru.exe \
                 $(CTB_UDIG)/ut_md_sha_1.exe \
+                $(CTB_UDIG)/ut_md_blake_224.exe \
                 $(CTB_UDIG)/ut_md2.exe \
                 $(CTB_UDIG)/ut_md4.exe \
                 $(CTB_UDIG)/ut_md5.exe \
@@ -304,6 +306,14 @@ $(CTB_UDIG)/ut_md_ripemd_320.exe: $(CTS_UDI_DRV)ut_md_ripemd_320.adb
 	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
     
 $(CTB_UDIG)/ut_md_sha_1.exe: $(CTS_UDI_DRV)ut_md_sha_1.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UDIG)/ut_md_snefru.exe: $(CTS_UDI_DRV)ut_md_snefru.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+    
+$(CTB_UDIG)/ut_md_blake_224.exe: $(CTS_UDI_DRV)ut_md_blake_224.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
     

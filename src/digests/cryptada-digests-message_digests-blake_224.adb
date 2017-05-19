@@ -74,6 +74,12 @@ package body CryptAda.Digests.Message_Digests.BLAKE_224 is
 
    BLAKE_224_Rounds        : constant Positive := 14;
 
+   --[BLAKE_224_Padding]--------------------------------------------------------
+   -- Array for padding.
+   -----------------------------------------------------------------------------
+
+   BLAKE_224_Padding       : constant BLAKE_224_Block := (1 => 16#80#, others => 16#00#);
+   
    --[BLAKE_224_Constants]------------------------------------------------------
    -- The BLAKE-224 constants
    -----------------------------------------------------------------------------
@@ -90,88 +96,22 @@ package body CryptAda.Digests.Message_Digests.BLAKE_224 is
    -- The BLAKE-224 permutations
    -----------------------------------------------------------------------------
 
-   BLAKE_224_Sigma         : constant array(Byte range 0 .. 19, Byte range 0.. 15) of Byte :=
+   BLAKE_224_Sigma         : constant array(Byte range 0 .. 13, Byte range 0.. 15) of Byte :=
       (
-         (
-            16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#,
-            16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
-         ),
-         (
-            16#0E#, 16#0A#, 16#04#, 16#08#, 16#09#, 16#0F#, 16#0D#, 16#06#,
-            16#01#, 16#0C#, 16#00#, 16#02#, 16#0B#, 16#07#, 16#05#, 16#03#
-         ),
-         (
-            16#0B#, 16#08#, 16#0C#, 16#00#, 16#05#, 16#02#, 16#0F#, 16#0D#,
-            16#0A#, 16#0E#, 16#03#, 16#06#, 16#07#, 16#01#, 16#09#, 16#04#
-         ),
-         (
-            16#07#, 16#09#, 16#03#, 16#01#, 16#0D#, 16#0C#, 16#0B#, 16#0E#,
-            16#02#, 16#06#, 16#05#, 16#0A#, 16#04#, 16#00#, 16#0F#, 16#08#
-         ),
-         (
-            16#09#, 16#00#, 16#05#, 16#07#, 16#02#, 16#04#, 16#0A#, 16#0F#,
-            16#0E#, 16#01#, 16#0B#, 16#0C#, 16#06#, 16#08#, 16#03#, 16#0D#
-         ),
-         (
-            16#02#, 16#0C#, 16#06#, 16#0A#, 16#00#, 16#0B#, 16#08#, 16#03#,
-            16#04#, 16#0D#, 16#07#, 16#05#, 16#0F#, 16#0E#, 16#01#, 16#09#
-         ),
-         (
-            16#0C#, 16#05#, 16#01#, 16#0F#, 16#0E#, 16#0D#, 16#04#, 16#0A#,
-            16#00#, 16#07#, 16#06#, 16#03#, 16#09#, 16#02#, 16#08#, 16#0B#
-         ),
-         (
-            16#0D#, 16#0B#, 16#07#, 16#0E#, 16#0C#, 16#01#, 16#03#, 16#09#,
-            16#05#, 16#00#, 16#0F#, 16#04#, 16#08#, 16#06#, 16#02#, 16#0A#
-         ),
-         (
-            16#06#, 16#0F#, 16#0E#, 16#09#, 16#0B#, 16#03#, 16#00#, 16#08#,
-            16#0C#, 16#02#, 16#0D#, 16#07#, 16#01#, 16#04#, 16#0A#, 16#05#
-         ),
-         (
-            16#0A#, 16#02#, 16#08#, 16#04#, 16#07#, 16#06#, 16#01#, 16#05#,
-            16#0F#, 16#0B#, 16#09#, 16#0E#, 16#03#, 16#0C#, 16#0D#, 16#00#
-         ),
-         (
-            16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#,
-            16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
-         ),
-         (
-            16#0E#, 16#0A#, 16#04#, 16#08#, 16#09#, 16#0F#, 16#0D#, 16#06#,
-            16#01#, 16#0C#, 16#00#, 16#02#, 16#0B#, 16#07#, 16#05#, 16#03#
-         ),
-         (
-            16#0B#, 16#08#, 16#0C#, 16#00#, 16#05#, 16#02#, 16#0F#, 16#0D#,
-            16#0A#, 16#0E#, 16#03#, 16#06#, 16#07#, 16#01#, 16#09#, 16#04#
-         ),
-         (
-            16#07#, 16#09#, 16#03#, 16#01#, 16#0D#, 16#0C#, 16#0B#, 16#0E#,
-            16#02#, 16#06#, 16#05#, 16#0A#, 16#04#, 16#00#, 16#0F#, 16#08#
-         ),
-         (
-            16#09#, 16#00#, 16#05#, 16#07#, 16#02#, 16#04#, 16#0A#, 16#0F#,
-            16#0E#, 16#01#, 16#0B#, 16#0C#, 16#06#, 16#08#, 16#03#, 16#0D#
-         ),
-         (
-            16#02#, 16#0C#, 16#06#, 16#0A#, 16#00#, 16#0B#, 16#08#, 16#03#,
-            16#04#, 16#0D#, 16#07#, 16#05#, 16#0F#, 16#0E#, 16#01#, 16#09#
-         ),
-         (
-            16#0C#, 16#05#, 16#01#, 16#0F#, 16#0E#, 16#0D#, 16#04#, 16#0A#,
-            16#00#, 16#07#, 16#06#, 16#03#, 16#09#, 16#02#, 16#08#, 16#0B#
-         ),
-         (
-            16#0D#, 16#0B#, 16#07#, 16#0E#, 16#0C#, 16#01#, 16#03#, 16#09#,
-            16#05#, 16#00#, 16#0F#, 16#04#, 16#08#, 16#06#, 16#02#, 16#0A#
-         ),
-         (
-            16#06#, 16#0F#, 16#0E#, 16#09#, 16#0B#, 16#03#, 16#00#, 16#08#,
-            16#0C#, 16#02#, 16#0D#, 16#07#, 16#01#, 16#04#, 16#0A#, 16#05#
-         ),
-         (
-            16#0A#, 16#02#, 16#08#, 16#04#, 16#07#, 16#06#, 16#01#, 16#05#,
-            16#0F#, 16#0B#, 16#09#, 16#0E#, 16#03#, 16#0C#, 16#0D#, 16#00#
-         )
+         (16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#),
+         (16#0E#, 16#0A#, 16#04#, 16#08#, 16#09#, 16#0F#, 16#0D#, 16#06#, 16#01#, 16#0C#, 16#00#, 16#02#, 16#0B#, 16#07#, 16#05#, 16#03#), 
+         (16#0B#, 16#08#, 16#0C#, 16#00#, 16#05#, 16#02#, 16#0F#, 16#0D#, 16#0A#, 16#0E#, 16#03#, 16#06#, 16#07#, 16#01#, 16#09#, 16#04#), 
+         (16#07#, 16#09#, 16#03#, 16#01#, 16#0D#, 16#0C#, 16#0B#, 16#0E#, 16#02#, 16#06#, 16#05#, 16#0A#, 16#04#, 16#00#, 16#0F#, 16#08#),
+         (16#09#, 16#00#, 16#05#, 16#07#, 16#02#, 16#04#, 16#0A#, 16#0F#, 16#0E#, 16#01#, 16#0B#, 16#0C#, 16#06#, 16#08#, 16#03#, 16#0D#),
+         (16#02#, 16#0C#, 16#06#, 16#0A#, 16#00#, 16#0B#, 16#08#, 16#03#, 16#04#, 16#0D#, 16#07#, 16#05#, 16#0F#, 16#0E#, 16#01#, 16#09#),
+         (16#0C#, 16#05#, 16#01#, 16#0F#, 16#0E#, 16#0D#, 16#04#, 16#0A#, 16#00#, 16#07#, 16#06#, 16#03#, 16#09#, 16#02#, 16#08#, 16#0B#), 
+         (16#0D#, 16#0B#, 16#07#, 16#0E#, 16#0C#, 16#01#, 16#03#, 16#09#, 16#05#, 16#00#, 16#0F#, 16#04#, 16#08#, 16#06#, 16#02#, 16#0A#), 
+         (16#06#, 16#0F#, 16#0E#, 16#09#, 16#0B#, 16#03#, 16#00#, 16#08#, 16#0C#, 16#02#, 16#0D#, 16#07#, 16#01#, 16#04#, 16#0A#, 16#05#),
+         (16#0A#, 16#02#, 16#08#, 16#04#, 16#07#, 16#06#, 16#01#, 16#05#, 16#0F#, 16#0B#, 16#09#, 16#0E#, 16#03#, 16#0C#, 16#0D#, 16#00#),
+         (16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#),
+         (16#0E#, 16#0A#, 16#04#, 16#08#, 16#09#, 16#0F#, 16#0D#, 16#06#, 16#01#, 16#0C#, 16#00#, 16#02#, 16#0B#, 16#07#, 16#05#, 16#03#), 
+         (16#0B#, 16#08#, 16#0C#, 16#00#, 16#05#, 16#02#, 16#0F#, 16#0D#, 16#0A#, 16#0E#, 16#03#, 16#06#, 16#07#, 16#01#, 16#09#, 16#04#), 
+         (16#07#, 16#09#, 16#03#, 16#01#, 16#0D#, 16#0C#, 16#0B#, 16#0E#, 16#02#, 16#06#, 16#05#, 16#0A#, 16#04#, 16#00#, 16#0F#, 16#08#)
       );
 
    -----------------------------------------------------------------------------
@@ -190,6 +130,12 @@ package body CryptAda.Digests.Message_Digests.BLAKE_224 is
 
    subtype BLAKE_224_Unpacked_State is Byte_Array(1 .. BLAKE_224_State_Bytes);
 
+   --[BLAKE_224_Working_Vector]-------------------------------------------------
+   -- BLAKE-224 working vector.
+   -----------------------------------------------------------------------------
+
+   subtype BLAKE_224_Working_Vector is Four_Bytes_Array(1 .. 16);
+   
    -----------------------------------------------------------------------------
    --[Body Declared Subprogram Specifications]----------------------------------
    -----------------------------------------------------------------------------
@@ -234,6 +180,13 @@ package body CryptAda.Digests.Message_Digests.BLAKE_224 is
       return   BLAKE_224_Packed_Salt;
    pragma Inline(Pack_Salt);
 
+   --[Unpack_Salt]--------------------------------------------------------------
+
+   function    Unpack_Salt(
+                  The_Salt       : in     BLAKE_224_Packed_Salt)
+      return   BLAKE_224_Salt;
+   pragma Inline(Unpack_Salt);
+   
    --[Unpack_State]-------------------------------------------------------------
 
    function    Unpack_State(
@@ -241,6 +194,19 @@ package body CryptAda.Digests.Message_Digests.BLAKE_224 is
       return   BLAKE_224_Unpacked_State;
    pragma Inline(Unpack_State);
 
+   --[G]------------------------------------------------------------------------
+
+   procedure   G(
+                  V              : in out BLAKE_224_Working_Vector;
+                  X              : in     BLAKE_224_Packed_Block;
+                  A              : in     Positive;
+                  B              : in     Positive;
+                  C              : in     Positive;
+                  D              : in     Positive;
+                  R              : in     Byte;
+                  I              : in     Byte);
+   pragma Inline(G);
+   
    --[Transform]----------------------------------------------------------------
 
    procedure   Transform(
@@ -399,6 +365,23 @@ package body CryptAda.Digests.Message_Digests.BLAKE_224 is
       return PS;
    end Pack_Salt;
 
+   --[Unpack_Salt]--------------------------------------------------------------
+
+   function    Unpack_Salt(
+                  The_Salt       : in     BLAKE_224_Packed_Salt)
+      return   BLAKE_224_Salt
+   is
+      US             : BLAKE_224_Salt  := (others => 16#00#);
+      J              : Positive        := US'First;
+   begin
+      for I in The_Salt'Range loop
+         US(J .. J + BLAKE_224_Word_Bytes - 1) := Unpack(The_Salt(I), Big_Endian);
+         J := J + BLAKE_224_Word_Bytes;
+      end loop;
+
+      return US;
+   end Unpack_Salt;
+   
    --[Unpack_State]-------------------------------------------------------------
 
    function    Unpack_State(
@@ -409,13 +392,43 @@ package body CryptAda.Digests.Message_Digests.BLAKE_224 is
       J              : Positive                 := US'First;
    begin
       for I in The_State'Range loop
-         US(J .. J + BLAKE_224_Word_Bytes - 1) := Unpack(The_State(I), Little_Endian);
+         US(J .. J + BLAKE_224_Word_Bytes - 1) := Unpack(The_State(I), Big_Endian);
          J := J + BLAKE_224_Word_Bytes;
       end loop;
 
       return US;
    end Unpack_State;
 
+   --[G]------------------------------------------------------------------------
+
+   procedure   G(
+                  V              : in out BLAKE_224_Working_Vector;
+                  X              : in     BLAKE_224_Packed_Block;
+                  A              : in     Positive;
+                  B              : in     Positive;
+                  C              : in     Positive;
+                  D              : in     Positive;
+                  R              : in     Byte;
+                  I              : in     Byte)
+   is
+      T1             : Four_Bytes;
+      T2             : Four_Bytes;
+   begin
+      T1       := X(1 + Natural(BLAKE_224_Sigma(R, I)));
+      T2       := BLAKE_224_Constants(1 + Natural(BLAKE_224_Sigma(R, I + 1)));
+      V(A)     := V(A) + (T1 xor T2) + V(B);
+      V(D)     := Rotate_Right((V(D) xor V(A)), 16);
+      V(C)     := V(C) + V(D);
+      V(B)     := Rotate_Right((V(B) xor V(C)), 12);
+
+      T1       := X(1 + Natural(BLAKE_224_Sigma(R, I + 1)));
+      T2       := BLAKE_224_Constants(1 + Natural(BLAKE_224_Sigma(R, I)));
+      V(A)     := V(A) + (T1 xor T2) + V(B);
+      V(D)     := Rotate_Right((V(D) xor V(A)),  8);
+      V(C)     := V(C) + V(D);
+      V(B)     := Rotate_Right((V(B) xor V(C)),  7);
+   end G;
+   
    --[Transform]----------------------------------------------------------------
 
    procedure   Transform(
@@ -427,33 +440,6 @@ package body CryptAda.Digests.Message_Digests.BLAKE_224 is
    is
       X              : constant BLAKE_224_Packed_Block := Pack_Block(Block);
       V              : Four_Bytes_Array(1 .. 16) := (others => 16#00000000#);
-
-      procedure   G(
-                     A           : in     Positive;
-                     B           : in     Positive;
-                     C           : in     Positive;
-                     D           : in     Positive;
-                     R           : in     Byte;
-                     I           : in     Byte)
-      is
-         T1             : Four_Bytes;
-         T2             : Four_Bytes;
-      begin
-         T1       := X(1 + Natural(BLAKE_224_Sigma(R, 2 * I)));
-         T2       := BLAKE_224_Constants(1 + Natural(BLAKE_224_Sigma(R, 2 * I + 1)));
-         V(A)     := (V(A) + V(B)) + (T1 xor T2);
-         V(D)     := Rotate_Right((V(D) xor V(A)), 16);
-         V(C)     := V(C) + V(D);
-         V(B)     := Rotate_Right((V(B) xor V(C)), 12);
-
-         T1       := X(1 + Natural(BLAKE_224_Sigma(R, 2 * I + 1)));
-         T2       := BLAKE_224_Constants(1 + Natural(BLAKE_224_Sigma(R, 2 * I)));
-         V(A)     := (V(A) + V(B)) + (T1 xor T2);
-         V(D)     := Rotate_Right((V(D) xor V(A)), 8);
-         V(C)     := V(C) + V(D);
-         V(B)     := Rotate_Right((V(B) xor V(C)), 7);
-      end G;
-      pragma Inline(G);
    begin
       -- Initialization.
 
@@ -483,29 +469,29 @@ package body CryptAda.Digests.Message_Digests.BLAKE_224 is
 
       for I in 1 .. BLAKE_224_Rounds loop
          -- Column Step.
-         G( 1,  5,  9, 13, Byte(I - 1), 0);
-         G( 2,  6, 10, 14, Byte(I - 1), 1);
-         G( 3,  7, 11, 15, Byte(I - 1), 2);
-         G( 4,  8, 12, 16, Byte(I - 1), 3);
+         G(V, X, 1,  5,  9, 13, Byte(I - 1),  0);
+         G(V, X, 2,  6, 10, 14, Byte(I - 1),  2);
+         G(V, X, 3,  7, 11, 15, Byte(I - 1),  4);
+         G(V, X, 4,  8, 12, 16, Byte(I - 1),  6);
 
          -- Diagonal Step.
 
-         G( 1,  6, 11, 16, Byte(I - 1), 4);
-         G( 2,  7, 12, 13, Byte(I - 1), 5);
-         G( 3,  8,  9, 14, Byte(I - 1), 6);
-         G( 4,  5, 10, 15, Byte(I - 1), 7);
+         G(V, X, 1,  6, 11, 16, Byte(I - 1),  8);
+         G(V, X, 2,  7, 12, 13, Byte(I - 1), 10);
+         G(V, X, 3,  8,  9, 14, Byte(I - 1), 12);
+         G(V, X, 4,  5, 10, 15, Byte(I - 1), 14);
       end loop;
 
       -- Finalization
 
-      State(1) := State(1) xor (V( 1) xor V( 9) xor Salt(1));
-      State(2) := State(2) xor (V( 2) xor V(10) xor Salt(2));
-      State(3) := State(3) xor (V( 3) xor V(11) xor Salt(3));
-      State(4) := State(4) xor (V( 4) xor V(12) xor Salt(4));
-      State(5) := State(5) xor (V( 5) xor V(13) xor Salt(1));
-      State(6) := State(6) xor (V( 6) xor V(14) xor Salt(2));
-      State(7) := State(7) xor (V( 7) xor V(15) xor Salt(3));
-      State(8) := State(8) xor (V( 8) xor V(16) xor Salt(4));
+      State(1) := (((State(1) xor V( 1)) xor V( 9)) xor Salt(1));
+      State(2) := (((State(2) xor V( 2)) xor V(10)) xor Salt(2));
+      State(3) := (((State(3) xor V( 3)) xor V(11)) xor Salt(3));
+      State(4) := (((State(4) xor V( 4)) xor V(12)) xor Salt(4));
+      State(5) := (((State(5) xor V( 5)) xor V(13)) xor Salt(1));
+      State(6) := (((State(6) xor V( 6)) xor V(14)) xor Salt(2));
+      State(7) := (((State(7) xor V( 7)) xor V(15)) xor Salt(3));
+      State(8) := (((State(8) xor V( 8)) xor V(16)) xor Salt(4));
    end Transform;
 
    -----------------------------------------------------------------------------
@@ -714,82 +700,67 @@ package body CryptAda.Digests.Message_Digests.BLAKE_224 is
                   The_Hash       :    out Hash)
    is
       Bit_Counter    : Byte_Array(1 .. 8) := (others => 16#00#);
-      BC_L           : constant Four_Bytes := The_Digest.all.BCount(1) + Four_Bytes(8 * The_Digest.all.BIB);
-      BC_H           : Four_Bytes := The_Digest.all.BCount(2);
       Null_T         : Boolean := False;
       Pad_Limit      : constant Positive := Bit_Counter_Offset - 2;
       To_Pad         : Positive;
       US             : BLAKE_224_Unpacked_State := (others => 16#00#);
    begin
+      -- Update bit count with buffered bytes:
+      
+      The_Digest.all.BCount(1) := The_Digest.all.BCount(1) + Four_Bytes(8 * The_Digest.all.BIB);
+
+      if The_Digest.all.BCount(1) < Four_Bytes(8 * The_Digest.all.BIB) then
+         The_Digest.all.BCount(2) := The_Digest.all.BCount(2) + 1;
+      end if;
+      
       -- Unpack bit counter.
 
-      if BC_L < Four_Bytes(8 * The_Digest.all.BIB) then
-         BC_H := BC_H + 1;
-      end if;
-
-      Bit_Counter(1 .. 4) := Unpack(BC_H, Big_Endian);
-      Bit_Counter(5 .. 8) := Unpack(BC_L, Big_Endian);
+      Bit_Counter(1 .. 4) := Unpack(The_Digest.all.BCount(2), Big_Endian);
+      Bit_Counter(5 .. 8) := Unpack(The_Digest.all.BCount(1), Big_Endian);
 
       -- Pad message. Determine the number of pad bytes.
 
-      if The_Digest.all.BIB <= Pad_Limit then
-         To_Pad := 1 + (Pad_Limit - The_Digest.all.BIB);
-      else
-         To_Pad := BLAKE_224_Block_Bytes - The_Digest.all.BIB + (Bit_Counter_Offset - 1);
-      end if;
+      if The_Digest.all.BIB = Pad_Limit then
+         -- Just one Pad byte...
 
-      if To_Pad = 1 then
          The_Digest.all.Buffer(The_Digest.all.BIB + 1) := 16#80#;
-         The_Digest.all.BCount(1) := The_Digest.all.BCount(1) - 8;
       else
-         if To_Pad <= (Bit_Counter_Offset - 1) then
+         if The_Digest.all.BIB < Pad_Limit then
+            -- Enough space for bit counter. Check if there are any bytes
+            -- buffered.
+            
             if The_Digest.all.BIB = 0 then
+               -- Buffer is empty. Flag last transform.
+               
                Null_T := True;
             end if;
-
-            -- Perform Pad
-
-            The_Digest.all.Buffer(The_Digest.all.BIB + 1) := 16#80#;
-            The_Digest.all.Buffer(The_Digest.all.BIB + 2 .. Bit_Counter_Offset - 1) := (others => 16#00#);
-            The_Digest.all.BCount(1) := The_Digest.all.BCount(1) - Four_Bytes(8 * (Pad_Limit - The_Digest.all.BIB));
+            
+            -- Determine the number of bytes to pad.
+            
+            To_Pad := Bit_Counter_Offset - (1 + The_Digest.all.BIB);
+            The_Digest.all.Buffer(The_Digest.all.BIB + 1 .. (Pad_Limit + 1)) := BLAKE_224_Padding(1 .. To_Pad);
          else
-            -- Fill buffer and transform.
-
-            The_Digest.all.Buffer(The_Digest.all.BIB + 1) := 16#80#;
-
-            if The_Digest.all.BIB + 2 <= BLAKE_224_Block_Bytes then
-               The_Digest.all.Buffer(The_Digest.all.BIB + 2 .. BLAKE_224_Block_Bytes) := (others => 16#00#);
-            end if;
-
-            The_Digest.all.BCount(1) := The_Digest.all.BCount(1) - Four_Bytes(8 * (BLAKE_224_Block_Bytes - The_Digest.all.BIB));
-
+            To_Pad := BLAKE_224_Block_Bytes - The_Digest.all.BIB;
+            The_Digest.all.Buffer(The_Digest.all.BIB + 1 .. The_Digest.all.Buffer'Last) := BLAKE_224_Padding(1 .. To_Pad);
             Transform(
                The_Digest.all.State,
                The_Digest.all.Buffer,
                The_Digest.all.Salt,
                The_Digest.all.BCount,
                False);
-
-            -- Zeroize buffer.
-
             The_Digest.all.Buffer := (others => 16#00#);
-            The_Digest.all.BCount(1) := The_Digest.all.BCount(1) - Four_Bytes(8 * (Pad_Limit));
             Null_T := True;
          end if;
       end if;
-
-      -- Append counter and transform.
-
+         
       The_Digest.all.Buffer(Bit_Counter_Offset .. BLAKE_224_Block_Bytes) := Bit_Counter;
-      The_Digest.all.BCount(1) := The_Digest.all.BCount(1) - 8 * (Bit_counter'Length);
-
       Transform(
          The_Digest.all.State,
          The_Digest.all.Buffer,
          The_Digest.all.Salt,
          The_Digest.all.BCount,
          Null_T);
-
+      
       -- Set the hash from state.
 
       US := Unpack_State(The_Digest.all.State);
@@ -817,4 +788,14 @@ package body CryptAda.Digests.Message_Digests.BLAKE_224 is
       The_Digest.all.Salt := Pack_Salt(With_Salt);
    end Digest_Start;
 
+   --[Get_Salt]-----------------------------------------------------------------
+   
+   function    Get_Salt(
+                  The_Digest     : access BLAKE_224_Digest'Class)
+      return   Blake_224_Salt
+   is
+   begin
+      return Unpack_Salt(The_Digest.all.Salt);
+   end Get_Salt;
+         
 end CryptAda.Digests.Message_Digests.BLAKE_224;

@@ -79,6 +79,12 @@ package CryptAda.Digests.Message_Digests.BLAKE_224 is
    -----------------------------------------------------------------------------
 
    subtype BLAKE_224_Salt is CryptAda.Pragmatics.Byte_Array(1 .. BLAKE_224_Salt_Bytes);
+
+   --[BLAKE_224_Default_Salt]---------------------------------------------------
+   -- Default salt value for BLAKE-224
+   -----------------------------------------------------------------------------
+
+   BLAKE_224_Default_Salt        : constant BLAKE_224_Salt := (others => 16#00#);
    
    -----------------------------------------------------------------------------
    --[Getting a handle]---------------------------------------------------------
@@ -173,7 +179,25 @@ package CryptAda.Digests.Message_Digests.BLAKE_224 is
    procedure   Digest_Start(
                   The_Digest     : access BLAKE_224_Digest'Class;
                   With_Salt      : in     Blake_224_Salt);
+
+   --[Get_Salt]-----------------------------------------------------------------
+   -- Purpose:
+   -- Returns the Salt used in digest computation.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Digest              Access to digest object to get the Salt from.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Salt value.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
    
+   function    Get_Salt(
+                  The_Digest     : access BLAKE_224_Digest'Class)
+      return   Blake_224_Salt;
+                  
    -----------------------------------------------------------------------------
    --[Private Part]-------------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -226,13 +250,7 @@ private
 
    subtype BLAKE_224_BCount is CryptAda.Pragmatics.Four_Bytes_Array(1 .. 2);
 
-   --[BLAKE_224_Default_Salt]---------------------------------------------------
-   -- Default salt value for BLAKE-224
-   -----------------------------------------------------------------------------
-
-   BLAKE_224_Default_Salt        : constant BLAKE_224_Salt := (others => 16#00#);
-
-   --[BLAKE_224_Default_Salt]---------------------------------------------------
+   --[BLAKE_224_Default_Packed_Salt]--------------------------------------------
    -- Default packed salt value for BLAKE-224
    -----------------------------------------------------------------------------
 
