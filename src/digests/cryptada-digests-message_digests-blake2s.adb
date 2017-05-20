@@ -827,24 +827,25 @@ package body CryptAda.Digests.Message_Digests.BLAKE2s is
                   The_Digest     : access BLAKE2s_Digest;
                   The_Bytes      : in     Byte_Array)
    is
-      TB             : constant Natural   := The_Digest.all.BIB + The_Bytes'Length;
-      Chunks         : Natural            := TB / BLAKE2s_Block_Bytes;
-      New_BIB        : constant Natural   := TB mod BLAKE2s_Block_Bytes;
-      I              : Natural            := The_Bytes'First;
-      To_Copy        : Natural            := 0;
+      L              : Natural := The_Bytes'Length;
+      Left           : constant Natural := The_Digest.all.BIB;
+      Fill           : constant Natural := BLAKE2s_Block_Bytes - Left;
+      I              : Positive := The_Bytes'First;
    begin
-      -- Data is processed in chunks of BLAKE2s_Block_Bytes bytes.
-
-      if Chunks > 0 then
-         -- Must process at least one chunk of data.
-
-         if The_Digest.BIB > 0 then
-            -- There are bytes buffered from a previous update operation. Fill
-            -- the buffer with bytes from The_Bytes.
-
-            To_Copy := BLAKE2s_Block_Bytes - The_Digest.all.BIB;
-            The_Digest.all.Buffer(The_Digest.all.BIB + 1 .. BLAKE2s_Block_Bytes) :=
-               The_Bytes(I .. I + To_Copy - 1);
+      -- This update process is different from other hashes. It is performed
+      -- in blocks but if total bytes to process is an integral multiple of 
+      -- BLAKE2s_Block_Bytes, the entire last block is buffered because the 
+      -- the last block is processed differently.
+      
+      if L > 0 then
+         -- There are bytes in The_Bytes to process. Check if there are enough
+         -- bytes to compress a block.
+         
+         if L > Fill then
+            -- At least one block must be compressed. Fill internal buffer with
+            -- bytes from The_Bytes
+            
+            The_Digest.all.Buffer(The_Digest.all.BIB + 1 .. BLAKE2s_Block_Bytes) := The_Bytes(I .. I + Fill - 1);
 
             -- Update internal counter.
 
@@ -853,7 +854,7 @@ package body CryptAda.Digests.Message_Digests.BLAKE2s is
             if The_Digest.all.BCount(1) < Four_Bytes(BLAKE2s_Block_Bytes) then
                The_Digest.all.BCount(2) := The_Digest.all.BCount(2) + 1;
             end if;
-
+            
             -- Compress
 
             Compress(
@@ -866,53 +867,49 @@ package body CryptAda.Digests.Message_Digests.BLAKE2s is
 
             The_Digest.all.BIB      := 0;
             The_Digest.all.Buffer   := (others => 16#00#);
+   
+            -- Update index over The_Bytes, decrease number of bytes to process.
 
-            -- Update index over The_Bytes, decrease number of chunks.
+            I := I + Fill;
+            L := L - Fill;
+         
+            -- While there are more than a block bytes left in The_Bytes.
+            
+            while L > BLAKE2s_Block_Bytes loop
+               -- Update internal counter.
 
-            I := I + To_Copy;
-            Chunks := Chunks - 1;
+               The_Digest.all.BCount(1) := The_Digest.all.BCount(1) + Four_Bytes(BLAKE2s_Block_Bytes);
+
+               if The_Digest.all.BCount(1) < Four_Bytes(BLAKE2s_Block_Bytes) then
+                  The_Digest.all.BCount(2) := The_Digest.all.BCount(2) + 1;
+               end if;         
+               
+               -- Compress from The_Bytes.
+
+               Compress(
+                  The_Digest.all.State,
+                  The_Digest.all.BCount,
+                  The_Digest.all.FFlags,
+                  The_Bytes(I .. I + BLAKE2s_Block_Bytes - 1));
+
+               -- Update index over The_Bytes, decrease number of bytes left.
+
+               I := I + BLAKE2s_Block_Bytes;
+               L := L - BLAKE2s_Block_Bytes;
+            end loop;
          end if;
+         
+         -- Copy remaining bytes to internal buffer.
+         
+         The_Digest.all.Buffer(The_Digest.all.BIB + 1 .. The_Digest.all.BIB + L) := The_Bytes(I .. The_Bytes'Last);
+         The_Digest.all.BIB := The_Digest.all.BIB + L;
+         
+         -- Increase processed bit counter.
 
-         -- Remaining chunks are processed from The_Bytes.
-
-         while Chunks > 0 loop
-            -- Update internal counter.
-
-            The_Digest.all.BCount(1) := The_Digest.all.BCount(1) + Four_Bytes(BLAKE2s_Block_Bytes);
-
-            if The_Digest.all.BCount(1) < Four_Bytes(BLAKE2s_Block_Bytes) then
-               The_Digest.all.BCount(2) := The_Digest.all.BCount(2) + 1;
-            end if;
-
-            -- Compress
-
-            Compress(
-               The_Digest.all.State,
-               The_Digest.all.BCount,
-               The_Digest.all.FFlags,
-               The_Bytes(I .. I + BLAKE2s_Block_Bytes - 1));
-
-            -- Update index over The_Bytes, decrease number of chunks.
-
-            I := I + BLAKE2s_Block_Bytes;
-            Chunks := Chunks - 1;
-         end loop;
+         Increment(The_Digest.all.Bit_Count, 8 * The_Bytes'Length);
       end if;
-
-      -- Copy remaining bytes (if any, to internal buffer).
-
-      if New_BIB > The_Digest.all.BIB then
-         The_Digest.all.Buffer(The_Digest.all.BIB + 1 .. New_BIB) :=
-            The_Bytes(I .. The_Bytes'Last);
-      end if;
-
-      The_Digest.all.BIB := New_BIB;
-
-      -- Increase processed bit counter.
-
-      Increment(The_Digest.all.Bit_Count, 8 * The_Bytes'Length);
    end Digest_Update;
-
+   
    --[Digest_End]---------------------------------------------------------------
 
    procedure   Digest_End(
@@ -947,7 +944,7 @@ package body CryptAda.Digests.Message_Digests.BLAKE2s is
          The_Digest.all.BCount,
          The_Digest.all.FFlags,
          The_Digest.all.Buffer);
-
+      
       -- Set the hash from state.
 
       US := Unpack_State(The_Digest.all.State);

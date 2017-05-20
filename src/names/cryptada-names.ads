@@ -137,6 +137,9 @@ package CryptAda.Names is
          MD_SHA_3_512,           -- SHA-3 512-bit
          MD_Whirlpool,           -- Whirlpool
          MD_BLAKE_224,           -- BLAKE-224
+         MD_BLAKE_256,           -- BLAKE-256
+         MD_BLAKE_384,           -- BLAKE-384
+         MD_BLAKE_512,           -- BLAKE-512
          MD_BLAKE2s              -- BLAKE2s
       );
 

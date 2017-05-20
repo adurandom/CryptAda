@@ -140,6 +140,10 @@ U_DIG       =   $(CTB_UDIG)/ut_count.exe \
                 $(CTB_UDIG)/ut_md_snefru.exe \
                 $(CTB_UDIG)/ut_md_sha_1.exe \
                 $(CTB_UDIG)/ut_md_blake_224.exe \
+                $(CTB_UDIG)/ut_md_blake_256.exe \
+                $(CTB_UDIG)/ut_md_blake_384.exe \
+                $(CTB_UDIG)/ut_md_blake_512.exe \
+                $(CTB_UDIG)/ut_md_blake2s.exe \
                 $(CTB_UDIG)/ut_md2.exe \
                 $(CTB_UDIG)/ut_md4.exe \
                 $(CTB_UDIG)/ut_md5.exe \
@@ -316,7 +320,23 @@ $(CTB_UDIG)/ut_md_snefru.exe: $(CTS_UDI_DRV)ut_md_snefru.adb
 $(CTB_UDIG)/ut_md_blake_224.exe: $(CTS_UDI_DRV)ut_md_blake_224.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UDIG)/ut_md_blake_256.exe: $(CTS_UDI_DRV)ut_md_blake_256.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
     
+$(CTB_UDIG)/ut_md_blake_384.exe: $(CTS_UDI_DRV)ut_md_blake_384.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UDIG)/ut_md_blake_512.exe: $(CTS_UDI_DRV)ut_md_blake_512.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UDIG)/ut_md_blake2s.exe: $(CTS_UDI_DRV)ut_md_blake2s.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+        
     
 $(CTB_UDIG)/ut_md2.exe: $(CTS_UDI_DRV)ut_md2.adb
 	@echo Building $<

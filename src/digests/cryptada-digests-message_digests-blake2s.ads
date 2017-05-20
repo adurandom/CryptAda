@@ -50,6 +50,10 @@
 --    applications such as Public Key Infrastructure (PKI), secure
 --    communication protocols, cloud storage, intrusion detection, forensic
 --    suites, and version control systems.
+--
+--    Caveat:
+--    Present implementation of BLAKE2s supports only sequential hashing and
+--    does not provide support for tree hashing.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
@@ -130,7 +134,7 @@ package CryptAda.Digests.Message_Digests.BLAKE2s is
    -- Next constants define the default values for BLAKE2s parameters.
    -----------------------------------------------------------------------------
    
-   BLAKE2s_Default_Hash_Bytes    : constant BLAKE2s_Hash_Bytes    := 16;
+   BLAKE2s_Default_Hash_Bytes    : constant BLAKE2s_Hash_Bytes    := 32;
    BLAKE2s_Default_Salt          : constant BLAKE2s_Salt          := (others => 16#00#);
    BLAKE2s_Default_Personal      : constant BLAKE2s_Personal      := (others => 16#00#);
    BLAKE2s_No_Key                : constant BLAKE2s_Key_Bytes     := 0;
@@ -163,7 +167,7 @@ package CryptAda.Digests.Message_Digests.BLAKE2s is
 
    --[Digest_Start]-------------------------------------------------------------
    -- Initializes BLAKE2s computation using default parameters:
-   -- Hash_Bytes     => 16 (BLAKE2s_Default_Hash_Bytes)
+   -- Hash_Bytes     => 32 (BLAKE2s_Default_Hash_Bytes)
    -- Salt           => Set to 0 all Salt Bytes.
    -- Personal       => Set to 0 all Personal Bytes
    --
