@@ -101,12 +101,14 @@ package CryptAda.Names is
          MD_RIPEMD_256,          -- RIPEMD 256 bit
          MD_RIPEMD_320,          -- RIPEMD 320 bit
          MD_SHA_1,               -- SHA-1
+         MD_Tiger,               -- Tiger (generic)
          MD_Tiger_128_3,         -- Tiger 128-bit 3 passes.
          MD_Tiger_128_4,         -- Tiger 128-bit 4 passes
          MD_Tiger_160_3,         -- Tiger 160-bit 3 passes
          MD_Tiger_160_4,         -- Tiger 160-bit 4 passes.
          MD_Tiger_192_3,         -- Tiger 192-bit 3 passes.
          MD_Tiger_192_4,         -- Tiger 192-bit 4 passes.
+         MD_HAVAL,               -- HAVAL (generic).
          MD_HAVAL_128_3,         -- HAVAL 128-bit 3 passes.
          MD_HAVAL_128_4,         -- HAVAL 128-bit 4 passes.
          MD_HAVAL_128_5,         -- HAVAL 128-bit 5 passes.
@@ -122,7 +124,7 @@ package CryptAda.Names is
          MD_HAVAL_256_3,         -- HAVAL 256-bit 3 passes.
          MD_HAVAL_256_4,         -- HAVAL 256-bit 4 passes.
          MD_HAVAL_256_5,         -- HAVAL 256-bit 5 passes.
-         MD_Snefru,              -- Snefru.
+         MD_Snefru,              -- Snefru (Generic)
          MD_Snefru_128_4,        -- Snefru 128-bit 4 passes.
          MD_Snefru_128_8,        -- Snefru 128-bit 8 passes.
          MD_Snefru_256_4,        -- Snefru 256-bit 4 passes.
@@ -131,6 +133,7 @@ package CryptAda.Names is
          MD_SHA_256,             -- SHA-256 (SHA-2).
          MD_SHA_384,             -- SHA-384 (SHA-2).
          MD_SHA_512,             -- SHA-512 (SHA-2).
+         MD_SHA_3,               -- SHA-3
          MD_SHA_3_224,           -- SHA-3 224-bit
          MD_SHA_3_256,           -- SHA-3 256-bit
          MD_SHA_3_384,           -- SHA-3 384-bit
@@ -140,7 +143,8 @@ package CryptAda.Names is
          MD_BLAKE_256,           -- BLAKE-256
          MD_BLAKE_384,           -- BLAKE-384
          MD_BLAKE_512,           -- BLAKE-512
-         MD_BLAKE2s              -- BLAKE2s
+         MD_BLAKE2s,             -- BLAKE2s
+         MD_BLAKE2b              -- BLAKE2b
       );
 
    --[Random_Generator_Id]------------------------------------------------------

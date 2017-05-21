@@ -16,112 +16,92 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-digests-message_digests-snefru.ads
+--    Filename          :  cryptada-digests-message_digests-tiger.ads
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 13th, 2017
 --    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Implements the Snefru message digest algorithm.
+--    Implements the Tiger message digest algorithm.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170313 ADD   Initial implementation.
---    2.0   20170516 ADD   Design changes to use access to objects.
+--    2.0   20170520 ADD   Design changes to use access to objects.
 --------------------------------------------------------------------------------
 
-package CryptAda.Digests.Message_Digests.Snefru is
+package CryptAda.Digests.Message_Digests.Tiger is
 
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Snefru_Digest]------------------------------------------------------------
-   -- Type that represents the Snefru message digest algorithm.
+   --[Tiger_Digest]-------------------------------------------------------------
+   -- Type that represents the Tiger message digest algorithm.
    --
-   -- Snefru is a cryptographic hash function invented by Ralph Merkle in 1990
-   -- while working at Xerox PARC. The function supports 128-bit and 256-bit
-   -- output. It was named after the Egyptian Pharaoh Sneferu, continuing the
-   -- tradition of the Khufu and Khafre block ciphers.
+   -- Tiger is a new hash algorithm developed by Ross Anderson and Eli
+   -- Biham. It is designed to work with 64-bit processors such as the
+   -- Digital Alpha and, unlike MD4, does not rely on rotations. In order
+   -- to provide drop-in compatibility with other hashes, Tiger can
+   -- generate a 128-bit, a 160-bit or a 192-bit digest.
    --
-   -- The original design of Snefru was shown to be insecure by Eli Biham and
-   -- Adi Shamir who were able to use differential cryptanalysis to find hash
-   -- collisions. The design was then modified by increasing the number of
-   -- iterations of the main pass of the algorithm from two to eight. Although
-   -- differential cryptanalysis can break the revised version with less
-   -- complexity than brute force search (a certificational weakness), the
-   -- attack requires 2^88.5 operations and is thus not currently feasible
-   -- in practice.
-   --
-   -- This implementation allows to choose the security level (4 or 8)
-   -- and the size of computed hash (either 128-bit or 256 bits). The
-   -- dispatching Digest_Start will default to security level 8 and hash size
-   -- 256. An overloaded Digest_Start procedure will allow to choose the
-   -- full range of values for these two parameters.
+   -- This implementation allows to choose both, the number of passes and the
+   -- size of computed hash. The dispatching Digest_Start procedure will default
+   -- to 5 passes and 192-bit hash size. An overloaded Digest_Start procedure
+   -- will allow to choose the full range of allowed values for these two
+   -- parameters.
    -----------------------------------------------------------------------------
 
-   type Snefru_Digest is new Message_Digest with private;
+   type Tiger_Digest is new Message_Digest with private;
 
-   --[Snefru_Digest_Ptr]--------------------------------------------------------
-   -- Access to Snefru digest objects.
+   --[Tiger_Digest_Ptr]---------------------------------------------------------
+   -- Access to Tiger digest objects.
    -----------------------------------------------------------------------------
 
-   type Snefru_Digest_Ptr is access all Snefru_Digest'Class;
+   type Tiger_Digest_Ptr is access all Tiger_Digest'Class;
    
-   --[Snefru_Hash_Size]---------------------------------------------------------
+   --[Tiger_Passes]-------------------------------------------------------------
+   -- Type that identifies the number of passes to perform.
+   -----------------------------------------------------------------------------
+
+   subtype Tiger_Passes is Positive range 3 .. 4;
+
+   --[Tiger_Hash_Size]----------------------------------------------------------
    -- Enumerated type that identify the hash size in bits.
    -----------------------------------------------------------------------------
 
-   type Snefru_Hash_Size is
+   type Tiger_Hash_Size is
       (
-         Snefru_128,          -- 128-bit (16 - byte) hash size.
-         Snefru_256           -- 256-bit (32 - byte) hash size.
+         Tiger_128,           -- 128-bit (16 - byte) hash size.
+         Tiger_160,           -- 160-bit (20 - byte) hash size.
+         Tiger_192            -- 192-bit (24 - byte) hash size.
       );
-      
-   --[Snefru_Security_Level]----------------------------------------------------
-   -- This type allows to specify the security level of the algorithm.
-   -----------------------------------------------------------------------------
 
-   type Snefru_Security_Level is
-      (
-         Security_Level_4,
-         Security_Level_8
-      );
-      
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Snefru_Hash_Bytes]--------------------------------------------------------
-   -- Size in bytes of Snefru hashes.
+   --[Tiger_Hash_Bytes]---------------------------------------------------------
+   -- Size in bytes of Tiger hashes.
    -----------------------------------------------------------------------------
-   
-   Snefru_Hash_Bytes             : constant array(Snefru_Hash_Size) of Positive :=
+
+   Tiger_Hash_Bytes                 : constant array(Tiger_Hash_Size) of Positive :=
       (
-         Snefru_128 => 16,
-         Snefru_256 => 32
+         Tiger_128 => 16,
+         Tiger_160 => 20,
+         Tiger_192 => 24
       );
 
-   --[Snefru_Security_Levels]---------------------------------------------------
-   -- Numeric constants for security levels.
+   --[Defaults]-----------------------------------------------------------------
+   -- Default values for Tiger parameters.
    -----------------------------------------------------------------------------
    
-   Snefru_Security_Levels        : constant array(Snefru_Security_Level) of Positive :=
-      (
-         Security_Level_4  => 4,
-         Security_Level_8  => 8
-      );
+   Tiger_Default_Passes             : constant Tiger_Passes       := Tiger_Passes'Last;
+   Tiger_Default_Hash_Size          : constant Tiger_Hash_Size    := Tiger_Hash_Size'Last;
+   Tiger_Default_Hash_Bytes         : constant Positive           := Tiger_Hash_Bytes(Tiger_Default_Hash_Size);
 
-   --[Default values for parameters]--------------------------------------------
-   -- Next constants define defaults for Snefru parameters.
-   -----------------------------------------------------------------------------
- 
-   Snefru_Default_Hash_Size      : constant Snefru_Hash_Size      := Snefru_Hash_Size'Last;
-   Snefru_Default_Hash_Bytes     : constant Positive              := Snefru_Hash_Bytes(Snefru_Default_Hash_Size);
-   Snefru_Default_Security_Level : constant Snefru_Security_Level := Snefru_Security_Level'Last;
- 
    -----------------------------------------------------------------------------
    --[Getting a handle]---------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -147,21 +127,22 @@ package CryptAda.Digests.Message_Digests.Snefru is
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
-   
+
    --[Digest_Start]-------------------------------------------------------------
-   -- Starts Snefru computation with default parameters:
-   -- Security_Level    => 8
-   -- Hash_Size         => 32 bytes (256 bits)
+   -- Starts Tiger computation with default parameters:
+   --
+   -- Hash Bytes  => 24 (192-bit)
+   -- Passes      => 4
    -----------------------------------------------------------------------------
 
    overriding
    procedure   Digest_Start(
-                  The_Digest     : access Snefru_Digest);
+                  The_Digest     : access Tiger_Digest);
 
    --[Digest_Start]-------------------------------------------------------------
    -- This start procedure admits a parameter list with the parameters to 
-   -- initialize Snefru computation. 
-   -- 
+   -- initialize Tiger computation. 
+   --
    -- If Parameters is an empty list then digest will be started with the 
    -- default parameters.
    --
@@ -169,50 +150,50 @@ package CryptAda.Digests.Message_Digests.Snefru is
    --
    -- (
    --    Hash_Bytes => <hash_bytes>,
-   --    Security_Level => <security_level>
+   --    Passes => <passes>
    -- )
    --
    -- Parameters:
    -- Hash_Bytes           Mandatory. Integer item specifying the size in bytes 
-   --                      of the hash to compute (either 16 or 32).
-   -- Security_Level       Mandatory. Integer item specifying the security 
-   --                      level value (either 4 or 8).
+   --                      of the hash to compute (16, 20 or 24).
+   -- Passes               Mandatory. Integer item specifying the number of
+   --                      passes (3 or 4)
    -----------------------------------------------------------------------------
 
    overriding
    procedure   Digest_Start(
-                  The_Digest     : access Snefru_Digest;
+                  The_Digest     : access Tiger_Digest;
                   Parameters     : in     CryptAda.Lists.List);
 
    --[Digest_Update]------------------------------------------------------------
 
    overriding
    procedure   Digest_Update(
-                  The_Digest     : access Snefru_Digest;
+                  The_Digest     : access Tiger_Digest;
                   The_Bytes      : in     CryptAda.Pragmatics.Byte_Array);
 
    --[Digest_End]---------------------------------------------------------------
 
    overriding
    procedure   Digest_End(
-                  The_Digest     : access Snefru_Digest;
+                  The_Digest     : access Tiger_Digest;
                   The_Hash       :    out CryptAda.Digests.Hashes.Hash);
-      
+   
    -----------------------------------------------------------------------------
    --[Non-Dispatching Operations]-----------------------------------------------
    -----------------------------------------------------------------------------
 
    --[Digest_Start]-------------------------------------------------------------
    -- Purpose:
-   -- Starts Snefru computation allowing to tune the security level and
+   -- Starts Tiger computation allowing to tune the number of passes and
    -- hash size.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- The_Digest           Access to the Snefru_Digest object that maintains the 
+   -- The_Digest           Access to Tiger_Digest object that maintains the 
    --                      context for digest computation.
-   -- Hash_Size_Id         Snefru_Hash_Size value that identifies the size of
+   -- Hash_Size_Id         Tiger_Hash_Size value that identifies the size of
    --                      the hash to generate.
-   -- Security_Level       Security level.
+   -- Passes               Number of passes to perform.
    -----------------------------------------------------------------------------
    -- Returned value:
    -- N/A.
@@ -222,48 +203,48 @@ package CryptAda.Digests.Message_Digests.Snefru is
    -----------------------------------------------------------------------------
 
    procedure   Digest_Start(
-                  The_Digest     : access Snefru_Digest'Class;
-                  Hash_Size_Id   : in     Snefru_Hash_Size;
-                  Security_Level : in     Snefru_Security_Level);
+                  The_Digest     : access Tiger_Digest'Class;
+                  Hash_Size_Id   : in     Tiger_Hash_Size;
+                  Passes         : in     Tiger_Passes);
 
-   --[Get_Security_Level]-------------------------------------------------------
+   --[Get_Passes]---------------------------------------------------------------
    -- Purpose:
-   -- Returns the security level configured for Snefru.
+   -- Returns the number of passes configured for Tiger.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- From_Digest          Access to the Snefru_Digest object that maintains the 
+   -- From_Digest          Access to Tiger_Digest object that maintains the 
    --                      context for digest computation.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Snefru_Security_Level value with the security level configured.
+   -- Tiger_Passes value with the number of passes configured.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- None.
    -----------------------------------------------------------------------------
 
-   function    Get_Security_Level(
-                  From_Digest    : access Snefru_Digest'Class)
-      return   Snefru_Security_Level;
+   function    Get_Passes(
+                  From_Digest    : access Tiger_Digest'Class)
+      return   Tiger_Passes;
 
    --[Get_Hash_Size_Id]---------------------------------------------------------
    -- Purpose:
-   -- Returns the identifier that specifies the hash size Snefru has to
+   -- Returns the identifier that specifies the hash size Tiger has to
    -- generate.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- From_Digest          Access to the Snefru_Digest object that maintains the 
+   -- From_Digest          Access to Tiger_Digest object that maintains the 
    --                      context for digest computation.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Snefru_Hash_Size value that identifies the size of the generated hash.
+   -- Tiger_Hash_Size value that identifies the size of the generated hash.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- None.
    -----------------------------------------------------------------------------
 
    function    Get_Hash_Size_Id(
-                  From_Digest    : access Snefru_Digest'Class)
-      return   Snefru_Hash_Size;
+                  From_Digest    : access Tiger_Digest'Class)
+      return   Tiger_Hash_Size;
 
    -----------------------------------------------------------------------------
    --[Private Part]-------------------------------------------------------------
@@ -276,63 +257,62 @@ private
    -----------------------------------------------------------------------------
 
    --[Constants]----------------------------------------------------------------
-   -- The following constants related to Snefru processing are defined.
+   -- The following constants related to Tiger processing are defined.
    --
-   -- Snefru_Max_State_Bytes     Maximum size in bytes of Snefru state.
-   -- Snefru_Max_Block_Bytes     Maximum size in bytes of Snefru blocks.
-   -- Snefru_Word_Bytes          Size in bytes of the Snefru words.
-   -- Snefru_State_Words         Number of words in Snefru state registers.
+   -- Tiger_State_Bytes          Size in bytes of Tiger state.
+   -- Tiger_Block_Bytes          Size in bytes of Tiger blocks.
+   -- Tiger_Word_Bytes           Size in bytes of the Tiger words.
+   -- Tiger_State_Words          Number of words in Tiger state registers.
    -----------------------------------------------------------------------------
 
-   Snefru_Max_State_Bytes        : constant Positive := 32;
-   Snefru_Max_Block_Bytes        : constant Positive := 48;
-   Snefru_Word_Bytes             : constant Positive :=  4;
-   Snefru_State_Words            : constant Positive := Snefru_Max_State_Bytes / Snefru_Word_Bytes;
-
-   --[Snefru_Block_Sizes]-------------------------------------------------------
-   -- Block sizes for different hash sizes.
-   -----------------------------------------------------------------------------
-
-   Snefru_Block_Sizes            : constant array(Snefru_Hash_Size) of Positive :=
-      (
-         Snefru_128  => 48,
-         Snefru_256  => 32
-      );
+   Tiger_State_Bytes             : constant Positive := 24;
+   Tiger_Block_Bytes             : constant Positive := 64;
+   Tiger_Word_Bytes              : constant Positive :=  8;
+   Tiger_State_Words             : constant Positive := Tiger_State_Bytes / Tiger_Word_Bytes;
 
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Snefru_Block]----------------------------------------------------------------
-   -- A subtype of Byte_Array for Snefru Blocks.
+   --[Tiger_Block]--------------------------------------------------------------
+   -- A subtype of Byte_Array for Tiger Blocks.
    -----------------------------------------------------------------------------
 
-   subtype Snefru_Block is CryptAda.Pragmatics.Byte_Array(1 .. Snefru_Max_Block_Bytes);
+   subtype Tiger_Block is CryptAda.Pragmatics.Byte_Array(1 .. Tiger_Block_Bytes);
 
-   --[Snefru_State]----------------------------------------------------------------
+   --[Tiger_State]--------------------------------------------------------------
    -- Type for state.
    -----------------------------------------------------------------------------
 
-   subtype Snefru_State is CryptAda.Pragmatics.Four_Bytes_Array(1 .. Snefru_State_Words);
+   subtype Tiger_State is CryptAda.Pragmatics.Eight_Bytes_Array(1 .. Tiger_State_Words);
 
-   --[Snefru_Digest]---------------------------------------------------------------
-   -- Full definition of the Snefru_Digest tagged type. The extension part
+   --[Tiger_Initial_State]------------------------------------------------------
+   -- Constant that provides the initial values for the state registers.
+   -----------------------------------------------------------------------------
+
+   Tiger_Initial_State           : constant Tiger_State :=
+      (
+         16#01234567_89ABCDEF#, 16#FEDCBA98_76543210#, 16#F096A5B4_C3B2E187#
+      );
+
+   --[Tiger_Digest]-------------------------------------------------------------
+   -- Full definition of the Tiger_Digest tagged type. The extension part
    -- contains the following fields:
    --
-   -- Security_Level       Security level (number of rounds).
+   -- Passes               Number of passes.
    -- Hash_Size_Id         Size of the hash.
    -- State                State registers.
    -- BIB                  Bytes in internal buffer.
    -- Buffer               Internal buffer.
    -----------------------------------------------------------------------------
 
-   type Snefru_Digest is new Message_Digest with
+   type Tiger_Digest is new Message_Digest with
       record
-         Security_Level          : Snefru_Security_Level    := Snefru_Default_Security_Level;
-         Hash_Size_Id            : Snefru_Hash_Size         := Snefru_Default_Hash_Size;
-         State                   : Snefru_State             := (others => 16#00000000#);
-         BIB                     : Natural                  := 0;
-         Buffer                  : Snefru_Block             := (others => 16#00#);
+         Passes                  : Tiger_Passes       := Tiger_Default_Passes;
+         Hash_Size_Id            : Tiger_Hash_Size    := Tiger_Default_Hash_Size;
+         State                   : Tiger_State        := Tiger_Initial_State;
+         BIB                     : Natural            := 0;
+         Buffer                  : Tiger_Block        := (others => 0);
       end record;
 
    -----------------------------------------------------------------------------
@@ -345,12 +325,12 @@ private
 
    overriding
    procedure   Initialize(
-                  The_Digest     : in out Snefru_Digest);
+                  The_Digest     : in out Tiger_Digest);
 
    --[Finalize]-----------------------------------------------------------------
 
    overriding
    procedure   Finalize(
-                  The_Digest     : in out Snefru_Digest);
+                  The_Digest     : in out Tiger_Digest);
 
-end CryptAda.Digests.Message_Digests.Snefru;
+end CryptAda.Digests.Message_Digests.Tiger;

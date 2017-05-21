@@ -765,8 +765,8 @@ package body CryptAda.Digests.Message_Digests.Snefru is
 
    procedure   Get_Parameters(
                   From_List      : in     List;
-                  Security_Level :    out Snefru_Security_Level;
-                  Hash_Size_Id   :    out Snefru_Hash_Size);
+                  Hash_Size_Id   :    out Snefru_Hash_Size;
+                  Security_Level :    out Snefru_Security_Level);
 
    --[Object Initialization]----------------------------------------------------
 
@@ -881,8 +881,8 @@ package body CryptAda.Digests.Message_Digests.Snefru is
 
    procedure   Get_Parameters(
                   From_List      : in     List;
-                  Security_Level :    out Snefru_Security_Level;
-                  Hash_Size_Id   :    out Snefru_Hash_Size)
+                  Hash_Size_Id   :    out Snefru_Hash_Size;
+                  Security_Level :    out Snefru_Security_Level)
    is
    begin
       -- Check list kind.
@@ -1183,8 +1183,8 @@ package body CryptAda.Digests.Message_Digests.Snefru is
    begin
       Digest_Start(
          The_Digest,
-         Snefru_Default_Security_Level,
-         Snefru_Default_Hash_Size);
+         Snefru_Default_Hash_Size,
+         Snefru_Default_Security_Level);
    end Digest_Start;
 
    --[Digest_Start]-------------------------------------------------------------
@@ -1194,11 +1194,11 @@ package body CryptAda.Digests.Message_Digests.Snefru is
                   The_Digest     : access Snefru_Digest;
                   Parameters     : in     List)
    is
-      SL             : Snefru_Security_Level;
       HS             : Snefru_Hash_Size;
+      SL             : Snefru_Security_Level;
    begin
-      Get_Parameters(Parameters, SL, HS);
-      Digest_Start(The_Digest, SL, HS);
+      Get_Parameters(Parameters, HS, SL);
+      Digest_Start(The_Digest, HS, SL);
    end Digest_Start;
 
    --[Digest_Update]------------------------------------------------------------
@@ -1321,8 +1321,8 @@ package body CryptAda.Digests.Message_Digests.Snefru is
 
    procedure   Digest_Start(
                   The_Digest     : access Snefru_Digest'Class;
-                  Security_Level : in     Snefru_Security_Level;
-                  Hash_Size_Id   : in     Snefru_Hash_Size)
+                  Hash_Size_Id   : in     Snefru_Hash_Size;
+                  Security_Level : in     Snefru_Security_Level)
    is
    begin
       Initialize(The_Digest.all);
@@ -1330,8 +1330,8 @@ package body CryptAda.Digests.Message_Digests.Snefru is
       Private_Set_Block_Size(The_Digest, Snefru_Block_Sizes(Hash_Size_Id));
       Private_Set_Hash_Size(The_Digest, Snefru_Hash_Bytes(Hash_Size_Id));
 
-      The_Digest.all.Security_Level := Security_Level;
       The_Digest.all.Hash_Size_Id   := Hash_Size_Id;
+      The_Digest.all.Security_Level := Security_Level;
    end Digest_Start;
 
    --[Get_Security_Level]-------------------------------------------------------

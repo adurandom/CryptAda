@@ -16,112 +16,84 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-digests-message_digests-snefru.ads
+--    Filename          :  cryptada-digests-message_digests-sha_3.ads
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 13th, 2017
 --    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Implements the Snefru message digest algorithm.
+--    Implements the SHA-3 (Secure hash algorithm) message digest algorithm.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170313 ADD   Initial implementation.
---    2.0   20170516 ADD   Design changes to use access to objects.
+--    2.0   20170521 ADD   Design changes to use access to objects.
 --------------------------------------------------------------------------------
 
-package CryptAda.Digests.Message_Digests.Snefru is
+package CryptAda.Digests.Message_Digests.SHA_3 is
 
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Snefru_Digest]------------------------------------------------------------
-   -- Type that represents the Snefru message digest algorithm.
+   --[SHA_3_Digest]-------------------------------------------------------------
+   -- Type that represents the SHA-3 message digest algorithm.
    --
-   -- Snefru is a cryptographic hash function invented by Ralph Merkle in 1990
-   -- while working at Xerox PARC. The function supports 128-bit and 256-bit
-   -- output. It was named after the Egyptian Pharaoh Sneferu, continuing the
-   -- tradition of the Khufu and Khafre block ciphers.
+   -- SHA-3 (Secure Hash Algorithm 3), a subset of the cryptographic primitive
+   -- family Keccak is a cryptographic hash function designed by Guido Bertoni,
+   -- Joan Daemen, Michaël Peeters, and Gilles Van Assche, building upon
+   -- RadioGatún. SHA-3 is a member of the Secure Hash Algorithm family. The
+   -- SHA-3 standard was released by NIST on August 5, 2015.
    --
-   -- The original design of Snefru was shown to be insecure by Eli Biham and
-   -- Adi Shamir who were able to use differential cryptanalysis to find hash
-   -- collisions. The design was then modified by increasing the number of
-   -- iterations of the main pass of the algorithm from two to eight. Although
-   -- differential cryptanalysis can break the revised version with less
-   -- complexity than brute force search (a certificational weakness), the
-   -- attack requires 2^88.5 operations and is thus not currently feasible
-   -- in practice.
-   --
-   -- This implementation allows to choose the security level (4 or 8)
-   -- and the size of computed hash (either 128-bit or 256 bits). The
-   -- dispatching Digest_Start will default to security level 8 and hash size
-   -- 256. An overloaded Digest_Start procedure will allow to choose the
-   -- full range of values for these two parameters.
+   -- SHA-3 can generate hashes of 224, 256, 384 or 512 bits (28, 32, 48 or 64
+   -- bytes. This implementation generates (by default) 512-bt hashes.
    -----------------------------------------------------------------------------
 
-   type Snefru_Digest is new Message_Digest with private;
+   type SHA_3_Digest is new Message_Digest with private;
 
-   --[Snefru_Digest_Ptr]--------------------------------------------------------
-   -- Access to Snefru digest objects.
+   --[SHA_3_Digest_Ptr]---------------------------------------------------------
+   -- Access to SHA-3 digest objects.
    -----------------------------------------------------------------------------
-
-   type Snefru_Digest_Ptr is access all Snefru_Digest'Class;
    
-   --[Snefru_Hash_Size]---------------------------------------------------------
-   -- Enumerated type that identify the hash size in bits.
+   type SHA_3_Digest_Ptr is access all SHA_3_Digest'Class;
+   
+   --[SHA_3_Hash_Size]----------------------------------------------------------
+   -- Enumerated type that identify the hash size in bits of the SHA-3 hashes.
    -----------------------------------------------------------------------------
 
-   type Snefru_Hash_Size is
+   type SHA_3_Hash_Size is
       (
-         Snefru_128,          -- 128-bit (16 - byte) hash size.
-         Snefru_256           -- 256-bit (32 - byte) hash size.
+         SHA_3_224,           -- 224-bit (28 - byte) hash size.
+         SHA_3_256,           -- 256-bit (32 - byte) hash size.
+         SHA_3_384,           -- 384-bit (48 - byte) hash size.
+         SHA_3_512            -- 512-bit (64 - byte) hash size.
       );
-      
-   --[Snefru_Security_Level]----------------------------------------------------
-   -- This type allows to specify the security level of the algorithm.
-   -----------------------------------------------------------------------------
 
-   type Snefru_Security_Level is
-      (
-         Security_Level_4,
-         Security_Level_8
-      );
-      
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Snefru_Hash_Bytes]--------------------------------------------------------
-   -- Size in bytes of Snefru hashes.
+   --[SHA_3_Hash_Bytes]---------------------------------------------------------
+   -- Size in bytes of SHA-3 hashes.
    -----------------------------------------------------------------------------
-   
-   Snefru_Hash_Bytes             : constant array(Snefru_Hash_Size) of Positive :=
-      (
-         Snefru_128 => 16,
-         Snefru_256 => 32
-      );
 
-   --[Snefru_Security_Levels]---------------------------------------------------
-   -- Numeric constants for security levels.
-   -----------------------------------------------------------------------------
-   
-   Snefru_Security_Levels        : constant array(Snefru_Security_Level) of Positive :=
+   SHA_3_Hash_Bytes              : constant array(SHA_3_Hash_Size) of Positive := 
       (
-         Security_Level_4  => 4,
-         Security_Level_8  => 8
+         SHA_3_224   => 28,
+         SHA_3_256   => 32,
+         SHA_3_384   => 48,
+         SHA_3_512   => 64
       );
 
    --[Default values for parameters]--------------------------------------------
-   -- Next constants define defaults for Snefru parameters.
+   -- Next constants define defaults for SHA-3 parameters.
    -----------------------------------------------------------------------------
  
-   Snefru_Default_Hash_Size      : constant Snefru_Hash_Size      := Snefru_Hash_Size'Last;
-   Snefru_Default_Hash_Bytes     : constant Positive              := Snefru_Hash_Bytes(Snefru_Default_Hash_Size);
-   Snefru_Default_Security_Level : constant Snefru_Security_Level := Snefru_Security_Level'Last;
- 
+   SHA_3_Default_Hash_Size       : constant SHA_3_Hash_Size       := SHA_3_Hash_Size'Last;
+   SHA_3_Default_Hash_Bytes      : constant Positive              := SHA_3_Hash_Bytes(SHA_3_Default_Hash_Size);
+
    -----------------------------------------------------------------------------
    --[Getting a handle]---------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -149,18 +121,17 @@ package CryptAda.Digests.Message_Digests.Snefru is
    -----------------------------------------------------------------------------
    
    --[Digest_Start]-------------------------------------------------------------
-   -- Starts Snefru computation with default parameters:
-   -- Security_Level    => 8
-   -- Hash_Size         => 32 bytes (256 bits)
+   -- Starts SHA-3 computation with default parameters:
+   -- Hash_Size         => 512-bit (64 bytes)
    -----------------------------------------------------------------------------
 
    overriding
    procedure   Digest_Start(
-                  The_Digest     : access Snefru_Digest);
+                  The_Digest     : access SHA_3_Digest);
 
    --[Digest_Start]-------------------------------------------------------------
    -- This start procedure admits a parameter list with the parameters to 
-   -- initialize Snefru computation. 
+   -- initialize SHA-3 computation. 
    -- 
    -- If Parameters is an empty list then digest will be started with the 
    -- default parameters.
@@ -168,51 +139,46 @@ package CryptAda.Digests.Message_Digests.Snefru is
    -- Otherwise, Parameters must be a named list with the following syntax:
    --
    -- (
-   --    Hash_Bytes => <hash_bytes>,
-   --    Security_Level => <security_level>
+   --    Hash_Bytes => <hash_bytes>
    -- )
    --
    -- Parameters:
    -- Hash_Bytes           Mandatory. Integer item specifying the size in bytes 
-   --                      of the hash to compute (either 16 or 32).
-   -- Security_Level       Mandatory. Integer item specifying the security 
-   --                      level value (either 4 or 8).
+   --                      of the hash to compute (either 28, 32, 48 or 64).
    -----------------------------------------------------------------------------
 
    overriding
    procedure   Digest_Start(
-                  The_Digest     : access Snefru_Digest;
+                  The_Digest     : access SHA_3_Digest;
                   Parameters     : in     CryptAda.Lists.List);
 
    --[Digest_Update]------------------------------------------------------------
 
    overriding
    procedure   Digest_Update(
-                  The_Digest     : access Snefru_Digest;
+                  The_Digest     : access SHA_3_Digest;
                   The_Bytes      : in     CryptAda.Pragmatics.Byte_Array);
 
    --[Digest_End]---------------------------------------------------------------
 
    overriding
    procedure   Digest_End(
-                  The_Digest     : access Snefru_Digest;
+                  The_Digest     : access SHA_3_Digest;
                   The_Hash       :    out CryptAda.Digests.Hashes.Hash);
-      
+   
    -----------------------------------------------------------------------------
    --[Non-Dispatching Operations]-----------------------------------------------
    -----------------------------------------------------------------------------
 
    --[Digest_Start]-------------------------------------------------------------
    -- Purpose:
-   -- Starts Snefru computation allowing to tune the security level and
-   -- hash size.
+   -- Starts SHA-3 computation allowing to set the hash size.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- The_Digest           Access to the Snefru_Digest object that maintains the 
+   -- The_Digest           Access to SHA_3_Digest object that maintains the 
    --                      context for digest computation.
-   -- Hash_Size_Id         Snefru_Hash_Size value that identifies the size of
+   -- Hash_Size_Id         SHA_3_Hash_Size value that identifies the size of
    --                      the hash to generate.
-   -- Security_Level       Security level.
    -----------------------------------------------------------------------------
    -- Returned value:
    -- N/A.
@@ -222,48 +188,27 @@ package CryptAda.Digests.Message_Digests.Snefru is
    -----------------------------------------------------------------------------
 
    procedure   Digest_Start(
-                  The_Digest     : access Snefru_Digest'Class;
-                  Hash_Size_Id   : in     Snefru_Hash_Size;
-                  Security_Level : in     Snefru_Security_Level);
-
-   --[Get_Security_Level]-------------------------------------------------------
-   -- Purpose:
-   -- Returns the security level configured for Snefru.
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- From_Digest          Access to the Snefru_Digest object that maintains the 
-   --                      context for digest computation.
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- Snefru_Security_Level value with the security level configured.
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- None.
-   -----------------------------------------------------------------------------
-
-   function    Get_Security_Level(
-                  From_Digest    : access Snefru_Digest'Class)
-      return   Snefru_Security_Level;
+                  The_Digest     : access SHA_3_Digest'Class;
+                  Hash_Size_Id   : in     SHA_3_Hash_Size);
 
    --[Get_Hash_Size_Id]---------------------------------------------------------
    -- Purpose:
-   -- Returns the identifier that specifies the hash size Snefru has to
-   -- generate.
+   -- Returns the identifier that specifies the hash size SHA-3 has to generate.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- From_Digest          Access to the Snefru_Digest object that maintains the 
+   -- From_Digest          Access to SHA_3_Digest object that maintains the 
    --                      context for digest computation.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Snefru_Hash_Size value that identifies the size of the generated hash.
+   -- SHA_3_Hash_Size value that identifies the size of the generated hash.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- None.
    -----------------------------------------------------------------------------
 
    function    Get_Hash_Size_Id(
-                  From_Digest    : access Snefru_Digest'Class)
-      return   Snefru_Hash_Size;
+                  From_Digest    : access SHA_3_Digest'Class)
+      return   SHA_3_Hash_Size;
 
    -----------------------------------------------------------------------------
    --[Private Part]-------------------------------------------------------------
@@ -276,63 +221,60 @@ private
    -----------------------------------------------------------------------------
 
    --[Constants]----------------------------------------------------------------
-   -- The following constants related to Snefru processing are defined.
+   -- The following constants related to MD5 processing are defined.
    --
-   -- Snefru_Max_State_Bytes     Maximum size in bytes of Snefru state.
-   -- Snefru_Max_Block_Bytes     Maximum size in bytes of Snefru blocks.
-   -- Snefru_Word_Bytes          Size in bytes of the Snefru words.
-   -- Snefru_State_Words         Number of words in Snefru state registers.
+   -- SHA_3_State_Bytes          Size in bytes of SHA-3 state.
+   -- SHA_3_Max_Block_Bytes      Maximum size in bytes of SHA-3 blocks.
+   -- SHA_3_Max_Hash_Bytes       MAximum size in bytes of SHA-3 hashes.
+   -- SHA_3_Word_Bytes           Size in bytes of the SHA-3 words.
+   -- SHA_3_State_Words          Number of words in SHA-3 state registers.
+   -- SHA_3_Block_Bytes          Size of block for any hash length.
    -----------------------------------------------------------------------------
 
-   Snefru_Max_State_Bytes        : constant Positive := 32;
-   Snefru_Max_Block_Bytes        : constant Positive := 48;
-   Snefru_Word_Bytes             : constant Positive :=  4;
-   Snefru_State_Words            : constant Positive := Snefru_Max_State_Bytes / Snefru_Word_Bytes;
-
-   --[Snefru_Block_Sizes]-------------------------------------------------------
-   -- Block sizes for different hash sizes.
-   -----------------------------------------------------------------------------
-
-   Snefru_Block_Sizes            : constant array(Snefru_Hash_Size) of Positive :=
-      (
-         Snefru_128  => 48,
-         Snefru_256  => 32
+   SHA_3_State_Bytes             : constant Positive := 200;
+   SHA_3_Max_Block_Bytes         : constant Positive := 144;
+   SHA_3_Max_Hash_Bytes          : constant Positive :=  64;
+   SHA_3_Word_Bytes              : constant Positive :=   8;
+   SHA_3_State_Words             : constant Positive := SHA_3_State_Bytes / SHA_3_Word_Bytes;
+   SHA_3_Block_Bytes             : constant array(SHA_3_Hash_Size) of Positive := (
+         SHA_3_224   => 144,
+         SHA_3_256   => 136,
+         SHA_3_384   => 104,
+         SHA_3_512   =>  72
       );
 
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Snefru_Block]----------------------------------------------------------------
-   -- A subtype of Byte_Array for Snefru Blocks.
+   --[SHA_3_Block]--------------------------------------------------------------
+   -- A subtype of Byte_Array for SHA-3 Blocks.
    -----------------------------------------------------------------------------
 
-   subtype Snefru_Block is CryptAda.Pragmatics.Byte_Array(1 .. Snefru_Max_Block_Bytes);
+   subtype SHA_3_Block is CryptAda.Pragmatics.Byte_Array(1 .. SHA_3_Max_Block_Bytes);
 
-   --[Snefru_State]----------------------------------------------------------------
+   --[SHA_3_State]--------------------------------------------------------------
    -- Type for state.
    -----------------------------------------------------------------------------
 
-   subtype Snefru_State is CryptAda.Pragmatics.Four_Bytes_Array(1 .. Snefru_State_Words);
+   subtype SHA_3_State is CryptAda.Pragmatics.Eight_Bytes_Array(1 .. SHA_3_State_Words);
 
-   --[Snefru_Digest]---------------------------------------------------------------
-   -- Full definition of the Snefru_Digest tagged type. The extension part
-   -- contains the following fields:
+   --[SHA_3_Digest]---------------------------------------------------------------
+   -- Full definition of the SHA_3_Digest tagged type. The extension part contains
+   -- the following fields:
    --
-   -- Security_Level       Security level (number of rounds).
-   -- Hash_Size_Id         Size of the hash.
-   -- State                State registers.
+   -- Hash_Size_Id         Identifier of the hash size.
+   -- State                State register.
    -- BIB                  Bytes in internal buffer.
    -- Buffer               Internal buffer.
    -----------------------------------------------------------------------------
 
-   type Snefru_Digest is new Message_Digest with
+   type SHA_3_Digest is new Message_Digest with
       record
-         Security_Level          : Snefru_Security_Level    := Snefru_Default_Security_Level;
-         Hash_Size_Id            : Snefru_Hash_Size         := Snefru_Default_Hash_Size;
-         State                   : Snefru_State             := (others => 16#00000000#);
-         BIB                     : Natural                  := 0;
-         Buffer                  : Snefru_Block             := (others => 16#00#);
+         Hash_Size_Id            : SHA_3_Hash_Size := SHA_3_Default_Hash_Size;
+         State                   : SHA_3_State     := (others => 0);
+         BIB                     : Natural         := 0;
+         Buffer                  : SHA_3_Block     := (others => 0);
       end record;
 
    -----------------------------------------------------------------------------
@@ -345,12 +287,12 @@ private
 
    overriding
    procedure   Initialize(
-                  The_Digest     : in out Snefru_Digest);
+                  The_Digest     : in out SHA_3_Digest);
 
    --[Finalize]-----------------------------------------------------------------
 
    overriding
    procedure   Finalize(
-                  The_Digest     : in out Snefru_Digest);
+                  The_Digest     : in out SHA_3_Digest);
 
-end CryptAda.Digests.Message_Digests.Snefru;
+end CryptAda.Digests.Message_Digests.SHA_3;

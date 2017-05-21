@@ -16,11 +16,11 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-digests-algorithms-haval.adb
+--    Filename          :  cryptada-digests-message_digests-haval.adb
 --    File kind         :  Ada package body
 --    Author            :  A. Duran
 --    Creation date     :  March 13th, 2017
---    Current version   :  1.0
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the HAVAL message digest algorithm.
@@ -29,46 +29,38 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170313 ADD   Initial implementation.
+--    2.0   20170521 ADD   Design changes to use access to objects.
 --------------------------------------------------------------------------------
 
-with CryptAda.Names;                   use CryptAda.Names;
-with CryptAda.Pragmatics;              use CryptAda.Pragmatics;
-with CryptAda.Digests.Counters;        use CryptAda.Digests.Counters;
-with CryptAda.Digests.Hashes;          use CryptAda.Digests.Hashes;
+with Ada.Exceptions;                            use Ada.Exceptions;
 
-package body CryptAda.Digests.Algorithms.HAVAL is
+with CryptAda.Names;                            use CryptAda.Names;
+with CryptAda.Exceptions;                       use CryptAda.Exceptions;
+with CryptAda.Pragmatics;                       use CryptAda.Pragmatics;
+with CryptAda.Lists;                            use CryptAda.Lists;
+with CryptAda.Lists.Integer_Item;
+with CryptAda.Digests.Counters;                 use CryptAda.Digests.Counters;
+with CryptAda.Digests.Hashes;                   use CryptAda.Digests.Hashes;
+
+package body CryptAda.Digests.Message_Digests.HAVAL is
+
+   -----------------------------------------------------------------------------
+   --[Generic Instantiations]---------------------------------------------------
+   -----------------------------------------------------------------------------
+
+   package PItem_Pkg is new CryptAda.Lists.Integer_Item(Positive);
+   use PItem_Pkg;
 
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[HAVAL_Algorithm_Id]-------------------------------------------------------
-   -- Maps parameters to algorithm identifiers.
+   --[Parameters list parameter names]------------------------------------------
+   -- Next constants identify the parameters names of parameters list.
    -----------------------------------------------------------------------------
 
-   HAVAL_Algorithm_Id      : constant array(HAVAL_Passes, HAVAL_Hash_Size) of Digest_Algorithm_Id := (
-         3 => (
-            HAVAL_128   => MD_HAVAL_128_3,
-            HAVAL_160   => MD_HAVAL_160_3,
-            HAVAL_192   => MD_HAVAL_192_3,
-            HAVAL_224   => MD_HAVAL_224_3,
-            HAVAL_256   => MD_HAVAL_256_3
-         ),
-         4 => (
-            HAVAL_128   => MD_HAVAL_128_4,
-            HAVAL_160   => MD_HAVAL_160_4,
-            HAVAL_192   => MD_HAVAL_192_4,
-            HAVAL_224   => MD_HAVAL_224_4,
-            HAVAL_256   => MD_HAVAL_256_4
-         ),
-         5 => (
-            HAVAL_128   => MD_HAVAL_128_5,
-            HAVAL_160   => MD_HAVAL_160_5,
-            HAVAL_192   => MD_HAVAL_192_5,
-            HAVAL_224   => MD_HAVAL_224_5,
-            HAVAL_256   => MD_HAVAL_256_5
-         )
-      );
+   Hash_Bytes_Name               : constant String := "Hash_Bytes";
+   Passes_Name                   : constant String := "Passes";
 
    --[Tail_Length]--------------------------------------------------------------
    -- Length of the tail appended to last block processed.
@@ -120,6 +112,35 @@ package body CryptAda.Digests.Algorithms.HAVAL is
    --[Body Declared Subprogram Specifications]----------------------------------
    -----------------------------------------------------------------------------
 
+   --[Getting Parameters]-------------------------------------------------------
+
+   --[Get_Passes]---------------------------------------------------------------
+
+   function    Get_Passes(
+                  From_List      : in     List)
+      return   HAVAL_Passes;
+
+   --[Get_Hash_Size_Id]---------------------------------------------------------
+
+   function    Get_Hash_Size_Id(
+                  From_List      : in     List)
+      return   HAVAL_Hash_Size;
+
+   --[Get_Parameters]-----------------------------------------------------------
+
+   procedure   Get_Parameters(
+                  From_List      : in     List;
+                  Hash_Size_Id   :    out HAVAL_Hash_Size;
+                  Passes         :    out HAVAL_Passes);
+
+   --[Object Initialization]----------------------------------------------------
+
+   --[Initialize_Object]--------------------------------------------------------
+
+   procedure   Initialize_Object(
+                  Object         : access HAVAL_Digest);
+   pragma Inline(Initialize_Object);
+                  
    --[Pack & Unpack]------------------------------------------------------------
 
    --[Pack_Block]---------------------------------------------------------------
@@ -578,6 +599,148 @@ package body CryptAda.Digests.Algorithms.HAVAL is
    --[Body Declared Subprogram Bodies]------------------------------------------
    -----------------------------------------------------------------------------
 
+   --[Getting Parameters]-------------------------------------------------------
+
+   --[Get_Passes]---------------------------------------------------------------
+
+   function    Get_Passes(
+                  From_List      : in     List)
+      return   HAVAL_Passes
+   is
+      Passes         : constant Integer := Get_Value(From_List, Passes_Name);
+   begin
+      if Passes in HAVAL_Passes'Range then
+         return Passes;
+      else
+         Raise_Exception(
+            CryptAda_Bad_Argument_Error'Identity,
+            "Invalid HAVAL 'Passes' parameter value: " & Integer'Image(Passes));
+      end if;
+   exception
+      when CryptAda_Bad_Argument_Error =>
+         raise;
+      when X: others =>
+         Raise_Exception(
+            CryptAda_Bad_Argument_Error'Identity,
+            "Caught exception: " &
+               Exception_Name(X) &
+               ", with message: """ &
+               Exception_Message(X) &
+               """. When obtaining HAVAL 'Passes' parameter");
+   end Get_Passes;
+
+   --[Get_Hash_Size_Id]---------------------------------------------------------
+
+   function    Get_Hash_Size_Id(
+                  From_List      : in     List)
+      return   HAVAL_Hash_Size
+   is
+      HB             : constant Integer := Get_Value(From_List, Hash_Bytes_Name);
+   begin
+      for I in HAVAL_Hash_Bytes'Range loop
+         if HB = HAVAL_Hash_Bytes(I) then
+            return I;
+         end if;
+      end loop;
+
+      Raise_Exception(
+         CryptAda_Bad_Argument_Error'Identity,
+         "Invalid HAVAL 'Hash_Bytes' parameter value: " & Positive'Image(HB));
+   exception
+      when CryptAda_Bad_Argument_Error =>
+         raise;
+      when X: others =>
+         Raise_Exception(
+            CryptAda_Bad_Argument_Error'Identity,
+            "Caught exception: " &
+               Exception_Name(X) &
+               ", with message: """ &
+               Exception_Message(X) &
+               """. When obtaining HAVAL 'Hash_Bytes' parameter");
+   end Get_Hash_Size_Id;
+
+   --[Get_Parameters]-----------------------------------------------------------
+
+   procedure   Get_Parameters(
+                  From_List      : in     List;
+                  Hash_Size_Id   :    out HAVAL_Hash_Size;
+                  Passes         :    out HAVAL_Passes)
+   is
+   begin
+      -- Check list kind.
+
+      if Get_List_Kind(From_List) = Empty then
+         -- Parameter list is empty: set defaults and return.
+
+         Hash_Size_Id      := HAVAL_Default_Hash_Size;
+         Passes            := HAVAL_Default_Passes;
+         return;
+      elsif Get_List_Kind(From_List) = Unnamed then
+         Raise_Exception(
+            CryptAda_Bad_Argument_Error'Identity,
+            "Parameter list is unnamed");
+      end if;
+
+      -- Get Passes.
+
+      if Contains_Item(From_List, Passes_Name) then
+         Passes := Get_Passes(From_List);
+      else
+         Raise_Exception(
+            CryptAda_Bad_Argument_Error'Identity,
+            "Parameter list does not contain mandatory 'Passes' item");
+      end if;
+
+      -- Get Hash_Size_Id
+
+      if Contains_Item(From_List, Hash_Bytes_Name) then
+         Hash_Size_Id := Get_Hash_Size_Id(From_List);
+      else
+         Raise_Exception(
+            CryptAda_Bad_Argument_Error'Identity,
+            "Parameter list does not contain mandatory 'Hash_Bytes' item");
+      end if;
+
+   exception
+      when CryptAda_Bad_Argument_Error =>
+         raise;
+
+      when X: others =>
+         Raise_Exception(
+            CryptAda_Bad_Argument_Error'Identity,
+            "Caught exception: " &
+               Exception_Name(X) &
+               ", with message: """ &
+               Exception_Message(X) &
+               """. When parsing HAVAL parameter list");
+   end Get_Parameters;
+
+   --[Object Initialization]----------------------------------------------------
+
+   --[Initialize_Object]--------------------------------------------------------
+
+   procedure   Initialize_Object(
+                  Object         : access HAVAL_Digest)
+   is
+   begin
+      -- Set to initial value any attribute which is modified in this package
+      -- except the bit counter.
+
+      -- Modified parent attributes.
+
+      Private_Set_Hash_Size(Object, HAVAL_Default_Hash_Bytes);
+
+      -- Extension attributes.
+
+      Object.all.Passes          := HAVAL_Default_Passes;
+      Object.all.Hash_Size_Id    := HAVAL_Default_Hash_Size;
+      Object.all.State           := HAVAL_Initial_State;
+      Object.all.BIB             := 0;
+      Object.all.Buffer          := (others => 16#00#);   
+   end Initialize_Object;
+   
+   --[Pack & Unpack]------------------------------------------------------------
+
    --[Pack_Block]---------------------------------------------------------------
 
    function    Pack_Block(
@@ -895,7 +1058,7 @@ package body CryptAda.Digests.Algorithms.HAVAL is
    begin
       pragma Warnings (Off, "actuals for this call may be in wrong order");
       return F_1(X3, X4, X1, X0, X5, X2, X6);
-      pragma Warnings (On, "actuals for this call may be in wrong order");
+      pragma Warnings (On, "actuals for this call may be in wrong order");      
    end Phi_5_1;
 
    --[Phi_5_2]------------------------------------------------------------------
@@ -1844,47 +2007,142 @@ package body CryptAda.Digests.Algorithms.HAVAL is
    end Tailor;
 
    -----------------------------------------------------------------------------
+   --[Getting a handle]---------------------------------------------------------
+   -----------------------------------------------------------------------------
+
+   --[Get_Message_Digest_Handle]------------------------------------------------
+
+   function    Get_Message_Digest_Handle
+      return   Message_Digest_Handle
+   is
+      P           : HAVAL_Digest_Ptr;
+   begin
+      P := new HAVAL_Digest'(Message_Digest with
+                                    Id             => MD_HAVAL,
+                                    Passes         => HAVAL_Default_Passes,
+                                    Hash_Size_Id   => HAVAL_Default_Hash_Size,
+                                    State          => HAVAL_Initial_State,
+                                    BIB            => 0,
+                                    Buffer         => (others => 16#00#));
+
+      Private_Initialize_Digest(
+         P.all,
+         HAVAL_State_Bytes,
+         HAVAL_Block_Bytes,
+         HAVAL_Default_Hash_Bytes);
+
+      return Ref(Message_Digest_Ptr(P));
+   exception
+      when others =>
+         Raise_Exception(
+            CryptAda_Storage_Error'Identity,
+            "Error when allocating HAVAL_Digest object");
+   end Get_Message_Digest_Handle;
+
+   -----------------------------------------------------------------------------
+   --[Ada.Finalizatrion Operations]---------------------------------------------
+   -----------------------------------------------------------------------------
+
+   --[Initialize]---------------------------------------------------------------
+
+   overriding
+   procedure   Initialize(
+                  The_Digest     : in out HAVAL_Digest)
+   is
+   begin
+      Private_Initialize_Digest(
+         The_Digest,
+         HAVAL_State_Bytes,
+         HAVAL_Block_Bytes,
+         HAVAL_Default_Hash_Bytes);
+
+      The_Digest.Passes          := HAVAL_Default_Passes;
+      The_Digest.Hash_Size_Id    := HAVAL_Default_Hash_Size;
+      The_Digest.State           := HAVAL_Initial_State;
+      The_Digest.BIB             := 0;
+      The_Digest.Buffer          := (others => 16#00#);
+   end Initialize;
+
+   --[Finalize]-----------------------------------------------------------------
+
+   overriding
+   procedure   Finalize(
+                  The_Digest     : in out HAVAL_Digest)
+   is
+   begin
+      Private_Initialize_Digest(
+         The_Digest,
+         HAVAL_State_Bytes,
+         HAVAL_Block_Bytes,
+         HAVAL_Default_Hash_Bytes);
+
+      The_Digest.Passes          := HAVAL_Default_Passes;
+      The_Digest.Hash_Size_Id    := HAVAL_Default_Hash_Size;
+      The_Digest.State           := HAVAL_Initial_State;
+      The_Digest.BIB             := 0;
+      The_Digest.Buffer          := (others => 16#00#);
+   end Finalize;
+
+   -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
 
    --[Digest_Start]-------------------------------------------------------------
 
+   overriding
    procedure   Digest_Start(
-                  The_Digest     : in out HAVAL_Digest)
+                  The_Digest     : access HAVAL_Digest)
    is
    begin
-      Digest_Start(The_Digest, HAVAL_Passes'Last, HAVAL_Hash_Size'Last);
+      Digest_Start(The_Digest, HAVAL_Default_Hash_Size, HAVAL_Default_Passes);
    end Digest_Start;
 
+   --[Digest_Start]-------------------------------------------------------------
+
+   overriding
+   procedure   Digest_Start(
+                  The_Digest     : access HAVAL_Digest;
+                  Parameters     : in     List)
+   is
+      HS             : HAVAL_Hash_Size;
+      P              : HAVAL_Passes;
+   begin
+      Get_Parameters(Parameters, HS, P);
+      Digest_Start(The_Digest, HS, P);
+   end Digest_Start;
+   
    --[Digest_Update]------------------------------------------------------------
 
+   overriding
    procedure   Digest_Update(
-                  The_Digest     : in out HAVAL_Digest;
+                  The_Digest     : access HAVAL_Digest;
                   The_Bytes      : in     Byte_Array)
    is
-      Tot_Bytes      : constant Natural := The_Digest.BIB + The_Bytes'Length;
-      Chunks         : Natural := Tot_Bytes / HAVAL_Block_Bytes;
-      New_BIB        : constant Natural := Tot_Bytes mod HAVAL_Block_Bytes;
-      I              : Natural := The_Bytes'First;
-      To_Copy        : Natural := 0;
+      TB             : constant Natural   := The_Digest.all.BIB + The_Bytes'Length;
+      Chunks         : Natural            := TB / HAVAL_Block_Bytes;
+      New_BIB        : constant Natural   := TB mod HAVAL_Block_Bytes;
+      I              : Natural            := The_Bytes'First;
+      To_Copy        : Natural            := 0;
    begin
-
       -- Data is processed in chunks of HAVAL_Block_Bytes bytes.
 
       if Chunks > 0 then
-
          -- If the object already has buffered data, fill the internal buffer
          -- with bytes from input and transform from internal buffer.
 
-         if The_Digest.BIB > 0 then
-            To_Copy := HAVAL_Block_Bytes - The_Digest.BIB;
-            The_Digest.Buffer(The_Digest.BIB + 1 .. HAVAL_Block_Bytes) := The_Bytes(I .. I + To_Copy - 1);
-            Transform(The_Digest.State, The_Digest.Passes, The_Digest.Buffer);
+         if The_Digest.all.BIB > 0 then
+            To_Copy := HAVAL_Block_Bytes - The_Digest.all.BIB;
+            The_Digest.all.Buffer(The_Digest.all.BIB + 1 .. HAVAL_Block_Bytes) := 
+               The_Bytes(I .. I + To_Copy - 1);
+            Transform(
+               The_Digest.all.State, 
+               The_Digest.all.Passes, 
+               The_Digest.all.Buffer);
 
             -- Now there are not any bytes in internal buffer.
 
-            The_Digest.BIB    := 0;
-            The_Digest.Buffer := (others => 16#00#);
+            The_Digest.all.BIB      := 0;
+            The_Digest.all.Buffer   := (others => 16#00#);
 
             -- Update index over The_Bytes, decrease number of chunks.
 
@@ -1895,7 +2153,10 @@ package body CryptAda.Digests.Algorithms.HAVAL is
          -- Remaining chunks are processed from The_Bytes.
 
          while Chunks > 0 loop
-            Transform(The_Digest.State, The_Digest.Passes, The_Bytes(I .. I + HAVAL_Block_Bytes - 1));
+            Transform(
+               The_Digest.all.State, 
+               The_Digest.all.Passes, 
+               The_Bytes(I .. I + HAVAL_Block_Bytes - 1));
 
             -- Update index over The_Bytes, decrease number of chunks.
 
@@ -1906,30 +2167,31 @@ package body CryptAda.Digests.Algorithms.HAVAL is
 
       -- Copy remaining bytes (if any, to internal buffer).
 
-      if New_BIB > The_Digest.BIB then
-         The_Digest.Buffer(The_Digest.BIB + 1 .. New_BIB) := The_Bytes(I .. The_Bytes'Last);
+      if New_BIB > The_Digest.all.BIB then
+         The_Digest.all.Buffer(The_Digest.all.BIB + 1 .. New_BIB) := 
+            The_Bytes(I .. The_Bytes'Last);
       end if;
 
-      The_Digest.BIB := New_BIB;
+      The_Digest.all.BIB := New_BIB;
 
       -- Increase processed bit counter.
 
-      Increment(The_Digest.Bit_Count, 8 * The_Bytes'Length);
+      Increment(The_Digest.all.Bit_Count, 8 * The_Bytes'Length);
    end Digest_Update;
 
    --[Digest_End]---------------------------------------------------------------
 
+   overriding
    procedure   Digest_End(
-                  The_Digest     : in out HAVAL_Digest;
+                  The_Digest     : access HAVAL_Digest;
                   The_Hash       :    out Hash)
    is
-      Digest_Bits    : constant Two_Bytes := Shift_Left(Two_Bytes(HAVAL_Hash_Bytes(The_Digest.Hash_Size_Id)), 3);
-      UC             : constant Unpacked_Counter := Unpack(The_Digest.Bit_Count, Little_Endian);
-      To_Pad         : constant Natural := HAVAL_Block_Bytes - The_Digest.BIB;
-      Tail           : Byte_Array(1 .. Tail_Length) := (others => 16#00#);
-      Hash_Bytes     : Byte_Array(1 .. HAVAL_State_Bytes) := (others => 16#00#);
+      Digest_Bits    : constant Two_Bytes                   := Shift_Left(Two_Bytes(HAVAL_Hash_Bytes(The_Digest.all.Hash_Size_Id)), 3);
+      UC             : constant Unpacked_Counter            := Unpack(The_Digest.all.Bit_Count, Little_Endian);
+      To_Pad         : constant Natural                     := HAVAL_Block_Bytes - The_Digest.all.BIB;
+      Tail           : Byte_Array(1 .. Tail_Length)         := (others => 16#00#);
+      Hash_Bytes     : Byte_Array(1 .. HAVAL_State_Bytes)   := (others => 16#00#);
    begin
-
       -- Save in tail, the haval version number, the number of passes,
       -- message digest length in bits and the bit counter (low order 8 bytes).
       -- The first 2 bytes in tail contain the digest bits, the passes and the
@@ -1951,7 +2213,7 @@ package body CryptAda.Digests.Algorithms.HAVAL is
       --      +---------------------------------> Size of hash in bits, 2 least significant bits
 
       Tail(1)        := Shift_Left(Lo_Byte(Digest_Bits and 16#0003#), 6) or
-                        Shift_Left((Byte(The_Digest.Passes) and 16#07#), 3)  or
+                        Shift_Left((Byte(The_Digest.all.Passes) and 16#07#), 3)  or
                         (HAVAL_Version and 16#07#);
       Tail(2)        := Lo_Byte(Shift_Right(Digest_Bits, 2));
       Tail(3 .. 10)  := UC(1 .. 8);
@@ -1959,33 +2221,39 @@ package body CryptAda.Digests.Algorithms.HAVAL is
       -- Pad buffer
 
       if To_Pad > 0 then
-         The_Digest.Buffer(The_Digest.BIB + 1 .. HAVAL_Block_Bytes) := HAVAL_Pad(1 .. To_Pad);
+         The_Digest.all.Buffer(The_Digest.all.BIB + 1 .. HAVAL_Block_Bytes) := 
+            HAVAL_Pad(1 .. To_Pad);
       end if;
 
       -- Check if there are room in Buffer for the tail
 
-      if (The_Digest.BIB + 1) >= Tail_Offset then
-
+      if (The_Digest.all.BIB + 1) >= Tail_Offset then
          -- No room for tail, transform and zeroize block.
 
-         Transform(The_Digest.State, The_Digest.Passes, The_Digest.Buffer);
+         Transform(
+            The_Digest.all.State, 
+            The_Digest.all.Passes, 
+            The_Digest.all.Buffer);
          The_Digest.Buffer := (others => 0);
       end if;
 
       -- Copy tail to Buffer and transform.
 
-      The_Digest.Buffer(Tail_Offset .. HAVAL_Block_Bytes) := Tail;
-      Transform(The_Digest.State, The_Digest.Passes, The_Digest.Buffer);
+      The_Digest.all.Buffer(Tail_Offset .. HAVAL_Block_Bytes) := Tail;
+      Transform(
+         The_Digest.all.State, 
+         The_Digest.all.Passes, 
+         The_Digest.all.Buffer);
 
       -- Tailor state and get the computed hash.
 
-      Tailor(The_Digest.State, The_Digest.Hash_Size_Id);
-      Hash_Bytes := Unpack_State(The_Digest.State);
-      Set_Hash(Hash_Bytes(1 .. HAVAL_Hash_Bytes(The_Digest.Hash_Size_Id)), The_Hash);
+      Tailor(The_Digest.all.State, The_Digest.all.Hash_Size_Id);
+      Hash_Bytes := Unpack_State(The_Digest.all.State);
+      Set_Hash(Hash_Bytes(1 .. HAVAL_Hash_Bytes(The_Digest.all.Hash_Size_Id)), The_Hash);
 
       -- Zeroize state.
 
-      Initialize(The_Digest);
+      Initialize_Object(The_Digest);
    end Digest_End;
 
    -----------------------------------------------------------------------------
@@ -1995,77 +2263,37 @@ package body CryptAda.Digests.Algorithms.HAVAL is
    --[Digest_Start]-------------------------------------------------------------
 
    procedure   Digest_Start(
-                  The_Digest     : in out HAVAL_Digest'Class;
-                  Passes         : in     HAVAL_Passes;
-                  Hash_Size_Id   : in     HAVAL_Hash_Size)
+                  The_Digest     : access HAVAL_Digest'Class;
+                  Hash_Size_Id   : in     HAVAL_Hash_Size;
+                  Passes         : in     HAVAL_Passes)
    is
    begin
-      The_Digest.Algorithm_Id := HAVAL_Algorithm_Id(Passes, Hash_Size_Id);
-      The_Digest.State_Size   := HAVAL_State_Bytes;
-      The_Digest.Block_Size   := HAVAL_Block_Bytes;
-      The_Digest.Hash_Size    := HAVAL_Hash_Bytes(Hash_Size_Id);
-      The_Digest.Passes       := Passes;
-      The_Digest.Hash_Size_Id := Hash_Size_Id;
-      The_Digest.Bit_Count    := Zero;
-      The_Digest.State        := HAVAL_Initial_State;
-      The_Digest.BIB          := 0;
-      The_Digest.Buffer       := (others => 0);
+      Initialize(The_Digest.all);
+      Private_Reset_Bit_Counter(The_Digest);
+      Private_Set_Hash_Size(The_Digest, HAVAL_Hash_Bytes(Hash_Size_Id));
+
+      The_Digest.all.Hash_Size_Id   := Hash_Size_Id;
+      The_Digest.all.Passes         := Passes;
    end Digest_Start;
 
    --[Get_Passes]---------------------------------------------------------------
 
    function    Get_Passes(
-                  From_Digest    : in     HAVAL_Digest'Class)
+                  From_Digest    : access HAVAL_Digest'Class)
       return   HAVAL_Passes
    is
    begin
-      return From_Digest.Passes;
+      return From_Digest.all.Passes;
    end Get_Passes;
 
    --[Get_Hash_Size_Id]---------------------------------------------------------
 
    function    Get_Hash_Size_Id(
-                  From_Digest    : in     HAVAL_Digest'Class)
+                  From_Digest    : access HAVAL_Digest'Class)
       return   HAVAL_Hash_Size
    is
    begin
-      return From_Digest.Hash_Size_Id;
+      return From_Digest.all.Hash_Size_Id;
    end Get_Hash_Size_Id;
 
-   --[Initialize]---------------------------------------------------------------
-
-   procedure   Initialize(
-                  The_Digest     : in out HAVAL_Digest)
-   is
-   begin
-      The_Digest.Algorithm_Id := MD_HAVAL_256_5;
-      The_Digest.State_Size   := HAVAL_State_Bytes;
-      The_Digest.Block_Size   := HAVAL_Block_Bytes;
-      The_Digest.Hash_Size    := HAVAL_Hash_Bytes(HAVAL_Hash_Size'Last);
-      The_Digest.Passes       := HAVAL_Passes'Last;
-      The_Digest.Hash_Size_Id := HAVAL_Hash_Size'Last;
-      The_Digest.Bit_Count    := Zero;
-      The_Digest.State        := HAVAL_Initial_State;
-      The_Digest.BIB          := 0;
-      The_Digest.Buffer       := (others => 0);
-   end Initialize;
-
-   --[Finalize]-----------------------------------------------------------------
-
-   procedure   Finalize(
-                  The_Digest     : in out HAVAL_Digest)
-   is
-   begin
-      The_Digest.Algorithm_Id := MD_HAVAL_256_5;
-      The_Digest.State_Size   := HAVAL_State_Bytes;
-      The_Digest.Block_Size   := HAVAL_Block_Bytes;
-      The_Digest.Hash_Size    := HAVAL_Hash_Bytes(HAVAL_Hash_Size'Last);
-      The_Digest.Passes       := HAVAL_Passes'Last;
-      The_Digest.Hash_Size_Id := HAVAL_Hash_Size'Last;
-      The_Digest.Bit_Count    := Zero;
-      The_Digest.State        := HAVAL_Initial_State;
-      The_Digest.BIB          := 0;
-      The_Digest.Buffer       := (others => 0);
-   end Finalize;
-
-end CryptAda.Digests.Algorithms.HAVAL;
+end CryptAda.Digests.Message_Digests.HAVAL;

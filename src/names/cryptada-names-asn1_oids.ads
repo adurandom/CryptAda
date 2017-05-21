@@ -54,6 +54,11 @@ package CryptAda.Names.ASN1_OIDs is
 
    ASN1_OID_SHA_1             : aliased constant String := "1.3.14.3.2.26";
 
+   ASN1_BLAKE2s_128           : aliased constant String := "1.3.6.1.4.1.1722.12.2.2.4";
+   ASN1_BLAKE2s_160           : aliased constant String := "1.3.6.1.4.1.1722.12.2.2.5";
+   ASN1_BLAKE2s_224           : aliased constant String := "1.3.6.1.4.1.1722.12.2.2.7";
+   ASN1_BLAKE2s_256           : aliased constant String := "1.3.6.1.4.1.1722.12.2.2.8";
+
    ASN1_OID_TIGER_192         : aliased constant String := "1.3.6.1.4.1.11591.12.2";
 
    ASN1_OID_HAVAL_128_3       : aliased constant String := "1.3.6.1.4.1.18105.2.1.1.1";

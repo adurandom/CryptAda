@@ -589,11 +589,13 @@ package body CryptAda.Text_Encoders.MIME is
 
    --[Start_Decoding]-----------------------------------------------------------
 
+   pragma Warnings (Off, "formal parameter ""Parameters"" is not referenced");
    overriding
    procedure   Start_Decoding(
                   The_Encoder    : access MIME_Encoder;
                   Parameters     : in     List)
    is
+   pragma Warnings (On, "formal parameter ""Parameters"" is not referenced");
    begin
       -- Parameter list is ignored in MIME decoding.
       

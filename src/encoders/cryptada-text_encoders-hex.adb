@@ -248,11 +248,14 @@ package body CryptAda.Text_Encoders.Hex is
 
    --[Start_Encoding]-----------------------------------------------------------
 
+   pragma Warnings (Off, "formal parameter ""Parameters"" is not referenced");
    overriding
    procedure   Start_Encoding(
                   The_Encoder    : access Hex_Encoder;
                   Parameters     : in     List)
    is
+   pragma Warnings (On, "formal parameter ""Parameters"" is not referenced");
+      -- Parameters is ignored because Start_Encoding does not expect any parameter.
    begin
       -- This encoder does not expect any parameter so revert to default
       -- Start_Encoding. This will raise a warning when compiling the package.
@@ -314,12 +317,15 @@ package body CryptAda.Text_Encoders.Hex is
 
    --[End_Encoding]-------------------------------------------------------------
 
+   pragma Warnings (Off, "formal parameter ""Output"" is not referenced");
    overriding
    procedure   End_Encoding(
                   With_Encoder   : access Hex_Encoder;
                   Output         :    out String;
                   Codes          :    out Natural)
    is
+   pragma Warnings (On, "formal parameter ""Output"" is not referenced");
+      -- No buffered codes means no Output.
    begin
       if With_Encoder.all.State /= State_Encoding then
          Raise_Exception(
@@ -364,11 +370,13 @@ package body CryptAda.Text_Encoders.Hex is
 
    --[Start_Decoding]-----------------------------------------------------------
 
+   pragma Warnings (Off, "formal parameter ""Parameters"" is not referenced");
    overriding
    procedure   Start_Decoding(
                   The_Encoder    : access Hex_Encoder;
                   Parameters     : in     List)
    is
+   pragma Warnings (On, "formal parameter ""Parameters"" is not referenced");
    begin
       -- This encoder does not expect any parameter so revert to default
       -- Start_Encoding. This will raise a warning when compiling.
@@ -475,12 +483,14 @@ package body CryptAda.Text_Encoders.Hex is
 
    --[End_Decoding]-------------------------------------------------------------
 
+   pragma Warnings (Off, "formal parameter ""Output"" is not referenced");
    overriding
    procedure   End_Decoding(
                   With_Encoder   : access Hex_Encoder;
                   Output         :    out Byte_Array;
                   Bytes          :    out Natural)
    is
+   pragma Warnings (On, "formal parameter ""Output"" is not referenced");
    begin
       if With_Encoder.all.State /= State_Decoding then
          Raise_Exception(

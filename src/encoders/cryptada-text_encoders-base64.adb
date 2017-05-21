@@ -852,12 +852,14 @@ package body CryptAda.Text_Encoders.Base64 is
 
    --[End_Decoding]-------------------------------------------------------------
 
+   pragma Warnings (Off, "formal parameter ""Output"" is not referenced");
    overriding
    procedure   End_Decoding(
                   With_Encoder   : access Base64_Encoder;
                   Output         :    out Byte_Array;
                   Bytes          :    out Natural)
    is
+   pragma Warnings (On, "formal parameter ""Output"" is not referenced");
    begin
       -- Check arguments.
 
