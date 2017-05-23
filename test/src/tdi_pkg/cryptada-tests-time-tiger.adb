@@ -23,7 +23,7 @@
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Time trial for CryptAda.Digests.Algorithms.Tiger.
+--    Time trial for CryptAda.Digests.Message_Digests.Tiger.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
@@ -36,8 +36,8 @@ with Ada.Exceptions;                         use Ada.Exceptions;
 with CryptAda.Tests.Utils;                   use CryptAda.Tests.Utils;
 with CryptAda.Tests.Time.Digests;            use CryptAda.Tests.Time.Digests;
 
-
-with CryptAda.Digests.Algorithms.Tiger;      use CryptAda.Digests.Algorithms.Tiger;
+with CryptAda.Digests.Message_Digests;       use CryptAda.Digests.Message_Digests;
+with CryptAda.Digests.Message_Digests.Tiger; use CryptAda.Digests.Message_Digests.Tiger;
 
 package body CryptAda.Tests.Time.Tiger is
 
@@ -47,7 +47,7 @@ package body CryptAda.Tests.Time.Tiger is
 
    Driver_Name                   : constant String := "CryptAda.Tests.Time.Tiger";
 
-   Driver_Description            : constant String := "Time trial for CryptAda.Digests.Algorithms.Tiger functionality.";
+   Driver_Description            : constant String := "Time trial for CryptAda.Digests.Message_Digests.Tiger functionality.";
 
    -----------------------------------------------------------------------------
    --[Test Cases Specs]---------------------------------------------------------
@@ -68,7 +68,8 @@ package body CryptAda.Tests.Time.Tiger is
 
    procedure Case_1
    is
-      D           : Tiger_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant Tiger_Digest_Ptr := Tiger_Digest_Ptr(Get_Message_Digest_Ptr(MDH));
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(1, "Tiger 128-bit hashing");
@@ -77,10 +78,11 @@ package body CryptAda.Tests.Time.Tiger is
          Print_Information_Message("Hash size : " & Tiger_Hash_Size'Image(Tiger_128));
          Print_Message("Passes    : " & Tiger_Passes'Image(I), "    ");
          Print_Message("Hashing 1MB", "    ");
-         Digest_Start(D, I, Tiger_128);
-         Digest_Time_Trial(D, 1, 1, Elapsed);
+         Digest_Start(MDP, Tiger_128, I);
+         Digest_Time_Trial(MDH, 1, 1, Elapsed);
       end loop;
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(1);
    exception
       when X: others =>
@@ -96,7 +98,8 @@ package body CryptAda.Tests.Time.Tiger is
 
    procedure Case_2
    is
-      D           : Tiger_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant Tiger_Digest_Ptr := Tiger_Digest_Ptr(Get_Message_Digest_Ptr(MDH));
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(2, "Tiger 128-bit hashing");
@@ -105,10 +108,11 @@ package body CryptAda.Tests.Time.Tiger is
          Print_Information_Message("Hash size : " & Tiger_Hash_Size'Image(Tiger_128));
          Print_Message("Passes    : " & Tiger_Passes'Image(I), "    ");
          Print_Message("Hashing 10MB", "    ");
-         Digest_Start(D, I, Tiger_128);
-         Digest_Time_Trial(D, 10, 4, Elapsed);
+         Digest_Start(MDP, Tiger_128, I);
+         Digest_Time_Trial(MDH, 10, 4, Elapsed);
       end loop;
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(2);
    exception
       when X: others =>
@@ -124,7 +128,8 @@ package body CryptAda.Tests.Time.Tiger is
 
    procedure Case_3
    is
-      D           : Tiger_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant Tiger_Digest_Ptr := Tiger_Digest_Ptr(Get_Message_Digest_Ptr(MDH));
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(3, "Tiger 160-bit hashing");
@@ -133,10 +138,11 @@ package body CryptAda.Tests.Time.Tiger is
          Print_Information_Message("Hash size : " & Tiger_Hash_Size'Image(Tiger_160));
          Print_Message("Passes    : " & Tiger_Passes'Image(I), "    ");
          Print_Message("Hashing 1MB", "    ");
-         Digest_Start(D, I, Tiger_160);
-         Digest_Time_Trial(D, 1, 1, Elapsed);
+         Digest_Start(MDP, Tiger_160, I);
+         Digest_Time_Trial(MDH, 1, 1, Elapsed);
       end loop;
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(3);
    exception
       when X: others =>
@@ -152,7 +158,8 @@ package body CryptAda.Tests.Time.Tiger is
 
    procedure Case_4
    is
-      D           : Tiger_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant Tiger_Digest_Ptr := Tiger_Digest_Ptr(Get_Message_Digest_Ptr(MDH));
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(4, "Tiger 160-bit hashing");
@@ -161,10 +168,11 @@ package body CryptAda.Tests.Time.Tiger is
          Print_Information_Message("Hash size : " & Tiger_Hash_Size'Image(Tiger_160));
          Print_Message("Passes    : " & Tiger_Passes'Image(I), "    ");
          Print_Message("Hashing 10MB", "    ");
-         Digest_Start(D, I, Tiger_160);
-         Digest_Time_Trial(D, 10, 4, Elapsed);
+         Digest_Start(MDP, Tiger_160, I);
+         Digest_Time_Trial(MDH, 10, 4, Elapsed);
       end loop;
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(4);
    exception
       when X: others =>
@@ -180,7 +188,8 @@ package body CryptAda.Tests.Time.Tiger is
 
    procedure Case_5
    is
-      D           : Tiger_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant Tiger_Digest_Ptr := Tiger_Digest_Ptr(Get_Message_Digest_Ptr(MDH));
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(5, "Tiger 192-bit hashing");
@@ -189,10 +198,11 @@ package body CryptAda.Tests.Time.Tiger is
          Print_Information_Message("Hash size : " & Tiger_Hash_Size'Image(Tiger_192));
          Print_Message("Passes    : " & Tiger_Passes'Image(I), "    ");
          Print_Message("Hashing 1MB", "    ");
-         Digest_Start(D, I, Tiger_192);
-         Digest_Time_Trial(D, 1, 1, Elapsed);
+         Digest_Start(MDP, Tiger_192, I);
+         Digest_Time_Trial(MDH, 1, 1, Elapsed);
       end loop;
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(5);
    exception
       when X: others =>
@@ -208,7 +218,8 @@ package body CryptAda.Tests.Time.Tiger is
 
    procedure Case_6
    is
-      D           : Tiger_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant Tiger_Digest_Ptr := Tiger_Digest_Ptr(Get_Message_Digest_Ptr(MDH));
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(6, "Tiger 192-bit hashing");
@@ -217,10 +228,11 @@ package body CryptAda.Tests.Time.Tiger is
          Print_Information_Message("Hash size : " & Tiger_Hash_Size'Image(Tiger_192));
          Print_Message("Passes    : " & Tiger_Passes'Image(I), "    ");
          Print_Message("Hashing 10MB", "    ");
-         Digest_Start(D, I, Tiger_192);
-         Digest_Time_Trial(D, 10, 4, Elapsed);
+         Digest_Start(MDP, Tiger_192, I);
+         Digest_Time_Trial(MDH, 10, 4, Elapsed);
       end loop;
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(6);
    exception
       when X: others =>

@@ -1,0 +1,74 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.1.d (2017/04/30)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Time.SHA_384
+Description              : Time trial for CryptAda.Digests.Message_Digests.SHA_384 functionality.
+Started                  : 2017/05/23 - 19:23:12
+================================================================================
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 1
+Description      : SHA_384 hashing
+Started          : 2017/05/23 - 19:23:12
+--------------------------------------------------------------------------------
+[I] Hashing 1MB
+[I] Starting time trial for digest algorithm.
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SHA_384.SHA_384_DIGEST"
+    CryptAda digest algorithm id  : "MD_SHA_384"
+    Digest algorithm SCAN name    : ""
+    Digest algorithm ASN1 OID     : "2.16.840.1.101.3.4.2.2"
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  64
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  48
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Bytes to digest    :  1 MB
+    Buffer size        :  1 KB
+    Iterations         :  1024
+[I] Time trial completed
+    Elapsed time       :           0.032538261 secs.
+    Counter (Low, High): ( 8388608,  0)
+    Obtained hash      : "A9FCC7BDEE17AEA52F0AB1878963575D6C00AB51BF3BA433CEFB43D36C125AC20DF43D587CE6D00F173F9F4672F30F98"
+--------------------------------------------------------------------------------
+Time Trial Number: 1
+Finished         : 2017/05/23 - 19:23:12
+--[End Time Trial]--------------------------------------------------------------
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 2
+Description      : SHA_384 hashing
+Started          : 2017/05/23 - 19:23:12
+--------------------------------------------------------------------------------
+[I] Hashing 10MB
+[I] Starting time trial for digest algorithm.
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SHA_384.SHA_384_DIGEST"
+    CryptAda digest algorithm id  : "MD_SHA_384"
+    Digest algorithm SCAN name    : ""
+    Digest algorithm ASN1 OID     : "2.16.840.1.101.3.4.2.2"
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  64
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  48
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Bytes to digest    :  10 MB
+    Buffer size        :  4 KB
+    Iterations         :  2560
+[I] Time trial completed
+    Elapsed time       :           0.328066759 secs.
+    Counter (Low, High): ( 83886080,  0)
+    Obtained hash      : "4A91621BC94FA05B2E7F0585179BE92FD11ED725EF53AA45657DCBBEC990EDF3A8103A56709D5CE46ED80C1B73C7F452"
+--------------------------------------------------------------------------------
+Time Trial Number: 2
+Finished         : 2017/05/23 - 19:23:12
+--[End Time Trial]--------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Time.SHA_384
+Finished                 : 2017/05/23 - 19:23:12
+================================================================================

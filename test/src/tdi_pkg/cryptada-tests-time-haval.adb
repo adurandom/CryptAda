@@ -23,7 +23,7 @@
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Time trial for CryptAda.Digests.Algorithms.HAVAL.
+--    Time trial for CryptAda.Digests.Message_Digests.HAVAL.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
@@ -37,7 +37,8 @@ with CryptAda.Tests.Utils;                   use CryptAda.Tests.Utils;
 with CryptAda.Tests.Time.Digests;            use CryptAda.Tests.Time.Digests;
 
 
-with CryptAda.Digests.Algorithms.HAVAL;      use CryptAda.Digests.Algorithms.HAVAL;
+with CryptAda.Digests.Message_Digests;    use CryptAda.Digests.Message_Digests;
+with CryptAda.Digests.Message_Digests.HAVAL; use CryptAda.Digests.Message_Digests.HAVAL;
 
 package body CryptAda.Tests.Time.HAVAL is
 
@@ -47,7 +48,7 @@ package body CryptAda.Tests.Time.HAVAL is
 
    Driver_Name                   : constant String := "CryptAda.Tests.Time.HAVAL";
 
-   Driver_Description            : constant String := "Time trial for CryptAda.Digests.Algorithms.HAVAL functionality.";
+   Driver_Description            : constant String := "Time trial for CryptAda.Digests.Message_Digests.HAVAL functionality.";
 
    -----------------------------------------------------------------------------
    --[Test Cases Specs]---------------------------------------------------------
@@ -72,7 +73,8 @@ package body CryptAda.Tests.Time.HAVAL is
 
    procedure Case_1
    is
-      D           : HAVAL_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant HAVAL_Digest_Ptr := HAVAL_Digest_Ptr(Get_Message_Digest_Ptr(MDH));
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(1, "HAVAL 128-bit hashing");
@@ -81,10 +83,11 @@ package body CryptAda.Tests.Time.HAVAL is
          Print_Information_Message("Hash size : " & HAVAL_Hash_Size'Image(HAVAL_128));
          Print_Message("Passes    : " & HAVAL_Passes'Image(I), "    ");
          Print_Message("Hashing 1MB", "    ");
-         Digest_Start(D, I, HAVAL_128);
-         Digest_Time_Trial(D, 1, 1, Elapsed);
+         Digest_Start(MDP, HAVAL_128, I);
+         Digest_Time_Trial(MDH, 1, 1, Elapsed);
       end loop;
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(1);
    exception
       when X: others =>
@@ -100,7 +103,8 @@ package body CryptAda.Tests.Time.HAVAL is
 
    procedure Case_2
    is
-      D           : HAVAL_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant HAVAL_Digest_Ptr := HAVAL_Digest_Ptr(Get_Message_Digest_Ptr(MDH));
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(2, "HAVAL 128-bit hashing");
@@ -109,10 +113,11 @@ package body CryptAda.Tests.Time.HAVAL is
          Print_Information_Message("Hash size : " & HAVAL_Hash_Size'Image(HAVAL_128));
          Print_Message("Passes    : " & HAVAL_Passes'Image(I), "    ");
          Print_Message("Hashing 10MB", "    ");
-         Digest_Start(D, I, HAVAL_128);
-         Digest_Time_Trial(D, 10, 4, Elapsed);
+         Digest_Start(MDP, HAVAL_128, I);
+         Digest_Time_Trial(MDH, 10, 4, Elapsed);
       end loop;
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(2);
    exception
       when X: others =>
@@ -128,7 +133,8 @@ package body CryptAda.Tests.Time.HAVAL is
 
    procedure Case_3
    is
-      D           : HAVAL_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant HAVAL_Digest_Ptr := HAVAL_Digest_Ptr(Get_Message_Digest_Ptr(MDH));
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(3, "HAVAL 160-bit hashing");
@@ -137,10 +143,11 @@ package body CryptAda.Tests.Time.HAVAL is
          Print_Information_Message("Hash size : " & HAVAL_Hash_Size'Image(HAVAL_160));
          Print_Message("Passes    : " & HAVAL_Passes'Image(I), "    ");
          Print_Message("Hashing 1MB", "    ");
-         Digest_Start(D, I, HAVAL_160);
-         Digest_Time_Trial(D, 1, 1, Elapsed);
+         Digest_Start(MDP, HAVAL_160, I);
+         Digest_Time_Trial(MDH, 1, 1, Elapsed);
       end loop;
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(3);
    exception
       when X: others =>
@@ -156,7 +163,8 @@ package body CryptAda.Tests.Time.HAVAL is
 
    procedure Case_4
    is
-      D           : HAVAL_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant HAVAL_Digest_Ptr := HAVAL_Digest_Ptr(Get_Message_Digest_Ptr(MDH));
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(4, "HAVAL 160-bit hashing");
@@ -165,10 +173,11 @@ package body CryptAda.Tests.Time.HAVAL is
          Print_Information_Message("Hash size : " & HAVAL_Hash_Size'Image(HAVAL_160));
          Print_Message("Passes    : " & HAVAL_Passes'Image(I), "    ");
          Print_Message("Hashing 10MB", "    ");
-         Digest_Start(D, I, HAVAL_160);
-         Digest_Time_Trial(D, 10, 4, Elapsed);
+         Digest_Start(MDP, HAVAL_160, I);
+         Digest_Time_Trial(MDH, 10, 4, Elapsed);
       end loop;
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(4);
    exception
       when X: others =>
@@ -184,7 +193,8 @@ package body CryptAda.Tests.Time.HAVAL is
 
    procedure Case_5
    is
-      D           : HAVAL_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant HAVAL_Digest_Ptr := HAVAL_Digest_Ptr(Get_Message_Digest_Ptr(MDH));
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(5, "HAVAL 192-bit hashing");
@@ -193,10 +203,11 @@ package body CryptAda.Tests.Time.HAVAL is
          Print_Information_Message("Hash size : " & HAVAL_Hash_Size'Image(HAVAL_192));
          Print_Message("Passes    : " & HAVAL_Passes'Image(I), "    ");
          Print_Message("Hashing 1MB", "    ");
-         Digest_Start(D, I, HAVAL_192);
-         Digest_Time_Trial(D, 1, 1, Elapsed);
+         Digest_Start(MDP, HAVAL_192, I);
+         Digest_Time_Trial(MDH, 1, 1, Elapsed);
       end loop;
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(5);
    exception
       when X: others =>
@@ -212,7 +223,8 @@ package body CryptAda.Tests.Time.HAVAL is
 
    procedure Case_6
    is
-      D           : HAVAL_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant HAVAL_Digest_Ptr := HAVAL_Digest_Ptr(Get_Message_Digest_Ptr(MDH));
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(6, "HAVAL 192-bit hashing");
@@ -221,10 +233,11 @@ package body CryptAda.Tests.Time.HAVAL is
          Print_Information_Message("Hash size : " & HAVAL_Hash_Size'Image(HAVAL_192));
          Print_Message("Passes    : " & HAVAL_Passes'Image(I), "    ");
          Print_Message("Hashing 10MB", "    ");
-         Digest_Start(D, I, HAVAL_192);
-         Digest_Time_Trial(D, 10, 4, Elapsed);
+         Digest_Start(MDP, HAVAL_192, I);
+         Digest_Time_Trial(MDH, 10, 4, Elapsed);
       end loop;
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(6);
    exception
       when X: others =>
@@ -240,7 +253,8 @@ package body CryptAda.Tests.Time.HAVAL is
 
    procedure Case_7
    is
-      D           : HAVAL_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant HAVAL_Digest_Ptr := HAVAL_Digest_Ptr(Get_Message_Digest_Ptr(MDH));
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(7, "HAVAL 224-bit hashing");
@@ -249,10 +263,11 @@ package body CryptAda.Tests.Time.HAVAL is
          Print_Information_Message("Hash size : " & HAVAL_Hash_Size'Image(HAVAL_224));
          Print_Message("Passes    : " & HAVAL_Passes'Image(I), "    ");
          Print_Message("Hashing 1MB", "    ");
-         Digest_Start(D, I, HAVAL_224);
-         Digest_Time_Trial(D, 1, 1, Elapsed);
+         Digest_Start(MDP, HAVAL_224, I);
+         Digest_Time_Trial(MDH, 1, 1, Elapsed);
       end loop;
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(7);
    exception
       when X: others =>
@@ -268,7 +283,8 @@ package body CryptAda.Tests.Time.HAVAL is
 
    procedure Case_8
    is
-      D           : HAVAL_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant HAVAL_Digest_Ptr := HAVAL_Digest_Ptr(Get_Message_Digest_Ptr(MDH));
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(8, "HAVAL 224-bit hashing");
@@ -277,10 +293,11 @@ package body CryptAda.Tests.Time.HAVAL is
          Print_Information_Message("Hash size : " & HAVAL_Hash_Size'Image(HAVAL_224));
          Print_Message("Passes    : " & HAVAL_Passes'Image(I), "    ");
          Print_Message("Hashing 10MB", "    ");
-         Digest_Start(D, I, HAVAL_224);
-         Digest_Time_Trial(D, 10, 4, Elapsed);
+         Digest_Start(MDP, HAVAL_224, I);
+         Digest_Time_Trial(MDH, 10, 4, Elapsed);
       end loop;
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(8);
    exception
       when X: others =>
@@ -296,7 +313,8 @@ package body CryptAda.Tests.Time.HAVAL is
 
    procedure Case_9
    is
-      D           : HAVAL_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant HAVAL_Digest_Ptr := HAVAL_Digest_Ptr(Get_Message_Digest_Ptr(MDH));
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(9, "HAVAL 256-bit hashing");
@@ -305,10 +323,11 @@ package body CryptAda.Tests.Time.HAVAL is
          Print_Information_Message("Hash size : " & HAVAL_Hash_Size'Image(HAVAL_256));
          Print_Message("Passes    : " & HAVAL_Passes'Image(I), "    ");
          Print_Message("Hashing 1MB", "    ");
-         Digest_Start(D, I, HAVAL_256);
-         Digest_Time_Trial(D, 1, 1, Elapsed);
+         Digest_Start(MDP, HAVAL_256, I);
+         Digest_Time_Trial(MDH, 1, 1, Elapsed);
       end loop;
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(9);
    exception
       when X: others =>
@@ -324,7 +343,8 @@ package body CryptAda.Tests.Time.HAVAL is
 
    procedure Case_10
    is
-      D           : HAVAL_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant HAVAL_Digest_Ptr := HAVAL_Digest_Ptr(Get_Message_Digest_Ptr(MDH));
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(10, "HAVAL 256-bit hashing");
@@ -333,10 +353,11 @@ package body CryptAda.Tests.Time.HAVAL is
          Print_Information_Message("Hash size : " & HAVAL_Hash_Size'Image(HAVAL_256));
          Print_Message("Passes    : " & HAVAL_Passes'Image(I), "    ");
          Print_Message("Hashing 10MB", "    ");
-         Digest_Start(D, I, HAVAL_256);
-         Digest_Time_Trial(D, 10, 4, Elapsed);
+         Digest_Start(MDP, HAVAL_256, I);
+         Digest_Time_Trial(MDH, 10, 4, Elapsed);
       end loop;
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(10);
    exception
       when X: others =>

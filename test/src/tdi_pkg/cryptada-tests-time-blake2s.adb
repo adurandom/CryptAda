@@ -16,14 +16,14 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-tests-time-md4.adb
+--    Filename          :  cryptada-tests-time-blake2s.adb
 --    File kind         :  Ada package body
 --    Author            :  A. Duran
 --    Creation date     :  March 1st, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Time trial for CryptAda.Digests.Message_Digests.MD4.
+--    Time trial for CryptAda.Digests.Message_Digests.BLAKE2s.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
@@ -37,17 +37,17 @@ with CryptAda.Tests.Utils;                use CryptAda.Tests.Utils;
 with CryptAda.Tests.Time.Digests;         use CryptAda.Tests.Time.Digests;
 
 with CryptAda.Digests.Message_Digests;    use CryptAda.Digests.Message_Digests;
-with CryptAda.Digests.Message_Digests.MD4; use CryptAda.Digests.Message_Digests.MD4;
+with CryptAda.Digests.Message_Digests.BLAKE2s; use CryptAda.Digests.Message_Digests.BLAKE2s;
 
-package body CryptAda.Tests.Time.MD4 is
+package body CryptAda.Tests.Time.BLAKE2s is
 
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   Driver_Name                   : constant String := "CryptAda.Tests.Time.MD4";
+   Driver_Name                   : constant String := "CryptAda.Tests.Time.BLAKE2s";
 
-   Driver_Description            : constant String := "Time trial for CryptAda.Digests.Message_Digests.MD4 functionality.";
+   Driver_Description            : constant String := "Time trial for CryptAda.Digests.Message_Digests.BLAKE2s functionality.";
 
    -----------------------------------------------------------------------------
    --[Test Cases Specs]---------------------------------------------------------
@@ -69,7 +69,7 @@ package body CryptAda.Tests.Time.MD4 is
       MDP         : constant Message_Digest_Ptr := Get_Message_Digest_Ptr(MDH);
       Elapsed     : Duration;
    begin
-      Begin_Time_Trial(1, "MD4 hashing");
+      Begin_Time_Trial(1, "BLAKE2s hashing");
       Print_Information_Message("Hashing 1MB");
 
       Digest_Start(MDP);
@@ -95,7 +95,7 @@ package body CryptAda.Tests.Time.MD4 is
       MDP         : constant Message_Digest_Ptr := Get_Message_Digest_Ptr(MDH);
       Elapsed     : Duration;
    begin
-      Begin_Time_Trial(2, "MD4 hashing");
+      Begin_Time_Trial(2, "BLAKE2s hashing");
       Print_Information_Message("Hashing 10MB");
 
       Digest_Start(MDP);
@@ -133,4 +133,4 @@ package body CryptAda.Tests.Time.MD4 is
          End_Test_Driver(Driver_Name);
    end Test_Driver;
 
-end CryptAda.Tests.Time.MD4;
+end CryptAda.Tests.Time.BLAKE2s;

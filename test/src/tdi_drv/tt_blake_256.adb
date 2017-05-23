@@ -16,15 +16,14 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-tests-time-digests.ads
---    File kind         :  Ada package specification.
+--    Filename          :  tt_blake_256.adb
+--    File kind         :  Ada procedure body.
 --    Author            :  A. Duran
 --    Creation date     :  March 12th, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    This package contains the test driver of time trials for message digests
---    algorithms.
+--    Time trial for CryptAda.Digests.Message_Digests.BLAKE_256
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
@@ -32,34 +31,10 @@
 --    1.0   20170312 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with CryptAda.Digests.Message_Digests;
+with CryptAda.Tests.Time.BLAKE_256;
 
-package CryptAda.Tests.Time.Digests is
-
-   --[Digest_Time_Trial]--------------------------------------------------------
-   -- Purpose:
-   -- Performs a time trial on a message digest object. The procedure will
-   -- fill a buffer of Buffer_Size KB with random bytres and repeteadly call
-   -- to the digest method to digest To_Digest MB of data. Finally it will
-   -- return the Duration of the digest process.
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- Digest               Digest algorithm to use. It must be started with the
-   --                      apropriate parameters.
-   -- To_Digest            MB to digest.
-   -- Buffer_Size          Size of buffer in KBs
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- N/A.
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- None.
-   -----------------------------------------------------------------------------
-
-   procedure   Digest_Time_Trial(
-                  Digest         : in out CryptAda.Digests.Message_Digests.Message_Digest_Handle;
-                  To_Digest      : in     Positive := 10;
-                  Buffer_Size    : in     Positive := 1;
-                  Elapsed        :    out Duration);
-
-end CryptAda.Tests.Time.Digests;
+procedure TT_BLAKE_256
+is
+begin
+   CryptAda.Tests.Time.BLAKE_256.Test_Driver;
+end TT_BLAKE_256;

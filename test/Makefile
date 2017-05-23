@@ -178,7 +178,15 @@ T_DIG       =   $(CTB_TDIG)/tt_md2.exe \
                 $(CTB_TDIG)/tt_md5.exe \
                 $(CTB_TDIG)/tt_ripemd_128.exe \
                 $(CTB_TDIG)/tt_ripemd_160.exe \
+                $(CTB_TDIG)/tt_ripemd_256.exe \
+                $(CTB_TDIG)/tt_ripemd_320.exe \
                 $(CTB_TDIG)/tt_sha_1.exe \
+                $(CTB_TDIG)/tt_blake_224.exe \
+                $(CTB_TDIG)/tt_blake_256.exe \
+                $(CTB_TDIG)/tt_blake_384.exe \
+                $(CTB_TDIG)/tt_blake_512.exe \
+                $(CTB_TDIG)/tt_blake2s.exe \
+                $(CTB_TDIG)/tt_blake2b.exe \
                 $(CTB_TDIG)/tt_sha_224.exe \
                 $(CTB_TDIG)/tt_sha_256.exe \
                 $(CTB_TDIG)/tt_sha_384.exe \
@@ -459,6 +467,38 @@ $(CTB_TDIG)/tt_ripemd_160.exe: $(CTS_TDI_DRV)tt_ripemd_160.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
 
+$(CTB_TDIG)/tt_ripemd_256.exe: $(CTS_TDI_DRV)tt_ripemd_256.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_TDIG)/tt_ripemd_320.exe: $(CTS_TDI_DRV)tt_ripemd_320.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_TDIG)/tt_blake_224.exe: $(CTS_TDI_DRV)tt_blake_224.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_TDIG)/tt_blake_256.exe: $(CTS_TDI_DRV)tt_blake_256.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_TDIG)/tt_blake_384.exe: $(CTS_TDI_DRV)tt_blake_384.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_TDIG)/tt_blake_512.exe: $(CTS_TDI_DRV)tt_blake_512.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_TDIG)/tt_blake2s.exe: $(CTS_TDI_DRV)tt_blake2s.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_TDIG)/tt_blake2b.exe: $(CTS_TDI_DRV)tt_blake2b.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
+    
 $(CTB_TDIG)/tt_sha_1.exe: $(CTS_TDI_DRV)tt_sha_1.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_TDI) $(ADAFLAGS) -o $@ $<
