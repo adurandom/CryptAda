@@ -137,28 +137,22 @@ U_DIG       =   $(CTB_UDIG)/ut_count.exe \
                 $(CTB_UDIG)/ut_md_ripemd_160.exe \
                 $(CTB_UDIG)/ut_md_ripemd_256.exe \
                 $(CTB_UDIG)/ut_md_ripemd_320.exe \
-                $(CTB_UDIG)/ut_md_snefru.exe \
                 $(CTB_UDIG)/ut_md_sha_1.exe \
+                $(CTB_UDIG)/ut_md_snefru.exe \
+                $(CTB_UDIG)/ut_md_tiger.exe \
+                $(CTB_UDIG)/ut_md_haval.exe \
+                $(CTB_UDIG)/ut_md_sha_224.exe \
+                $(CTB_UDIG)/ut_md_sha_256.exe \
+                $(CTB_UDIG)/ut_md_sha_384.exe \
+                $(CTB_UDIG)/ut_md_sha_512.exe \
                 $(CTB_UDIG)/ut_md_blake_224.exe \
                 $(CTB_UDIG)/ut_md_blake_256.exe \
                 $(CTB_UDIG)/ut_md_blake_384.exe \
                 $(CTB_UDIG)/ut_md_blake_512.exe \
+                $(CTB_UDIG)/ut_md_sha_3.exe \
+                $(CTB_UDIG)/ut_md_whirlpool.exe \
                 $(CTB_UDIG)/ut_md_blake2s.exe \
-                $(CTB_UDIG)/ut_md2.exe \
-                $(CTB_UDIG)/ut_md4.exe \
-                $(CTB_UDIG)/ut_md5.exe \
-                $(CTB_UDIG)/ut_ripemd_128.exe \
-                $(CTB_UDIG)/ut_ripemd_160.exe \
-                $(CTB_UDIG)/ut_sha_1.exe \
-                $(CTB_UDIG)/ut_sha_224.exe \
-                $(CTB_UDIG)/ut_sha_256.exe \
-                $(CTB_UDIG)/ut_sha_384.exe \
-                $(CTB_UDIG)/ut_sha_512.exe \
-                $(CTB_UDIG)/ut_sha_3.exe \
-                $(CTB_UDIG)/ut_snefru.exe \
-                $(CTB_UDIG)/ut_tiger.exe \
-                $(CTB_UDIG)/ut_haval.exe \
-                $(CTB_UDIG)/ut_whirlpool.exe
+                $(CTB_UDIG)/ut_md_blake2b.exe
 
 U_RND       =   $(CTB_URND)/ut_rsaref.exe \
                 $(CTB_URND)/ut_caprng.exe
@@ -316,6 +310,30 @@ $(CTB_UDIG)/ut_md_sha_1.exe: $(CTS_UDI_DRV)ut_md_sha_1.adb
 $(CTB_UDIG)/ut_md_snefru.exe: $(CTS_UDI_DRV)ut_md_snefru.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UDIG)/ut_md_tiger.exe: $(CTS_UDI_DRV)ut_md_tiger.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UDIG)/ut_md_haval.exe: $(CTS_UDI_DRV)ut_md_haval.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UDIG)/ut_md_sha_224.exe: $(CTS_UDI_DRV)ut_md_sha_224.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UDIG)/ut_md_sha_256.exe: $(CTS_UDI_DRV)ut_md_sha_256.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UDIG)/ut_md_sha_384.exe: $(CTS_UDI_DRV)ut_md_sha_384.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UDIG)/ut_md_sha_512.exe: $(CTS_UDI_DRV)ut_md_sha_512.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
     
 $(CTB_UDIG)/ut_md_blake_224.exe: $(CTS_UDI_DRV)ut_md_blake_224.adb
 	@echo Building $<
@@ -333,71 +351,22 @@ $(CTB_UDIG)/ut_md_blake_512.exe: $(CTS_UDI_DRV)ut_md_blake_512.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
 
+$(CTB_UDIG)/ut_md_sha_3.exe: $(CTS_UDI_DRV)ut_md_sha_3.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UDIG)/ut_md_whirlpool.exe: $(CTS_UDI_DRV)ut_md_whirlpool.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
+    
 $(CTB_UDIG)/ut_md_blake2s.exe: $(CTS_UDI_DRV)ut_md_blake2s.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
         
+$(CTB_UDIG)/ut_md_blake2b.exe: $(CTS_UDI_DRV)ut_md_blake2b.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
     
-$(CTB_UDIG)/ut_md2.exe: $(CTS_UDI_DRV)ut_md2.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
-
-$(CTB_UDIG)/ut_md4.exe: $(CTS_UDI_DRV)ut_md4.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
-
-$(CTB_UDIG)/ut_md5.exe: $(CTS_UDI_DRV)ut_md5.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
-
-$(CTB_UDIG)/ut_ripemd_128.exe: $(CTS_UDI_DRV)ut_ripemd_128.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
-
-$(CTB_UDIG)/ut_ripemd_160.exe: $(CTS_UDI_DRV)ut_ripemd_160.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
-
-$(CTB_UDIG)/ut_sha_1.exe: $(CTS_UDI_DRV)ut_sha_1.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
-
-$(CTB_UDIG)/ut_sha_224.exe: $(CTS_UDI_DRV)ut_sha_224.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
-
-$(CTB_UDIG)/ut_sha_256.exe: $(CTS_UDI_DRV)ut_sha_256.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
-
-$(CTB_UDIG)/ut_sha_384.exe: $(CTS_UDI_DRV)ut_sha_384.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
-
-$(CTB_UDIG)/ut_sha_512.exe: $(CTS_UDI_DRV)ut_sha_512.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
-
-$(CTB_UDIG)/ut_sha_3.exe: $(CTS_UDI_DRV)ut_sha_3.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
-
-$(CTB_UDIG)/ut_snefru.exe: $(CTS_UDI_DRV)ut_snefru.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
-
-$(CTB_UDIG)/ut_tiger.exe: $(CTS_UDI_DRV)ut_tiger.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
-
-$(CTB_UDIG)/ut_haval.exe: $(CTS_UDI_DRV)ut_haval.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
-
-$(CTB_UDIG)/ut_whirlpool.exe: $(CTS_UDI_DRV)ut_whirlpool.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UDI) $(ADAFLAGS) -o $@ $<
-
 # Random unit test drivers
 
 $(CTB_URND)/ut_rsaref.exe: $(CTS_URN_DRV)ut_rsaref.adb

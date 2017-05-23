@@ -271,8 +271,8 @@ package body CryptAda.Tests.Unit.MD_Snefru is
    
       if Is_Valid_Handle(Handle) then
          P := Snefru_Digest_Ptr(Get_Message_Digest_Ptr(Handle));
-         Print_Message("Security level                : " & Snefru_Security_Level'Image(Get_Security_Level(P)), "    ");
          Print_Message("Hash size id                  : " & Snefru_Hash_Size'Image(Get_Hash_Size_Id(P)), "    ");
+         Print_Message("Security level                : " & Snefru_Security_Level'Image(Get_Security_Level(P)), "    ");
       end if;
    end Print_Digest_Info;
    
@@ -452,19 +452,28 @@ package body CryptAda.Tests.Unit.MD_Snefru is
       Begin_Test_Case(2, "Testing default Digest_Start");
       Print_Information_Message("Subprograms tested: ");
       Print_Message("- Digest_Start", "    ");
-      Print_Message("- Digest_Start(Snefru_Security_Level, Snefru_Hash_Size)", "    ");
+      Print_Message("- Digest_Start(Snefru_Hash_Size, Snefru_Security_Level)", "    ");
 
       Print_Information_Message("Default Digest_Start will start digest computation with default parameters");
-      Print_Message("Default Security Level: " & Snefru_Security_Level'Image(Snefru_Default_Security_Level), "    ");
       Print_Message("Default Hash Size     : " & Snefru_Hash_Size'Image(Snefru_Default_Hash_Size), "    ");
+      Print_Message("Default Security Level: " & Snefru_Security_Level'Image(Snefru_Default_Security_Level), "    ");
 
       Print_Information_Message("Using defaul Digest_Start");      
       Print_Digest_Info("Digest information BEFORE Digest_Start", MDH);      
       Digest_Start(MDP);
       Print_Digest_Info("Digest information AFTER Digest_Start", MDH);            
       Print_Information_Message("Getting Security_Level and Hash_Size");
-      SLO := Get_Security_Level(Snefru_Digest_Ptr(MDP));
+
       HSO := Get_Hash_Size_Id(Snefru_Digest_Ptr(MDP));
+      
+      if HSO = Snefru_Default_Hash_Size then
+         Print_Information_Message("Hash_Size values match");
+      else 
+         Print_Error_Message("Hash_Size values don't match");
+         raise CryptAda_Test_Error;
+      end if;
+
+      SLO := Get_Security_Level(Snefru_Digest_Ptr(MDP));
 
       if SLO = Snefru_Default_Security_Level then
          Print_Information_Message("Security_Level values match");
@@ -472,24 +481,25 @@ package body CryptAda.Tests.Unit.MD_Snefru is
          Print_Error_Message("Security_Level values don't match");
          raise CryptAda_Test_Error;
       end if;
+      
+      Print_Information_Message("Calling Digest_Start(Snefru_Hash_Size, Snefru_Security_Level)");      
+      Print_Message("Setting Hash Size to     : " & Snefru_Hash_Size'Image(HSE), "    ");
+      Print_Message("Setting Security Level to: " & Snefru_Security_Level'Image(SLE), "    ");
+      Print_Digest_Info("Digest information BEFORE Digest_Start", MDH);      
+      Digest_Start(Snefru_Digest_Ptr(MDP), HSE, SLE);
+      Print_Digest_Info("Digest information AFTER Digest_Start", MDH);            
+      Print_Information_Message("Getting Security_Level and Hash_Size");
 
-      if HSO = Snefru_Default_Hash_Size then
-         Print_Information_Message("Hahs_Size values match");
+      HSO := Get_Hash_Size_Id(Snefru_Digest_Ptr(MDP));
+      
+      if HSO = HSE then
+         Print_Information_Message("Hash_Size values match");
       else 
          Print_Error_Message("Hash_Size values don't match");
          raise CryptAda_Test_Error;
       end if;
-      
-      Print_Information_Message("Calling Digest_Start(Snefru_Security_Level, Snefru_Hash_Size)");      
-      Print_Message("Setting Security Level to: " & Snefru_Security_Level'Image(SLE), "    ");
-      Print_Message("Setting Hahs Size to     : " & Snefru_Hash_Size'Image(HSE), "    ");
-      Print_Digest_Info("Digest information BEFORE Digest_Start", MDH);      
-      Digest_Start(Snefru_Digest_Ptr(MDP), SLE, HSE);
-      Print_Digest_Info("Digest information AFTER Digest_Start", MDH);            
-      Print_Information_Message("Getting Security_Level and Hash_Size");
 
       SLO := Get_Security_Level(Snefru_Digest_Ptr(MDP));
-      HSO := Get_Hash_Size_Id(Snefru_Digest_Ptr(MDP));
 
       if SLO = SLE then
          Print_Information_Message("Security_Level values match");
@@ -498,13 +508,38 @@ package body CryptAda.Tests.Unit.MD_Snefru is
          raise CryptAda_Test_Error;
       end if;
 
-      if HSO = HSE then
-         Print_Information_Message("Hahs_Size values match");
-      else 
-         Print_Error_Message("Hash_Size values don't match");
-         raise CryptAda_Test_Error;
-      end if;
-                  
+      Print_Information_Message("Setting combinations of parameters");      
+      Print_Information_Message("Calling Digest_Start(Snefru_Hash_Size, Snefru_Security_Level)");      
+      
+      for I in Snefru_Hash_Size'Range loop
+         for J in Snefru_Security_Level'Range loop
+            Print_Information_Message("Setting Hash Size to     : " & Snefru_Hash_Size'Image(I));
+            Print_Information_Message("Setting Security level to: " & Snefru_Security_Level'Image(J));
+            Digest_Start(Snefru_Digest_Ptr(MDP), I, J);
+            Print_Digest_Info("Digest information AFTER Digest_Start", MDH);            
+            
+            Print_Information_Message("Getting Security_Level and Hash_Size");
+
+            HSO := Get_Hash_Size_Id(Snefru_Digest_Ptr(MDP));
+            
+            if HSO = I then
+               Print_Information_Message("Hash_Size values match");
+            else 
+               Print_Error_Message("Hash_Size values don't match");
+               raise CryptAda_Test_Error;
+            end if;
+
+            SLO := Get_Security_Level(Snefru_Digest_Ptr(MDP));
+
+            if SLO = J then
+               Print_Information_Message("Security_Level values match");
+            else 
+               Print_Error_Message("Security_Level values don't match");
+               raise CryptAda_Test_Error;
+            end if;
+         end loop;
+      end loop;
+      
       Invalidate_Handle(MDH);
       Print_Information_Message("Test case OK");
       End_Test_Case(2, Passed);
@@ -537,7 +572,7 @@ package body CryptAda.Tests.Unit.MD_Snefru is
       Begin_Test_Case(3, "Testing parametrized Digest_Start");
       Print_Information_Message("Subprograms tested: ");
       Print_Message("- Digest_Start(Parameter_List)", "    ");
-      Print_Information_Message("BLAKE-224 accept a parameter list containing a Salt value");
+      Print_Information_Message("Snefru accepts a parameter list containing a hash size value and a security level value");
 
       Print_Information_Message("Using an empty parameters list will set the default salt value");
       Print_Message("Parameter list: " & List_2_Text(L), "    ");
@@ -546,8 +581,17 @@ package body CryptAda.Tests.Unit.MD_Snefru is
       Print_Digest_Info("Digest information AFTER Digest_Start", MDH);      
 
       Print_Information_Message("Getting Security_Level and Hash_Size");
-      SLO := Get_Security_Level(Snefru_Digest_Ptr(MDP));
+      
       HSO := Get_Hash_Size_Id(Snefru_Digest_Ptr(MDP));
+
+      if HSO = Snefru_Default_Hash_Size then
+         Print_Information_Message("Hash_Size values match");
+      else 
+         Print_Error_Message("Hash_Size values don't match");
+         raise CryptAda_Test_Error;
+      end if;
+
+      SLO := Get_Security_Level(Snefru_Digest_Ptr(MDP));
 
       if SLO = Snefru_Default_Security_Level then
          Print_Information_Message("Security_Level values match");
@@ -556,13 +600,6 @@ package body CryptAda.Tests.Unit.MD_Snefru is
          raise CryptAda_Test_Error;
       end if;
 
-      if HSO = Snefru_Default_Hash_Size then
-         Print_Information_Message("Hahs_Size values match");
-      else 
-         Print_Error_Message("Hash_Size values don't match");
-         raise CryptAda_Test_Error;
-      end if;
-            
       Print_Information_Message("Trying some invalid lists.");
       Print_Message("Digest_Start must raise CryptAda_Bad_Argument_Error in all cases", "    ");
       
@@ -601,20 +638,21 @@ package body CryptAda.Tests.Unit.MD_Snefru is
       Print_Digest_Info("Digest information AFTER Digest_Start", MDH);      
       Print_Information_Message("Getting Security_Level and Hash_Size");
 
-      SLO := Get_Security_Level(Snefru_Digest_Ptr(MDP));
       HSO := Get_Hash_Size_Id(Snefru_Digest_Ptr(MDP));
+
+      if HSO = HSE then
+         Print_Information_Message("Hash_Size values match");
+      else 
+         Print_Error_Message("Hash_Size values don't match");
+         raise CryptAda_Test_Error;
+      end if;
+
+      SLO := Get_Security_Level(Snefru_Digest_Ptr(MDP));
 
       if SLO = SLE then
          Print_Information_Message("Security_Level values match");
       else 
          Print_Error_Message("Security_Level values don't match");
-         raise CryptAda_Test_Error;
-      end if;
-
-      if HSO = HSE then
-         Print_Information_Message("Hahs_Size values match");
-      else 
-         Print_Error_Message("Hash_Size values don't match");
          raise CryptAda_Test_Error;
       end if;
       
@@ -647,7 +685,7 @@ package body CryptAda.Tests.Unit.MD_Snefru is
       Print_Message("    Number of vectors to test: " & Positive'Image(Std_Test_Vector_Count));
 
       for I in  1 .. Std_Test_Vector_Count loop
-         Digest_Start(Snefru_Digest_Ptr(MDP), Security_Level_8, Snefru_128);
+         Digest_Start(Snefru_Digest_Ptr(MDP), Snefru_128, Security_Level_8);
          Run_Test_Vector(MDH, Std_Test_Vector_Str(I).all, Std_Test_Vector_BA(I).all, Std_Test_Vector_Hashes_128(I).all, Std_Test_Vector_Counters(I), R);
 
          if R then
@@ -687,7 +725,7 @@ package body CryptAda.Tests.Unit.MD_Snefru is
       Print_Message("    Number of vectors to test: " & Positive'Image(Std_Test_Vector_Count));
 
       for I in  1 .. Std_Test_Vector_Count loop
-         Digest_Start(Snefru_Digest_Ptr(MDP), Security_Level_8, Snefru_256);
+         Digest_Start(Snefru_Digest_Ptr(MDP), Snefru_256, Security_Level_8);
          Run_Test_Vector(MDH, Std_Test_Vector_Str(I).all, Std_Test_Vector_BA(I).all, Std_Test_Vector_Hashes_256(I).all, Std_Test_Vector_Counters(I), R);
 
          if R then
@@ -727,7 +765,7 @@ package body CryptAda.Tests.Unit.MD_Snefru is
       Print_Message("Number of vectors to test: " & Positive'Image(Test_Vector_Count), "    ");
 
       for I in  1 .. Test_Vector_Count loop
-         Digest_Start(Snefru_Digest_Ptr(MDP), Security_Level_8, Snefru_128);
+         Digest_Start(Snefru_Digest_Ptr(MDP), Snefru_128, Security_Level_8);
          Run_CryptAda_Test_Vector(MDH, I, CryptAda_Test_Vector_Hashes_128(I).all, R);
 
          if R then
@@ -767,7 +805,7 @@ package body CryptAda.Tests.Unit.MD_Snefru is
       Print_Message("Number of vectors to test: " & Positive'Image(Test_Vector_Count), "    ");
 
       for I in  1 .. Test_Vector_Count loop
-         Digest_Start(Snefru_Digest_Ptr(MDP), Security_Level_8, Snefru_256);
+         Digest_Start(Snefru_Digest_Ptr(MDP), Snefru_256, Security_Level_8);
          Run_CryptAda_Test_Vector(MDH, I, CryptAda_Test_Vector_Hashes_256(I).all, R);
 
          if R then
@@ -818,7 +856,7 @@ package body CryptAda.Tests.Unit.MD_Snefru is
          Print_Message("Vector length: " & Positive'Image(Len));
          EC := To_Counter(8 * Eight_Bytes(Len), 0);
 
-         Digest_Start(Snefru_Digest_Ptr(MDP), Security_Level_8, Snefru_128);
+         Digest_Start(Snefru_Digest_Ptr(MDP), Snefru_128, Security_Level_8);
          Digest_Update(MDP, Test_Block(1 .. Len));
          OC := Get_Bit_Count(MDP);
          Digest_End(MDP, HO);
@@ -873,7 +911,7 @@ package body CryptAda.Tests.Unit.MD_Snefru is
          Print_Message("Vector length: " & Positive'Image(Len));
          EC := To_Counter(8 * Eight_Bytes(Len), 0);
 
-         Digest_Start(Snefru_Digest_Ptr(MDP), Security_Level_8, Snefru_256);
+         Digest_Start(Snefru_Digest_Ptr(MDP), Snefru_256, Security_Level_8);
          Digest_Update(MDP, Test_Block(1 .. Len));
          OC := Get_Bit_Count(MDP);
          Digest_End(MDP, HO);

@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.MD_Snefru
 Description              : Unit test driver for CryptAda.Digests.Message_Digests.Snefru functionality.
-Started                  : 2017/05/19 - 15:36:02
+Started                  : 2017/05/22 - 08:45:34
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Getting a handle for message digest objects
-Started         : 2017/05/19 - 15:36:02
+Started         : 2017/05/22 - 08:45:34
 --------------------------------------------------------------------------------
 [I] Subprograms tested: 
     - Get_Message_Digest_Handle
@@ -41,8 +41,8 @@ Started         : 2017/05/19 - 15:36:02
     Input block size (bytes)      :  32
     Hash size (bytes)             :  32
     Processed bit count           : 16#00000000000000000000000000000000#
-    Security level                : SECURITY_LEVEL_8
     Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
 [I] Now the handle must be invalid:
 [I] Handle is valid
 [I] Getting a pointer from an invalid handle will return a not null value
@@ -58,8 +58,8 @@ Started         : 2017/05/19 - 15:36:02
     Input block size (bytes)      :  32
     Hash size (bytes)             :  32
     Processed bit count           : 16#00000000000000000000000000000000#
-    Security level                : SECURITY_LEVEL_8
     Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
 [I] Calling Digest_Update
 [I] Digesting string              : "CryptAda By TCantos Software"
 [I] Digest information AFTER Digest_Update
@@ -72,8 +72,8 @@ Started         : 2017/05/19 - 15:36:02
     Input block size (bytes)      :  32
     Hash size (bytes)             :  32
     Processed bit count           : 16#000000000000000000000000000000E0#
-    Security level                : SECURITY_LEVEL_8
     Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
 [I] Calling Digest_End to finish processing and obtaining the computed Hash
 [I] Digest information AFTER Digest_End
     Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
@@ -85,8 +85,8 @@ Started         : 2017/05/19 - 15:36:02
     Input block size (bytes)      :  32
     Hash size (bytes)             :  32
     Processed bit count           : 16#000000000000000000000000000000E0#
-    Security level                : SECURITY_LEVEL_8
     Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
 [I] Checking digest computation results
 [I] Expected hash
     - Hash size :  32
@@ -112,20 +112,20 @@ Started         : 2017/05/19 - 15:36:02
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/05/19 - 15:36:02
+Finished        : 2017/05/22 - 08:45:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Testing default Digest_Start
-Started         : 2017/05/19 - 15:36:02
+Started         : 2017/05/22 - 08:45:34
 --------------------------------------------------------------------------------
 [I] Subprograms tested: 
     - Digest_Start
-    - Digest_Start(Snefru_Security_Level, Snefru_Hash_Size)
+    - Digest_Start(Snefru_Hash_Size, Snefru_Security_Level)
 [I] Default Digest_Start will start digest computation with default parameters
-    Default Security Level: SECURITY_LEVEL_8
     Default Hash Size     : SNEFRU_256
+    Default Security Level: SECURITY_LEVEL_8
 [I] Using defaul Digest_Start
 [I] Digest information BEFORE Digest_Start
     Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
@@ -137,8 +137,8 @@ Started         : 2017/05/19 - 15:36:02
     Input block size (bytes)      :  32
     Hash size (bytes)             :  32
     Processed bit count           : 16#00000000000000000000000000000000#
-    Security level                : SECURITY_LEVEL_8
     Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
 [I] Digest information AFTER Digest_Start
     Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
     CryptAda digest algorithm id  : "MD_SNEFRU"
@@ -149,14 +149,14 @@ Started         : 2017/05/19 - 15:36:02
     Input block size (bytes)      :  32
     Hash size (bytes)             :  32
     Processed bit count           : 16#00000000000000000000000000000000#
-    Security level                : SECURITY_LEVEL_8
     Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
 [I] Getting Security_Level and Hash_Size
+[I] Hash_Size values match
 [I] Security_Level values match
-[I] Hahs_Size values match
-[I] Calling Digest_Start(Snefru_Security_Level, Snefru_Hash_Size)
+[I] Calling Digest_Start(Snefru_Hash_Size, Snefru_Security_Level)
+    Setting Hash Size to     : SNEFRU_128
     Setting Security Level to: SECURITY_LEVEL_4
-    Setting Hahs Size to     : SNEFRU_128
 [I] Digest information BEFORE Digest_Start
     Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
     CryptAda digest algorithm id  : "MD_SNEFRU"
@@ -167,8 +167,8 @@ Started         : 2017/05/19 - 15:36:02
     Input block size (bytes)      :  32
     Hash size (bytes)             :  32
     Processed bit count           : 16#00000000000000000000000000000000#
-    Security level                : SECURITY_LEVEL_8
     Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
 [I] Digest information AFTER Digest_Start
     Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
     CryptAda digest algorithm id  : "MD_SNEFRU"
@@ -179,26 +179,96 @@ Started         : 2017/05/19 - 15:36:02
     Input block size (bytes)      :  48
     Hash size (bytes)             :  16
     Processed bit count           : 16#00000000000000000000000000000000#
-    Security level                : SECURITY_LEVEL_4
     Hash size id                  : SNEFRU_128
+    Security level                : SECURITY_LEVEL_4
 [I] Getting Security_Level and Hash_Size
+[I] Hash_Size values match
 [I] Security_Level values match
-[I] Hahs_Size values match
+[I] Setting combinations of parameters
+[I] Calling Digest_Start(Snefru_Hash_Size, Snefru_Security_Level)
+[I] Setting Hash Size to     : SNEFRU_128
+[I] Setting Security level to: SECURITY_LEVEL_4
+[I] Digest information AFTER Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    Digest algorithm SCAN name    : ""
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  32
+    Input block size (bytes)      :  48
+    Hash size (bytes)             :  16
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_128
+    Security level                : SECURITY_LEVEL_4
+[I] Getting Security_Level and Hash_Size
+[I] Hash_Size values match
+[I] Security_Level values match
+[I] Setting Hash Size to     : SNEFRU_128
+[I] Setting Security level to: SECURITY_LEVEL_8
+[I] Digest information AFTER Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    Digest algorithm SCAN name    : ""
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  32
+    Input block size (bytes)      :  48
+    Hash size (bytes)             :  16
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_128
+    Security level                : SECURITY_LEVEL_8
+[I] Getting Security_Level and Hash_Size
+[I] Hash_Size values match
+[I] Security_Level values match
+[I] Setting Hash Size to     : SNEFRU_256
+[I] Setting Security level to: SECURITY_LEVEL_4
+[I] Digest information AFTER Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    Digest algorithm SCAN name    : ""
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  32
+    Input block size (bytes)      :  32
+    Hash size (bytes)             :  32
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_4
+[I] Getting Security_Level and Hash_Size
+[I] Hash_Size values match
+[I] Security_Level values match
+[I] Setting Hash Size to     : SNEFRU_256
+[I] Setting Security level to: SECURITY_LEVEL_8
+[I] Digest information AFTER Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    Digest algorithm SCAN name    : ""
+    Digest algorithm ASN1 OID     : ""
+    Digest algorithm OpenPGP name : ""
+    State size (bytes)            :  32
+    Input block size (bytes)      :  32
+    Hash size (bytes)             :  32
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
+[I] Getting Security_Level and Hash_Size
+[I] Hash_Size values match
+[I] Security_Level values match
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/05/19 - 15:36:02
+Finished        : 2017/05/22 - 08:45:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Testing parametrized Digest_Start
-Started         : 2017/05/19 - 15:36:02
+Started         : 2017/05/22 - 08:45:34
 --------------------------------------------------------------------------------
 [I] Subprograms tested: 
     - Digest_Start(Parameter_List)
-[I] BLAKE-224 accept a parameter list containing a Salt value
+[I] Snefru accepts a parameter list containing a hash size value and a security level value
 [I] Using an empty parameters list will set the default salt value
     Parameter list: ()
 [I] Digest information BEFORE Digest_Start
@@ -211,8 +281,8 @@ Started         : 2017/05/19 - 15:36:02
     Input block size (bytes)      :  32
     Hash size (bytes)             :  32
     Processed bit count           : 16#00000000000000000000000000000000#
-    Security level                : SECURITY_LEVEL_8
     Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
 [I] Digest information AFTER Digest_Start
     Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
     CryptAda digest algorithm id  : "MD_SNEFRU"
@@ -223,11 +293,11 @@ Started         : 2017/05/19 - 15:36:02
     Input block size (bytes)      :  32
     Hash size (bytes)             :  32
     Processed bit count           : 16#00000000000000000000000000000000#
-    Security level                : SECURITY_LEVEL_8
     Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
 [I] Getting Security_Level and Hash_Size
+[I] Hash_Size values match
 [I] Security_Level values match
-[I] Hahs_Size values match
 [I] Trying some invalid lists.
     Digest_Start must raise CryptAda_Bad_Argument_Error in all cases
 [I] Parameter list: (16,4)
@@ -241,8 +311,8 @@ Started         : 2017/05/19 - 15:36:02
     Input block size (bytes)      :  32
     Hash size (bytes)             :  32
     Processed bit count           : 16#00000000000000000000000000000000#
-    Security level                : SECURITY_LEVEL_8
     Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
 [I] Caught CryptAda_Bad_Argument_Error
     Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
     Message  : "Parameter list is unnamed"
@@ -257,8 +327,8 @@ Started         : 2017/05/19 - 15:36:02
     Input block size (bytes)      :  32
     Hash size (bytes)             :  32
     Processed bit count           : 16#00000000000000000000000000000000#
-    Security level                : SECURITY_LEVEL_8
     Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
 [I] Caught CryptAda_Bad_Argument_Error
     Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
     Message  : "Parameter list does not contain mandatory 'Hash_Bytes' item"
@@ -273,8 +343,8 @@ Started         : 2017/05/19 - 15:36:02
     Input block size (bytes)      :  32
     Hash size (bytes)             :  32
     Processed bit count           : 16#00000000000000000000000000000000#
-    Security level                : SECURITY_LEVEL_8
     Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
 [I] Caught CryptAda_Bad_Argument_Error
     Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
     Message  : "Parameter list does not contain mandatory 'Security_Level' item"
@@ -289,8 +359,8 @@ Started         : 2017/05/19 - 15:36:02
     Input block size (bytes)      :  32
     Hash size (bytes)             :  32
     Processed bit count           : 16#00000000000000000000000000000000#
-    Security level                : SECURITY_LEVEL_8
     Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
 [I] Caught CryptAda_Bad_Argument_Error
     Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
     Message  : "Invalid Snefru 'Hash_Bytes' parameter value:  64"
@@ -305,8 +375,8 @@ Started         : 2017/05/19 - 15:36:02
     Input block size (bytes)      :  32
     Hash size (bytes)             :  32
     Processed bit count           : 16#00000000000000000000000000000000#
-    Security level                : SECURITY_LEVEL_8
     Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
 [I] Caught CryptAda_Bad_Argument_Error
     Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
     Message  : "Invalid Snefru 'Security_Level' parameter value:  5"
@@ -321,8 +391,8 @@ Started         : 2017/05/19 - 15:36:02
     Input block size (bytes)      :  32
     Hash size (bytes)             :  32
     Processed bit count           : 16#00000000000000000000000000000000#
-    Security level                : SECURITY_LEVEL_8
     Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
 [I] Caught CryptAda_Bad_Argument_Error
     Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
     Message  : "Caught exception: CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR, with message: "Item is not an integer value". When parsing Snefru parameter list"
@@ -338,8 +408,8 @@ Started         : 2017/05/19 - 15:36:02
     Input block size (bytes)      :  32
     Hash size (bytes)             :  32
     Processed bit count           : 16#00000000000000000000000000000000#
-    Security level                : SECURITY_LEVEL_8
     Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
 [I] Digest information AFTER Digest_Start
     Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
     CryptAda digest algorithm id  : "MD_SNEFRU"
@@ -350,22 +420,22 @@ Started         : 2017/05/19 - 15:36:02
     Input block size (bytes)      :  48
     Hash size (bytes)             :  16
     Processed bit count           : 16#00000000000000000000000000000000#
-    Security level                : SECURITY_LEVEL_4
     Hash size id                  : SNEFRU_128
+    Security level                : SECURITY_LEVEL_4
 [I] Getting Security_Level and Hash_Size
+[I] Hash_Size values match
 [I] Security_Level values match
-[I] Hahs_Size values match
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/05/19 - 15:36:02
+Finished        : 2017/05/22 - 08:45:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Standard Snefru 128-bit, security level 8 test vectors
-Started         : 2017/05/19 - 15:36:02
+Started         : 2017/05/22 - 08:45:34
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from http://ftp.vim.org/security/coast/crypto/snefru/
     Number of vectors to test:  11
@@ -638,13 +708,13 @@ experimentally.
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/05/19 - 15:36:02
+Finished        : 2017/05/22 - 08:45:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Standard Snefru 256-bit, security level 8 test vectors
-Started         : 2017/05/19 - 15:36:02
+Started         : 2017/05/22 - 08:45:34
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from http://ftp.vim.org/security/coast/crypto/snefru/
     Number of vectors to test:  11
@@ -917,13 +987,13 @@ experimentally.
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/05/19 - 15:36:02
+Finished        : 2017/05/22 - 08:45:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : CryptAda Snefru 128-bit, security level 8 test vectors
-Started         : 2017/05/19 - 15:36:02
+Started         : 2017/05/22 - 08:45:34
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
     Number of vectors to test:  9
@@ -1088,13 +1158,13 @@ Started         : 2017/05/19 - 15:36:02
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/05/19 - 15:36:02
+Finished        : 2017/05/22 - 08:45:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
 Description     : CryptAda Snefru 256-bit, security level 8 test vectors
-Started         : 2017/05/19 - 15:36:02
+Started         : 2017/05/22 - 08:45:34
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
     Number of vectors to test:  9
@@ -1259,13 +1329,13 @@ Started         : 2017/05/19 - 15:36:02
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/05/19 - 15:36:02
+Finished        : 2017/05/22 - 08:45:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 8
 Description     : Testing Snefru 128-bit, security level 8 operation at block boundary.
-Started         : 2017/05/19 - 15:36:02
+Started         : 2017/05/22 - 08:45:34
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at block boundary.
@@ -1304,13 +1374,13 @@ Vector length:  49
 --------------------------------------------------------------------------------
 Test Case Number: 8
 Test Case Result: PASSED
-Finished        : 2017/05/19 - 15:36:02
+Finished        : 2017/05/22 - 08:45:34
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 9
 Description     : Testing Snefru 256-bit, security level 8 operation at block boundary.
-Started         : 2017/05/19 - 15:36:02
+Started         : 2017/05/22 - 08:45:34
 --------------------------------------------------------------------------------
 [I] Obtained hashes are checked against values obtained by using several online tools
 [I] Checking at block boundary.
@@ -1349,11 +1419,11 @@ Vector length:  33
 --------------------------------------------------------------------------------
 Test Case Number: 9
 Test Case Result: PASSED
-Finished        : 2017/05/19 - 15:36:02
+Finished        : 2017/05/22 - 08:45:34
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.MD_Snefru
-Finished                 : 2017/05/19 - 15:36:02
+Finished                 : 2017/05/22 - 08:45:34
 ================================================================================
