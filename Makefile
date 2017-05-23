@@ -112,22 +112,6 @@ OBJS     =  cryptada.o \
             cryptada-digests-message_digests-whirlpool.o \
             cryptada-digests-message_digests-blake2s.o \
             cryptada-digests-message_digests-blake2b.o \
-            cryptada-digests-algorithms.o \
-            cryptada-digests-algorithms-md2.o \
-            cryptada-digests-algorithms-md4.o \
-            cryptada-digests-algorithms-md5.o \
-            cryptada-digests-algorithms-ripemd_128.o \
-            cryptada-digests-algorithms-ripemd_160.o \
-            cryptada-digests-algorithms-sha_1.o \
-            cryptada-digests-algorithms-sha_224.o \
-            cryptada-digests-algorithms-sha_256.o \
-            cryptada-digests-algorithms-sha_384.o \
-            cryptada-digests-algorithms-sha_512.o \
-            cryptada-digests-algorithms-sha_3.o \
-            cryptada-digests-algorithms-snefru.o \
-            cryptada-digests-algorithms-tiger.o \
-            cryptada-digests-algorithms-haval.o \
-            cryptada-digests-algorithms-whirlpool.o \
             cryptada-random.o \
             cryptada-random-generators.o \
             cryptada-random-generators-rsaref.o \
@@ -378,70 +362,6 @@ cryptada-digests-message_digests-blake2b.o: $(DIGDIR)/cryptada-digests-message_d
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
     
-cryptada-digests-algorithms.o: $(DIGDIR)/cryptada-digests-algorithms.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-digests-algorithms-md2.o: $(DIGDIR)/cryptada-digests-algorithms-md2.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-digests-algorithms-md4.o: $(DIGDIR)/cryptada-digests-algorithms-md4.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-digests-algorithms-md5.o: $(DIGDIR)/cryptada-digests-algorithms-md5.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-digests-algorithms-ripemd_128.o: $(DIGDIR)/cryptada-digests-algorithms-ripemd_128.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-digests-algorithms-ripemd_160.o: $(DIGDIR)/cryptada-digests-algorithms-ripemd_160.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-digests-algorithms-sha_1.o: $(DIGDIR)/cryptada-digests-algorithms-sha_1.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-digests-algorithms-sha_224.o: $(DIGDIR)/cryptada-digests-algorithms-sha_224.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-digests-algorithms-sha_256.o: $(DIGDIR)/cryptada-digests-algorithms-sha_256.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-digests-algorithms-sha_384.o: $(DIGDIR)/cryptada-digests-algorithms-sha_384.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-digests-algorithms-sha_512.o: $(DIGDIR)/cryptada-digests-algorithms-sha_512.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-digests-algorithms-sha_3.o: $(DIGDIR)/cryptada-digests-algorithms-sha_3.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-digests-algorithms-snefru.o: $(DIGDIR)/cryptada-digests-algorithms-snefru.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-digests-algorithms-tiger.o: $(DIGDIR)/cryptada-digests-algorithms-tiger.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-digests-algorithms-haval.o: $(DIGDIR)/cryptada-digests-algorithms-haval.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-digests-algorithms-whirlpool.o: $(DIGDIR)/cryptada-digests-algorithms-whirlpool.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
 # Random packages
 
 cryptada-random.o: $(RNDDIR)/cryptada-random.ads
