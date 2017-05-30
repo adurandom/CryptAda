@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 30th, 2017
---    Current version   :  1.1
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    TDEA key generator.
@@ -30,6 +30,7 @@
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170329 ADD   Initial implementation.
 --    1.1   20170403 ADD   Changes in Symmetric ciphers hierarchy.
+--    2.0   20170524 ADD   Changes in interface.
 --------------------------------------------------------------------------------
 
 with CryptAda.Ciphers.Keys;
@@ -47,10 +48,49 @@ package CryptAda.Ciphers.Key_Generators.TDEA is
 
    type TDEA_Key_Generator is new Key_Generator with private;
 
+   --[TDEA_Key_Generator_Ptr]---------------------------------------------------
+   -- Access to TDEA key generator type.
+   -----------------------------------------------------------------------------
+
+   type TDEA_Key_Generator_Ptr is access all TDEA_Key_Generator'Class;
+   
    -----------------------------------------------------------------------------
    --[Subprograms]--------------------------------------------------------------
    -----------------------------------------------------------------------------
 
+   --[Get_Key_Generator_Handle]-------------------------------------------------
+   -- Purpose:
+   -- Creates a Key_Generator object and returns a handle for that object.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- With_RNG             Random_Generator_Handle to use to generate key random
+   --                      bytes. RNG must be started and seeded.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Key_Generator_Handle to handle the key generator.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CryptAda_Bad_Argument_Error if PRNG is not a valid Random_Generator_Handle
+   -- CryptAda_Generator_Not_Started_Error if the random generator is not 
+   --    started.
+   -- CryptAda_Generator_Need_Seeding_Error if the random generator is not 
+   --    seeded.
+   -----------------------------------------------------------------------------
+
+   function    Get_Key_Generator_Handle(
+                  With_RNG       : in     CryptAda.Random.Generators.Random_Generator_Handle)
+      return   Key_Generator_Handle;
+
+   --[Generate_Key]-------------------------------------------------------------
+   -- Generates a TDEA key for keying option 1.
+   -----------------------------------------------------------------------------
+
+   overriding
+   procedure   Generate_Key(
+                  The_Generator  : access TDEA_Key_Generator;
+                  The_Key        : in out CryptAda.Ciphers.Keys.Key;
+                  Key_Length     : in     Cipher_Key_Length);
+      
    --[Generate_Key]-------------------------------------------------------------
    -- Purpose:
    -- Generates a random key for the specific TDEA_Keying_Option.
@@ -69,7 +109,7 @@ package CryptAda.Ciphers.Key_Generators.TDEA is
    -----------------------------------------------------------------------------
 
    procedure   Generate_Key(
-                  The_Generator  : in out TDEA_Key_Generator'Class;
+                  The_Generator  : access TDEA_Key_Generator'Class;
                   The_Key        : in out CryptAda.Ciphers.Keys.Key;
                   Keying_Option  : in     CryptAda.Ciphers.Symmetric.Block.TDEA.TDEA_Keying_Option);
    

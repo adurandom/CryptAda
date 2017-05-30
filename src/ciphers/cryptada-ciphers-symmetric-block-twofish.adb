@@ -20,7 +20,7 @@
 --    File kind         :  Ada package body
 --    Author            :  A. Duran
 --    Creation date     :  April 6th, 2017
---    Current version   :  1.0
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the Twofish block cipher.
@@ -29,9 +29,13 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170406 ADD   Initial implementation.
+--    2.0   20170530 ADD   Changes in types.
 --------------------------------------------------------------------------------
 
+with Ada.Exceptions;                      use Ada.Exceptions;
+
 with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
+with CryptAda.Lists;                      use CryptAda.Lists;
 with CryptAda.Names;                      use CryptAda.Names;
 with CryptAda.Exceptions;                 use CryptAda.Exceptions;
 with CryptAda.Ciphers.Keys;               use CryptAda.Ciphers.Keys;
@@ -268,6 +272,12 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
    --[Body Declared Subprogram Specs]-------------------------------------------
    -----------------------------------------------------------------------------
 
+   --[Initialize_Object]--------------------------------------------------------
+
+   procedure   Initialize_Object(
+                  Object         : access Twofish_Cipher);
+   pragma Inline(Initialize_Object);
+   
    --[Pack_Block]---------------------------------------------------------------
 
    procedure   Pack_Block(
@@ -325,14 +335,14 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
    --[Encrypt_Block]------------------------------------------------------------
    
    procedure   Encrypt_Block(
-                  Cipher         : in out Twofish_Cipher;
+                  Cipher         : access Twofish_Cipher;
                   Input          : in     Twofish_Block;
                   Output         :    out Twofish_Block);
 
    --[Decrypt_Block]------------------------------------------------------------
    
    procedure   Decrypt_Block(
-                  Cipher         : in out Twofish_Cipher;
+                  Cipher         : access Twofish_Cipher;
                   Input          : in     Twofish_Block;
                   Output         :    out Twofish_Block);
    
@@ -340,6 +350,20 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
    --[Body Declared Subprogram Bodies]------------------------------------------
    -----------------------------------------------------------------------------
 
+   --[Initialize_Object]--------------------------------------------------------
+
+   procedure   Initialize_Object(
+                  Object         : access Twofish_Cipher)
+   is
+   begin
+      -- Set to initial value any attribute which is modified in this package
+
+      Object.all.State        := Idle;
+      Object.all.Key_Id       := Twofish_Key_Id'Last;
+      Object.all.S_Boxes      := (others => 16#00000000#);
+      Object.all.Subkeys      := (others => 16#00000000#);
+   end Initialize_Object;
+   
    --[Pack_Block]---------------------------------------------------------------
 
    procedure   Pack_Block(
@@ -635,7 +659,7 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
    --[Encrypt_Block]------------------------------------------------------------
    
    procedure   Encrypt_Block(
-                  Cipher         : in out Twofish_Cipher;
+                  Cipher         : access Twofish_Cipher;
                   Input          : in     Twofish_Block;
                   Output         :    out Twofish_Block)
    is
@@ -650,10 +674,10 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
 
       -- Xor block with input whiten.
       
-      J := Cipher.Subkeys'First + Input_Whiten_Offset;   
+      J := Cipher.all.Subkeys'First + Input_Whiten_Offset;   
       
       for I in PB'Range loop
-         PB(I) := PB(I) xor Cipher.Subkeys(J);
+         PB(I) := PB(I) xor Cipher.all.Subkeys(J);
          J := J + 1;
       end loop;
 
@@ -663,27 +687,27 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
          T0                      : Four_Bytes;
          T1                      : Four_Bytes;
          R                       : Positive := 1;
-         K                       : Positive := Cipher.Subkeys'First + Round_Subkeys_Offset;
+         K                       : Positive := Cipher.all.Subkeys'First + Round_Subkeys_Offset;
       begin
          -- Perform the encryption rounds.
          
          while R <= Twofish_Rounds loop
-            T0    := Fe_32(Cipher.S_Boxes, PB(1), 0);
-            T1    := Fe_32(Cipher.S_Boxes, PB(2), 3);
-            PB(3) := PB(3) xor (T0 + T1 + Cipher.Subkeys(K));
+            T0    := Fe_32(Cipher.all.S_Boxes, PB(1), 0);
+            T1    := Fe_32(Cipher.all.S_Boxes, PB(2), 3);
+            PB(3) := PB(3) xor (T0 + T1 + Cipher.all.Subkeys(K));
             K     := K + 1;
             PB(3) := Rotate_Right(PB(3), 1);
             PB(4) := Rotate_Left(PB(4), 1);
-            PB(4) := PB(4) xor (T0 + 2 * T1 + Cipher.Subkeys(K));
+            PB(4) := PB(4) xor (T0 + 2 * T1 + Cipher.all.Subkeys(K));
             K     := K + 1;
 
-            T0    := Fe_32(Cipher.S_Boxes, PB(3), 0);
-            T1    := Fe_32(Cipher.S_Boxes, PB(4), 3);
-            PB(1) := PB(1) xor (T0 + T1 + Cipher.Subkeys(K));
+            T0    := Fe_32(Cipher.all.S_Boxes, PB(3), 0);
+            T1    := Fe_32(Cipher.all.S_Boxes, PB(4), 3);
+            PB(1) := PB(1) xor (T0 + T1 + Cipher.all.Subkeys(K));
             K     := K + 1;
             PB(1) := Rotate_Right(PB(1), 1);
             PB(2) := Rotate_Left(PB(2), 1);
-            PB(2) := PB(2) xor (T0 + 2 * T1 + Cipher.Subkeys(K));
+            PB(2) := PB(2) xor (T0 + 2 * T1 + Cipher.all.Subkeys(K));
             K := K + 1;
             
             R := R + 2;
@@ -699,10 +723,10 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
       
       -- Xor with output whiten.
       
-      J := Cipher.Subkeys'First + Output_Whiten_Offset;   
+      J := Cipher.all.Subkeys'First + Output_Whiten_Offset;   
       
       for I in PB'Range loop
-         PB(I) := PB(I) xor Cipher.Subkeys(J);
+         PB(I) := PB(I) xor Cipher.all.Subkeys(J);
          J := J + 1;
       end loop;
       
@@ -714,7 +738,7 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
    --[Decrypt_Block]------------------------------------------------------------
    
    procedure   Decrypt_Block(
-                  Cipher         : in out Twofish_Cipher;
+                  Cipher         : access Twofish_Cipher;
                   Input          : in     Twofish_Block;
                   Output         :    out Twofish_Block)
    is
@@ -729,10 +753,10 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
 
       -- Xor block with output whiten.
       
-      J := Cipher.Subkeys'First + Output_Whiten_Offset;   
+      J := Cipher.all.Subkeys'First + Output_Whiten_Offset;   
       
       for I in PB'Range loop
-         PB(I) := PB(I) xor Cipher.Subkeys(J);
+         PB(I) := PB(I) xor Cipher.all.Subkeys(J);
          J := J + 1;
       end loop;
       
@@ -748,25 +772,25 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
          T0                      : Four_Bytes;
          T1                      : Four_Bytes;
          R                       : Positive := 1;
-         K                       : Positive := Cipher.Subkeys'Last;
+         K                       : Positive := Cipher.all.Subkeys'Last;
       begin
          while R <= Twofish_Rounds loop
-            T0    := Fe_32(Cipher.S_Boxes, PB(3), 0);
-            T1    := Fe_32(Cipher.S_Boxes, PB(4), 3);
-            PB(2) := PB(2) xor (T0 + 2 * T1 + Cipher.Subkeys(K));
+            T0    := Fe_32(Cipher.all.S_Boxes, PB(3), 0);
+            T1    := Fe_32(Cipher.all.S_Boxes, PB(4), 3);
+            PB(2) := PB(2) xor (T0 + 2 * T1 + Cipher.all.Subkeys(K));
             K     := K - 1;
             PB(2) := Rotate_Right(PB(2), 1);
             PB(1) := Rotate_Left(PB(1), 1);
-            PB(1) := PB(1) xor (T0 + T1 + Cipher.Subkeys(K));
+            PB(1) := PB(1) xor (T0 + T1 + Cipher.all.Subkeys(K));
             K     := K - 1;
             
-            T0    := Fe_32(Cipher.S_Boxes, PB(1), 0);
-            T1    := Fe_32(Cipher.S_Boxes, PB(2), 3);
-            PB(4) := PB(4) xor (T0 + 2 * T1 + Cipher.Subkeys(K));
+            T0    := Fe_32(Cipher.all.S_Boxes, PB(1), 0);
+            T1    := Fe_32(Cipher.all.S_Boxes, PB(2), 3);
+            PB(4) := PB(4) xor (T0 + 2 * T1 + Cipher.all.Subkeys(K));
             K     := K - 1;
             PB(4) := Rotate_Right(PB(4), 1);
             PB(3) := Rotate_Left(PB(3), 1);
-            PB(3) := PB(3) xor (T0 + T1 + Cipher.Subkeys(K));
+            PB(3) := PB(3) xor (T0 + T1 + Cipher.all.Subkeys(K));
             K := K - 1;
 
             R := R + 2;
@@ -775,10 +799,10 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
 
       -- Xor with input whiten.
       
-      J := Cipher.Subkeys'First + Input_Whiten_Offset;   
+      J := Cipher.all.Subkeys'First + Input_Whiten_Offset;   
       
       for I in PB'Range loop
-         PB(I) := PB(I) xor Cipher.Subkeys(J);
+         PB(I) := PB(I) xor Cipher.all.Subkeys(J);
          J := J + 1;
       end loop;
       
@@ -786,59 +810,94 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
 
       Unpack_Block(PB, Output);      
    end Decrypt_Block;
-   
+
    -----------------------------------------------------------------------------
-   --[Spec declared subprogram bodies]------------------------------------------
+   --[Getting a handle]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Ada.Finalization interface]-----------------------------------------------
+   --[Get_Symmetric_Cipher_Handle]----------------------------------------------
+
+   function    Get_Symmetric_Cipher_Handle
+      return   Symmetric_Cipher_Handle
+   is
+      P           : Twofish_Cipher_Ptr;
+   begin
+      P := new Twofish_Cipher'(Block_Cipher with
+                                    Id             => SC_Twofish,
+                                    Key_Id         => Twofish_Key_Id'Last,
+                                    S_Boxes        => (others => 16#00000000#),
+                                    Subkeys        => (others => 16#00000000#));
+                                 
+      P.all.Ciph_Type   := CryptAda.Ciphers.Block_Cipher;
+      P.all.Key_Info    := Twofish_Key_Info;
+      P.all.State       := Idle;
+      P.all.Block_Size  := Twofish_Block_Size;
+
+      return Ref(Symmetric_Cipher_Ptr(P));
+   exception
+      when X: others =>
+         Raise_Exception(
+            CryptAda_Storage_Error'Identity,
+            "Caught exception: '" &
+               Exception_Name(X) &
+               "' with message: '" &
+               Exception_Message(X) &
+               "', when allocating Twofish_Cipher object");
+   end Get_Symmetric_Cipher_Handle;
+
+   -----------------------------------------------------------------------------
+   --[Ada.Finalization Operations]----------------------------------------------
+   -----------------------------------------------------------------------------
 
    --[Initialize]---------------------------------------------------------------
 
+   overriding
    procedure   Initialize(
                   Object         : in out Twofish_Cipher)
    is
    begin
-      Object.Cipher_Id     := SC_Twofish_256;
       Object.Ciph_Type     := CryptAda.Ciphers.Block_Cipher;
       Object.Key_Info      := Twofish_Key_Info;
       Object.State         := Idle;
       Object.Block_Size    := Twofish_Block_Size;
-      Object.Key_Id        := Twofish_256;
-      Object.S_Boxes       := (others => 0);
-      Object.Subkeys       := (others => 0);
+      Object.Key_Id        := Twofish_Key_Id'Last;
+      Object.S_Boxes       := (others => 16#00000000#);
+      Object.Subkeys       := (others => 16#00000000#);
    end Initialize;
 
    --[Finalize]-----------------------------------------------------------------
 
+   overriding
    procedure   Finalize(
                   Object         : in out Twofish_Cipher)
    is
    begin
-      Object.Cipher_Id        := SC_Twofish_256;
-      Object.State            := Idle;
-      Object.Key_Id           := Twofish_256;
-      Object.S_Boxes       := (others => 0);
-      Object.Subkeys       := (others => 0);
+      Object.State         := Idle;
+      Object.Key_Id        := Twofish_Key_Id'Last;
+      Object.S_Boxes       := (others => 16#00000000#);
+      Object.Subkeys       := (others => 16#00000000#);
    end Finalize;
-   
-   --[Dispatching Operations]---------------------------------------------------
 
+   -----------------------------------------------------------------------------
+   --[Dispatching operations]---------------------------------------------------
+   -----------------------------------------------------------------------------
+   
    --[Start_Cipher]-------------------------------------------------------------
 
+   overriding
    procedure   Start_Cipher(
-                  The_Cipher     : in out Twofish_Cipher;
+                  The_Cipher     : access Twofish_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     Key)
    is
       K_Id           : Twofish_Key_Id;
-      BC_Id          : Block_Cipher_Id;
    begin
-
       -- Veriify that key is a valid Twofish key.
       
       if not Is_Valid_Twofish_Key(With_Key) then
-         raise CryptAda_Invalid_Key_Error;
+         Raise_Exception(
+            CryptAda_Invalid_Key_Error'Identity,
+            "Invalid Twofish key");
       end if;
 
       -- Depending on the key length.
@@ -846,59 +905,72 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
       case Get_Key_Length(With_Key) is
          when 8 =>
             K_Id  := Twofish_64;
-            BC_Id := SC_Twofish_64;
          when 16 =>
             K_Id  := Twofish_128;
-            BC_Id := SC_Twofish_128;
          when 24 =>
             K_Id  := Twofish_192;
-            BC_Id := SC_Twofish_192;
          when others =>
             K_Id  := Twofish_256;
-            BC_Id := SC_Twofish_256;
       end case;
       
       -- Make key
       
-      Make_Key(Get_Key_Bytes(With_Key), The_Cipher.S_Boxes, The_Cipher.Subkeys);
+      Make_Key(Get_Key_Bytes(With_Key), The_Cipher.all.S_Boxes, The_Cipher.all.Subkeys);
 
       -- Update cipher fields.
 
-      The_Cipher.Cipher_Id       := BC_Id;
-      
       if For_Operation = Encrypt then
-         The_Cipher.State        := Encrypting;
+         The_Cipher.all.State := Encrypting;
       else
-         The_Cipher.State        := Decrypting;
+         The_Cipher.all.State := Decrypting;
       end if;
 
-      The_Cipher.Key_Id          := K_Id;
+      The_Cipher.all.Key_Id   := K_Id;
    end Start_Cipher;
 
+   --[Start_Cipher]-------------------------------------------------------------
+
+   overriding
+   procedure   Start_Cipher(
+                  The_Cipher     : access Twofish_Cipher;
+                  Parameters     : in     List)
+   is
+      O              : Cipher_Operation;
+      K              : Key;
+   begin
+      Get_Parameters(Parameters, O, K);
+      Start_Cipher(The_Cipher, O, K);
+   end Start_Cipher;
+   
    --[Do_Process]---------------------------------------------------------------
 
+   overriding
    procedure   Do_Process(
-                  With_Cipher    : in out Twofish_Cipher;
+                  With_Cipher    : access Twofish_Cipher;
                   Input          : in     Byte_Array;
                   Output         :    out Byte_Array)
    is
    begin
       -- Check state.
       
-      if With_Cipher.State = Idle then
-         raise CryptAda_Uninitialized_Cipher_Error;
+      if With_Cipher.all.State = Idle then
+         Raise_Exception(
+            CryptAda_Uninitialized_Cipher_Error'Identity,
+            "Twofish cipher is in Idle state");      
       end if;
 
       -- Check blocks.
       
       if Input'Length /= Twofish_Block_Size or
          Output'Length /= Twofish_Block_Size then
-         raise CryptAda_Invalid_Block_Length_Error;
+         Raise_Exception(
+            CryptAda_Invalid_Block_Length_Error'Identity,
+            "Invalid block length");               
       end if;
 
       -- Process block.
       
-      if With_Cipher.State = Encrypting then
+      if With_Cipher.all.State = Encrypting then
          Encrypt_Block(With_Cipher, Input, Output);
       else
          Decrypt_Block(With_Cipher, Input, Output);
@@ -906,29 +978,30 @@ package body CryptAda.Ciphers.Symmetric.Block.Twofish is
    end Do_Process;
    
    --[Stop_Cipher]--------------------------------------------------------------
-      
+
+   overriding
    procedure   Stop_Cipher(
-                  The_Cipher     : in out Twofish_Cipher)
+                  The_Cipher     : access Twofish_Cipher)
    is
    begin
-      if The_Cipher.State /= Idle then
-         The_Cipher.State     := Idle;
-         The_Cipher.Cipher_Id := SC_Twofish_256;
-         The_Cipher.Key_Id    := Twofish_256;         
-      end if;
+      Initialize_Object(The_Cipher);
    end Stop_Cipher;
-   
-   --[Other public subprograms]-------------------------------------------------
+
+   -----------------------------------------------------------------------------
+   --[Non-Dispatching operations]-----------------------------------------------
+   -----------------------------------------------------------------------------
    
    --[Get_Twofish_Key_Id]-------------------------------------------------------
 
    function    Get_Twofish_Key_Id(
-                  Of_Cipher      : in     Twofish_Cipher'Class)
+                  Of_Cipher      : access Twofish_Cipher'Class)
       return   Twofish_Key_Id
    is
    begin
       if Of_Cipher.State = Idle then
-         raise CryptAda_Uninitialized_Cipher_Error;
+         Raise_Exception(
+            CryptAda_Uninitialized_Cipher_Error'Identity,
+            "Cipher is in Idle state");               
       else
          return Of_Cipher.Key_Id;
       end if;

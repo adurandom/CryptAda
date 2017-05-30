@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  April 3rd, 2017
---    Current version   :  1.0
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the IDEA block cipher.
@@ -36,10 +36,8 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170403 ADD   Initial implementation.
+--    2.0   20170529 ADD   Changed types.
 --------------------------------------------------------------------------------
-
-with CryptAda.Pragmatics;
-with CryptAda.Ciphers.Keys;
 
 package CryptAda.Ciphers.Symmetric.Block.IDEA is
 
@@ -69,11 +67,39 @@ package CryptAda.Ciphers.Symmetric.Block.IDEA is
    
    type IDEA_Cipher is new Block_Cipher with private;
 
+   --[IDEA_Cipher_Ptr]----------------------------------------------------------
+   -- Access type to IDEA_Cipher objects.
+   -----------------------------------------------------------------------------
+   
+   type IDEA_Cipher_Ptr is access all IDEA_Cipher'Class;
+   
    --[IDEA_Block]----------------------------------------------------------------
    -- Constrained subtype for IDEA blocks.
    -----------------------------------------------------------------------------
    
    subtype IDEA_Block is Cipher_Block(1 .. IDEA_Block_Size);
+
+   -----------------------------------------------------------------------------
+   --[Getting a handle]---------------------------------------------------------
+   -----------------------------------------------------------------------------
+   
+   --[Get_Symmetric_Cipher_Handle]----------------------------------------------
+   -- Purpose:
+   -- Creates a Symmetric_Cipher object and returns a handle for that object.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- None.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Symmetric_Cipher_Handle value that handles the reference to the newly 
+   -- created Symmetric_Cipher object.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CrtyptAda_Storage_Error if an error is raised during object allocation.
+   -----------------------------------------------------------------------------
+
+   function    Get_Symmetric_Cipher_Handle
+      return   Symmetric_Cipher_Handle;
    
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
@@ -81,23 +107,33 @@ package CryptAda.Ciphers.Symmetric.Block.IDEA is
 
    --[Start_Cipher]-------------------------------------------------------------
 
+   overriding
    procedure   Start_Cipher(
-                  The_Cipher     : in out IDEA_Cipher;
+                  The_Cipher     : access IDEA_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     CryptAda.Ciphers.Keys.Key);
 
+   --[Start_Cipher]-------------------------------------------------------------
+
+   overriding
+   procedure   Start_Cipher(
+                  The_Cipher     : access IDEA_Cipher;
+                  Parameters     : in     CryptAda.Lists.List);
+   
    --[Do_Process]---------------------------------------------------------------
 
+   overriding
    procedure   Do_Process(
-                  With_Cipher    : in out IDEA_Cipher;
+                  With_Cipher    : access IDEA_Cipher;
                   Input          : in     CryptAda.Pragmatics.Byte_Array;
                   Output         :    out CryptAda.Pragmatics.Byte_Array);
 
    --[Stop_Cipher]--------------------------------------------------------------
-      
-   procedure   Stop_Cipher(
-                  The_Cipher     : in out IDEA_Cipher);
 
+   overriding
+   procedure   Stop_Cipher(
+                  The_Cipher     : access IDEA_Cipher);
+         
    -----------------------------------------------------------------------------
    --[Non-dispatching operations]-----------------------------------------------
    -----------------------------------------------------------------------------
@@ -186,16 +222,18 @@ private
 
    type IDEA_Cipher is new Block_Cipher with
       record
-         Key_Schedule            : IDEA_Key_Schedule := (others => (others => 0));
+         Key_Schedule            : IDEA_Key_Schedule := (others => (others => 16#0000#));
       end record;
 
    -----------------------------------------------------------------------------
    --[Subprogram specifications]------------------------------------------------
    -----------------------------------------------------------------------------
 
+   overriding
    procedure   Initialize(
                   Object         : in out IDEA_Cipher);
 
+   overriding
    procedure   Finalize(
                   Object         : in out IDEA_Cipher);
 

@@ -16,47 +16,45 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-identification.ads
---    File kind         :  Ada package specification.
+--    Filename          :  cryptada-factories-random_generator_factory.adb
+--    File kind         :  Ada package body
 --    Author            :  A. Duran
---    Creation date     :  March 13th, 2017
---    Current version   :  1.2
+--    Creation date     :  May 30th, 2017
+--    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    This package provides constants that identify the current version of the
---    library.
+--    This package implements a factory for random generators.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
---    1.0   20170313 ADD   Initial implementation.
---    1.1   20170430 ADD   Release 0.1.d.
---    1.2   20170530 ADD   Release 0.2.a
+--    1.0   20170530 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-package CryptAda.Identification is
+with CryptAda.Names;                      use CryptAda.Names;
+with CryptAda.Random.Generators;          use CryptAda.Random.Generators;
+with CryptAda.Random.Generators.RSAREF;   use CryptAda.Random.Generators.RSAREF;
+with CryptAda.Random.Generators.CAPRNG;   use CryptAda.Random.Generators.CAPRNG;
 
-   pragma Pure(Identification);
+package body CryptAda.Factories.Random_Generator_Factory is
 
    -----------------------------------------------------------------------------
-   --[Constants]----------------------------------------------------------------
+   --[Subprogram Bosies]--------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[CryptAda Identification Constants]----------------------------------------
-   -- Next constants provide version information as well as identification
-   -- information of CryptAda.
-   -----------------------------------------------------------------------------
+   --[Create_Random_Generator]--------------------------------------------------
 
-   CryptAda_Name              : aliased constant String     := "TCantos Ada Cryptography Library";
-   CryptAda_Acronym           : aliased constant String     := "CryptAda";
-   CryptAda_Copyright         : aliased constant String     := "Copyright (c) 2017, Antonio Duran";
-   CryptAda_Version_Major     : aliased constant String     := "0";
-   CryptAda_Version_Minor     : aliased constant String     := "2";
-   CryptAda_Release           : aliased constant String     := "a";
-   CryptAda_Version_String    : aliased constant String     := CryptAda_Version_Major & "." &
-                                                               CryptAda_Version_Minor & "." &
-                                                               CryptAda_Release;
-   CryptAda_Version_Comments  : aliased constant String     := "Second alpha release";
-   CryptAda_Release_Date      : aliased constant String     := "2017/05/30";
-
-end CryptAda.Identification;
+   function    Create_Random_Generator(
+                  Id             : in     Random_Generator_Id)
+      return   Random_Generator_Handle
+   is
+   begin
+      case Id is
+         when RG_RSAREF =>
+            return CryptAda.Random.Generators.RSAREF.Get_Random_Generator_Handle;
+         when RG_CAPRNG =>
+            return CryptAda.Random.Generators.CAPRNG.Get_Random_Generator_Handle;
+      end case;
+   end Create_Random_Generator;
+      
+end CryptAda.Factories.Random_Generator_Factory;

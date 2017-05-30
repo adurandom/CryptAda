@@ -20,7 +20,7 @@
 --    File kind         :  Ada package body.
 --    Author            :  A. Duran
 --    Creation date     :  March 21th, 2017
---    Current version   :  1.0
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Root package for CryptAda implemented block ciphers.
@@ -31,6 +31,7 @@
 --    1.0   20170321 ADD   Initial implementation.
 --    1.1   20170329 ADD   Removed key generation subprogramm and other changes.
 --    1.2   20140403 ADD   Changed cipher hierarchy.
+--    2.0   20140529 ADD   Changed cipher types.
 --------------------------------------------------------------------------------
 
 package body CryptAda.Ciphers.Symmetric.Block is
@@ -42,11 +43,11 @@ package body CryptAda.Ciphers.Symmetric.Block is
    --[Get_Block_Size]-----------------------------------------------------------
 
    function    Get_Block_Size(
-                  From           : in     Block_Cipher'Class)
+                  From           : access Block_Cipher'Class)
       return   Cipher_Block_Size
    is
    begin
-      return From.Block_Size;
+      return From.all.Block_Size;
    end Get_Block_Size;
 
 end CryptAda.Ciphers.Symmetric.Block;

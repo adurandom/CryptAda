@@ -32,9 +32,6 @@
 --------------------------------------------------------------------------------
 
 with CryptAda.Names;                      use CryptAda.Names;
-with CryptAda.Names.Scan;                 use CryptAda.Names.Scan;
-with CryptAda.Names.ASN1_OIDs;            use CryptAda.Names.ASN1_OIDs;
-with CryptAda.Names.OpenPGP;              use CryptAda.Names.OpenPGP;
 with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
 with CryptAda.Digests.Counters;           use CryptAda.Digests.Counters;
 with CryptAda.Digests.Hashes;             use CryptAda.Digests.Hashes;
@@ -87,27 +84,6 @@ package body CryptAda.Digests.Message_Digests is
    begin
       return From.all.Id;
    end Get_Algorithm_Id;
-
-   --[Get_Algorithm_Name]-------------------------------------------------------
-
-   function    Get_Algorithm_Name(
-                  From           : access Message_Digest'Class;
-                  Schema         : in     Naming_Schema)
-      return   String
-   is
-   begin
-      case Schema is
-         when NS_Scan =>
-            return SCAN_Digest_Algorithms(From.all.Id).all;
-
-         when NS_ASN1_OIDs =>
-            return ASN1_OIDs_Digest_Algorithms(From.all.Id).all;
-
-         when NS_OpenPGP =>
-            return OpenPGP_Digest_Algorithms(From.all.Id).all;
-
-      end case;
-   end Get_Algorithm_Name;
 
    --[Get_State_Size]-----------------------------------------------------------
 

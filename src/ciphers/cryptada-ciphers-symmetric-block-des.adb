@@ -20,7 +20,7 @@
 --    File kind         :  Ada package body
 --    Author            :  A. Duran
 --    Creation date     :  March 21th, 2017
---    Current version   :  1.2
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the DES block cipher.
@@ -31,11 +31,15 @@
 --    1.0   20170321 ADD   Initial implementation.
 --    1.1   20170329 ADD   Removed key generation subprogram.
 --    1.2   20170403 ADD   Changed symmetric ciphers hierarchy.
+--    2.0   20170529 ADD   Changed types definitions.
 --------------------------------------------------------------------------------
+
+with Ada.Exceptions;                   use Ada.Exceptions;
 
 with CryptAda.Pragmatics;              use CryptAda.Pragmatics;
 with CryptAda.Names;                   use CryptAda.Names;
 with CryptAda.Exceptions;              use CryptAda.Exceptions;
+with CryptAda.Lists;                   use CryptAda.Lists;
 with CryptAda.Ciphers.Keys;            use CryptAda.Ciphers.Keys;
 
 package body CryptAda.Ciphers.Symmetric.Block.DES is
@@ -281,25 +285,31 @@ package body CryptAda.Ciphers.Symmetric.Block.DES is
    -----------------------------------------------------------------------------
    --[Subprogram Specification]-------------------------------------------------
    -----------------------------------------------------------------------------
+
+   --[Initialize_Object]--------------------------------------------------------
+
+   procedure   Initialize_Object(
+                  Object         : access DES_Cipher);
+   pragma Inline(Initialize_Object);
    
    --[Pack_Block]---------------------------------------------------------------
 
-   procedure   Pack_Block(
-                  Unpacked       : in     DES_Block;
-                  Packed         :    out DES_Packed_Block);
+   function    Pack_Block(
+                  Unpacked       : in     DES_Block)
+      return   DES_Packed_Block;
    pragma Inline(Pack_Block);
    
    --[Unpack_Block]-------------------------------------------------------------
 
-   procedure   Unpack_Block(
-                  Packed         : in     DES_Packed_Block;
-                  Unpacked       :    out DES_Block);
+   function    Unpack_Block(
+                  Packed         : in     DES_Packed_Block)
+      return   DES_Block;
    pragma Inline(Unpack_Block);
 
    --[Generate_Key_Schedule]----------------------------------------------------
 
    procedure   Generate_Key_Schedule(
-                  For_Cipher     : in out DES_Cipher;
+                  For_Cipher     : access DES_Cipher;
                   With_Key       : in     Key;
                   For_Operation  : in     Cipher_Operation);
 
@@ -321,44 +331,64 @@ package body CryptAda.Ciphers.Symmetric.Block.DES is
 
    procedure   Do_Block(
                   KS             : in     DES_Key_Schedule_Block;
-                  Block          : in out DES_Packed_Block);
+                  Input          : in     DES_Block;
+                  Output         :    out DES_Block);
+   pragma Inline(Do_Block);
    
    -----------------------------------------------------------------------------
    --[Body declared subprogram bodies]------------------------------------------
    -----------------------------------------------------------------------------
    
+   --[Initialize_Object]--------------------------------------------------------
+
+   procedure   Initialize_Object(
+                  Object         : access DES_Cipher)
+   is
+   begin
+      -- Set to initial value any attribute which is modified in this package
+
+      Object.all.State        := Idle;
+      Object.all.Key_Schedule := (others => 16#00000000#);      
+   end Initialize_Object;
+
    --[Pack_Block]---------------------------------------------------------------
    
-   procedure   Pack_Block(
-                  Unpacked       : in     DES_Block;
-                  Packed         :    out DES_Packed_Block)
+   function    Pack_Block(
+                  Unpacked       : in     DES_Block)
+      return   DES_Packed_Block
    is
+      PB             : DES_Packed_Block := (others => 16#00000000#);
       J              : Positive := Unpacked'First;
    begin
-      for I in Packed'Range loop
-         Packed(I) := Pack(Unpacked(J .. J + 3), Big_Endian);
+      for I in PB'Range loop
+         PB(I) := Pack(Unpacked(J .. J + 3), Big_Endian);
          J := J + 4;
       end loop;
+      
+      return PB;
    end Pack_Block;
    
    --[Unpack_Block]-------------------------------------------------------------
 
-   procedure   Unpack_Block(
-                  Packed         : in     DES_Packed_Block;
-                  Unpacked       :    out DES_Block)
+   function    Unpack_Block(
+                  Packed         : in     DES_Packed_Block)
+      return   DES_Block
    is
-      J              : Positive := Unpacked'First;
+      UB             : DES_Block := (others => 16#00#);
+      J              : Positive := UB'First;
    begin
       for I in Packed'Range loop
-         Unpacked(J .. J + 3) := Unpack(Packed(I), Big_Endian);
+         UB(J .. J + 3) := Unpack(Packed(I), Big_Endian);
          J := J + 4;
       end loop;
+      
+      return UB;
    end Unpack_Block;
 
    --[Generate_Key_Schedule]----------------------------------------------------
 
    procedure   Generate_Key_Schedule(
-                  For_Cipher     : in out DES_Cipher;
+                  For_Cipher     : access DES_Cipher;
                   With_Key       : in     Key;
                   For_Operation  : in     Cipher_Operation)
    is
@@ -374,7 +404,7 @@ package body CryptAda.Ciphers.Symmetric.Block.DES is
    begin
       -- Initialize Key_Schedule.
       
-      For_Cipher.Key_Schedule := (others => 0);
+      For_Cipher.all.Key_Schedule := (others => 0);
 
       -- Perform initial permutation of key bits and store the results in PC_1M
       -- Will use 1 byte for each bit.
@@ -444,8 +474,8 @@ package body CryptAda.Ciphers.Symmetric.Block.DES is
 
          L := (2 * I) - 1;
 
-         For_Cipher.Key_Schedule(L)       := Make_Four_Bytes(KSB(7), KSB(5), KSB(3), KSB(1));
-         For_Cipher.Key_Schedule(L + 1)   := Make_Four_Bytes(KSB(8), KSB(6), KSB(4), KSB(2));
+         For_Cipher.all.Key_Schedule(L)      := Make_Four_Bytes(KSB(7), KSB(5), KSB(3), KSB(1));
+         For_Cipher.all.Key_Schedule(L + 1)  := Make_Four_Bytes(KSB(8), KSB(6), KSB(4), KSB(2));
       end loop;
 
       -- Reverse key schedule order when decrypting.
@@ -454,13 +484,13 @@ package body CryptAda.Ciphers.Symmetric.Block.DES is
          L := 1;
 
          while L <= 16 loop
-            T := For_Cipher.Key_Schedule(L);
-            For_Cipher.Key_Schedule(L) := For_Cipher.Key_Schedule(For_Cipher.Key_Schedule'Last - L);
-            For_Cipher.Key_Schedule(For_Cipher.Key_Schedule'Last - L) := T;
+            T := For_Cipher.all.Key_Schedule(L);
+            For_Cipher.all.Key_Schedule(L) := For_Cipher.all.Key_Schedule(For_Cipher.all.Key_Schedule'Last - L);
+            For_Cipher.all.Key_Schedule(For_Cipher.all.Key_Schedule'Last - L) := T;
 
-            T := For_Cipher.Key_Schedule(L + 1);
-            For_Cipher.Key_Schedule(L + 1) := For_Cipher.Key_Schedule(For_Cipher.Key_Schedule'Last - L + 1);
-            For_Cipher.Key_Schedule(For_Cipher.Key_Schedule'Last - L + 1) := T;
+            T := For_Cipher.all.Key_Schedule(L + 1);
+            For_Cipher.all.Key_Schedule(L + 1) := For_Cipher.all.Key_Schedule(For_Cipher.all.Key_Schedule'Last - L + 1);
+            For_Cipher.all.Key_Schedule(For_Cipher.all.Key_Schedule'Last - L + 1) := T;
 
             L := L + 2;
          end loop;
@@ -525,14 +555,15 @@ package body CryptAda.Ciphers.Symmetric.Block.DES is
 
    procedure   Do_Block(
                   KS             : in     DES_Key_Schedule_Block;
-                  Block          : in out DES_Packed_Block)
+                  Input          : in     DES_Block;
+                  Output         :    out DES_Block)
    is
+      PB             : DES_Packed_Block := Pack_Block(Input);
       W              : Four_Bytes;
-      L              : Four_Bytes := Block(1);
-      R              : Four_Bytes := Block(2);
+      L              : Four_Bytes := PB(1);
+      R              : Four_Bytes := PB(2);
       N              : Positive := 1;
    begin
-
       -- Perdorm initial permutation.
 
       I_Perm(R, L);
@@ -585,55 +616,107 @@ package body CryptAda.Ciphers.Symmetric.Block.DES is
 
       -- Update block.
 
-      Block(1) := R;
-      Block(2) := L;
+      PB(1) := R;
+      PB(2) := L;
+      
+      -- Set output.
+      
+      Output := Unpack_Block(PB);
+      
+      -- Clear intermediate values.
+
+      pragma Warnings (Off, "useless assignment to ""PB"", value never referenced");
+      pragma Warnings (Off, "useless assignment to ""W"", value never referenced");
+      pragma Warnings (Off, "useless assignment to ""L"", value never referenced");
+      pragma Warnings (Off, "useless assignment to ""R"", value never referenced");
+      
+      PB := (others => 16#00000000#);
+      W  := 16#00000000#;
+      L  := 16#00000000#;
+      R  := 16#00000000#;
+      
+      pragma Warnings (On, "useless assignment to ""PB"", value never referenced");
+      pragma Warnings (On, "useless assignment to ""W"", value never referenced");
+      pragma Warnings (On, "useless assignment to ""L"", value never referenced");
+      pragma Warnings (On, "useless assignment to ""R"", value never referenced");
    end Do_Block;
 
    -----------------------------------------------------------------------------
-   --[Spec declared subprogram bodies]------------------------------------------
+   --[Getting a handle]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Ada.Finalization interface]-----------------------------------------------
+   --[Get_Symmetric_Cipher_Handle]----------------------------------------------
+
+   function    Get_Symmetric_Cipher_Handle
+      return   Symmetric_Cipher_Handle
+   is
+      P           : DES_Cipher_Ptr;
+   begin
+      P := new DES_Cipher'(Block_Cipher with
+                                 Id             => SC_DES,
+                                 Key_Schedule   => (others => 16#00000000#));
+                                 
+      P.all.Ciph_Type   := CryptAda.Ciphers.Block_Cipher;
+      P.all.Key_Info    := DES_Key_Info;
+      P.all.State       := Idle;
+      P.all.Block_Size  := DES_Block_Size;
+
+      return Ref(Symmetric_Cipher_Ptr(P));
+   exception
+      when others =>
+         Raise_Exception(
+            CryptAda_Storage_Error'Identity,
+            "Error when allocating DES_Cipher object");
+   end Get_Symmetric_Cipher_Handle;
+
+   -----------------------------------------------------------------------------
+   --[Ada.Finalization Operations]----------------------------------------------
+   -----------------------------------------------------------------------------
 
    --[Initialize]---------------------------------------------------------------
 
+   overriding
    procedure   Initialize(
                   Object         : in out DES_Cipher)
    is
    begin
-      Object.Cipher_Id     := SC_DES;
       Object.Ciph_Type     := CryptAda.Ciphers.Block_Cipher;
       Object.Key_Info      := DES_Key_Info;
       Object.State         := Idle;
       Object.Block_Size    := DES_Block_Size;
-      Object.Key_Schedule  := (others => 0);
+      Object.Key_Schedule  := (others => 16#000000#);
    end Initialize;
 
    --[Finalize]-----------------------------------------------------------------
 
+   overriding
    procedure   Finalize(
                   Object         : in out DES_Cipher)
    is
    begin
       Object.State         := Idle;
-      Object.Key_Schedule  := (others => 0);
+      Object.Key_Schedule  := (others => 16#00000000#);
    end Finalize;
    
+   -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
+   -----------------------------------------------------------------------------
 
    --[Start_Cipher]-------------------------------------------------------------
 
+   overriding
    procedure   Start_Cipher(
-                  The_Cipher     : in out DES_Cipher;
+                  The_Cipher     : access DES_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     Key)
    is
    begin
-
       -- Veriify that key is a valid DES key.
       
       if not Is_Valid_DES_Key(With_Key) then
-         raise CryptAda_Invalid_Key_Error;
+         Raise_Exception(
+            CryptAda_Invalid_Key_Error'Identity,
+            "Invalid DES key");
       end if;
 
       -- Obtain key schedule.
@@ -643,53 +726,69 @@ package body CryptAda.Ciphers.Symmetric.Block.DES is
       -- Set cipher state.
      
       if For_Operation = Encrypt then
-         The_Cipher.State  := Encrypting;
+         The_Cipher.all.State := Encrypting;
       else
-         The_Cipher.State  := Decrypting;
+         The_Cipher.all.State := Decrypting;
       end if;
    end Start_Cipher;
 
+   --[Start_Cipher]-------------------------------------------------------------
+
+   overriding
+   procedure   Start_Cipher(
+                  The_Cipher     : access DES_Cipher;
+                  Parameters     : in     List)
+   is
+      O              : Cipher_Operation;
+      K              : Key;
+   begin
+      Get_Parameters(Parameters, O, K);
+      Start_Cipher(The_Cipher, O, K);
+   end Start_Cipher;
+   
    --[Do_Process]---------------------------------------------------------------
 
+   overriding
    procedure   Do_Process(
-                  With_Cipher    : in out DES_Cipher;
+                  With_Cipher    : access DES_Cipher;
                   Input          : in     Byte_Array;
                   Output         :    out Byte_Array)
    is
-      PB             : DES_Packed_Block;
    begin
       -- Check state.
       
-      if With_Cipher.State = Idle then
-         raise CryptAda_Uninitialized_Cipher_Error;
+      if With_Cipher.all.State = Idle then
+         Raise_Exception(
+            CryptAda_Uninitialized_Cipher_Error'Identity,
+            "DES cipher is in Idle state");
       end if;
 
-      -- Check block lengthd.
+      -- Check block length.
       
       if Input'Length /= DES_Block_Size or Output'Length /= DES_Block_Size then
-         raise CryptAda_Invalid_Block_Length_Error;
+         Raise_Exception(
+            CryptAda_Invalid_Block_Length_Error'Identity,
+            "Invalid block length");
       end if;
 
       -- Process block.
       
-      Pack_Block(Input, PB);
-      Do_Block(With_Cipher.Key_Schedule, PB);
-      Unpack_Block(PB, Output);
+      Do_Block(With_Cipher.all.Key_Schedule, Input, Output);
    end Do_Process;
 
    --[Stop_Cipher]--------------------------------------------------------------
-      
+
+   overriding 
    procedure   Stop_Cipher(
-                  The_Cipher     : in out DES_Cipher)
+                  The_Cipher     : access DES_Cipher)
    is
    begin
-      if The_Cipher.State /= Idle then
-         The_Cipher.Key_Schedule := (others => 0);
-         The_Cipher.State        := Idle;
-      end if;
+      Initialize_Object(The_Cipher);
    end Stop_Cipher;
 
+   -----------------------------------------------------------------------------
    --[Non-Dispatching operations]-----------------------------------------------
+   -----------------------------------------------------------------------------
 
    --[Is_Valid_DES_Key]---------------------------------------------------------
    
@@ -697,8 +796,7 @@ package body CryptAda.Ciphers.Symmetric.Block.DES is
                   The_Key        : in     Key)
       return   Boolean
    is
-   begin
-   
+   begin   
       -- Check for key validity: Key must not be null and must be of appropriate 
       -- length.
       
@@ -716,7 +814,6 @@ package body CryptAda.Ciphers.Symmetric.Block.DES is
       return   Boolean
    is
    begin
-   
       -- Key must be valid.
       
       if not Is_Valid_DES_Key(The_Key) then
@@ -758,19 +855,22 @@ package body CryptAda.Ciphers.Symmetric.Block.DES is
    is
    begin
       if Is_Null(Of_Key) then
-         raise CryptAda_Null_Argument_Error;
+         Raise_Exception(
+            CryptAda_Null_Argument_Error'Identity,
+            "Key is null");
       end if;
       
       if Get_Key_Length(Of_Key) /= DES_Key_Length then
-         raise CryptAda_Invalid_Key_Error;
+         Raise_Exception(
+            CryptAda_Invalid_Key_Error'Identity,
+            "Key is a invalid DES key");
       end if;
       
       declare
          KB       : constant Byte_Array := Get_Key_Bytes(Of_Key);
          CP       : Byte;
          TP       : Byte;
-      begin
-      
+      begin      
          -- Loop through key bytes.
 
          for I in KB'Range loop
@@ -810,11 +910,15 @@ package body CryptAda.Ciphers.Symmetric.Block.DES is
    is
    begin
       if Is_Null(Of_Key) then
-         raise CryptAda_Null_Argument_Error;
+         Raise_Exception(
+            CryptAda_Null_Argument_Error'Identity,
+            "Key is null");
       end if;
       
       if Get_Key_Length(Of_Key) /= DES_Key_Length then
-         raise CryptAda_Invalid_Key_Error;
+         Raise_Exception(
+            CryptAda_Invalid_Key_Error'Identity,
+            "Key is a invalid DES key");
       end if;
 
       declare

@@ -32,6 +32,8 @@
 --    1.1   20170403 ADD   Changes in Symmetric ciphers hierarchy.
 --------------------------------------------------------------------------------
 
+with Ada.Exceptions;                         use Ada.Exceptions;
+
 with CryptAda.Exceptions;                    use CryptAda.Exceptions;
 with CryptAda.Pragmatics;                    use CryptAda.Pragmatics;
 with CryptAda.Random.Generators;             use CryptAda.Random.Generators;
@@ -48,7 +50,7 @@ package body CryptAda.Ciphers.Key_Generators.TDEA is
    --[Generate_Strong_DES_Key]--------------------------------------------------
    
    procedure   Generate_Strong_DES_Key(
-                  The_Generator  : in out TDEA_Key_Generator'Class;
+                  The_Generator  : access TDEA_Key_Generator'Class;
                   The_Key        : in out Key);
 
    -----------------------------------------------------------------------------
@@ -58,34 +60,99 @@ package body CryptAda.Ciphers.Key_Generators.TDEA is
    --[Generate_Strong_DES_Key]--------------------------------------------------
    
    procedure   Generate_Strong_DES_Key(
-                  The_Generator  : in out TDEA_Key_Generator'Class;
+                  The_Generator  : access TDEA_Key_Generator'Class;
                   The_Key        : in out Key)
    is
       KB             : Byte_Array(1 .. DES_Key_Length);
+      RNGP           : constant Random_Generator_Ptr := Get_Random_Generator_Ptr(The_Generator.all.RH);
    begin
       loop
-         Random_Generate(The_Generator.PRNG.all, KB);
+         Random_Generate(RNGP, KB);
          Set_Key(The_Key, KB);
          Fix_DES_Key_Parity(The_Key);
          
          exit when Is_Strong_DES_Key(The_Key);         
       end loop;
    end Generate_Strong_DES_Key;
+
+   -----------------------------------------------------------------------------
+   --[Spec Declared Subprogram Bodiea]------------------------------------------
+   -----------------------------------------------------------------------------
+   
+   --[Get_Key_Generator_Handle]-------------------------------------------------
+
+   function    Get_Key_Generator_Handle(
+                  With_RNG       : in     Random_Generator_Handle)
+      return   Key_Generator_Handle
+   is
+      KGP            : TDEA_Key_Generator_Ptr;
+      RNGP           : Random_Generator_Ptr;
+   begin
+      -- Check the RNG is started and seeded.
+      
+      if not Is_Valid_Handle(With_RNG) then
+         Raise_Exception(
+            CryptAda_Bad_Argument_Error'Identity,
+            "Random_Generator_Handle is invalid");
+      end if;
+      
+      RNGP := Get_Random_Generator_Ptr(With_RNG);
+      
+      if not Is_Started(RNGP) then
+         Raise_Exception(
+            CryptAda_Generator_Not_Started_Error'Identity,
+            "Random generator is not started");
+      end if;
+      
+      if not Is_Seeded(RNGP) then
+         Raise_Exception(
+            CryptAda_Generator_Need_Seeding_Error'Identity,
+            "Random generator is not seeded");
+      end if;
+         
+      -- Allocate the key generator.
+      
+      KGP := new TDEA_Key_Generator'(Key_Generator with null record);
+      
+      KGP.all.RH := With_RNG;
+
+      return Ref(Key_Generator_Ptr(KGP));
+   exception
+      when CryptAda_Bad_Argument_Error |
+           CryptAda_Generator_Not_Started_Error |
+           CryptAda_Generator_Need_Seeding_Error =>
+         raise;
+         
+      when others =>
+         Raise_Exception(
+            CryptAda_Storage_Error'Identity,
+            "Error when allocating Key_Generator object");
+   end Get_Key_Generator_Handle;
+
+   --[Generate_Key]-------------------------------------------------------------
+
+   pragma Warnings (Off, "formal parameter ""Key_Length"" is not referenced");
+   overriding
+   procedure   Generate_Key(
+                  The_Generator  : access TDEA_Key_Generator;
+                  The_Key        : in out Key;
+                  Key_Length     : in     Cipher_Key_Length)
+   is
+   pragma Warnings (On, "formal parameter ""Key_Length"" is not referenced");
+   begin
+      Generate_Key(The_Generator, The_Key, Keying_Option_1);
+   end Generate_Key;
    
    --[Generate_Key]-------------------------------------------------------------
 
    procedure   Generate_Key(
-                  The_Generator  : in out TDEA_Key_Generator'Class;
+                  The_Generator  : access TDEA_Key_Generator'Class;
                   The_Key        : in out Key;
                   Keying_Option  : in     TDEA_Keying_Option)
    is
       KB             : Byte_Array(1 .. TDEA_Key_Length);
       K              : Key;
    begin
-      if not Is_Started(The_Generator) then
-         raise CryptAda_Bad_Operation_Error;
-      end if;
- 
       -- Generate first key.
       
       Generate_Strong_DES_Key(The_Generator, K);

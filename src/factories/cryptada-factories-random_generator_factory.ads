@@ -16,47 +16,51 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-identification.ads
+--    Filename          :  cryptada-factories-random_generator_factory.ads
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
---    Creation date     :  March 13th, 2017
---    Current version   :  1.2
+--    Creation date     :  May 30th, 2017
+--    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    This package provides constants that identify the current version of the
---    library.
+--    This package implements a factory for random generators.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
---    1.0   20170313 ADD   Initial implementation.
---    1.1   20170430 ADD   Release 0.1.d.
---    1.2   20170530 ADD   Release 0.2.a
+--    1.0   20170530 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-package CryptAda.Identification is
+with CryptAda.Names;
+with CryptAda.Random.Generators;
 
-   pragma Pure(Identification);
-
+package CryptAda.Factories.Random_Generator_Factory is
+   
    -----------------------------------------------------------------------------
-   --[Constants]----------------------------------------------------------------
+   --[Subprogram Specs]---------------------------------------------------------
+   -----------------------------------------------------------------------------
+   
+   --[Create_Random_Generator]--------------------------------------------------
+   -- Purpose:
+   -- Creates and returns a handle to a particular Random_Generator object.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- Id                      Random_Generator_Id that identifies the random 
+   --                         generator to create.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Random_Generator_Handle that allows the caller to handle the particular 
+   -- random generator created.
+   -- 
+   -- As returned by this function, the random generator is not started and not
+   -- seeded.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- TBD
    -----------------------------------------------------------------------------
 
-   --[CryptAda Identification Constants]----------------------------------------
-   -- Next constants provide version information as well as identification
-   -- information of CryptAda.
-   -----------------------------------------------------------------------------
+   function    Create_Random_Generator(
+                  Id             : in     CryptAda.Names.Random_Generator_Id)
+      return   CryptAda.Random.Generators.Random_Generator_Handle;
 
-   CryptAda_Name              : aliased constant String     := "TCantos Ada Cryptography Library";
-   CryptAda_Acronym           : aliased constant String     := "CryptAda";
-   CryptAda_Copyright         : aliased constant String     := "Copyright (c) 2017, Antonio Duran";
-   CryptAda_Version_Major     : aliased constant String     := "0";
-   CryptAda_Version_Minor     : aliased constant String     := "2";
-   CryptAda_Release           : aliased constant String     := "a";
-   CryptAda_Version_String    : aliased constant String     := CryptAda_Version_Major & "." &
-                                                               CryptAda_Version_Minor & "." &
-                                                               CryptAda_Release;
-   CryptAda_Version_Comments  : aliased constant String     := "Second alpha release";
-   CryptAda_Release_Date      : aliased constant String     := "2017/05/30";
-
-end CryptAda.Identification;
+end CryptAda.Factories.Random_Generator_Factory;

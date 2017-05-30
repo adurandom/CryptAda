@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 21th, 2017
---    Current version   :  1.2
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Root package for CryptAda implemented block ciphers.
@@ -38,10 +38,8 @@
 --    1.1   20170329 ADD   Removed key generation subprogram.
 --    1.2   20170403 ADD   Renamed from CryptAda.Ciphers.Block_Ciphers to
 --                         CryptAda.Ciphers.Symmetric.Block
+--    2.0   20170529 ADD   Changed Cipher types.
 --------------------------------------------------------------------------------
-
-with CryptAda.Pragmatics;
-with CryptAda.Ciphers.Keys;
 
 package CryptAda.Ciphers.Symmetric.Block is
 
@@ -57,11 +55,11 @@ package CryptAda.Ciphers.Symmetric.Block is
    
    type Block_Cipher is abstract new Symmetric_Cipher with private;
 
-   --[Block_Cipher_Ref]---------------------------------------------------------
+   --[Block_Cipher_Ptr]---------------------------------------------------------
    -- Class wide access type to Block_Cipher objects.
    -----------------------------------------------------------------------------
    
-   type Block_Cipher_Ref is access all Block_Cipher'Class;
+   type Block_Cipher_Ptr is access all Block_Cipher'Class;
    
    --[Cipher_Block_Size]--------------------------------------------------------
    -- Type for block size values.
@@ -99,11 +97,47 @@ package CryptAda.Ciphers.Symmetric.Block is
    -----------------------------------------------------------------------------
 
    procedure   Start_Cipher(
-                  The_Cipher     : in out Block_Cipher;
+                  The_Cipher     : access Block_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     CryptAda.Ciphers.Keys.Key)
       is abstract;
 
+   --[Start_Cipher]-------------------------------------------------------------
+   -- Purpose:
+   -- Initializes a Block_Cipher object for a specific operation (Encrypt or
+   -- Decrypt) with a specific key. If the cipher object is already started, all
+   -- state information is lost and the object is left ready for a new 
+   -- encryption/decryption process.
+   -- Operation and Key are passed as a parameter list.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Cipher           Access ti Symmetric_Cipher object to start.
+   -- Parameters           List containing the parameter list. It must be a 
+   --                      named list with the following syntax:
+   --
+   -- (
+   --    Operation => <cipher_operation>,
+   --    Key => "<hex_key>"
+   -- )
+   -- <cipher_operation>   Mandatory, Identifier of the operation to perform 
+   --                      (either Encrypt or Decrypt)
+   -- <hex_key>            Mandatory, string item with the key to use in 
+   --                      hexadecimal notation.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CryptAda_Bad_Argument_Error if Parameters is not a valid parameter list.
+   -- CryptAda_Invalid_Key_Error if the key provided is not a valid key for the 
+   --    cipher.
+   -----------------------------------------------------------------------------
+
+   procedure   Start_Cipher(
+                  The_Cipher     : access Block_Cipher;
+                  Parameters     : in     CryptAda.Lists.List)
+      is abstract;
+      
    --[Do_Process]---------------------------------------------------------------
    -- Purpose:
    -- Processes (ecrypts or decrypts) a block of data returning the 
@@ -126,7 +160,7 @@ package CryptAda.Ciphers.Symmetric.Block is
    -----------------------------------------------------------------------------
 
    procedure   Do_Process(
-                  With_Cipher    : in out Block_Cipher;
+                  With_Cipher    : access Block_Cipher;
                   Input          : in     CryptAda.Pragmatics.Byte_Array;
                   Output         :    out CryptAda.Pragmatics.Byte_Array)
       is abstract;
@@ -147,7 +181,7 @@ package CryptAda.Ciphers.Symmetric.Block is
    -----------------------------------------------------------------------------
       
    procedure   Stop_Cipher(
-                  The_Cipher     : in out Block_Cipher)
+                  The_Cipher     : access Block_Cipher)
          is abstract;
          
    -----------------------------------------------------------------------------
@@ -169,7 +203,7 @@ package CryptAda.Ciphers.Symmetric.Block is
    -----------------------------------------------------------------------------
 
    function    Get_Block_Size(
-                  From           : in     Block_Cipher'Class)
+                  From           : access Block_Cipher'Class)
       return   Cipher_Block_Size;
       
    -----------------------------------------------------------------------------

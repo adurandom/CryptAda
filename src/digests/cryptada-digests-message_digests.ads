@@ -238,27 +238,6 @@ package CryptAda.Digests.Message_Digests is
                   From           : access Message_Digest'Class)
       return   CryptAda.Names.Digest_Algorithm_Id;
 
-   --[Get_Algorithm_Name]-------------------------------------------------------
-   -- Purpose:
-   -- Returns the algorithm name according to a particular naming schema.
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- From                 Access to the Message_Digest object to obtain the
-   --                      algorithm name from.
-   -- Schema               Naming_Schema idetifier.
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- String with algorithm name acording the particular naming schema.
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- None.
-   -----------------------------------------------------------------------------
-
-   function    Get_Algorithm_Name(
-                  From           : access Message_Digest'Class;
-                  Schema         : in     CryptAda.Names.Naming_Schema)
-      return   String;
-
    --[Get_State_Size]-----------------------------------------------------------
    -- Purpose:
    -- Returns the state size in bytes of the algorithm object.
@@ -410,7 +389,7 @@ private
    -- Full definition of Message_Digest_Handle type
    -----------------------------------------------------------------------------
 
-   type Message_Digest_Handle is new Message_digest_Handles.Handle with null record;
+   type Message_Digest_Handle is new Message_Digest_Handles.Handle with null record;
 
    --[Ref]----------------------------------------------------------------------
 

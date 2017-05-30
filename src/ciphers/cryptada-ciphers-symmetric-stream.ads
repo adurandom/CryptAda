@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  April 3rd, 2017
---    Current version   :  1.0
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Root package for CryptAda implemented stream ciphers.
@@ -50,10 +50,8 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170403 ADD   Initial implementation.
+--    2.0   20170529 ADD   Changed types.
 --------------------------------------------------------------------------------
-
-with CryptAda.Pragmatics;
-with CryptAda.Ciphers.Keys;
 
 package CryptAda.Ciphers.Symmetric.Stream is
 
@@ -69,11 +67,11 @@ package CryptAda.Ciphers.Symmetric.Stream is
    
    type Stream_Cipher is abstract new Symmetric_Cipher with private;
 
-   --[Stream_Cipher_Ref]--------------------------------------------------------
+   --[Stream_Cipher_Ptr]--------------------------------------------------------
    -- Class wide access type to Stream_Cipher objects.
    -----------------------------------------------------------------------------
    
-   type Stream_Cipher_Ref is access all Stream_Cipher'Class;
+   type Stream_Cipher_Ptr is access all Stream_Cipher'Class;
    
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
@@ -81,12 +79,12 @@ package CryptAda.Ciphers.Symmetric.Stream is
 
    --[Start_Cipher]-------------------------------------------------------------
    -- Purpose:
-   -- Initializes a Block_Cipher object for a specific operation (encryption or
+   -- Initializes a Stream_Cipher object for a specific operation (encryption or
    -- decryption). If the object is already started, the procedure will reset
    -- object state to its initial state.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- The_Cipher           Block_Cipher object to initialize.
+   -- The_Cipher           Stream_Cipher object to initialize.
    -- For_Operation        Cipher_Operation value that identifies the operation
    --                      for which the object is to be started.
    -- With_Key             The cipher key to use.
@@ -99,11 +97,47 @@ package CryptAda.Ciphers.Symmetric.Stream is
    -----------------------------------------------------------------------------
 
    procedure   Start_Cipher(
-                  The_Cipher     : in out Stream_Cipher;
+                  The_Cipher     : access Stream_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     CryptAda.Ciphers.Keys.Key)
       is abstract;
 
+   --[Start_Cipher]-------------------------------------------------------------
+   -- Purpose:
+   -- Initializes a Stream_Cipher object for a specific operation (Encrypt or
+   -- Decrypt) with a specific key. If the cipher object is already started, all
+   -- state information is lost and the object is left ready for a new 
+   -- encryption/decryption process.
+   -- Operation and Key are passed as a parameter list.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Cipher           Access to the Stream_Cipher object to start.
+   -- Parameters           List containing the parameter list. It must be a 
+   --                      named list with the following syntax:
+   --
+   -- (
+   --    Operation => <cipher_operation>,
+   --    Key => "<hex_key>"
+   -- )
+   -- <cipher_operation>   Mandatory, Identifier of the operation to perform 
+   --                      (either Encrypt or Decrypt)
+   -- <hex_key>            Mandatory, string item with the key to use in 
+   --                      hexadecimal notation.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CryptAda_Bad_Argument_Error if Parameters is not a valid parameter list.
+   -- CryptAda_Invalid_Key_Error if the key provided is not a valid key for the 
+   --    cipher.
+   -----------------------------------------------------------------------------
+
+   procedure   Start_Cipher(
+                  The_Cipher     : access Stream_Cipher;
+                  Parameters     : in     CryptAda.Lists.List)
+      is abstract;
+      
    --[Do_Process]---------------------------------------------------------------
    -- Purpose:
    -- Processes (ecrypts or decrypts) a byte array of data returning the  
@@ -125,7 +159,7 @@ package CryptAda.Ciphers.Symmetric.Stream is
    -----------------------------------------------------------------------------
 
    procedure   Do_Process(
-                  With_Cipher    : in out Stream_Cipher;
+                  With_Cipher    : access Stream_Cipher;
                   Input          : in     CryptAda.Pragmatics.Byte_Array;
                   Output         :    out CryptAda.Pragmatics.Byte_Array)
       is abstract;
@@ -146,7 +180,7 @@ package CryptAda.Ciphers.Symmetric.Stream is
    -----------------------------------------------------------------------------
       
    procedure   Stop_Cipher(
-                  The_Cipher     : in out Stream_Cipher)
+                  The_Cipher     : access Stream_Cipher)
          is abstract;
          
    -----------------------------------------------------------------------------

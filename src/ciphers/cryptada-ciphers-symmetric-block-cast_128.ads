@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  April 4th, 2017
---    Current version   :  1.0
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the CAST-128 (aka CAST5) block cipher.
@@ -38,10 +38,8 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170404 ADD   Initial implementation.
+--    2.0   20170529 ADD   Changed types.
 --------------------------------------------------------------------------------
-
-with CryptAda.Pragmatics;
-with CryptAda.Ciphers.Keys;
 
 package CryptAda.Ciphers.Symmetric.Block.CAST_128 is
 
@@ -65,6 +63,12 @@ package CryptAda.Ciphers.Symmetric.Block.CAST_128 is
    
    type CAST_128_Cipher is new Block_Cipher with private;
 
+   --[CAST_128_Cipher_Ptr]------------------------------------------------------
+   -- Access to CAST_128 cipher context.
+   -----------------------------------------------------------------------------
+   
+   type CAST_128_Cipher_Ptr is access all CAST_128_Cipher'Class;
+   
    --[CAST_128_Block]-----------------------------------------------------------
    -- Constrained subtype for CAST blocks.
    -----------------------------------------------------------------------------
@@ -76,6 +80,28 @@ package CryptAda.Ciphers.Symmetric.Block.CAST_128 is
    -----------------------------------------------------------------------------
    
    subtype CAST_128_Key_Length is Cipher_Key_Length range 5 .. 16;
+
+   -----------------------------------------------------------------------------
+   --[Getting a handle]---------------------------------------------------------
+   -----------------------------------------------------------------------------
+   
+   --[Get_Symmetric_Cipher_Handle]----------------------------------------------
+   -- Purpose:
+   -- Creates a Symmetric_Cipher object and returns a handle for that object.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- None.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Symmetric_Cipher_Handle value that handles the reference to the newly 
+   -- created Symmetric_Cipher object.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CrtyptAda_Storage_Error if an error is raised during object allocation.
+   -----------------------------------------------------------------------------
+
+   function    Get_Symmetric_Cipher_Handle
+      return   Symmetric_Cipher_Handle;
    
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
@@ -83,23 +109,33 @@ package CryptAda.Ciphers.Symmetric.Block.CAST_128 is
 
    --[Start_Cipher]-------------------------------------------------------------
 
+   overriding
    procedure   Start_Cipher(
-                  The_Cipher     : in out CAST_128_Cipher;
+                  The_Cipher     : access CAST_128_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     CryptAda.Ciphers.Keys.Key);
 
+   --[Start_Cipher]-------------------------------------------------------------
+
+   overriding
+   procedure   Start_Cipher(
+                  The_Cipher     : access CAST_128_Cipher;
+                  Parameters     : in     CryptAda.Lists.List);
+   
    --[Do_Process]---------------------------------------------------------------
 
+   overriding
    procedure   Do_Process(
-                  With_Cipher    : in out CAST_128_Cipher;
+                  With_Cipher    : access CAST_128_Cipher;
                   Input          : in     CryptAda.Pragmatics.Byte_Array;
                   Output         :    out CryptAda.Pragmatics.Byte_Array);
 
    --[Stop_Cipher]--------------------------------------------------------------
-      
-   procedure   Stop_Cipher(
-                  The_Cipher     : in out CAST_128_Cipher);
 
+   overriding
+   procedure   Stop_Cipher(
+                  The_Cipher     : access CAST_128_Cipher);
+         
    -----------------------------------------------------------------------------
    --[Non-dispatching operations]-----------------------------------------------
    -----------------------------------------------------------------------------
@@ -185,9 +221,11 @@ private
    --[Subprogram specifications]------------------------------------------------
    -----------------------------------------------------------------------------
 
+   overriding
    procedure   Initialize(
                   Object         : in out CAST_128_Cipher);
 
+   overriding
    procedure   Finalize(
                   Object         : in out CAST_128_Cipher);
 

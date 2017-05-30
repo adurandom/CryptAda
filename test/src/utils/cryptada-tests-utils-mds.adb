@@ -99,9 +99,6 @@ package body CryptAda.Tests.Utils.MDs is
          
          Print_Message("Digest object tag name        : """ & Expanded_Name(P.all'Tag) & """", Indent_Str);
          Print_Message("CryptAda digest algorithm id  : """ & Digest_Algorithm_Id'Image(Get_Algorithm_Id(P)) & """", Indent_Str);
-         Print_Message("Digest algorithm SCAN name    : """ & Get_Algorithm_Name(P, NS_SCAN) & """", Indent_Str);
-         Print_Message("Digest algorithm ASN1 OID     : """ & Get_Algorithm_Name(P, NS_ASN1_OIDs) & """", Indent_Str);
-         Print_Message("Digest algorithm OpenPGP name : """ & Get_Algorithm_Name(P, NS_OpenPGP) & """", Indent_Str);
          Print_Message("State size (bytes)            : " & Positive'Image(Get_State_Size(P)), Indent_Str);
          Print_Message("Input block size (bytes)      : " & Positive'Image(Get_Block_Size(P)), Indent_Str);
          Print_Message("Hash size (bytes)             : " & Positive'Image(Get_Hash_Size(P)), Indent_Str);

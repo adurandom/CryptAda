@@ -34,7 +34,6 @@
 with CryptAda.Pragmatics;
 with CryptAda.Ciphers.Symmetric;
 with CryptAda.Ciphers.Symmetric.Block;
-with CryptAda.Ciphers.Symmetric.Stream;
 with CryptAda.Ciphers.Keys;
 
 package CryptAda.Tests.Utils.Ciphers is
@@ -60,35 +59,35 @@ package CryptAda.Tests.Utils.Ciphers is
    --[Testing]------------------------------------------------------------------
    
    procedure   Run_Block_Cipher_Basic_Tests(
-                  The_Cipher     : in out CryptAda.Ciphers.Symmetric.Block.Block_Cipher'Class;
+                  The_Cipher     : in     CryptAda.Ciphers.Symmetric.Symmetric_Cipher_Handle;
                   Message        : in     String);
 
    procedure   Run_Stream_Cipher_Basic_Tests(
-                  The_Cipher     : in out CryptAda.Ciphers.Symmetric.Stream.Stream_Cipher'Class;
+                  The_Cipher     : in     CryptAda.Ciphers.Symmetric.Symmetric_Cipher_Handle;
                   Message        : in     String);
                   
    procedure   Run_Block_Cipher_Bulk_Tests(
-                  With_Cipher    : in out CryptAda.Ciphers.Symmetric.Block.Block_Cipher'Class;
+                  With_Cipher    : in     CryptAda.Ciphers.Symmetric.Symmetric_Cipher_Handle;
                   Key_Size       : in     Positive);
 
    procedure   Run_Stream_Cipher_Bulk_Tests(
-                  With_Cipher    : in out CryptAda.Ciphers.Symmetric.Stream.Stream_Cipher'Class;
+                  With_Cipher    : in     CryptAda.Ciphers.Symmetric.Symmetric_Cipher_Handle;
                   Key_Size       : in     Positive;
                   Buffer_Size    : in     Positive);
                   
    procedure   Run_Block_Cipher_Test_Vector(
                   Message        : in     String;
-                  With_Cipher    : in out CryptAda.Ciphers.Symmetric.Block.Block_Cipher'Class;
+                  With_Cipher    : in     CryptAda.Ciphers.Symmetric.Symmetric_Cipher_Handle;
                   Vector         : in     Test_Vector;
                   Result         :    out Boolean);
                   
    --[Printing information]-----------------------------------------------------
 
    procedure   Print_Cipher_Info(
-                  The_Cipher     : in     CryptAda.Ciphers.Symmetric.Symmetric_Cipher'Class);
+                  The_Cipher     : in     CryptAda.Ciphers.Symmetric.Symmetric_Cipher_Handle);
 
    procedure   Print_Block_Cipher_Info(
-                  The_Cipher     : in     CryptAda.Ciphers.Symmetric.Block.Block_Cipher'Class);
+                  The_Cipher     : in     CryptAda.Ciphers.Symmetric.Symmetric_Cipher_Handle);
                   
    procedure   Print_Block(
                   The_Block      : in     CryptAda.Ciphers.Symmetric.Block.Cipher_Block;
@@ -97,6 +96,5 @@ package CryptAda.Tests.Utils.Ciphers is
    procedure   Print_Key(
                   The_Key        : in     CryptAda.Ciphers.Keys.Key;
                   Message        : in     String);
-
 
 end CryptAda.Tests.Utils.Ciphers;

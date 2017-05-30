@@ -35,7 +35,7 @@ with Ada.Exceptions;                      use Ada.Exceptions;
 with Ada.Numerics.Discrete_Random;
 
 with CryptAda.Tests.Utils;                use CryptAda.Tests.Utils;
-with CryptAda.Tests.Utils.Digests;        use CryptAda.Tests.Utils.Digests;
+with CryptAda.Tests.Utils.MDs;            use CryptAda.Tests.Utils.MDs;
 
 with CryptAda.Names;                      use CryptAda.Names;
 with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
@@ -49,7 +49,7 @@ package body CryptAda.Tests.Unit.Hashes is
    -----------------------------------------------------------------------------
 
    Driver_Name          : constant String := "CryptAda.Tests.Unit.Hashes";
-   Driver_Description   : constant String := "Unit test driver for CryptAda.Pragmatics.Hashes functionality.";
+   Driver_Description   : constant String := "Unit test driver for CryptAda.Digests.Hashes functionality.";
 
    Iterations           : constant Positive := 100_000;
    

@@ -71,13 +71,8 @@ OBJS     =  cryptada.o \
             cryptada-lists-float_item.o \
             cryptada-lists-string_item.o \
             cryptada-lists-list_item.o \
-            cryptada-ref_counters.o \
             cryptada-names.o \
-            cryptada-names-asn1_oids.o \
-            cryptada-names-scan.o \
-            cryptada-names-openpgp.o \
             cryptada-pragmatics.o \
-            cryptada-pragmatics-byte_vectors.o \
             cryptada-utils.o \
             cryptada-utils-format.o \
             cryptada-text_encoders.o \
@@ -135,9 +130,9 @@ OBJS     =  cryptada.o \
             cryptada-ciphers-key_generators.o \
             cryptada-ciphers-key_generators-tdea.o \
             cryptada-factories.o \
-            cryptada-factories-text_encoder_factory.o
-
-UTILITY  =  $(BINDIR)/gen_twofish_mds.exe
+            cryptada-factories-text_encoder_factory.o \
+            cryptada-factories-message_digest_factory.o \
+            cryptada-factories-random_generator_factory.o
 
 
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -157,10 +152,6 @@ cryptada-identification.o: $(BASEDIR)/cryptada-identification.ads
 	$(ADACC) $(CFLAGS) $<
 
 cryptada-exceptions.o: $(BASEDIR)/cryptada-exceptions.ads
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-ref_counters.o: $(BASEDIR)/cryptada-ref_counters.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
@@ -198,28 +189,12 @@ cryptada-names.o: $(NAMESDIR)/cryptada-names.ads
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
-cryptada-names-asn1_oids.o: $(NAMESDIR)/cryptada-names-asn1_oids.ads
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-names-scan.o: $(NAMESDIR)/cryptada-names-scan.ads
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
-cryptada-names-openpgp.o: $(NAMESDIR)/cryptada-names-openpgp.ads
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-
 # Pragmatics packages
 
 cryptada-pragmatics.o: $(PRAGMADIR)/cryptada-pragmatics.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
-cryptada-pragmatics-byte_vectors.o: $(PRAGMADIR)/cryptada-pragmatics-byte_vectors.adb
-	@echo Compiling $<
-	$(ADACC) $(CFLAGS) $<
-    
 # Utils packages
 
 cryptada-utils.o: $(UTILSDIR)/cryptada-utils.ads
@@ -463,20 +438,20 @@ cryptada-factories.o: $(FACTDIR)/cryptada-factories.ads
 cryptada-factories-text_encoder_factory.o: $(FACTDIR)/cryptada-factories-text_encoder_factory.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
+
+cryptada-factories-message_digest_factory.o: $(FACTDIR)/cryptada-factories-message_digest_factory.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-factories-random_generator_factory.o: $(FACTDIR)/cryptada-factories-random_generator_factory.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
     
-# Utility tools
-
-$(BINDIR)/gen_twofish_mds.exe: $(UTILITYDIR)/gen_twofish_mds.adb
-	@echo Building $<
-	$(ADAMAKER) $(SOURCEDIRS) $(ADAFLAGS) -o $@ $<
-
 #>>>[Targets]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-all: objs utility
+all: objs
 
 objs: $(OBJS)
-
-utility: $(UTILITY)
 
 clean:
 	$(DELCMD) $(OBJDIR)/*.o

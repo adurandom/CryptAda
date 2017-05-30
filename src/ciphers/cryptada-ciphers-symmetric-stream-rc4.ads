@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  April 4th, 2017
---    Current version   :  1.0
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the RC4 stream cipher as described in RFC 2268
@@ -42,10 +42,8 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170404 ADD   Initial implementation.
+--    2.0   20170530 ADD   Changed types.
 --------------------------------------------------------------------------------
-
-with CryptAda.Pragmatics;
-with CryptAda.Ciphers.Keys;
 
 package CryptAda.Ciphers.Symmetric.Stream.RC4 is
 
@@ -63,6 +61,12 @@ package CryptAda.Ciphers.Symmetric.Stream.RC4 is
    
    type RC4_Cipher is new Stream_Cipher with private;
 
+   --[RC4_Cipher_Ptr]-----------------------------------------------------------
+   -- Access to RC4 stream cipher objects.
+   -----------------------------------------------------------------------------
+   
+   type RC4_Cipher_Ptr is access all RC4_Cipher'Class;
+   
    --[RC4_Key_Length]-----------------------------------------------------------
    -- Subtype for key lengths.
    -----------------------------------------------------------------------------
@@ -70,34 +74,64 @@ package CryptAda.Ciphers.Symmetric.Stream.RC4 is
    subtype RC4_Key_Length is Cipher_Key_Length range 1 .. 256;
    
    -----------------------------------------------------------------------------
+   --[Getting a handle]---------------------------------------------------------
+   -----------------------------------------------------------------------------
+   
+   --[Get_Symmetric_Cipher_Handle]----------------------------------------------
+   -- Purpose:
+   -- Creates a Symmetric_Cipher object and returns a handle for that object.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- None.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Symmetric_Cipher_Handle value that handles the reference to the newly 
+   -- created Symmetric_Cipher object.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CrtyptAda_Storage_Error if an error is raised during object allocation.
+   -----------------------------------------------------------------------------
+
+   function    Get_Symmetric_Cipher_Handle
+      return   Symmetric_Cipher_Handle;
+   
+   -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Encrypt/Decrypt Interface]------------------------------------------------
-
    --[Start_Cipher]-------------------------------------------------------------
 
+   overriding
    procedure   Start_Cipher(
-                  The_Cipher     : in out RC4_Cipher;
+                  The_Cipher     : access RC4_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     CryptAda.Ciphers.Keys.Key);
 
+   --[Start_Cipher]-------------------------------------------------------------
+
+   overriding
+   procedure   Start_Cipher(
+                  The_Cipher     : access RC4_Cipher;
+                  Parameters     : in     CryptAda.Lists.List);
+   
    --[Do_Process]---------------------------------------------------------------
 
+   overriding
    procedure   Do_Process(
-                  With_Cipher    : in out RC4_Cipher;
+                  With_Cipher    : access RC4_Cipher;
                   Input          : in     CryptAda.Pragmatics.Byte_Array;
                   Output         :    out CryptAda.Pragmatics.Byte_Array);
 
    --[Stop_Cipher]--------------------------------------------------------------
-      
-   procedure   Stop_Cipher(
-                  The_Cipher     : in out RC4_Cipher);
 
+   overriding
+   procedure   Stop_Cipher(
+                  The_Cipher     : access RC4_Cipher);
+      
    -----------------------------------------------------------------------------
    --[Non-dispatching operations]-----------------------------------------------
    -----------------------------------------------------------------------------
-
+   
    --[Is_Valid_RC4_Key]---------------------------------------------------------
    -- Purpose:
    -- Checks if a given key is a valid RC4 key.
@@ -168,9 +202,11 @@ private
    --[Subprogram specifications]------------------------------------------------
    -----------------------------------------------------------------------------
 
+   overriding
    procedure   Initialize(
                   Object         : in out RC4_Cipher);
 
+   overriding
    procedure   Finalize(
                   Object         : in out RC4_Cipher);
 

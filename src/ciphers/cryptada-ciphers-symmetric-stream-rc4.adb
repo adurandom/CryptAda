@@ -20,7 +20,7 @@
 --    File kind         :  Ada package body
 --    Author            :  A. Duran
 --    Creation date     :  April 4th, 2017
---    Current version   :  1.0
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the RC4 stream cipher.
@@ -29,9 +29,13 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170404 ADD   Initial implementation.
+--    2.0   20170529 ADD   Changed types.
 --------------------------------------------------------------------------------
 
+with Ada.Exceptions;                      use Ada.Exceptions;
+
 with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
+with CryptAda.Lists;                      use CryptAda.Lists;
 with CryptAda.Names;                      use CryptAda.Names;
 with CryptAda.Exceptions;                 use CryptAda.Exceptions;
 with CryptAda.Ciphers.Keys;               use CryptAda.Ciphers.Keys;
@@ -53,18 +57,24 @@ package body CryptAda.Ciphers.Symmetric.Stream.RC4 is
    -----------------------------------------------------------------------------
    --[Body Declared Subprogram Specs]-------------------------------------------
    -----------------------------------------------------------------------------
-        
+
+   --[Initialize_Object]--------------------------------------------------------
+
+   procedure   Initialize_Object(
+                  Object         : access RC4_Cipher);
+   pragma Inline(Initialize_Object);
+   
    --[Init_State]---------------------------------------------------------------
 
    procedure   Init_State(
-                  Cipher         : in out RC4_Cipher;
+                  Cipher         : access RC4_Cipher;
                   KB             : in     Byte_Array);
    pragma Inline(Init_State);
 
    --[Process_Bytes]------------------------------------------------------------
    
    procedure   Process_Bytes(
-                  Cipher         : in out RC4_Cipher;
+                  Cipher         : access RC4_Cipher;
                   Input          : in     Byte_Array;
                   Output         :    out Byte_Array);
    pragma Inline(Process_Bytes);
@@ -72,30 +82,44 @@ package body CryptAda.Ciphers.Symmetric.Stream.RC4 is
    -----------------------------------------------------------------------------
    --[Body Declared Subprogram Bodies]------------------------------------------
    -----------------------------------------------------------------------------
+
+   --[Initialize_Object]--------------------------------------------------------
+
+   procedure   Initialize_Object(
+                  Object         : access RC4_Cipher)
+   is
+   begin
+      -- Set to initial value any attribute which is modified in this package
+
+      Object.all.State        := Idle;
+      Object.all.RC4_St       := (others => 16#00#);
+      Object.all.I            := 0;
+      Object.all.J            := 0;      
+   end Initialize_Object;
    
    --[Init_State]---------------------------------------------------------------
 
    procedure   Init_State(
-                  Cipher         : in out RC4_Cipher;
+                  Cipher         : access RC4_Cipher;
                   KB             : in     Byte_Array)
    is
       J           : Positive := KB'First;
       K           : Byte := 0;
       T           : Byte;
    begin
-      Cipher.I := 0;
-      Cipher.J := 0;
+      Cipher.all.I := 0;
+      Cipher.all.J := 0;
    
-      for I in Cipher.RC4_St'Range loop
-         Cipher.RC4_St(I) := I;
+      for I in Cipher.all.RC4_St'Range loop
+         Cipher.all.RC4_St(I) := I;
       end loop;
       
-      for I in Cipher.RC4_St'Range loop
-         K := K + KB(J) + Cipher.RC4_St(I);
+      for I in Cipher.all.RC4_St'Range loop
+         K := K + KB(J) + Cipher.all.RC4_St(I);
          
-         T                 := Cipher.RC4_St(I);
-         Cipher.RC4_St(I)  := Cipher.RC4_St(K);
-         Cipher.RC4_St(K)  := T;
+         T                    := Cipher.all.RC4_St(I);
+         Cipher.all.RC4_St(I) := Cipher.all.RC4_St(K);
+         Cipher.all.RC4_St(K) := T;
          
          J := J + 1;
          
@@ -108,7 +132,7 @@ package body CryptAda.Ciphers.Symmetric.Stream.RC4 is
    --[Process_Bytes]------------------------------------------------------------
    
    procedure   Process_Bytes(
-                  Cipher         : in out RC4_Cipher;
+                  Cipher         : access RC4_Cipher;
                   Input          : in     Byte_Array;
                   Output         :    out Byte_Array)
    is
@@ -118,71 +142,107 @@ package body CryptAda.Ciphers.Symmetric.Stream.RC4 is
       for I in Input'Range loop
          -- Set internal state indexes.
          
-         Cipher.I := Cipher.I + 1;
-         Cipher.J := Cipher.J + Cipher.RC4_St(Cipher.I);
+         Cipher.all.I := Cipher.all.I + 1;
+         Cipher.all.J := Cipher.all.J + Cipher.all.RC4_St(Cipher.all.I);
 
          -- Swap
          
-         T                       := Cipher.RC4_St(Cipher.I);
-         Cipher.RC4_St(Cipher.I) := Cipher.RC4_St(Cipher.J);
-         Cipher.RC4_St(Cipher.J) := T;
+         T                                := Cipher.all.RC4_St(Cipher.all.I);
+         Cipher.all.RC4_St(Cipher.all.I)  := Cipher.all.RC4_St(Cipher.all.J);
+         Cipher.all.RC4_St(Cipher.all.J)  := T;
 
          -- Xor
          
-         T         := Cipher.RC4_St(Cipher.I) + Cipher.RC4_St(Cipher.J);
-         Output(J) := Input(I) xor Cipher.RC4_St(T);
+         T         := Cipher.all.RC4_St(Cipher.all.I) + Cipher.all.RC4_St(Cipher.all.J);
+         Output(J) := Input(I) xor Cipher.all.RC4_St(T);
          J := J + 1;
       end loop;
    end Process_Bytes;
    
    -----------------------------------------------------------------------------
-   --[Spec declared subprogram bodies]------------------------------------------
+   --[Getting a handle]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Ada.Finalization interface]-----------------------------------------------
+   --[Get_Symmetric_Cipher_Handle]----------------------------------------------
+
+   function    Get_Symmetric_Cipher_Handle
+      return   Symmetric_Cipher_Handle
+   is
+      P           : RC4_Cipher_Ptr;
+   begin
+      P := new RC4_Cipher'(Stream_Cipher with
+                                 Id          => SC_RC4,
+                                 RC4_St      => (others => 16#00#),
+                                 I           => 16#00#,
+                                 J           => 16#00#);
+                                 
+      P.all.Ciph_Type   := CryptAda.Ciphers.Stream_Cipher;
+      P.all.Key_Info    := RC4_Key_Info;
+      P.all.State       := Idle;
+
+      return Ref(Symmetric_Cipher_Ptr(P));
+   exception
+      when X: others =>
+         Raise_Exception(
+            CryptAda_Storage_Error'Identity,
+            "Caught exception: '" &
+               Exception_Name(X) &
+               "' with message: '" &
+               Exception_Message(X) &
+               "', when allocating RC4_Cipher object");
+   end Get_Symmetric_Cipher_Handle;
+
+   -----------------------------------------------------------------------------
+   --[Ada.Finalization Operations]----------------------------------------------
+   -----------------------------------------------------------------------------
 
    --[Initialize]---------------------------------------------------------------
 
+   overriding
    procedure   Initialize(
                   Object         : in out RC4_Cipher)
    is
    begin
-      Object.Cipher_Id     := SC_RC4;
-      Object.Ciph_Type     := CryptAda.Ciphers.Stream_Cipher;
-      Object.Key_Info      := RC4_Key_Info;
-      Object.State         := Idle;
-      Object.RC4_St        := (others => 0);
-      Object.I             := 0;
-      Object.J             := 0;
+      Object.Ciph_Type  := CryptAda.Ciphers.Stream_Cipher;
+      Object.Key_Info   := RC4_Key_Info;
+      Object.State      := Idle;
+      Object.RC4_St     := (others => 16#00#);
+      Object.I          := 16#00#;
+      Object.J          := 16#00#;
    end Initialize;
 
    --[Finalize]-----------------------------------------------------------------
 
+   overriding
    procedure   Finalize(
                   Object         : in out RC4_Cipher)
    is
    begin
-      Object.State         := Idle;
-      Object.RC4_St        := (others => 0);
-      Object.I             := 0;
-      Object.J             := 0;
+      Object.State      := Idle;
+      Object.RC4_St     := (others => 16#00#);
+      Object.I          := 16#00#;
+      Object.J          := 16#00#;
    end Finalize;
    
-   --[Dispatching Operations]---------------------------------------------------
+   -----------------------------------------------------------------------------
+   --[Dispatching operations]---------------------------------------------------
+   -----------------------------------------------------------------------------
 
    --[Start_Cipher]-------------------------------------------------------------
 
+   overriding
    procedure   Start_Cipher(
-                  The_Cipher     : in out RC4_Cipher;
+                  The_Cipher     : access RC4_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     Key)
    is
    begin
-
       -- Veriify that key is a valid RC4 key.
       
       if not Is_Valid_RC4_Key(With_Key) then
-         raise CryptAda_Invalid_Key_Error;         
+         Raise_Exception(
+            CryptAda_Invalid_Key_Error'Identity,
+            "Invalid RC4 key");
       end if;
 
       -- Initialize internal state.
@@ -192,30 +252,49 @@ package body CryptAda.Ciphers.Symmetric.Stream.RC4 is
       -- Set cipher state.
      
       if For_Operation = Encrypt then
-         The_Cipher.State  := Encrypting;
+         The_Cipher.all.State := Encrypting;
       else
-         The_Cipher.State  := Decrypting;
+         The_Cipher.all.State := Decrypting;
       end if;
    end Start_Cipher;
 
+   --[Start_Cipher]-------------------------------------------------------------
+
+   overriding
+   procedure   Start_Cipher(
+                  The_Cipher     : access RC4_Cipher;
+                  Parameters     : in     List)
+   is
+      O              : Cipher_Operation;
+      K              : Key;
+   begin
+      Get_Parameters(Parameters, O, K);
+      Start_Cipher(The_Cipher, O, K);
+   end Start_Cipher;
+   
    --[Do_Process]---------------------------------------------------------------
 
+   overriding
    procedure   Do_Process(
-                  With_Cipher    : in out RC4_Cipher;
+                  With_Cipher    : access RC4_Cipher;
                   Input          : in     Byte_Array;
                   Output         :    out Byte_Array)
    is
    begin
       -- Check state.
       
-      if With_Cipher.State = Idle then
-         raise CryptAda_Uninitialized_Cipher_Error;
+      if With_Cipher.all.State = Idle then
+         Raise_Exception(
+            CryptAda_Uninitialized_Cipher_Error'Identity,
+            "RC4 cipher is in Idle state");
       end if;
 
       -- Check input and output buffers.
       
       if Input'Length /= Output'Length then
-         raise CryptAda_Bad_Argument_Error;
+         Raise_Exception(
+            CryptAda_Bad_Argument_Error'Identity,
+            "Input size must be equal to Output size");               
       end if;
 
       -- Process bytes
@@ -225,16 +304,12 @@ package body CryptAda.Ciphers.Symmetric.Stream.RC4 is
    
    --[Stop_Cipher]--------------------------------------------------------------
       
+   overriding
    procedure   Stop_Cipher(
-                  The_Cipher     : in out RC4_Cipher)
+                  The_Cipher     : access RC4_Cipher)
    is
    begin
-      if The_Cipher.State /= Idle then
-         The_Cipher.State  := Idle;
-         The_Cipher.RC4_St := (others => 0);
-         The_Cipher.I      := 0;
-         The_Cipher.J      := 0;
-      end if;
+      Initialize_Object(The_Cipher);
    end Stop_Cipher;
    
    --[Other public subprograms]-------------------------------------------------

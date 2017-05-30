@@ -171,7 +171,7 @@ package CryptAda.Random.Generators is
 
    --[Get_Random_Generator_Ptr]-------------------------------------------------
    -- Purpose:
-   -- Returns a Random_Generator_Ptr from a Message_Digest_Handle.
+   -- Returns a Random_Generator_Ptr from a Random_Generator_Handle.
    -----------------------------------------------------------------------------
    -- Arguments:
    -- From_Handle          Handle to get the Random_Generator_Ptr from.
@@ -457,7 +457,6 @@ private
          Started                 : Boolean                              := False;
          Seed_Bytes_Needed       : Natural                              := 0;
       end record;
-
 
    --[Internal_Seeder_Block_Size]-----------------------------------------------
    -- Size of block for internal seeder.
