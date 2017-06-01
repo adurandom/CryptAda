@@ -20,7 +20,7 @@
 --    File kind         :  Ada package body
 --    Author            :  A. Duran
 --    Creation date     :  March 25th, 2017
---    Current version   :  1.2
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the AES block cipher.
@@ -31,11 +31,14 @@
 --    1.0   20170325 ADD   Initial implementation.
 --    1.1   20170330 ADD   Removed key generation subprogram.
 --    1.2   20170403 ADD   Changed symmetric ciphers hierarchy.
+--    2.0   20170529 ADD   Changed types.
 --------------------------------------------------------------------------------
 
+with Ada.Exceptions;                      use Ada.Exceptions;
 with Ada.Unchecked_Deallocation;
 
 with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
+with CryptAda.Lists;                      use CryptAda.Lists;
 with CryptAda.Names;                      use CryptAda.Names;
 with CryptAda.Exceptions;                 use CryptAda.Exceptions;
 with CryptAda.Ciphers.Keys;               use CryptAda.Ciphers.Keys;
@@ -449,6 +452,12 @@ package body CryptAda.Ciphers.Symmetric.Block.AES is
    -----------------------------------------------------------------------------
    --[Body Declared Subprogram Specs]-------------------------------------------
    -----------------------------------------------------------------------------
+
+   --[Initialize_Object]--------------------------------------------------------
+
+   procedure   Initialize_Object(
+                  Object         : access AES_Cipher);
+   pragma Inline(Initialize_Object);
    
    --[Allocate_Round_Keys]------------------------------------------------------
    
@@ -503,6 +512,25 @@ package body CryptAda.Ciphers.Symmetric.Block.AES is
    --[Body Declared Subprogram Bodies]------------------------------------------
    -----------------------------------------------------------------------------
 
+   --[Initialize_Object]--------------------------------------------------------
+
+   procedure   Initialize_Object(
+                  Object         : access AES_Cipher)
+   is
+      T              : AES_Round_Keys := Object.all.Round_Keys;
+   begin
+      -- Set to initial value any attribute which is modified in this package
+
+      Object.all.State        := Idle;
+      Object.all.Round_Keys   := null;
+      Object.all.Key_Id       := AES_256;
+      
+      if T /= null then
+         T.all := (others => 16#00000000#);
+         Free(T);
+      end if;      
+   end Initialize_Object;
+   
    --[Allocate_Round_Keys]------------------------------------------------------
    
    function    Allocate_Round_Keys(
@@ -517,8 +545,14 @@ package body CryptAda.Ciphers.Symmetric.Block.AES is
       
       return RK;
    exception
-      when others =>
-         raise CryptAda_Storage_Error;
+      when X: others =>
+         Raise_Exception(
+            CryptAda_Storage_Error'Identity,
+            "Caught exception: '" &
+               Exception_Name(X) &
+               "' with message: '" &
+               Exception_Message(X) &
+               "', when allocating AES round keys array");
    end Allocate_Round_Keys;
    
    --[Pack_Block]---------------------------------------------------------------
@@ -939,61 +973,96 @@ package body CryptAda.Ciphers.Symmetric.Block.AES is
    end Decrypt_Block;
 
    -----------------------------------------------------------------------------
-   --[Spec declared subprogram bodies]------------------------------------------
+   --[Getting a handle]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Ada.Finalization interface]-----------------------------------------------
+   --[Get_Symmetric_Cipher_Handle]----------------------------------------------
+
+   function    Get_Symmetric_Cipher_Handle
+      return   Symmetric_Cipher_Handle
+   is
+      P           : AES_Cipher_Ptr;
+   begin
+      P := new AES_Cipher'(Block_Cipher with
+                                 Id          => SC_AES,
+                                 Key_Id      => AES_256,
+                                 Round_Keys  => null);
+                                 
+      P.all.Ciph_Type   := CryptAda.Ciphers.Block_Cipher;
+      P.all.Key_Info    := AES_Key_Info;
+      P.all.State       := Idle;
+      P.all.Block_Size  := AES_Block_Size;
+
+      return Ref(Symmetric_Cipher_Ptr(P));
+   exception
+      when X: others =>
+         Raise_Exception(
+            CryptAda_Storage_Error'Identity,
+            "Caught exception: '" &
+               Exception_Name(X) &
+               "' with message: '" &
+               Exception_Message(X) &
+               "', when allocating AES_Cipher object");
+   end Get_Symmetric_Cipher_Handle;
+
+   -----------------------------------------------------------------------------
+   --[Ada.Finalization Operations]----------------------------------------------
+   -----------------------------------------------------------------------------
 
    --[Initialize]---------------------------------------------------------------
 
+   overriding
    procedure   Initialize(
                   Object         : in out AES_Cipher)
    is
    begin
-      Object.Cipher_Id     := SC_AES_256;
-      Object.Ciph_Type     := CryptAda.Ciphers.Block_Cipher;
-      Object.Key_Info      := AES_Key_Info;
-      Object.State         := Idle;
-      Object.Block_Size    := AES_Block_Size;
-      Object.Key_Id        := AES_256;
-      Object.Round_Keys    := null;
+      Object.Ciph_Type  := CryptAda.Ciphers.Block_Cipher;
+      Object.Key_Info   := AES_Key_Info;
+      Object.State      := Idle;
+      Object.Block_Size := AES_Block_Size;
+      Object.Key_Id     := AES_256;
+      Object.Round_Keys := null;
    end Initialize;
 
    --[Finalize]-----------------------------------------------------------------
 
+   overriding
    procedure   Finalize(
                   Object         : in out AES_Cipher)
    is
+      T              : AES_Round_Keys := Object.Round_Keys;      
    begin
-      if Object.Round_Keys /= null then
-         Object.Round_Keys.all := (others => 0);
-         Free(Object.Round_Keys);
-      end if;
+      Object.State      := Idle;
+      Object.Key_Id     := AES_256;
+      Object.Round_Keys := null;
       
-      Object.Cipher_Id        := SC_AES_256;
-      Object.State            := Idle;
-      Object.Key_Id           := AES_256;
-      Object.Round_Keys       := null;
+      if T /= null then
+         T.all := (others => 16#00000000#);
+         Free(T);
+      end if;
    end Finalize;
    
-   --[Dispatching Operations]---------------------------------------------------
+   -----------------------------------------------------------------------------
+   --[Dispatching operations]---------------------------------------------------
+   -----------------------------------------------------------------------------
 
    --[Start_Cipher]-------------------------------------------------------------
 
+   overriding
    procedure   Start_Cipher(
-                  The_Cipher     : in out AES_Cipher;
+                  The_Cipher     : access AES_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     Key)
    is
       K_Id           : AES_Key_Id;
-      BC_Id          : Block_Cipher_Id;
       RK             : AES_Round_Keys;
    begin
-
-      -- Veriify that key is a valid DES EDE key.
+      -- Veriify that key is a valid AES key.
       
       if not Is_Valid_AES_Key(With_Key) then
-         raise CryptAda_Invalid_Key_Error;
+         Raise_Exception(
+            CryptAda_Invalid_Key_Error'Identity,
+            "Invalid AES key");
       end if;
 
       -- Depending on the key length.
@@ -1001,13 +1070,10 @@ package body CryptAda.Ciphers.Symmetric.Block.AES is
       case Get_Key_Length(With_Key) is
          when 16 =>
             K_Id  := AES_128;
-            BC_Id := SC_AES_128;
          when 24 =>
             K_Id  := AES_192;
-            BC_Id := SC_AES_192;
          when others =>
             K_Id  := AES_256;
-            BC_Id := SC_AES_256;
       end case;
       
       -- Create AES key rounds.
@@ -1016,29 +1082,42 @@ package body CryptAda.Ciphers.Symmetric.Block.AES is
 
       -- Update cipher fields.
 
-      The_Cipher.Cipher_Id       := BC_Id;
-      
       if For_Operation = Encrypt then
-         The_Cipher.State        := Encrypting;
+         The_Cipher.all.State    := Encrypting;
       else
          Inv_AES_Round_Keys(K_Id, RK);
-         The_Cipher.State        := Decrypting;
+         The_Cipher.all.State    := Decrypting;
       end if;
 
-      The_Cipher.Key_Id          := K_Id;
+      The_Cipher.all.Key_Id      := K_Id;
 
-      if The_Cipher.Round_Keys /= null then
-         The_Cipher.Round_Keys.all := (others => 0);
-         Free(The_Cipher.Round_Keys);
+      if The_Cipher.all.Round_Keys /= null then
+         The_Cipher.all.Round_Keys.all := (others => 16#00000000#);
+         Free(The_Cipher.all.Round_Keys);
       end if;
       
-      The_Cipher.Round_Keys      := RK;      
+      The_Cipher.all.Round_Keys  := RK;      
+   end Start_Cipher;
+
+   --[Start_Cipher]-------------------------------------------------------------
+
+   overriding
+   procedure   Start_Cipher(
+                  The_Cipher     : access AES_Cipher;
+                  Parameters     : in     List)
+   is
+      O              : Cipher_Operation;
+      K              : Key;
+   begin
+      Get_Parameters(Parameters, O, K);
+      Start_Cipher(The_Cipher, O, K);
    end Start_Cipher;
 
    --[Do_Process]---------------------------------------------------------------
 
+   overriding
    procedure   Do_Process(
-                  With_Cipher    : in out AES_Cipher;
+                  With_Cipher    : access AES_Cipher;
                   Input          : in     Byte_Array;
                   Output         :    out Byte_Array)
    is
@@ -1047,63 +1126,61 @@ package body CryptAda.Ciphers.Symmetric.Block.AES is
    begin
       -- Check state.
       
-      if With_Cipher.State = Idle then
-         raise CryptAda_Uninitialized_Cipher_Error;
+      if With_Cipher.all.State = Idle then
+         Raise_Exception(
+            CryptAda_Uninitialized_Cipher_Error'Identity,
+            "AES cipher is in Idle state");
       end if;
 
       -- Check blocks.
       
       if Input'Length /= AES_Block_Size or
          Output'Length /= AES_Block_Size then
-         raise CryptAda_Invalid_Block_Length_Error;
+         Raise_Exception(
+            CryptAda_Invalid_Block_Length_Error'Identity,
+            "Invalid block length");               
       end if;
 
       -- Process block.
       
       B_I := Pack_Block(Input);
       
-      if With_Cipher.State = Encrypting then
-         Encrypt_Block(With_Cipher.Round_Keys, With_Cipher.Key_Id, B_I, B_O);
+      if With_Cipher.all.State = Encrypting then
+         Encrypt_Block(With_Cipher.all.Round_Keys, With_Cipher.all.Key_Id, B_I, B_O);
       else
-         Decrypt_Block(With_Cipher.Round_Keys, With_Cipher.Key_Id, B_I, B_O);
+         Decrypt_Block(With_Cipher.all.Round_Keys, With_Cipher.all.Key_Id, B_I, B_O);
       end if;
       
       Output := Unpack_Block(B_O);
    end Do_Process;
    
    --[Stop_Cipher]--------------------------------------------------------------
-      
+
+   overriding
    procedure   Stop_Cipher(
-                  The_Cipher     : in out AES_Cipher)
+                  The_Cipher     : access AES_Cipher)
    is
    begin
-      if The_Cipher.State /= Idle then
-         The_Cipher.State := Idle;
-
-         if The_Cipher.Round_Keys /= null then
-            The_Cipher.Round_Keys.all := (others => 0);
-            Free(The_Cipher.Round_Keys);
-            The_Cipher.Round_Keys := null;
-         end if;
-
-         The_Cipher.Cipher_Id    := SC_AES_256;
-         The_Cipher.Key_Id       := AES_256;         
-      end if;
+      Initialize_Object(The_Cipher);
    end Stop_Cipher;
    
-   --[Other public subprograms]-------------------------------------------------
+   -----------------------------------------------------------------------------
+   --[Non-Dispatching operations]-----------------------------------------------
+   -----------------------------------------------------------------------------
    
    --[Get_AES_Key_Id]-----------------------------------------------------------
 
    function    Get_AES_Key_Id(
-                  Of_Cipher      : in     AES_Cipher'Class)
+                  Of_Cipher      : access AES_Cipher'Class)
       return   AES_Key_Id
    is
    begin
-      if Of_Cipher.State = Idle then
-         raise CryptAda_Uninitialized_Cipher_Error;
+      if Of_Cipher.all.State = Idle then
+         Raise_Exception(
+            CryptAda_Uninitialized_Cipher_Error'Identity,
+            "AES cipher is in Idle state");
       else
-         return Of_Cipher.Key_Id;
+         return Of_Cipher.all.Key_Id;
       end if;
    end Get_AES_Key_Id;
    

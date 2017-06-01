@@ -1,74 +1,68 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.c (2017/04/04)
+Version: 0.2.a (2017/05/30)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Time.RIPEMD_160
-Description              : Time trial for CryptAda.Digests.Algorithms.RIPEMD_160 functionality.
-Started                  : 2017/04/18 - 20:19:13
+Description              : Time trial for CryptAda.Digests.Message_Digests.RIPEMD_160 functionality.
+Started                  : 2017/06/01 - 18:26:29
 ================================================================================
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 1
-Description      : RIPEMD_160 hashing
-Started          : 2017/04/18 - 20:19:13
+Description      : RIPEMD-160 hashing
+Started          : 2017/06/01 - 18:26:29
 --------------------------------------------------------------------------------
 [I] Hashing 1MB
 [I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.RIPEMD_160.RIPEMD_160_DIGEST"
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.RIPEMD_160.RIPEMD_160_DIGEST"
     CryptAda digest algorithm id  : "MD_RIPEMD_160"
-    Digest algorithm SCAN name    : "RIPEMD-160"
-    Digest algorithm ASN1 OID     : "1.0.10118.3.0.49"
-    Digest algorithm OpenPGP name : "OpenPGP.Digest.3"
     State size (bytes)            :  20
     Input block size (bytes)      :  64
     Hash size (bytes)             :  20
-    Processed bit count           : ( 0,  0)
+    Processed bit count           : 16#00000000000000000000000000000000#
     Bytes to digest    :  1 MB
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.008906485 secs.
+    Elapsed time       :           0.009069491 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "6D60BA7F70ABA514999224C374358BE5B6DA6B1F"
+    Obtained hash      : "C7869B61E5F6343A2710B8AD1C4C98100E8A570F"
 --------------------------------------------------------------------------------
 Time Trial Number: 1
-Finished         : 2017/04/18 - 20:19:13
+Finished         : 2017/06/01 - 18:26:29
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 2
-Description      : RIPEMD_160 hashing
-Started          : 2017/04/18 - 20:19:13
+Description      : RIPEMD-160 hashing
+Started          : 2017/06/01 - 18:26:29
 --------------------------------------------------------------------------------
 [I] Hashing 10MB
 [I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.RIPEMD_160.RIPEMD_160_DIGEST"
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.RIPEMD_160.RIPEMD_160_DIGEST"
     CryptAda digest algorithm id  : "MD_RIPEMD_160"
-    Digest algorithm SCAN name    : "RIPEMD-160"
-    Digest algorithm ASN1 OID     : "1.0.10118.3.0.49"
-    Digest algorithm OpenPGP name : "OpenPGP.Digest.3"
     State size (bytes)            :  20
     Input block size (bytes)      :  64
     Hash size (bytes)             :  20
-    Processed bit count           : ( 0,  0)
+    Processed bit count           : 16#00000000000000000000000000000000#
     Bytes to digest    :  10 MB
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.089315126 secs.
+    Elapsed time       :           0.090359437 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "0872EF286777E0106518A1829C9792D711E45AD2"
+    Obtained hash      : "619D4CEF41D7A1913BED2525898FA4EAB3E39035"
 --------------------------------------------------------------------------------
 Time Trial Number: 2
-Finished         : 2017/04/18 - 20:19:14
+Finished         : 2017/06/01 - 18:26:29
 --[End Time Trial]--------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Time.RIPEMD_160
-Finished                 : 2017/04/18 - 20:19:14
+Finished                 : 2017/06/01 - 18:26:29
 ================================================================================

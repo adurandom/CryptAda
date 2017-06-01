@@ -33,6 +33,7 @@
 --                         procedure.
 --------------------------------------------------------------------------------
 
+with Ada.Exceptions;                         use Ada.Exceptions;
 with Ada.Unchecked_Deallocation;
 
 with CryptAda.Pragmatics;                    use CryptAda.Pragmatics;
@@ -86,8 +87,14 @@ package body CryptAda.Ciphers.Keys is
       
       return R;
    exception
-      when others =>
-         raise CryptAda_Storage_Error;
+      when X: others =>
+         Raise_Exception(
+            CryptAda_Storage_Error'Identity,
+            "Caught exception: '" &
+               Exception_Name(X) &
+               "', message: '" &
+               Exception_Message(X) &
+               "', when allocating key byte array");
    end Allocate_Byte_Array;
 
    -----------------------------------------------------------------------------
@@ -110,11 +117,13 @@ package body CryptAda.Ciphers.Keys is
    procedure   Finalize(
                   Object         : in out Key)
    is
+      T              : Byte_Array_Ptr := Object.Key_Bytes;
    begin      
-      if Object.Key_Bytes /= null then
-         Object.Key_Bytes.all := (others => 0);
-         Free(Object.Key_Bytes);
-         Object.Key_Bytes := null;
+      Object.Key_Bytes := null;
+      
+      if T /= null then
+         T.all := (others => 0);
+         Free(T);
       end if;
    end Finalize;
    
@@ -156,11 +165,13 @@ package body CryptAda.Ciphers.Keys is
    procedure   Set_Null(
                   The_Key        : in out Key)
    is
+      T              : Byte_Array_Ptr := The_Key.Key_Bytes;      
    begin
-      if The_Key.Key_Bytes /= null then
-         The_Key.Key_Bytes.all := (others => 0);
-         Free(The_Key.Key_Bytes);
-         The_Key.Key_Bytes := null;
+      The_Key.Key_Bytes := null;
+      
+      if T /= null then
+         T.all := (others => 0);
+         Free(T);
       end if;
    end Set_Null;
 
@@ -172,7 +183,9 @@ package body CryptAda.Ciphers.Keys is
    is
    begin
       if Of_Key.Key_Bytes = null then
-         raise CryptAda_Null_Argument_Error;
+         Raise_Exception(
+            CryptAda_Null_Argument_Error'Identity,
+            "Key is null");
       else
          return Of_Key.Key_Bytes.all'Length;
       end if;
@@ -186,7 +199,9 @@ package body CryptAda.Ciphers.Keys is
    is
    begin
       if From_Key.Key_Bytes = null then
-         raise CryptAda_Null_Argument_Error;
+         Raise_Exception(
+            CryptAda_Null_Argument_Error'Identity,
+            "Key is null");
       else
          return From_Key.Key_Bytes.all;
       end if;
@@ -202,12 +217,16 @@ package body CryptAda.Ciphers.Keys is
       L              : Natural;
    begin
       if From_Key.Key_Bytes = null then
-         raise CryptAda_Null_Argument_Error;
+         Raise_Exception(
+            CryptAda_Null_Argument_Error'Identity,
+            "Key is null");
       else
          L := From_Key.Key_Bytes.all'Length;
          
          if Into'Length < L then
-            raise CryptAda_Overflow_Error;
+            Raise_Exception(
+               CryptAda_Overflow_Error'Identity,
+               "Into'Length is not enough for key bytes");
          else
             Into := (others => 0);
             Into(Into'First .. Into'First + L - 1) := From_Key.Key_Bytes.all;

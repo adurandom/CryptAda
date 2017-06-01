@@ -1,224 +1,200 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.c (2017/04/04)
+Version: 0.2.a (2017/05/30)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Time.Snefru
-Description              : Time trial for CryptAda.Digests.Algorithms.Snefru functionality.
-Started                  : 2017/04/18 - 20:19:18
+Description              : Time trial for CryptAda.Digests.Message_Digests.Snefru functionality.
+Started                  : 2017/06/01 - 18:27:11
 ================================================================================
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 1
 Description      : Snefru 128-bit hashing
-Started          : 2017/04/18 - 20:19:18
+Started          : 2017/06/01 - 18:27:11
 --------------------------------------------------------------------------------
 [I] Hash size     : SNEFRU_128
     Security level: SECURITY_LEVEL_4
     Hashing 1MB
 [I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.SNEFRU.SNEFRU_DIGEST"
-    CryptAda digest algorithm id  : "MD_SNEFRU_128_4"
-    Digest algorithm SCAN name    : "Snefru-2(16,4)"
-    Digest algorithm ASN1 OID     : ""
-    Digest algorithm OpenPGP name : ""
-    State size (bytes)            :  16
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
     Input block size (bytes)      :  48
     Hash size (bytes)             :  16
-    Processed bit count           : ( 0,  0)
+    Processed bit count           : 16#00000000000000000000000000000000#
     Bytes to digest    :  1 MB
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.041999831 secs.
+    Elapsed time       :           0.042492909 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "914D7F882740CD27088B015048200FD0"
+    Obtained hash      : "66193D54F58F60D22E965BB1C5B193AA"
 [I] Hash size     : SNEFRU_128
     Security level: SECURITY_LEVEL_8
     Hashing 1MB
 [I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.SNEFRU.SNEFRU_DIGEST"
-    CryptAda digest algorithm id  : "MD_SNEFRU_128_8"
-    Digest algorithm SCAN name    : "Snefru-2(16,8)"
-    Digest algorithm ASN1 OID     : ""
-    Digest algorithm OpenPGP name : ""
-    State size (bytes)            :  16
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
     Input block size (bytes)      :  48
     Hash size (bytes)             :  16
-    Processed bit count           : ( 0,  0)
+    Processed bit count           : 16#00000000000000000000000000000000#
     Bytes to digest    :  1 MB
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.079116331 secs.
+    Elapsed time       :           0.079228401 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "A8E6F4DC9F251C3B60B31798408B6585"
+    Obtained hash      : "9C5BEDCA78174023F2BD819860840580"
 --------------------------------------------------------------------------------
 Time Trial Number: 1
-Finished         : 2017/04/18 - 20:19:19
+Finished         : 2017/06/01 - 18:27:11
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 2
 Description      : Snefru 128-bit hashing
-Started          : 2017/04/18 - 20:19:19
+Started          : 2017/06/01 - 18:27:11
 --------------------------------------------------------------------------------
 [I] Hash size     : SNEFRU_128
     Security level: SECURITY_LEVEL_4
     Hashing 10MB
 [I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.SNEFRU.SNEFRU_DIGEST"
-    CryptAda digest algorithm id  : "MD_SNEFRU_128_4"
-    Digest algorithm SCAN name    : "Snefru-2(16,4)"
-    Digest algorithm ASN1 OID     : ""
-    Digest algorithm OpenPGP name : ""
-    State size (bytes)            :  16
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
     Input block size (bytes)      :  48
     Hash size (bytes)             :  16
-    Processed bit count           : ( 0,  0)
+    Processed bit count           : 16#00000000000000000000000000000000#
     Bytes to digest    :  10 MB
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.418038337 secs.
+    Elapsed time       :           0.420604480 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "FEDDDB6E654BE974D9FE04CAB987A3A4"
+    Obtained hash      : "EAC2B2A97E926BBC551D6E5A275776E4"
 [I] Hash size     : SNEFRU_128
     Security level: SECURITY_LEVEL_8
     Hashing 10MB
 [I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.SNEFRU.SNEFRU_DIGEST"
-    CryptAda digest algorithm id  : "MD_SNEFRU_128_8"
-    Digest algorithm SCAN name    : "Snefru-2(16,8)"
-    Digest algorithm ASN1 OID     : ""
-    Digest algorithm OpenPGP name : ""
-    State size (bytes)            :  16
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
     Input block size (bytes)      :  48
     Hash size (bytes)             :  16
-    Processed bit count           : ( 0,  0)
+    Processed bit count           : 16#00000000000000000000000000000000#
     Bytes to digest    :  10 MB
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.791612240 secs.
+    Elapsed time       :           0.795569049 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "83E26EAF4273581CB690F4B5BBCD8610"
+    Obtained hash      : "F2799237E058CB21BD6EE78D8E204259"
 --------------------------------------------------------------------------------
 Time Trial Number: 2
-Finished         : 2017/04/18 - 20:19:20
+Finished         : 2017/06/01 - 18:27:12
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 3
 Description      : Snefru 256-bit hashing
-Started          : 2017/04/18 - 20:19:20
+Started          : 2017/06/01 - 18:27:12
 --------------------------------------------------------------------------------
 [I] Hash size     : SNEFRU_256
     Security level: SECURITY_LEVEL_4
     Hashing 1MB
 [I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.SNEFRU.SNEFRU_DIGEST"
-    CryptAda digest algorithm id  : "MD_SNEFRU_256_4"
-    Digest algorithm SCAN name    : "Snefru-2(32,4)"
-    Digest algorithm ASN1 OID     : ""
-    Digest algorithm OpenPGP name : ""
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
     State size (bytes)            :  32
     Input block size (bytes)      :  32
     Hash size (bytes)             :  32
-    Processed bit count           : ( 0,  0)
+    Processed bit count           : 16#00000000000000000000000000000000#
     Bytes to digest    :  1 MB
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.061608926 secs.
+    Elapsed time       :           0.063480699 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "50ECC2466A98CE9907D40CC483C2925BDB3B9A4E4F80A0D0933810B98EC0A658"
+    Obtained hash      : "E175736E1C8FAF6AA4C88AD6BD0E003542EEABA12116A7950540635E3C563C70"
 [I] Hash size     : SNEFRU_256
     Security level: SECURITY_LEVEL_8
     Hashing 1MB
 [I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.SNEFRU.SNEFRU_DIGEST"
-    CryptAda digest algorithm id  : "MD_SNEFRU_256_8"
-    Digest algorithm SCAN name    : "Snefru-2(32,8)"
-    Digest algorithm ASN1 OID     : ""
-    Digest algorithm OpenPGP name : ""
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
     State size (bytes)            :  32
     Input block size (bytes)      :  32
     Hash size (bytes)             :  32
-    Processed bit count           : ( 0,  0)
+    Processed bit count           : 16#00000000000000000000000000000000#
     Bytes to digest    :  1 MB
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.121615472 secs.
+    Elapsed time       :           0.118382614 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "963F1F1617CE57028D317B7869F99A496BB995043EDE4A8F6EAA9246BE4C057A"
+    Obtained hash      : "C24C250D9153AE4196F5B08ACEA870AC64924D118D7D4A79C1E27E92F33F398C"
 --------------------------------------------------------------------------------
 Time Trial Number: 3
-Finished         : 2017/04/18 - 20:19:20
+Finished         : 2017/06/01 - 18:27:12
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 4
 Description      : Snefru 256-bit hashing
-Started          : 2017/04/18 - 20:19:20
+Started          : 2017/06/01 - 18:27:12
 --------------------------------------------------------------------------------
 [I] Hash size     : SNEFRU_256
     Security level: SECURITY_LEVEL_4
     Hashing 10MB
 [I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.SNEFRU.SNEFRU_DIGEST"
-    CryptAda digest algorithm id  : "MD_SNEFRU_256_4"
-    Digest algorithm SCAN name    : "Snefru-2(32,4)"
-    Digest algorithm ASN1 OID     : ""
-    Digest algorithm OpenPGP name : ""
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
     State size (bytes)            :  32
     Input block size (bytes)      :  32
     Hash size (bytes)             :  32
-    Processed bit count           : ( 0,  0)
+    Processed bit count           : 16#00000000000000000000000000000000#
     Bytes to digest    :  10 MB
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.618675111 secs.
+    Elapsed time       :           0.623888125 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "D1587DB72320AA27DA3A452D23F91161F07FFCEE49E124DEBECD582A94F80BEE"
+    Obtained hash      : "277E4A281ED93B2516251DA32BC95B32918ABF1ABACE25E94B2A3689A5BCCDE0"
 [I] Hash size     : SNEFRU_256
     Security level: SECURITY_LEVEL_8
     Hashing 10MB
 [I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.SNEFRU.SNEFRU_DIGEST"
-    CryptAda digest algorithm id  : "MD_SNEFRU_256_8"
-    Digest algorithm SCAN name    : "Snefru-2(32,8)"
-    Digest algorithm ASN1 OID     : ""
-    Digest algorithm OpenPGP name : ""
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
     State size (bytes)            :  32
     Input block size (bytes)      :  32
     Hash size (bytes)             :  32
-    Processed bit count           : ( 0,  0)
+    Processed bit count           : 16#00000000000000000000000000000000#
     Bytes to digest    :  10 MB
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           1.180836392 secs.
+    Elapsed time       :           1.186772028 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "87CBC1FC3FA0C8B0B415BF7CD5A984E10F38657EDCDAE909C60648EFD7B736D8"
+    Obtained hash      : "625D162BFA8F78F3977BDA884D760E8B050C8E8D7373449CA73B370E29C671E6"
 --------------------------------------------------------------------------------
 Time Trial Number: 4
-Finished         : 2017/04/18 - 20:19:22
+Finished         : 2017/06/01 - 18:27:14
 --[End Time Trial]--------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Time.Snefru
-Finished                 : 2017/04/18 - 20:19:22
+Finished                 : 2017/06/01 - 18:27:14
 ================================================================================

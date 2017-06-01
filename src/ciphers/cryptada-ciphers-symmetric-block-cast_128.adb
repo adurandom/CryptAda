@@ -20,7 +20,7 @@
 --    File kind         :  Ada package body
 --    Author            :  A. Duran
 --    Creation date     :  April 4th, 2017
---    Current version   :  1.0
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the CAST-128 block cupher.
@@ -29,9 +29,13 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170404 ADD   Initial implementation.
+--    2.0   20170529 ADD   Changed types.
 --------------------------------------------------------------------------------
 
+with Ada.Exceptions;                         use Ada.Exceptions;
+
 with CryptAda.Pragmatics;                    use CryptAda.Pragmatics;
+with CryptAda.Lists;                         use CryptAda.Lists;
 with CryptAda.Names;                         use CryptAda.Names;
 with CryptAda.Exceptions;                    use CryptAda.Exceptions;
 with CryptAda.Ciphers.Keys;                  use CryptAda.Ciphers.Keys;
@@ -330,6 +334,12 @@ package body CryptAda.Ciphers.Symmetric.Block.CAST_128 is
    --[Subprogram Specification]-------------------------------------------------
    -----------------------------------------------------------------------------
 
+   --[Initialize_Object]--------------------------------------------------------
+
+   procedure   Initialize_Object(
+                  Object         : access CAST_128_Cipher);
+   pragma Inline(Initialize_Object);
+   
    --[HHB]----------------------------------------------------------------------
 
    function    HHB(
@@ -412,6 +422,19 @@ package body CryptAda.Ciphers.Symmetric.Block.CAST_128 is
    --[Body declared subprogram bodies]------------------------------------------
    -----------------------------------------------------------------------------
 
+   --[Initialize_Object]--------------------------------------------------------
+
+   procedure   Initialize_Object(
+                  Object         : access CAST_128_Cipher)
+   is
+   begin
+      -- Set to initial value any attribute which is modified in this package
+
+      Object.all.State        := Idle;
+      Object.all.Rounds       := CAST_128_Min_Rounds;
+      Object.all.Expanded_Key := (others => 16#00000000#);
+   end Initialize_Object;
+   
    --[HHB]----------------------------------------------------------------------
 
    function    HHB(
@@ -738,111 +761,165 @@ package body CryptAda.Ciphers.Symmetric.Block.CAST_128 is
    end Decrypt_Block;
 
    -----------------------------------------------------------------------------
-   --[Spec declared subprogram bodies]------------------------------------------
+   --[Getting a handle]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Ada.Finalization interface]-----------------------------------------------
+   --[Get_Symmetric_Cipher_Handle]----------------------------------------------
+
+   function    Get_Symmetric_Cipher_Handle
+      return   Symmetric_Cipher_Handle
+   is
+      P           : CAST_128_Cipher_Ptr;
+   begin
+      P := new CAST_128_Cipher'(Block_Cipher with
+                                    Id             => SC_CAST_128,
+                                    Rounds         => CAST_128_Min_Rounds,
+                                    Expanded_Key   => (others => 16#00000000#));
+                                 
+      P.all.Ciph_Type   := CryptAda.Ciphers.Block_Cipher;
+      P.all.Key_Info    := CAST_128_Key_Info;
+      P.all.State       := Idle;
+      P.all.Block_Size  := CAST_128_Block_Size;
+
+      return Ref(Symmetric_Cipher_Ptr(P));
+   exception
+      when X: others =>
+         Raise_Exception(
+            CryptAda_Storage_Error'Identity,
+            "Caught exception: '" &
+               Exception_Name(X) &
+               "' with message: '" &
+               Exception_Message(X) &
+               "', when allocating CAST_128_Cipher object");
+   end Get_Symmetric_Cipher_Handle;
+
+   -----------------------------------------------------------------------------
+   --[Ada.Finalization Operations]----------------------------------------------
+   -----------------------------------------------------------------------------
 
    --[Initialize]---------------------------------------------------------------
 
+   overriding
    procedure   Initialize(
                   Object         : in out CAST_128_Cipher)
    is
    begin
-      Object.Cipher_Id     := SC_CAST_128;
       Object.Ciph_Type     := CryptAda.Ciphers.Block_Cipher;
       Object.Key_Info      := CAST_128_Key_Info;
       Object.State         := Idle;
       Object.Block_Size    := CAST_128_Block_Size;
       Object.Rounds        := CAST_128_Min_Rounds;
-      Object.Expanded_Key  := (others => 0);
+      Object.Expanded_Key  := (others => 16#00000000#);
    end Initialize;
 
    --[Finalize]-----------------------------------------------------------------
 
+   overriding
    procedure   Finalize(
                   Object         : in out CAST_128_Cipher)
    is
    begin
       Object.State         := Idle;
       Object.Rounds        := CAST_128_Min_Rounds;
-      Object.Expanded_Key  := (others => 0);
+      Object.Expanded_Key  := (others => 16#00000000#);
    end Finalize;
 
-   --[Dispatching Operations]---------------------------------------------------
-
+   -----------------------------------------------------------------------------
+   --[Dispatching operations]---------------------------------------------------
+   -----------------------------------------------------------------------------
+   
    --[Start_Cipher]-------------------------------------------------------------
 
+   overriding
    procedure   Start_Cipher(
-                  The_Cipher     : in out CAST_128_Cipher;
+                  The_Cipher     : access CAST_128_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     Key)
    is
    begin
-
       -- Verify that With_Key is a valid key.
 
       if not Is_Valid_CAST_128_Key(With_Key) then
-         raise CryptAda_Invalid_Key_Error;
+         Raise_Exception(
+            CryptAda_Invalid_Key_Error'Identity,
+            "Invalid CAST_128 key");
       end if;
 
       -- Make internal key.
 
-      Make_Key(The_Cipher.Expanded_Key, Get_Key_Bytes(With_Key), The_Cipher.Rounds);
+      Make_Key(The_Cipher.all.Expanded_Key, Get_Key_Bytes(With_Key), The_Cipher.all.Rounds);
 
       if For_Operation = Encrypt then
-         The_Cipher.State        := Encrypting;
+         The_Cipher.all.State := Encrypting;
       else
-         The_Cipher.State        := Decrypting;
+         The_Cipher.all.State := Decrypting;
       end if;
    end Start_Cipher;
 
+   --[Start_Cipher]-------------------------------------------------------------
+
+   overriding
+   procedure   Start_Cipher(
+                  The_Cipher     : access CAST_128_Cipher;
+                  Parameters     : in     List)
+   is
+      O              : Cipher_Operation;
+      K              : Key;
+   begin
+      Get_Parameters(Parameters, O, K);
+      Start_Cipher(The_Cipher, O, K);
+   end Start_Cipher;
+   
    --[Do_Process]---------------------------------------------------------------
 
+   overriding
    procedure   Do_Process(
-                  With_Cipher    : in out CAST_128_Cipher;
+                  With_Cipher    : access CAST_128_Cipher;
                   Input          : in     Byte_Array;
                   Output         :    out Byte_Array)
    is
    begin
       -- Check state.
 
-      if With_Cipher.State = Idle then
-         raise CryptAda_Uninitialized_Cipher_Error;
+      if With_Cipher.all.State = Idle then
+         Raise_Exception(
+            CryptAda_Uninitialized_Cipher_Error'Identity,
+            "CAST_128 cipher is in Idle state");
       end if;
 
       -- Check blocks.
 
       if Input'Length /= CAST_128_Block_Size or
          Output'Length /= CAST_128_Block_Size then
-         raise CryptAda_Invalid_Block_Length_Error;
+         Raise_Exception(
+            CryptAda_Invalid_Block_Length_Error'Identity,
+            "Invalid block length");               
       end if;
 
       -- Process block.
       
-      if With_Cipher.State = Encrypting then
-         Encrypt_Block(With_Cipher.Expanded_Key, With_Cipher.Rounds, Input, Output);
+      if With_Cipher.all.State = Encrypting then
+         Encrypt_Block(With_Cipher.all.Expanded_Key, With_Cipher.all.Rounds, Input, Output);
       else
-         Decrypt_Block(With_Cipher.Expanded_Key, With_Cipher.Rounds, Input, Output);
+         Decrypt_Block(With_Cipher.all.Expanded_Key, With_Cipher.all.Rounds, Input, Output);
       end if;
    end Do_Process;
 
    --[Stop_Cipher]--------------------------------------------------------------
 
+   overriding
    procedure   Stop_Cipher(
-                  The_Cipher     : in out CAST_128_Cipher)
+                  The_Cipher     : access CAST_128_Cipher)
    is
    begin
-      if The_Cipher.State /= Idle then
-         The_Cipher.State        := Idle;
-         The_Cipher.Rounds       := CAST_128_Min_Rounds;
-         The_Cipher.Expanded_Key := (others => 0);
-      end if;
+      Initialize_Object(The_Cipher);
    end Stop_Cipher;
 
-   --[Other public subprograms]-------------------------------------------------
+   -----------------------------------------------------------------------------
+   --[Non-Dispatching operations]-----------------------------------------------
+   -----------------------------------------------------------------------------
 
-   --[Is_Valid_CAST_128_Key]--------------------------------------------------------
+   --[Is_Valid_CAST_128_Key]----------------------------------------------------
 
    function    Is_Valid_CAST_128_Key(
                   The_Key        : in     Key)

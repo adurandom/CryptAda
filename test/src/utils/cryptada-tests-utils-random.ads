@@ -36,12 +36,12 @@ with CryptAda.Random.Generators;
 package CryptAda.Tests.Utils.Random is
 
    procedure   Print_Generator_Info(
-                  Generator      : in     CryptAda.Random.Generators.Random_Generator'Class);
+                  Generator      : in     CryptAda.Random.Generators.Random_Generator_Handle);
                   
    procedure   Run_Chi_Square_Test(
-                  Generator      : in out CryptAda.Random.Generators.Random_Generator'Class);
+                  Generator      : in     CryptAda.Random.Generators.Random_Generator_Handle);
                   
    procedure   Run_FIPS_PUB_140_2_Tests(
-                  Generator      : in out CryptAda.Random.Generators.Random_Generator'Class);
+                  Generator      : in     CryptAda.Random.Generators.Random_Generator_Handle);
                   
 end Cryptada.Tests.Utils.Random;

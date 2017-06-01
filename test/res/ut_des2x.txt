@@ -1,29 +1,103 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.c (2017/04/04)
+Version: 0.2.a (2017/05/30)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.DES2X
 Description              : Unit test driver for CryptAda.Ciphers.Symmetric.Block.DES2X functionality.
-Started                  : 2017/04/18 - 20:18:52
+Started                  : 2017/06/01 - 18:25:40
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
-Description     : Running DES2X_Cipher basic tests
-Started         : 2017/04/18 - 20:18:52
+Description     : Getting a handle for cipher objects
+Started         : 2017/06/01 - 18:25:40
 --------------------------------------------------------------------------------
-[I] Basic tests for DES2X_Cipher
+[I] Subprograms tested: 
+    - Get_Symmetric_Cipher_Handle
+    - Is_Valid_Handle
+    - Invalidate_Handle
+    - Get_Symmetric_Cipher_Ptr
+[I] Before Get_Symmetric_Cipher_Handle the handle is invalid:
+[I] Handle is invalid
+[I] Getting a pointer from an invalid handle will return null
+[I] Pointer is null
+[I] Trying any operation with a null pointer will raise Constraint_Error
+    Trying Start_Cipher
+[I] Caught Constraint_Error
+    Exception: "CONSTRAINT_ERROR"
+    Message  : "cryptada-tests-unit-des2x.adb:143 access check failed"
+[I] Getting a symmetric cipher handle
+[I] Information on handle BEFORE calling Get_Symmetric_Cipher_Handle
+[I] Invalid symmetric cipher handle
+[I] Information on handle AFTER calling Get_Symmetric_Cipher_Handle
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.DES2X.DES2X_CIPHER"
+    CryptAda cipher algorithm id  : SC_DES2X
+    Cipher type                   : BLOCK_CIPHER
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  32
+    Maximum key length            :  32
+    Default key length            :  32
+    Key length increment step     :  0
+[I] Now the handle must be valid:
+[I] Handle is valid
+[I] Getting a pointer from an valid handle will return a not null value
+[I] Pointer is not null
+[I] Starting cipher must succeed now
+[I] Information on handle AFTER Start_Cipher
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.DES2X.DES2X_CIPHER"
+    CryptAda cipher algorithm id  : SC_DES2X
+    Cipher type                   : BLOCK_CIPHER
+    Cipher state                  : ENCRYPTING
+    Started                       : TRUE
+    Minimum key length            :  32
+    Maximum key length            :  32
+    Default key length            :  32
+    Key length increment step     :  0
+[I] Calling Stop_Cipher
+[I] Information on handle AFTER Stop_Cipher
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.DES2X.DES2X_CIPHER"
+    CryptAda cipher algorithm id  : SC_DES2X
+    Cipher type                   : BLOCK_CIPHER
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  32
+    Maximum key length            :  32
+    Default key length            :  32
+    Key length increment step     :  0
+[I] Invalidating handle
+[I] Information on handle AFTER invalidating handle
+[I] Invalid symmetric cipher handle
+[I] Handle is invalid
+[I] Using a pointer from an invalid handle must result in an exception
+    Trying Start_Cipher
+[I] Caught Constraint_Error
+    Exception: "CONSTRAINT_ERROR"
+    Message  : "cryptada-tests-unit-des2x.adb:216 access check failed"
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:25:40
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Running DES2X_Cipher basic tests
+Started         : 2017/06/01 - 18:25:40
+--------------------------------------------------------------------------------
+[I] Basic test for DES2X_Cipher
     This test case is a 10 step test that will exercise Block_Cipher dispatching operations
 [I] Cipher information:
 [I] Information of cipher object:
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.DES2X.DES2X_CIPHER"
     CryptAda cipher algorithm id  : SC_DES2X
     Cipher type                   : BLOCK_CIPHER
-    SCAN name                     : ""
-    ASN1 OID                      : ""
-    OpenPGP name                  : ""
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  32
@@ -38,7 +112,9 @@ Started         : 2017/04/18 - 20:18:52
 Block length:  8
 Block data  :
 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
-[I] Raised CryptAda_Uninitialized_Cipher_Error
+[I] Caught CryptAda_Uninitialized_Cipher_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_UNINITIALIZED_CIPHER_ERROR'
+    - Message  : 'DES2X cipher is in Idle state'
 [I] Basic Test 2
     Trying Start_Cipher with an invalid key
     Must raise CryptAda_Invalid_Key_Error exception.
@@ -46,7 +122,9 @@ Block data  :
 [I] The key
 Null key
 [I] Calling to Start_Cipher
-[I] Raised CryptAda_Invalid_Key_Error
+[I] Caught CryptAda_Invalid_Key_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_KEY_ERROR'
+    - Message  : 'Invalid DESX key'
 [I] Using key with excessive length
 [I] Maximum key length is:  32
 [I] The key
@@ -56,7 +134,9 @@ Null key
 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
 16#11#
 [I] Calling to Start_Cipher
-[I] Raised CryptAda_Invalid_Key_Error
+[I] Caught CryptAda_Invalid_Key_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_KEY_ERROR'
+    - Message  : 'Invalid DESX key'
 [I] Basic Test 3
     Checking state after successful Start_Cipher for encryption
 [I] Key set to
@@ -69,9 +149,6 @@ Null key
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.DES2X.DES2X_CIPHER"
     CryptAda cipher algorithm id  : SC_DES2X
     Cipher type                   : BLOCK_CIPHER
-    SCAN name                     : ""
-    ASN1 OID                      : ""
-    OpenPGP name                  : ""
     Cipher state                  : ENCRYPTING
     Started                       : TRUE
     Minimum key length            :  32
@@ -87,25 +164,33 @@ Null key
 Block length:  7
 Block data  :
 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
-[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Caught CryptAda_Invalid_Block_Length_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_BLOCK_LENGTH_ERROR'
+    - Message  : 'Invalid block length'
     Cipher block size:  8 bytes
 [I] Invalid input block information: 
 Block length:  9
 Block data  :
 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#
-[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Caught CryptAda_Invalid_Block_Length_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_BLOCK_LENGTH_ERROR'
+    - Message  : 'Invalid block length'
     Cipher block size:  8 bytes
 [I] Invalid output block information: 
 Block length:  7
 Block data  :
 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
-[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Caught CryptAda_Invalid_Block_Length_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_BLOCK_LENGTH_ERROR'
+    - Message  : 'Invalid block length'
     Cipher block size:  8 bytes
 [I] Invalid output block information: 
 Block length:  9
 Block data  :
 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
-[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Caught CryptAda_Invalid_Block_Length_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_BLOCK_LENGTH_ERROR'
+    - Message  : 'Invalid block length'
 [I] Basic Test 5
     Encrypting a valid block
 [I] Block to encrypt
@@ -123,9 +208,6 @@ Block data  :
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.DES2X.DES2X_CIPHER"
     CryptAda cipher algorithm id  : SC_DES2X
     Cipher type                   : BLOCK_CIPHER
-    SCAN name                     : ""
-    ASN1 OID                      : ""
-    OpenPGP name                  : ""
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  32
@@ -140,9 +222,6 @@ Block data  :
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.DES2X.DES2X_CIPHER"
     CryptAda cipher algorithm id  : SC_DES2X
     Cipher type                   : BLOCK_CIPHER
-    SCAN name                     : ""
-    ASN1 OID                      : ""
-    OpenPGP name                  : ""
     Cipher state                  : DECRYPTING
     Started                       : TRUE
     Minimum key length            :  32
@@ -158,25 +237,33 @@ Block data  :
 Block length:  7
 Block data  :
 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
-[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Caught CryptAda_Invalid_Block_Length_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_BLOCK_LENGTH_ERROR'
+    - Message  : 'Invalid block length'
     Cipher block size:  8 bytes
 [I] Invalid input block information: 
 Block length:  9
 Block data  :
 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#
-[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Caught CryptAda_Invalid_Block_Length_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_BLOCK_LENGTH_ERROR'
+    - Message  : 'Invalid block length'
     Cipher block size:  8 bytes
 [I] Invalid output block information: 
 Block length:  7
 Block data  :
 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
-[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Caught CryptAda_Invalid_Block_Length_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_BLOCK_LENGTH_ERROR'
+    - Message  : 'Invalid block length'
     Cipher block size:  8 bytes
 [I] Invalid output block information: 
 Block length:  9
 Block data  :
 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
-[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Caught CryptAda_Invalid_Block_Length_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_BLOCK_LENGTH_ERROR'
+    - Message  : 'Invalid block length'
 [I] Basic Test 9
     Decrypting the block encrypted on basic test 5. Must be equal to original
     plaintext block
@@ -196,9 +283,6 @@ Block data  :
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.DES2X.DES2X_CIPHER"
     CryptAda cipher algorithm id  : SC_DES2X
     Cipher type                   : BLOCK_CIPHER
-    SCAN name                     : ""
-    ASN1 OID                      : ""
-    OpenPGP name                  : ""
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  32
@@ -208,15 +292,77 @@ Block data  :
     Block size                    :  8
 [I] Test case OK
 --------------------------------------------------------------------------------
-Test Case Number: 1
+Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:52
+Finished        : 2017/06/01 - 18:25:40
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 2
+Test Case Number: 3
+Description     : Start_Cipher(Parameter List)
+Started         : 2017/06/01 - 18:25:40
+--------------------------------------------------------------------------------
+[I] Trying Start_Cipher with some invalid lists
+[I] List  1: "()"
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Parameters list must be a named list"
+[I] List  2: "(Encrypt,"0102030405060708091011121314151617181920212223242526272829303132")"
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Parameters list must be a named list"
+[I] List  3: "(Op=>Encrypt,Key=>"0102030405060708091011121314151617181920212223242526272829303132")"
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Missing mandatory item 'Operation'"
+[I] List  4: "(Operation=>Encrypt,K=>"0102030405060708091011121314151617181920212223242526272829303132")"
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Missing mandatory item 'Key'"
+[I] List  5: "(Operation=>Encrypting,Key=>"0102030405060708091011121314151617181920212223242526272829303132")"
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Caught exception: 'CONSTRAINT_ERROR', with message: 'bad input for 'Value: "Encrypting"', when obtaining 'Operation' parameter"
+[I] List  6: "(Operation=>Encrypt,Key=>"01020304050607080910111213141516@17181920212223242526272829303132")"
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Caught exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR', with message: 'Invalid hexadecimal digit: '@'', when obtaining 'Key' parameter"
+[I] List  7: "(Operation=>Encrypt,Key=>"01020304050607080910111213141516171819202122232425262728293031")"
+[I] Caught CryptAda_Invalid_Key_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_KEY_ERROR"
+    Message  : "Invalid DESX key"
+[I] Encrypting with valid parameter list
+[I] Parameter list: "(Operation=>Encrypt,Key=>"000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f")"
+[I] Block to encrypt
+Block length:  8
+Block data  :
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] Ciphered block
+Block length:  8
+Block data  :
+16#DB#, 16#BE#, 16#A5#, 16#CD#, 16#6B#, 16#2D#, 16#F2#, 16#D4#
+[I] Decrypting with valid parameter list
+[I] Parameter list: "(Operation=>Decrypt,Key=>"000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f")"
+[I] Block to decrypt
+Block length:  8
+Block data  :
+16#DB#, 16#BE#, 16#A5#, 16#CD#, 16#6B#, 16#2D#, 16#F2#, 16#D4#
+[I] Decrypted block
+Block length:  8
+Block data  :
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] Results match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:25:40
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
 Description     : Testing DES2X_Cipher non dispatching operations
-Started         : 2017/04/18 - 20:18:52
+Started         : 2017/06/01 - 18:25:40
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
 Is_Valid_DES2X_Key
@@ -247,28 +393,28 @@ Key is not valid: OK
 16#AD#, 16#AD#, 16#AD#, 16#AD#, 16#AD#, 16#AD#, 16#AD#, 16#AD#, 16#AD#, 16#AD#, 16#AD#, 16#AD#, 16#AD#, 16#AD#, 16#AD#, 16#AD#
 Key is valid: OK
 --------------------------------------------------------------------------------
-Test Case Number: 2
+Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:52
+Finished        : 2017/06/01 - 18:25:40
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 3
+Test Case Number: 5
 Description     : DES2X standard test vectors
-Started         : 2017/04/18 - 20:18:52
+Started         : 2017/06/01 - 18:25:40
 --------------------------------------------------------------------------------
-[I] No vectors so far.
+[I] No vectors found
 [I] Test case OK
 --------------------------------------------------------------------------------
-Test Case Number: 3
+Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:52
+Finished        : 2017/06/01 - 18:25:40
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 4
+Test Case Number: 6
 Description     : DES2X Bulk test
-Started         : 2017/04/18 - 20:18:52
+Started         : 2017/06/01 - 18:25:40
 --------------------------------------------------------------------------------
 [I] Block cipher bulk test
     Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
@@ -278,9 +424,6 @@ Started         : 2017/04/18 - 20:18:52
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.DES2X.DES2X_CIPHER"
     CryptAda cipher algorithm id  : SC_DES2X
     Cipher type                   : BLOCK_CIPHER
-    SCAN name                     : ""
-    ASN1 OID                      : ""
-    OpenPGP name                  : ""
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  32
@@ -291,13 +434,13 @@ Started         : 2017/04/18 - 20:18:52
 [I] Bulk test completed OK
 [I] Test case OK
 --------------------------------------------------------------------------------
-Test Case Number: 4
+Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:53
+Finished        : 2017/06/01 - 18:25:40
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.DES2X
-Finished                 : 2017/04/18 - 20:18:53
+Finished                 : 2017/06/01 - 18:25:40
 ================================================================================

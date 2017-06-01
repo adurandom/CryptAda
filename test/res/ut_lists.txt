@@ -1,18 +1,18 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.c (2017/04/04)
+Version: 0.2.a (2017/05/30)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Lists
-Description              : Unit test driver for CryptAda.Pragmatics.Lists functionality.
-Started                  : 2017/04/24 - 16:03:27
+Description              : Unit test driver for CryptAda.Lists functionality.
+Started                  : 2017/06/01 - 18:23:48
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Basic List tests
-Started         : 2017/04/24 - 16:03:27
+Started         : 2017/06/01 - 18:23:48
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
     - Get_List_Kind
@@ -24,1360 +24,2196 @@ Started         : 2017/04/24 - 16:03:27
 Expected list kind: EMPTY
 Obtained list kind: EMPTY
 [I] Results match
-[I] Empty list must contain 0 items
-Expected list size:  0
-Obtained list size:  0
+[I] Printing List_1
+[I] List: List_1
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Empty list must have a 0 items
+Expected number of items:  0
+Obtained number of items:  0
 [I] Results match
 [I] Empty list must be equal to other empty list
+[I] List: List_1
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] Lists are equal
 [I] Text representation of empty lists
-Text representation of test list is: "()"
+Text representation of List_1 is: "()"
 [I] Converting from text to empty lists
 Whitespace is ignored
     Text: "()"
-[I] Obtained list. Must be equal to an empty list
+[I] List: Obtained list
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] Lists are equal
-Text representation of obtained list is: "()"
     Text: "    (      )    "
-[I] Obtained list. Must be equal to an empty list
+[I] List: Obtained list
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] Lists are equal
-Text representation of obtained list is: "()"
     Text: "	
  (	
  )	
  "
-[I] Obtained list. Must be equal to an empty list
+[I] List: Obtained list
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] Lists are equal
-Text representation of obtained list is: "()"
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/24 - 16:03:27
+Finished        : 2017/06/01 - 18:23:48
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
-Description     : Basic handling of unnamed lists
-Started         : 2017/04/24 - 16:03:27
---------------------------------------------------------------------------------
-[I] Interfaces tested:
-    - Get_List_Kind
-    - Number_Of_Items
-    - List_2_Text
-    - Text_2_List
-    - Get_Item_Kind
-    - Make_Empty
-[I] As created, list must be empty
-Expected list kind: EMPTY
-Obtained list kind: EMPTY
-[I] Results match
-[I] Converting text to list
-Text to convert: "((), Foo_Bar, "Foo Bar", 16#FF#, 3.1415926)"
-Expected list kind: UNNAMED
-Obtained list kind: UNNAMED
-[I] Results match
-[I] List must contain 5 items
-Expected list size:  5
-Obtained list size:  5
-[I] Results match
-[I] Now we get the kind of list items ...
-Item  1. Kind: LIST_ITEM_KIND
-Item  2. Kind: IDENTIFIER_ITEM_KIND
-Item  3. Kind: STRING_ITEM_KIND
-Item  4. Kind: INTEGER_ITEM_KIND
-Item  5. Kind: FLOAT_ITEM_KIND
-[I] Converting back to test must eliminate whitespace between tokens ...
-List text: "((),Foo_Bar,"Foo Bar",255,3.14159E+00)"
-[I] Make_Empty must make the list empty
-Expected list kind: EMPTY
-Obtained list kind: EMPTY
-[I] Results match
-[I] List must contain 0 items
-Expected list size:  0
-Obtained list size:  0
-[I] Results match
-List text: "()"
-[I] Test case OK
---------------------------------------------------------------------------------
-Test Case Number: 2
-Test Case Result: PASSED
-Finished        : 2017/04/24 - 16:03:27
---[End Test Case]---------------------------------------------------------------
-
---[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 3
-Description     : Basic handling of named lists
-Started         : 2017/04/24 - 16:03:27
---------------------------------------------------------------------------------
-[I] Interfaces tested:
-    - Get_List_Kind
-    - Number_Of_Items
-    - List_2_Text
-    - Text_2_List
-    - Get_Item_Kind
-    - Get_Item_Name
-    - Make_Empty
-[I] As created, list must be empty
-Expected list kind: EMPTY
-Obtained list kind: EMPTY
-[I] Results match
-[I] Converting text to list
-Text to convert: "(List => (), Identifier => Foo_Bar, String => "Foo Bar", Integer => 16#FF#, Float => 3.1415926)"
-Expected list kind: NAMED
-Obtained list kind: NAMED
-[I] Results match
-[I] List must contain 5 items
-Expected list size:  5
-Obtained list size:  5
-[I] Results match
-[I] Now we get the names and kind of list items ...
-Item  1. Name: "List". Kind: LIST_ITEM_KIND
-Item  2. Name: "Identifier". Kind: IDENTIFIER_ITEM_KIND
-Item  3. Name: "String". Kind: STRING_ITEM_KIND
-Item  4. Name: "Integer". Kind: INTEGER_ITEM_KIND
-Item  5. Name: "Float". Kind: FLOAT_ITEM_KIND
-[I] Converting back to test must eliminate whitespace between tokens ...
-List text: "(List=>(),Identifier=>Foo_Bar,String=>"Foo Bar",Integer=>255,Float=>3.14159E+00)"
-[I] Make_Empty must make the list empty
-Expected list kind: EMPTY
-Obtained list kind: EMPTY
-[I] Results match
-[I] List must contain 0 items
-Expected list size:  0
-Obtained list size:  0
-[I] Results match
-List text: "()"
-[I] Test case OK
---------------------------------------------------------------------------------
-Test Case Number: 3
-Test Case Result: PASSED
-Finished        : 2017/04/24 - 16:03:27
---[End Test Case]---------------------------------------------------------------
-
---[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 4
-Description     : List text syntax
-Started         : 2017/04/24 - 16:03:27
---------------------------------------------------------------------------------
-[I] Interfaces tested:
-    - Text_2_List
-[I] Testing some syntax incorrect list text strings
-Conversion must raise CryptAda_Syntax_Error
-List text: ""
-[I] Caught CryptAda_Syntax_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-    Message  : "List_Text parser. Null first token"
-List text: "        "
-[I] Caught CryptAda_Syntax_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-    Message  : "List_Text parser. Null first token"
-List text: "	
- "
-[I] Caught CryptAda_Syntax_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-    Message  : "List_Text parser. Null first token"
-List text: "("
-[I] Caught CryptAda_Syntax_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-    Message  : "List_Text parser. Found null token."
-List text: "(((()))"
-[I] Caught CryptAda_Syntax_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-    Message  : "List_Text parser. Found null token."
-List text: "("Inside"outside)"
-[I] Caught CryptAda_Syntax_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-    Message  : "List_Text parser. Found invalid token: TK_IDENTIFIER"
-List text: "(Hello, World Howdy)"
-[I] Caught CryptAda_Syntax_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-    Message  : "List_Text parser. Found invalid token: TK_IDENTIFIER"
-List text: "(My_Int => 2#123456#)"
-[I] Caught CryptAda_Syntax_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-    Message  : "List_Text parser. Invalid numeric literal: "2#123456#""
-List text: "(My_Int => - 25)"
-[I] Caught CryptAda_Syntax_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-    Message  : "List_Text parser. Invalid numeric literal: "-""
-List text: "(My_Float => - 2.5)"
-[I] Caught CryptAda_Syntax_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-    Message  : "List_Text parser. Invalid numeric literal: "-""
-List text: "(My_Ident => 2Hello)"
-[I] Caught CryptAda_Syntax_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-    Message  : "List_Text parser. Invalid numeric literal: "2Hello""
-List text: "(My_Ident => @Hello)"
-[I] Caught CryptAda_Syntax_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-    Message  : "List_Text scanner. Position:  14. Invalid character: '@'"
-List text: "(My_Ident => Hello_)"
-[I] Caught CryptAda_Syntax_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-    Message  : "List_Text scanner. Position:  20. Invalid character ')'"
-List text: "(My_Ident => Hel__lo)"
-[I] Caught CryptAda_Syntax_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-    Message  : "List_Text scanner. Position:  18. Invalid character '_'"
-[I] Test case OK
---------------------------------------------------------------------------------
-Test Case Number: 4
-Test Case Result: PASSED
-Finished        : 2017/04/24 - 16:03:27
---[End Test Case]---------------------------------------------------------------
-
---[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 5
 Description     : Copying lists
-Started         : 2017/04/24 - 16:03:27
+Started         : 2017/06/01 - 18:23:48
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
     - Copy_List
-    - Is_Equal
-[I] Converting text to list
-Text to convert: "(List => (Hello => "Hi", World => (1, 2, 3)), Identifier => Foo_Bar, String => "Foo Bar", Integer => 16#FF#, Float => 3.1415926)"
-[I] Lists before copy:
-[I] List: L1
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (List=>(Hello=>"Hi",World=>(1,2,3)),Identifier=>Foo_Bar,String=>"Foo Bar",Integer=>255,Float=>3.14159E+00)
-[I] List: L2
-    Kind           : EMPTY
-    Number of items:  0
-    List text      : ()
-[I] Copying lists
-[I] Lists after copy:
-[I] List: L1
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (List=>(Hello=>"Hi",World=>(1,2,3)),Identifier=>Foo_Bar,String=>"Foo Bar",Integer=>255,Float=>3.14159E+00)
-[I] List: L2
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (List=>(Hello=>"Hi",World=>(1,2,3)),Identifier=>Foo_Bar,String=>"Foo Bar",Integer=>255,Float=>3.14159E+00)
-[I] Lists must be equal:
+[I] Copying from List_1 to List_2
+[I] List: List_1
+    Kind                 : UNNAMED
+    Number of items      :  6
+    List text            : (1,2.00000E+00,Three,"Four",(Five),(One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(List)))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2 before copy
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2 after copy
+    Kind                 : UNNAMED
+    Number of items      :  6
+    List text            : (1,2.00000E+00,Three,"Four",(Five),(One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(List)))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Copying from an empty list makes copy target empty
+    Copying from List_3 to List_2
+[I] List: List_3
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2 before copy
+    Kind                 : UNNAMED
+    Number of items      :  6
+    List text            : (1,2.00000E+00,Three,"Four",(Five),(One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(List)))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2 after copy
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Copy_List copies current list
+    Making 6th item of List_1 current
+[I] List: List_1 before making 6th item current
+    Kind                 : UNNAMED
+    Number of items      :  6
+    List text            : (1,2.00000E+00,Three,"Four",(Five),(One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(List)))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+    Copying from List_1 to List_2
+[I] List: List_1 after making 6th item current
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(List))
+    Is outermost         : FALSE
+    Current list position:  6
+[I] List: List_2 before copy
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2 after copy
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(List))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+    Now setting List_1 current to the outermost list
+[I] List: List_1 after making contianing list current
+    Kind                 : UNNAMED
+    Number of items      :  6
+    List text            : (1,2.00000E+00,Three,"Four",(Five),(One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(List)))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(List))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Modifying an item in the copyied list does not affect the other list
+    Changing item 'Four' in List_2 to 'Four_4'
+[I] List: List_2 before replacing
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(List))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2 after replacing
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four_4,Five=>(List))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_1 unaffected
+    Kind                 : UNNAMED
+    Number of items      :  6
+    List text            : (1,2.00000E+00,Three,"Four",(Five),(One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(List)))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] After copy, copyied list becom equal to source
+    Copying from List_1 to List_2
+[I] List: List_1
+    Kind                 : UNNAMED
+    Number of items      :  6
+    List text            : (1,2.00000E+00,Three,"Four",(Five),(One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(List)))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2 before copy
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four_4,Five=>(List))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2 after copy
+    Kind                 : UNNAMED
+    Number of items      :  6
+    List text            : (1,2.00000E+00,Three,"Four",(Five),(One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(List)))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] Lists are equal
-[I] After copy, lists are independent. Modifications in one does not affect the other.
-Deleting first element of L1 and last element of L2
-[I] Lists after deleting:
-[I] List: L1
-    Kind           : NAMED
-    Number of items:  4
-    List text      : (Identifier=>Foo_Bar,String=>"Foo Bar",Integer=>255,Float=>3.14159E+00)
-[I] List: L2
-    Kind           : NAMED
-    Number of items:  4
-    List text      : (List=>(Hello=>"Hi",World=>(1,2,3)),Identifier=>Foo_Bar,String=>"Foo Bar",Integer=>255)
-[I] Now lists are not equal
-[I] Lists are not equal
+    Copying from List_3 to List_1
+[I] List: List_3
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_1 before copy
+    Kind                 : UNNAMED
+    Number of items      :  6
+    List text            : (1,2.00000E+00,Three,"Four",(Five),(One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(List)))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_1 after copy
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Lists are equal
+    Copying from List_3 to List_2
+[I] List: List_3
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2 before copy
+    Kind                 : UNNAMED
+    Number of items      :  6
+    List text            : (1,2.00000E+00,Three,"Four",(Five),(One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(List)))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2 after copy
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Lists are equal
 [I] Test case OK
 --------------------------------------------------------------------------------
-Test Case Number: 5
+Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/24 - 16:03:27
+Finished        : 2017/06/01 - 18:23:48
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 6
-Description     : List equality
-Started         : 2017/04/24 - 16:03:27
+Test Case Number: 3
+Description     : Making lists empty
+Started         : 2017/06/01 - 18:23:48
+--------------------------------------------------------------------------------
+[I] Interfaces tested:
+    - Make_Empty
+[I] As declared, a list is empty (List_2)
+[I] List: List_2
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List_2 is empty
+[I] Make_Empty makes empty the outermost list, not the current list
+    Making 6th item of List_1 current
+[I] List: List_1 before making 6th item current
+    Kind                 : UNNAMED
+    Number of items      :  6
+    List text            : (1,2.00000E+00,Three,"Four",(Five),(One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(List)))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_1 after making 6th item current
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(List))
+    Is outermost         : FALSE
+    Current list position:  6
+    Making List_1 empty
+[I] List: List_1 after making empty
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List_1 is empty
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:23:48
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : Convertiong from text to list
+Started         : 2017/06/01 - 18:23:48
+--------------------------------------------------------------------------------
+[I] Interfaces tested:
+    - Text_2_List
+[I] Converting text to list (unnamed)
+    Text to convert: "((), Foo_Bar, "Foo Bar", 16#FF#, 3.1415926)"
+[I] List: List_1
+    Kind                 : UNNAMED
+    Number of items      :  5
+    List text            : ((),Foo_Bar,"Foo Bar",255,3.14159E+00)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+Expected list kind: UNNAMED
+Obtained list kind: UNNAMED
+[I] Results match
+[I] Converting text to list (named)
+    Text to convert: "(One => (), Two => Foo_Bar, Three => "Foo Bar", Four => 16#FF#, Five => 3.1415926)"
+[I] List: List_2
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>(),Two=>Foo_Bar,Three=>"Foo Bar",Four=>255,Five=>3.14159E+00)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+Expected list kind: NAMED
+Obtained list kind: NAMED
+[I] Results match
+[I] Testing some syntax incorrect list text strings
+    Conversion must raise CryptAda_Syntax_Error
+[I] Trying to convert list text: ""
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "List_Text parser. Token list is exhausted"
+[I] Trying to convert list text: "        "
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "List_Text parser. Token list is exhausted"
+[I] Trying to convert list text: "	
+ "
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "List_Text parser. Token list is exhausted"
+[I] Trying to convert list text: "("
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "List_Text parser. Token list is exhausted"
+[I] Trying to convert list text: "(((()))"
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "List_Text parser. Token list is exhausted"
+[I] Trying to convert list text: "("Inside"outside)"
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "List_Text parser. Found invalid token: 'TK_IDENTIFIER', when expecting an item value separator or an end of list"
+[I] Trying to convert list text: "(Hello, World Howdy)"
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "List_Text parser. Found invalid token: 'TK_IDENTIFIER', when expecting an item value separator or an end of list"
+[I] Trying to convert list text: "(My_Int => 2#123456#)"
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "List_Text parser. Invalid numeric literal: '2#123456#'"
+[I] Trying to convert list text: "(My_Int => - 25)"
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "List_Text parser. Invalid numeric literal: '-'"
+[I] Trying to convert list text: "(My_Float => - 2.5)"
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "List_Text parser. Invalid numeric literal: '-'"
+[I] Trying to convert list text: "(My_Ident => 2Hello)"
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "List_Text parser. Invalid integer literal: '2Hello'"
+[I] Trying to convert list text: "(My_Ident => @Hello)"
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "List_Text scanner. Position:  14. Invalid character: '@'"
+[I] Trying to convert list text: "(My_Ident => Hello_)"
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "Identifier last character must not be '_'"
+[I] Trying to convert list text: "(My_Ident => Hel__lo)"
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "Invalid character '_' in identifier"
+[I] Trying to convert list text: "((((),,,,,)))"
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "List_Text parser. Found invalid token: 'TK_ITEM_SEPARATOR', when expecting an item value"
+[I] Trying to convert list text: "(One => 1, One => 1.0)"
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "List already contains the item: 'One'"
+[I] Trying to convert list text: "(One => 1, 1 => 1.0)"
+[I] Caught CryptAda_Syntax_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+    Message  : "List_Text parser. Found invalid token: 'TK_NUMBER', when expecting an item name"
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:23:48
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 5
+Description     : Equality test for lists
+Started         : 2017/06/01 - 18:23:48
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
     - Is_Equal
 [I] Performing equality tests
 [I] Equality test  1
-List text 1: ()
-List text 2: ()
-[I] List: L1
-    Kind           : EMPTY
-    Number of items:  0
-    List text      : ()
-[I] List: L2
-    Kind           : EMPTY
-    Number of items:  0
-    List text      : ()
-Expected result: TRUE
-Obtained result: TRUE
+    List text 1: "()"
+    List text 2: "()"
+[I] List: List_1
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+    Expected result: TRUE
+    Obtained result: TRUE
 [I] Results match
 [I] Equality test  2
-List text 1: (3)
-List text 2: (2#11#)
-[I] List: L1
-    Kind           : UNNAMED
-    Number of items:  1
-    List text      : (3)
-[I] List: L2
-    Kind           : UNNAMED
-    Number of items:  1
-    List text      : (3)
-Expected result: TRUE
-Obtained result: TRUE
+    List text 1: "(Unnamed)"
+    List text 2: "()"
+[I] List: List_1
+    Kind                 : UNNAMED
+    Number of items      :  1
+    List text            : (Unnamed)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+    Expected result: FALSE
+    Obtained result: FALSE
 [I] Results match
 [I] Equality test  3
-List text 1: (True)
-List text 2: (TRUE)
-[I] List: L1
-    Kind           : UNNAMED
-    Number of items:  1
-    List text      : (True)
-[I] List: L2
-    Kind           : UNNAMED
-    Number of items:  1
-    List text      : (TRUE)
-Expected result: TRUE
-Obtained result: TRUE
+    List text 1: "(Named => "Named")"
+    List text 2: "()"
+[I] List: List_1
+    Kind                 : NAMED
+    Number of items      :  1
+    List text            : (Named=>"Named")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+    Expected result: FALSE
+    Obtained result: FALSE
 [I] Results match
 [I] Equality test  4
-List text 1: (Result => True)
-List text 2: (RESULT => TRUE)
-[I] List: L1
-    Kind           : NAMED
-    Number of items:  1
-    List text      : (Result=>True)
-[I] List: L2
-    Kind           : NAMED
-    Number of items:  1
-    List text      : (RESULT=>TRUE)
-Expected result: TRUE
-Obtained result: TRUE
+    List text 1: "(Unnamed)"
+    List text 2: "(Unnamed => Unnamed)"
+[I] List: List_1
+    Kind                 : UNNAMED
+    Number of items      :  1
+    List text            : (Unnamed)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2
+    Kind                 : NAMED
+    Number of items      :  1
+    List text            : (Unnamed=>Unnamed)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+    Expected result: FALSE
+    Obtained result: FALSE
 [I] Results match
 [I] Equality test  5
-List text 1: (True)
-List text 2: (RESULT => TRUE)
-[I] List: L1
-    Kind           : UNNAMED
-    Number of items:  1
-    List text      : (True)
-[I] List: L2
-    Kind           : NAMED
-    Number of items:  1
-    List text      : (RESULT=>TRUE)
-Expected result: FALSE
-Obtained result: FALSE
+    List text 1: "(3)"
+    List text 2: "(2#11#)"
+[I] List: List_1
+    Kind                 : UNNAMED
+    Number of items      :  1
+    List text            : (3)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2
+    Kind                 : UNNAMED
+    Number of items      :  1
+    List text            : (3)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+    Expected result: TRUE
+    Obtained result: TRUE
 [I] Results match
 [I] Equality test  6
-List text 1: (1, 2, 3, 4, 5, 6, 7)
-List text 2: (1, 2, 3, 4,5,6,7)
-[I] List: L1
-    Kind           : UNNAMED
-    Number of items:  7
-    List text      : (1,2,3,4,5,6,7)
-[I] List: L2
-    Kind           : UNNAMED
-    Number of items:  7
-    List text      : (1,2,3,4,5,6,7)
-Expected result: TRUE
-Obtained result: TRUE
+    List text 1: "(True)"
+    List text 2: "(TRUE)"
+[I] List: List_1
+    Kind                 : UNNAMED
+    Number of items      :  1
+    List text            : (True)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2
+    Kind                 : UNNAMED
+    Number of items      :  1
+    List text            : (TRUE)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+    Expected result: TRUE
+    Obtained result: TRUE
 [I] Results match
 [I] Equality test  7
-List text 1: (7, 6, 5, 4, 3, 2, 1)
-List text 2: (1, 2, 3, 4, 5, 6, 7)
-[I] List: L1
-    Kind           : UNNAMED
-    Number of items:  7
-    List text      : (7,6,5,4,3,2,1)
-[I] List: L2
-    Kind           : UNNAMED
-    Number of items:  7
-    List text      : (1,2,3,4,5,6,7)
-Expected result: FALSE
-Obtained result: FALSE
+    List text 1: "(Result => True)"
+    List text 2: "(RESULT => TRUE)"
+[I] List: List_1
+    Kind                 : NAMED
+    Number of items      :  1
+    List text            : (Result=>True)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2
+    Kind                 : NAMED
+    Number of items      :  1
+    List text            : (RESULT=>TRUE)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+    Expected result: TRUE
+    Obtained result: TRUE
 [I] Results match
 [I] Equality test  8
-List text 1: (One => 1, Two => 2, Three => 3)
-List text 2: (One => "1", Two => 2, Three => 3)
-[I] List: L1
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (One=>1,Two=>2,Three=>3)
-[I] List: L2
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (One=>"1",Two=>2,Three=>3)
-Expected result: FALSE
-Obtained result: FALSE
+    List text 1: "(True)"
+    List text 2: "(RESULT => TRUE)"
+[I] List: List_1
+    Kind                 : UNNAMED
+    Number of items      :  1
+    List text            : (True)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2
+    Kind                 : NAMED
+    Number of items      :  1
+    List text            : (RESULT=>TRUE)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+    Expected result: FALSE
+    Obtained result: FALSE
 [I] Results match
 [I] Equality test  9
-List text 1: (One => 1, Two => 2, Three => 3)
-List text 2: (Three => 3, One => 1, Two => 2)
-[I] List: L1
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (One=>1,Two=>2,Three=>3)
-[I] List: L2
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (Three=>3,One=>1,Two=>2)
-Expected result: FALSE
-Obtained result: FALSE
+    List text 1: "(1, 2, 3, 4, 5, 6, 7)"
+    List text 2: "(1, 2, 3, 4,5,6,7)"
+[I] List: List_1
+    Kind                 : UNNAMED
+    Number of items      :  7
+    List text            : (1,2,3,4,5,6,7)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2
+    Kind                 : UNNAMED
+    Number of items      :  7
+    List text            : (1,2,3,4,5,6,7)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+    Expected result: TRUE
+    Obtained result: TRUE
 [I] Results match
 [I] Equality test  10
-List text 1: (One => 1, Two => 2, Three => 3)
-List text 2: (One => 1.0, Two => 2, Three => 3)
-[I] List: L1
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (One=>1,Two=>2,Three=>3)
-[I] List: L2
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (One=>1.00000E+00,Two=>2,Three=>3)
-Expected result: FALSE
-Obtained result: FALSE
+    List text 1: "(7, 6, 5, 4, 3, 2, 1)"
+    List text 2: "(1, 2, 3, 4, 5, 6, 7)"
+[I] List: List_1
+    Kind                 : UNNAMED
+    Number of items      :  7
+    List text            : (7,6,5,4,3,2,1)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2
+    Kind                 : UNNAMED
+    Number of items      :  7
+    List text            : (1,2,3,4,5,6,7)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+    Expected result: FALSE
+    Obtained result: FALSE
 [I] Results match
 [I] Equality test  11
-List text 1: (Pi => 3.1415926)
-List text 2: (Pi => 3.1416E+00)
-[I] List: L1
-    Kind           : NAMED
-    Number of items:  1
-    List text      : (Pi=>3.14159E+00)
-[I] List: L2
-    Kind           : NAMED
-    Number of items:  1
-    List text      : (Pi=>3.14160E+00)
-Expected result: FALSE
-Obtained result: FALSE
+    List text 1: "(One => 1, Two => 2, Three => 3)"
+    List text 2: "(One => "1", Two => 2, Three => 3)"
+[I] List: List_1
+    Kind                 : NAMED
+    Number of items      :  3
+    List text            : (One=>1,Two=>2,Three=>3)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2
+    Kind                 : NAMED
+    Number of items      :  3
+    List text            : (One=>"1",Two=>2,Three=>3)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+    Expected result: FALSE
+    Obtained result: FALSE
 [I] Results match
 [I] Equality test  12
-List text 1: (Hello => "Hi")
-List text 2: (Hello => "HI")
-[I] List: L1
-    Kind           : NAMED
-    Number of items:  1
-    List text      : (Hello=>"Hi")
-[I] List: L2
-    Kind           : NAMED
-    Number of items:  1
-    List text      : (Hello=>"HI")
-Expected result: FALSE
-Obtained result: FALSE
+    List text 1: "(One => 1, Two => 2, Three => 3)"
+    List text 2: "(Three => 3, One => 1, Two => 2)"
+[I] List: List_1
+    Kind                 : NAMED
+    Number of items      :  3
+    List text            : (One=>1,Two=>2,Three=>3)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2
+    Kind                 : NAMED
+    Number of items      :  3
+    List text            : (Three=>3,One=>1,Two=>2)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+    Expected result: FALSE
+    Obtained result: FALSE
 [I] Results match
 [I] Equality test  13
-List text 1: (Hello => "Howdy")
-List text 2: (HellO => "Howdy")
-[I] List: L1
-    Kind           : NAMED
-    Number of items:  1
-    List text      : (Hello=>"Howdy")
-[I] List: L2
-    Kind           : NAMED
-    Number of items:  1
-    List text      : (HellO=>"Howdy")
-Expected result: TRUE
-Obtained result: TRUE
+    List text 1: "(One => 1, Two => 2, Three => 3)"
+    List text 2: "(One => 1.0, Two => 2, Three => 3)"
+[I] List: List_1
+    Kind                 : NAMED
+    Number of items      :  3
+    List text            : (One=>1,Two=>2,Three=>3)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2
+    Kind                 : NAMED
+    Number of items      :  3
+    List text            : (One=>1.00000E+00,Two=>2,Three=>3)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+    Expected result: FALSE
+    Obtained result: FALSE
 [I] Results match
 [I] Equality test  14
-List text 1: (((((One),(Two)))))
-List text 2: (((((ONE),(TWO)))))
-[I] List: L1
-    Kind           : UNNAMED
-    Number of items:  1
-    List text      : (((((One),(Two)))))
-[I] List: L2
-    Kind           : UNNAMED
-    Number of items:  1
-    List text      : (((((ONE),(TWO)))))
-Expected result: TRUE
-Obtained result: TRUE
+    List text 1: "(Pi => 3.1415926)"
+    List text 2: "(Pi => 3.1416E+00)"
+[I] List: List_1
+    Kind                 : NAMED
+    Number of items      :  1
+    List text            : (Pi=>3.14159E+00)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2
+    Kind                 : NAMED
+    Number of items      :  1
+    List text            : (Pi=>3.14160E+00)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+    Expected result: FALSE
+    Obtained result: FALSE
 [I] Results match
+[I] Equality test  15
+    List text 1: "(Hello => "Hi")"
+    List text 2: "(Hello => "HI")"
+[I] List: List_1
+    Kind                 : NAMED
+    Number of items      :  1
+    List text            : (Hello=>"Hi")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2
+    Kind                 : NAMED
+    Number of items      :  1
+    List text            : (Hello=>"HI")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+    Expected result: FALSE
+    Obtained result: FALSE
+[I] Results match
+[I] Equality test  16
+    List text 1: "(Hello => "Howdy")"
+    List text 2: "(HellO => "Howdy")"
+[I] List: List_1
+    Kind                 : NAMED
+    Number of items      :  1
+    List text            : (Hello=>"Howdy")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2
+    Kind                 : NAMED
+    Number of items      :  1
+    List text            : (HellO=>"Howdy")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+    Expected result: TRUE
+    Obtained result: TRUE
+[I] Results match
+[I] Equality test  17
+    List text 1: "(((((One),(Two)))))"
+    List text 2: "(((((ONE),(TWO)))))"
+[I] List: List_1
+    Kind                 : UNNAMED
+    Number of items      :  1
+    List text            : (((((One),(Two)))))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2
+    Kind                 : UNNAMED
+    Number of items      :  1
+    List text            : (((((ONE),(TWO)))))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+    Expected result: TRUE
+    Obtained result: TRUE
+[I] Results match
+[I] Equality test is performed on 'current' lists
+[I] List_1 and List_2 are different
+[I] List: List_1
+    Kind                 : NAMED
+    Number of items      :  2
+    List text            : (One=>1,Two=>(1,2,3.00000E+00))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_2
+    Kind                 : UNNAMED
+    Number of items      :  3
+    List text            : (1,2,3.00000E+00)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Lists are not equal
+[I] Now we set item 'Two' of List_1 as the current list
+[I] List: List_1 before set 'Two' as current
+    Kind                 : NAMED
+    Number of items      :  2
+    List text            : (One=>1,Two=>(1,2,3.00000E+00))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List_1 after set 'Two' as current
+    Kind                 : UNNAMED
+    Number of items      :  3
+    List text            : (1,2,3.00000E+00)
+    Is outermost         : FALSE
+    Current list position:  2
+[I] Now List_1 must be equal to List_2
+[I] List: List_2
+    Kind                 : UNNAMED
+    Number of items      :  3
+    List text            : (1,2,3.00000E+00)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Lists are equal
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 5
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:23:48
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 6
+Description     : Deleting items given its position
+Started         : 2017/06/01 - 18:23:48
+--------------------------------------------------------------------------------
+[I] Interfaces tested:
+    - Delete(Position_Count)
+[I] For this test case we'll use three different lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,Three,"Four",(Six,Seven))"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))"
+[I] Trying Delete on an empty list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "From_List current list is empty"
+[I] Trying Delete on an unnamed list at an invalid position
+    Will raise CryptAda_Index_Error
+[I] Caught CryptAda_Index_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid list position value"
+[I] Trying Delete on a named list at an invalid position
+    Will raise CryptAda_Index_Error
+[I] Caught CryptAda_Index_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid list position value"
+[I] Delete all items of a unnamed list
+[I] List: Before delete Item 1
+    Kind                 : UNNAMED
+    Number of items      :  5
+    List text            : (1,2.00000E+00,Three,"Four",(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: After delete Item 1
+    Kind                 : UNNAMED
+    Number of items      :  4
+    List text            : (2.00000E+00,Three,"Four",(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: Before delete Item 1
+    Kind                 : UNNAMED
+    Number of items      :  4
+    List text            : (2.00000E+00,Three,"Four",(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: After delete Item 1
+    Kind                 : UNNAMED
+    Number of items      :  3
+    List text            : (Three,"Four",(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: Before delete Item 1
+    Kind                 : UNNAMED
+    Number of items      :  3
+    List text            : (Three,"Four",(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: After delete Item 1
+    Kind                 : UNNAMED
+    Number of items      :  2
+    List text            : ("Four",(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: Before delete Item 1
+    Kind                 : UNNAMED
+    Number of items      :  2
+    List text            : ("Four",(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: After delete Item 1
+    Kind                 : UNNAMED
+    Number of items      :  1
+    List text            : ((Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: Before delete Item 1
+    Kind                 : UNNAMED
+    Number of items      :  1
+    List text            : ((Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: After delete Item 1
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Delete operates on 'current' list
+    Setting current list in named list to 'Five' item
+[I] List: Named list before changing current list
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: Named list after changing current list
+    Kind                 : UNNAMED
+    Number of items      :  2
+    List text            : (Six,Seven)
+    Is outermost         : FALSE
+    Current list position:  5
+    Deleting all items of current list
+[I] List: Named list after deleting all items
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : FALSE
+    Current list position:  5
+    Setting outermost list as current
+[I] List: Outermost named list
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>())
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/04/24 - 16:03:27
+Finished        : 2017/06/01 - 18:23:48
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
-Description     : Deleting elements from lists
-Started         : 2017/04/24 - 16:03:27
+Description     : Deleting items given its name (Identifier)
+Started         : 2017/06/01 - 18:23:48
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
-    - Delete
-[I] Trying to delete an item from an empty list ...
-    Must raise CryptAda_List_Kind_Error
-[I] List: List to delete item 1
-    Kind           : EMPTY
-    Number of items:  0
-    List text      : ()
+    - Delete(Identifier)
+[I] For this test case we'll use three different lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,Three,"Four",(Six,Seven))"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))"
+[I] Trying Delete on an empty list
+    Will raise CryptAda_List_Kind_Error
 [I] Caught CryptAda_List_Kind_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
-    Message  : "From_List current list is empty"
-[I] Trying to delete an item at an invalid position ...
-    Must raise CryptAda_Index_Error
-[I] List: List to delete item 5
-    Kind           : UNNAMED
-    Number of items:  3
-    List text      : (1,2,3)
-[I] Caught CryptAda_Index_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
-    Message  : "Invalid list position value"
-[I] Trying to delete an item with an invalid identifier text ...
-    Must raise CryptAda_Syntax_Error
-[I] List: List to delete item "1ONE"
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (One=>1,Two=>2,Three=>3)
-[I] Caught CryptAda_Syntax_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-    Message  : "Identifier first character is not a letter"
-[I] Trying to delete an item with a null identifier ...
-    Must raise CryptAda_Identifier_Error
-[I] List: List to delete item
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (One=>1,Two=>2,Three=>3)
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "From_List current list is empty"
+[I] Trying Delete on an unnamed list
+    Will raise CryptAda_Named_List_Error
+[I] Caught CryptAda_Named_List_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
+Message  : "From_List current list is unnamed"
+[I] Trying Delete on an named list with a null identifier
+    Will raise CryptAda_Identifier_Error
 [I] Caught CryptAda_Identifier_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_IDENTIFIER_ERROR"
-    Message  : "Null identifier"
-[I] Trying to delete an item by name (Identifier_Text) in an unnamed list ...
-    Must raise CryptAda_Named_List_Error
-[I] List: List to delete item "Two" using Identifier_Text
-    Kind           : UNNAMED
-    Number of items:  3
-    List text      : (1,2,3)
-[I] Caught CryptAda_Named_List_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
-    Message  : "From_List current list is unnamed"
-[I] Trying to delete an item by name (Identifier) in an unnamed list ...
-    Must raise CryptAda_Named_List_Error
-[I] List: List to delete item "Two" using Identifier
-    Kind           : UNNAMED
-    Number of items:  3
-    List text      : (1,2,3)
-[I] Caught CryptAda_Named_List_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
-    Message  : "From_List current list is unnamed"
-[I] Trying to delete an item by name (Identifier_Text) that not exists in a named list ...
-    Must raise CryptAda_Item_Not_Found_Error
-[I] List: List to delete item "Four" using Identifier_Text
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (One=>1,Two=>2,Three=>3)
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_IDENTIFIER_ERROR"
+Message  : "Null identifier"
+[I] Trying Delete on an named list with a identifier that is not a name of any element
+    Will raise CryptAda_Item_Not_Found_Error
 [I] Caught CryptAda_Item_Not_Found_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
-    Message  : "List doesn't contains a: "Four" item"
-[I] Trying to delete an item by name (Identifier) that not exists in a named list ...
-    Must raise CryptAda_Item_Not_Found_Error
-[I] List: List to delete item "Four" using Identifier
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (One=>1,Two=>2,Three=>3)
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
+Message  : "List doesn't contains a: 'Eight' item"
+[I] Deleting item 'Three' from the named list.
+[I] List: Named list before Delete
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: Named after Delete
+    Kind                 : NAMED
+    Number of items      :  4
+    List text            : (One=>1,Two=>2.00000E+00,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Trying to get item 'Three' must raise CryptAda_Item_Not_Found_Error
 [I] Caught CryptAda_Item_Not_Found_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
-    Message  : "List doesn't contains a: "Four" item"
-[I] Deleting second item in unnamed list
-[I] List: Before Delete
-    Kind           : UNNAMED
-    Number of items:  3
-    List text      : (1,2,3)
-[I] List: After Delete
-    Kind           : UNNAMED
-    Number of items:  2
-    List text      : (1,3)
-[I] Deleting remaining items. List becomes Empty after deletion
-[I] List: Before Delete
-    Kind           : UNNAMED
-    Number of items:  2
-    List text      : (1,3)
-[I] List: After Delete
-    Kind           : EMPTY
-    Number of items:  0
-    List text      : ()
-[I] Deleting first item by position in named list
-[I] List: Before Delete
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (One=>1,Two=>2,Three=>3)
-[I] List: After Delete
-    Kind           : NAMED
-    Number of items:  2
-    List text      : (Two=>2,Three=>3)
-[I] Deleting item "Three" by name (Identifier_Text) in named list
-[I] List: Before Delete
-    Kind           : NAMED
-    Number of items:  2
-    List text      : (Two=>2,Three=>3)
-[I] List: After Delete
-    Kind           : NAMED
-    Number of items:  1
-    List text      : (Two=>2)
-[I] Deleting item "Two" by name (Identifier) in named list
-[I] List: Before Delete
-    Kind           : NAMED
-    Number of items:  1
-    List text      : (Two=>2)
-[I] List: After Delete
-    Kind           : EMPTY
-    Number of items:  0
-    List text      : ()
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
+Message  : "List doesn't contains a: 'Three' item"
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/04/24 - 16:03:27
+Finished        : 2017/06/01 - 18:23:48
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 8
-Description     : Getting the kind of items in lists
-Started         : 2017/04/24 - 16:03:27
+Description     : Deleting items given its name (Identifier_Text)
+Started         : 2017/06/01 - 18:23:48
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
-    - Get_Item_Kind
-[I] Trying to get the kind of an item from an empty list ...
-    Must raise CryptAda_List_Kind_Error
-[I] List: The List
-    Kind           : EMPTY
-    Number of items:  0
-    List text      : ()
+    - Delete(Identifier)
+[I] For this test case we'll use three different lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,Three,"Four",(Six,Seven))"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))"
+[I] Trying Delete on an empty list
+    Will raise CryptAda_List_Kind_Error
 [I] Caught CryptAda_List_Kind_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
-    Message  : "In_List current list is empty"
-[I] Trying to get the kind of item at an invalid position ...
-    Must raise CryptAda_Index_Error
-[I] List: The list
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
-[I] Caught CryptAda_Index_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
-    Message  : "Invalid list position value"
-[I] Trying to get the kind of item with an invalid identifier text ...
-    Must raise CryptAda_Syntax_Error
-[I] List: The list
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "From_List current list is empty"
+[I] Trying Delete on an unnamed list
+    Will raise CryptAda_Named_List_Error
+[I] Caught CryptAda_Named_List_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
+Message  : "From_List current list is unnamed"
+[I] Trying Delete on an named list with an invalid name
+    Will raise CryptAda_Syntax_Error
 [I] Caught CryptAda_Syntax_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-    Message  : "Identifier first character is not a letter"
-[I] Trying to get the kind of an item with a null identifier ...
-    Must raise CryptAda_Identifier_Error
-[I] List: The list
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
-[I] Caught CryptAda_Identifier_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_IDENTIFIER_ERROR"
-    Message  : "Null identifier"
-[I] Trying to get the kind of an item by name (Identifier_Text) in an unnamed list ...
-    Must raise CryptAda_Named_List_Error
-[I] List: The list
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
-[I] Caught CryptAda_Named_List_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
-    Message  : "In_List current list is unnamed"
-[I] Trying to get the kind of item by name (Identifier) in an unnamed list ...
-    Must raise CryptAda_Named_List_Error
-[I] List: The list
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
-[I] Caught CryptAda_Named_List_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
-    Message  : "In_List current list is unnamed"
-[I] Trying to get the kind of an item by name (Identifier_Text) that not exists in a named list ...
-    Must raise CryptAda_Item_Not_Found_Error
-[I] List: The list
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+Message  : "'Package' is an Ada reserved word"
+[I] Trying Delete on an named list with a identifier that is not a name of any element
+    Will raise CryptAda_Item_Not_Found_Error
 [I] Caught CryptAda_Item_Not_Found_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
-    Message  : "List doesn't contains a: "Eight" item"
-[I] Trying to get the kind of an item by name (Identifier) that not exists in a named list ...
-    Must raise CryptAda_Item_Not_Found_Error
-[I] List: The list
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
+Message  : "List doesn't contains a: 'Eight' item"
+[I] Deleting item 'Three' from the named list.
+[I] List: Named list before Delete
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: Named after Delete
+    Kind                 : NAMED
+    Number of items      :  4
+    List text            : (One=>1,Two=>2.00000E+00,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Trying to get item 'Three' must raise CryptAda_Item_Not_Found_Error
 [I] Caught CryptAda_Item_Not_Found_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
-    Message  : "List doesn't contains a: "Eight" item"
-[I] Getting the kind of the items of an unamed list
-[I] List: The list
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
-Item  1. Kind: INTEGER_ITEM_KIND
-Item  2. Kind: FLOAT_ITEM_KIND
-Item  3. Kind: STRING_ITEM_KIND
-Item  4. Kind: IDENTIFIER_ITEM_KIND
-Item  5. Kind: LIST_ITEM_KIND
-[I] Getting the kind of the items of a named list using Identifier_Text
-[I] List: The list
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
-Item  1. Identifier: "One". Kind: INTEGER_ITEM_KIND
-Item  2. Identifier: "Two". Kind: FLOAT_ITEM_KIND
-Item  3. Identifier: "Three". Kind: STRING_ITEM_KIND
-Item  4. Identifier: "Four". Kind: IDENTIFIER_ITEM_KIND
-Item  5. Identifier: "Five". Kind: LIST_ITEM_KIND
-[I] Getting the kind of the items of a named list using Identifier
-[I] List: The list
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
-Item  1. Identifier: "One". Kind: INTEGER_ITEM_KIND
-Item  2. Identifier: "Two". Kind: FLOAT_ITEM_KIND
-Item  3. Identifier: "Three". Kind: STRING_ITEM_KIND
-Item  4. Identifier: "Four". Kind: IDENTIFIER_ITEM_KIND
-Item  5. Identifier: "Five". Kind: LIST_ITEM_KIND
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
+Message  : "List doesn't contains a: 'Three' item"
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 8
 Test Case Result: PASSED
-Finished        : 2017/04/24 - 16:03:27
+Finished        : 2017/06/01 - 18:23:48
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 9
-Description     : Inserting lists in to lists
-Started         : 2017/04/24 - 16:03:27
+Description     : Geting the kind of items given its position
+Started         : 2017/06/01 - 18:23:48
+--------------------------------------------------------------------------------
+[I] Interfaces tested:
+    - Get_Item_Kind(Position_Count)
+[I] For this test case we'll use three different lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,Three,"Four",(Six,Seven))"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))"
+[I] Trying Get_Item_Kind on an empty list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "In_List current list is empty"
+[I] Trying Get_Item_Kind on an unnamed list at an invalid position
+    Will raise CryptAda_Index_Error
+[I] Caught CryptAda_Index_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid list position value"
+[I] Trying Get_Item_Kind on a named list at an invalid position
+    Will raise CryptAda_Index_Error
+[I] Caught CryptAda_Index_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid list position value"
+[I] Geting the kind of all items in unnamed list
+[I] List: The unnamed list
+    Kind                 : UNNAMED
+    Number of items      :  5
+    List text            : (1,2.00000E+00,Three,"Four",(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+Item:  1. Kind: INTEGER_ITEM_KIND
+Item:  2. Kind: FLOAT_ITEM_KIND
+Item:  3. Kind: IDENTIFIER_ITEM_KIND
+Item:  4. Kind: STRING_ITEM_KIND
+Item:  5. Kind: LIST_ITEM_KIND
+[I] Geting the kind of all items in named list
+[I] List: The named list
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+Item:  1. Kind: INTEGER_ITEM_KIND
+Item:  2. Kind: FLOAT_ITEM_KIND
+Item:  3. Kind: IDENTIFIER_ITEM_KIND
+Item:  4. Kind: STRING_ITEM_KIND
+Item:  5. Kind: LIST_ITEM_KIND
+[I] Get_Item_Kind operates on 'current' list
+    Setting current list in named list to 'Five' item
+[I] Geting the kind of all items in named list
+[I] List: The named list
+    Kind                 : UNNAMED
+    Number of items      :  2
+    List text            : (Six,Seven)
+    Is outermost         : FALSE
+    Current list position:  5
+Item:  1. Kind: IDENTIFIER_ITEM_KIND
+Item:  2. Kind: IDENTIFIER_ITEM_KIND
+[I] List: Named list after changing current list
+    Kind                 : UNNAMED
+    Number of items      :  2
+    List text            : (Six,Seven)
+    Is outermost         : FALSE
+    Current list position:  5
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 9
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:23:48
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 10
+Description     : Getting the kind of an items given its name (Identifier)
+Started         : 2017/06/01 - 18:23:48
+--------------------------------------------------------------------------------
+[I] Interfaces tested:
+    - Get_Item_Kind(Identifier)
+[I] For this test case we'll use three different lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,Three,"Four",(Six,Seven))"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))"
+[I] Trying Get_Item_Kind on an empty list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "In_List current list is empty"
+[I] Trying Get_Item_Kind on an unnamed list
+    Will raise CryptAda_Named_List_Error
+[I] Caught CryptAda_Named_List_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
+Message  : "In_List current list is unnamed"
+[I] Trying Get_Item_Kind on an named list with a null identifier
+    Will raise CryptAda_Identifier_Error
+[I] Caught CryptAda_Identifier_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_IDENTIFIER_ERROR"
+Message  : "Null identifier"
+[I] Trying Get_Item_Kind on an named list with a identifier that is not a name of any element
+    Will raise CryptAda_Item_Not_Found_Error
+[I] Caught CryptAda_Item_Not_Found_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
+Message  : "List doesn't contains a: 'Eight' item"
+[I] List: The named list
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Geting the kind of element 'One' from the named list
+Item: 'One'. Kind: INTEGER_ITEM_KIND
+[I] Geting the kind of element 'Two' from the named list
+Item: 'Two'. Kind: FLOAT_ITEM_KIND
+[I] Geting the kind of element 'Three' from the named list
+Item: 'Three'. Kind: IDENTIFIER_ITEM_KIND
+[I] Geting the kind of element 'Four' from the named list
+Item: 'Four'. Kind: STRING_ITEM_KIND
+[I] Geting the kind of element 'Five' from the named list
+Item: 'Five'. Kind: LIST_ITEM_KIND
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 10
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:23:48
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 11
+Description     : Getting the kind of an items given its name (Identifier_Text)
+Started         : 2017/06/01 - 18:23:48
+--------------------------------------------------------------------------------
+[I] Interfaces tested:
+    - Get_Item_Kind(Identifier_Text)
+[I] For this test case we'll use three different lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,Three,"Four",(Six,Seven))"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))"
+[I] Trying Get_Item_Kind on an empty list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "In_List current list is empty"
+[I] Trying Get_Item_Kind on an unnamed list
+    Will raise CryptAda_Named_List_Error
+[I] Caught CryptAda_Named_List_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
+Message  : "In_List current list is unnamed"
+[I] Trying Get_Item_Kind on an named list with an invalid name
+    Will raise CryptAda_Syntax_Error
+[I] Caught CryptAda_Syntax_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+Message  : "'Generic' is an Ada reserved word"
+[I] Trying Get_Item_Kind on an named list with a identifier that is not a name of any element
+    Will raise CryptAda_Item_Not_Found_Error
+[I] Caught CryptAda_Item_Not_Found_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
+Message  : "List doesn't contains a: 'Eight' item"
+[I] List: The named list
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Geting the kind of element 'One' from the named list
+Item: 'One'. Kind: INTEGER_ITEM_KIND
+[I] Geting the kind of element 'Two' from the named list
+Item: 'Two'. Kind: FLOAT_ITEM_KIND
+[I] Geting the kind of element 'Three' from the named list
+Item: 'Three'. Kind: IDENTIFIER_ITEM_KIND
+[I] Geting the kind of element 'Four' from the named list
+Item: 'Four'. Kind: STRING_ITEM_KIND
+[I] Geting the kind of element 'Five' from the named list
+Item: 'Five'. Kind: LIST_ITEM_KIND
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 11
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:23:48
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 12
+Description     : Inserting items from lists into other lists
+Started         : 2017/06/01 - 18:23:48
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
     - Splice
-[I] Trying to splice a named list into a unnamed list ...
-    Must raise CryptAda_List_Kind_Error
-[I] List: In_List
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
-[I] List: The_List
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
+[I] For this test case we'll use next lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,Three,"Four",(Six,Seven))"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))"
+    - Insert list 1  : "(8,"Nine")"
+    - Insert list 2  : "(Eight=>8,Nine=>"Nine")"
+    - Insert list 3  : "(Five=>5,Eight=>8,Nine=>"Nine")"
+[I] Trying to Splice an unamed list into a named list
+    Will raise CryptAda_List_Kind_Error
+[I] List: List target of Splice
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List to be inserted
+    Kind                 : UNNAMED
+    Number of items      :  2
+    List text            : (8,"Nine")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+Insertion position: 1
 [I] Caught CryptAda_List_Kind_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
-    Message  : "In_List and The_List are not empty and not the same kind"
-[I] Trying to splice an unnamed list into a named list ...
-    Must raise CryptAda_List_Kind_Error
-[I] List: In_List
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
-[I] List: The_List
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "In_List and The_List are not empty and not the same kind"
+[I] Trying to Splice an named list into a unamed list
+    Will raise CryptAda_List_Kind_Error
+[I] List: List target of Splice
+    Kind                 : UNNAMED
+    Number of items      :  5
+    List text            : (1,2.00000E+00,Three,"Four",(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List to be inserted
+    Kind                 : NAMED
+    Number of items      :  2
+    List text            : (Eight=>8,Nine=>"Nine")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+Insertion position: 1
 [I] Caught CryptAda_List_Kind_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
-    Message  : "In_List and The_List are not empty and not the same kind"
-[I] Trying to splice at an invalid position ...
-    Must raise CryptAda_Index_Error
-[I] List: In_List
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
-[I] List: The_List
-    Kind           : UNNAMED
-    Number of items:  2
-    List text      : ("Six",Seven)
-[I] At_Position: 10
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "In_List and The_List are not empty and not the same kind"
+[I] Trying to Splice an unnamed list into a unnamed list at an invalid position
+    Will raise CryptAda_Index_Error
+[I] List: List target of Splice
+    Kind                 : UNNAMED
+    Number of items      :  5
+    List text            : (1,2.00000E+00,Three,"Four",(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List to be inserted
+    Kind                 : UNNAMED
+    Number of items      :  2
+    List text            : (8,"Nine")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+Insertion position: 8
 [I] Caught CryptAda_Index_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
-    Message  : "Invalid list insert position value"
-[I] Splicing an empty list into a unnamed list ...
-    List must not be modified
-[I] List: In_List
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
-[I] List: The_List
-    Kind           : EMPTY
-    Number of items:  0
-    List text      : ()
-[I] At_Position: 3
-[I] List: In_List after splice
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
-[I] Splicing an empty list into a named list ...
-    List must not be modified
-[I] List: In_List
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
-[I] List: The_List
-    Kind           : EMPTY
-    Number of items:  0
-    List text      : ()
-[I] At_Position: 3
-[I] List: In_List after splice
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
-[I] Splicing an unnamed list into an empty list ...
-    Resulting list must be equal than the unnamed list
-[I] List: In_List
-    Kind           : EMPTY
-    Number of items:  0
-    List text      : ()
-[I] List: The_List
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
-[I] At_Position: 0
-[I] List: In_List after splice
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
-[I] Splicing a named list into an empty list ...
-    Resulting list must be equal than the named list
-[I] List: In_List
-    Kind           : EMPTY
-    Number of items:  0
-    List text      : ()
-[I] List: The_List
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
-[I] At_Position: 0
-[I] List: In_List after splice
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
-[I] Splicing an unnamed list into an unnamed list ...
-[I] List: In_List
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
-[I] List: The_List
-    Kind           : UNNAMED
-    Number of items:  2
-    List text      : ("Six",Seven)
-[I] At_Position: 2
-[I] List: In_List after splice
-    Kind           : UNNAMED
-    Number of items:  7
-    List text      : (1,2.00000E+00,"Six",Seven,"Three",Four,(Five))
-[I] Splicing an named list into an named list ...
-[I] List: In_List
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
-[I] List: The_List
-    Kind           : NAMED
-    Number of items:  2
-    List text      : (Six=>"Six",Seven=>Seven)
-[I] At_Position: 4
-[I] List: In_List after splice
-    Kind           : NAMED
-    Number of items:  7
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Six=>"Six",Seven=>Seven,Five=>(Five))
-[I] Trying to splice a named list with an already existing identifier ...
-    Must raise CryptAda_Named_List_Error
-[I] List: In_List
-    Kind           : NAMED
-    Number of items:  7
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Six=>"Six",Seven=>Seven,Five=>(Five))
-[I] List: The_List
-    Kind           : NAMED
-    Number of items:  1
-    List text      : (SIX=>6)
-[I] At_Position: 1
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid list insert position value"
+[I] Trying to Splice a named list into a named list at an invalid position
+    Will raise CryptAda_Index_Error
+[I] List: List target of Splice
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List to be inserted
+    Kind                 : NAMED
+    Number of items      :  2
+    List text            : (Eight=>8,Nine=>"Nine")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+Insertion position: 8
+[I] Caught CryptAda_Index_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid list insert position value"
+[I] Trying to Splice a named list with a duplicated item name into a named list
+    Will raise CryptAda_Named_List_Error
+[I] List: List target of Splice
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List to be inserted
+    Kind                 : NAMED
+    Number of items      :  3
+    List text            : (Five=>5,Eight=>8,Nine=>"Nine")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+Insertion position: 4
 [I] Caught CryptAda_Named_List_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
-    Message  : "Duplicated item name"
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
+Message  : "Duplicated item name: 'Five'"
+[I] Splicing a unnamed list into an empty list
+[I] List: List target of Splice
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List to be inserted
+    Kind                 : UNNAMED
+    Number of items      :  2
+    List text            : (8,"Nine")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+Insertion position: 0
+[I] List: List after Splice
+    Kind                 : UNNAMED
+    Number of items      :  2
+    List text            : (8,"Nine")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Splicing a named list into an empty list
+[I] List: List target of Splice
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List to be inserted
+    Kind                 : NAMED
+    Number of items      :  2
+    List text            : (Eight=>8,Nine=>"Nine")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+Insertion position: 0
+[I] List: List after Splice
+    Kind                 : NAMED
+    Number of items      :  2
+    List text            : (Eight=>8,Nine=>"Nine")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Splicing an empty list into an empty list
+[I] List: List target of Splice
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List to be inserted
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+Insertion position: 0
+[I] List: List after Splice
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Splicing an empty list into an unnamed list
+[I] List: List target of Splice
+    Kind                 : UNNAMED
+    Number of items      :  5
+    List text            : (1,2.00000E+00,Three,"Four",(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List to be inserted
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+Insertion position: 0
+[I] List: List after Splice
+    Kind                 : UNNAMED
+    Number of items      :  5
+    List text            : (1,2.00000E+00,Three,"Four",(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Splicing an empty list into a named list
+[I] List: List target of Splice
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List to be inserted
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+Insertion position: 0
+[I] List: List after Splice
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Splicing an unnamed list into an unnamed list
+[I] List: List target of Splice
+    Kind                 : UNNAMED
+    Number of items      :  5
+    List text            : (1,2.00000E+00,Three,"Four",(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List to be inserted
+    Kind                 : UNNAMED
+    Number of items      :  2
+    List text            : (8,"Nine")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+Insertion position: 3
+[I] List: List after Splice
+    Kind                 : UNNAMED
+    Number of items      :  7
+    List text            : (1,2.00000E+00,Three,8,"Nine","Four",(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Splicing an named list into an named list
+[I] List: List target of Splice
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: List to be inserted
+    Kind                 : NAMED
+    Number of items      :  2
+    List text            : (Eight=>8,Nine=>"Nine")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+Insertion position: 0
+[I] List: List after Splice
+    Kind                 : NAMED
+    Number of items      :  7
+    List text            : (Eight=>8,Nine=>"Nine",One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Splice operates on 'current' list
+    Setting current list in named list to 'Five' item
+[I] List: Named list before
+    Kind                 : NAMED
+    Number of items      :  7
+    List text            : (Eight=>8,Nine=>"Nine",One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: Named list after
+    Kind                 : UNNAMED
+    Number of items      :  2
+    List text            : (Six,Seven)
+    Is outermost         : FALSE
+    Current list position:  7
+[I] List: List target of Splice
+    Kind                 : UNNAMED
+    Number of items      :  2
+    List text            : (Six,Seven)
+    Is outermost         : FALSE
+    Current list position:  7
+[I] List: List to be inserted
+    Kind                 : UNNAMED
+    Number of items      :  2
+    List text            : (8,"Nine")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+Insertion position: 2
+[I] List: List after Splice
+    Kind                 : UNNAMED
+    Number of items      :  4
+    List text            : (Six,Seven,8,"Nine")
+    Is outermost         : FALSE
+    Current list position:  7
+[I] List: Named list outermost
+    Kind                 : NAMED
+    Number of items      :  7
+    List text            : (Eight=>8,Nine=>"Nine",One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven,8,"Nine"))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] Test case OK
 --------------------------------------------------------------------------------
-Test Case Number: 9
+Test Case Number: 12
 Test Case Result: PASSED
-Finished        : 2017/04/24 - 16:03:27
+Finished        : 2017/06/01 - 18:23:48
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 10
+Test Case Number: 13
 Description     : Concatenating lists
-Started         : 2017/04/24 - 16:03:27
+Started         : 2017/06/01 - 18:23:48
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
     - Concatenate
-[I] Trying to concatenate a named list with an unnamed list ...
-    Must raise CryptAda_List_Kind_Error
+[I] For this test case we'll use next lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,Three,"Four",(Six,Seven))"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))"
+    - Insert list 1  : "(8,"Nine")"
+    - Insert list 2  : "(Eight=>8,Nine=>"Nine")"
+    - Insert list 3  : "(Five=>5,Eight=>8,Nine=>"Nine")"
+[I] Trying to Concatenate a named list to an unnamed list
+    Will raise CryptAda_List_Kind_Error
 [I] List: Front
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
+    Kind                 : UNNAMED
+    Number of items      :  5
+    List text            : (1,2.00000E+00,Three,"Four",(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] List: Back
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] Caught CryptAda_List_Kind_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
-    Message  : "Front and Back are not empty and not the same kind"
-[I] Trying to concatenate a named list with a named list with duplicated names ...
-    Must raise CryptAda_Named_List_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "Front and Back are not empty and not the same kind"
+[I] Trying to Concatenate an unnamed list to a named list
+    Will raise CryptAda_List_Kind_Error
 [I] List: Front
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] List: Back
-    Kind           : NAMED
-    Number of items:  1
-    List text      : (Five=>5)
+    Kind                 : UNNAMED
+    Number of items      :  5
+    List text            : (1,2.00000E+00,Three,"Four",(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "Front and Back are not empty and not the same kind"
+[I] Trying to Concatenate a named list with a duplicated item name to a named list
+    Will raise CryptAda_Named_Error
+[I] List: Front
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: Back
+    Kind                 : NAMED
+    Number of items      :  3
+    List text            : (Five=>5,Eight=>8,Nine=>"Nine")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] Caught CryptAda_Named_List_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
-    Message  : "Duplicated item name"
-[I] Concatenating with empty lists ...
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
+Message  : "Duplicated item name: 'Five'"
+[I] Concatenating two empty lists
 [I] List: Front
-    Kind           : EMPTY
-    Number of items:  0
-    List text      : ()
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] List: Back
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] List: Result
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Concatenating a named list with an empty list
 [I] List: Front
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] List: Back
-    Kind           : EMPTY
-    Number of items:  0
-    List text      : ()
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] List: Result
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Concatenating an unnamed list with an empty list
 [I] List: Front
-    Kind           : EMPTY
-    Number of items:  0
-    List text      : ()
+    Kind                 : UNNAMED
+    Number of items      :  5
+    List text            : (1,2.00000E+00,Three,"Four",(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] List: Back
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
+    Kind                 : EMPTY
+    Number of items      :  0
+    List text            : ()
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] List: Result
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
+    Kind                 : UNNAMED
+    Number of items      :  5
+    List text            : (1,2.00000E+00,Three,"Four",(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Concatenating two unnamed lists
 [I] List: Front
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
+    Kind                 : UNNAMED
+    Number of items      :  5
+    List text            : (1,2.00000E+00,Three,"Four",(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] List: Back
-    Kind           : EMPTY
-    Number of items:  0
-    List text      : ()
+    Kind                 : UNNAMED
+    Number of items      :  2
+    List text            : (8,"Nine")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] List: Result
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
-[I] Concatenating unnamed lists ...
+    Kind                 : UNNAMED
+    Number of items      :  7
+    List text            : (1,2.00000E+00,Three,"Four",(Six,Seven),8,"Nine")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Concatenating two named lists
 [I] List: Front
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
+    Kind                 : NAMED
+    Number of items      :  2
+    List text            : (Eight=>8,Nine=>"Nine")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] List: Back
-    Kind           : UNNAMED
-    Number of items:  2
-    List text      : ("Six",Seven)
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] List: Result
-    Kind           : UNNAMED
-    Number of items:  7
-    List text      : (1,2.00000E+00,"Three",Four,(Five),"Six",Seven)
+    Kind                 : NAMED
+    Number of items      :  7
+    List text            : (Eight=>8,Nine=>"Nine",One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Concatenate operates on 'current' list
+    Setting current list in named list to 'Five' item
+[I] List: Named list before
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: Named list after
+    Kind                 : UNNAMED
+    Number of items      :  2
+    List text            : (Six,Seven)
+    Is outermost         : FALSE
+    Current list position:  5
+[I] Concatenating
 [I] List: Front
-    Kind           : UNNAMED
-    Number of items:  2
-    List text      : ("Six",Seven)
+    Kind                 : UNNAMED
+    Number of items      :  5
+    List text            : (1,2.00000E+00,Three,"Four",(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] List: Back
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
+    Kind                 : UNNAMED
+    Number of items      :  2
+    List text            : (Six,Seven)
+    Is outermost         : FALSE
+    Current list position:  5
 [I] List: Result
-    Kind           : UNNAMED
-    Number of items:  7
-    List text      : ("Six",Seven,1,2.00000E+00,"Three",Four,(Five))
-[I] Concatenating named lists ...
-[I] List: Front
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
-[I] List: Back
-    Kind           : NAMED
-    Number of items:  2
-    List text      : (Six=>"Six",Seven=>Seven)
-[I] List: Result
-    Kind           : NAMED
-    Number of items:  7
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five),Six=>"Six",Seven=>Seven)
-[I] List: Front
-    Kind           : NAMED
-    Number of items:  2
-    List text      : (Six=>"Six",Seven=>Seven)
-[I] List: Back
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
-[I] List: Result
-    Kind           : NAMED
-    Number of items:  7
-    List text      : (Six=>"Six",Seven=>Seven,One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
+    Kind                 : UNNAMED
+    Number of items      :  7
+    List text            : (1,2.00000E+00,Three,"Four",(Six,Seven),Six,Seven)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] Test case OK
 --------------------------------------------------------------------------------
-Test Case Number: 10
+Test Case Number: 13
 Test Case Result: PASSED
-Finished        : 2017/04/24 - 16:03:27
+Finished        : 2017/06/01 - 18:23:48
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 11
-Description     : Extracting lists from lists
-Started         : 2017/04/24 - 16:03:27
+Test Case Number: 14
+Description     : Extracting lists
+Started         : 2017/06/01 - 18:23:48
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
     - Extract_List
-[I] Trying to extract using invalid indexes ...
-    Must raise CryptAda_Index_Error
-[I] List: From_List
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
-Start_Position:  1
-End_Position  : 11
+[I] For this test case we'll use next lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,Three,"Four",(Six,Seven))"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))"
+[I] Trying Extract_List from an Empty list
+    Will raise CryptAda_Index_Error
 [I] Caught CryptAda_Index_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
-    Message  : "Invalid position values"
-[I] List: From_List
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
-Start_Position: 9
-End_Position  : 10
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid position values"
+[I] Trying Extract_List from an unnamed list with an invalid start position
+    Will raise CryptAda_Index_Error
+Start position: 7
+End position  : 3
 [I] Caught CryptAda_Index_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
-    Message  : "Invalid position values"
-[I] List: From_List
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
-Start_Position:  4
-End_Position  :  3
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid position values"
+[I] Trying Extract_List from an unnamed list with an invalid end position
+    Will raise CryptAda_Index_Error
+Start position: 2
+End position  : 8
 [I] Caught CryptAda_Index_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
-    Message  : "Invalid position values"
-[I] Extracting from unnamed list ...
-[I] List: From_List
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
-Start_Position:  1
-End_Position  :  5
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid position values"
+[I] Trying Extract_List from an unnamed list with a invalid start and end position
+    Will raise CryptAda_Index_Error
+Start position: 4
+End position  : 3
+[I] Caught CryptAda_Index_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid position values"
+[I] Trying Extract_List from a named list with an invalid start position
+    Will raise CryptAda_Index_Error
+Start position: 7
+End position  : 3
+[I] Caught CryptAda_Index_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid position values"
+[I] Trying Extract_List from a named list with an invalid end position
+    Will raise CryptAda_Index_Error
+Start position: 2
+End position  : 8
+[I] Caught CryptAda_Index_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid position values"
+[I] Trying Extract_List from a named list with a invalid start and end position
+    Will raise CryptAda_Index_Error
+Start position: 4
+End position  : 3
+[I] Caught CryptAda_Index_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid position values"
+[I] Extracting from an unamed list
+[I] List: Unnamed list
+    Kind                 : UNNAMED
+    Number of items      :  5
+    List text            : (1,2.00000E+00,Three,"Four",(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+Start position: 2
+End position  : 4
 [I] List: Result
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
-[I] List: From_List
-    Kind           : UNNAMED
-    Number of items:  5
-    List text      : (1,2.00000E+00,"Three",Four,(Five))
-Start_Position:  2
-End_Position  :  4
+    Kind                 : UNNAMED
+    Number of items      :  3
+    List text            : (2.00000E+00,Three,"Four")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Extracting from a amed list
+[I] List: Named list
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+Start position: 2
+End position  : 4
 [I] List: Result
-    Kind           : UNNAMED
-    Number of items:  3
-    List text      : (2.00000E+00,"Three",Four)
-[I] Extracting from named list ...
-[I] List: From_List
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
-Start_Position:  1
-End_Position  :  5
+    Kind                 : NAMED
+    Number of items      :  3
+    List text            : (Two=>2.00000E+00,Three=>Three,Four=>"Four")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] Extract_List operates on 'current' list
+    Setting current list in named list to 'Five' item
+[I] List: Named list before
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: Named list after
+    Kind                 : UNNAMED
+    Number of items      :  2
+    List text            : (Six,Seven)
+    Is outermost         : FALSE
+    Current list position:  5
+[I] Extracting
+Start position: 1
+End position  : 1
 [I] List: Result
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
-[I] List: From_List
-    Kind           : NAMED
-    Number of items:  5
-    List text      : (One=>1,Two=>2.00000E+00,Three=>"Three",Four=>Four,Five=>(Five))
-Start_Position:  2
-End_Position  :  4
-[I] List: Result
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (Two=>2.00000E+00,Three=>"Three",Four=>Four)
+    Kind                 : UNNAMED
+    Number of items      :  1
+    List text            : (Six)
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
 [I] Test case OK
 --------------------------------------------------------------------------------
-Test Case Number: 11
+Test Case Number: 14
 Test Case Result: PASSED
-Finished        : 2017/04/24 - 16:03:27
+Finished        : 2017/06/01 - 18:23:48
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 12
-Description     : Handling "current" lists
-Started         : 2017/04/24 - 16:03:27
+Test Case Number: 15
+Description     : Checking if current list is outermost and getting the position of the current list
+Started         : 2017/06/01 - 18:23:48
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
-    - Make_List_Item_Current
-    - Make_Containing_List_Current
     - Current_List_Is_Outermost
     - Position_Of_Current_List
-[I] Current lists allows to transparently handle list nesting
-    For these tests we use two lists with nested sublists
-[I] List: Unnamed
-    Kind           : UNNAMED
-    Number of items:  3
-    List text      : (1,(1,2,(Three=>3)),"Three")
-[I] List: Named
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (One=>1,Two=>(2,"Two"),Three=>(1.00000E+00,2.00000E+00,3.00000E+00,(())))
-[I] As created, current list is the outermost list
-    For unnamed list, Current_List_Is_Outermost: TRUE
-    For named list, Current_List_Is_Outermost: TRUE
-[I] Making 2nd item current in unnamed list
-    Now, for unnamed list, Current_List_Is_Outermost: FALSE
-[I] List: Current unnamed list
-    Kind           : UNNAMED
-    Number of items:  3
-    List text      : (1,2,(Three=>3))
-[I] Making 3rd item current ...
-    Now, for unnamed list, Current_List_Is_Outermost: FALSE
-[I] List: Current unnamed list
-    Kind           : NAMED
-    Number of items:  1
-    List text      : (Three=>3)
-[I] Any operation is performed on current list.
-    For example, Splice
-[I] List: In_List
-    Kind           : NAMED
-    Number of items:  1
-    List text      : (Three=>3)
-[I] At_Position: 0
-[I] List: The_List
-    Kind           : NAMED
-    Number of items:  1
-    List text      : (Four=>4.00000E+00)
-[I] List: Resulting list
-    Kind           : NAMED
-    Number of items:  2
-    List text      : (Four=>4.00000E+00,Three=>3)
-[I] Going up one level
-    Calling Make_Containing_List_Current
-[I] List: Now the list is
-    Kind           : UNNAMED
-    Number of items:  3
-    List text      : (1,2,(Four=>4.00000E+00,Three=>3))
-[I] Going up another level
-    Calling Make_Containing_List_Current
-[I] List: Now the list is
-    Kind           : UNNAMED
-    Number of items:  3
-    List text      : (1,(1,2,(Four=>4.00000E+00,Three=>3)),"Three")
-[I] And now must be the outermost list ...
-    Current_List_Is_Outermost: TRUE
-[I] Trying to go up another level will result in a CryptAda_Index_Error exception
+    - Make_Containing_List_Current
+[I] For this test case we'll use next lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,Three,"Four",(Six,Seven))"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>Three,Four=>(Six,Seven),Five=>"Five")"
+[I] Trying Current_List_Is_Outermost in the test lists
+    Will return True in all three cases
+[I] For the empty list, current list is the outermost list
+[I] For the unnamed list, current list is the outermost list
+[I] For the named list, current list is the outermost list
+[I] Now we set the current list in the unnamed list to the fifth item
+[I] And we set the current list in the named list to the 'Four' item
+[I] Now in neither of them current list is the outermost
+[I] For the unnamed list, current list is not the outermost list
+[I] For the named list, current list is not the outermost list
+[I] Trying Position_Of_Current_List must raise CryptAda_Index_Error if current list is outermost
+    Trying with the empty list
 [I] Caught CryptAda_Index_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
-    Message  : "Current list is the outermost list In_List"
-[I] Now with the named list we are going to meke current the innermost list in "Three" item
-[I] List: Starting list
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (One=>1,Two=>(2,"Two"),Three=>(1.00000E+00,2.00000E+00,3.00000E+00,(())))
-[I] List: Current list
-    Kind           : UNNAMED
-    Number of items:  4
-    List text      : (1.00000E+00,2.00000E+00,3.00000E+00,(()))
-[I] List: Current list
-    Kind           : UNNAMED
-    Number of items:  1
-    List text      : (())
-[I] List: Current list
-    Kind           : EMPTY
-    Number of items:  0
-    List text      : ()
-[I] Now we are going to get the position that current list occupies in parent list
-[I] List: Current list
-    Kind           : EMPTY
-    Number of items:  0
-    List text      : ()
-[I] Position in parent is:  1
-    Calling Make_Containing_List_Current
-[I] List: Current list
-    Kind           : UNNAMED
-    Number of items:  1
-    List text      : (())
-[I] Position in parent is:  4
-    Calling Make_Containing_List_Current
-[I] List: Current list
-    Kind           : UNNAMED
-    Number of items:  4
-    List text      : (1.00000E+00,2.00000E+00,3.00000E+00,(()))
-[I] Position in parent is:  3
-    Calling Make_Containing_List_Current
-[I] List: Current list
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (One=>1,Two=>(2,"Two"),Three=>(1.00000E+00,2.00000E+00,3.00000E+00,(())))
-[I] Trying to get position in parent in the outermost list will result in a CryptAda_Index_Error exception
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Current list is the outermost list In_List"
+[I] Now we get the Position_Of_Current_List in unnamed (5) and named list (4)
+[I] Position_Of_Current_List for the unnamed list is:  5
+[I] Position_Of_Current_List for the named list is  :  4
+[I] Trying Make_Containing_List_Current must raise CryptAda_Index_Error if current list is outermost
+    Trying with the empty list
 [I] Caught CryptAda_Index_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
-    Message  : "Current list is the outermost list In_List"
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Current list is the outermost list In_List"
+[I] Finally, we set the current list to the outermost list in both unnamed and named lists
+[I] Trying Current_List_Is_Outermost in the named and unnamed lists
+    Will return True in both cases
+[I] For the unnamed list, current list is the outermost list
+[I] For the named list, current list is the outermost list
 [I] Test case OK
 --------------------------------------------------------------------------------
-Test Case Number: 12
+Test Case Number: 15
 Test Case Result: PASSED
-Finished        : 2017/04/24 - 16:03:27
+Finished        : 2017/06/01 - 18:23:48
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 13
-Description     : Making list items current
-Started         : 2017/04/24 - 16:03:27
+Test Case Number: 16
+Description     : Making a list item current
+Started         : 2017/06/01 - 18:23:48
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
-    - Make_List_Item_Current
-[I] Trying to make a list item current in an empty list ...
-    Must raise CryptAda_List_Kind_Error
-[I] List: The List
-    Kind           : EMPTY
-    Number of items:  0
-    List text      : ()
+    - Make_List_Item_Current(Position_Count)
+[I] For this test case we'll use three different lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,Three,(4,Four),"Five")"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))"
+[I] Trying Make_List_Item_Current on an empty list
+    Will raise CryptAda_List_Kind_Error
 [I] Caught CryptAda_List_Kind_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
-    Message  : "In_List current list is empty"
-[I] Trying to make a list item current with an invalid position value ...
-    Must raise CryptAda_Index_Error
-[I] List: The list
-    Kind           : UNNAMED
-    Number of items:  3
-    List text      : (1,(1,2,(Three=>3)),"Three")
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "In_List current list is empty"
+[I] Trying Make_List_Item_Current on an unnamed list at an invalid position
+    Will raise CryptAda_Index_Error
 [I] Caught CryptAda_Index_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
-    Message  : "Invalid list position value"
-[I] Trying to make a list item current with an invalid identifier text ...
-    Must raise CryptAda_Syntax_Error
-[I] List: The list
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (One=>1,Two=>(2,"Two"),Three=>(1.00000E+00,2.00000E+00,3.00000E+00,(())))
-[I] Caught CryptAda_Syntax_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-    Message  : "Identifier first character is not a letter"
-[I] Trying to make a list current with a null identifier ...
-    Must raise CryptAda_Identifier_Error
-[I] List: The list
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (One=>1,Two=>(2,"Two"),Three=>(1.00000E+00,2.00000E+00,3.00000E+00,(())))
-[I] Caught CryptAda_Identifier_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_IDENTIFIER_ERROR"
-    Message  : "Null identifier"
-[I] Trying to make a list item current by name (Identifier_Text) in an unnamed list ...
-    Must raise CryptAda_Named_List_Error
-[I] List: The list
-    Kind           : UNNAMED
-    Number of items:  3
-    List text      : (1,(1,2,(Three=>3)),"Three")
-[I] Caught CryptAda_Named_List_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
-    Message  : "In_List current list is unnamed"
-[I] Trying to make a list item current by name (Identifier) in an unnamed list ...
-    Must raise CryptAda_Named_List_Error
-[I] List: The list
-    Kind           : UNNAMED
-    Number of items:  3
-    List text      : (1,(1,2,(Three=>3)),"Three")
-[I] Caught CryptAda_Named_List_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
-    Message  : "In_List current list is unnamed"
-[I] Trying to make a list item current name (Identifier_Text) that not exists in a named list ...
-    Must raise CryptAda_Item_Not_Found_Error
-[I] List: The list
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (One=>1,Two=>(2,"Two"),Three=>(1.00000E+00,2.00000E+00,3.00000E+00,(())))
-[I] Caught CryptAda_Item_Not_Found_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
-    Message  : "List doesn't contains a: "Eight" item"
-[I] Trying to make a list item current by name (Identifier) that not exists in a named list ...
-    Must raise CryptAda_Item_Not_Found_Error
-[I] List: The list
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (One=>1,Two=>(2,"Two"),Three=>(1.00000E+00,2.00000E+00,3.00000E+00,(())))
-[I] Caught CryptAda_Item_Not_Found_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
-    Message  : "List doesn't contains a: "Eight" item"
-[I] Trying to make a list item current that is not a list item in an unnamed list ...
-    Must raise CryptAda_Item_Kind_Error
-[I] List: The list
-    Kind           : UNNAMED
-    Number of items:  3
-    List text      : (1,(1,2,(Three=>3)),"Three")
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid list position value"
+[I] Trying Make_List_Item_Current on a named list at an invalid position
+    Will raise CryptAda_Index_Error
+[I] Caught CryptAda_Index_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid list position value"
+[I] Trying Make_List_Item_Current on an unnamed list at an position of a non list item
+    Will raise CryptAda_Item_Kind_Error
 [I] Caught CryptAda_Item_Kind_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-    Message  : "Item is not a list item"
-[I] Trying to make a list item current that is not a list item in an named list (Identifier_Text) ...
-    Must raise CryptAda_Item_Kind_Error
-[I] List: The list
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (One=>1,Two=>(2,"Two"),Three=>(1.00000E+00,2.00000E+00,3.00000E+00,(())))
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not a list item"
+[I] Trying Make_List_Item_Current on a named list at an position of a non list item
+    Will raise CryptAda_Item_Kind_Error
 [I] Caught CryptAda_Item_Kind_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-    Message  : "Item is not a list item"
-[I] Trying to make a list item current that is not a list item in an named list (Identifier) ...
-    Must raise CryptAda_Item_Kind_Error
-[I] List: The list
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (One=>1,Two=>(2,"Two"),Three=>(1.00000E+00,2.00000E+00,3.00000E+00,(())))
-[I] Caught CryptAda_Item_Kind_Error
-    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-    Message  : "Item is not a list item"
-[I] Making a list item current in an unamed list
-[I] List: Before
-    Kind           : UNNAMED
-    Number of items:  3
-    List text      : (1,(1,2,(Three=>3)),"Three")
-[I] List: After
-    Kind           : UNNAMED
-    Number of items:  3
-    List text      : (1,2,(Three=>3))
-[I] Making a list item current in an named list (Identifier_Text)
-[I] List: Before
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (One=>1,Two=>(2,"Two"),Three=>(1.00000E+00,2.00000E+00,3.00000E+00,(())))
-[I] List: After
-    Kind           : UNNAMED
-    Number of items:  2
-    List text      : (2,"Two")
-[I] Making a list item current in an named list (Identifier)
-[I] List: Before
-    Kind           : NAMED
-    Number of items:  3
-    List text      : (One=>1,Two=>(2,"Two"),Three=>(1.00000E+00,2.00000E+00,3.00000E+00,(())))
-[I] List: After
-    Kind           : UNNAMED
-    Number of items:  2
-    List text      : (2,"Two")
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not a list item"
+[I] Making list item current at position 4 of unnamed list
+[I] List: Unnamed list before
+    Kind                 : UNNAMED
+    Number of items      :  5
+    List text            : (1,2.00000E+00,Three,(4,Four),"Five")
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: Unnamed list after
+    Kind                 : UNNAMED
+    Number of items      :  2
+    List text            : (4,Four)
+    Is outermost         : FALSE
+    Current list position:  4
+[I] Position of current list is:  4
+[I] Making list item current at position 5 of named list
+[I] List: Named list before
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: Named list after
+    Kind                 : UNNAMED
+    Number of items      :  2
+    List text            : (Six,Seven)
+    Is outermost         : FALSE
+    Current list position:  5
+[I] Position of current list is:  5
 [I] Test case OK
 --------------------------------------------------------------------------------
-Test Case Number: 13
+Test Case Number: 16
 Test Case Result: PASSED
-Finished        : 2017/04/24 - 16:03:27
+Finished        : 2017/06/01 - 18:23:48
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 17
+Description     : Making a list item current
+Started         : 2017/06/01 - 18:23:48
+--------------------------------------------------------------------------------
+[I] Interfaces tested:
+    - Make_List_Item_Current(Identifier)
+[I] For this test case we'll use three different lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,Three,(4,Four),"Five")"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))"
+[I] Trying Make_List_Item_Current on an empty list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "In_List current list is empty"
+[I] Trying Make_List_Item_Current on an unnamed list
+    Will raise CryptAda_Named_List_Error
+[I] Caught CryptAda_Named_List_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
+Message  : "In_List current list is unnamed"
+[I] Trying Make_List_Item_Current on an named list with a null identifier
+    Will raise CryptAda_Identifier_Error
+[I] Caught CryptAda_Identifier_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_IDENTIFIER_ERROR"
+Message  : "Null identifier"
+[I] Trying Make_List_Item_Current on a named list with a identifier that is not a name of any element
+    Will raise CryptAda_Item_Not_Found_Error
+[I] Caught CryptAda_Item_Not_Found_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
+Message  : "List doesn't contains a: 'Eight' item"
+[I] Trying Make_List_Item_Current on a named list with a identifier that is not a name of a list element
+    Will raise CryptAda_Item_Kind_Error
+[I] Caught CryptAda_Item_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not a list item"
+[I] Making list item 'Five' current
+[I] List: Named list before
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: Named list after
+    Kind                 : UNNAMED
+    Number of items      :  2
+    List text            : (Six,Seven)
+    Is outermost         : FALSE
+    Current list position:  5
+[I] Position of current list is:  5
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 17
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:23:48
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 18
+Description     : Making a list item current
+Started         : 2017/06/01 - 18:23:48
+--------------------------------------------------------------------------------
+[I] Interfaces tested:
+    - Make_List_Item_Current(Identifier_Text)
+[I] For this test case we'll use three different lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,Three,(4,Four),"Five")"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))"
+[I] Trying Make_List_Item_Current on an empty list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "In_List current list is empty"
+[I] Trying Make_List_Item_Current on an unnamed list
+    Will raise CryptAda_Named_List_Error
+[I] Caught CryptAda_Named_List_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
+Message  : "In_List current list is unnamed"
+[I] Trying Make_List_Item_Current on a named list witha syntax invalid identifier
+    Will raise CryptAda_Syntax_Error
+[I] Caught CryptAda_Syntax_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+Message  : "'task' is an Ada reserved word"
+[I] Trying Make_List_Item_Current on a named list with a identifier that is not a name of any element
+    Will raise CryptAda_Item_Not_Found_Error
+[I] Caught CryptAda_Item_Not_Found_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
+Message  : "List doesn't contains a: 'Eight' item"
+[I] Trying Make_List_Item_Current on a named list with a identifier that is not a name of a list element
+    Will raise CryptAda_Item_Kind_Error
+[I] Caught CryptAda_Item_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
+Message  : "Item is not a list item"
+[I] Making list item 'Five' current
+[I] List: Named list before
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six,Seven))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: Named list after
+    Kind                 : UNNAMED
+    Number of items      :  2
+    List text            : (Six,Seven)
+    Is outermost         : FALSE
+    Current list position:  5
+[I] Position of current list is:  5
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 18
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:23:48
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 19
+Description     : Getting the names of list items
+Started         : 2017/06/01 - 18:23:48
+--------------------------------------------------------------------------------
+[I] Interfaces tested:
+    - Get_Item_Name
+[I] For this test case we'll use three different lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,Three,(4,Four),"Five")"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six=>Six,Seven=>7))"
+[I] Trying Get_Item_Name on an empty list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "In_List current list is not named"
+[I] Trying Get_Item_Name on an unnamed list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "In_List current list is not named"
+[I] Trying Get_Item_Name on a named list at an invalid list position
+    Will raise CryptAda_Index_Error
+[I] Caught CryptAda_Index_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
+Message  : "Invalid list position value"
+[I] Getting the names of all items in named list
+[I] Position:  1, name: 'One'
+[I] Position:  2, name: 'Two'
+[I] Position:  3, name: 'Three'
+[I] Position:  4, name: 'Four'
+[I] Position:  5, name: 'Five'
+[I] Get_Item_Name works on current list
+[I] Making list item 'Five' current
+[I] List: Named list before
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six=>Six,Seven=>7))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: Named list after
+    Kind                 : NAMED
+    Number of items      :  2
+    List text            : (Six=>Six,Seven=>7)
+    Is outermost         : FALSE
+    Current list position:  5
+[I] Getting the names of all items in current list
+[I] Position:  1, name: 'Six'
+[I] Position:  2, name: 'Seven'
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 19
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:23:48
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 20
+Description     : Getting list item positions
+Started         : 2017/06/01 - 18:23:48
+--------------------------------------------------------------------------------
+[I] Interfaces tested:
+    - Get_Item_Position(Identifier)
+[I] For this test case we'll use three different lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,Three,(4,Four),"Five")"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six=>Six,Seven=>7))"
+[I] Trying Get_Item_Position on an empty list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "In_List current list is empty"
+[I] Trying Get_Item_Position on an unnamed list
+    Will raise CryptAda_Named_List_Error
+[I] Caught CryptAda_Named_List_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
+Message  : "In_List current list is unnamed"
+[I] Trying Get_Item_Position on an named list with a null identifier
+    Will raise CryptAda_Identifier_Error
+[I] Caught CryptAda_Identifier_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_IDENTIFIER_ERROR"
+Message  : "Null identifier"
+[I] Trying Get_Item_Position on a named list with a identifier that is not a name of any element
+    Will raise CryptAda_Item_Not_Found_Error
+[I] Caught CryptAda_Item_Not_Found_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
+Message  : "List doesn't contains a: 'Eight' item"
+[I] Getting position of item: 'One
+Position of item 'One' is:  1
+[I] Getting position of item: 'Two
+Position of item 'Two' is:  2
+[I] Getting position of item: 'Three
+Position of item 'Three' is:  3
+[I] Getting position of item: 'Four
+Position of item 'Four' is:  4
+[I] Getting position of item: 'Five
+Position of item 'Five' is:  5
+[I] Get_Item_Position works on current list
+[I] Making list item 'Five' current
+[I] List: Named list before
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six=>Six,Seven=>7))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: Named list after
+    Kind                 : NAMED
+    Number of items      :  2
+    List text            : (Six=>Six,Seven=>7)
+    Is outermost         : FALSE
+    Current list position:  5
+[I] Getting position of item: 'Six
+Position of item 'Six' is:  1
+[I] Getting position of item: 'Seven
+Position of item 'Seven' is:  2
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 20
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:23:48
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 21
+Description     : Getting list item positions
+Started         : 2017/06/01 - 18:23:48
+--------------------------------------------------------------------------------
+[I] Interfaces tested:
+    - Get_Item_Position(Identifier_Text)
+[I] For this test case we'll use three different lists
+    - An empty list  : "()"
+    - An unnamed list: "(1,2.00000E+00,Three,(4,Four),"Five")"
+    - A named list   : "(One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six=>Six,Seven=>7))"
+[I] Trying Get_Item_Position on an empty list
+    Will raise CryptAda_List_Kind_Error
+[I] Caught CryptAda_List_Kind_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_LIST_KIND_ERROR"
+Message  : "In_List current list is empty"
+[I] Trying Get_Item_Position on an unnamed list
+    Will raise CryptAda_Named_List_Error
+[I] Caught CryptAda_Named_List_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
+Message  : "In_List current list is unnamed"
+[I] Trying Get_Item_Position on an named list with a syntax incorrect identifier
+    Will raise CryptAda_Syntax_Error
+[I] Caught CryptAda_Syntax_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
+Message  : "'in' is an Ada reserved word"
+[I] Trying Get_Item_Position on a named list with a identifier that is not a name of any element
+    Will raise CryptAda_Item_Not_Found_Error
+[I] Caught CryptAda_Item_Not_Found_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
+Message  : "List doesn't contains a: 'Eight' item"
+[I] Getting position of item: 'One'
+Position of item 'One' is:  1
+[I] Getting position of item: 'Two'
+Position of item 'Two' is:  2
+[I] Getting position of item: 'Three'
+Position of item 'Three' is:  3
+[I] Getting position of item: 'Four'
+Position of item 'Four' is:  4
+[I] Getting position of item: 'Five'
+Position of item 'Five' is:  5
+[I] Get_Item_Position works on current list
+[I] Making list item 'Five' current
+[I] List: Named list before
+    Kind                 : NAMED
+    Number of items      :  5
+    List text            : (One=>1,Two=>2.00000E+00,Three=>Three,Four=>"Four",Five=>(Six=>Six,Seven=>7))
+    Is outermost         : TRUE
+    Current list position: N/A (outermost)
+[I] List: Named list after
+    Kind                 : NAMED
+    Number of items      :  2
+    List text            : (Six=>Six,Seven=>7)
+    Is outermost         : FALSE
+    Current list position:  5
+[I] Getting position of item: 'Six'
+Position of item 'Six' is:  1
+[I] Getting position of item: 'Seven'
+Position of item 'Seven' is:  2
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 21
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:23:48
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Lists
-Finished                 : 2017/04/24 - 16:03:27
+Finished                 : 2017/06/01 - 18:23:48
 ================================================================================

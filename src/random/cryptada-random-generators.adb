@@ -20,7 +20,7 @@
 --    File kind         :  Ada package body.
 --    Author            :  A. Duran
 --    Creation date     :  March 12th, 2017
---    Current version   :  1.0
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the non dispatching operations declared in its spec.
@@ -29,8 +29,10 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170312 ADD   Initial implementation.
+--    2.0   20170523 ADD   Changes in the interface.
 --------------------------------------------------------------------------------
 
+with Ada.Exceptions;                   use Ada.Exceptions;
 with Ada.Numerics.Discrete_Random;
 
 with CryptAda.Pragmatics;              use CryptAda.Pragmatics;
@@ -60,52 +62,87 @@ package body CryptAda.Random.Generators is
    Internal_Byte_Generator    : Random_Byte.Generator;
 
    -----------------------------------------------------------------------------
+   --[Random_Generator_Handle Operations]---------------------------------------
+   -----------------------------------------------------------------------------
+
+   --[Is_Valid_Handle]----------------------------------------------------------
+
+   function    Is_Valid_Handle(
+                  The_Handle     : in     Random_Generator_Handle)
+      return   Boolean
+   is
+   begin
+      return RG_Handles.Is_Valid(RG_Handles.Handle(The_Handle));
+   end Is_Valid_Handle;
+
+   --[Invalidate_Handle]--------------------------------------------------------
+
+   procedure   Invalidate_Handle(
+                  The_Handle     : in out Random_Generator_Handle)
+   is
+   begin
+      RG_Handles.Invalidate(RG_Handles.Handle(The_Handle));
+   end Invalidate_Handle;
+      
+   --[Get_Random_Generator_Ptr]-------------------------------------------------
+
+   function    Get_Random_Generator_Ptr(
+                  From_Handle    : in     Random_Generator_Handle)
+      return   Random_Generator_Ptr
+   is
+   begin
+      return RG_Handles.Ptr(RG_Handles.Handle(From_Handle));
+   end Get_Random_Generator_Ptr;
+   
+   -----------------------------------------------------------------------------
    --[Non-dispatching Operations]-----------------------------------------------
    -----------------------------------------------------------------------------
 
    --[Get_Random_Generator_Id]--------------------------------------------------
 
    function    Get_Random_Generator_Id(
-                  Of_Generator   : in     Random_Generator'Class)
+                  Of_Generator   : access Random_Generator'Class)
       return   Random_Generator_Id
    is
    begin
-      return Of_Generator.Generator_Id;
+      return Of_Generator.all.Id;
    end Get_Random_Generator_Id;
 
    --[Get_Seed_Bytes_Needed]----------------------------------------------------
 
    function    Get_Seed_Bytes_Needed(
-                  For_Generator  : in     Random_Generator'Class)
+                  For_Generator  : access Random_Generator'Class)
       return   Natural
    is
    begin
-      if For_Generator.Started then
-         return For_Generator.Seed_Bytes_Needed;
+      if For_Generator.all.Started then
+         return For_Generator.all.Seed_Bytes_Needed;
       else
-         raise CryptAda_Generator_Not_Started_Error;
+         Raise_Exception(
+            CryptAda_Generator_Not_Started_Error'Identity,
+            "Random generator has not been started");
       end if;
    end Get_Seed_Bytes_Needed;
 
    --[Is_Started]---------------------------------------------------------------
 
    function    Is_Started(
-                  The_Generator  : in     Random_Generator'Class)
+                  The_Generator  : access Random_Generator'Class)
       return   Boolean
    is
    begin
-      return The_Generator.Started;
+      return The_Generator.all.Started;
    end Is_Started;
 
    --[Is_Seeded]----------------------------------------------------------------
 
    function    Is_Seeded(
-                  The_Generator  : in     Random_Generator'Class)
+                  The_Generator  : access Random_Generator'Class)
       return   Boolean
    is
    begin
-      if The_Generator.Started then
-         return (The_Generator.Seed_Bytes_Needed = 0);
+      if The_Generator.all.Started then
+         return (The_Generator.all.Seed_Bytes_Needed = 0);
       else
          return False;
       end if;
@@ -119,7 +156,6 @@ package body CryptAda.Random.Generators is
       B              : Internal_Seeder_Block;
       T              : Four_Bytes := 0;
    begin
-
       -- I'm not so naive to believe that this will resist any serious
       -- cryptanalysis but I'd like to put the things as difficult as possible.
       -- Be aware that this is not the random generator but the seed generator.
@@ -152,6 +188,26 @@ package body CryptAda.Random.Generators is
       return B;
    end Get_Internal_Seeder_Bytes;
 
+   --[Private_Initialize_Random_Generator]--------------------------------------
+   
+   procedure   Private_Initialize_Random_Generator(
+                  RG             : in out Random_Generator'Class)
+   is
+   begin
+      RG.Started           := False;
+      RG.Seed_Bytes_Needed := 0;
+   end Private_Initialize_Random_Generator;
+   
+   --[Ref]----------------------------------------------------------------------
+   
+   function    Ref(
+                  Thing          : in     Random_Generator_Ptr)
+      return   Random_Generator_Handle
+   is
+   begin
+      return (RG_Handles.Ref(Thing) with null record);   
+   end Ref;       
+   
    -----------------------------------------------------------------------------
    --[Package Initialization]---------------------------------------------------
    -----------------------------------------------------------------------------

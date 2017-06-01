@@ -186,25 +186,33 @@ package body CryptAda.Tests.Utils.Random is
    --[Print_Generator_Info]-----------------------------------------------------
 
    procedure   Print_Generator_Info(
-                  Generator      : in     Random_Generator'Class)
+                  Generator      : in     Random_Generator_Handle)
    is
+      RGP            : Random_Generator_Ptr;
    begin
-      Print_Information_Message("Information of random generator object:");
-      Print_Message("Digest object tag name        : """ & Expanded_Name(Generator'Tag) & """", "    ");
-      Print_Message("CryptAda random generator id  : """ & Random_Generator_Id'Image(Get_Random_Generator_Id(Generator)) & """", "    ");
-      Print_Message("Is started                    : """ & Boolean'Image(Is_Started(Generator)) & """", "    ");
-      Print_Message("Is seeded                     : """ & Boolean'Image(Is_Seeded(Generator)) & """", "    ");
-      
-      if Is_Started(Generator) then
-         Print_Message("Seed bytes needed             : """ & Natural'Image(Get_Seed_Bytes_Needed(Generator)) & """", "    ");
-      end if;
+      if Is_Valid_Handle(Generator) then
+         RGP := Get_Random_Generator_Ptr(Generator);
+         
+         Print_Information_Message("Information of random generator object:");
+         Print_Message("Digest object tag name        : """ & Expanded_Name(RGP.all'Tag) & """", "    ");
+         Print_Message("CryptAda random generator id  : """ & Random_Generator_Id'Image(Get_Random_Generator_Id(RGP)) & """", "    ");
+         Print_Message("Is started                    : """ & Boolean'Image(Is_Started(RGP)) & """", "    ");
+         Print_Message("Is seeded                     : """ & Boolean'Image(Is_Seeded(RGP)) & """", "    ");
+         
+         if Is_Started(RGP) then
+            Print_Message("Seed bytes needed             : """ & Natural'Image(Get_Seed_Bytes_Needed(RGP)) & """", "    ");
+         end if;
+      else
+         Print_Information_Message("Invalid random generator handle");
+      end if;      
    end Print_Generator_Info;
    
    --[Run_Chi_Square_Test]------------------------------------------------------
    
    procedure   Run_Chi_Square_Test(
-                  Generator      : in out Random_Generator'Class)
+                  Generator      : in     Random_Generator_Handle)
    is
+      RGP            : constant Random_Generator_Ptr := Get_Random_Generator_Ptr(Generator);
       F              : array(Byte) of Natural := (others => 0);
       Buff           : Byte_Array(1 .. Chi_Square_Buffer_Size);
       S              : Float;
@@ -237,12 +245,12 @@ package body CryptAda.Tests.Utils.Random is
 
       --  Start and Seed the random generator.
 
-      Random_Start_And_Seed(Generator);
+      Random_Start_And_Seed(RGP);
 
       -- Generate bytes.
 
       for J in 1 .. Chi_Square_Iterations loop
-         Random_Generate(Generator, Buff);
+         Random_Generate(RGP, Buff);
 
          -- Compute frequencies.
 
@@ -250,10 +258,6 @@ package body CryptAda.Tests.Utils.Random is
             F(Buff(K)) := F(Buff(K)) + 1;
          end loop;
       end loop;
-
-      -- Stop generator.
-
-      Random_Stop(Generator);
 
       -- Compute chi-square.
 
@@ -335,8 +339,9 @@ package body CryptAda.Tests.Utils.Random is
    --[Run_FIPS_PUB_140_2_Tests]-------------------------------------------------
 
    procedure   Run_FIPS_PUB_140_2_Tests(
-                  Generator      : in out Random_Generator'Class)
+                  Generator      : in     Random_Generator_Handle)
    is
+      RGP            : constant Random_Generator_Ptr := Get_Random_Generator_Ptr(Generator);
       Buff              : Byte_Array(1 .. Test_Bytes);
       Cnt               : Natural := 0;
       Monobit_Results   : Natural := 0;
@@ -388,15 +393,11 @@ package body CryptAda.Tests.Utils.Random is
 
       -- Start and Seed random generator.
 
-      Random_Start_And_Seed(Generator);
+      Random_Start_And_Seed(RGP);
 
       -- Generate the random buffer.
 
-      Random_Generate(Generator, Buff);
-
-      -- Stop random generator.
-
-      Random_Stop(Generator);
+      Random_Generate(RGP, Buff);
 
       -- Monobit test:
       -- Compute number of 1's in Buff.

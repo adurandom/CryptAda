@@ -33,9 +33,9 @@
 --    1.0   20170313 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with CryptAda.Pragmatics;
-with CryptAda.Digests.Algorithms.HAVAL;
-with CryptAda.Digests.Algorithms.SHA_256;
+with CryptAda.Digests.Message_Digests;
+with CryptAda.Digests.Message_Digests.HAVAL;
+with CryptAda.Digests.Message_Digests.SHA_256;
 
 package CryptAda.Random.Generators.CAPRNG is
 
@@ -57,44 +57,86 @@ package CryptAda.Random.Generators.CAPRNG is
 
    type CAPRNG_Generator is new Random_Generator with private;
 
+   --[RSAREF_Generator_Ptr]-----------------------------------------------------
+   -- Access to RSAREF_Generator objects.
+   -----------------------------------------------------------------------------
+
+   type CAPRNG_Generator_Ptr is access all CAPRNG_Generator'Class;
+
+   -----------------------------------------------------------------------------
+   --[Getting a handle]---------------------------------------------------------
+   -----------------------------------------------------------------------------
+   
+   --[Get_Random_Generator_Handle]----------------------------------------------
+   -- Purpose:
+   -- Creates a Random_Generator object and returns a handle for that object.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- None.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Random_Generator_Handle value that handles the reference to the newly 
+   -- created Random_Generator object.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CrtyptAda_Storage_Error if an error is raised during object allocation.
+   -----------------------------------------------------------------------------
+
+   function    Get_Random_Generator_Handle
+      return   Random_Generator_Handle;
+   
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
 
    --[Random_Start]-------------------------------------------------------------
 
+   overriding
    procedure   Random_Start(
-                  Generator      : in out CAPRNG_Generator;
+                  Generator      : access CAPRNG_Generator;
                   Seed_Bytes_Req : in     Positive := Minimum_Seed_Bytes);
 
    --[Random_Seed]--------------------------------------------------------------
 
+   overriding
    procedure   Random_Seed(
-                  Generator      : in out CAPRNG_Generator;
+                  Generator      : access CAPRNG_Generator;
                   Seed_Bytes     : in     CryptAda.Pragmatics.Byte_Array);
 
    --[Random_Start_And_Seed]----------------------------------------------------
 
+   overriding
    procedure   Random_Start_And_Seed(
-                  Generator      : in out CAPRNG_Generator;
+                  Generator      : access CAPRNG_Generator;
                   Seed_Bytes_Req : in     Positive := Minimum_Internal_Seed_Bytes);
 
    --[Random_Mix]---------------------------------------------------------------
 
+   overriding
    procedure   Random_Mix(
-                  Generator      : in out CAPRNG_Generator;
+                  Generator      : access CAPRNG_Generator;
                   Mix_Bytes      : in     CryptAda.Pragmatics.Byte_Array);
 
    --[Random_Generate]----------------------------------------------------------
 
+   overriding
    procedure   Random_Generate(
-                  Generator      : in out CAPRNG_Generator;
+                  Generator      : access CAPRNG_Generator;
                   The_Bytes      :    out CryptAda.Pragmatics.Byte_Array);
 
+   --[Random_Generate]----------------------------------------------------------
+
+   overriding
+   function    Random_Generate(
+                  Generator      : access CAPRNG_Generator;
+                  Bytes          : in     Positive)
+      return   CryptAda.Pragmatics.Byte_Array;
+                  
    --[Random_Stop]--------------------------------------------------------------
 
+   overriding
    procedure   Random_Stop(
-                  Generator      : in out CAPRNG_Generator);
+                  Generator      : access CAPRNG_Generator);
 
 private
 
@@ -106,13 +148,13 @@ private
    -- Size in bytes of the internal state.
    -----------------------------------------------------------------------------
 
-   State_Size              : constant Positive := CryptAda.Digests.Algorithms.HAVAL.HAVAL_Hash_Bytes(CryptAda.Digests.Algorithms.HAVAL.HAVAL_256);
+   State_Size              : constant Positive := CryptAda.Digests.Message_Digests.HAVAL.HAVAL_Hash_Bytes(CryptAda.Digests.Message_Digests.HAVAL.HAVAL_256);
 
    --[Output_Size]--------------------------------------------------------------
    -- Size in bytes of the output buffer.
    -----------------------------------------------------------------------------
 
-   Output_Size              : constant Positive := CryptAda.Digests.Algorithms.SHA_256.SHA_256_Hash_Bytes;
+   Output_Size              : constant Positive := CryptAda.Digests.Message_Digests.SHA_256.SHA_256_Hash_Bytes;
    
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
@@ -149,8 +191,8 @@ private
 
    type CAPRNG_Generator is new Random_Generator with
       record
-      	State_Digest            : CryptAda.Digests.Algorithms.HAVAL.HAVAL_Digest;
-      	Output_Digest           : CryptAda.Digests.Algorithms.SHA_256.SHA_256_Digest;
+      	State_Digest            : CryptAda.Digests.Message_Digests.Message_Digest_Handle;
+      	Output_Digest           : CryptAda.Digests.Message_Digests.Message_Digest_Handle;
          State                   : CAPRNG_State       := (others => 16#00#);
          OCount                  : CAPRNG_Output_Ndx  := 0;
          OBuffer                 : CAPRNG_Output      := (others => 16#00#);
@@ -158,11 +200,6 @@ private
 
    -----------------------------------------------------------------------------
    --[Subprogram Specifications]------------------------------------------------
-   -----------------------------------------------------------------------------
-
-   --[Subprogram Specifications]------------------------------------------------
-   -- Next subprograms are the overrided methods of
-   -- Ada.Finalization.Limited_Controlled.
    -----------------------------------------------------------------------------
 
    procedure   Initialize(

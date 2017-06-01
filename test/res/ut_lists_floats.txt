@@ -1,18 +1,18 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.c (2017/04/04)
+Version: 0.2.a (2017/05/30)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Lists_Floats
-Description              : Unit test driver for CryptAda.Pragmatics.Lists.Float_Item
-Started                  : 2017/04/27 - 14:13:15
+Description              : Unit test driver for CryptAda.Lists.Float_Item
+Started                  : 2017/06/01 - 18:23:58
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Getting text representation of float values
-Started         : 2017/04/27 - 14:13:15
+Started         : 2017/06/01 - 18:23:58
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Number_2_Text
@@ -26,13 +26,13 @@ Started         : 2017/04/27 - 14:13:15
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/27 - 14:13:15
+Finished        : 2017/06/01 - 18:23:58
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Getting float items from lists
-Started         : 2017/04/27 - 14:13:15
+Started         : 2017/06/01 - 18:23:58
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Get_Value (Position)
@@ -59,21 +59,21 @@ Message  : "From_List current list is empty"
     Over an unnamed list
 [I] Caught CryptAda_Index_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
-Message  : "Invalid list position value"
+Message  : "Invalid At_Position value"
     Over a named list
 [I] Caught CryptAda_Index_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
-Message  : "Invalid list position value"
+Message  : "Invalid At_Position value"
 [I] Trying Get_Value over a non-float valued item
     Will raise CryptAda_Item_Kind_Error
     Over an unnamed list
 [I] Caught CryptAda_Item_Kind_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-Message  : "Item is not an float value"
+Message  : "Item is not a float value"
     Over a named list
 [I] Caught CryptAda_Item_Kind_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-Message  : "Item is not an float value"
+Message  : "Item is not a float value"
 [I] Trying Get_Value of the float item at position 6 in the unnamed list
     Expected result: -1.0
     Obtained result: -1.0E+00
@@ -86,13 +86,13 @@ Message  : "Item is not an float value"
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/27 - 14:13:15
+Finished        : 2017/06/01 - 18:23:58
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Getting float items from lists
-Started         : 2017/04/27 - 14:13:15
+Started         : 2017/06/01 - 18:23:58
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Get_Value (Identifier)
@@ -129,13 +129,13 @@ Message  : "Null identifier"
     Getting value for "Eight"
 [I] Caught CryptAda_Item_Not_Found_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
-Message  : "List doesn't contains a: "Eight" item"
+Message  : "List doesn't contains a: 'Eight' item"
 [I] Trying get a value that is not an integer
     Will raise CryptAda_Item_Kind_Error
     Getting value for "Three"
 [I] Caught CryptAda_Item_Kind_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-Message  : "Item is not an float value"
+Message  : "Item is not a float value"
 [I] Getting a float value from a named list
     Expected result: 1.0
     Obtained result: 1.0E+00
@@ -144,13 +144,13 @@ Message  : "Item is not an float value"
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/04/27 - 14:13:15
+Finished        : 2017/06/01 - 18:23:58
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Getting float items from lists
-Started         : 2017/04/27 - 14:13:15
+Started         : 2017/06/01 - 18:23:58
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Get_Value (Identifier_Text)
@@ -181,19 +181,19 @@ Message  : "From_List current list is unnamed"
     Will raise CryptAda_Syntax_Error
 [I] Caught CryptAda_Syntax_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-Message  : "Identifier is an Ada reserved word"
+Message  : "'Is' is an Ada reserved word"
 [I] Trying to get a value that does not exist in a named list
     Will raise CryptAda_Item_Not_Found_Error
     Getting value for "Eight"
 [I] Caught CryptAda_Item_Not_Found_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
-Message  : "List doesn't contains a: "Eight" item"
+Message  : "List doesn't contains a: 'Eight' item"
 [I] Trying get a value that is not a float
     Will raise CryptAda_Item_Kind_Error
     Getting value for "Three"
 [I] Caught CryptAda_Item_Kind_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-Message  : "Item is not an float value"
+Message  : "Item is not a float value"
 [I] Getting a float value from a named list
     Expected result: 1.0
     Obtained result: 1.0E+00
@@ -202,13 +202,13 @@ Message  : "Item is not an float value"
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/04/27 - 14:13:15
+Finished        : 2017/06/01 - 18:23:58
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Replacing float item values from lists
-Started         : 2017/04/27 - 14:13:15
+Started         : 2017/06/01 - 18:23:58
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Replace_Value (Position)
@@ -235,21 +235,21 @@ Message  : "In_List current list is empty"
     On an unnamed list
 [I] Caught CryptAda_Index_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
-Message  : "Invalid list position value"
+Message  : "Invalid At_Position value"
     On a named list
 [I] Caught CryptAda_Index_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
-Message  : "Invalid list position value"
+Message  : "Invalid At_Position value"
 [I] Trying Replace_Value on a non-float valued item
     Will raise CryptAda_Item_Kind_Error
     On an unnamed list
 [I] Caught CryptAda_Item_Kind_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-Message  : "Item is not an float"
+Message  : "Item is not a float value"
     On a named list
 [I] Caught CryptAda_Item_Kind_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-Message  : "Item is not an float"
+Message  : "Item is not a float value"
 [I] Trying Replace_Value on a float value item in an unnamed list
 Replacing value of item 2 to: -0.25
 [I] List           : List before replace
@@ -274,13 +274,13 @@ Replacing value of item 2 (Two) to: 0.37
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/04/27 - 14:13:15
+Finished        : 2017/06/01 - 18:23:58
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : Replacing float item values from lists
-Started         : 2017/04/27 - 14:13:15
+Started         : 2017/06/01 - 18:23:58
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Replace_Value (Identifier)
@@ -317,13 +317,13 @@ Message  : "Item_Name is null"
     Replacing value for "Eight"
 [I] Caught CryptAda_Item_Not_Found_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
-Message  : "List doesn't contains a: "Eight" item"
+Message  : "List doesn't contains a: 'Eight' item"
 [I] Trying replace a value that is not a float
     Will raise CryptAda_Item_Kind_Error
     Replacing value for "Three"
 [I] Caught CryptAda_Item_Kind_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-Message  : "Item is not an float"
+Message  : "Item is not a float value"
 [I] Trying Replace_Value on a float value item in a named list
 Replacing value of item "Two" to: -0.13
 [I] List           : List before replace
@@ -338,13 +338,13 @@ Replacing value of item "Two" to: -0.13
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/04/27 - 14:13:15
+Finished        : 2017/06/01 - 18:23:58
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
 Description     : Replacing float item values from lists
-Started         : 2017/04/27 - 14:13:15
+Started         : 2017/06/01 - 18:23:58
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Replace_Value (Identifier_Text)
@@ -381,13 +381,13 @@ Message  : "Invalid character '@' in identifier"
     Replacing value for "Eight"
 [I] Caught CryptAda_Item_Not_Found_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
-Message  : "List doesn't contains a: "Eight" item"
+Message  : "List doesn't contains a: 'Eight' item"
 [I] Trying replace a value that is not a float
     Will raise CryptAda_Item_Kind_Error
     Replacing value for "Three"
 [I] Caught CryptAda_Item_Kind_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-Message  : "Item is not an float"
+Message  : "Item is not a float value"
 [I] Trying Replace_Value on a float value item in an named list
 Replacing value of item "Two" to: -0.67
 [I] List           : List before replace
@@ -402,13 +402,13 @@ Replacing value of item "Two" to: -0.67
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/04/27 - 14:13:15
+Finished        : 2017/06/01 - 18:23:58
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 8
 Description     : Inserting float item values in lists
-Started         : 2017/04/27 - 14:13:15
+Started         : 2017/06/01 - 18:23:58
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Insert_Value (Position)
@@ -429,7 +429,7 @@ Started         : 2017/04/27 - 14:13:15
     Will raise CryptAda_Index_Error
 [I] Caught CryptAda_Index_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
-Message  : "Invalid list position value"
+Message  : "Invalid At_Position value"
 [I] Trying Insert_Value (form 1 - Unnamed) on a named list
     Will raise CryptAda_List_Kind_Error
 [I] Caught CryptAda_List_Kind_Error
@@ -480,13 +480,13 @@ Inserting the value : 0.99
 --------------------------------------------------------------------------------
 Test Case Number: 8
 Test Case Result: PASSED
-Finished        : 2017/04/27 - 14:13:15
+Finished        : 2017/06/01 - 18:23:58
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 9
 Description     : Inserting float item values in lists
-Started         : 2017/04/27 - 14:13:15
+Started         : 2017/06/01 - 18:23:58
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Insert_Value (Identifier)
@@ -522,7 +522,7 @@ Message  : "Item_Name is null"
     Will raise CryptAda_Named_List_Error
 [I] Caught CryptAda_Named_List_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
-Message  : "List already contains the item: "Two""
+Message  : "List already contains the item: 'Two'"
 [I] Inserting a float value in an empty list (at position 0)
 Inserting the value : -0.4
 With name           : "First"
@@ -572,13 +572,13 @@ With name           : "Post_Last"
 --------------------------------------------------------------------------------
 Test Case Number: 9
 Test Case Result: PASSED
-Finished        : 2017/04/27 - 14:13:15
+Finished        : 2017/06/01 - 18:23:58
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 10
 Description     : Inserting float item values in lists
-Started         : 2017/04/27 - 14:13:15
+Started         : 2017/06/01 - 18:23:58
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Insert_Value (Identifier_Text)
@@ -599,7 +599,7 @@ Started         : 2017/04/27 - 14:13:15
     Will raise CryptAda_Index_Error
 [I] Caught CryptAda_Index_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
-Message  : "Invalid list position value"
+Message  : "Invalid At_Position value"
 [I] Trying Insert_Value (form 3 - Named using Identifier) on an unnamed list
     Will raise CryptAda_List_Kind_Error
 [I] Caught CryptAda_List_Kind_Error
@@ -609,12 +609,12 @@ Message  : "In_List current list is unnamed"
     Will raise CryptAda_Syntax_Error
 [I] Caught CryptAda_Syntax_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-Message  : "Identifier is an Ada reserved word"
+Message  : "'Package' is an Ada reserved word"
 [I] Trying Insert_Value using a duplicated name identifier
     Will raise CryptAda_Named_List_Error
 [I] Caught CryptAda_Named_List_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
-Message  : "List already contains the item: "Two""
+Message  : "List already contains the item: 'Two'"
 [I] Inserting a float value in an empty list (at position 0)
 Inserting the value : 0.5
 With name           : "First"
@@ -664,13 +664,13 @@ With name           : "Post_Last"
 --------------------------------------------------------------------------------
 Test Case Number: 10
 Test Case Result: PASSED
-Finished        : 2017/04/27 - 14:13:15
+Finished        : 2017/06/01 - 18:23:58
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 11
 Description     : Getting element position by value
-Started         : 2017/04/27 - 14:13:15
+Started         : 2017/06/01 - 18:23:58
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Position_By_Value
@@ -696,20 +696,20 @@ Message  : "In_List current list is empty"
     Will raise CryptAda_Index_Error
 [I] Caught CryptAda_Index_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
-Message  : "Invalid Start position"
+Message  : "Invalid Start_Position value"
 [I] Caught CryptAda_Index_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
-Message  : "Invalid Start position"
+Message  : "Invalid Start_Position value"
 [I] Trying Position_By_Value with an inexistent value
     Will raise CryptAda_Item_Not_Found_Error
 [I] On the unnamed list ...
 [I] Caught CryptAda_Item_Not_Found_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
-Message  : "Not found an float item with the value provided"
+Message  : "In_list does not contain a float item with value: -7.0E-01"
 [I] On the named list ...
 [I] Caught CryptAda_Item_Not_Found_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
-Message  : "Not found an float item with the value provided"
+Message  : "In_list does not contain a float item with value: -7.0E-01"
 [I] List           : The unnamed list
     Kind           : UNNAMED
     Number of items:  7
@@ -726,11 +726,11 @@ Message  : "Not found an float item with the value provided"
 --------------------------------------------------------------------------------
 Test Case Number: 11
 Test Case Result: PASSED
-Finished        : 2017/04/27 - 14:13:15
+Finished        : 2017/06/01 - 18:23:58
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Lists_Floats
-Finished                 : 2017/04/27 - 14:13:15
+Finished                 : 2017/06/01 - 18:23:58
 ================================================================================

@@ -1,0 +1,634 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.2.a (2017/05/30)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.MD_BLAKE_384
+Description              : Unit test driver for CryptAda.Digests.Message_Digests.BLAKE_384 functionality.
+Started                  : 2017/06/01 - 18:25:09
+================================================================================
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Getting a handle for message digest objects
+Started         : 2017/06/01 - 18:25:09
+--------------------------------------------------------------------------------
+[I] Subprograms tested: 
+    - Get_Message_Digest_Handle
+    - Is_Valid_Handle
+    - Invalidate_Handle
+    - Get_Message_Digest_Ptr
+[I] Before Get_Message_Digest_Handle the handle is invalid:
+[I] Handle is invalid
+[I] Getting a pointer from an invalid handle will return null
+[I] Pointer is null
+[I] Trying any operation with a null pointer will raise Constraint_Error
+    Trying Digest_Start
+[I] Caught Constraint_Error
+    Exception: "CONSTRAINT_ERROR"
+    Message  : "cryptada-tests-unit-md_blake_384.adb:237 access check failed"
+[I] Getting a message digest handle
+[I] Information on handle BEFORE calling Get_Message_Digest_Handle
+    Invalid Message_Digest_Handle
+[I] Information on handle AFTER calling Get_Message_Digest_Handle
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.BLAKE_384.BLAKE_384_DIGEST"
+    CryptAda digest algorithm id  : "MD_BLAKE_384"
+    State size (bytes)            :  64
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  48
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Salt                          : 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Now the handle must be invalid:
+[I] Handle is valid
+[I] Getting a pointer from an invalid handle will return a not null value
+[I] Pointer is not null
+[I] Computing a hash value may succeed
+[I] Digest information AFTER Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.BLAKE_384.BLAKE_384_DIGEST"
+    CryptAda digest algorithm id  : "MD_BLAKE_384"
+    State size (bytes)            :  64
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  48
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Salt                          : 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Calling Digest_Update
+[I] Digesting string              : "CryptAda By TCantos Software"
+[I] Digest information AFTER Digest_Update
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.BLAKE_384.BLAKE_384_DIGEST"
+    CryptAda digest algorithm id  : "MD_BLAKE_384"
+    State size (bytes)            :  64
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  48
+    Processed bit count           : 16#000000000000000000000000000000E0#
+    Salt                          : 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Calling Digest_End to finish processing and obtaining the computed Hash
+[I] Digest information AFTER Digest_End
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.BLAKE_384.BLAKE_384_DIGEST"
+    CryptAda digest algorithm id  : "MD_BLAKE_384"
+    State size (bytes)            :  64
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  48
+    Processed bit count           : 16#000000000000000000000000000000E0#
+    Salt                          : 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Checking digest computation results
+[I] Expected hash
+    - Hash size :  48
+    - Hash bytes:
+16#4F#, 16#16#, 16#F5#, 16#7D#, 16#3C#, 16#F5#, 16#99#, 16#E5#, 16#1F#, 16#D5#, 16#B9#, 16#6A#, 16#39#, 16#9D#, 16#41#, 16#72#, 
+16#B5#, 16#1E#, 16#87#, 16#90#, 16#09#, 16#A8#, 16#AC#, 16#3C#, 16#13#, 16#2C#, 16#07#, 16#A4#, 16#29#, 16#43#, 16#A8#, 16#67#, 
+16#00#, 16#F8#, 16#23#, 16#C6#, 16#03#, 16#97#, 16#4A#, 16#B3#, 16#F3#, 16#2C#, 16#90#, 16#18#, 16#C7#, 16#13#, 16#22#, 16#B9#
+[I] Obtained hash
+    - Hash size :  48
+    - Hash bytes:
+16#4F#, 16#16#, 16#F5#, 16#7D#, 16#3C#, 16#F5#, 16#99#, 16#E5#, 16#1F#, 16#D5#, 16#B9#, 16#6A#, 16#39#, 16#9D#, 16#41#, 16#72#, 
+16#B5#, 16#1E#, 16#87#, 16#90#, 16#09#, 16#A8#, 16#AC#, 16#3C#, 16#13#, 16#2C#, 16#07#, 16#A4#, 16#29#, 16#43#, 16#A8#, 16#67#, 
+16#00#, 16#F8#, 16#23#, 16#C6#, 16#03#, 16#97#, 16#4A#, 16#B3#, 16#F3#, 16#2C#, 16#90#, 16#18#, 16#C7#, 16#13#, 16#22#, 16#B9#
+[I] Results match
+[I] Invalidating handle
+[I] Digest information AFTER invalidating handle
+    Invalid Message_Digest_Handle
+[I] Handle is invalid
+[I] Using a pointer from an invalid handle must result in an exception
+    Trying Digest_Start
+[I] Caught Constraint_Error
+    Exception: "CONSTRAINT_ERROR"
+    Message  : "cryptada-tests-unit-md_blake_384.adb:320 access check failed"
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:25:09
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Testing default Digest_Start
+Started         : 2017/06/01 - 18:25:09
+--------------------------------------------------------------------------------
+[I] Subprograms tested: 
+    - Digest_Start
+    - Digest_Start(With_Salt)
+[I] Default Digest_Start will start digest computation with default parameters
+    BLAKE-384 has a Salt parameter
+    Default salt value is: 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Using defaul Digest_Start
+[I] Digest information BEFORE Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.BLAKE_384.BLAKE_384_DIGEST"
+    CryptAda digest algorithm id  : "MD_BLAKE_384"
+    State size (bytes)            :  64
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  48
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Salt                          : 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Digest information AFTER Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.BLAKE_384.BLAKE_384_DIGEST"
+    CryptAda digest algorithm id  : "MD_BLAKE_384"
+    State size (bytes)            :  64
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  48
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Salt                          : 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Getting salt value
+[I] Salt values match
+[I] Calling Digest_Start(With_Salt)
+    Setting Salt value to: 
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] Digest information BEFORE Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.BLAKE_384.BLAKE_384_DIGEST"
+    CryptAda digest algorithm id  : "MD_BLAKE_384"
+    State size (bytes)            :  64
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  48
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Salt                          : 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Digest information AFTER Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.BLAKE_384.BLAKE_384_DIGEST"
+    CryptAda digest algorithm id  : "MD_BLAKE_384"
+    State size (bytes)            :  64
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  48
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Salt                          : 
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] Getting salt value
+[I] Salt values match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:25:09
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Testing parametrized Digest_Start
+Started         : 2017/06/01 - 18:25:09
+--------------------------------------------------------------------------------
+[I] Subprograms tested: 
+    - Digest_Start(Parameter_List)
+[I] BLAKE-384 accept a parameter list containing a Salt value
+[I] Using an empty parameters list will set the default salt value
+    Parameter list: ()
+[I] Digest information BEFORE Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.BLAKE_384.BLAKE_384_DIGEST"
+    CryptAda digest algorithm id  : "MD_BLAKE_384"
+    State size (bytes)            :  64
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  48
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Salt                          : 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Digest information AFTER Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.BLAKE_384.BLAKE_384_DIGEST"
+    CryptAda digest algorithm id  : "MD_BLAKE_384"
+    State size (bytes)            :  64
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  48
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Salt                          : 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Salt values match
+[I] Trying some invalid lists.
+    Digest_Start must raise CryptAda_Bad_Argument_Error in all cases
+[I] Parameter list: ("000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f")
+[I] Digest information BEFORE Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.BLAKE_384.BLAKE_384_DIGEST"
+    CryptAda digest algorithm id  : "MD_BLAKE_384"
+    State size (bytes)            :  64
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  48
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Salt                          : 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Parameter list is unnamed"
+[I] Parameter list: (The_Salt=>"000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f")
+[I] Digest information BEFORE Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.BLAKE_384.BLAKE_384_DIGEST"
+    CryptAda digest algorithm id  : "MD_BLAKE_384"
+    State size (bytes)            :  64
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  48
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Salt                          : 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Parameter list does not contain mandatory 'Salt' item"
+[I] Parameter list: (Salt=>"000102030405060708090a0b0c0d0e0f@101112131415161718191a1b1c1d1e1f")
+[I] Digest information BEFORE Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.BLAKE_384.BLAKE_384_DIGEST"
+    CryptAda digest algorithm id  : "MD_BLAKE_384"
+    State size (bytes)            :  64
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  48
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Salt                          : 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Caught exception: CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR, with message: "Invalid hexadecimal digit: '@'". When parsing BLAKE-384 parameter list"
+[I] Parameter list: (Salt=>"000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e")
+[I] Digest information BEFORE Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.BLAKE_384.BLAKE_384_DIGEST"
+    CryptAda digest algorithm id  : "MD_BLAKE_384"
+    State size (bytes)            :  64
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  48
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Salt                          : 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Invalid 'Salt' length"
+[I] Trying a valid parameter list
+[I] Parameter list: (Salt=>"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
+[I] Digest information BEFORE Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.BLAKE_384.BLAKE_384_DIGEST"
+    CryptAda digest algorithm id  : "MD_BLAKE_384"
+    State size (bytes)            :  64
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  48
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Salt                          : 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
+[I] Digest information AFTER Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.BLAKE_384.BLAKE_384_DIGEST"
+    CryptAda digest algorithm id  : "MD_BLAKE_384"
+    State size (bytes)            :  64
+    Input block size (bytes)      :  128
+    Hash size (bytes)             :  48
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Salt                          : 
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] Getting salt value
+    Expected Salt value: 
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+    Obtained Salt value: 
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] Salt values match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:25:09
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : Standard BLAKE-384 test vectors
+Started         : 2017/06/01 - 18:25:09
+--------------------------------------------------------------------------------
+[I] Standard test vectors obtained from BLAKE documentation
+    Number of vectors to test:  2
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_BLAKE_384
+    Vector string                 : ""
+    Vector length                 :  1
+    Vector array                  : 
+16#00#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000000008#
+    Obtained bit count            : 16#00000000000000000000000000000008#
+    Expected hash (String)        : "10281F67E135E90AE8E882251A355510A719367AD70227B137343E1BC122015C29391E8545B5272D13A7C2879DA3D807"
+    Obtained hash (String)        : "10281F67E135E90AE8E882251A355510A719367AD70227B137343E1BC122015C29391E8545B5272D13A7C2879DA3D807"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 test passed.
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_BLAKE_384
+    Vector string                 : ""
+    Vector length                 :  144
+    Vector array                  : 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
+16#00#, 16#00#, 16#00#, 16#00#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000000480#
+    Obtained bit count            : 16#00000000000000000000000000000480#
+    Expected hash (String)        : "0B9845DD429566CDAB772BA195D271EFFE2D0211F16991D766BA749447C5CDE569780B2DAA66C4B224A2EC2E5D09174C"
+    Obtained hash (String)        : "0B9845DD429566CDAB772BA195D271EFFE2D0211F16991D766BA749447C5CDE569780B2DAA66C4B224A2EC2E5D09174C"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 test passed.
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:25:09
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 5
+Description     : CryptAda BLAKE-384 test vectors
+Started         : 2017/06/01 - 18:25:09
+--------------------------------------------------------------------------------
+[I] Obtained hashes are checked against values obtained from https://asecuritysite.com/encryption/blake
+    Number of vectors to test:  9
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_BLAKE_384
+    Test vector index             :  1
+    Vector string                 : ""
+    Vector length                 :  0
+    Vector array                  : 
+
+[I] Digest results for vector     :  1
+    Expected bit count            : 16#00000000000000000000000000000000#
+    Obtained bit count            : 16#00000000000000000000000000000000#
+    Expected hash (String)        : "C6CBD89C926AB525C242E6621F2F5FA73AA4AFE3D9E24AED727FAAADD6AF38B620BDB623DD2B4788B1C8086984AF8706"
+    Obtained hash (String)        : "C6CBD89C926AB525C242E6621F2F5FA73AA4AFE3D9E24AED727FAAADD6AF38B620BDB623DD2B4788B1C8086984AF8706"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_BLAKE_384
+    Test vector index             :  2
+    Vector string                 : "a"
+    Vector length                 :  1
+    Vector array                  : 
+16#61#
+[I] Digest results for vector     :  2
+    Expected bit count            : 16#00000000000000000000000000000008#
+    Obtained bit count            : 16#00000000000000000000000000000008#
+    Expected hash (String)        : "43B10BDC1B8B623050D47529D48A44FAE16023F93596D0307E99A6B4299891CF639FD2673C97CE4062DF1068BE3F827E"
+    Obtained hash (String)        : "43B10BDC1B8B623050D47529D48A44FAE16023F93596D0307E99A6B4299891CF639FD2673C97CE4062DF1068BE3F827E"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_BLAKE_384
+    Test vector index             :  3
+    Vector string                 : "abc"
+    Vector length                 :  3
+    Vector array                  : 
+16#61#, 16#62#, 16#63#
+[I] Digest results for vector     :  3
+    Expected bit count            : 16#00000000000000000000000000000018#
+    Obtained bit count            : 16#00000000000000000000000000000018#
+    Expected hash (String)        : "FCBBE2A60F9D4BFABF2E018CC3B1628D520D6B325D5E90A8D196F3948811A952823349236DAF0C49BE6A214EDE021AAA"
+    Obtained hash (String)        : "FCBBE2A60F9D4BFABF2E018CC3B1628D520D6B325D5E90A8D196F3948811A952823349236DAF0C49BE6A214EDE021AAA"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_BLAKE_384
+    Test vector index             :  4
+    Vector string                 : "message digest"
+    Vector length                 :  14
+    Vector array                  : 
+16#6D#, 16#65#, 16#73#, 16#73#, 16#61#, 16#67#, 16#65#, 16#20#, 16#64#, 16#69#, 
+16#67#, 16#65#, 16#73#, 16#74#
+[I] Digest results for vector     :  4
+    Expected bit count            : 16#00000000000000000000000000000070#
+    Obtained bit count            : 16#00000000000000000000000000000070#
+    Expected hash (String)        : "D232F14D74BCBC8185DB5A6AFBFC202AAE87E4D7A3C6BC0290FEFFC3DD3EFDAE8EF736DB55D8825B9616F21549C0EB63"
+    Obtained hash (String)        : "D232F14D74BCBC8185DB5A6AFBFC202AAE87E4D7A3C6BC0290FEFFC3DD3EFDAE8EF736DB55D8825B9616F21549C0EB63"
+[I] Counters match
+[I] Hashes match
+[I] Vector  4 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_BLAKE_384
+    Test vector index             :  5
+    Vector string                 : "abcdefghijklmnopqrstuvwxyz"
+    Vector length                 :  26
+    Vector array                  : 
+16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 
+16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 
+16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#
+[I] Digest results for vector     :  5
+    Expected bit count            : 16#000000000000000000000000000000D0#
+    Obtained bit count            : 16#000000000000000000000000000000D0#
+    Expected hash (String)        : "6DFAA1BFBDA172037B90232830D6DFFE4B181DE79FDDE6AD515313C1E04491D23BAD270DDA85151944ABBA390144E5F1"
+    Obtained hash (String)        : "6DFAA1BFBDA172037B90232830D6DFFE4B181DE79FDDE6AD515313C1E04491D23BAD270DDA85151944ABBA390144E5F1"
+[I] Counters match
+[I] Hashes match
+[I] Vector  5 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_BLAKE_384
+    Test vector index             :  6
+    Vector string                 : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    Vector length                 :  62
+    Vector array                  : 
+16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 
+16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 
+16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#61#, 16#62#, 16#63#, 16#64#, 
+16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 
+16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 
+16#79#, 16#7A#, 16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 
+16#38#, 16#39#
+[I] Digest results for vector     :  6
+    Expected bit count            : 16#000000000000000000000000000001F0#
+    Obtained bit count            : 16#000000000000000000000000000001F0#
+    Expected hash (String)        : "A8EE3028C6AF66E7DFFC73EE054205222A835EC9A754B32BE2DB946AF4B3D7D0B0CE198953DBB03A5AA0C7BED1622B69"
+    Obtained hash (String)        : "A8EE3028C6AF66E7DFFC73EE054205222A835EC9A754B32BE2DB946AF4B3D7D0B0CE198953DBB03A5AA0C7BED1622B69"
+[I] Counters match
+[I] Hashes match
+[I] Vector  6 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_BLAKE_384
+    Test vector index             :  7
+    Vector string                 : "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
+    Vector length                 :  80
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#
+[I] Digest results for vector     :  7
+    Expected bit count            : 16#00000000000000000000000000000280#
+    Obtained bit count            : 16#00000000000000000000000000000280#
+    Expected hash (String)        : "399250093F270A34FF22CBCC06C255D869D0D8F692E35CA79539721DCAE4869C9570BC3B050C6076C0E8651303EC4175"
+    Obtained hash (String)        : "399250093F270A34FF22CBCC06C255D869D0D8F692E35CA79539721DCAE4869C9570BC3B050C6076C0E8651303EC4175"
+[I] Counters match
+[I] Hashes match
+[I] Vector  7 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_BLAKE_384
+    Test vector index             :  8
+    Vector string                 : "The quick brown fox jumps over the lazy dog"
+    Vector length                 :  43
+    Vector array                  : 
+16#54#, 16#68#, 16#65#, 16#20#, 16#71#, 16#75#, 16#69#, 16#63#, 16#6B#, 16#20#, 
+16#62#, 16#72#, 16#6F#, 16#77#, 16#6E#, 16#20#, 16#66#, 16#6F#, 16#78#, 16#20#, 
+16#6A#, 16#75#, 16#6D#, 16#70#, 16#73#, 16#20#, 16#6F#, 16#76#, 16#65#, 16#72#, 
+16#20#, 16#74#, 16#68#, 16#65#, 16#20#, 16#6C#, 16#61#, 16#7A#, 16#79#, 16#20#, 
+16#64#, 16#6F#, 16#67#
+[I] Digest results for vector     :  8
+    Expected bit count            : 16#00000000000000000000000000000158#
+    Obtained bit count            : 16#00000000000000000000000000000158#
+    Expected hash (String)        : "67C9E8EF665D11B5B57A1D99C96ADFFB3034D8768C0827D1C6E60B54871E8673651767A2C6C43D0BA2A9BB2500227406"
+    Obtained hash (String)        : "67C9E8EF665D11B5B57A1D99C96ADFFB3034D8768C0827D1C6E60B54871E8673651767A2C6C43D0BA2A9BB2500227406"
+[I] Counters match
+[I] Hashes match
+[I] Vector  8 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_BLAKE_384
+    Test vector index             :  9
+    Vector string                 : "CryptAda By TCantos Software"
+    Vector length                 :  28
+    Vector array                  : 
+16#43#, 16#72#, 16#79#, 16#70#, 16#74#, 16#41#, 16#64#, 16#61#, 16#20#, 16#42#, 
+16#79#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 16#73#, 16#20#, 
+16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+[I] Digest results for vector     :  9
+    Expected bit count            : 16#000000000000000000000000000000E0#
+    Obtained bit count            : 16#000000000000000000000000000000E0#
+    Expected hash (String)        : "4F16F57D3CF599E51FD5B96A399D4172B51E879009A8AC3C132C07A42943A86700F823C603974AB3F32C9018C71322B9"
+    Obtained hash (String)        : "4F16F57D3CF599E51FD5B96A399D4172B51E879009A8AC3C132C07A42943A86700F823C603974AB3F32C9018C71322B9"
+[I] Counters match
+[I] Hashes match
+[I] Vector  9 test passed.
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 5
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:25:09
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 6
+Description     : Testing BLAKE-384 operation at counter offset and block boundary.
+Started         : 2017/06/01 - 18:25:09
+--------------------------------------------------------------------------------
+[I] Obtained hashes are checked against values obtained from https://asecuritysite.com/encryption/blake
+[I] Checking at counter offset boundary.
+    Number of vectors to test:  3
+[I] Vector   :  1
+Vector length:  111
+[I] Digest result for test vector:  1
+    Expected bit count            : 16#00000000000000000000000000000378#
+    Obtained bit count            : 16#00000000000000000000000000000378#
+    Expected hash (String)        : "B5ECCB7CF0755F23C4EF4B78D669A9A0881E247C5A2C717CB6ABA92ED4D6861953D69A5BFE2AF8D37D7937C054D33EFB"
+    Obtained hash (String)        : "B5ECCB7CF0755F23C4EF4B78D669A9A0881E247C5A2C717CB6ABA92ED4D6861953D69A5BFE2AF8D37D7937C054D33EFB"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 results match
+[I] Vector   :  2
+Vector length:  112
+[I] Digest result for test vector:  2
+    Expected bit count            : 16#00000000000000000000000000000380#
+    Obtained bit count            : 16#00000000000000000000000000000380#
+    Expected hash (String)        : "FF49246A853EA6BA476690695F91C176F3275EB2640F9403A1426C3D694369EC9A37CF4F9D9A0E161A7CD99CD826BB14"
+    Obtained hash (String)        : "FF49246A853EA6BA476690695F91C176F3275EB2640F9403A1426C3D694369EC9A37CF4F9D9A0E161A7CD99CD826BB14"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 results match
+[I] Vector   :  3
+Vector length:  113
+[I] Digest result for test vector:  3
+    Expected bit count            : 16#00000000000000000000000000000388#
+    Obtained bit count            : 16#00000000000000000000000000000388#
+    Expected hash (String)        : "460A4DB47CF1C9F7B343CA2D37C803B269D5F9F52C60477DC418B21C4A3FD7B0CDA4E73F89BC7CCC27BA5BF9FDC10F52"
+    Obtained hash (String)        : "460A4DB47CF1C9F7B343CA2D37C803B269D5F9F52C60477DC418B21C4A3FD7B0CDA4E73F89BC7CCC27BA5BF9FDC10F52"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 results match
+[I] Checking at block boundary.
+    Number of vectors to test:  3
+[I] Vector   :  1
+Vector length:  127
+[I] Digest result for test vector:  1
+    Expected bit count            : 16#000000000000000000000000000003F8#
+    Obtained bit count            : 16#000000000000000000000000000003F8#
+    Expected hash (String)        : "4EAD4FB676441DCA3E73E3D5027674CD06E4781807779A7E9E3AF5DDE7FBCF577FDB74499A8B370C91FE39C2B3ACD4FC"
+    Obtained hash (String)        : "4EAD4FB676441DCA3E73E3D5027674CD06E4781807779A7E9E3AF5DDE7FBCF577FDB74499A8B370C91FE39C2B3ACD4FC"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 results match
+[I] Vector   :  2
+Vector length:  128
+[I] Digest result for test vector:  2
+    Expected bit count            : 16#00000000000000000000000000000400#
+    Obtained bit count            : 16#00000000000000000000000000000400#
+    Expected hash (String)        : "787B569EC1FF86D46F298C25957E182047CA82BD50149DCDB4C53C070D10D62A07F15C73CA0B0CDACC8F3B4D1862D86C"
+    Obtained hash (String)        : "787B569EC1FF86D46F298C25957E182047CA82BD50149DCDB4C53C070D10D62A07F15C73CA0B0CDACC8F3B4D1862D86C"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 results match
+[I] Vector   :  3
+Vector length:  129
+[I] Digest result for test vector:  3
+    Expected bit count            : 16#00000000000000000000000000000408#
+    Obtained bit count            : 16#00000000000000000000000000000408#
+    Expected hash (String)        : "D3CE2D3E588B8BA2F7C38DC630835F2DCCDE62682662D7C378E7179AE5CE453A44AC0D9BACFA66F9BC891604C64D5F66"
+    Obtained hash (String)        : "D3CE2D3E588B8BA2F7C38DC630835F2DCCDE62682662D7C378E7179AE5CE453A44AC0D9BACFA66F9BC891604C64D5F66"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 results match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 6
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:25:09
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 7
+Description     : Another BLAKE-384 test vector: 1,000,000 repetitions of 'a'
+Started         : 2017/06/01 - 18:25:09
+--------------------------------------------------------------------------------
+[I] Performng 1,000 iteratios with a 1,000 bytes buffer
+    Expected bit count (Low, High): ( 8000000,  0)
+    Expected hash                 : "22CCCE05B0AC1CEDA1B0B0DC0021E6A3957779260CD2FAE8A21C3D5432CE204F1DF2D62A00D8F505CAE6E70E3BE18701"
+    Obtained bit count (Low, High): ( 8000000,  0)
+    Obtained hash                 : "22CCCE05B0AC1CEDA1B0B0DC0021E6A3957779260CD2FAE8A21C3D5432CE204F1DF2D62A00D8F505CAE6E70E3BE18701"
+[I] Counters match
+[I] Hashes match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 7
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:25:09
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.MD_BLAKE_384
+Finished                 : 2017/06/01 - 18:25:09
+================================================================================

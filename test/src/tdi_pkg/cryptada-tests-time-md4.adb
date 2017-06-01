@@ -23,7 +23,7 @@
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Time trial for CryptAda.Digests.Algorithms.MD4.
+--    Time trial for CryptAda.Digests.Message_Digests.MD4.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
@@ -36,7 +36,8 @@ with Ada.Exceptions;                      use Ada.Exceptions;
 with CryptAda.Tests.Utils;                use CryptAda.Tests.Utils;
 with CryptAda.Tests.Time.Digests;         use CryptAda.Tests.Time.Digests;
 
-with CryptAda.Digests.Algorithms.MD4;     use CryptAda.Digests.Algorithms.MD4;
+with CryptAda.Digests.Message_Digests;    use CryptAda.Digests.Message_Digests;
+with CryptAda.Digests.Message_Digests.MD4; use CryptAda.Digests.Message_Digests.MD4;
 
 package body CryptAda.Tests.Time.MD4 is
 
@@ -46,7 +47,7 @@ package body CryptAda.Tests.Time.MD4 is
 
    Driver_Name                   : constant String := "CryptAda.Tests.Time.MD4";
 
-   Driver_Description            : constant String := "Time trial for CryptAda.Digests.Algorithms.MD4 functionality.";
+   Driver_Description            : constant String := "Time trial for CryptAda.Digests.Message_Digests.MD4 functionality.";
 
    -----------------------------------------------------------------------------
    --[Test Cases Specs]---------------------------------------------------------
@@ -64,15 +65,17 @@ package body CryptAda.Tests.Time.MD4 is
 
    procedure Case_1
    is
-      D           : MD4_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant Message_Digest_Ptr := Get_Message_Digest_Ptr(MDH);
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(1, "MD4 hashing");
       Print_Information_Message("Hashing 1MB");
 
-      Digest_Start(D);
-      Digest_Time_Trial(D, 1, 1, Elapsed);
+      Digest_Start(MDP);
+      Digest_Time_Trial(MDH, 1, 1, Elapsed);
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(1);
    exception
       when X: others =>
@@ -88,15 +91,17 @@ package body CryptAda.Tests.Time.MD4 is
 
    procedure Case_2
    is
-      D           : MD4_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant Message_Digest_Ptr := Get_Message_Digest_Ptr(MDH);
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(2, "MD4 hashing");
       Print_Information_Message("Hashing 10MB");
 
-      Digest_Start(D);
-      Digest_Time_Trial(D, 10, 4, Elapsed);
+      Digest_Start(MDP);
+      Digest_Time_Trial(MDH, 10, 4, Elapsed);
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(2);
    exception
       when X: others =>

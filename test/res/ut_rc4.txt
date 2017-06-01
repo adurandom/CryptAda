@@ -1,18 +1,18 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.c (2017/04/04)
+Version: 0.2.a (2017/05/30)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.RC4
 Description              : Unit test driver for CryptAda.Ciphers.Symmetric.Stream.RC4 functionality.
-Started                  : 2017/04/18 - 20:19:08
+Started                  : 2017/06/01 - 18:26:15
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Running RC4_Cipher basic tests
-Started         : 2017/04/18 - 20:19:08
+Started         : 2017/06/01 - 18:26:15
 --------------------------------------------------------------------------------
 [I] Basic test for RC4_Cipher
     This test case will exercise Stream_Cipher dispatching operations
@@ -21,9 +21,6 @@ Started         : 2017/04/18 - 20:19:08
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
     CryptAda cipher algorithm id  : SC_RC4
     Cipher type                   : STREAM_CIPHER
-    SCAN name                     : "RC4"
-    ASN1 OID                      : ""
-    OpenPGP name                  : ""
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  1
@@ -41,7 +38,9 @@ Block data  :
 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
-[I] Raised CryptAda_Uninitialized_Cipher_Error
+[I] Caught CryptAda_Uninitialized_Cipher_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_UNINITIALIZED_CIPHER_ERROR'
+    - Message  : 'RC4 cipher is in Idle state'
 [I] Basic Test 2
     Trying Start_Cipher with an invalid key
     Must raise CryptAda_Invalid_Key_Error exception.
@@ -49,7 +48,9 @@ Block data  :
 [I] The key
 Null key
 [I] Calling to Start_Cipher
-[I] Raised CryptAda_Invalid_Key_Error
+[I] Caught CryptAda_Invalid_Key_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_KEY_ERROR'
+    - Message  : 'Invalid RC4 key'
 [I] Using key with excessive length
 [I] Maximum key length is:  256
 [I] The key
@@ -73,7 +74,9 @@ Null key
 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
 16#11#
 [I] Calling to Start_Cipher
-[I] Raised CryptAda_Invalid_Key_Error
+[I] Caught CryptAda_Invalid_Key_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_KEY_ERROR'
+    - Message  : 'Invalid RC4 key'
 [I] Basic Test 3
     Checking state after successful Start_Cipher for encryption
 [I] Key set to
@@ -85,9 +88,6 @@ Null key
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
     CryptAda cipher algorithm id  : SC_RC4
     Cipher type                   : STREAM_CIPHER
-    SCAN name                     : "RC4"
-    ASN1 OID                      : ""
-    OpenPGP name                  : ""
     Cipher state                  : ENCRYPTING
     Started                       : TRUE
     Minimum key length            :  1
@@ -111,7 +111,9 @@ Block data  :
 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
-[I] Raised CryptAda_Bad_Argument_Error
+[I] Caught CryptAda_Bad_Argument_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR'
+    - Message  : 'Input size must be equal to Output size'
 [I] Basic Test 5
     Encrypting
 [I] Buffer to encrypt
@@ -137,9 +139,6 @@ Block data  :
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
     CryptAda cipher algorithm id  : SC_RC4
     Cipher type                   : STREAM_CIPHER
-    SCAN name                     : "RC4"
-    ASN1 OID                      : ""
-    OpenPGP name                  : ""
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  1
@@ -153,9 +152,6 @@ Block data  :
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
     CryptAda cipher algorithm id  : SC_RC4
     Cipher type                   : STREAM_CIPHER
-    SCAN name                     : "RC4"
-    ASN1 OID                      : ""
-    OpenPGP name                  : ""
     Cipher state                  : DECRYPTING
     Started                       : TRUE
     Minimum key length            :  1
@@ -179,7 +175,9 @@ Block data  :
 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 
 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
-[I] Raised CryptAda_Bad_Argument_Error
+[I] Caught CryptAda_Bad_Argument_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR'
+    - Message  : 'Input size must be equal to Output size'
 [I] Basic Test 9
     Decrypting the block encrypted on basic test 5. Must be equal to original
     plaintext block
@@ -207,9 +205,6 @@ Block data  :
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
     CryptAda cipher algorithm id  : SC_RC4
     Cipher type                   : STREAM_CIPHER
-    SCAN name                     : "RC4"
-    ASN1 OID                      : ""
-    OpenPGP name                  : ""
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  1
@@ -220,13 +215,13 @@ Block data  :
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:19:08
+Finished        : 2017/06/01 - 18:26:15
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Testing RC4_Cipher non dispatching operations
-Started         : 2017/04/18 - 20:19:08
+Started         : 2017/06/01 - 18:26:15
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     Is_Valid_RC4_Key
@@ -515,13 +510,13 @@ Key length  256 is valid
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:19:08
+Finished        : 2017/06/01 - 18:26:15
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : RC4 standard test vectors
-Started         : 2017/04/18 - 20:19:08
+Started         : 2017/06/01 - 18:26:15
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from: RFC 6229
 [I] Key length 40-bits
@@ -1195,13 +1190,13 @@ Started         : 2017/04/18 - 20:19:08
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:19:09
+Finished        : 2017/06/01 - 18:26:15
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : RC4 Bulk test
-Started         : 2017/04/18 - 20:19:09
+Started         : 2017/06/01 - 18:26:15
 --------------------------------------------------------------------------------
 [I] Using key size:  5
 [I] Stream cipher bulk test
@@ -1212,9 +1207,6 @@ Started         : 2017/04/18 - 20:19:09
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
     CryptAda cipher algorithm id  : SC_RC4
     Cipher type                   : STREAM_CIPHER
-    SCAN name                     : "RC4"
-    ASN1 OID                      : ""
-    OpenPGP name                  : ""
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  1
@@ -1231,9 +1223,6 @@ Started         : 2017/04/18 - 20:19:09
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
     CryptAda cipher algorithm id  : SC_RC4
     Cipher type                   : STREAM_CIPHER
-    SCAN name                     : "RC4"
-    ASN1 OID                      : ""
-    OpenPGP name                  : ""
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  1
@@ -1250,9 +1239,6 @@ Started         : 2017/04/18 - 20:19:09
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
     CryptAda cipher algorithm id  : SC_RC4
     Cipher type                   : STREAM_CIPHER
-    SCAN name                     : "RC4"
-    ASN1 OID                      : ""
-    OpenPGP name                  : ""
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  1
@@ -1269,9 +1255,6 @@ Started         : 2017/04/18 - 20:19:09
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
     CryptAda cipher algorithm id  : SC_RC4
     Cipher type                   : STREAM_CIPHER
-    SCAN name                     : "RC4"
-    ASN1 OID                      : ""
-    OpenPGP name                  : ""
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  1
@@ -1288,9 +1271,6 @@ Started         : 2017/04/18 - 20:19:09
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
     CryptAda cipher algorithm id  : SC_RC4
     Cipher type                   : STREAM_CIPHER
-    SCAN name                     : "RC4"
-    ASN1 OID                      : ""
-    OpenPGP name                  : ""
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  1
@@ -1307,9 +1287,6 @@ Started         : 2017/04/18 - 20:19:09
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
     CryptAda cipher algorithm id  : SC_RC4
     Cipher type                   : STREAM_CIPHER
-    SCAN name                     : "RC4"
-    ASN1 OID                      : ""
-    OpenPGP name                  : ""
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  1
@@ -1326,9 +1303,6 @@ Started         : 2017/04/18 - 20:19:09
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.STREAM.RC4.RC4_CIPHER"
     CryptAda cipher algorithm id  : SC_RC4
     Cipher type                   : STREAM_CIPHER
-    SCAN name                     : "RC4"
-    ASN1 OID                      : ""
-    OpenPGP name                  : ""
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  1
@@ -1340,11 +1314,11 @@ Started         : 2017/04/18 - 20:19:09
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:19:09
+Finished        : 2017/06/01 - 18:26:15
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.RC4
-Finished                 : 2017/04/18 - 20:19:09
+Finished                 : 2017/06/01 - 18:26:15
 ================================================================================

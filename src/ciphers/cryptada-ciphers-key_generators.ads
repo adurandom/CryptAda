@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 29th, 2017
---    Current version   :  1.0
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Root package for CryptAda key generators.
@@ -29,7 +29,11 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170329 ADD   Initial implementation.
+--    2.0   20170524 ADD   Modified implementation to use an access value.
 --------------------------------------------------------------------------------
+
+with Object;
+with Object.Handle;
 
 with CryptAda.Ciphers.Keys;
 with CryptAda.Random.Generators;
@@ -44,37 +48,104 @@ package CryptAda.Ciphers.Key_Generators is
    -- Key_Generator type.
    -----------------------------------------------------------------------------
 
-   type Key_Generator is tagged limited private;
+   type Key_Generator (<>) is new Object.Entity with private;
+
+   --[Key_Generator_Ptr]--------------------------------------------------------
+   -- Wide class access type to Key_Generator objects.
+   -----------------------------------------------------------------------------
+
+   type Key_Generator_Ptr is access all Key_Generator'Class;
+
+   --[Random_Generator_Handle]--------------------------------------------------
+   -- Type for handling message digest objects.
+   -----------------------------------------------------------------------------
+
+   type Key_Generator_Handle is private;
 
    -----------------------------------------------------------------------------
    --[Subprograms]--------------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Start_Key_Generator]------------------------------------------------------
+   -----------------------------------------------------------------------------
+   --[Key_Generator_Handle Operations]------------------------------------------
+   -----------------------------------------------------------------------------
+
+   --[Get_Key_Generator_Handle]-------------------------------------------------
    -- Purpose:
-   -- Starts a Key_Generator object.
+   -- Creates a Key_Generator object and returns a handle for that object.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Generator            Key_Generator object to start.
-   -- PRNG                 Access to the Pseudo-random number generator to use 
-   --                      to generate the random bytes of keys. This subprogram
-   --                      expects a started and seeded Random_Generator.
+   -- With_RNG             Random_Generator_Handle to use to generate key random
+   --                      bytes. RNG must be started and seeded.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- N/A.
+   -- Key_Generator_Handle to handle the key generator.
    -----------------------------------------------------------------------------
    -- Exceptions:
-   -- CryptAda_Null_Argument_Error if PRNG is null.
+   -- CryptAda_Bad_Argument_Error if PRNG is not a valid Random_Generator_Handle
    -- CryptAda_Generator_Not_Started_Error if the random generator is not 
    --    started.
    -- CryptAda_Generator_Need_Seeding_Error if the random generator is not 
    --    seeded.
    -----------------------------------------------------------------------------
 
-   procedure   Start_Key_Generator(
-                  The_Generator  : in out Key_Generator;
-                  PRNG           : in     CryptAda.Random.Generators.Random_Generator_Ref);
+   function    Get_Key_Generator_Handle(
+                  With_RNG       : in     CryptAda.Random.Generators.Random_Generator_Handle)
+      return   Key_Generator_Handle;
 
+   --[Is_Valid_Handle]----------------------------------------------------------
+   -- Purpose:
+   -- Checks if a handle is valid.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Handle           Handle to check for validity.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Boolean value that indicates whether the handle is valid or not.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   function    Is_Valid_Handle(
+                  The_Handle     : in     Key_Generator_Handle)
+      return   Boolean;
+
+   --[Invalidate_Handle]--------------------------------------------------------
+   -- Purpose:
+   -- Invalidates a handle.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Handle           Handle to invalidate.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   procedure   Invalidate_Handle(
+                  The_Handle     : in out Key_Generator_Handle);
+
+   --[Get_Key_Generator_Ptr]----------------------------------------------------
+   -- Purpose:
+   -- Returns a Key_Generator_Ptr from a Key_Generator_Handle.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- From_Handle          Handle to get the Key_Generator_Ptr from.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Key_Generator_Ptr handled by From_Handle.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   function    Get_Key_Generator_Ptr(
+                  From_Handle    : in     Key_Generator_Handle)
+      return   Key_Generator_Ptr;
+                  
    --[Generate_Key]-------------------------------------------------------------
    -- Purpose:
    -- Generates a random key of the specified length.
@@ -93,29 +164,10 @@ package CryptAda.Ciphers.Key_Generators is
    -----------------------------------------------------------------------------
 
    procedure   Generate_Key(
-                  The_Generator  : in out Key_Generator;
+                  The_Generator  : access Key_Generator;
                   The_Key        : in out CryptAda.Ciphers.Keys.Key;
                   Key_Length     : in     Cipher_Key_Length);
 
-   --[Is_Started]---------------------------------------------------------------
-   -- Purpose:
-   -- Checks if a particular generator is started.
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- The_Generator        Key_Generator object.
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- Boolean value that indicates if The_Generator is started (True) or not
-   -- (False).
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- None.
-   -----------------------------------------------------------------------------
-
-   function    Is_Started(
-                  The_Generator  : in     Key_Generator)
-      return   Boolean;
-   
    -----------------------------------------------------------------------------
    --[Private Part]-------------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -130,8 +182,31 @@ private
    -- Full definition of the Key_Generator type.
    -----------------------------------------------------------------------------
 
-   type Key_Generator is tagged limited
+   type Key_Generator is new Object.Entity with
       record
-         PRNG                    : CryptAda.Random.Generators.Random_Generator_Ref;
-      end record;            
+         RH                      : CryptAda.Random.Generators.Random_Generator_Handle;
+      end record;
+
+   -----------------------------------------------------------------------------
+   --[Key_Generator_Handle]-----------------------------------------------------
+   -----------------------------------------------------------------------------
+
+   --[KG_Handles]---------------------------------------------------------------
+   -- Generic instantiation of the package Object.Handle for Key_Generator
+   -----------------------------------------------------------------------------
+
+   package KG_Handles is new Object.Handle(Key_Generator, Key_Generator_Ptr);
+
+   --[Key_Generator_Handle]-----------------------------------------------------
+   -- Full definition of Key_Generator_Handle type
+   -----------------------------------------------------------------------------
+
+   type Key_Generator_Handle is new KG_Handles.Handle with null record;
+
+   --[Ref]----------------------------------------------------------------------
+
+   function    Ref(
+                  Thing          : in     Key_Generator_Ptr)
+      return   Key_Generator_Handle;
+      
 end CryptAda.Ciphers.Key_Generators;

@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 29th, 2017
---    Current version   :  1.1
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the RC2 block cipher as described in RFC 2268
@@ -56,10 +56,8 @@
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170329 ADD   Initial implementation.
 --    1.1   20170403 ADD   Changed symmetric ciphers hierarchy.
+--    2.0   20170530 ADD   Changed types.
 --------------------------------------------------------------------------------
-
-with CryptAda.Pragmatics;
-with CryptAda.Ciphers.Keys;
 
 package CryptAda.Ciphers.Symmetric.Block.RC2 is
 
@@ -89,6 +87,12 @@ package CryptAda.Ciphers.Symmetric.Block.RC2 is
    
    type RC2_Cipher is new Block_Cipher with private;
 
+   --[RC2_Cipher_Ptr]-----------------------------------------------------------
+   -- Access type to RC2 objects..
+   -----------------------------------------------------------------------------
+   
+   type RC2_Cipher_Ptr is access all RC2_Cipher'Class;
+   
    --[RC2_Block]----------------------------------------------------------------
    -- Constrained subtype for RC2 blocks.
    -----------------------------------------------------------------------------
@@ -106,32 +110,82 @@ package CryptAda.Ciphers.Symmetric.Block.RC2 is
    -----------------------------------------------------------------------------
    
    subtype RC2_Effective_Key_Bits is Positive range 8 .. 1_024;
+
+   -----------------------------------------------------------------------------
+   --[Getting a handle]---------------------------------------------------------
+   -----------------------------------------------------------------------------
+   
+   --[Get_Symmetric_Cipher_Handle]----------------------------------------------
+   -- Purpose:
+   -- Creates a Symmetric_Cipher object and returns a handle for that object.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- None.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Symmetric_Cipher_Handle value that handles the reference to the newly 
+   -- created Symmetric_Cipher object.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CrtyptAda_Storage_Error if an error is raised during object allocation.
+   -----------------------------------------------------------------------------
+
+   function    Get_Symmetric_Cipher_Handle
+      return   Symmetric_Cipher_Handle;
    
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Encrypt/Decrypt Interface]------------------------------------------------
-
    --[Start_Cipher]-------------------------------------------------------------
 
+   overriding
    procedure   Start_Cipher(
-                  The_Cipher     : in out RC2_Cipher;
+                  The_Cipher     : access RC2_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     CryptAda.Ciphers.Keys.Key);
 
+   --[Start_Cipher]-------------------------------------------------------------
+   -- The Parameters list, in the case of RC2 admits one additional optional 
+   -- parameter which is the Effective_Key_Bits in the key. Thus, the syntax of 
+   -- the parameter list is:
+   --
+   --
+   -- (
+   --    Operation => <cipher_operation>,
+   --    Key => "<hex_key>"
+   --    [, Effective_Key_Bits => <effective_key_bits>]
+   -- )
+   -- <cipher_operation>   Mandatory, Identifier of the operation to perform 
+   --                      (either Encrypt or Decrypt)
+   -- <hex_key>            Mandatory, string item with the key to use in 
+   --                      hexadecimal notation.
+   -- <effective_key_bits> Optional. Effective bits in Key. Its value must be
+   --                      in the range 8 .. 8 * Key'Length, if less than 8
+   --                      8 is assummed, if greater than 8 * Key'Length, 
+   --                      8 * Key'Length is assumed. If omitted the value 8 *
+   --                      Key'Length will be used.
+   -----------------------------------------------------------------------------
+
+   overriding
+   procedure   Start_Cipher(
+                  The_Cipher     : access RC2_Cipher;
+                  Parameters     : in     CryptAda.Lists.List);
+   
    --[Do_Process]---------------------------------------------------------------
 
+   overriding
    procedure   Do_Process(
-                  With_Cipher    : in out RC2_Cipher;
+                  With_Cipher    : access RC2_Cipher;
                   Input          : in     CryptAda.Pragmatics.Byte_Array;
                   Output         :    out CryptAda.Pragmatics.Byte_Array);
 
    --[Stop_Cipher]--------------------------------------------------------------
-      
-   procedure   Stop_Cipher(
-                  The_Cipher     : in out RC2_Cipher);
 
+   overriding
+   procedure   Stop_Cipher(
+                  The_Cipher     : access RC2_Cipher);
+         
    -----------------------------------------------------------------------------
    --[Non-dispatching operations]-----------------------------------------------
    -----------------------------------------------------------------------------
@@ -158,7 +212,7 @@ package CryptAda.Ciphers.Symmetric.Block.RC2 is
    -----------------------------------------------------------------------------
 
    procedure   Start_Cipher(
-                  The_Cipher     : in out RC2_Cipher'Class;
+                  The_Cipher     : access RC2_Cipher'Class;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     CryptAda.Ciphers.Keys.Key;
                   Effective_Bits : in     RC2_Effective_Key_Bits);
@@ -179,7 +233,7 @@ package CryptAda.Ciphers.Symmetric.Block.RC2 is
    -----------------------------------------------------------------------------
 
    function    Get_Effective_Key_Bits(
-                  Of_Cipher      : in     RC2_Cipher'Class)
+                  Of_Cipher      : access RC2_Cipher'Class)
       return   RC2_Effective_Key_Bits;
                   
    --[Is_Valid_RC2_Key]---------------------------------------------------------
@@ -256,9 +310,11 @@ private
    --[Subprogram specifications]------------------------------------------------
    -----------------------------------------------------------------------------
 
+   overriding
    procedure   Initialize(
                   Object         : in out RC2_Cipher);
 
+   overriding
    procedure   Finalize(
                   Object         : in out RC2_Cipher);
 

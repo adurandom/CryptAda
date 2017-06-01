@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 28th, 2017
---    Current version   :  1.2
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the DES2X block cipher.
@@ -38,10 +38,9 @@
 --    1.0   20170328 ADD   Initial implementation.
 --    1.1   20170329 ADD   Removed key generation subprogram.
 --    1.2   20170403 ADD   Changed symmetric ciphers hierarchy.
+--    2.0   20170529 ADD   Changed types.
 --------------------------------------------------------------------------------
 
-with CryptAda.Pragmatics;
-with CryptAda.Ciphers.Keys;
 with CryptAda.Ciphers.Symmetric.Block.DES;
 
 package CryptAda.Ciphers.Symmetric.Block.DES2X is
@@ -55,7 +54,7 @@ package CryptAda.Ciphers.Symmetric.Block.DES2X is
    -----------------------------------------------------------------------------
 
    DES2X_Block_Size              : constant Cipher_Block_Size :=  CryptAda.Ciphers.Symmetric.Block.DES.DES_Block_Size;
-
+   
    --[DES2X_Key_Length]---------------------------------------------------------
    -- Size in bytes of DESX keys. The size is 32 bytes
    -- - 8 Bytes for DES Key
@@ -76,41 +75,77 @@ package CryptAda.Ciphers.Symmetric.Block.DES2X is
    
    type DES2X_Cipher is new Block_Cipher with private;
 
+   --[DES2X_Cipher_Ptr]---------------------------------------------------------
+   -- Access type to DES2X block cipher objects.
+   -----------------------------------------------------------------------------
+   
+   type DES2X_Cipher_Ptr is access all DES2X_Cipher'Class;
+   
    --[DES2X_Block]--------------------------------------------------------------
    -- Constrained subtype for DES2X blocks.
    -----------------------------------------------------------------------------
    
    subtype DES2X_Block is Cipher_Block(1 .. DES2X_Block_Size);
+
+   -----------------------------------------------------------------------------
+   --[Getting a handle]---------------------------------------------------------
+   -----------------------------------------------------------------------------
+   
+   --[Get_Symmetric_Cipher_Handle]----------------------------------------------
+   -- Purpose:
+   -- Creates a Symmetric_Cipher object and returns a handle for that object.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- None.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Symmetric_Cipher_Handle value that handles the reference to the newly 
+   -- created Symmetric_Cipher object.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CrtyptAda_Storage_Error if an error is raised during object allocation.
+   -----------------------------------------------------------------------------
+
+   function    Get_Symmetric_Cipher_Handle
+      return   Symmetric_Cipher_Handle;
    
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Encrypt/Decrypt Interface]------------------------------------------------
-
    --[Start_Cipher]-------------------------------------------------------------
 
+   overriding
    procedure   Start_Cipher(
-                  The_Cipher     : in out DES2X_Cipher;
+                  The_Cipher     : access DES2X_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     CryptAda.Ciphers.Keys.Key);
 
+   --[Start_Cipher]-------------------------------------------------------------
+
+   overriding
+   procedure   Start_Cipher(
+                  The_Cipher     : access DES2X_Cipher;
+                  Parameters     : in     CryptAda.Lists.List);
+   
    --[Do_Process]---------------------------------------------------------------
 
+   overriding
    procedure   Do_Process(
-                  With_Cipher    : in out DES2X_Cipher;
+                  With_Cipher    : access DES2X_Cipher;
                   Input          : in     CryptAda.Pragmatics.Byte_Array;
                   Output         :    out CryptAda.Pragmatics.Byte_Array);
 
    --[Stop_Cipher]--------------------------------------------------------------
-      
-   procedure   Stop_Cipher(
-                  The_Cipher     : in out DES2X_Cipher);
 
+   overriding
+   procedure   Stop_Cipher(
+                  The_Cipher     : access DES2X_Cipher);
+   
    -----------------------------------------------------------------------------
    --[Non-dispatching operations]-----------------------------------------------
    -----------------------------------------------------------------------------
-
+   
    --[Is_Valid_DES2X_Key]-------------------------------------------------------
    -- Purpose:
    -- Checks if a given key is a valid DES2X key.
@@ -168,7 +203,7 @@ private
 
    type DES2X_Cipher is new Block_Cipher with
       record
-         Sub_Cipher              : CryptAda.Ciphers.Symmetric.Block.DES.DES_Cipher;
+         Sub_Cipher              : Symmetric_Cipher_Handle;
          Xor_K1                  : DES2X_Block := (others => 0);
          Xor_K2                  : DES2X_Block := (others => 0);
          Xor_K3                  : DES2X_Block := (others => 0);
@@ -178,9 +213,11 @@ private
    --[Subprogram specifications]------------------------------------------------
    -----------------------------------------------------------------------------
 
+   overriding
    procedure   Initialize(
                   Object         : in out DES2X_Cipher);
 
+   overriding
    procedure   Finalize(
                   Object         : in out DES2X_Cipher);
 

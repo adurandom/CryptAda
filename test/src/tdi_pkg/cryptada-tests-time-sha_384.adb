@@ -16,14 +16,14 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-tests-time-sha_384.adb
+--    Filename          :  cryptada-tests-time-SHA_384.adb
 --    File kind         :  Ada package body
 --    Author            :  A. Duran
 --    Creation date     :  March 1st, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Time trial for CryptAda.Digests.Algorithms.SHA_384.
+--    Time trial for CryptAda.Digests.Message_Digests.SHA_384.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
@@ -36,8 +36,8 @@ with Ada.Exceptions;                      use Ada.Exceptions;
 with CryptAda.Tests.Utils;                use CryptAda.Tests.Utils;
 with CryptAda.Tests.Time.Digests;         use CryptAda.Tests.Time.Digests;
 
-
-with CryptAda.Digests.Algorithms.SHA_384; use CryptAda.Digests.Algorithms.SHA_384;
+with CryptAda.Digests.Message_Digests;    use CryptAda.Digests.Message_Digests;
+with CryptAda.Digests.Message_Digests.SHA_384; use CryptAda.Digests.Message_Digests.SHA_384;
 
 package body CryptAda.Tests.Time.SHA_384 is
 
@@ -47,7 +47,7 @@ package body CryptAda.Tests.Time.SHA_384 is
 
    Driver_Name                   : constant String := "CryptAda.Tests.Time.SHA_384";
 
-   Driver_Description            : constant String := "Time trial for CryptAda.Digests.Algorithms.SHA_384 functionality.";
+   Driver_Description            : constant String := "Time trial for CryptAda.Digests.Message_Digests.SHA_384 functionality.";
 
    -----------------------------------------------------------------------------
    --[Test Cases Specs]---------------------------------------------------------
@@ -65,15 +65,17 @@ package body CryptAda.Tests.Time.SHA_384 is
 
    procedure Case_1
    is
-      D           : SHA_384_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant Message_Digest_Ptr := Get_Message_Digest_Ptr(MDH);
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(1, "SHA_384 hashing");
       Print_Information_Message("Hashing 1MB");
 
-      Digest_Start(D);
-      Digest_Time_Trial(D, 1, 1, Elapsed);
+      Digest_Start(MDP);
+      Digest_Time_Trial(MDH, 1, 1, Elapsed);
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(1);
    exception
       when X: others =>
@@ -89,15 +91,17 @@ package body CryptAda.Tests.Time.SHA_384 is
 
    procedure Case_2
    is
-      D           : SHA_384_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant Message_Digest_Ptr := Get_Message_Digest_Ptr(MDH);
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(2, "SHA_384 hashing");
       Print_Information_Message("Hashing 10MB");
 
-      Digest_Start(D);
-      Digest_Time_Trial(D, 10, 4, Elapsed);
+      Digest_Start(MDP);
+      Digest_Time_Trial(MDH, 10, 4, Elapsed);
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(2);
    exception
       when X: others =>

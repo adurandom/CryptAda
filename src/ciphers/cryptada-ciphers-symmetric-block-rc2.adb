@@ -20,7 +20,7 @@
 --    File kind         :  Ada package body
 --    Author            :  A. Duran
 --    Creation date     :  April 2nd, 2017
---    Current version   :  1.1
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the RC2 block cipher.
@@ -30,9 +30,14 @@
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170402 ADD   Initial implementation.
 --    1.1   20170403 ADD   Changed symmetric ciphers hierarchy.
+--    2.0   20170530 ADD   Changed types.
 --------------------------------------------------------------------------------
 
+with Ada.Exceptions;                      use Ada.Exceptions;
+
 with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
+with CryptAda.Lists;                      use CryptAda.Lists;
+with CryptAda.Lists.Integer_Item;
 with CryptAda.Names;                      use CryptAda.Names;
 with CryptAda.Exceptions;                 use CryptAda.Exceptions;
 with CryptAda.Ciphers.Keys;               use CryptAda.Ciphers.Keys;
@@ -43,10 +48,19 @@ package body CryptAda.Ciphers.Symmetric.Block.RC2 is
    --[Generic Instantiation]----------------------------------------------------
    -----------------------------------------------------------------------------
    
+   package EKB_Item is new CryptAda.Lists.Integer_Item(RC2_Effective_Key_Bits);
+   use EKB_Item;
+   
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
 
+   --[Effective_Key_Bits_Name]--------------------------------------------------
+   -- Name of the Effective_Key_Bits parameter.
+   -----------------------------------------------------------------------------
+   
+   Effective_Key_Bits_Name    : aliased constant String := "Effective_Key_Bits";
+   
    --[RC2_Word_Size]------------------------------------------------------------
    -- Size of a RC2 word.
    -----------------------------------------------------------------------------
@@ -101,7 +115,19 @@ package body CryptAda.Ciphers.Symmetric.Block.RC2 is
    -----------------------------------------------------------------------------
    --[Body Declared Subprogram Specs]-------------------------------------------
    -----------------------------------------------------------------------------
-        
+
+   --[Initialize_Object]--------------------------------------------------------
+
+   procedure   Initialize_Object(
+                  Object         : access RC2_Cipher);
+   pragma Inline(Initialize_Object);
+
+   --[Get_Effective_Key_Bits]---------------------------------------------------
+   
+   function    Get_Effective_Key_Bits(
+                  Parameters     : in     List)
+      return   RC2_Effective_Key_Bits;
+   
    --[Pack_Block]---------------------------------------------------------------
 
    function    Pack_Block(
@@ -204,6 +230,39 @@ package body CryptAda.Ciphers.Symmetric.Block.RC2 is
    -----------------------------------------------------------------------------
    --[Body Declared Subprogram Bodies]------------------------------------------
    -----------------------------------------------------------------------------
+
+   --[Initialize_Object]--------------------------------------------------------
+
+   procedure   Initialize_Object(
+                  Object         : access RC2_Cipher)
+   is
+   begin
+      -- Set to initial value any attribute which is modified in this package
+
+      Object.all.State        := Idle;
+      Object.all.Effective_KB := RC2_Effective_Key_Bits'First;
+      Object.all.Expanded_Key := (others => 16#0000#);
+   end Initialize_Object;
+
+   --[Get_Effective_Key_Bits]---------------------------------------------------
+   
+   function    Get_Effective_Key_Bits(
+                  Parameters     : in     List)
+      return   RC2_Effective_Key_Bits
+   is
+   begin
+      return Get_Value(Parameters, Effective_Key_Bits_Name);
+      
+   exception
+      when X: others =>
+         Raise_Exception(
+            CryptAda_Bad_Argument_Error'Identity,
+            "Caught exception: '" &
+               Exception_Name(X) &
+               "', message: '" &
+               Exception_Message(X) &
+               "', when obtaining RC2 Effective_Key_Bits parameter");
+   end Get_Effective_Key_Bits;
    
    --[Pack_Block]---------------------------------------------------------------
 
@@ -504,150 +563,220 @@ package body CryptAda.Ciphers.Symmetric.Block.RC2 is
       
       OB := Unpack_Block(PB);
    end Decrypt_Block;
-   
+
    -----------------------------------------------------------------------------
-   --[Spec declared subprogram bodies]------------------------------------------
+   --[Getting a handle]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Ada.Finalization interface]-----------------------------------------------
+   --[Get_Symmetric_Cipher_Handle]----------------------------------------------
+
+   function    Get_Symmetric_Cipher_Handle
+      return   Symmetric_Cipher_Handle
+   is
+      P           : RC2_Cipher_Ptr;
+   begin
+      P := new RC2_Cipher'(Block_Cipher with
+                                    Id             => SC_RC2,
+                                    Effective_KB   => RC2_Effective_Key_Bits'First,
+                                    Expanded_Key   => (others => 16#0000#));
+                                 
+      P.all.Ciph_Type   := CryptAda.Ciphers.Block_Cipher;
+      P.all.Key_Info    := RC2_Key_Info;
+      P.all.State       := Idle;
+      P.all.Block_Size  := RC2_Block_Size;
+
+      return Ref(Symmetric_Cipher_Ptr(P));
+   exception
+      when X: others =>
+         Raise_Exception(
+            CryptAda_Storage_Error'Identity,
+            "Caught exception: '" &
+               Exception_Name(X) &
+               "' with message: '" &
+               Exception_Message(X) &
+               "', when allocating RC2_Cipher object");
+   end Get_Symmetric_Cipher_Handle;
+
+   -----------------------------------------------------------------------------
+   --[Ada.Finalization Operations]----------------------------------------------
+   -----------------------------------------------------------------------------
 
    --[Initialize]---------------------------------------------------------------
 
+   overriding
    procedure   Initialize(
                   Object         : in out RC2_Cipher)
    is
    begin
-      Object.Cipher_Id     := SC_RC2;
       Object.Ciph_Type     := CryptAda.Ciphers.Block_Cipher;
       Object.Key_Info      := RC2_Key_Info;
       Object.State         := Idle;
       Object.Block_Size    := RC2_Block_Size;
       Object.Effective_KB  := RC2_Effective_Key_Bits'First;
-      Object.Expanded_Key  := (others => 0);
+      Object.Expanded_Key  := (others => 16#0000#);
    end Initialize;
 
    --[Finalize]-----------------------------------------------------------------
 
+   overriding
    procedure   Finalize(
                   Object         : in out RC2_Cipher)
    is
    begin
       Object.State         := Idle;
       Object.Effective_KB  := RC2_Effective_Key_Bits'First;
-      Object.Expanded_Key  := (others => 0);
+      Object.Expanded_Key  := (others => 16#0000#);
    end Finalize;
-   
-   --[Dispatching Operations]---------------------------------------------------
 
+   -----------------------------------------------------------------------------
+   --[Dispatching operations]---------------------------------------------------
+   -----------------------------------------------------------------------------
+   
    --[Start_Cipher]-------------------------------------------------------------
 
+   overriding
    procedure   Start_Cipher(
-                  The_Cipher     : in out RC2_Cipher;
+                  The_Cipher     : access RC2_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     Key)
    is
-      KL             : Positive;
    begin
-
       -- Veriify that key is a valid RC2 key.
       
       if not Is_Valid_RC2_Key(With_Key) then
-         raise CryptAda_Invalid_Key_Error;         
+         Raise_Exception(
+            CryptAda_Invalid_Key_Error'Identity,
+            "Invalid RC2 key");      
+      else
+         Start_Cipher(The_Cipher, For_Operation, With_Key, 8 * Get_Key_Length(With_Key));
       end if;
-
-      -- Start cipher.
-      
-      KL := Get_Key_Length(With_Key);      
-      Start_Cipher(The_Cipher, For_Operation, With_Key, 8 * KL);
    end Start_Cipher;
 
+   --[Start_Cipher]-------------------------------------------------------------
+
+   overriding
+   procedure   Start_Cipher(
+                  The_Cipher     : access RC2_Cipher;
+                  Parameters     : in     List)
+   is
+      O              : Cipher_Operation;
+      K              : Key;
+      EKB            : RC2_Effective_Key_Bits;
+      KL             : Cipher_Key_Length;
+   begin
+      Get_Parameters(Parameters, O, K);
+      
+      if not Is_Valid_RC2_Key(K) then
+         Raise_Exception(
+            CryptAda_Invalid_Key_Error'Identity,
+            "Invalid RC2 key");      
+      else
+         KL := Get_Key_Length(K);
+         
+         if Contains_Item(Parameters, Effective_Key_Bits_Name) then
+            EKB := Get_Effective_Key_Bits(Parameters);
+         else
+            EKB := 8 * KL;
+         end if;
+         
+         Start_Cipher(The_Cipher, O, K, EKB);
+      end if;
+   end Start_Cipher;
+   
    --[Do_Process]---------------------------------------------------------------
 
+   overriding
    procedure   Do_Process(
-                  With_Cipher    : in out RC2_Cipher;
+                  With_Cipher    : access RC2_Cipher;
                   Input          : in     Byte_Array;
                   Output         :    out Byte_Array)
    is
    begin
       -- Check state.
       
-      if With_Cipher.State = Idle then
-         raise CryptAda_Uninitialized_Cipher_Error;
+      if With_Cipher.all.State = Idle then
+         Raise_Exception(
+            CryptAda_Uninitialized_Cipher_Error'Identity,
+            "RC2 cipher is in Idle state");      
       end if;
 
       -- Check blocks.
       
       if Input'Length /= RC2_Block_Size or
          Output'Length /= RC2_Block_Size then
-         raise CryptAda_Invalid_Block_Length_Error;
+         Raise_Exception(
+            CryptAda_Invalid_Block_Length_Error'Identity,
+            "Invalid block length");               
       end if;
 
       -- Process block.
       
-      if With_Cipher.State = Encrypting then
-         Encrypt_Block(With_Cipher.Expanded_Key, Input, Output);
+      if With_Cipher.all.State = Encrypting then
+         Encrypt_Block(With_Cipher.all.Expanded_Key, Input, Output);
       else
-         Decrypt_Block(With_Cipher.Expanded_Key, Input, Output);
+         Decrypt_Block(With_Cipher.all.Expanded_Key, Input, Output);
       end if;
    end Do_Process;
    
    --[Stop_Cipher]--------------------------------------------------------------
-      
+
+   overriding   
    procedure   Stop_Cipher(
-                  The_Cipher     : in out RC2_Cipher)
+                  The_Cipher     : access RC2_Cipher)
    is
    begin
-      if The_Cipher.State /= Idle then
-         The_Cipher.State        := Idle;
-         The_Cipher.Expanded_Key := (others => 0);
-         The_Cipher.Effective_KB := RC2_Effective_Key_Bits'First;
-      end if;
+      Initialize_Object(The_Cipher);
    end Stop_Cipher;
    
-   --[Other public subprograms]-------------------------------------------------
+   -----------------------------------------------------------------------------
+   --[Non-Dispatching operations]-----------------------------------------------
+   -----------------------------------------------------------------------------
 
    --[Start_Cipher]-------------------------------------------------------------
 
    procedure   Start_Cipher(
-                  The_Cipher     : in out RC2_Cipher'Class;
+                  The_Cipher     : access RC2_Cipher'Class;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     Key;
                   Effective_Bits : in     RC2_Effective_Key_Bits)
    is
    begin
-
       -- Veriify that key is a valid RC2 key.
       
       if not Is_Valid_RC2_Key(With_Key) then
-         raise CryptAda_Invalid_Key_Error;         
+         Raise_Exception(
+            CryptAda_Invalid_Key_Error'Identity,
+            "Invalid RC2 key");      
       end if;
 
       -- Expand Key.
       
-      The_Cipher.Expanded_Key := Expand_Key(Get_Key_Bytes(With_Key), Effective_Bits);
+      The_Cipher.all.Expanded_Key := Expand_Key(Get_Key_Bytes(With_Key), Effective_Bits);
 
       -- Set cipher attributes.
       
-      The_Cipher.Effective_KB := Effective_Bits;
+      The_Cipher.all.Effective_KB := Effective_Bits;
       
       if For_Operation = Encrypt then
-         The_Cipher.State  := Encrypting;
+         The_Cipher.all.State := Encrypting;
       else
-         The_Cipher.State  := Decrypting;
+         The_Cipher.all.State := Decrypting;
       end if;      
    end Start_Cipher;
       
    --[Get_Effective_Key_Bits]---------------------------------------------------
 
    function    Get_Effective_Key_Bits(
-                  Of_Cipher      : in     RC2_Cipher'Class)
+                  Of_Cipher      : access RC2_Cipher'Class)
       return   RC2_Effective_Key_Bits
    is
    begin
-      if Of_Cipher.State = Idle then
-         raise CryptAda_Uninitialized_Cipher_Error;
+      if Of_Cipher.all.State = Idle then
+         Raise_Exception(
+            CryptAda_Uninitialized_Cipher_Error'Identity,
+            "RC2 cipher is in Idle state");      
       else
-         return Of_Cipher.Effective_KB;
+         return Of_Cipher.all.Effective_KB;
       end if;
    end Get_Effective_Key_Bits;
 

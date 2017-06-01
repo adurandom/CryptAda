@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 28th, 2017
---    Current version   :  1.2
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the DES-X block cipher.
@@ -53,11 +53,9 @@
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170328 ADD   Initial implementation.
 --    1.1   20170329 ADD   Removed key generation subprogram.
---    1.2   20170403 ADD   Changed symmetric ciphers hierarchy.
+--    2.0   20170529 ADD   Changed types.
 --------------------------------------------------------------------------------
 
-with CryptAda.Pragmatics;
-with CryptAda.Ciphers.Keys;
 with CryptAda.Ciphers.Symmetric.Block.DES;
 
 package CryptAda.Ciphers.Symmetric.Block.DESX is
@@ -91,11 +89,39 @@ package CryptAda.Ciphers.Symmetric.Block.DESX is
    
    type DESX_Cipher is new Block_Cipher with private;
 
+   --[DESX_Cipher_Ptr]----------------------------------------------------------
+   -- Access type to DESX block cipher objects.
+   -----------------------------------------------------------------------------
+   
+   type DESX_Cipher_Ptr is access all DESX_Cipher'Class;
+   
    --[DESX_Block]---------------------------------------------------------------
    -- Constrained subtype for DESX blocks.
    -----------------------------------------------------------------------------
    
    subtype DESX_Block is Cipher_Block(1 .. DESX_Block_Size);
+
+   -----------------------------------------------------------------------------
+   --[Getting a handle]---------------------------------------------------------
+   -----------------------------------------------------------------------------
+   
+   --[Get_Symmetric_Cipher_Handle]----------------------------------------------
+   -- Purpose:
+   -- Creates a Symmetric_Cipher object and returns a handle for that object.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- None.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Symmetric_Cipher_Handle value that handles the reference to the newly 
+   -- created Symmetric_Cipher object.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CrtyptAda_Storage_Error if an error is raised during object allocation.
+   -----------------------------------------------------------------------------
+
+   function    Get_Symmetric_Cipher_Handle
+      return   Symmetric_Cipher_Handle;
    
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
@@ -103,23 +129,33 @@ package CryptAda.Ciphers.Symmetric.Block.DESX is
 
    --[Start_Cipher]-------------------------------------------------------------
 
+   overriding
    procedure   Start_Cipher(
-                  The_Cipher     : in out DESX_Cipher;
+                  The_Cipher     : access DESX_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     CryptAda.Ciphers.Keys.Key);
 
+   --[Start_Cipher]-------------------------------------------------------------
+
+   overriding
+   procedure   Start_Cipher(
+                  The_Cipher     : access DESX_Cipher;
+                  Parameters     : in     CryptAda.Lists.List);
+   
    --[Do_Process]---------------------------------------------------------------
 
+   overriding
    procedure   Do_Process(
-                  With_Cipher    : in out DESX_Cipher;
+                  With_Cipher    : access DESX_Cipher;
                   Input          : in     CryptAda.Pragmatics.Byte_Array;
                   Output         :    out CryptAda.Pragmatics.Byte_Array);
 
    --[Stop_Cipher]--------------------------------------------------------------
-      
-   procedure   Stop_Cipher(
-                  The_Cipher     : in out DESX_Cipher);
 
+   overriding
+   procedure   Stop_Cipher(
+                  The_Cipher     : access DESX_Cipher);
+   
    -----------------------------------------------------------------------------
    --[Non-dispatching operations]-----------------------------------------------
    -----------------------------------------------------------------------------
@@ -173,14 +209,15 @@ private
    -- Full definition of the DESX_Cipher tagged type. It extends the
    -- Block_Cipher with the followitng fields:
    --
-   -- Sub_Cipher        DES_Cipher.
+   -- Sub_Cipher        Symmetric_Cipher_Handle that handles the DES cipher
+   --                   used for encryption/decryption.
    -- Xor_K1            Key for xoring input block before encryption.
    -- Xor_K2            Key for xoring output block after encryption.
    -----------------------------------------------------------------------------
 
    type DESX_Cipher is new Block_Cipher with
       record
-         Sub_Cipher              : CryptAda.Ciphers.Symmetric.Block.DES.DES_Cipher;
+         Sub_Cipher              : Symmetric_Cipher_Handle;
          Xor_K1                  : DESX_Block := (others => 0);
          Xor_K2                  : DESX_Block := (others => 0);
       end record;
@@ -189,9 +226,11 @@ private
    --[Subprogram specifications]------------------------------------------------
    -----------------------------------------------------------------------------
 
+   overriding
    procedure   Initialize(
                   Object         : in out DESX_Cipher);
 
+   overriding
    procedure   Finalize(
                   Object         : in out DESX_Cipher);
 

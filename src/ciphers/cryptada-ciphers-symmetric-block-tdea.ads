@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 25th, 2017
---    Current version   :  1.2
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the Triple Data Encryption Algorithm (Triple DES EDE) block 
@@ -55,10 +55,9 @@
 --    1.0   20170325 ADD   Initial implementation.
 --    1.1   20170330 ADD   Removed key generation subprogram.
 --    1.2   20170403 ADD   Changed symmetric ciphers hierarchy.
+--    2.0   20170529 ADD   Changed types.
 --------------------------------------------------------------------------------
 
-with CryptAda.Pragmatics;
-with CryptAda.Ciphers.Keys;
 with CryptAda.Ciphers.Symmetric.Block.DES;
 
 package CryptAda.Ciphers.Symmetric.Block.TDEA is
@@ -108,6 +107,12 @@ package CryptAda.Ciphers.Symmetric.Block.TDEA is
    
    type TDEA_Cipher is new Block_Cipher with private;
 
+   --[TDEA_Cipher_Ptr]----------------------------------------------------------
+   -- Access type to TDEA block cipher objects.
+   -----------------------------------------------------------------------------
+   
+   type TDEA_Cipher_Ptr is access all TDEA_Cipher'Class;
+   
    --[TDEA_Block]---------------------------------------------------------------
    -- Constrained subtype for DES blocks.
    -----------------------------------------------------------------------------
@@ -137,30 +142,60 @@ package CryptAda.Ciphers.Symmetric.Block.TDEA is
       );
 
    -----------------------------------------------------------------------------
+   --[Getting a handle]---------------------------------------------------------
+   -----------------------------------------------------------------------------
+   
+   --[Get_Symmetric_Cipher_Handle]----------------------------------------------
+   -- Purpose:
+   -- Creates a Symmetric_Cipher object and returns a handle for that object.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- None.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Symmetric_Cipher_Handle value that handles the reference to the newly 
+   -- created Symmetric_Cipher object.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CrtyptAda_Storage_Error if an error is raised during object allocation.
+   -----------------------------------------------------------------------------
+
+   function    Get_Symmetric_Cipher_Handle
+      return   Symmetric_Cipher_Handle;
+   
+   -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Encrypt/Decrypt Interface]------------------------------------------------
-
    --[Start_Cipher]-------------------------------------------------------------
 
+   overriding
    procedure   Start_Cipher(
-                  The_Cipher     : in out TDEA_Cipher;
+                  The_Cipher     : access TDEA_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     CryptAda.Ciphers.Keys.Key);
 
+   --[Start_Cipher]-------------------------------------------------------------
+
+   overriding
+   procedure   Start_Cipher(
+                  The_Cipher     : access TDEA_Cipher;
+                  Parameters     : in     CryptAda.Lists.List);
+   
    --[Do_Process]---------------------------------------------------------------
 
+   overriding
    procedure   Do_Process(
-                  With_Cipher    : in out TDEA_Cipher;
+                  With_Cipher    : access TDEA_Cipher;
                   Input          : in     CryptAda.Pragmatics.Byte_Array;
                   Output         :    out CryptAda.Pragmatics.Byte_Array);
 
    --[Stop_Cipher]--------------------------------------------------------------
-      
-   procedure   Stop_Cipher(
-                  The_Cipher     : in out TDEA_Cipher);
 
+   overriding
+   procedure   Stop_Cipher(
+                  The_Cipher     : access TDEA_Cipher);
+      
    -----------------------------------------------------------------------------
    --[Non-dispatching operations]-----------------------------------------------
    -----------------------------------------------------------------------------
@@ -180,7 +215,7 @@ package CryptAda.Ciphers.Symmetric.Block.TDEA is
    -----------------------------------------------------------------------------
 
    function    Get_TDEA_Keying_Option(
-                  Of_Cipher      : in     TDEA_Cipher'Class)
+                  Of_Cipher      : access TDEA_Cipher'Class)
       return   TDEA_Keying_Option;
    
    --[Is_Valid_TDEA_Key]--------------------------------------------------------
@@ -230,35 +265,32 @@ private
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
-
-   --[DES_Ciphers]--------------------------------------------------------------
-   -- Array type of DES_Cipher used in TDEA.
-   -----------------------------------------------------------------------------
-   
-   type DES_Ciphers is array(Positive range 1 .. 3) of CryptAda.Ciphers.Symmetric.Block.DES.DES_Cipher;
    
    --[TDEA_Cipher]-----------------------------------------------------------
    -- Full definition of the TDEA_Cipher tagged type. It extends the
    -- Block_Cipher with the followitng fields.
    --
-   -- Sub_Ciphers          Array of DES_Cipher objects that implement the triple 
-   --                      DES.
    -- Keying_Option        Keying option.
+   -- SCH_1 .. SCH_3       Handles of the sub-ciphers used in processing
    -----------------------------------------------------------------------------
 
    type TDEA_Cipher is new Block_Cipher with
       record
          Keying_Option           : TDEA_Keying_Option;
-         Sub_Ciphers             : DES_Ciphers;
+         SCH_1                   : Symmetric_Cipher_Handle;
+         SCH_2                   : Symmetric_Cipher_Handle;
+         SCH_3                   : Symmetric_Cipher_Handle;
       end record;
 
    -----------------------------------------------------------------------------
    --[Subprogram specifications]------------------------------------------------
    -----------------------------------------------------------------------------
 
+   overriding
    procedure   Initialize(
                   Object         : in out TDEA_Cipher);
 
+   overriding
    procedure   Finalize(
                   Object         : in out TDEA_Cipher);
 

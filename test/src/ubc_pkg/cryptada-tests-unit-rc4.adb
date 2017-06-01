@@ -252,10 +252,11 @@ package body CryptAda.Tests.Unit.RC4 is
 
    procedure Case_1
    is
-      C                    : RC4_Cipher;
+      SCH         : Symmetric_Cipher_Handle := Get_Symmetric_Cipher_Handle;
    begin
       Begin_Test_Case(1, "Running RC4_Cipher basic tests");
-      Run_Stream_Cipher_Basic_Tests(C, "Basic test for RC4_Cipher");
+      Run_Stream_Cipher_Basic_Tests(SCH, "Basic test for RC4_Cipher");
+      Invalidate_Handle(SCH);
       Print_Information_Message("Test case OK");
       End_Test_Case(1, Passed);
    exception
@@ -275,10 +276,11 @@ package body CryptAda.Tests.Unit.RC4 is
 
    procedure Case_2
    is
-      C                    : RC4_Cipher;
+      SCH         : Symmetric_Cipher_Handle := Get_Symmetric_Cipher_Handle;
+      SCP         : constant Symmetric_Cipher_Ptr := Get_Symmetric_Cipher_Ptr(SCH);
       K                    : Key;
-      Min_KL               : constant Positive := Get_Minimum_Key_Length(C);
-      Max_KL               : constant Positive := Get_Maximum_Key_Length(C);
+      Min_KL               : constant Positive := Get_Minimum_Key_Length(SCP);
+      Max_KL               : constant Positive := Get_Maximum_Key_Length(SCP);
       KB                   : constant Byte_Array(1 .. 1 + Max_KL) := (others => 16#33#);
    begin
       Begin_Test_Case(2, "Testing RC4_Cipher non dispatching operations");
@@ -316,6 +318,7 @@ package body CryptAda.Tests.Unit.RC4 is
          raise CryptAda_Test_Error;
       end if;
 
+      Invalidate_Handle(SCH);
       Print_Information_Message("Test case OK");
       End_Test_Case(2, Passed);
    exception
@@ -335,7 +338,8 @@ package body CryptAda.Tests.Unit.RC4 is
 
    procedure Case_3
    is
-      C                    : RC4_Cipher;
+      SCH         : Symmetric_Cipher_Handle := Get_Symmetric_Cipher_Handle;
+      SCP         : constant Symmetric_Cipher_Ptr := Get_Symmetric_Cipher_Ptr(SCH);
       IB                   : constant Byte_Array(1 .. 5000) := (others => 0);
       OB                   : Byte_Array(1 .. 5000) := (others => 0);
       ES                   : Byte_Array(1 .. 16);
@@ -348,9 +352,9 @@ package body CryptAda.Tests.Unit.RC4 is
       Print_Information_Message("Key length 40-bits");
       Set_Key(K, RC4_KL_40_Bits_KB);
       Print_Key(K, "Key to use");
-      Start_Cipher(C, Encrypt, K);
-      Do_Process(C, IB, OB);
-      Stop_Cipher(C);
+      Start_Cipher(SCP, Encrypt, K);
+      Do_Process(SCP, IB, OB);
+      Stop_Cipher(SCP);
 
       for I in 1.. RC4_ST_Count loop
          Print_Information_Message("Vector: " & Positive'Image(I));
@@ -371,9 +375,9 @@ package body CryptAda.Tests.Unit.RC4 is
       Print_Information_Message("Key length 56-bits");
       Set_Key(K, RC4_KL_56_Bits_KB);
       Print_Key(K, "Key to use");
-      Start_Cipher(C, Encrypt, K);
-      Do_Process(C, IB, OB);
-      Stop_Cipher(C);
+      Start_Cipher(SCP, Encrypt, K);
+      Do_Process(SCP, IB, OB);
+      Stop_Cipher(SCP);
 
       for I in 1.. RC4_ST_Count loop
          Print_Information_Message("Vector: " & Positive'Image(I));
@@ -394,9 +398,9 @@ package body CryptAda.Tests.Unit.RC4 is
       Print_Information_Message("Key length 64-bits");
       Set_Key(K, RC4_KL_64_Bits_KB);
       Print_Key(K, "Key to use");
-      Start_Cipher(C, Encrypt, K);
-      Do_Process(C, IB, OB);
-      Stop_Cipher(C);
+      Start_Cipher(SCP, Encrypt, K);
+      Do_Process(SCP, IB, OB);
+      Stop_Cipher(SCP);
 
       for I in 1.. RC4_ST_Count loop
          Print_Information_Message("Vector: " & Positive'Image(I));
@@ -417,9 +421,9 @@ package body CryptAda.Tests.Unit.RC4 is
       Print_Information_Message("Key length 80-bits");
       Set_Key(K, RC4_KL_80_Bits_KB);
       Print_Key(K, "Key to use");
-      Start_Cipher(C, Encrypt, K);
-      Do_Process(C, IB, OB);
-      Stop_Cipher(C);
+      Start_Cipher(SCP, Encrypt, K);
+      Do_Process(SCP, IB, OB);
+      Stop_Cipher(SCP);
 
       for I in 1.. RC4_ST_Count loop
          Print_Information_Message("Vector: " & Positive'Image(I));
@@ -440,9 +444,9 @@ package body CryptAda.Tests.Unit.RC4 is
       Print_Information_Message("Key length 128-bits");
       Set_Key(K, RC4_KL_128_Bits_KB);
       Print_Key(K, "Key to use");
-      Start_Cipher(C, Encrypt, K);
-      Do_Process(C, IB, OB);
-      Stop_Cipher(C);
+      Start_Cipher(SCP, Encrypt, K);
+      Do_Process(SCP, IB, OB);
+      Stop_Cipher(SCP);
 
       for I in 1.. RC4_ST_Count loop
          Print_Information_Message("Vector: " & Positive'Image(I));
@@ -463,9 +467,9 @@ package body CryptAda.Tests.Unit.RC4 is
       Print_Information_Message("Key length 192-bits");
       Set_Key(K, RC4_KL_192_Bits_KB);
       Print_Key(K, "Key to use");
-      Start_Cipher(C, Encrypt, K);
-      Do_Process(C, IB, OB);
-      Stop_Cipher(C);
+      Start_Cipher(SCP, Encrypt, K);
+      Do_Process(SCP, IB, OB);
+      Stop_Cipher(SCP);
 
       for I in 1.. RC4_ST_Count loop
          Print_Information_Message("Vector: " & Positive'Image(I));
@@ -486,9 +490,9 @@ package body CryptAda.Tests.Unit.RC4 is
       Print_Information_Message("Key length 256-bits");
       Set_Key(K, RC4_KL_256_Bits_KB);
       Print_Key(K, "Key to use");
-      Start_Cipher(C, Encrypt, K);
-      Do_Process(C, IB, OB);
-      Stop_Cipher(C);
+      Start_Cipher(SCP, Encrypt, K);
+      Do_Process(SCP, IB, OB);
+      Stop_Cipher(SCP);
 
       for I in 1.. RC4_ST_Count loop
          Print_Information_Message("Vector: " & Positive'Image(I));
@@ -506,6 +510,7 @@ package body CryptAda.Tests.Unit.RC4 is
          end if;
       end loop;
 
+      Invalidate_Handle(SCH);
       Print_Information_Message("Test case OK");
       End_Test_Case(3, Passed);
    exception
@@ -525,16 +530,17 @@ package body CryptAda.Tests.Unit.RC4 is
 
    procedure Case_4
    is
-      C                    : RC4_Cipher;
+      SCH         : Symmetric_Cipher_Handle := Get_Symmetric_Cipher_Handle;
       KLs                  : constant array(1 .. 7) of Positive := (5, 7, 8, 10, 16, 24, 32);
    begin
       Begin_Test_Case(4, "RC4 Bulk test");
       
       for I in KLs'Range loop
          Print_Information_Message("Using key size: " & Integer'Image(KLs(I)));
-         Run_Stream_Cipher_Bulk_Tests(C, KLs(I), 16);
+         Run_Stream_Cipher_Bulk_Tests(SCH, KLs(I), 16);
       end loop;
       
+      Invalidate_Handle(SCH);
       Print_Information_Message("Test case OK");
       End_Test_Case(4, Passed);
    exception

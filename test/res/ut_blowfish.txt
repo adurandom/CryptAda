@@ -1,29 +1,103 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.c (2017/04/04)
+Version: 0.2.a (2017/05/30)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Blowfish
 Description              : Unit test driver for CryptAda.Ciphers.Symmetric.Block.Blowfish functionality.
-Started                  : 2017/04/18 - 20:18:54
+Started                  : 2017/06/01 - 18:25:49
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
-Description     : Running Blowfish_Cipher basic tests
-Started         : 2017/04/18 - 20:18:54
+Description     : Getting a handle for cipher objects
+Started         : 2017/06/01 - 18:25:49
 --------------------------------------------------------------------------------
-[I] Basic tests for Blowfish_Cipher
+[I] Subprograms tested: 
+    - Get_Symmetric_Cipher_Handle
+    - Is_Valid_Handle
+    - Invalidate_Handle
+    - Get_Symmetric_Cipher_Ptr
+[I] Before Get_Symmetric_Cipher_Handle the handle is invalid:
+[I] Handle is invalid
+[I] Getting a pointer from an invalid handle will return null
+[I] Pointer is null
+[I] Trying any operation with a null pointer will raise Constraint_Error
+    Trying Start_Cipher
+[I] Caught Constraint_Error
+    Exception: "CONSTRAINT_ERROR"
+    Message  : "cryptada-tests-unit-blowfish.adb:319 access check failed"
+[I] Getting a symmetric cipher handle
+[I] Information on handle BEFORE calling Get_Symmetric_Cipher_Handle
+[I] Invalid symmetric cipher handle
+[I] Information on handle AFTER calling Get_Symmetric_Cipher_Handle
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_BLOWFISH
+    Cipher type                   : BLOCK_CIPHER
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  4
+    Maximum key length            :  56
+    Default key length            :  16
+    Key length increment step     :  1
+[I] Now the handle must be valid:
+[I] Handle is valid
+[I] Getting a pointer from an valid handle will return a not null value
+[I] Pointer is not null
+[I] Starting cipher must succeed now
+[I] Information on handle AFTER Start_Cipher
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_BLOWFISH
+    Cipher type                   : BLOCK_CIPHER
+    Cipher state                  : ENCRYPTING
+    Started                       : TRUE
+    Minimum key length            :  4
+    Maximum key length            :  56
+    Default key length            :  16
+    Key length increment step     :  1
+[I] Calling Stop_Cipher
+[I] Information on handle AFTER Stop_Cipher
+[I] Information of cipher object:
+    Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
+    CryptAda cipher algorithm id  : SC_BLOWFISH
+    Cipher type                   : BLOCK_CIPHER
+    Cipher state                  : IDLE
+    Started                       : FALSE
+    Minimum key length            :  4
+    Maximum key length            :  56
+    Default key length            :  16
+    Key length increment step     :  1
+[I] Invalidating handle
+[I] Information on handle AFTER invalidating handle
+[I] Invalid symmetric cipher handle
+[I] Handle is invalid
+[I] Using a pointer from an invalid handle must result in an exception
+    Trying Start_Cipher
+[I] Caught Constraint_Error
+    Exception: "CONSTRAINT_ERROR"
+    Message  : "cryptada-tests-unit-blowfish.adb:392 access check failed"
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:25:49
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Running Blowfish_Cipher basic tests
+Started         : 2017/06/01 - 18:25:49
+--------------------------------------------------------------------------------
+[I] Basic test for Blowfish_Cipher
     This test case is a 10 step test that will exercise Block_Cipher dispatching operations
 [I] Cipher information:
 [I] Information of cipher object:
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
     CryptAda cipher algorithm id  : SC_BLOWFISH
     Cipher type                   : BLOCK_CIPHER
-    SCAN name                     : "Blowfish"
-    ASN1 OID                      : ""
-    OpenPGP name                  : "OpenPGP.Cipher.4"
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  4
@@ -38,7 +112,9 @@ Started         : 2017/04/18 - 20:18:54
 Block length:  8
 Block data  :
 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
-[I] Raised CryptAda_Uninitialized_Cipher_Error
+[I] Caught CryptAda_Uninitialized_Cipher_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_UNINITIALIZED_CIPHER_ERROR'
+    - Message  : 'Blowfish cipher is in Idle state'
 [I] Basic Test 2
     Trying Start_Cipher with an invalid key
     Must raise CryptAda_Invalid_Key_Error exception.
@@ -46,7 +122,9 @@ Block data  :
 [I] The key
 Null key
 [I] Calling to Start_Cipher
-[I] Raised CryptAda_Invalid_Key_Error
+[I] Caught CryptAda_Invalid_Key_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_KEY_ERROR'
+    - Message  : 'Invalid Blowfish key'
 [I] Using key with excessive length
 [I] Maximum key length is:  56
 [I] The key
@@ -57,7 +135,9 @@ Null key
 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 
 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
 [I] Calling to Start_Cipher
-[I] Raised CryptAda_Invalid_Key_Error
+[I] Caught CryptAda_Invalid_Key_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_KEY_ERROR'
+    - Message  : 'Invalid Blowfish key'
 [I] Basic Test 3
     Checking state after successful Start_Cipher for encryption
 [I] Key set to
@@ -69,9 +149,6 @@ Null key
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
     CryptAda cipher algorithm id  : SC_BLOWFISH
     Cipher type                   : BLOCK_CIPHER
-    SCAN name                     : "Blowfish"
-    ASN1 OID                      : ""
-    OpenPGP name                  : "OpenPGP.Cipher.4"
     Cipher state                  : ENCRYPTING
     Started                       : TRUE
     Minimum key length            :  4
@@ -87,25 +164,33 @@ Null key
 Block length:  7
 Block data  :
 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
-[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Caught CryptAda_Invalid_Block_Length_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_BLOCK_LENGTH_ERROR'
+    - Message  : 'Invalid block length'
     Cipher block size:  8 bytes
 [I] Invalid input block information: 
 Block length:  9
 Block data  :
 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#
-[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Caught CryptAda_Invalid_Block_Length_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_BLOCK_LENGTH_ERROR'
+    - Message  : 'Invalid block length'
     Cipher block size:  8 bytes
 [I] Invalid output block information: 
 Block length:  7
 Block data  :
 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
-[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Caught CryptAda_Invalid_Block_Length_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_BLOCK_LENGTH_ERROR'
+    - Message  : 'Invalid block length'
     Cipher block size:  8 bytes
 [I] Invalid output block information: 
 Block length:  9
 Block data  :
 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
-[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Caught CryptAda_Invalid_Block_Length_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_BLOCK_LENGTH_ERROR'
+    - Message  : 'Invalid block length'
 [I] Basic Test 5
     Encrypting a valid block
 [I] Block to encrypt
@@ -123,9 +208,6 @@ Block data  :
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
     CryptAda cipher algorithm id  : SC_BLOWFISH
     Cipher type                   : BLOCK_CIPHER
-    SCAN name                     : "Blowfish"
-    ASN1 OID                      : ""
-    OpenPGP name                  : "OpenPGP.Cipher.4"
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  4
@@ -140,9 +222,6 @@ Block data  :
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
     CryptAda cipher algorithm id  : SC_BLOWFISH
     Cipher type                   : BLOCK_CIPHER
-    SCAN name                     : "Blowfish"
-    ASN1 OID                      : ""
-    OpenPGP name                  : "OpenPGP.Cipher.4"
     Cipher state                  : DECRYPTING
     Started                       : TRUE
     Minimum key length            :  4
@@ -158,25 +237,33 @@ Block data  :
 Block length:  7
 Block data  :
 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#, 16#11#
-[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Caught CryptAda_Invalid_Block_Length_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_BLOCK_LENGTH_ERROR'
+    - Message  : 'Invalid block length'
     Cipher block size:  8 bytes
 [I] Invalid input block information: 
 Block length:  9
 Block data  :
 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#, 16#22#
-[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Caught CryptAda_Invalid_Block_Length_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_BLOCK_LENGTH_ERROR'
+    - Message  : 'Invalid block length'
     Cipher block size:  8 bytes
 [I] Invalid output block information: 
 Block length:  7
 Block data  :
 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
-[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Caught CryptAda_Invalid_Block_Length_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_BLOCK_LENGTH_ERROR'
+    - Message  : 'Invalid block length'
     Cipher block size:  8 bytes
 [I] Invalid output block information: 
 Block length:  9
 Block data  :
 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#, 16#00#
-[I] Raised CryptAda_Invalid_Block_Length_Error
+[I] Caught CryptAda_Invalid_Block_Length_Error
+    - Exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_BLOCK_LENGTH_ERROR'
+    - Message  : 'Invalid block length'
 [I] Basic Test 9
     Decrypting the block encrypted on basic test 5. Must be equal to original
     plaintext block
@@ -196,9 +283,6 @@ Block data  :
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
     CryptAda cipher algorithm id  : SC_BLOWFISH
     Cipher type                   : BLOCK_CIPHER
-    SCAN name                     : "Blowfish"
-    ASN1 OID                      : ""
-    OpenPGP name                  : "OpenPGP.Cipher.4"
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  4
@@ -208,21 +292,84 @@ Block data  :
     Block size                    :  8
 [I] Test case OK
 --------------------------------------------------------------------------------
-Test Case Number: 1
+Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:54
+Finished        : 2017/06/01 - 18:25:49
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 2
+Test Case Number: 3
+Description     : Start_Cipher(Parameter List)
+Started         : 2017/06/01 - 18:25:49
+--------------------------------------------------------------------------------
+[I] Trying Start_Cipher with some invalid lists
+[I] List  1: "()"
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Parameters list must be a named list"
+[I] List  2: "(Encrypt,"0102030405060708")"
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Parameters list must be a named list"
+[I] List  3: "(Op=>Encrypt,Key=>"0102030405060708")"
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Missing mandatory item 'Operation'"
+[I] List  4: "(Operation=>Encrypt,K=>"0102030405060708")"
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Missing mandatory item 'Key'"
+[I] List  5: "(Operation=>Encrypting,Key=>"0102030405060708")"
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Caught exception: 'CONSTRAINT_ERROR', with message: 'bad input for 'Value: "Encrypting"', when obtaining 'Operation' parameter"
+[I] List  6: "(Operation=>Encrypt,Key=>"01020304_05060708")"
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Caught exception: 'CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR', with message: 'Invalid hexadecimal digit: '_'', when obtaining 'Key' parameter"
+[I] List  7: "(Operation=>Encrypt,Key=>"010203")"
+[I] Caught CryptAda_Invalid_Key_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INVALID_KEY_ERROR"
+    Message  : "Invalid Blowfish key"
+[I] Encrypting with valid parameter lists
+[I] Parameter list: "(Operation=>Encrypt,Key=>"0001020304050607101112131415")"
+[I] Block to encrypt
+Block length:  8
+Block data  :
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] Ciphered block
+Block length:  8
+Block data  :
+16#9A#, 16#D3#, 16#78#, 16#9C#, 16#55#, 16#1F#, 16#9B#, 16#6C#
+[I] Decrypting with valid parameter list
+[I] Parameter list: "(Operation=>Decrypt,Key=>"0001020304050607101112131415")"
+[I] Block to decrypt
+Block length:  8
+Block data  :
+16#9A#, 16#D3#, 16#78#, 16#9C#, 16#55#, 16#1F#, 16#9B#, 16#6C#
+[I] Decrypted block
+Block length:  8
+Block data  :
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] Results match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:25:49
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
 Description     : Testing Blowfish_Cipher non dispatching operations
-Started         : 2017/04/18 - 20:18:54
+Started         : 2017/06/01 - 18:25:49
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
-    Is_Valid_Blowfish_Key
-[I] Null Key must not be valid
+Is_Valid_Blowfish_Key
+[I] Checking validity of null key
 [I] Null key
 Null key
+Key is not valid: OK
 [I] A key of  3 bytes must not be valid
 [I] Invalid key
     Key length:  3
@@ -292,15 +439,15 @@ Key length  56 is valid
 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#, 16#33#
 [I] Test case OK
 --------------------------------------------------------------------------------
-Test Case Number: 2
+Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:54
+Finished        : 2017/06/01 - 18:25:49
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 3
+Test Case Number: 5
 Description     : Blowfish standard test vectors
-Started         : 2017/04/18 - 20:18:54
+Started         : 2017/06/01 - 18:25:49
 --------------------------------------------------------------------------------
 [I] Using test vectors obtained from: https://www.schneier.com/code/vectors.txt
 [I] Blowfish Schneier Test Vector:  1
@@ -645,15 +792,15 @@ Started         : 2017/04/18 - 20:18:54
 [I] Cipher test vector, results match
 [I] Test case OK
 --------------------------------------------------------------------------------
-Test Case Number: 3
+Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:54
+Finished        : 2017/06/01 - 18:25:49
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 4
+Test Case Number: 6
 Description     : Blowfish Bulk test
-Started         : 2017/04/18 - 20:18:54
+Started         : 2017/06/01 - 18:25:49
 --------------------------------------------------------------------------------
 [I] Using key size:  4
 [I] Block cipher bulk test
@@ -664,9 +811,6 @@ Started         : 2017/04/18 - 20:18:54
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
     CryptAda cipher algorithm id  : SC_BLOWFISH
     Cipher type                   : BLOCK_CIPHER
-    SCAN name                     : "Blowfish"
-    ASN1 OID                      : ""
-    OpenPGP name                  : "OpenPGP.Cipher.4"
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  4
@@ -684,9 +828,6 @@ Started         : 2017/04/18 - 20:18:54
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
     CryptAda cipher algorithm id  : SC_BLOWFISH
     Cipher type                   : BLOCK_CIPHER
-    SCAN name                     : "Blowfish"
-    ASN1 OID                      : ""
-    OpenPGP name                  : "OpenPGP.Cipher.4"
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  4
@@ -704,9 +845,6 @@ Started         : 2017/04/18 - 20:18:54
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
     CryptAda cipher algorithm id  : SC_BLOWFISH
     Cipher type                   : BLOCK_CIPHER
-    SCAN name                     : "Blowfish"
-    ASN1 OID                      : ""
-    OpenPGP name                  : "OpenPGP.Cipher.4"
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  4
@@ -724,9 +862,6 @@ Started         : 2017/04/18 - 20:18:54
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
     CryptAda cipher algorithm id  : SC_BLOWFISH
     Cipher type                   : BLOCK_CIPHER
-    SCAN name                     : "Blowfish"
-    ASN1 OID                      : ""
-    OpenPGP name                  : "OpenPGP.Cipher.4"
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  4
@@ -744,9 +879,6 @@ Started         : 2017/04/18 - 20:18:54
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
     CryptAda cipher algorithm id  : SC_BLOWFISH
     Cipher type                   : BLOCK_CIPHER
-    SCAN name                     : "Blowfish"
-    ASN1 OID                      : ""
-    OpenPGP name                  : "OpenPGP.Cipher.4"
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  4
@@ -764,9 +896,6 @@ Started         : 2017/04/18 - 20:18:54
     Cipher object tag name        : "CRYPTADA.CIPHERS.SYMMETRIC.BLOCK.BLOWFISH.BLOWFISH_CIPHER"
     CryptAda cipher algorithm id  : SC_BLOWFISH
     Cipher type                   : BLOCK_CIPHER
-    SCAN name                     : "Blowfish"
-    ASN1 OID                      : ""
-    OpenPGP name                  : "OpenPGP.Cipher.4"
     Cipher state                  : IDLE
     Started                       : FALSE
     Minimum key length            :  4
@@ -777,13 +906,13 @@ Started         : 2017/04/18 - 20:18:54
 [I] Bulk test completed OK
 [I] Test case OK
 --------------------------------------------------------------------------------
-Test Case Number: 4
+Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:19:04
+Finished        : 2017/06/01 - 18:25:59
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Blowfish
-Finished                 : 2017/04/18 - 20:19:04
+Finished                 : 2017/06/01 - 18:25:59
 ================================================================================

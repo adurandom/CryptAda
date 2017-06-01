@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 25th, 2017
---    Current version   :  1.2
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the AES block cipher.
@@ -63,10 +63,8 @@
 --    1.0   20170325 ADD   Initial implementation.
 --    1.1   20170330 ADD   Removed key generation subprogram.
 --    1.2   20170403 ADD   Changed symmetric ciphers hierarchy.
+--    2.0   20170529 ADD   Changed types.
 --------------------------------------------------------------------------------
-
-with CryptAda.Pragmatics;
-with CryptAda.Ciphers.Keys;
 
 package CryptAda.Ciphers.Symmetric.Block.AES is
 
@@ -80,9 +78,9 @@ package CryptAda.Ciphers.Symmetric.Block.AES is
    
    type AES_Key_Id is
       (
-         AES_128,                -- AES 128-bit keys
-         AES_192,                -- AES 192-bit keys.
-         AES_256                 -- AES 256-bit keys.
+         AES_128,                -- AES 128-bit (16 - byte) keys
+         AES_192,                -- AES 192-bit (24 - byte) keys.
+         AES_256                 -- AES 256-bit (32 - byte) keys.
       );
       
    -----------------------------------------------------------------------------
@@ -116,11 +114,39 @@ package CryptAda.Ciphers.Symmetric.Block.AES is
    
    type AES_Cipher is new Block_Cipher with private;
 
+   --[AES_Cipher_Ptr]-----------------------------------------------------------
+   -- Access to AES context objects.
+   -----------------------------------------------------------------------------
+   
+   type AES_Cipher_Ptr is access all AES_Cipher'Class;
+   
    --[AES_Block]----------------------------------------------------------------
    -- Constrained subtype for AES blocks.
    -----------------------------------------------------------------------------
    
    subtype AES_Block is Cipher_Block(1 .. AES_Block_Size);
+
+   -----------------------------------------------------------------------------
+   --[Getting a handle]---------------------------------------------------------
+   -----------------------------------------------------------------------------
+   
+   --[Get_Symmetric_Cipher_Handle]----------------------------------------------
+   -- Purpose:
+   -- Creates a Symmetric_Cipher object and returns a handle for that object.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- None.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Symmetric_Cipher_Handle value that handles the reference to the newly 
+   -- created Symmetric_Cipher object.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CrtyptAda_Storage_Error if an error is raised during object allocation.
+   -----------------------------------------------------------------------------
+
+   function    Get_Symmetric_Cipher_Handle
+      return   Symmetric_Cipher_Handle;
    
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
@@ -128,27 +154,37 @@ package CryptAda.Ciphers.Symmetric.Block.AES is
 
    --[Start_Cipher]-------------------------------------------------------------
 
+   overriding
    procedure   Start_Cipher(
-                  The_Cipher     : in out AES_Cipher;
+                  The_Cipher     : access AES_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     CryptAda.Ciphers.Keys.Key);
 
+   --[Start_Cipher]-------------------------------------------------------------
+
+   overriding
+   procedure   Start_Cipher(
+                  The_Cipher     : access AES_Cipher;
+                  Parameters     : in     CryptAda.Lists.List);
+   
    --[Do_Process]---------------------------------------------------------------
 
+   overriding
    procedure   Do_Process(
-                  With_Cipher    : in out AES_Cipher;
+                  With_Cipher    : access AES_Cipher;
                   Input          : in     CryptAda.Pragmatics.Byte_Array;
                   Output         :    out CryptAda.Pragmatics.Byte_Array);
 
    --[Stop_Cipher]--------------------------------------------------------------
-      
-   procedure   Stop_Cipher(
-                  The_Cipher     : in out AES_Cipher);
 
+   overriding
+   procedure   Stop_Cipher(
+                  The_Cipher     : access AES_Cipher);
+      
    -----------------------------------------------------------------------------
    --[Non-dispatching operations]-----------------------------------------------
    -----------------------------------------------------------------------------
-
+   
    --[Get_AES_Key_Id]-----------------------------------------------------------
    -- Purpose:
    -- Returns the identifier of the key the AES cipher is using.
@@ -164,7 +200,7 @@ package CryptAda.Ciphers.Symmetric.Block.AES is
    -----------------------------------------------------------------------------
 
    function    Get_AES_Key_Id(
-                  Of_Cipher      : in     AES_Cipher'Class)
+                  Of_Cipher      : access AES_Cipher'Class)
       return   AES_Key_Id;
                   
    --[Is_Valid_AES_Key]---------------------------------------------------------
@@ -250,9 +286,11 @@ private
    --[Subprogram specifications]------------------------------------------------
    -----------------------------------------------------------------------------
 
+   overriding
    procedure   Initialize(
                   Object         : in out AES_Cipher);
 
+   overriding
    procedure   Finalize(
                   Object         : in out AES_Cipher);
 

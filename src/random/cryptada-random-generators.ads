@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 13th, 2017
---    Current version   :  1.0
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Defines an abstract tagged type (Random_Generator) and the primitive
@@ -30,9 +30,11 @@
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
 --    1.0   20170313 ADD   Initial implementation.
+--    2.0   20170523 ADD   Changed interface to use access to.
 --------------------------------------------------------------------------------
 
-with Ada.Finalization;
+with Object;
+with Object.Handle;
 
 with CryptAda.Pragmatics;
 with CryptAda.Names;
@@ -95,14 +97,20 @@ package CryptAda.Random.Generators is
    -- object could be stopped by calling the Random_Stop procedure.
    -----------------------------------------------------------------------------
 
-   type Random_Generator is abstract tagged limited private;
+   type Random_Generator (<>) is abstract new Object.Entity with private;
 
-   --[Random_Generator_Ref]-----------------------------------------------------
+   --[Random_Generator_Ptr]-----------------------------------------------------
    -- Wide class access type to Random_Generator objects.
    -----------------------------------------------------------------------------
 
-   type Random_Generator_Ref is access all Random_Generator'Class;
+   type Random_Generator_Ptr is access all Random_Generator'Class;
 
+   --[Random_Generator_Handle]--------------------------------------------------
+   -- Type for handling message digest objects.
+   -----------------------------------------------------------------------------
+
+   type Random_Generator_Handle is private;
+   
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -122,6 +130,63 @@ package CryptAda.Random.Generators is
 
    Minimum_Internal_Seed_Bytes   : constant Positive;
 
+   -----------------------------------------------------------------------------
+   --[Random_Generator_Handle Operations]---------------------------------------
+   -----------------------------------------------------------------------------
+
+   --[Is_Valid_Handle]----------------------------------------------------------
+   -- Purpose:
+   -- Checks if a handle is valid.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Handle           Handle to check for validity.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Boolean value that indicates whether the handle is valid or not.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   function    Is_Valid_Handle(
+                  The_Handle     : in     Random_Generator_Handle)
+      return   Boolean;
+
+   --[Invalidate_Handle]--------------------------------------------------------
+   -- Purpose:
+   -- Invalidates a habndle.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Handle           Handle to invalidate.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   procedure   Invalidate_Handle(
+                  The_Handle     : in out Random_Generator_Handle);
+
+   --[Get_Random_Generator_Ptr]-------------------------------------------------
+   -- Purpose:
+   -- Returns a Random_Generator_Ptr from a Random_Generator_Handle.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- From_Handle          Handle to get the Random_Generator_Ptr from.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Random_Generator_Ptr handled by Handle.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   function    Get_Random_Generator_Ptr(
+                  From_Handle    : in     Random_Generator_Handle)
+      return   Random_Generator_Ptr;
+   
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
@@ -154,7 +219,7 @@ package CryptAda.Random.Generators is
    -----------------------------------------------------------------------------
 
    procedure   Random_Start(
-                  Generator      : in out Random_Generator;
+                  Generator      : access Random_Generator;
                   Seed_Bytes_Req : in     Positive := Minimum_Seed_Bytes)
          is abstract;
 
@@ -177,7 +242,7 @@ package CryptAda.Random.Generators is
    -----------------------------------------------------------------------------
 
    procedure   Random_Seed(
-                  Generator      : in out Random_Generator;
+                  Generator      : access Random_Generator;
                   Seed_Bytes     : in     CryptAda.Pragmatics.Byte_Array)
          is abstract;
 
@@ -199,7 +264,7 @@ package CryptAda.Random.Generators is
    -----------------------------------------------------------------------------
 
    procedure   Random_Start_And_Seed(
-                  Generator      : in out Random_Generator;
+                  Generator      : access Random_Generator;
                   Seed_Bytes_Req : in     Positive := Minimum_Internal_Seed_Bytes)
          is abstract;
 
@@ -222,7 +287,7 @@ package CryptAda.Random.Generators is
    -----------------------------------------------------------------------------
 
    procedure   Random_Mix(
-                  Generator      : in out Random_Generator;
+                  Generator      : access Random_Generator;
                   Mix_Bytes      : in     CryptAda.Pragmatics.Byte_Array)
          is abstract;
 
@@ -232,7 +297,7 @@ package CryptAda.Random.Generators is
    -----------------------------------------------------------------------------
    -- Arguments:
    -- Generator            Random_Generator object.
-   -- The_Bytes            Byte_Array that, at the retrn of subprogram will
+   -- The_Bytes            Byte_Array that, at the return of subprogram will
    --                      contain the random bytes.
    -----------------------------------------------------------------------------
    -- Returned value:
@@ -244,10 +309,33 @@ package CryptAda.Random.Generators is
    -----------------------------------------------------------------------------
 
    procedure   Random_Generate(
-                  Generator      : in out Random_Generator;
+                  Generator      : access Random_Generator;
                   The_Bytes      :    out CryptAda.Pragmatics.Byte_Array)
          is abstract;
 
+   --[Random_Generate]----------------------------------------------------------
+   -- Purpose:
+   -- Generates and returns a sequence of random bytes.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- Generator            Random_Generator object.
+   -- Bytes                Positive value indicating the number of random
+   --                      bytes to generate.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Returns a Byte_Array containing Bytes random bytes.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CryptAda_Generator_Not_Started_Error if Generator is stopped.
+   -- CryptAda_Generator_Need_Seeding_Error is Generator was not seeded.
+   -----------------------------------------------------------------------------
+
+   function    Random_Generate(
+                  Generator      : access Random_Generator;
+                  Bytes          : in     Positive)
+      return   CryptAda.Pragmatics.Byte_Array
+         is abstract;
+         
    --[Random_Stop]--------------------------------------------------------------
    -- Purpose:
    -- Stops a random generator object.
@@ -263,7 +351,7 @@ package CryptAda.Random.Generators is
    -----------------------------------------------------------------------------
 
    procedure   Random_Stop(
-                  Generator      : in out Random_Generator)
+                  Generator      : access Random_Generator)
          is abstract;
 
    -----------------------------------------------------------------------------
@@ -285,7 +373,7 @@ package CryptAda.Random.Generators is
    -----------------------------------------------------------------------------
 
    function    Get_Random_Generator_Id(
-                  Of_Generator   : in     Random_Generator'Class)
+                  Of_Generator   : access Random_Generator'Class)
       return   CryptAda.Names.Random_Generator_Id;
 
    --[Get_Seed_Bytes_Needed]----------------------------------------------------
@@ -304,7 +392,7 @@ package CryptAda.Random.Generators is
    -----------------------------------------------------------------------------
 
    function    Get_Seed_Bytes_Needed(
-                  For_Generator  : in     Random_Generator'Class)
+                  For_Generator  : access Random_Generator'Class)
       return   Natural;
 
    --[Is_Started]---------------------------------------------------------------
@@ -323,7 +411,7 @@ package CryptAda.Random.Generators is
    -----------------------------------------------------------------------------
 
    function    Is_Started(
-                  The_Generator  : in     Random_Generator'Class)
+                  The_Generator  : access Random_Generator'Class)
       return   Boolean;
 
    --[Is_Seeded]----------------------------------------------------------------
@@ -342,7 +430,7 @@ package CryptAda.Random.Generators is
    -----------------------------------------------------------------------------
 
    function    Is_Seeded(
-                  The_Generator  : in     Random_Generator'Class)
+                  The_Generator  : access Random_Generator'Class)
       return   Boolean;
 
    -----------------------------------------------------------------------------
@@ -356,21 +444,19 @@ private
    -- Ada.Finalization.Limited_Controlled with the following record extension
    -- fields:
    --
-   -- Generator_Id            Random_Generator_Id value that identifies the
-   --                         particular Random_Generator.
+   -- Id                      Discriinant. Random_Generator_Id value that 
+   --                         identifies the particular Random_Generator.
    -- Started                 Boolean value that indicates if the generator is
    --                         started or not.
    -- Seed_Bytes_Needed       Natural value with the number of seed bytes
    --                         required by the object.
    -----------------------------------------------------------------------------
 
-   type Random_Generator is abstract new Ada.Finalization.Limited_Controlled with
+   type Random_Generator(Id : CryptAda.Names.Random_Generator_Id) is abstract new Object.Entity with
       record
-         Generator_Id            : CryptAda.Names.Random_Generator_Id   := CryptAda.Names.RG_NONE;
          Started                 : Boolean                              := False;
          Seed_Bytes_Needed       : Natural                              := 0;
       end record;
-
 
    --[Internal_Seeder_Block_Size]-----------------------------------------------
    -- Size of block for internal seeder.
@@ -413,4 +499,31 @@ private
    function    Get_Internal_Seeder_Bytes
       return   Internal_Seeder_Block;
 
+   --[Private_Initialize_Random_Generator]--------------------------------------
+   
+   procedure   Private_Initialize_Random_Generator(
+                  RG             : in out Random_Generator'Class);
+                  
+   -----------------------------------------------------------------------------
+   --[Random_Generator_Handle]--------------------------------------------------
+   -----------------------------------------------------------------------------
+
+   --[RG_Handles]---------------------------------------------------------------
+   -- Generic instantiation of the package Object.Handle for Random_Generator
+   -----------------------------------------------------------------------------
+
+   package RG_Handles is new Object.Handle(Random_Generator, Random_Generator_Ptr);
+
+   --[Random_Generator_Handle]--------------------------------------------------
+   -- Full definition of Random_Generator_Handle type
+   -----------------------------------------------------------------------------
+
+   type Random_Generator_Handle is new RG_Handles.Handle with null record;
+
+   --[Ref]----------------------------------------------------------------------
+
+   function    Ref(
+                  Thing          : in     Random_Generator_Ptr)
+      return   Random_Generator_Handle;
+      
 end CryptAda.Random.Generators;

@@ -1,18 +1,18 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.c (2017/04/04)
+Version: 0.2.a (2017/05/30)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Utils
 Description              : Unit test driver for CryptAda.Tests.Utils functionality.
-Started                  : 2017/04/18 - 20:18:45
+Started                  : 2017/06/01 - 18:23:43
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Printing messages
-Started         : 2017/04/18 - 20:18:45
+Started         : 2017/06/01 - 18:23:43
 --------------------------------------------------------------------------------
 [I] This is an information message.
 [E] This is an error message.
@@ -22,11 +22,11 @@ Another simple message.
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:45
+Finished        : 2017/06/01 - 18:23:43
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Utils
-Finished                 : 2017/04/18 - 20:18:45
+Finished                 : 2017/06/01 - 18:23:43
 ================================================================================

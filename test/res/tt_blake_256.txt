@@ -1,0 +1,68 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.2.a (2017/05/30)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Time.BLAKE_256
+Description              : Time trial for CryptAda.Digests.Message_Digests.BLAKE_256 functionality.
+Started                  : 2017/06/01 - 18:26:42
+================================================================================
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 1
+Description      : BLAKE-256 hashing
+Started          : 2017/06/01 - 18:26:42
+--------------------------------------------------------------------------------
+[I] Hashing 1MB
+[I] Starting time trial for digest algorithm.
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.BLAKE_256.BLAKE_256_DIGEST"
+    CryptAda digest algorithm id  : "MD_BLAKE_256"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  32
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Bytes to digest    :  1 MB
+    Buffer size        :  1 KB
+    Iterations         :  1024
+[I] Time trial completed
+    Elapsed time       :           0.015997972 secs.
+    Counter (Low, High): ( 8388608,  0)
+    Obtained hash      : "9EAC0461549ECA01B3DFE16F6BF22CC634A25ACAAF53FFD10515864281E97E99"
+--------------------------------------------------------------------------------
+Time Trial Number: 1
+Finished         : 2017/06/01 - 18:26:42
+--[End Time Trial]--------------------------------------------------------------
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 2
+Description      : BLAKE-256 hashing
+Started          : 2017/06/01 - 18:26:42
+--------------------------------------------------------------------------------
+[I] Hashing 10MB
+[I] Starting time trial for digest algorithm.
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.BLAKE_256.BLAKE_256_DIGEST"
+    CryptAda digest algorithm id  : "MD_BLAKE_256"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  32
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Bytes to digest    :  10 MB
+    Buffer size        :  4 KB
+    Iterations         :  2560
+[I] Time trial completed
+    Elapsed time       :           0.161500992 secs.
+    Counter (Low, High): ( 83886080,  0)
+    Obtained hash      : "C2B76EFFBBCF2155DB466854F8CBCB106C78F04DE423A65F63C7BDCA4C11CAEE"
+--------------------------------------------------------------------------------
+Time Trial Number: 2
+Finished         : 2017/06/01 - 18:26:42
+--[End Time Trial]--------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Time.BLAKE_256
+Finished                 : 2017/06/01 - 18:26:42
+================================================================================

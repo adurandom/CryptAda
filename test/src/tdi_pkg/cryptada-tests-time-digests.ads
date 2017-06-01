@@ -32,7 +32,7 @@
 --    1.0   20170312 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with CryptAda.Digests.Algorithms;
+with CryptAda.Digests.Message_Digests;
 
 package CryptAda.Tests.Time.Digests is
 
@@ -57,7 +57,7 @@ package CryptAda.Tests.Time.Digests is
    -----------------------------------------------------------------------------
 
    procedure   Digest_Time_Trial(
-                  Digest         : in out CryptAda.Digests.Algorithms.Digest_Algorithm'Class;
+                  Digest         : in out CryptAda.Digests.Message_Digests.Message_Digest_Handle;
                   To_Digest      : in     Positive := 10;
                   Buffer_Size    : in     Positive := 1;
                   Elapsed        :    out Duration);

@@ -1,18 +1,18 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.c (2017/04/04)
+Version: 0.2.a (2017/05/30)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Lists_Ids
-Description              : Unit test driver for CryptAda.Pragmatics.Lists.Identifier_Item
-Started                  : 2017/04/25 - 13:59:07
+Description              : Unit test driver for CryptAda.Lists.Identifier_Item
+Started                  : 2017/06/01 - 18:23:51
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Basic identifier operations
-Started         : 2017/04/25 - 13:59:07
+Started         : 2017/06/01 - 18:23:51
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Is_Null
@@ -48,13 +48,13 @@ Started         : 2017/04/25 - 13:59:07
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 13:59:07
+Finished        : 2017/06/01 - 18:23:51
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Identifier syntax
-Started         : 2017/04/25 - 13:59:07
+Started         : 2017/06/01 - 18:23:51
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Text_2_Identifier
@@ -108,34 +108,34 @@ Started         : 2017/04/25 - 13:59:07
     Text to convert: " generic "
 [I] Caught CryptAda_Syntax_Error
     Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-    Message  : "Identifier is an Ada reserved word"
+    Message  : "'generic' is an Ada reserved word"
     Text to convert: "task"
 [I] Caught CryptAda_Syntax_Error
     Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-    Message  : "Identifier is an Ada reserved word"
+    Message  : "'task' is an Ada reserved word"
     Text to convert: "is "
 [I] Caught CryptAda_Syntax_Error
     Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-    Message  : "Identifier is an Ada reserved word"
+    Message  : "'is' is an Ada reserved word"
     Text to convert: "begin"
 [I] Caught CryptAda_Syntax_Error
     Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-    Message  : "Identifier is an Ada reserved word"
+    Message  : "'begin' is an Ada reserved word"
     Text to convert: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 [I] Caught CryptAda_Syntax_Error
     Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-    Message  : "Identifier too long"
+    Message  : "Maximum identifier length exceeded"
 [I] Test case OK
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 13:59:07
+Finished        : 2017/06/01 - 18:23:51
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Converting from identifier to text
-Started         : 2017/04/25 - 13:59:07
+Started         : 2017/06/01 - 18:23:51
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Identifier_2_Text
@@ -145,11 +145,11 @@ Started         : 2017/04/25 - 13:59:07
 [I] Trying to get the text from a null identifier must raise CryptAda_Identifier_Error
 [I] Caught CryptAda_Identifier_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_IDENTIFIER_ERROR"
-Message  : "Null identifier"
+Message  : "Source identifier is null"
 [I] Now procedure form
 [I] Caught CryptAda_Identifier_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_IDENTIFIER_ERROR"
-Message  : "Null identifier"
+Message  : "Source identifier is null"
 [I] Setting identifier to: "Foo_Bar"
 [I] Now Id must not be null
 [I] Identifier is not null
@@ -162,7 +162,7 @@ Message  : "Null identifier"
 [I] Identifier_2_Text procedure form will raise CryptAda_Overflow_Error if Identifier_Text is not long enough
 [I] Caught CryptAda_Overflow_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_OVERFLOW_ERROR"
-Message  : "To'Length is not enough to hold From characters"
+Message  : "To length is not enough for holding identifier characters"
 [I] Getting text from the identifier (procedure form)
 [I] Last character returned:  7
     Text returned          : "Foo_Bar                         "
@@ -176,13 +176,13 @@ Message  : "To'Length is not enough to hold From characters"
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 13:59:07
+Finished        : 2017/06/01 - 18:23:51
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Copying identifiers
-Started         : 2017/04/25 - 13:59:07
+Started         : 2017/06/01 - 18:23:51
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Copy_Identifier
@@ -192,7 +192,7 @@ Started         : 2017/04/25 - 13:59:07
 [I] Copying from a null identifier will raise CryptAda_Identifier_Error
 [I] Caught CryptAda_Identifier_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_IDENTIFIER_ERROR"
-Message  : "Null identifier"
+Message  : "Source identifier is null"
 [I] Copying identifiers make them equal
     Id_1 before the copy: "Foo_Bar_1"
     Id_2 before the copy: "Foo_Bar_2"
@@ -204,13 +204,13 @@ Message  : "Null identifier"
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 13:59:07
+Finished        : 2017/06/01 - 18:23:51
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Getting identifier items from lists
-Started         : 2017/04/25 - 13:59:07
+Started         : 2017/06/01 - 18:23:51
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Get_Value (Position)
@@ -238,11 +238,11 @@ Message  : "Invalid list position value"
     Over an unnamed list
 [I] Caught CryptAda_Item_Kind_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-Message  : "Item is not an identifier"
+Message  : "Item at position  1, is not an identifier"
     Over a named list
 [I] Caught CryptAda_Item_Kind_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-Message  : "Item is not an identifier"
+Message  : "Item at position  1, is not an identifier"
 [I] Trying Get_Value over an identifier valued item (2) in an unnamed list
     Expected result: "Two"
     Obtained result: "Two"
@@ -255,13 +255,13 @@ Message  : "Item is not an identifier"
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 13:59:07
+Finished        : 2017/06/01 - 18:23:51
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : Getting identifier items from lists
-Started         : 2017/04/25 - 13:59:07
+Started         : 2017/06/01 - 18:23:51
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Get_Value (Identifier)
@@ -283,19 +283,19 @@ Message  : "From_List current list is unnamed"
     Will raise CryptAda_Identifier_Error
 [I] Caught CryptAda_Identifier_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_IDENTIFIER_ERROR"
-Message  : "Null identifier"
+Message  : "Item_Name is null"
 [I] Trying to get a value that does not exist in a named list
     Will raise CryptAda_Item_Not_Found_Error
     Getting value for "Four"
 [I] Caught CryptAda_Item_Not_Found_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
-Message  : "List doesn't contains a: "Four" item"
+Message  : "List doesn't contains a: 'Four' item"
 [I] Trying get a value that is not an identifier
     Will raise CryptAda_Item_Kind_Error
     Getting value for "Three"
 [I] Caught CryptAda_Item_Kind_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-Message  : "Item is not an identifier"
+Message  : "Item 'Three', is not an identifier"
 [I] Getting an identifier value from a named list
     Getting value for "Two"
     Expected result: "Two"
@@ -305,13 +305,13 @@ Message  : "Item is not an identifier"
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 13:59:07
+Finished        : 2017/06/01 - 18:23:51
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
 Description     : Getting identifier items from lists
-Started         : 2017/04/25 - 13:59:07
+Started         : 2017/06/01 - 18:23:51
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Get_Value (Identifier_Text)
@@ -333,19 +333,19 @@ Message  : "From_List current list is unnamed"
     Will raise CryptAda_Syntax_Error
 [I] Caught CryptAda_Syntax_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-Message  : "Identifier is an Ada reserved word"
+Message  : "'With' is an Ada reserved word"
 [I] Trying to get a value that does not exist in a named list
     Will raise CryptAda_Item_Not_Found_Error
     Getting value for "Four"
 [I] Caught CryptAda_Item_Not_Found_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
-Message  : "List doesn't contains a: "Four" item"
+Message  : "List doesn't contains a: 'Four' item"
 [I] Trying get a value that is not an identifier
     Will raise CryptAda_Item_Kind_Error
     Getting value for "Three"
 [I] Caught CryptAda_Item_Kind_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-Message  : "Item is not an identifier"
+Message  : "Item 'Three', is not an identifier"
 [I] Getting an identifier value from a named list
     Getting value for "TWO"
     Expected result: "Two"
@@ -355,13 +355,13 @@ Message  : "Item is not an identifier"
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 13:59:07
+Finished        : 2017/06/01 - 18:23:51
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 8
 Description     : Replacing identifier items values in lists
-Started         : 2017/04/25 - 13:59:07
+Started         : 2017/06/01 - 18:23:51
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Replace_Value (Position)
@@ -389,11 +389,11 @@ Message  : "Invalid list position value"
     On an unnamed list
 [I] Caught CryptAda_Item_Kind_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-Message  : "Item is not an identifier"
+Message  : "Item at position:  1, is not an identifier"
     On a named list
 [I] Caught CryptAda_Item_Kind_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-Message  : "Item is not an identifier"
+Message  : "Item at position:  1, is not an identifier"
 [I] Trying Replace_Value to set a null identifier vaue.
     Will raise CryptAda_Identifier_Error
     On an unnamed list
@@ -416,13 +416,13 @@ Replacing value of second item ("Two") to : "One_Plus_One"
 --------------------------------------------------------------------------------
 Test Case Number: 8
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 13:59:07
+Finished        : 2017/06/01 - 18:23:51
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 9
 Description     : Replacing identifier items values in lists
-Started         : 2017/04/25 - 13:59:07
+Started         : 2017/06/01 - 18:23:51
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Replace_Value (Identifier)
@@ -455,13 +455,13 @@ Message  : "Value is null"
     Replacing value for "Four"
 [I] Caught CryptAda_Item_Not_Found_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
-Message  : "List doesn't contains a: "Four" item"
+Message  : "List doesn't contains a: 'Four' item"
 [I] Trying replace a value that is not an identifier
     Will raise CryptAda_Item_Kind_Error
     Replacing value for "Three"
 [I] Caught CryptAda_Item_Kind_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-Message  : "Item is not an identifier"
+Message  : "Item 'Three', is not an identifier"
 [I] Trying Replace_Value over an identifier valued item in a named list
 Replacing value of second item ("Two") to : "One_Plus_One"
     List before replace: "(One=>1,Two=>Two,Three=>"Three",Dos=>Two)"
@@ -470,13 +470,13 @@ Replacing value of second item ("Two") to : "One_Plus_One"
 --------------------------------------------------------------------------------
 Test Case Number: 9
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 13:59:07
+Finished        : 2017/06/01 - 18:23:51
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 10
 Description     : Replacing identifier items values in lists
-Started         : 2017/04/25 - 13:59:07
+Started         : 2017/06/01 - 18:23:51
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Replace_Value (Identifier_Text)
@@ -498,7 +498,7 @@ Message  : "In_List current list is unnamed"
     Will raise CryptAda_Syntax_Error
 [I] Caught CryptAda_Syntax_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-Message  : "Identifier is an Ada reserved word"
+Message  : "'With' is an Ada reserved word"
 [I] Trying Replace_Value on a named list with a null identifier value
     Will raise CryptAda_Identifier_Error
 [I] Caught CryptAda_Identifier_Error
@@ -509,13 +509,13 @@ Message  : "Value is null"
     Replacing value for "Four"
 [I] Caught CryptAda_Item_Not_Found_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
-Message  : "List doesn't contains a: "Four" item"
+Message  : "List doesn't contains a: 'Four' item"
 [I] Trying replace a value that is not an identifier
     Will raise CryptAda_Item_Kind_Error
     Replacing value for "Three"
 [I] Caught CryptAda_Item_Kind_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-Message  : "Item is not an identifier"
+Message  : "Item 'Three', is not an identifier"
 [I] Trying Replace_Value on an identifier valued item in a named list
 Replacing value of second item ("Two") to : "One_Plus_One"
     List before replace: "(One=>1,Two=>Two,Three=>"Three",Dos=>Two)"
@@ -524,13 +524,13 @@ Replacing value of second item ("Two") to : "One_Plus_One"
 --------------------------------------------------------------------------------
 Test Case Number: 10
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 13:59:07
+Finished        : 2017/06/01 - 18:23:51
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 11
 Description     : Inserting identifier items values in lists
-Started         : 2017/04/25 - 13:59:07
+Started         : 2017/06/01 - 18:23:51
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Insert_Value (in unnamed lists)
@@ -576,13 +576,13 @@ Inserting the value : "Last"
 --------------------------------------------------------------------------------
 Test Case Number: 11
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 13:59:07
+Finished        : 2017/06/01 - 18:23:51
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 12
 Description     : Inserting identifier items values in lists
-Started         : 2017/04/25 - 13:59:07
+Started         : 2017/06/01 - 18:23:51
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Insert_Value (Identifier - in named lists)
@@ -614,7 +614,7 @@ Message  : "Value is null"
     Will raise CryptAda_Named_List_Error
 [I] Caught CryptAda_Named_List_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
-Message  : "List already contains the item: "Two""
+Message  : "List already contains an item: 'Two'"
 [I] Inserting an identifier value in an empty list (at position 0)
 Inserting the value : "Five"
     List before insert: "()"
@@ -639,13 +639,13 @@ Inserting the value : "Last"
 --------------------------------------------------------------------------------
 Test Case Number: 12
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 13:59:07
+Finished        : 2017/06/01 - 18:23:51
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 13
 Description     : Inserting identifier items values in lists
-Started         : 2017/04/25 - 13:59:07
+Started         : 2017/06/01 - 18:23:51
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Insert_Value (Identifier_Text - in named lists)
@@ -667,17 +667,17 @@ Message  : "In_List current list is unnamed"
     Will raise CryptAda_Syntax_Error
 [I] Caught CryptAda_Syntax_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_SYNTAX_ERROR"
-Message  : "Identifier is an Ada reserved word"
+Message  : "'Package' is an Ada reserved word"
 [I] Trying Insert_Value using a null value identifier
     Will raise CryptAda_Identifier_Error
 [I] Caught CryptAda_Identifier_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_IDENTIFIER_ERROR"
-Message  : "Value is null"
+Message  : "Identifier value is null"
 [I] Trying Insert_Value using a duplicated name identifier
     Will raise CryptAda_Named_List_Error
 [I] Caught CryptAda_Named_List_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_NAMED_LIST_ERROR"
-Message  : "List already contains the item: "Two""
+Message  : "List already contains the item: 'Two'"
 [I] Inserting an identifier value in an empty list (at position 0)
 Inserting the value : "Five"
 With name           : "Five"
@@ -704,13 +704,13 @@ With name           : "Last"
 --------------------------------------------------------------------------------
 Test Case Number: 13
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 13:59:07
+Finished        : 2017/06/01 - 18:23:51
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 14
 Description     : Getting element position by value
-Started         : 2017/04/25 - 13:59:07
+Started         : 2017/06/01 - 18:23:51
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Position_By_Value
@@ -727,30 +727,30 @@ Message  : "In_List current list is empty"
     Will raise CryptAda_Index_Error
 [I] Caught CryptAda_Index_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
-Message  : "Invalids Start position"
+Message  : "Invalid Start_Position value"
 [I] Caught CryptAda_Index_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_INDEX_ERROR"
-Message  : "Invalids Start position"
+Message  : "Invalid Start_Position value"
 [I] Trying Position_By_Value with a null Value identifier
     Will raise CryptAda_Identifier_Error
 [I] On the unnamed list ...
 [I] Caught CryptAda_Identifier_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_IDENTIFIER_ERROR"
-Message  : "Supplied value is null"
+Message  : "Value is null"
 [I] On the named list ...
 [I] Caught CryptAda_Identifier_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_IDENTIFIER_ERROR"
-Message  : "Supplied value is null"
+Message  : "Value is null"
 [I] Trying Position_By_Value with an inexistent value
     Will raise CryptAda_Item_Not_Found_Error
 [I] On the unnamed list ...
 [I] Caught CryptAda_Item_Not_Found_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
-Message  : "Not found an item with value: "Five""
+Message  : "In_list does not contain an item with value: 'Five'"
 [I] On the named list ...
 [I] Caught CryptAda_Item_Not_Found_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR"
-Message  : "Not found an item with value: "Five""
+Message  : "In_list does not contain an item with value: 'Five'"
 [I] The unnamed list: (1,Two,"Three",Two)
 [I] On unnamed list. Getting the position of identifier: "Two" from the beginning of list
 [I] Position obtained:  2
@@ -765,13 +765,13 @@ Message  : "Not found an item with value: "Five""
 --------------------------------------------------------------------------------
 Test Case Number: 14
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 13:59:07
+Finished        : 2017/06/01 - 18:23:51
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 15
 Description     : Checking if an identifier item is enumerated
-Started         : 2017/04/25 - 13:59:07
+Started         : 2017/06/01 - 18:23:51
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Is_Enumerated (By Position)
@@ -799,11 +799,11 @@ Message  : "Invalid list position value"
     On an unnamed list
 [I] Caught CryptAda_Item_Kind_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-Message  : "Item is not an identifier"
+Message  : "Item at position  3 is not an identifier"
     On a named list
 [I] Caught CryptAda_Item_Kind_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-Message  : "Item is not an identifier"
+Message  : "Item at position  3 is not an identifier"
 [I] Checking whether or not the identifier items are enumerated
     On an unnamed list
     Item         :  1
@@ -832,13 +832,13 @@ Message  : "Item is not an identifier"
 --------------------------------------------------------------------------------
 Test Case Number: 15
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 13:59:07
+Finished        : 2017/06/01 - 18:23:51
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 16
 Description     : Checking if an identifier item is enumerated
-Started         : 2017/04/25 - 13:59:07
+Started         : 2017/06/01 - 18:23:51
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Is_Enumerated (By Name - Identifier)
@@ -860,7 +860,7 @@ Message  : "In_List current list is unnamed"
     Will raise CryptAda_Item_Kind_Error
 [I] Caught CryptAda_Item_Kind_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-Message  : "Item is not an identifier"
+Message  : "Item 'Three' is not an identifier"
 [I] Trying Is_Enumerated querying with a null identifier
     Will raise CryptAda_Identifier_Error
 [I] Caught CryptAda_Identifier_Error
@@ -886,13 +886,13 @@ Message  : "Item_Name is null"
 --------------------------------------------------------------------------------
 Test Case Number: 16
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 13:59:07
+Finished        : 2017/06/01 - 18:23:51
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 17
 Description     : Checking if an identifier item is enumerated
-Started         : 2017/04/25 - 13:59:07
+Started         : 2017/06/01 - 18:23:51
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
     - Is_Enumerated (By Name - Identifier_Text)
@@ -914,7 +914,7 @@ Message  : "In_List current list is unnamed"
     Will raise CryptAda_Item_Kind_Error
 [I] Caught CryptAda_Item_Kind_Error
 Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR"
-Message  : "Item is not an identifier"
+Message  : "Item 'Three' is not an identifier"
 [I] Trying Is_Enumerated querying with a syntax incorrect identifier text
     Will raise CryptAda_Syntax_Error
 [I] Caught CryptAda_Syntax_Error
@@ -940,11 +940,11 @@ Message  : "Identifier first character is not a letter"
 --------------------------------------------------------------------------------
 Test Case Number: 17
 Test Case Result: PASSED
-Finished        : 2017/04/25 - 13:59:07
+Finished        : 2017/06/01 - 18:23:51
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.Lists_Ids
-Finished                 : 2017/04/25 - 13:59:07
+Finished                 : 2017/06/01 - 18:23:51
 ================================================================================

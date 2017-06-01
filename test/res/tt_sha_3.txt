@@ -1,256 +1,232 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.c (2017/04/04)
+Version: 0.2.a (2017/05/30)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Time.SHA_3
-Description              : Time trial for CryptAda.Digests.Algorithms.SHA_3 functionality.
-Started                  : 2017/04/18 - 20:19:16
+Description              : Time trial for CryptAda.Digests.Message_Digests.SHA_3 functionality.
+Started                  : 2017/06/01 - 18:27:06
 ================================================================================
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 1
 Description      : SHA-3 224-bit hashing
-Started          : 2017/04/18 - 20:19:16
+Started          : 2017/06/01 - 18:27:06
 --------------------------------------------------------------------------------
 [I] Hash size     : SHA_3_224
     Hashing 1MB
 [I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.SHA_3.SHA_3_DIGEST"
-    CryptAda digest algorithm id  : "MD_SHA_3_224"
-    Digest algorithm SCAN name    : ""
-    Digest algorithm ASN1 OID     : "2.16.840.1.101.3.4.2.7"
-    Digest algorithm OpenPGP name : ""
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SHA_3.SHA_3_DIGEST"
+    CryptAda digest algorithm id  : "MD_SHA_3"
     State size (bytes)            :  200
     Input block size (bytes)      :  144
     Hash size (bytes)             :  28
-    Processed bit count           : ( 0,  0)
+    Processed bit count           : 16#00000000000000000000000000000000#
     Bytes to digest    :  1 MB
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.046014794 secs.
+    Elapsed time       :           0.045311406 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "AE9E436FE64153A579EC5385D167338F42DAFE49E8C1DEF4015E8905"
+    Obtained hash      : "4C634A6F4AEDAE771BD031D9FFB352C5DBC2D19D88AF0748F0DED159"
 --------------------------------------------------------------------------------
 Time Trial Number: 1
-Finished         : 2017/04/18 - 20:19:16
+Finished         : 2017/06/01 - 18:27:06
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 2
 Description      : SHA-3 224-bit hashing
-Started          : 2017/04/18 - 20:19:16
+Started          : 2017/06/01 - 18:27:06
 --------------------------------------------------------------------------------
 [I] Hash size     : SHA_3_224
     Hashing 10MB
 [I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.SHA_3.SHA_3_DIGEST"
-    CryptAda digest algorithm id  : "MD_SHA_3_224"
-    Digest algorithm SCAN name    : ""
-    Digest algorithm ASN1 OID     : "2.16.840.1.101.3.4.2.7"
-    Digest algorithm OpenPGP name : ""
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SHA_3.SHA_3_DIGEST"
+    CryptAda digest algorithm id  : "MD_SHA_3"
     State size (bytes)            :  200
     Input block size (bytes)      :  144
     Hash size (bytes)             :  28
-    Processed bit count           : ( 0,  0)
+    Processed bit count           : 16#00000000000000000000000000000000#
     Bytes to digest    :  10 MB
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.462945555 secs.
+    Elapsed time       :           0.456173004 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "1FAFA201B48E2BF241998CF4FD2FB6F92DAAACB35BF83AF7CDA3C956"
+    Obtained hash      : "AE7B973B4AF2351FF1D5B5A20A9BA81892DB8FA4396A182E9A14F668"
 --------------------------------------------------------------------------------
 Time Trial Number: 2
-Finished         : 2017/04/18 - 20:19:16
+Finished         : 2017/06/01 - 18:27:06
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 3
 Description      : SHA-3 256-bit hashing
-Started          : 2017/04/18 - 20:19:16
+Started          : 2017/06/01 - 18:27:06
 --------------------------------------------------------------------------------
 [I] Hash size     : SHA_3_256
     Hashing 1MB
 [I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.SHA_3.SHA_3_DIGEST"
-    CryptAda digest algorithm id  : "MD_SHA_3_256"
-    Digest algorithm SCAN name    : ""
-    Digest algorithm ASN1 OID     : "2.16.840.1.101.3.4.2.8"
-    Digest algorithm OpenPGP name : ""
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SHA_3.SHA_3_DIGEST"
+    CryptAda digest algorithm id  : "MD_SHA_3"
     State size (bytes)            :  200
     Input block size (bytes)      :  136
     Hash size (bytes)             :  32
-    Processed bit count           : ( 0,  0)
+    Processed bit count           : 16#00000000000000000000000000000000#
     Bytes to digest    :  1 MB
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.048293845 secs.
+    Elapsed time       :           0.047660496 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "053EEF8CDCB5B5828D6B7E6B1E70709E6B26E1FE84C6938B7567A52848948179"
+    Obtained hash      : "310A33908AE1C6DA66304B9025BD19E257E5546CB79D84C78298359ECCFE8BA3"
 --------------------------------------------------------------------------------
 Time Trial Number: 3
-Finished         : 2017/04/18 - 20:19:16
+Finished         : 2017/06/01 - 18:27:06
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 4
 Description      : SHA-3 256-bit hashing
-Started          : 2017/04/18 - 20:19:16
+Started          : 2017/06/01 - 18:27:06
 --------------------------------------------------------------------------------
 [I] Hash size     : SHA_3_256
     Hashing 10MB
 [I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.SHA_3.SHA_3_DIGEST"
-    CryptAda digest algorithm id  : "MD_SHA_3_256"
-    Digest algorithm SCAN name    : ""
-    Digest algorithm ASN1 OID     : "2.16.840.1.101.3.4.2.8"
-    Digest algorithm OpenPGP name : ""
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SHA_3.SHA_3_DIGEST"
+    CryptAda digest algorithm id  : "MD_SHA_3"
     State size (bytes)            :  200
     Input block size (bytes)      :  136
     Hash size (bytes)             :  32
-    Processed bit count           : ( 0,  0)
+    Processed bit count           : 16#00000000000000000000000000000000#
     Bytes to digest    :  10 MB
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.487733306 secs.
+    Elapsed time       :           0.478405585 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "874D1F9F3C61F8115E910DFEA6CEE8104733F01EFF771A462D1B758E3DEBECC9"
+    Obtained hash      : "BBA076A807AC08CE380ADD549ED1AE0F92FB33D2E95DB0D3AA857402EDE1B3B3"
 --------------------------------------------------------------------------------
 Time Trial Number: 4
-Finished         : 2017/04/18 - 20:19:17
+Finished         : 2017/06/01 - 18:27:07
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 5
 Description      : SHA-3 384-bit hashing
-Started          : 2017/04/18 - 20:19:17
+Started          : 2017/06/01 - 18:27:07
 --------------------------------------------------------------------------------
 [I] Hash size     : SHA_3_384
     Hashing 1MB
 [I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.SHA_3.SHA_3_DIGEST"
-    CryptAda digest algorithm id  : "MD_SHA_3_384"
-    Digest algorithm SCAN name    : ""
-    Digest algorithm ASN1 OID     : "2.16.840.1.101.3.4.2.9"
-    Digest algorithm OpenPGP name : ""
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SHA_3.SHA_3_DIGEST"
+    CryptAda digest algorithm id  : "MD_SHA_3"
     State size (bytes)            :  200
     Input block size (bytes)      :  104
     Hash size (bytes)             :  48
-    Processed bit count           : ( 0,  0)
+    Processed bit count           : 16#00000000000000000000000000000000#
     Bytes to digest    :  1 MB
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.062341713 secs.
+    Elapsed time       :           0.061737007 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "D2ED6304C0CD638C3286BFBCA25508525298377CA23BB9432C2CAD6BAA83CE37A8B1DA5C6966AE27B0C6280377C57C10"
+    Obtained hash      : "813EB45B12F02C75C174099D48162741584A1385DEF085EBD0B3018FF77D2DCE8CF48A5FE3BC1CD7340B1E7EEF53271C"
 --------------------------------------------------------------------------------
 Time Trial Number: 5
-Finished         : 2017/04/18 - 20:19:17
+Finished         : 2017/06/01 - 18:27:07
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 6
 Description      : SHA-3 384-bit hashing
-Started          : 2017/04/18 - 20:19:17
+Started          : 2017/06/01 - 18:27:07
 --------------------------------------------------------------------------------
 [I] Hash size     : SHA_3_384
     Hashing 10MB
 [I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.SHA_3.SHA_3_DIGEST"
-    CryptAda digest algorithm id  : "MD_SHA_3_384"
-    Digest algorithm SCAN name    : ""
-    Digest algorithm ASN1 OID     : "2.16.840.1.101.3.4.2.9"
-    Digest algorithm OpenPGP name : ""
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SHA_3.SHA_3_DIGEST"
+    CryptAda digest algorithm id  : "MD_SHA_3"
     State size (bytes)            :  200
     Input block size (bytes)      :  104
     Hash size (bytes)             :  48
-    Processed bit count           : ( 0,  0)
+    Processed bit count           : 16#00000000000000000000000000000000#
     Bytes to digest    :  10 MB
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.643215051 secs.
+    Elapsed time       :           0.622286567 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "22C04074E649349D395EB651F22E1197940BDA4F952036B9F87B97E0E84B9D8BF9EDD4CA0FDE74C2628702021C159718"
+    Obtained hash      : "2230F647C7E3CB95AEA30945FB2321282BF73A0FFD1416B9086174CDA927741609827F92FB5E002B3FEF7357AB220BC5"
 --------------------------------------------------------------------------------
 Time Trial Number: 6
-Finished         : 2017/04/18 - 20:19:17
+Finished         : 2017/06/01 - 18:27:07
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 7
 Description      : SHA-3 512-bit hashing
-Started          : 2017/04/18 - 20:19:17
+Started          : 2017/06/01 - 18:27:07
 --------------------------------------------------------------------------------
 [I] Hash size     : SHA_3_512
     Hashing 1MB
 [I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.SHA_3.SHA_3_DIGEST"
-    CryptAda digest algorithm id  : "MD_SHA_3_512"
-    Digest algorithm SCAN name    : ""
-    Digest algorithm ASN1 OID     : "2.16.840.1.101.3.4.2.10"
-    Digest algorithm OpenPGP name : ""
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SHA_3.SHA_3_DIGEST"
+    CryptAda digest algorithm id  : "MD_SHA_3"
     State size (bytes)            :  200
     Input block size (bytes)      :  72
     Hash size (bytes)             :  64
-    Processed bit count           : ( 0,  0)
+    Processed bit count           : 16#00000000000000000000000000000000#
     Bytes to digest    :  1 MB
     Buffer size        :  1 KB
     Iterations         :  1024
 [I] Time trial completed
-    Elapsed time       :           0.089810340 secs.
+    Elapsed time       :           0.088005023 secs.
     Counter (Low, High): ( 8388608,  0)
-    Obtained hash      : "F5E30CAA45B293299FA77E0CF7068880026818376E3018583C942F7B45E63953108FD8CCCC34EA9178463FC2F2F93C26B7AD2E79FE6F868282A143BE8E49767A"
+    Obtained hash      : "18F391551A4298F0241F1A1CBAC8A33AB7DB115AAE52E2665EB9804AD671E2E447C109063D31A7A408B42543576A823EAE6338EC6FB7FE0B0AB2B70B03523D07"
 --------------------------------------------------------------------------------
 Time Trial Number: 7
-Finished         : 2017/04/18 - 20:19:17
+Finished         : 2017/06/01 - 18:27:08
 --[End Time Trial]--------------------------------------------------------------
 
 --[Begin Time Trial]------------------------------------------------------------
 Time Trial Number: 8
 Description      : SHA-3 512-bit hashing
-Started          : 2017/04/18 - 20:19:17
+Started          : 2017/06/01 - 18:27:08
 --------------------------------------------------------------------------------
 [I] Hash size     : SHA_3_512
     Hashing 10MB
 [I] Starting time trial for digest algorithm.
-[I] Information of digest object:
-    Digest object tag name        : "CRYPTADA.DIGESTS.ALGORITHMS.SHA_3.SHA_3_DIGEST"
-    CryptAda digest algorithm id  : "MD_SHA_3_512"
-    Digest algorithm SCAN name    : ""
-    Digest algorithm ASN1 OID     : "2.16.840.1.101.3.4.2.10"
-    Digest algorithm OpenPGP name : ""
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SHA_3.SHA_3_DIGEST"
+    CryptAda digest algorithm id  : "MD_SHA_3"
     State size (bytes)            :  200
     Input block size (bytes)      :  72
     Hash size (bytes)             :  64
-    Processed bit count           : ( 0,  0)
+    Processed bit count           : 16#00000000000000000000000000000000#
     Bytes to digest    :  10 MB
     Buffer size        :  4 KB
     Iterations         :  2560
 [I] Time trial completed
-    Elapsed time       :           0.902317841 secs.
+    Elapsed time       :           0.893764654 secs.
     Counter (Low, High): ( 83886080,  0)
-    Obtained hash      : "B5C9EEC8D7D22CBDCFED1FD4DC409947DC4D9EF415FA6D71252AEF0E361D05AD9394E624312E4BEDA487FB21EB0B186C64373BE9EB6C572B0257308E6B8ECC01"
+    Obtained hash      : "B1063F4B362E25DFFDE813D7865DE01301333FE4EFD4D26CE559674431566B83685410AFF38654C774524CCF6D0E37CF3EAB98833E06C9FC8FEB32B30B662A09"
 --------------------------------------------------------------------------------
 Time Trial Number: 8
-Finished         : 2017/04/18 - 20:19:18
+Finished         : 2017/06/01 - 18:27:08
 --[End Time Trial]--------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Time.SHA_3
-Finished                 : 2017/04/18 - 20:19:18
+Finished                 : 2017/06/01 - 18:27:08
 ================================================================================

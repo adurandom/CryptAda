@@ -20,7 +20,7 @@
 --    File kind         :  Ada package body
 --    Author            :  A. Duran
 --    Creation date     :  March 28th, 2017
---    Current version   :  1.2
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the Blowfish block cipher.
@@ -31,9 +31,13 @@
 --    1.0   20170328 ADD   Initial implementation.
 --    1.1   20170331 ADD   Removed key generation subprogram.
 --    1.2   20170403 ADD   Changed symmetric ciphers hierarchy.
+--    2.0   20170529 ADD   Changed types.
 --------------------------------------------------------------------------------
 
+with Ada.Exceptions;                   use Ada.Exceptions;
+
 with CryptAda.Pragmatics;              use CryptAda.Pragmatics;
+with CryptAda.Lists;                   use CryptAda.Lists;
 with CryptAda.Names;                   use CryptAda.Names;
 with CryptAda.Exceptions;              use CryptAda.Exceptions;
 with CryptAda.Ciphers.Keys;            use CryptAda.Ciphers.Keys;
@@ -242,6 +246,12 @@ package body CryptAda.Ciphers.Symmetric.Block.Blowfish is
    --[Subprogram Specification]-------------------------------------------------
    -----------------------------------------------------------------------------
 
+   --[Initialize_Object]--------------------------------------------------------
+
+   procedure   Initialize_Object(
+                  Object         : access Blowfish_Cipher);
+   pragma Inline(Initialize_Object);
+   
    --[Pack_Block]---------------------------------------------------------------
 
    function    Pack_Block(
@@ -285,6 +295,19 @@ package body CryptAda.Ciphers.Symmetric.Block.Blowfish is
    --[Body declared subprogram bodies]------------------------------------------
    -----------------------------------------------------------------------------
 
+   --[Initialize_Object]--------------------------------------------------------
+
+   procedure   Initialize_Object(
+                  Object         : access Blowfish_Cipher)
+   is
+   begin
+      -- Set to initial value any attribute which is modified in this package
+
+      Object.all.State        := Idle;
+      Object.all.P_Array      := (others => 16#00000000#);
+      Object.all.S_Boxes      := (others => 16#00000000#);
+   end Initialize_Object;
+   
    --[Pack_Block]---------------------------------------------------------------
 
    function    Pack_Block(
@@ -467,98 +490,160 @@ package body CryptAda.Ciphers.Symmetric.Block.Blowfish is
    end Do_Block;
 
    -----------------------------------------------------------------------------
-   --[Spec declared subprogram bodies]------------------------------------------
+   --[Getting a handle]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Ada.Finalization interface]-----------------------------------------------
+   --[Get_Symmetric_Cipher_Handle]----------------------------------------------
+
+   function    Get_Symmetric_Cipher_Handle
+      return   Symmetric_Cipher_Handle
+   is
+      P           : Blowfish_Cipher_Ptr;
+   begin
+      P := new Blowfish_Cipher'(Block_Cipher with
+                                 Id          => SC_Blowfish,
+                                 P_Array     => (others => 16#00000000#),
+                                 S_Boxes     => (others => 16#00000000#));
+                                 
+      P.all.Ciph_Type   := CryptAda.Ciphers.Block_Cipher;
+      P.all.Key_Info    := Blowfish_Key_Info;
+      P.all.State       := Idle;
+      P.all.Block_Size  := Blowfish_Block_Size;
+
+      return Ref(Symmetric_Cipher_Ptr(P));
+   exception
+      when X: others =>
+         Raise_Exception(
+            CryptAda_Storage_Error'Identity,
+            "Caught exception: '" &
+               Exception_Name(X) &
+               "' with message: '" &
+               Exception_Message(X) &
+               "', when allocating Blowfish_Cipher object");
+   end Get_Symmetric_Cipher_Handle;
+
+   -----------------------------------------------------------------------------
+   --[Ada.Finalization Operations]----------------------------------------------
+   -----------------------------------------------------------------------------
 
    --[Initialize]---------------------------------------------------------------
 
+   overriding
    procedure   Initialize(
                   Object         : in out Blowfish_Cipher)
    is
    begin
-      Object.Cipher_Id  := SC_Blowfish;
       Object.Ciph_Type  := CryptAda.Ciphers.Block_Cipher;
       Object.Key_Info   := Blowfish_Key_Info;
       Object.State      := Idle;
       Object.Block_Size := Blowfish_Block_Size;
-      Object.P_Array    := (others => 0);
-      Object.S_Boxes    := (others => 0);
+      Object.P_Array    := (others => 16#00000000#);
+      Object.S_Boxes    := (others => 16#00000000#);
    end Initialize;
 
    --[Finalize]-----------------------------------------------------------------
 
+   overriding
    procedure   Finalize(
                   Object         : in out Blowfish_Cipher)
    is
    begin
       Object.State      := Idle;
-      Object.P_Array    := (others => 0);
-      Object.S_Boxes    := (others => 0);
+      Object.P_Array    := (others => 16#00000000#);
+      Object.S_Boxes    := (others => 16#00000000#);
    end Finalize;
-   
-   --[Dispatching Operations]---------------------------------------------------
 
+   -----------------------------------------------------------------------------
+   --[Dispatching operations]---------------------------------------------------
+   -----------------------------------------------------------------------------
+   
    --[Start_Cipher]-------------------------------------------------------------
 
+   overriding
    procedure   Start_Cipher(
-                  The_Cipher     : in out Blowfish_Cipher;
+                  The_Cipher     : access Blowfish_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     Key)
    is
    begin
-
       -- Veriify that key is a valid Blowfish key.
 
       if not Is_Valid_Blowfish_Key(With_Key) then
-         raise CryptAda_Invalid_Key_Error;
+         Raise_Exception(
+            CryptAda_Invalid_Key_Error'Identity,
+            "Invalid Blowfish key");
       end if;
 
       -- Build key.
 
-      Build_Key(The_Cipher.P_Array, The_Cipher.S_Boxes, With_Key, For_Operation);
+      Build_Key(
+         The_Cipher.all.P_Array, 
+         The_Cipher.all.S_Boxes, 
+         With_Key, 
+         For_Operation);
 
       -- Set state.
 
       if For_Operation = Encrypt then
-         The_Cipher.State  := Encrypting;
+         The_Cipher.all.State := Encrypting;
       else
-         The_Cipher.State  := Decrypting;
+         The_Cipher.all.State := Decrypting;
       end if;
    end Start_Cipher;
 
+   --[Start_Cipher]-------------------------------------------------------------
+
+   overriding
+   procedure   Start_Cipher(
+                  The_Cipher     : access Blowfish_Cipher;
+                  Parameters     : in     List)
+   is
+      O              : Cipher_Operation;
+      K              : Key;
+   begin
+      Get_Parameters(Parameters, O, K);
+      Start_Cipher(The_Cipher, O, K);
+   end Start_Cipher;
+   
    --[Do_Process]---------------------------------------------------------------
 
+   overriding
    procedure   Do_Process(
-                  With_Cipher    : in out Blowfish_Cipher;
+                  With_Cipher    : access Blowfish_Cipher;
                   Input          : in     Byte_Array;
                   Output         :    out Byte_Array)
    is
    begin
-      if With_Cipher.State = Idle then
-         raise CryptAda_Uninitialized_Cipher_Error;
-      else
-         if Input'Length /= Blowfish_Block_Size or
-            Output'Length /= Blowfish_Block_Size then
-            raise CryptAda_Invalid_Block_Length_Error;
-         else
-            Do_Block(With_Cipher.P_Array, With_Cipher.S_Boxes, Input, Output);
-         end if;
+      -- Check state.
+      
+      if With_Cipher.all.State = Idle then
+         Raise_Exception(
+            CryptAda_Uninitialized_Cipher_Error'Identity,
+            "Blowfish cipher is in Idle state");
       end if;
+
+      -- Check block lengths
+      
+      if Input'Length /= Blowfish_Block_Size or
+         Output'Length /= Blowfish_Block_Size then
+         Raise_Exception(
+            CryptAda_Invalid_Block_Length_Error'Identity,
+            "Invalid block length");               
+      end if;
+      
+      -- Process block.
+      
+      Do_Block(With_Cipher.all.P_Array, With_Cipher.all.S_Boxes, Input, Output);
    end Do_Process;
 
    --[Stop_Cipher]--------------------------------------------------------------
 
+   overriding
    procedure   Stop_Cipher(
-                  The_Cipher     : in out Blowfish_Cipher)
+                  The_Cipher     : access Blowfish_Cipher)
    is
    begin
-      if The_Cipher.State /= Idle then
-         The_Cipher.P_Array   := (others => 0);
-         The_Cipher.S_Boxes   := (others => 0);
-         The_Cipher.State     := Idle;
-      end if;
+      Initialize_Object(The_Cipher);
    end Stop_Cipher;
 
    --[Other public subprograms]-------------------------------------------------

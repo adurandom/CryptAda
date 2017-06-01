@@ -23,7 +23,7 @@
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Time trial for CryptAda.Digests.Algorithms.Snefru.
+--    Time trial for CryptAda.Digests.Message_Digests.Snefru.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
@@ -37,7 +37,8 @@ with CryptAda.Tests.Utils;                   use CryptAda.Tests.Utils;
 with CryptAda.Tests.Time.Digests;            use CryptAda.Tests.Time.Digests;
 
 
-with CryptAda.Digests.Algorithms.Snefru;     use CryptAda.Digests.Algorithms.Snefru;
+with CryptAda.Digests.Message_Digests;    use CryptAda.Digests.Message_Digests;
+with CryptAda.Digests.Message_Digests.Snefru; use CryptAda.Digests.Message_Digests.Snefru;
 
 package body CryptAda.Tests.Time.Snefru is
 
@@ -47,7 +48,7 @@ package body CryptAda.Tests.Time.Snefru is
 
    Driver_Name                   : constant String := "CryptAda.Tests.Time.Snefru";
 
-   Driver_Description            : constant String := "Time trial for CryptAda.Digests.Algorithms.Snefru functionality.";
+   Driver_Description            : constant String := "Time trial for CryptAda.Digests.Message_Digests.Snefru functionality.";
 
    -----------------------------------------------------------------------------
    --[Test Cases Specs]---------------------------------------------------------
@@ -66,7 +67,8 @@ package body CryptAda.Tests.Time.Snefru is
 
    procedure Case_1
    is
-      D           : Snefru_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant Snefru_Digest_Ptr := Snefru_Digest_Ptr(Get_Message_Digest_Ptr(MDH));
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(1, "Snefru 128-bit hashing");
@@ -75,10 +77,11 @@ package body CryptAda.Tests.Time.Snefru is
          Print_Information_Message("Hash size     : " & Snefru_Hash_Size'Image(Snefru_128));
          Print_Message("Security level: " & Snefru_Security_Level'Image(I), "    ");
          Print_Message("Hashing 1MB", "    ");
-         Digest_Start(D, I, Snefru_128);
-         Digest_Time_Trial(D, 1, 1, Elapsed);
+         Digest_Start(MDP, Snefru_128, I);
+         Digest_Time_Trial(MDH, 1, 1, Elapsed);
       end loop;
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(1);
    exception
       when X: others =>
@@ -94,7 +97,8 @@ package body CryptAda.Tests.Time.Snefru is
 
    procedure Case_2
    is
-      D           : Snefru_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant Snefru_Digest_Ptr := Snefru_Digest_Ptr(Get_Message_Digest_Ptr(MDH));
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(2, "Snefru 128-bit hashing");
@@ -103,10 +107,11 @@ package body CryptAda.Tests.Time.Snefru is
          Print_Information_Message("Hash size     : " & Snefru_Hash_Size'Image(Snefru_128));
          Print_Message("Security level: " & Snefru_Security_Level'Image(I), "    ");
          Print_Message("Hashing 10MB", "    ");
-         Digest_Start(D, I, Snefru_128);
-         Digest_Time_Trial(D, 10, 4, Elapsed);
+         Digest_Start(MDP, Snefru_128, I);
+         Digest_Time_Trial(MDH, 10, 4, Elapsed);
       end loop;
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(2);
    exception
       when X: others =>
@@ -122,7 +127,8 @@ package body CryptAda.Tests.Time.Snefru is
 
    procedure Case_3
    is
-      D           : Snefru_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant Snefru_Digest_Ptr := Snefru_Digest_Ptr(Get_Message_Digest_Ptr(MDH));
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(3, "Snefru 256-bit hashing");
@@ -131,10 +137,11 @@ package body CryptAda.Tests.Time.Snefru is
          Print_Information_Message("Hash size     : " & Snefru_Hash_Size'Image(Snefru_256));
          Print_Message("Security level: " & Snefru_Security_Level'Image(I), "    ");
          Print_Message("Hashing 1MB", "    ");
-         Digest_Start(D, I, Snefru_256);
-         Digest_Time_Trial(D, 1, 1, Elapsed);
+         Digest_Start(MDP, Snefru_256, I);
+         Digest_Time_Trial(MDH, 1, 1, Elapsed);
       end loop;
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(3);
    exception
       when X: others =>
@@ -150,7 +157,8 @@ package body CryptAda.Tests.Time.Snefru is
 
    procedure Case_4
    is
-      D           : Snefru_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant Snefru_Digest_Ptr := Snefru_Digest_Ptr(Get_Message_Digest_Ptr(MDH));
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(4, "Snefru 256-bit hashing");
@@ -159,10 +167,11 @@ package body CryptAda.Tests.Time.Snefru is
          Print_Information_Message("Hash size     : " & Snefru_Hash_Size'Image(Snefru_256));
          Print_Message("Security level: " & Snefru_Security_Level'Image(I), "    ");
          Print_Message("Hashing 10MB", "    ");
-         Digest_Start(D, I, Snefru_256);
-         Digest_Time_Trial(D, 10, 4, Elapsed);
+         Digest_Start(MDP, Snefru_256, I);
+         Digest_Time_Trial(MDH, 10, 4, Elapsed);
       end loop;
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(4);
    exception
       when X: others =>

@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 28th, 2017
---    Current version   :  1.2
+--    Current version   :  2.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    Implements the Blowfish block cipher.
@@ -36,10 +36,8 @@
 --    1.0   20170328 ADD   Initial implementation.
 --    1.1   20170331 ADD   Removed key generation subprogram.
 --    1.2   20170403 ADD   Changed symmetric ciphers hierarchy.
+--    2.0   20170529 ADD   Changed types.
 --------------------------------------------------------------------------------
-
-with CryptAda.Pragmatics;
-with CryptAda.Ciphers.Keys;
 
 package CryptAda.Ciphers.Symmetric.Block.Blowfish is
 
@@ -63,6 +61,12 @@ package CryptAda.Ciphers.Symmetric.Block.Blowfish is
 
    type Blowfish_Cipher is new Block_Cipher with private;
 
+   --[Blowfish_Cipher_Ptr]------------------------------------------------------
+   -- Access to Blowfish objects.
+   -----------------------------------------------------------------------------
+
+   type Blowfish_Cipher_Ptr is access all Blowfish_Cipher'Class;
+   
    --[Blowfish_Block]-----------------------------------------------------------
    -- Constrained subtype for Blowfish blocks.
    -----------------------------------------------------------------------------
@@ -76,32 +80,62 @@ package CryptAda.Ciphers.Symmetric.Block.Blowfish is
    subtype Blowfish_Key_Length is Cipher_Key_Length range 4 .. 56;
 
    -----------------------------------------------------------------------------
+   --[Getting a handle]---------------------------------------------------------
+   -----------------------------------------------------------------------------
+   
+   --[Get_Symmetric_Cipher_Handle]----------------------------------------------
+   -- Purpose:
+   -- Creates a Symmetric_Cipher object and returns a handle for that object.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- None.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Symmetric_Cipher_Handle value that handles the reference to the newly 
+   -- created Symmetric_Cipher object.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CrtyptAda_Storage_Error if an error is raised during object allocation.
+   -----------------------------------------------------------------------------
+
+   function    Get_Symmetric_Cipher_Handle
+      return   Symmetric_Cipher_Handle;
+   
+   -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Encrypt/Decrypt Interface]------------------------------------------------
-
    --[Start_Cipher]-------------------------------------------------------------
 
+   overriding
    procedure   Start_Cipher(
-                  The_Cipher     : in out Blowfish_Cipher;
+                  The_Cipher     : access Blowfish_Cipher;
                   For_Operation  : in     Cipher_Operation;
                   With_Key       : in     CryptAda.Ciphers.Keys.Key);
 
+   --[Start_Cipher]-------------------------------------------------------------
+
+   overriding
+   procedure   Start_Cipher(
+                  The_Cipher     : access Blowfish_Cipher;
+                  Parameters     : in     CryptAda.Lists.List);
+   
    --[Do_Process]---------------------------------------------------------------
 
+   overriding
    procedure   Do_Process(
-                  With_Cipher    : in out Blowfish_Cipher;
+                  With_Cipher    : access Blowfish_Cipher;
                   Input          : in     CryptAda.Pragmatics.Byte_Array;
                   Output         :    out CryptAda.Pragmatics.Byte_Array);
 
    --[Stop_Cipher]--------------------------------------------------------------
 
+   overriding
    procedure   Stop_Cipher(
-                  The_Cipher     : in out Blowfish_Cipher);
-
+                  The_Cipher     : access Blowfish_Cipher);
+      
    -----------------------------------------------------------------------------
-   --[Non-Dispatching Operations]-----------------------------------------------
+   --[Non-dispatching operations]-----------------------------------------------
    -----------------------------------------------------------------------------
 
    --[Is_Valid_Blowfish_Key]----------------------------------------------------
@@ -191,9 +225,11 @@ private
    --[Subprogram specifications]------------------------------------------------
    -----------------------------------------------------------------------------
 
+   overriding
    procedure   Initialize(
                   Object         : in out Blowfish_Cipher);
 
+   overriding
    procedure   Finalize(
                   Object         : in out Blowfish_Cipher);
 

@@ -1,18 +1,81 @@
 ================================================================================
 TCantos Ada Cryptography Library (CryptAda)
-Version: 0.1.c (2017/04/04)
+Version: 0.2.a (2017/05/30)
 Copyright (c) 2017, Antonio Duran
 ================================================================================
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.PRNG_RSAREF
 Description              : Unit test driver for CryptAda.Random.Generators.RSAREF functionality.
-Started                  : 2017/04/18 - 20:18:49
+Started                  : 2017/06/01 - 18:25:24
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
+Description     : Getting a handle for random generator objects
+Started         : 2017/06/01 - 18:25:24
+--------------------------------------------------------------------------------
+[I] Subprograms tested: 
+    - Get_Random_Generator_Handle
+    - Is_Valid_Handle
+    - Invalidate_Handle
+    - Get_Random_Generator_Ptr
+[I] Before Get_Random_Generator_Handle the handle is invalid:
+[I] Handle is invalid
+[I] Getting a pointer from an invalid handle will return null
+[I] Pointer is null
+[I] Trying any operation with a null pointer will raise Constraint_Error
+    Trying Random_Start
+[I] Caught Constraint_Error
+    Exception: "CONSTRAINT_ERROR"
+    Message  : "cryptada-tests-unit-rsaref.adb:130 access check failed"
+[I] Getting a random generator handle
+[I] Information on handle BEFORE calling Get_Random_Generator_Handle
+[I] Invalid random generator handle
+[I] Information on handle AFTER calling Get_Random_Generator_Handle
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.RSAREF.RSAREF_GENERATOR"
+    CryptAda random generator id  : "RG_RSAREF"
+    Is started                    : "FALSE"
+    Is seeded                     : "FALSE"
+[I] Now the handle must be valid:
+[I] Handle is valid
+[I] Getting a pointer from a valid handle will return a not null value
+[I] Pointer is not null
+[I] Trying Random_Start_And_Seed
+[I] Information on handle AFTER calling Random_Start_And_Seed
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.RSAREF.RSAREF_GENERATOR"
+    CryptAda random generator id  : "RG_RSAREF"
+    Is started                    : "TRUE"
+    Is seeded                     : "TRUE"
+    Seed bytes needed             : " 0"
+[I] Trying Random_Stop
+[I] Information on handle AFTER calling Random_Stop
+[I] Information of random generator object:
+    Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.RSAREF.RSAREF_GENERATOR"
+    CryptAda random generator id  : "RG_RSAREF"
+    Is started                    : "FALSE"
+    Is seeded                     : "FALSE"
+[I] Invalidating handle
+[I] Information on handle AFTER calling Invalidate_Handle
+[I] Invalid random generator handle
+[I] Handle is invalid
+[I] Using a pointer from an invalid handle must result in an exception
+    Trying Digest_Start
+[I] Caught Constraint_Error
+    Exception: "CONSTRAINT_ERROR"
+    Message  : "cryptada-tests-unit-rsaref.adb:203 access check failed"
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:25:24
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
 Description     : Trying to call operations without starting the PRNG
-Started         : 2017/04/18 - 20:18:49
+Started         : 2017/06/01 - 18:25:24
 --------------------------------------------------------------------------------
 [I] Random generator not started
 Operations must raise CryptAda_Generator_Not_Started_Error
@@ -29,15 +92,15 @@ Operations must raise CryptAda_Generator_Not_Started_Error
 [I] Raised CryptAda_Generator_Not_Started_Error
 [I] Test case OK
 --------------------------------------------------------------------------------
-Test Case Number: 1
+Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:49
+Finished        : 2017/06/01 - 18:25:24
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 2
+Test Case Number: 3
 Description     : Trying to call operations without seeding the PRNG
-Started         : 2017/04/18 - 20:18:49
+Started         : 2017/06/01 - 18:25:24
 --------------------------------------------------------------------------------
 [I] Operations must raise CryptAda_Generator_Need_Seeding_Error
 [I] Information of random generator object:
@@ -64,15 +127,15 @@ Started         : 2017/04/18 - 20:18:49
     Is seeded                     : "FALSE"
 [I] Test case OK
 --------------------------------------------------------------------------------
-Test Case Number: 2
+Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:49
+Finished        : 2017/06/01 - 18:25:24
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 3
+Test Case Number: 4
 Description     : Seeding with external seeder.
-Started         : 2017/04/18 - 20:18:49
+Started         : 2017/06/01 - 18:25:24
 --------------------------------------------------------------------------------
 [I] Seeding random generator with external seeder ...
 [I] Information of random generator object:
@@ -187,8 +250,8 @@ Random_Seed call  13
     Seed bytes needed             : " 0"
 [I] Getting a random byte array ...
 [I] Obtained byte array:
-16#98#, 16#08#, 16#FA#, 16#E5#, 16#BC#, 16#56#, 16#9A#, 16#C5#, 16#55#, 16#1C#, 
-16#8F#, 16#C3#, 16#E9#, 16#B0#, 16#25#, 16#B2#, 16#64#, 16#0A#, 16#8F#, 16#5D#
+16#7D#, 16#53#, 16#93#, 16#D1#, 16#5E#, 16#CE#, 16#46#, 16#03#, 16#4C#, 16#09#, 
+16#53#, 16#10#, 16#67#, 16#C9#, 16#47#, 16#80#, 16#00#, 16#92#, 16#71#, 16#40#
 [I] Calling Random_Stop
 [I] Information of random generator object:
     Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.RSAREF.RSAREF_GENERATOR"
@@ -197,15 +260,15 @@ Random_Seed call  13
     Is seeded                     : "FALSE"
 [I] Test case OK
 --------------------------------------------------------------------------------
-Test Case Number: 3
+Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:49
+Finished        : 2017/06/01 - 18:25:24
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 4
+Test Case Number: 5
 Description     : Seeding with internal seeder.
-Started         : 2017/04/18 - 20:18:49
+Started         : 2017/06/01 - 18:25:24
 --------------------------------------------------------------------------------
 [I] Seeding random generator with internal seeder ...
 [I] Information of random generator object:
@@ -222,8 +285,8 @@ Started         : 2017/04/18 - 20:18:49
     Seed bytes needed             : " 0"
 [I] Getting a random byte array ...
 [I] Obtained byte array:
-16#6F#, 16#21#, 16#C5#, 16#19#, 16#80#, 16#46#, 16#EF#, 16#34#, 16#E3#, 16#C1#, 
-16#98#, 16#42#, 16#B3#, 16#B6#, 16#00#, 16#65#, 16#67#, 16#DF#, 16#87#, 16#41#
+16#9E#, 16#C8#, 16#37#, 16#F5#, 16#D7#, 16#B4#, 16#E7#, 16#BB#, 16#6D#, 16#F7#, 
+16#52#, 16#DC#, 16#73#, 16#47#, 16#C8#, 16#8A#, 16#AD#, 16#D5#, 16#CE#, 16#B0#
 [I] Calling Random_Stop
 [I] Information of random generator object:
     Digest object tag name        : "CRYPTADA.RANDOM.GENERATORS.RSAREF.RSAREF_GENERATOR"
@@ -232,15 +295,15 @@ Started         : 2017/04/18 - 20:18:49
     Is seeded                     : "FALSE"
 [I] Test case OK
 --------------------------------------------------------------------------------
-Test Case Number: 4
+Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:49
+Finished        : 2017/06/01 - 18:25:24
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 5
+Test Case Number: 6
 Description     : Chi-square test
-Started         : 2017/04/18 - 20:18:49
+Started         : 2017/06/01 - 18:25:24
 --------------------------------------------------------------------------------
 [I] Running Chi-Square test for random generator:
 [I] Information of random generator object:
@@ -263,19 +326,19 @@ Started         : 2017/04/18 - 20:18:49
 [I] Running test on Ada.Numerics.Discrete_Random ...
 [I] Test completed.
 [I] Chi-Square test results for CryptAda PRNG:
-    - Computed chi-square: 251.000. Test result => OK
+    - Computed chi-square: 276.000. Test result => OK
 [I] Chi-Square test results for Ada.Numerics.Discrete_Random:
-    - Computed chi-square: 255.000. Test result => OK
+    - Computed chi-square: 258.000. Test result => OK
 --------------------------------------------------------------------------------
-Test Case Number: 5
+Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:50
+Finished        : 2017/06/01 - 18:25:25
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
-Test Case Number: 6
+Test Case Number: 7
 Description     : FIPS PUB 140-2 RNG statistical tests
-Started         : 2017/04/18 - 20:18:50
+Started         : 2017/06/01 - 18:25:25
 --------------------------------------------------------------------------------
 [I] Running FIPS PUB 140-2 tests for random generator:
 [I] Information of random generator object:
@@ -306,62 +369,62 @@ Started         : 2017/04/18 - 20:18:50
        - Acceptable bounds:
          Lower =>  9725
          Upper =>  10275
-       - Obtained result: 9989. Test result => OK
+       - Obtained result: 10003. Test result => OK
     2. Poker test
        - Acceptable bounds:
          Lower =>  2.160
          Upper => 46.170
-       - Obtained result:  9.658. Test result => OK
+       - Obtained result: 15.699. Test result => OK
     3. Runs test
        * Run length:  1
        - Acceptable bounds:
          Lower =>  2315
          Upper =>  2685
-       - Obtained result (bit 0):  2485. Test result => OK
-       - Obtained result (bit 1):  2491. Test result => OK
+       - Obtained result (bit 0):  2536. Test result => OK
+       - Obtained result (bit 1):  2546. Test result => OK
        * Run length:  2
        - Acceptable bounds:
          Lower =>  1114
          Upper =>  1386
-       - Obtained result (bit 0):  1228. Test result => OK
-       - Obtained result (bit 1):  1244. Test result => OK
+       - Obtained result (bit 0):  1251. Test result => OK
+       - Obtained result (bit 1):  1225. Test result => OK
        * Run length:  3
        - Acceptable bounds:
          Lower =>  527
          Upper =>  723
        - Obtained result (bit 0):  605. Test result => OK
-       - Obtained result (bit 1):  607. Test result => OK
+       - Obtained result (bit 1):  630. Test result => OK
        * Run length:  4
        - Acceptable bounds:
          Lower =>  240
          Upper =>  384
-       - Obtained result (bit 0):  339. Test result => OK
-       - Obtained result (bit 1):  310. Test result => OK
+       - Obtained result (bit 0):  305. Test result => OK
+       - Obtained result (bit 1):  297. Test result => OK
        * Run length:  5
        - Acceptable bounds:
          Lower =>  103
          Upper =>  209
-       - Obtained result (bit 0):  163. Test result => OK
-       - Obtained result (bit 1):  164. Test result => OK
+       - Obtained result (bit 0):  149. Test result => OK
+       - Obtained result (bit 1):  140. Test result => OK
        * Run length:  6
        - Acceptable bounds:
          Lower =>  103
          Upper =>  209
-       - Obtained result (bit 0):  156. Test result => OK
-       - Obtained result (bit 1):  159. Test result => OK
+       - Obtained result (bit 0):  173. Test result => OK
+       - Obtained result (bit 1):  181. Test result => OK
 
     4. Long runs test
        - Acceptable result: 0
        - Obtained result (bit 0):  0. Test result => OK
        - Obtained result (bit 1):  0. Test result => OK
 --------------------------------------------------------------------------------
-Test Case Number: 6
+Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/04/18 - 20:18:50
+Finished        : 2017/06/01 - 18:25:25
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.PRNG_RSAREF
-Finished                 : 2017/04/18 - 20:18:50
+Finished                 : 2017/06/01 - 18:25:25
 ================================================================================

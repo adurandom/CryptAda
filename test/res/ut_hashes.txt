@@ -1,0 +1,209 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.2.a (2017/05/30)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Hashes
+Description              : Unit test driver for CryptAda.Digests.Hashes functionality.
+Started                  : 2017/06/01 - 18:24:24
+================================================================================
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Setting hash values
+Started         : 2017/06/01 - 18:24:24
+--------------------------------------------------------------------------------
+[I] Interfaces tested:
+- To_Hash(Byte_Array)
+- Get_Bytes(Byte_Array)
+- "="(Hash, Byte_Array)
+- "="(Byte_Array, Hash)
+[I] Setting Hash values from Byte_Arrays and checking the values returned
+Performing  100000 iterations
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:25
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Null hash values
+Started         : 2017/06/01 - 18:24:25
+--------------------------------------------------------------------------------
+[I] Interfaces tested:
+- To_Hash(Byte_Array)
+- Get_Bytes(Byte_Array)
+- Clear
+- "="(Hash, Hash)
+[I] Before setting it, a hash value must be a null hash
+[I] Before setting
+    Null hash
+[I] Hash value is null
+[I] Setting hash to a non-empty byte array value
+[I] Setting hash to: 
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] Hash after setting
+    - Hash size :  16
+    - Hash bytes:
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] Hash value is not null
+[I] Hash bytes: 
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] Setting hash to an empty byte array value will make hash null
+[I] Setting hash to: 
+
+[I] Hash after setting
+    Null hash
+[I] Hash value is null
+[I] Hash bytes: 
+
+[I] Setting hash to a non-empty byte array value
+[I] Setting hash to: 
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] Hash after setting
+    - Hash size :  16
+    - Hash bytes:
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] Hash value is not null
+[I] Hash bytes: 
+16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#, 16#FF#
+[I] Clear will make hash null
+[I] Hash after clear
+    Null hash
+[I] Hash value is null
+[I] Hash bytes: 
+
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:25
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Creating hash from text encodings
+Started         : 2017/06/01 - 18:24:25
+--------------------------------------------------------------------------------
+[I] Interfaces tested:
+- To_Hash(String, Encoder_Id)
+- Set_Hash(String, Encoder_Id)
+[I] Setting hash values from encoded text strings
+[I] Encoding: TE_HEXADECIMAL
+[I] Calling To_Hash with the encoded string: "000102030405060708090a0b0c0d0e0f"
+[I] Expected hash value:
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
+[I] Obtained hash value:
+    - Hash size :  16
+    - Hash bytes:
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
+[I] Results match
+[I] Calling Set_Hash with the encoded string: "000102030405060708090a0b0c0d0e0f"
+[I] Expected hash value:
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
+[I] Obtained hash value:
+    - Hash size :  16
+    - Hash bytes:
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
+[I] Results match
+[I] Encoding: TE_BASE16
+[I] Calling To_Hash with the encoded string: "000102030405060708090A0B0C0D0E0F"
+[I] Expected hash value:
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
+[I] Obtained hash value:
+    - Hash size :  16
+    - Hash bytes:
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
+[I] Results match
+[I] Calling Set_Hash with the encoded string: "000102030405060708090A0B0C0D0E0F"
+[I] Expected hash value:
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
+[I] Obtained hash value:
+    - Hash size :  16
+    - Hash bytes:
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
+[I] Results match
+[I] Encoding: TE_BASE64
+[I] Calling To_Hash with the encoded string: "Zm9vYmFy"
+[I] Expected hash value:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Obtained hash value:
+    - Hash size :  6
+    - Hash bytes:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Results match
+[I] Calling Set_Hash with the encoded string: "Zm9vYmFy"
+[I] Expected hash value:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Obtained hash value:
+    - Hash size :  6
+    - Hash bytes:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Results match
+[I] Encoding: TE_MIME
+[I] Calling To_Hash with the encoded string: "     Zm 9v@ Ym Fy    "
+[I] Expected hash value:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Obtained hash value:
+    - Hash size :  6
+    - Hash bytes:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Results match
+[I] Calling Set_Hash with the encoded string: "     Zm 9v@ Ym Fy    "
+[I] Expected hash value:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Obtained hash value:
+    - Hash size :  6
+    - Hash bytes:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Results match
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:25
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Getting hash values as encoded text strings
+Started         : 2017/06/01 - 18:24:25
+--------------------------------------------------------------------------------
+[I] Interfaces tested:
+- Get_Encoded_Hash
+[I] Getting encoded hash values
+[I] Using hash value:
+    - Hash size :  16
+    - Hash bytes:
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#
+[I] Using encoding : TE_HEXADECIMAL
+[I] Expected result: "000102030405060708090a0b0c0d0e0f"
+[I] Obtained result: "000102030405060708090a0b0c0d0e0f"
+[I] Results match
+[I] Using encoding : TE_BASE16
+[I] Expected result: "000102030405060708090A0B0C0D0E0F"
+[I] Obtained result: "000102030405060708090A0B0C0D0E0F"
+[I] Results match
+[I] Using encoding : TE_BASE64
+[I] Expected result: "AAECAwQFBgcICQoLDA0ODw=="
+[I] Obtained result: "AAECAwQFBgcICQoLDA0ODw=="
+[I] Results match
+[I] Using encoding : TE_MIME
+[I] Expected result: "AAECAwQFBgcICQoLDA0ODw=="
+[I] Obtained result: "AAECAwQFBgcICQoLDA0ODw=="
+[I] Results match
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:25
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Hashes
+Finished                 : 2017/06/01 - 18:24:25
+================================================================================

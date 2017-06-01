@@ -31,6 +31,8 @@
 --    1.0   20170329 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
+with Ada.Exceptions;                      use Ada.Exceptions;
+
 with CryptAda.Exceptions;                 use CryptAda.Exceptions;
 with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
 with CryptAda.Random.Generators;          use CryptAda.Random.Generators;
@@ -38,52 +40,105 @@ with CryptAda.Ciphers.Keys;               use CryptAda.Ciphers.Keys;
 
 package body CryptAda.Ciphers.Key_Generators is
 
-   --[Start_Key_Generator]------------------------------------------------------
+   --[Get_Key_Generator_Handle]-------------------------------------------------
 
-   procedure   Start_Key_Generator(
-                  The_Generator  : in out Key_Generator;
-                  PRNG           : in     Random_Generator_Ref)
+   function    Get_Key_Generator_Handle(
+                  With_RNG       : in     Random_Generator_Handle)
+      return   Key_Generator_Handle
+   is
+      KGP            : Key_Generator_Ptr;
+      RNGP           : Random_Generator_Ptr;
+   begin
+      -- Check the RNG is started and seeded.
+      
+      if not Is_Valid_Handle(With_RNG) then
+         Raise_Exception(
+            CryptAda_Bad_Argument_Error'Identity,
+            "Random_Generator_Handle is invalid");
+      end if;
+      
+      RNGP := Get_Random_Generator_Ptr(With_RNG);
+      
+      if not Is_Started(RNGP) then
+         Raise_Exception(
+            CryptAda_Generator_Not_Started_Error'Identity,
+            "Random generator is not started");
+      end if;
+      
+      if not Is_Seeded(RNGP) then
+         Raise_Exception(
+            CryptAda_Generator_Need_Seeding_Error'Identity,
+            "Random generator is not seeded");
+      end if;
+         
+      -- Allocate the key generator.
+      
+      KGP := new Key_Generator'(Object.Entity with RH => With_RNG);
+
+      return Ref(KGP);
+   exception
+      when CryptAda_Bad_Argument_Error |
+           CryptAda_Generator_Not_Started_Error |
+           CryptAda_Generator_Need_Seeding_Error =>
+         raise;
+         
+      when others =>
+         Raise_Exception(
+            CryptAda_Storage_Error'Identity,
+            "Error when allocating Key_Generator object");
+   end Get_Key_Generator_Handle;
+
+   --[Is_Valid_Handle]----------------------------------------------------------
+
+   function    Is_Valid_Handle(
+                  The_Handle     : in     Key_Generator_Handle)
+      return   Boolean
    is
    begin
-      if PRNG = null then
-         raise CryptAda_Null_Argument_Error;
-      end if;
-      
-      if not Is_Started(PRNG.all) then
-         raise CryptAda_Generator_Not_Started_Error;
-      end if;
-      
-      if not Is_Seeded(PRNG.all) then
-         raise CryptAda_Generator_Need_Seeding_Error;
-      end if;
-      
-      The_Generator.PRNG := PRNG;
-   end Start_Key_Generator;
+      return KG_Handles.Is_Valid(KG_Handles.Handle(The_Handle));
+   end Is_Valid_Handle;
 
+   --[Invalidate_Handle]--------------------------------------------------------
+
+   procedure   Invalidate_Handle(
+                  The_Handle     : in out Key_Generator_Handle)
+   is
+   begin
+      KG_Handles.Invalidate(KG_Handles.Handle(The_Handle));
+   end Invalidate_Handle;
+      
+   --[Get_Key_Generator_Ptr]----------------------------------------------------
+
+   function    Get_Key_Generator_Ptr(
+                  From_Handle    : in     Key_Generator_Handle)
+      return   Key_Generator_Ptr
+   is
+   begin
+      return KG_Handles.Ptr(KG_Handles.Handle(From_Handle));
+   end Get_Key_Generator_Ptr;
+   
    --[Generate_Key]-------------------------------------------------------------
 
    procedure   Generate_Key(
-                  The_Generator  : in out Key_Generator;
+                  The_Generator  : access Key_Generator;
                   The_Key        : in out Key;
                   Key_Length     : in     Cipher_Key_Length)
    is
       KB             : Byte_Array(1 .. Key_Length);
+      RNGP           : constant Random_Generator_Ptr := Get_Random_Generator_Ptr(The_Generator.all.RH);
    begin
-      if not Is_Started(The_Generator) then
-         raise CryptAda_Bad_Operation_Error;
-      end if;
-   
-      Random_Generate(The_Generator.PRNG.all, KB);
+      Random_Generate(RNGP, KB);
       Set_Key(The_Key, KB);
    end Generate_Key;   
    
-   --[Is_Started]---------------------------------------------------------------
-
-   function    Is_Started(
-                  The_Generator  : in     Key_Generator)
-      return   Boolean
+   --[Ref]----------------------------------------------------------------------
+   
+   function    Ref(
+                  Thing          : in     Key_Generator_Ptr)
+      return   Key_Generator_Handle
    is
    begin
-      return (The_Generator.PRNG /= null);
-   end Is_Started;   
+      return (KG_Handles.Ref(Thing) with null record);   
+   end Ref;       
+   
 end CryptAda.Ciphers.Key_Generators;

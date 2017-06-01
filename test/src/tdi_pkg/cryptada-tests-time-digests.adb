@@ -38,9 +38,9 @@ with Ada.Text_IO;                         use Ada.Text_IO;
 with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
 with CryptAda.Digests.Counters;           use CryptAda.Digests.Counters;
 with CryptAda.Digests.Hashes;             use CryptAda.Digests.Hashes;
-with CryptAda.Digests.Algorithms;         use CryptAda.Digests.Algorithms;
+with CryptAda.Digests.Message_Digests;    use CryptAda.Digests.Message_Digests;
 with CryptAda.Tests.Utils;                use CryptAda.Tests.Utils;
-with CryptAda.Tests.Utils.Digests;        use CryptAda.Tests.Utils.Digests;
+with CryptAda.Tests.Utils.MDs;            use CryptAda.Tests.Utils.MDs;
 
 package body CryptAda.Tests.Time.Digests is
 
@@ -58,11 +58,12 @@ package body CryptAda.Tests.Time.Digests is
    --[Digest_Time_Trial]--------------------------------------------------------
 
    procedure   Digest_Time_Trial(
-                  Digest         : in out Digest_Algorithm'Class;
+                  Digest         : in out Message_Digest_Handle;
                   To_Digest      : in     Positive := 10;
                   Buffer_Size    : in     Positive := 1;
                   Elapsed        :    out Duration)
    is
+      MDP            : constant Message_Digest_Ptr := Get_Message_Digest_Ptr(Digest);
       Buffer         : constant Byte_Array := Random_Byte_Array(1_024 * Buffer_Size);
       Iterations     : constant Positive := (1_024 * To_Digest) / Buffer_Size;
       TB             : Ada.Real_Time.Time;
@@ -72,7 +73,7 @@ package body CryptAda.Tests.Time.Digests is
       TS             : Time_Span;
    begin
       Print_Information_Message("Starting time trial for digest algorithm.");
-      Print_Digest_Info(Digest);
+      Print_Digest_Info("Time trial digest", Digest);
       Print_Message("Bytes to digest    : " & Positive'Image(To_Digest) & " MB", "    ");
       Print_Message("Buffer size        : " & Positive'Image(Buffer_Size) & " KB", "    ");
       Print_Message("Iterations         : " & Positive'Image(Iterations), "    ");
@@ -80,11 +81,11 @@ package body CryptAda.Tests.Time.Digests is
       TB := Clock;
 
       for I in 1 .. Iterations loop
-            Digest_Update(Digest, Buffer);
+            Digest_Update(MDP, Buffer);
       end loop;
 
-      C := Get_Bit_Count(Digest);
-      Digest_End(Digest, H);
+      C := Get_Bit_Count(MDP);
+      Digest_End(MDP, H);
 
       TE := Clock;
       TS := TE - TB;
