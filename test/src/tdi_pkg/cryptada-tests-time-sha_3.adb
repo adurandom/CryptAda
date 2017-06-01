@@ -36,8 +36,8 @@ with Ada.Exceptions;                         use Ada.Exceptions;
 with CryptAda.Tests.Utils;                   use CryptAda.Tests.Utils;
 with CryptAda.Tests.Time.Digests;            use CryptAda.Tests.Time.Digests;
 
-
-with CryptAda.Digests.Algorithms.SHA_3;     use CryptAda.Digests.Algorithms.SHA_3;
+with CryptAda.Digests.Message_Digests;    use CryptAda.Digests.Message_Digests;
+with CryptAda.Digests.Message_Digests.SHA_3; use CryptAda.Digests.Message_Digests.SHA_3;
 
 package body CryptAda.Tests.Time.SHA_3 is
 
@@ -47,7 +47,7 @@ package body CryptAda.Tests.Time.SHA_3 is
 
    Driver_Name                   : constant String := "CryptAda.Tests.Time.SHA_3";
 
-   Driver_Description            : constant String := "Time trial for CryptAda.Digests.Algorithms.SHA_3 functionality.";
+   Driver_Description            : constant String := "Time trial for CryptAda.Digests.Message_Digests.SHA_3 functionality.";
 
    -----------------------------------------------------------------------------
    --[Test Cases Specs]---------------------------------------------------------
@@ -70,16 +70,18 @@ package body CryptAda.Tests.Time.SHA_3 is
 
    procedure Case_1
    is
-      D           : SHA_3_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant Message_Digest_Ptr := Get_Message_Digest_Ptr(MDH);
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(1, "SHA-3 224-bit hashing");
 
       Print_Information_Message("Hash size     : " & SHA_3_Hash_Size'Image(SHA_3_224));
       Print_Message("Hashing 1MB", "    ");
-      Digest_Start(D, SHA_3_224);
-      Digest_Time_Trial(D, 1, 1, Elapsed);
+      Digest_Start(SHA_3_Digest_Ptr(MDP), SHA_3_224);
+      Digest_Time_Trial(MDH, 1, 1, Elapsed);
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(1);
    exception
       when X: others =>
@@ -95,16 +97,18 @@ package body CryptAda.Tests.Time.SHA_3 is
 
    procedure Case_2
    is
-      D           : SHA_3_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant Message_Digest_Ptr := Get_Message_Digest_Ptr(MDH);
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(2, "SHA-3 224-bit hashing");
 
       Print_Information_Message("Hash size     : " & SHA_3_Hash_Size'Image(SHA_3_224));
       Print_Message("Hashing 10MB", "    ");
-      Digest_Start(D, SHA_3_224);
-      Digest_Time_Trial(D, 10, 4, Elapsed);
+      Digest_Start(SHA_3_Digest_Ptr(MDP), SHA_3_224);
+      Digest_Time_Trial(MDH, 10, 4, Elapsed);
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(2);
    exception
       when X: others =>
@@ -120,16 +124,18 @@ package body CryptAda.Tests.Time.SHA_3 is
 
    procedure Case_3
    is
-      D           : SHA_3_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant Message_Digest_Ptr := Get_Message_Digest_Ptr(MDH);
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(3, "SHA-3 256-bit hashing");
 
       Print_Information_Message("Hash size     : " & SHA_3_Hash_Size'Image(SHA_3_256));
       Print_Message("Hashing 1MB", "    ");
-      Digest_Start(D, SHA_3_256);
-      Digest_Time_Trial(D, 1, 1, Elapsed);
+      Digest_Start(SHA_3_Digest_Ptr(MDP), SHA_3_256);
+      Digest_Time_Trial(MDH, 1, 1, Elapsed);
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(3);
    exception
       when X: others =>
@@ -145,16 +151,18 @@ package body CryptAda.Tests.Time.SHA_3 is
 
    procedure Case_4
    is
-      D           : SHA_3_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant Message_Digest_Ptr := Get_Message_Digest_Ptr(MDH);
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(4, "SHA-3 256-bit hashing");
 
       Print_Information_Message("Hash size     : " & SHA_3_Hash_Size'Image(SHA_3_256));
       Print_Message("Hashing 10MB", "    ");
-      Digest_Start(D, SHA_3_256);
-      Digest_Time_Trial(D, 10, 4, Elapsed);
+      Digest_Start(SHA_3_Digest_Ptr(MDP), SHA_3_256);
+      Digest_Time_Trial(MDH, 10, 4, Elapsed);
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(4);
    exception
       when X: others =>
@@ -170,16 +178,18 @@ package body CryptAda.Tests.Time.SHA_3 is
 
    procedure Case_5
    is
-      D           : SHA_3_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant Message_Digest_Ptr := Get_Message_Digest_Ptr(MDH);
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(5, "SHA-3 384-bit hashing");
 
       Print_Information_Message("Hash size     : " & SHA_3_Hash_Size'Image(SHA_3_384));
       Print_Message("Hashing 1MB", "    ");
-      Digest_Start(D, SHA_3_384);
-      Digest_Time_Trial(D, 1, 1, Elapsed);
+      Digest_Start(SHA_3_Digest_Ptr(MDP), SHA_3_384);
+      Digest_Time_Trial(MDH, 1, 1, Elapsed);
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(5);
    exception
       when X: others =>
@@ -195,16 +205,18 @@ package body CryptAda.Tests.Time.SHA_3 is
 
    procedure Case_6
    is
-      D           : SHA_3_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant Message_Digest_Ptr := Get_Message_Digest_Ptr(MDH);
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(6, "SHA-3 384-bit hashing");
 
       Print_Information_Message("Hash size     : " & SHA_3_Hash_Size'Image(SHA_3_384));
       Print_Message("Hashing 10MB", "    ");
-      Digest_Start(D, SHA_3_384);
-      Digest_Time_Trial(D, 10, 4, Elapsed);
+      Digest_Start(SHA_3_Digest_Ptr(MDP), SHA_3_384);
+      Digest_Time_Trial(MDH, 10, 4, Elapsed);
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(6);
    exception
       when X: others =>
@@ -220,16 +232,18 @@ package body CryptAda.Tests.Time.SHA_3 is
 
    procedure Case_7
    is
-      D           : SHA_3_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant Message_Digest_Ptr := Get_Message_Digest_Ptr(MDH);
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(7, "SHA-3 512-bit hashing");
 
       Print_Information_Message("Hash size     : " & SHA_3_Hash_Size'Image(SHA_3_512));
       Print_Message("Hashing 1MB", "    ");
-      Digest_Start(D, SHA_3_512);
-      Digest_Time_Trial(D, 1, 1, Elapsed);
+      Digest_Start(SHA_3_Digest_Ptr(MDP), SHA_3_512);
+      Digest_Time_Trial(MDH, 1, 1, Elapsed);
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(7);
    exception
       when X: others =>
@@ -245,16 +259,18 @@ package body CryptAda.Tests.Time.SHA_3 is
 
    procedure Case_8
    is
-      D           : SHA_3_Digest;
+      MDH         : Message_Digest_Handle := Get_Message_Digest_Handle;
+      MDP         : constant Message_Digest_Ptr := Get_Message_Digest_Ptr(MDH);
       Elapsed     : Duration;
    begin
       Begin_Time_Trial(8, "SHA-3 512-bit hashing");
 
       Print_Information_Message("Hash size     : " & SHA_3_Hash_Size'Image(SHA_3_512));
       Print_Message("Hashing 10MB", "    ");
-      Digest_Start(D, SHA_3_512);
-      Digest_Time_Trial(D, 10, 4, Elapsed);
+      Digest_Start(SHA_3_Digest_Ptr(MDP), SHA_3_512);
+      Digest_Time_Trial(MDH, 10, 4, Elapsed);
 
+      Invalidate_Handle(MDH);
       End_Time_Trial(8);
    exception
       when X: others =>

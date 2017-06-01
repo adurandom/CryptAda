@@ -118,8 +118,7 @@ U_UTILS     =   $(CTB_UUTILS)/ut_utils.exe \
                 $(CTB_UUTILS)/ut_lists_strings.exe \
                 $(CTB_UUTILS)/ut_lists_lists.exe 
 
-U_PRAG      =   $(CTB_UPRAG)/ut_pragmatics.exe \
-                $(CTB_UPRAG)/ut_bvectors.exe
+U_PRAG      =   $(CTB_UPRAG)/ut_pragmatics.exe
 
 U_ENC       =   $(CTB_UENC)/ut_enc_hex.exe \
                 $(CTB_UENC)/ut_enc_base16.exe \
@@ -168,10 +167,7 @@ U_BC        =   $(CTB_UBC)/ut_keys.exe \
                 $(CTB_UBC)/ut_idea.exe \
                 $(CTB_UBC)/ut_cast_128.exe \
                 $(CTB_UBC)/ut_twofish.exe \
-                $(CTB_UBC)/ut_rc4.exe \
-                $(CTB_UBC)/ut_key_generators.exe \
-                $(CTB_UBC)/ut_kg_tdea.exe
-                
+                $(CTB_UBC)/ut_rc4.exe                 
                 
 T_DIG       =   $(CTB_TDIG)/tt_md2.exe \
                 $(CTB_TDIG)/tt_md4.exe \
@@ -247,10 +243,6 @@ $(CTB_UPRAG)/ut_pragmatics.exe: $(CTS_UPR_DRV)ut_pragmatics.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UPR) $(ADAFLAGS) -o $@ $<
 
-$(CTB_UPRAG)/ut_bvectors.exe: $(CTS_UPR_DRV)ut_bvectors.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UPR) $(ADAFLAGS) -o $@ $<
-    
 # Encoders unit test drivers.
 
 $(CTB_UENC)/ut_enc_hex.exe: $(CTS_UEN_DRV)ut_enc_hex.adb
@@ -434,15 +426,7 @@ $(CTB_UBC)/ut_twofish.exe: $(CTS_UBC_DRV)ut_twofish.adb
 $(CTB_UBC)/ut_rc4.exe: $(CTS_UBC_DRV)ut_rc4.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
-    
-$(CTB_UBC)/ut_key_generators.exe: $(CTS_UBC_DRV)ut_key_generators.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
-
-$(CTB_UBC)/ut_kg_tdea.exe: $(CTS_UBC_DRV)ut_kg_tdea.adb
-	@echo Building $<
-	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
-    
+        
 #>>>[Building time trials Drivers]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 # Digests time trials

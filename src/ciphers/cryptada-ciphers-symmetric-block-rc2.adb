@@ -641,7 +641,15 @@ package body CryptAda.Ciphers.Symmetric.Block.RC2 is
                   With_Key       : in     Key)
    is
    begin
-      Start_Cipher(The_Cipher, For_Operation, With_Key, 8 * Get_Key_Length(With_Key));
+      -- Veriify that key is a valid RC2 key.
+      
+      if not Is_Valid_RC2_Key(With_Key) then
+         Raise_Exception(
+            CryptAda_Invalid_Key_Error'Identity,
+            "Invalid RC2 key");      
+      else
+         Start_Cipher(The_Cipher, For_Operation, With_Key, 8 * Get_Key_Length(With_Key));
+      end if;
    end Start_Cipher;
 
    --[Start_Cipher]-------------------------------------------------------------
@@ -658,15 +666,21 @@ package body CryptAda.Ciphers.Symmetric.Block.RC2 is
    begin
       Get_Parameters(Parameters, O, K);
       
-      KL := Get_Key_Length(K);
-      
-      if Contains_Item(Parameters, Effective_Key_Bits_Name) then
-         EKB := Get_Effective_Key_Bits(Parameters);
+      if not Is_Valid_RC2_Key(K) then
+         Raise_Exception(
+            CryptAda_Invalid_Key_Error'Identity,
+            "Invalid RC2 key");      
       else
-         EKB := 8 * KL;
+         KL := Get_Key_Length(K);
+         
+         if Contains_Item(Parameters, Effective_Key_Bits_Name) then
+            EKB := Get_Effective_Key_Bits(Parameters);
+         else
+            EKB := 8 * KL;
+         end if;
+         
+         Start_Cipher(The_Cipher, O, K, EKB);
       end if;
-      
-      Start_Cipher(The_Cipher, O, K, EKB);
    end Start_Cipher;
    
    --[Do_Process]---------------------------------------------------------------

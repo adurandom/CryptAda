@@ -1,0 +1,1885 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.2.a (2017/05/30)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Enc_MIME
+Description              : Unit test driver for CryptAda.Text_Encoders.MIME functionality.
+Started                  : 2017/06/01 - 18:24:16
+================================================================================
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Testing object state during encoding
+Started         : 2017/06/01 - 18:24:16
+--------------------------------------------------------------------------------
+[I] Before getting an encoder handle ...
+[I] Information of Encoder object:
+    Invalid encoder handle
+[I] Getting an encoder handle object. State must be State_Idle
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] State is State_Idle
+[I] Calling Start_Encoding. State must be State_Encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] State is State_Encoding
+[I] Encoding an array
+Array to encode :
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+Array Length    :  128
+Encoding results: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4
+OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx
+"
+[I] Calling End_Encoding
+Expected encoding results: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4
+OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx
+cnN0dXZ3eHl6e3x9fn8="
+Obtained encoding results: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4
+OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx
+cnN0dXZ3eHl6e3x9fn8="
+[I] State must be State_Idle
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  128
+    Encoder code count     :  176
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] State is State_Idle
+[I] Invalidating handle
+[I] Information of Encoder object:
+    Invalid encoder handle
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:16
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Start encoding
+Started         : 2017/06/01 - 18:24:16
+--------------------------------------------------------------------------------
+[I] Testing Start_Encoding procedures
+[I] Default Start_Encoding procedure
+    Before Start_Encoding, the object is in State_Idle
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+    After Start_Encoding, the object is in State_Encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Start_Encoding with parameters
+    Parameter list only admits a parameter 'Line_Length'
+[I] Start_Encoding with an empty list will start the encoder with the default alphabet
+    Using list: ()
+    Before Start_Encoding:
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+    After Start_Encoding:
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Start_Encoding with an unnamed list will raise CryptAda_Bad_Argument_Error
+    Using list: (32)
+    Before Start_Encoding:
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Caught exception: CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR when processing parameter list. Message: Expected a named parameter list"
+[I] Start_Encoding with a named list containing an invalid parameter name will raise CryptAda_Bad_Argument_Error
+    Using list: (LL=>32)
+    Before Start_Encoding:
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Caught exception: CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_NOT_FOUND_ERROR when processing parameter list. Message: List doesn't contains a: 'Line_Length' item"
+[I] Start_Encoding with a named list containing an invalid parameter value CryptAda_Bad_Argument_Error
+    Using list: (Line_Length=>Default_Line_Length)
+    Before Start_Encoding:
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Caught exception: CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR when processing parameter list. Message: Item is not an integer value"
+[I] Start_Encoding with a valid parameter list
+    Using list: (Line_Length=>32)
+    Before Start_Encoding:
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+    After Start_Encoding:
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  32
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:16
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Encode
+Started         : 2017/06/01 - 18:24:16
+--------------------------------------------------------------------------------
+[I] Testing Encode (procedure form)
+[I] Trying encode will raise CryptAda_Bad_Operation_Error if encoder was not initialized for encoding
+    Encoder object:
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Caught CryptAda_Bad_Operation_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
+    Message  : "Encoder is not in encoding state"
+[I] Start encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Trying Encode with a buffer too short will raise CryptAda_Overflow_Error
+Array to encode :
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+Array Length    :  128
+[I] Caught CryptAda_Overflow_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_OVERFLOW_ERROR"
+    Message  : "Output buffer length is not enough"
+[I] Now we perform encoding ...
+Encoding length          :  156
+Obtained encoding results: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4
+OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx
+"
+[I] Ending encoding ...
+     Expected final result    : "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4
+OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx
+cnN0dXZ3eHl6e3x9fn8="
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  128
+    Encoder code count     :  176
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+Encoding length          :  20
+Obtained encoding results: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4
+OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx
+cnN0dXZ3eHl6e3x9fn8="
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:16
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : Encode
+Started         : 2017/06/01 - 18:24:16
+--------------------------------------------------------------------------------
+[I] Testing Encode (function form)
+[I] Trying encode will raise CryptAda_Bad_Operation_Error if encoder was not initialized for encoding
+    Encoder object:
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Caught CryptAda_Bad_Operation_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
+    Message  : "Encoder is not in encoding state"
+[I] Start encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Now we perform encoding ...
+[I] Encoded so far: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4
+OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx
+"
+[I] End encoding ...
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  128
+    Encoder code count     :  176
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+     Expected final result    : "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4
+OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx
+cnN0dXZ3eHl6e3x9fn8="
+     Obtained final result    : "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4
+OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx
+cnN0dXZ3eHl6e3x9fn8="
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:16
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 5
+Description     : End encoding
+Started         : 2017/06/01 - 18:24:16
+--------------------------------------------------------------------------------
+[I] Testing End_Encoding (procedure form)
+[I] Trying End_Encoding will raise CryptAda_Bad_Operation_Error if encoder was not initialized for encoding
+    Encoder object:
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Caught CryptAda_Bad_Operation_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
+    Message  : "Encoder is not in encoding state"
+[I] End_Encoding will raise CryptAda_Overflow_Error if output buffer is not long enough
+    Encoder object:
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Caught CryptAda_Overflow_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_OVERFLOW_ERROR"
+    Message  : "Output buffer length is not enough"
+[I] End encoding will return the buffered codes plus 0 or plus 4
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Start encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Encoding array: 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#
+Obained encoded length:  0
+Obained encoded string: ""
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  35
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  44
+    Decoding stopped       : FALSE
+[I] End encoding
+Obained encoded length:  48
+Obained encoded string: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISI="
+Total encoded length  :  48
+Final encoded string  : "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISI="
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  35
+    Encoder code count     :  48
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Start encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Encoding array: 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#
+Obained encoded length:  0
+Obained encoded string: ""
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  36
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  48
+    Decoding stopped       : FALSE
+[I] End encoding
+Obained encoded length:  48
+Obained encoded string: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIj"
+Total encoded length  :  48
+Final encoded string  : "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIj"
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  36
+    Encoder code count     :  48
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Start encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Encoding array: 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#
+Obained encoded length:  0
+Obained encoded string: ""
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  37
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  48
+    Decoding stopped       : FALSE
+[I] End encoding
+Obained encoded length:  52
+Obained encoded string: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJA=="
+Total encoded length  :  52
+Final encoded string  : "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJA=="
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  37
+    Encoder code count     :  52
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Start encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Encoding array: 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#
+Obained encoded length:  0
+Obained encoded string: ""
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  38
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  48
+    Decoding stopped       : FALSE
+[I] End encoding
+Obained encoded length:  52
+Obained encoded string: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCU="
+Total encoded length  :  52
+Final encoded string  : "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCU="
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  38
+    Encoder code count     :  52
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Start encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Encoding array: 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#
+Obained encoded length:  0
+Obained encoded string: ""
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  39
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  52
+    Decoding stopped       : FALSE
+[I] End encoding
+Obained encoded length:  52
+Obained encoded string: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUm"
+Total encoded length  :  52
+Final encoded string  : "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUm"
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  39
+    Encoder code count     :  52
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Start encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Encoding array: 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#
+Obained encoded length:  0
+Obained encoded string: ""
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  40
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  52
+    Decoding stopped       : FALSE
+[I] End encoding
+Obained encoded length:  56
+Obained encoded string: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJw=="
+Total encoded length  :  56
+Final encoded string  : "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJw=="
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 5
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:16
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 6
+Description     : End encoding
+Started         : 2017/06/01 - 18:24:16
+--------------------------------------------------------------------------------
+[I] Testing End_Encoding (function form)
+[I] Trying End_Encoding will raise CryptAda_Bad_Operation_Error if encoder was not initialized for encoding
+    Encoder object:
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Caught CryptAda_Bad_Operation_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
+    Message  : "Encoder is not in encoding state"
+[I] End encoding will return the buffered codes plus (or not) a last encoded chunk
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Start encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Encoding array: 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  35
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  44
+    Decoding stopped       : FALSE
+Encoded length so far:  0
+Encoded string so far: ""
+[I] End encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  35
+    Encoder code count     :  48
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+Final encoded length :  48
+Final encoded string : "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISI="
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  35
+    Encoder code count     :  48
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Start encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Encoding array: 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  36
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  48
+    Decoding stopped       : FALSE
+Encoded length so far:  0
+Encoded string so far: ""
+[I] End encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  36
+    Encoder code count     :  48
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+Final encoded length :  48
+Final encoded string : "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIj"
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  36
+    Encoder code count     :  48
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Start encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Encoding array: 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  37
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  48
+    Decoding stopped       : FALSE
+Encoded length so far:  0
+Encoded string so far: ""
+[I] End encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  37
+    Encoder code count     :  52
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+Final encoded length :  52
+Final encoded string : "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJA=="
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  37
+    Encoder code count     :  52
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Start encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Encoding array: 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  38
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  48
+    Decoding stopped       : FALSE
+Encoded length so far:  0
+Encoded string so far: ""
+[I] End encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  38
+    Encoder code count     :  52
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+Final encoded length :  52
+Final encoded string : "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCU="
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  38
+    Encoder code count     :  52
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Start encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Encoding array: 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  39
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  52
+    Decoding stopped       : FALSE
+Encoded length so far:  0
+Encoded string so far: ""
+[I] End encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  39
+    Encoder code count     :  52
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+Final encoded length :  52
+Final encoded string : "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUm"
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  39
+    Encoder code count     :  52
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Start encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Encoding array: 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  40
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  52
+    Decoding stopped       : FALSE
+Encoded length so far:  0
+Encoded string so far: ""
+[I] End encoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  40
+    Encoder code count     :  56
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+Final encoded length :  56
+Final encoded string : "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJw=="
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 6
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:16
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 7
+Description     : Testing object state during decoding
+Started         : 2017/06/01 - 18:24:16
+--------------------------------------------------------------------------------
+[I] Before getting an encoder handle ...
+[I] Information of Encoder object:
+    Invalid encoder handle
+[I] Getting an encoder handle object. State must be State_Idle
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] State is State_Idle
+[I] Calling Start_Decoding. State must be State_Decoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] State is State_Decoding
+[I] Decoding a string
+String to decode : "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4
+OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx
+cnN0dXZ3eHl6e3x9fn8="
+String length    :  176
+[I] Decoding results so far: 
+- Decoded bytes:  128
+- Decoded array: 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+[I] Calling End_Decoding
+[I] Final decoding results: 
+- Decoded bytes:  128
+- Decoded array: 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+[I] State must be State_Idle
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  128
+    Encoder code count     :  172
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] State is State_Idle
+[I] Invalidating handle
+[I] Information of Encoder object:
+    Invalid encoder handle
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 7
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:16
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 8
+Description     : Start decoding
+Started         : 2017/06/01 - 18:24:16
+--------------------------------------------------------------------------------
+[I] Testing Start_Decoding procedures
+[I] Default Start_Decoding procedure
+    Before Start_Decoding, the object is in State_Idle
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+    After Start_Decoding, the object is in State_Decoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Start_Decoding with parameters
+    Parameter list is ignored for MIME decoder
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 8
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:16
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 9
+Description     : Decode
+Started         : 2017/06/01 - 18:24:16
+--------------------------------------------------------------------------------
+[I] Testing Decode (procedure form)
+[I] Trying Decode will raise CryptAda_Bad_Operation_Error if encoder was not initialized for decoding
+    Encoder object:
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Caught CryptAda_Bad_Operation_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
+    Message  : "Encoder is not in decoding state"
+[I] Start decoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Trying Decode with a buffer too short will raise CryptAda_Overflow_Error
+String to decode : "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4
+OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx
+cnN0dXZ3eHl6e3x9fn8="
+String Length    :  176
+[I] Caught CryptAda_Overflow_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_OVERFLOW_ERROR"
+    Message  : "Output buffer length is not enough"
+[I] Now we perform decoding ...
+Decoding length          :  128
+Obtained decoding results:
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+[I] Ending decoding ...
+Expected final result    :
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  128
+    Encoder code count     :  172
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+End_Decoding length      :  0
+Obtained decoding results:
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 9
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:16
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 10
+Description     : Decode
+Started         : 2017/06/01 - 18:24:16
+--------------------------------------------------------------------------------
+[I] Testing Decode (function form)
+[I] Trying decode will raise CryptAda_Bad_Operation_Error if encoder was not initialized for decoding
+    Encoder object:
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Caught CryptAda_Bad_Operation_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
+    Message  : "Encoder is not in decoding state"
+[I] Start decoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Now we perform decoding ...
+Decoding length          :  128
+Obtained decoding results:
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+[I] Ending decoding ...
+Expected final result    :
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  128
+    Encoder code count     :  172
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+Obtained decoding results:
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 10
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:16
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 11
+Description     : End decoding
+Started         : 2017/06/01 - 18:24:16
+--------------------------------------------------------------------------------
+[I] Testing End_Decoding (procedure form)
+[I] Trying End_Decoding will raise CryptAda_Bad_Operation_Error if encoder was not initialized for decoding
+    Encoder object:
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Caught CryptAda_Bad_Operation_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
+    Message  : "Encoder is not in decoding state"
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Start decoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Decoding string: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4
+OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx
+cnN0dXZ3eHl6e3x9fn8="
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  128
+    Encoder code count     :  172
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : TRUE
+Obained decoded length:  128
+Obained decoded array : 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+[I] End decoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  128
+    Encoder code count     :  172
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+Obained decoded length:  0
+Obained decoded array : 
+
+Total decoded length  :  128
+Final decoded array   : 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 11
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:16
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 12
+Description     : End decoding
+Started         : 2017/06/01 - 18:24:16
+--------------------------------------------------------------------------------
+[I] Testing End_Decoding (function form)
+[I] Trying End_Decoding will raise CryptAda_Bad_Operation_Error if encoder was not initialized for decoding
+    Encoder object:
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_IDLE
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Caught CryptAda_Bad_Operation_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_OPERATION_ERROR"
+    Message  : "Encoder is not in decoding state"
+[I] End decoding will return an empty (0 length) byte array
+[I] Start decoding
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+[I] Decoding string: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4
+OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx
+cnN0dXZ3eHl6e3x9fn8="
+Obained decoded length:  128
+Obained decoded array : 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+[I] End decoding
+Obained decoded length:  0
+Obained decoded array : 
+
+Total decoded length  :  128
+Final decoded array   : 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 12
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:16
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 13
+Description     : Step by step encoding
+Started         : 2017/06/01 - 18:24:16
+--------------------------------------------------------------------------------
+[I] Encoding a test byte array one byte at a time
+Byte array to encode
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Expected encoding: "Zm9vYmFy"
+Encoding byte  1 (16#66#)
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  1
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+Encoded so far: ""
+Encoding byte  2 (16#6F#)
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  2
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+Encoded so far: ""
+Encoding byte  3 (16#6F#)
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  3
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  4
+    Decoding stopped       : FALSE
+Encoded so far: ""
+Encoding byte  4 (16#62#)
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  4
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  4
+    Decoding stopped       : FALSE
+Encoded so far: ""
+Encoding byte  5 (16#61#)
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  5
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  4
+    Decoding stopped       : FALSE
+Encoded so far: ""
+Encoding byte  6 (16#72#)
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_ENCODING
+    Encoder byte count     :  6
+    Encoder code count     :  0
+    Line length            :  76
+    Buffered codes         :  8
+    Decoding stopped       : FALSE
+Encoded so far: ""
+[I] End encoding
+Final encoded : "Zm9vYmFy"
+[I] Results match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 13
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:16
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 14
+Description     : Step by step decoding
+Started         : 2017/06/01 - 18:24:16
+--------------------------------------------------------------------------------
+[I] Decoding a test encoded string one code at a time
+[I] String to decode: "Zm9vYmFy"
+[I] Expected byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#
+Decoding code  1 ('Z')
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  1
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+Decoded so far:  0
+
+Decoding code  2 ('m')
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  2
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+Decoded so far:  0
+
+Decoding code  3 ('9')
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  0
+    Encoder code count     :  3
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+Decoded so far:  0
+
+Decoding code  4 ('v')
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  3
+    Encoder code count     :  4
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+Decoded so far:  3
+16#66#, 16#6F#, 16#6F#
+Decoding code  5 ('Y')
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  3
+    Encoder code count     :  5
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+Decoded so far:  3
+16#66#, 16#6F#, 16#6F#
+Decoding code  6 ('m')
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  3
+    Encoder code count     :  6
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+Decoded so far:  3
+16#66#, 16#6F#, 16#6F#
+Decoding code  7 ('F')
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  3
+    Encoder code count     :  7
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : FALSE
+Decoded so far:  3
+16#66#, 16#6F#, 16#6F#
+Decoding code  8 ('y')
+[I] Information of Encoder object:
+    Encoder object tag name: "CRYPTADA.TEXT_ENCODERS.MIME.MIME_ENCODER"
+    Encoder id             : TE_MIME
+    Encoder state          : STATE_DECODING
+    Encoder byte count     :  5
+    Encoder code count     :  8
+    Line length            :  76
+    Buffered codes         :  0
+    Decoding stopped       : TRUE
+Decoded so far:  5
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#
+[I] End decoding
+Final decoded : 
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#
+[I] Results match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 14
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:16
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 15
+Description     : Testing encoding/decoding RFC 4648 test vectors
+Started         : 2017/06/01 - 18:24:16
+--------------------------------------------------------------------------------
+[I] Encoding test vectors
+[I] Decoded (as string)     : ""
+Decoded (as byte array) :
+
+Expected encoding result: ""
+Obtained encoding result: ""
+[I] Result matches
+[I] Decoded (as string)     : "f"
+Decoded (as byte array) :
+16#66#
+Expected encoding result: "Zg=="
+Obtained encoding result: "Zg=="
+[I] Result matches
+[I] Decoded (as string)     : "fo"
+Decoded (as byte array) :
+16#66#, 16#6F#
+Expected encoding result: "Zm8="
+Obtained encoding result: "Zm8="
+[I] Result matches
+[I] Decoded (as string)     : "foo"
+Decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#
+Expected encoding result: "Zm9v"
+Obtained encoding result: "Zm9v"
+[I] Result matches
+[I] Decoded (as string)     : "foob"
+Decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#
+Expected encoding result: "Zm9vYg=="
+Obtained encoding result: "Zm9vYg=="
+[I] Result matches
+[I] Decoded (as string)     : "fooba"
+Decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#
+Expected encoding result: "Zm9vYmE="
+Obtained encoding result: "Zm9vYmE="
+[I] Result matches
+[I] Decoded (as string)     : "foobar"
+Decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Expected encoding result: "Zm9vYmFy"
+Obtained encoding result: "Zm9vYmFy"
+[I] Result matches
+[I] Decoding test vectors
+[I] Encoded                          : ""
+Expected decoded (as string)     : ""
+Expected decoded (as byte array) :
+
+Obtained decoded (as byte array) :
+
+[I] Result matches
+[I] Encoded                          : "Zg=="
+Expected decoded (as string)     : "f"
+Expected decoded (as byte array) :
+16#66#
+Obtained decoded (as byte array) :
+16#66#
+[I] Result matches
+[I] Encoded                          : "Zm8="
+Expected decoded (as string)     : "fo"
+Expected decoded (as byte array) :
+16#66#, 16#6F#
+Obtained decoded (as byte array) :
+16#66#, 16#6F#
+[I] Result matches
+[I] Encoded                          : "Zm9v"
+Expected decoded (as string)     : "foo"
+Expected decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#
+Obtained decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#
+[I] Result matches
+[I] Encoded                          : "Zm9vYg=="
+Expected decoded (as string)     : "foob"
+Expected decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#
+Obtained decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#
+[I] Result matches
+[I] Encoded                          : "Zm9vYmE="
+Expected decoded (as string)     : "fooba"
+Expected decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#
+Obtained decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#
+[I] Result matches
+[I] Encoded                          : "Zm9vYmFy"
+Expected decoded (as string)     : "foobar"
+Expected decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained decoded (as byte array) :
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Result matches
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 15
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:16
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 16
+Description     : Testing Base64 syntactic erroneous strings that must be accepted by MIME encoder
+Started         : 2017/06/01 - 18:24:16
+--------------------------------------------------------------------------------
+[I] Trying to decode: "==Zm9vYmFy"
+Calling to Decode
+Calling to End_Decoding
+Expected byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Results match
+[I] Trying to decode: "**Zm9vYmFy"
+Calling to Decode
+Calling to End_Decoding
+Expected byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Results match
+[I] Trying to decode: "                      Z m 9 v Y m F* y"
+Calling to Decode
+Calling to End_Decoding
+Expected byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Results match
+[I] Trying to decode: " Z.m.9.vY..mF..y"
+Calling to Decode
+Calling to End_Decoding
+Expected byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Results match
+[I] Trying to decode: "@Zm9v@YmFy@"
+Calling to Decode
+Calling to End_Decoding
+Expected byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Results match
+[I] Trying to decode: "Zm9vYmFy"
+Calling to Decode
+Calling to End_Decoding
+Expected byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Results match
+[I] Trying to decode: "Z=m9vYmFy"
+Calling to Decode
+Calling to End_Decoding
+Expected byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Results match
+[I] Trying to decode: "Zm9v=YmFy"
+Calling to Decode
+Calling to End_Decoding
+Expected byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Results match
+[I] Trying to decode: "Zm9vYmFy"
+Calling to Decode
+Calling to End_Decoding
+Expected byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Results match
+[I] Trying to decode: "Zm9vYm=Fy"
+Calling to Decode
+Calling to End_Decoding
+Expected byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+Obtained byte array:
+16#66#, 16#6F#, 16#6F#, 16#62#, 16#61#, 16#72#
+[I] Results match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 16
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:16
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 17
+Description     : Testing MIME encoding/decoding with different line lengths
+Started         : 2017/06/01 - 18:24:16
+--------------------------------------------------------------------------------
+[I] Encoding with line length =  2147483647
+Must use line length =  76
+Using parameter list: (Line_Length=>2147483647)
+Encoding array   : 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+Expected encoding: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4
+OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx
+cnN0dXZ3eHl6e3x9fn8="
+Expected line length:  76
+Obtained line length:  76
+[I] Results match
+Obtained encoding: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4
+OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx
+cnN0dXZ3eHl6e3x9fn8="
+[I] Results match
+[I] Decoding previous encoded byte array
+[I] Results match
+[I] Encoding with line length =  50
+Using parameter list: (Line_Length=>50)
+Encoding array   : 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+Expected encoding: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJC
+UmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0BBQkNERUZHSElK
+S0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3
+BxcnN0dXZ3eHl6e3x9fn8="
+Expected line length:  50
+Obtained line length:  50
+[I] Results match
+Obtained encoding: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJC
+UmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0BBQkNERUZHSElK
+S0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3
+BxcnN0dXZ3eHl6e3x9fn8="
+[I] Results match
+[I] Decoding previous encoded byte array
+[I] Results match
+[I] Encoding with line length =  25
+Using parameter list: (Line_Length=>25)
+Encoding array   : 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#09#, 16#0A#, 16#0B#, 16#0C#, 16#0D#, 16#0E#, 16#0F#, 
+16#10#, 16#11#, 16#12#, 16#13#, 16#14#, 16#15#, 16#16#, 16#17#, 16#18#, 16#19#, 16#1A#, 16#1B#, 16#1C#, 16#1D#, 16#1E#, 16#1F#, 
+16#20#, 16#21#, 16#22#, 16#23#, 16#24#, 16#25#, 16#26#, 16#27#, 16#28#, 16#29#, 16#2A#, 16#2B#, 16#2C#, 16#2D#, 16#2E#, 16#2F#, 
+16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#3A#, 16#3B#, 16#3C#, 16#3D#, 16#3E#, 16#3F#, 
+16#40#, 16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 
+16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#5B#, 16#5C#, 16#5D#, 16#5E#, 16#5F#, 
+16#60#, 16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 
+16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#, 16#7B#, 16#7C#, 16#7D#, 16#7E#, 16#7F#
+Expected encoding: "AAECAwQFBgcICQoLDA0ODxARE
+hMUFRYXGBkaGxwdHh8gISIjJC
+UmJygpKissLS4vMDEyMzQ1Njc
+4OTo7PD0+P0BBQkNERUZHSElK
+S0xNTk9QUVJTVFVWV1hZWltcX
+V5fYGFiY2RlZmdoaWprbG1ub3
+BxcnN0dXZ3eHl6e3x9fn8="
+Expected line length:  25
+Obtained line length:  25
+[I] Results match
+Obtained encoding: "AAECAwQFBgcICQoLDA0ODxARE
+hMUFRYXGBkaGxwdHh8gISIjJC
+UmJygpKissLS4vMDEyMzQ1Njc
+4OTo7PD0+P0BBQkNERUZHSElK
+S0xNTk9QUVJTVFVWV1hZWltcX
+V5fYGFiY2RlZmdoaWprbG1ub3
+BxcnN0dXZ3eHl6e3x9fn8="
+[I] Results match
+[I] Decoding previous encoded byte array
+[I] Results match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 17
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:16
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 18
+Description     : Bulk encoding
+Started         : 2017/06/01 - 18:24:16
+--------------------------------------------------------------------------------
+[I] Encoding a random Byte array buffer of  1024
+[I] Performing  10240 iterations
+[I] Total bytes to encode:  10485760
+[I] Start encoding ...
+[I] Encoding ended
+[I] Total encoded bytes  :  10485760
+[I] Total generated codes:  14348936
+[I] Elapsed time       :           0.092708117 secs.
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 18
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:16
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 21
+Description     : Bulk decoding
+Started         : 2017/06/01 - 18:24:16
+--------------------------------------------------------------------------------
+[I] Decoding a random Base64 String of  1024
+[I] Performing  20480 iterations
+[I] Total codes to process:  14254080
+[I] Start decoding ...
+[I] Decoding ended
+[I] Total processed codes:  13926400
+[I] Total decoded bytes  :  10444800
+[I] Elapsed time       :           0.231364168 secs.
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 19
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:16
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.Enc_MIME
+Finished                 : 2017/06/01 - 18:24:16
+================================================================================

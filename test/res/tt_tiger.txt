@@ -1,0 +1,292 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.2.a (2017/05/30)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Time.Tiger
+Description              : Time trial for CryptAda.Digests.Message_Digests.Tiger functionality.
+Started                  : 2017/06/01 - 18:27:17
+================================================================================
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 1
+Description      : Tiger 128-bit hashing
+Started          : 2017/06/01 - 18:27:17
+--------------------------------------------------------------------------------
+[I] Hash size : TIGER_128
+    Passes    :  3
+    Hashing 1MB
+[I] Starting time trial for digest algorithm.
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER"
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  16
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Bytes to digest    :  1 MB
+    Buffer size        :  1 KB
+    Iterations         :  1024
+[I] Time trial completed
+    Elapsed time       :           0.015243478 secs.
+    Counter (Low, High): ( 8388608,  0)
+    Obtained hash      : "758612F634BCEC36D36B8BB3151A70AB"
+[I] Hash size : TIGER_128
+    Passes    :  4
+    Hashing 1MB
+[I] Starting time trial for digest algorithm.
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER"
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  16
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Bytes to digest    :  1 MB
+    Buffer size        :  1 KB
+    Iterations         :  1024
+[I] Time trial completed
+    Elapsed time       :           0.020103041 secs.
+    Counter (Low, High): ( 8388608,  0)
+    Obtained hash      : "8E299A424728A3860CBBB66641F711E3"
+--------------------------------------------------------------------------------
+Time Trial Number: 1
+Finished         : 2017/06/01 - 18:27:17
+--[End Time Trial]--------------------------------------------------------------
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 2
+Description      : Tiger 128-bit hashing
+Started          : 2017/06/01 - 18:27:17
+--------------------------------------------------------------------------------
+[I] Hash size : TIGER_128
+    Passes    :  3
+    Hashing 10MB
+[I] Starting time trial for digest algorithm.
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER"
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  16
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Bytes to digest    :  10 MB
+    Buffer size        :  4 KB
+    Iterations         :  2560
+[I] Time trial completed
+    Elapsed time       :           0.154098597 secs.
+    Counter (Low, High): ( 83886080,  0)
+    Obtained hash      : "719B6020B9C1FA61314F057EB9486ED3"
+[I] Hash size : TIGER_128
+    Passes    :  4
+    Hashing 10MB
+[I] Starting time trial for digest algorithm.
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER"
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  16
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Bytes to digest    :  10 MB
+    Buffer size        :  4 KB
+    Iterations         :  2560
+[I] Time trial completed
+    Elapsed time       :           0.202106848 secs.
+    Counter (Low, High): ( 83886080,  0)
+    Obtained hash      : "E47B8DECD393B15410E013C9B5BF26D7"
+--------------------------------------------------------------------------------
+Time Trial Number: 2
+Finished         : 2017/06/01 - 18:27:17
+--[End Time Trial]--------------------------------------------------------------
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 3
+Description      : Tiger 160-bit hashing
+Started          : 2017/06/01 - 18:27:17
+--------------------------------------------------------------------------------
+[I] Hash size : TIGER_160
+    Passes    :  3
+    Hashing 1MB
+[I] Starting time trial for digest algorithm.
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER"
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  20
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Bytes to digest    :  1 MB
+    Buffer size        :  1 KB
+    Iterations         :  1024
+[I] Time trial completed
+    Elapsed time       :           0.015255356 secs.
+    Counter (Low, High): ( 8388608,  0)
+    Obtained hash      : "88FD895319266B9B3595A8B878AF08A04261D165"
+[I] Hash size : TIGER_160
+    Passes    :  4
+    Hashing 1MB
+[I] Starting time trial for digest algorithm.
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER"
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  20
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Bytes to digest    :  1 MB
+    Buffer size        :  1 KB
+    Iterations         :  1024
+[I] Time trial completed
+    Elapsed time       :           0.020200117 secs.
+    Counter (Low, High): ( 8388608,  0)
+    Obtained hash      : "1DA50931230E6BB4F87C967B2F8D14B209592BCD"
+--------------------------------------------------------------------------------
+Time Trial Number: 3
+Finished         : 2017/06/01 - 18:27:17
+--[End Time Trial]--------------------------------------------------------------
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 4
+Description      : Tiger 160-bit hashing
+Started          : 2017/06/01 - 18:27:17
+--------------------------------------------------------------------------------
+[I] Hash size : TIGER_160
+    Passes    :  3
+    Hashing 10MB
+[I] Starting time trial for digest algorithm.
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER"
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  20
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Bytes to digest    :  10 MB
+    Buffer size        :  4 KB
+    Iterations         :  2560
+[I] Time trial completed
+    Elapsed time       :           0.152821037 secs.
+    Counter (Low, High): ( 83886080,  0)
+    Obtained hash      : "858B2CE43BC798341CFE06CAAA59954C0A786B4B"
+[I] Hash size : TIGER_160
+    Passes    :  4
+    Hashing 10MB
+[I] Starting time trial for digest algorithm.
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER"
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  20
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Bytes to digest    :  10 MB
+    Buffer size        :  4 KB
+    Iterations         :  2560
+[I] Time trial completed
+    Elapsed time       :           0.203881670 secs.
+    Counter (Low, High): ( 83886080,  0)
+    Obtained hash      : "4921913A63488799705004A5DCFDCC26BD67E83B"
+--------------------------------------------------------------------------------
+Time Trial Number: 4
+Finished         : 2017/06/01 - 18:27:17
+--[End Time Trial]--------------------------------------------------------------
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 5
+Description      : Tiger 192-bit hashing
+Started          : 2017/06/01 - 18:27:17
+--------------------------------------------------------------------------------
+[I] Hash size : TIGER_192
+    Passes    :  3
+    Hashing 1MB
+[I] Starting time trial for digest algorithm.
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER"
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Bytes to digest    :  1 MB
+    Buffer size        :  1 KB
+    Iterations         :  1024
+[I] Time trial completed
+    Elapsed time       :           0.015590823 secs.
+    Counter (Low, High): ( 8388608,  0)
+    Obtained hash      : "7D5F2F6A63FDCC184DC6E09E5A72E31B3EAB67F7136F72BF"
+[I] Hash size : TIGER_192
+    Passes    :  4
+    Hashing 1MB
+[I] Starting time trial for digest algorithm.
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER"
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Bytes to digest    :  1 MB
+    Buffer size        :  1 KB
+    Iterations         :  1024
+[I] Time trial completed
+    Elapsed time       :           0.020624058 secs.
+    Counter (Low, High): ( 8388608,  0)
+    Obtained hash      : "1F9248DE31B3F68818C6851E49D93F244E341644812CDE58"
+--------------------------------------------------------------------------------
+Time Trial Number: 5
+Finished         : 2017/06/01 - 18:27:17
+--[End Time Trial]--------------------------------------------------------------
+
+--[Begin Time Trial]------------------------------------------------------------
+Time Trial Number: 6
+Description      : Tiger 192-bit hashing
+Started          : 2017/06/01 - 18:27:17
+--------------------------------------------------------------------------------
+[I] Hash size : TIGER_192
+    Passes    :  3
+    Hashing 10MB
+[I] Starting time trial for digest algorithm.
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER"
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Bytes to digest    :  10 MB
+    Buffer size        :  4 KB
+    Iterations         :  2560
+[I] Time trial completed
+    Elapsed time       :           0.152591657 secs.
+    Counter (Low, High): ( 83886080,  0)
+    Obtained hash      : "ADD886361EA452EFB72125BC71C89440917736EAB38E3A68"
+[I] Hash size : TIGER_192
+    Passes    :  4
+    Hashing 10MB
+[I] Starting time trial for digest algorithm.
+[I] Time trial digest
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.TIGER.TIGER_DIGEST"
+    CryptAda digest algorithm id  : "MD_TIGER"
+    State size (bytes)            :  24
+    Input block size (bytes)      :  64
+    Hash size (bytes)             :  24
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Bytes to digest    :  10 MB
+    Buffer size        :  4 KB
+    Iterations         :  2560
+[I] Time trial completed
+    Elapsed time       :           0.204908142 secs.
+    Counter (Low, High): ( 83886080,  0)
+    Obtained hash      : "CEAAEC4C5A5FBAC44D8FFD2A93E9C392E7BDE73FE44A463D"
+--------------------------------------------------------------------------------
+Time Trial Number: 6
+Finished         : 2017/06/01 - 18:27:18
+--[End Time Trial]--------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Time.Tiger
+Finished                 : 2017/06/01 - 18:27:18
+================================================================================

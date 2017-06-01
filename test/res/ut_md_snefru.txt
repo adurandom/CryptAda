@@ -1,0 +1,1363 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.2.a (2017/05/30)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.MD_Snefru
+Description              : Unit test driver for CryptAda.Digests.Message_Digests.Snefru functionality.
+Started                  : 2017/06/01 - 18:24:47
+================================================================================
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Getting a handle for message digest objects
+Started         : 2017/06/01 - 18:24:47
+--------------------------------------------------------------------------------
+[I] Subprograms tested: 
+    - Get_Message_Digest_Handle
+    - Is_Valid_Handle
+    - Invalidate_Handle
+    - Get_Message_Digest_Ptr
+[I] Before Get_Message_Digest_Handle the handle is invalid:
+[I] Handle is invalid
+[I] Getting a pointer from an invalid handle will return null
+[I] Pointer is null
+[I] Trying any operation with a null pointer will raise Constraint_Error
+    Trying Digest_Start
+[I] Caught Constraint_Error
+    Exception: "CONSTRAINT_ERROR"
+    Message  : "cryptada-tests-unit-md_snefru.adb:324 access check failed"
+[I] Getting a message digest handle
+[I] Information on handle BEFORE calling Get_Message_Digest_Handle
+    Invalid Message_Digest_Handle
+[I] Information on handle AFTER calling Get_Message_Digest_Handle
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  32
+    Hash size (bytes)             :  32
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
+[I] Now the handle must be invalid:
+[I] Handle is valid
+[I] Getting a pointer from an invalid handle will return a not null value
+[I] Pointer is not null
+[I] Computing a hash value may succeed
+[I] Digest information AFTER Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  32
+    Hash size (bytes)             :  32
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
+[I] Calling Digest_Update
+[I] Digesting string              : "CryptAda By TCantos Software"
+[I] Digest information AFTER Digest_Update
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  32
+    Hash size (bytes)             :  32
+    Processed bit count           : 16#000000000000000000000000000000E0#
+    Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
+[I] Calling Digest_End to finish processing and obtaining the computed Hash
+[I] Digest information AFTER Digest_End
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  32
+    Hash size (bytes)             :  32
+    Processed bit count           : 16#000000000000000000000000000000E0#
+    Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
+[I] Checking digest computation results
+[I] Expected hash
+    - Hash size :  32
+    - Hash bytes:
+16#D9#, 16#74#, 16#0B#, 16#CF#, 16#F5#, 16#3B#, 16#5D#, 16#CF#, 16#AD#, 16#DE#, 16#4D#, 16#01#, 16#53#, 16#0F#, 16#F4#, 16#EF#, 
+16#53#, 16#21#, 16#E6#, 16#B4#, 16#1C#, 16#4A#, 16#B2#, 16#F3#, 16#E3#, 16#27#, 16#AA#, 16#04#, 16#5E#, 16#06#, 16#8B#, 16#76#
+[I] Obtained hash
+    - Hash size :  32
+    - Hash bytes:
+16#D9#, 16#74#, 16#0B#, 16#CF#, 16#F5#, 16#3B#, 16#5D#, 16#CF#, 16#AD#, 16#DE#, 16#4D#, 16#01#, 16#53#, 16#0F#, 16#F4#, 16#EF#, 
+16#53#, 16#21#, 16#E6#, 16#B4#, 16#1C#, 16#4A#, 16#B2#, 16#F3#, 16#E3#, 16#27#, 16#AA#, 16#04#, 16#5E#, 16#06#, 16#8B#, 16#76#
+[I] Results match
+[I] Invalidating handle
+[I] Digest information AFTER invalidating handle
+    Invalid Message_Digest_Handle
+[I] Handle is invalid
+[I] Using a pointer from an invalid handle must result in an exception
+    Trying Digest_Start
+[I] Caught Constraint_Error
+    Exception: "CONSTRAINT_ERROR"
+    Message  : "cryptada-tests-unit-md_snefru.adb:407 access check failed"
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:47
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Testing default Digest_Start
+Started         : 2017/06/01 - 18:24:47
+--------------------------------------------------------------------------------
+[I] Subprograms tested: 
+    - Digest_Start
+    - Digest_Start(Snefru_Hash_Size, Snefru_Security_Level)
+[I] Default Digest_Start will start digest computation with default parameters
+    Default Hash Size     : SNEFRU_256
+    Default Security Level: SECURITY_LEVEL_8
+[I] Using defaul Digest_Start
+[I] Digest information BEFORE Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  32
+    Hash size (bytes)             :  32
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
+[I] Digest information AFTER Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  32
+    Hash size (bytes)             :  32
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
+[I] Getting Security_Level and Hash_Size
+[I] Hash_Size values match
+[I] Security_Level values match
+[I] Calling Digest_Start(Snefru_Hash_Size, Snefru_Security_Level)
+    Setting Hash Size to     : SNEFRU_128
+    Setting Security Level to: SECURITY_LEVEL_4
+[I] Digest information BEFORE Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  32
+    Hash size (bytes)             :  32
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
+[I] Digest information AFTER Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  48
+    Hash size (bytes)             :  16
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_128
+    Security level                : SECURITY_LEVEL_4
+[I] Getting Security_Level and Hash_Size
+[I] Hash_Size values match
+[I] Security_Level values match
+[I] Setting combinations of parameters
+[I] Calling Digest_Start(Snefru_Hash_Size, Snefru_Security_Level)
+[I] Setting Hash Size to     : SNEFRU_128
+[I] Setting Security level to: SECURITY_LEVEL_4
+[I] Digest information AFTER Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  48
+    Hash size (bytes)             :  16
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_128
+    Security level                : SECURITY_LEVEL_4
+[I] Getting Security_Level and Hash_Size
+[I] Hash_Size values match
+[I] Security_Level values match
+[I] Setting Hash Size to     : SNEFRU_128
+[I] Setting Security level to: SECURITY_LEVEL_8
+[I] Digest information AFTER Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  48
+    Hash size (bytes)             :  16
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_128
+    Security level                : SECURITY_LEVEL_8
+[I] Getting Security_Level and Hash_Size
+[I] Hash_Size values match
+[I] Security_Level values match
+[I] Setting Hash Size to     : SNEFRU_256
+[I] Setting Security level to: SECURITY_LEVEL_4
+[I] Digest information AFTER Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  32
+    Hash size (bytes)             :  32
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_4
+[I] Getting Security_Level and Hash_Size
+[I] Hash_Size values match
+[I] Security_Level values match
+[I] Setting Hash Size to     : SNEFRU_256
+[I] Setting Security level to: SECURITY_LEVEL_8
+[I] Digest information AFTER Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  32
+    Hash size (bytes)             :  32
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
+[I] Getting Security_Level and Hash_Size
+[I] Hash_Size values match
+[I] Security_Level values match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:47
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Testing parametrized Digest_Start
+Started         : 2017/06/01 - 18:24:47
+--------------------------------------------------------------------------------
+[I] Subprograms tested: 
+    - Digest_Start(Parameter_List)
+[I] Snefru accepts a parameter list containing a hash size value and a security level value
+[I] Using an empty parameters list will set the default salt value
+    Parameter list: ()
+[I] Digest information BEFORE Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  32
+    Hash size (bytes)             :  32
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
+[I] Digest information AFTER Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  32
+    Hash size (bytes)             :  32
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
+[I] Getting Security_Level and Hash_Size
+[I] Hash_Size values match
+[I] Security_Level values match
+[I] Trying some invalid lists.
+    Digest_Start must raise CryptAda_Bad_Argument_Error in all cases
+[I] Parameter list: (16,4)
+[I] Digest information BEFORE Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  32
+    Hash size (bytes)             :  32
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Parameter list is unnamed"
+[I] Parameter list: (Hash_Size=>32,Security_Level=>4)
+[I] Digest information BEFORE Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  32
+    Hash size (bytes)             :  32
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Parameter list does not contain mandatory 'Hash_Bytes' item"
+[I] Parameter list: (Hash_Bytes=>32,Security=>4)
+[I] Digest information BEFORE Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  32
+    Hash size (bytes)             :  32
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Parameter list does not contain mandatory 'Security_Level' item"
+[I] Parameter list: (Hash_Bytes=>64,Security_Level=>4)
+[I] Digest information BEFORE Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  32
+    Hash size (bytes)             :  32
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Invalid Snefru 'Hash_Bytes' parameter value:  64"
+[I] Parameter list: (Hash_Bytes=>16,Security_Level=>5)
+[I] Digest information BEFORE Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  32
+    Hash size (bytes)             :  32
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Invalid Snefru 'Security_Level' parameter value:  5"
+[I] Parameter list: (Hash_Bytes=>16,Security_Level=>4.50000E+00)
+[I] Digest information BEFORE Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  32
+    Hash size (bytes)             :  32
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
+[I] Caught CryptAda_Bad_Argument_Error
+    Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_BAD_ARGUMENT_ERROR"
+    Message  : "Caught exception: CRYPTADA.EXCEPTIONS.CRYPTADA_ITEM_KIND_ERROR, with message: "Item is not an integer value". When parsing Snefru parameter list"
+[I] Trying a valid parameter list
+[I] Parameter list: (Hash_Bytes=>16,Security_Level=>4)
+[I] Digest information BEFORE Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  32
+    Hash size (bytes)             :  32
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_256
+    Security level                : SECURITY_LEVEL_8
+[I] Digest information AFTER Digest_Start
+    Digest object tag name        : "CRYPTADA.DIGESTS.MESSAGE_DIGESTS.SNEFRU.SNEFRU_DIGEST"
+    CryptAda digest algorithm id  : "MD_SNEFRU"
+    State size (bytes)            :  32
+    Input block size (bytes)      :  48
+    Hash size (bytes)             :  16
+    Processed bit count           : 16#00000000000000000000000000000000#
+    Hash size id                  : SNEFRU_128
+    Security level                : SECURITY_LEVEL_4
+[I] Getting Security_Level and Hash_Size
+[I] Hash_Size values match
+[I] Security_Level values match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:47
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : Standard Snefru 128-bit, security level 8 test vectors
+Started         : 2017/06/01 - 18:24:47
+--------------------------------------------------------------------------------
+[I] Using test vectors obtained from http://ftp.vim.org/security/coast/crypto/snefru/
+    Number of vectors to test:  11
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_SNEFRU
+    Vector string                 : "
+"
+    Vector length                 :  1
+    Vector array                  : 
+16#0A#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000000008#
+    Obtained bit count            : 16#00000000000000000000000000000008#
+    Expected hash (String)        : "D9FCB3171C097FBBA8C8F12AA0906BAD"
+    Obtained hash (String)        : "D9FCB3171C097FBBA8C8F12AA0906BAD"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 test passed.
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_SNEFRU
+    Vector string                 : "1
+"
+    Vector length                 :  2
+    Vector array                  : 
+16#31#, 16#0A#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000000010#
+    Obtained bit count            : 16#00000000000000000000000000000010#
+    Expected hash (String)        : "44EC420CE99C1F62FEB66C53C24AE453"
+    Obtained hash (String)        : "44EC420CE99C1F62FEB66C53C24AE453"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 test passed.
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_SNEFRU
+    Vector string                 : "12
+"
+    Vector length                 :  3
+    Vector array                  : 
+16#31#, 16#32#, 16#0A#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000000018#
+    Obtained bit count            : 16#00000000000000000000000000000018#
+    Expected hash (String)        : "7182051AA852EF6FBA4B6C9C9B79B317"
+    Obtained hash (String)        : "7182051AA852EF6FBA4B6C9C9B79B317"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 test passed.
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_SNEFRU
+    Vector string                 : "123
+"
+    Vector length                 :  4
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#0A#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000000020#
+    Obtained bit count            : 16#00000000000000000000000000000020#
+    Expected hash (String)        : "BC3A50AF82BF56D6A64732BC7B050A93"
+    Obtained hash (String)        : "BC3A50AF82BF56D6A64732BC7B050A93"
+[I] Counters match
+[I] Hashes match
+[I] Vector  4 test passed.
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_SNEFRU
+    Vector string                 : "1234
+"
+    Vector length                 :  5
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#0A#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000000028#
+    Obtained bit count            : 16#00000000000000000000000000000028#
+    Expected hash (String)        : "C5B8A04985A8EADFB4331A8988752B77"
+    Obtained hash (String)        : "C5B8A04985A8EADFB4331A8988752B77"
+[I] Counters match
+[I] Hashes match
+[I] Vector  5 test passed.
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_SNEFRU
+    Vector string                 : "12345
+"
+    Vector length                 :  6
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#0A#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000000030#
+    Obtained bit count            : 16#00000000000000000000000000000030#
+    Expected hash (String)        : "D559A2B62F6F44111324F85208723707"
+    Obtained hash (String)        : "D559A2B62F6F44111324F85208723707"
+[I] Counters match
+[I] Hashes match
+[I] Vector  6 test passed.
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_SNEFRU
+    Vector string                 : "123456
+"
+    Vector length                 :  7
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#0A#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000000038#
+    Obtained bit count            : 16#00000000000000000000000000000038#
+    Expected hash (String)        : "6CFB5E8F1DA02BD167B01E4816686C30"
+    Obtained hash (String)        : "6CFB5E8F1DA02BD167B01E4816686C30"
+[I] Counters match
+[I] Hashes match
+[I] Vector  7 test passed.
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_SNEFRU
+    Vector string                 : "1234567
+"
+    Vector length                 :  8
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#0A#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000000040#
+    Obtained bit count            : 16#00000000000000000000000000000040#
+    Expected hash (String)        : "29AA48325F275A8A7A01BA1543C54BA5"
+    Obtained hash (String)        : "29AA48325F275A8A7A01BA1543C54BA5"
+[I] Counters match
+[I] Hashes match
+[I] Vector  8 test passed.
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_SNEFRU
+    Vector string                 : "12345678
+"
+    Vector length                 :  9
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#0A#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000000048#
+    Obtained bit count            : 16#00000000000000000000000000000048#
+    Expected hash (String)        : "BE862A6B68B7DF887EBE00319CBC4A47"
+    Obtained hash (String)        : "BE862A6B68B7DF887EBE00319CBC4A47"
+[I] Counters match
+[I] Hashes match
+[I] Vector  9 test passed.
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_SNEFRU
+    Vector string                 : "123456789
+"
+    Vector length                 :  10
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#0A#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000000050#
+    Obtained bit count            : 16#00000000000000000000000000000050#
+    Expected hash (String)        : "6103721CCD8AD565D68E90B0F8906163"
+    Obtained hash (String)        : "6103721CCD8AD565D68E90B0F8906163"
+[I] Counters match
+[I] Hashes match
+[I] Vector  10 test passed.
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_SNEFRU
+    Vector string                 : "The theory of quantum electrodynamics has now lasted for
+more than fifty years, and has been tested more and more
+accurately over a wider and wider range of conditions.
+At the present time I can proudly say that there is no
+significant difference between experiment and theory!
+
+Just to give you an idea of how the theory has been put
+through the wringer, I'll give you some recent numbers:
+experiments have Dirac's number at 1.00115965221 (with
+an uncertainty of about five times as much). To give you
+a feeling for the accuracy of these numbers, it comes
+out something like this:  If you were to measure the
+distance from Los Angeles to New York to this accuracy,
+it would be exact to the thickness of a human hair.
+That's how delicately quantum electrodynamics has, in the
+past fifty years, been checked -- both theoretically and
+experimentally.
+"
+    Vector length                 :  849
+    Vector array                  : 
+16#54#, 16#68#, 16#65#, 16#20#, 16#74#, 16#68#, 16#65#, 16#6F#, 16#72#, 16#79#, 
+16#20#, 16#6F#, 16#66#, 16#20#, 16#71#, 16#75#, 16#61#, 16#6E#, 16#74#, 16#75#, 
+16#6D#, 16#20#, 16#65#, 16#6C#, 16#65#, 16#63#, 16#74#, 16#72#, 16#6F#, 16#64#, 
+16#79#, 16#6E#, 16#61#, 16#6D#, 16#69#, 16#63#, 16#73#, 16#20#, 16#68#, 16#61#, 
+16#73#, 16#20#, 16#6E#, 16#6F#, 16#77#, 16#20#, 16#6C#, 16#61#, 16#73#, 16#74#, 
+16#65#, 16#64#, 16#20#, 16#66#, 16#6F#, 16#72#, 16#0A#, 16#6D#, 16#6F#, 16#72#, 
+16#65#, 16#20#, 16#74#, 16#68#, 16#61#, 16#6E#, 16#20#, 16#66#, 16#69#, 16#66#, 
+16#74#, 16#79#, 16#20#, 16#79#, 16#65#, 16#61#, 16#72#, 16#73#, 16#2C#, 16#20#, 
+16#61#, 16#6E#, 16#64#, 16#20#, 16#68#, 16#61#, 16#73#, 16#20#, 16#62#, 16#65#, 
+16#65#, 16#6E#, 16#20#, 16#74#, 16#65#, 16#73#, 16#74#, 16#65#, 16#64#, 16#20#, 
+16#6D#, 16#6F#, 16#72#, 16#65#, 16#20#, 16#61#, 16#6E#, 16#64#, 16#20#, 16#6D#, 
+16#6F#, 16#72#, 16#65#, 16#0A#, 16#61#, 16#63#, 16#63#, 16#75#, 16#72#, 16#61#, 
+16#74#, 16#65#, 16#6C#, 16#79#, 16#20#, 16#6F#, 16#76#, 16#65#, 16#72#, 16#20#, 
+16#61#, 16#20#, 16#77#, 16#69#, 16#64#, 16#65#, 16#72#, 16#20#, 16#61#, 16#6E#, 
+16#64#, 16#20#, 16#77#, 16#69#, 16#64#, 16#65#, 16#72#, 16#20#, 16#72#, 16#61#, 
+16#6E#, 16#67#, 16#65#, 16#20#, 16#6F#, 16#66#, 16#20#, 16#63#, 16#6F#, 16#6E#, 
+16#64#, 16#69#, 16#74#, 16#69#, 16#6F#, 16#6E#, 16#73#, 16#2E#, 16#0A#, 16#41#, 
+16#74#, 16#20#, 16#74#, 16#68#, 16#65#, 16#20#, 16#70#, 16#72#, 16#65#, 16#73#, 
+16#65#, 16#6E#, 16#74#, 16#20#, 16#74#, 16#69#, 16#6D#, 16#65#, 16#20#, 16#49#, 
+16#20#, 16#63#, 16#61#, 16#6E#, 16#20#, 16#70#, 16#72#, 16#6F#, 16#75#, 16#64#, 
+16#6C#, 16#79#, 16#20#, 16#73#, 16#61#, 16#79#, 16#20#, 16#74#, 16#68#, 16#61#, 
+16#74#, 16#20#, 16#74#, 16#68#, 16#65#, 16#72#, 16#65#, 16#20#, 16#69#, 16#73#, 
+16#20#, 16#6E#, 16#6F#, 16#0A#, 16#73#, 16#69#, 16#67#, 16#6E#, 16#69#, 16#66#, 
+16#69#, 16#63#, 16#61#, 16#6E#, 16#74#, 16#20#, 16#64#, 16#69#, 16#66#, 16#66#, 
+16#65#, 16#72#, 16#65#, 16#6E#, 16#63#, 16#65#, 16#20#, 16#62#, 16#65#, 16#74#, 
+16#77#, 16#65#, 16#65#, 16#6E#, 16#20#, 16#65#, 16#78#, 16#70#, 16#65#, 16#72#, 
+16#69#, 16#6D#, 16#65#, 16#6E#, 16#74#, 16#20#, 16#61#, 16#6E#, 16#64#, 16#20#, 
+16#74#, 16#68#, 16#65#, 16#6F#, 16#72#, 16#79#, 16#21#, 16#0A#, 16#0A#, 16#4A#, 
+16#75#, 16#73#, 16#74#, 16#20#, 16#74#, 16#6F#, 16#20#, 16#67#, 16#69#, 16#76#, 
+16#65#, 16#20#, 16#79#, 16#6F#, 16#75#, 16#20#, 16#61#, 16#6E#, 16#20#, 16#69#, 
+16#64#, 16#65#, 16#61#, 16#20#, 16#6F#, 16#66#, 16#20#, 16#68#, 16#6F#, 16#77#, 
+16#20#, 16#74#, 16#68#, 16#65#, 16#20#, 16#74#, 16#68#, 16#65#, 16#6F#, 16#72#, 
+16#79#, 16#20#, 16#68#, 16#61#, 16#73#, 16#20#, 16#62#, 16#65#, 16#65#, 16#6E#, 
+16#20#, 16#70#, 16#75#, 16#74#, 16#0A#, 16#74#, 16#68#, 16#72#, 16#6F#, 16#75#, 
+16#67#, 16#68#, 16#20#, 16#74#, 16#68#, 16#65#, 16#20#, 16#77#, 16#72#, 16#69#, 
+16#6E#, 16#67#, 16#65#, 16#72#, 16#2C#, 16#20#, 16#49#, 16#27#, 16#6C#, 16#6C#, 
+16#20#, 16#67#, 16#69#, 16#76#, 16#65#, 16#20#, 16#79#, 16#6F#, 16#75#, 16#20#, 
+16#73#, 16#6F#, 16#6D#, 16#65#, 16#20#, 16#72#, 16#65#, 16#63#, 16#65#, 16#6E#, 
+16#74#, 16#20#, 16#6E#, 16#75#, 16#6D#, 16#62#, 16#65#, 16#72#, 16#73#, 16#3A#, 
+16#0A#, 16#65#, 16#78#, 16#70#, 16#65#, 16#72#, 16#69#, 16#6D#, 16#65#, 16#6E#, 
+16#74#, 16#73#, 16#20#, 16#68#, 16#61#, 16#76#, 16#65#, 16#20#, 16#44#, 16#69#, 
+16#72#, 16#61#, 16#63#, 16#27#, 16#73#, 16#20#, 16#6E#, 16#75#, 16#6D#, 16#62#, 
+16#65#, 16#72#, 16#20#, 16#61#, 16#74#, 16#20#, 16#31#, 16#2E#, 16#30#, 16#30#, 
+16#31#, 16#31#, 16#35#, 16#39#, 16#36#, 16#35#, 16#32#, 16#32#, 16#31#, 16#20#, 
+16#28#, 16#77#, 16#69#, 16#74#, 16#68#, 16#0A#, 16#61#, 16#6E#, 16#20#, 16#75#, 
+16#6E#, 16#63#, 16#65#, 16#72#, 16#74#, 16#61#, 16#69#, 16#6E#, 16#74#, 16#79#, 
+16#20#, 16#6F#, 16#66#, 16#20#, 16#61#, 16#62#, 16#6F#, 16#75#, 16#74#, 16#20#, 
+16#66#, 16#69#, 16#76#, 16#65#, 16#20#, 16#74#, 16#69#, 16#6D#, 16#65#, 16#73#, 
+16#20#, 16#61#, 16#73#, 16#20#, 16#6D#, 16#75#, 16#63#, 16#68#, 16#29#, 16#2E#, 
+16#20#, 16#54#, 16#6F#, 16#20#, 16#67#, 16#69#, 16#76#, 16#65#, 16#20#, 16#79#, 
+16#6F#, 16#75#, 16#0A#, 16#61#, 16#20#, 16#66#, 16#65#, 16#65#, 16#6C#, 16#69#, 
+16#6E#, 16#67#, 16#20#, 16#66#, 16#6F#, 16#72#, 16#20#, 16#74#, 16#68#, 16#65#, 
+16#20#, 16#61#, 16#63#, 16#63#, 16#75#, 16#72#, 16#61#, 16#63#, 16#79#, 16#20#, 
+16#6F#, 16#66#, 16#20#, 16#74#, 16#68#, 16#65#, 16#73#, 16#65#, 16#20#, 16#6E#, 
+16#75#, 16#6D#, 16#62#, 16#65#, 16#72#, 16#73#, 16#2C#, 16#20#, 16#69#, 16#74#, 
+16#20#, 16#63#, 16#6F#, 16#6D#, 16#65#, 16#73#, 16#0A#, 16#6F#, 16#75#, 16#74#, 
+16#20#, 16#73#, 16#6F#, 16#6D#, 16#65#, 16#74#, 16#68#, 16#69#, 16#6E#, 16#67#, 
+16#20#, 16#6C#, 16#69#, 16#6B#, 16#65#, 16#20#, 16#74#, 16#68#, 16#69#, 16#73#, 
+16#3A#, 16#20#, 16#20#, 16#49#, 16#66#, 16#20#, 16#79#, 16#6F#, 16#75#, 16#20#, 
+16#77#, 16#65#, 16#72#, 16#65#, 16#20#, 16#74#, 16#6F#, 16#20#, 16#6D#, 16#65#, 
+16#61#, 16#73#, 16#75#, 16#72#, 16#65#, 16#20#, 16#74#, 16#68#, 16#65#, 16#0A#, 
+16#64#, 16#69#, 16#73#, 16#74#, 16#61#, 16#6E#, 16#63#, 16#65#, 16#20#, 16#66#, 
+16#72#, 16#6F#, 16#6D#, 16#20#, 16#4C#, 16#6F#, 16#73#, 16#20#, 16#41#, 16#6E#, 
+16#67#, 16#65#, 16#6C#, 16#65#, 16#73#, 16#20#, 16#74#, 16#6F#, 16#20#, 16#4E#, 
+16#65#, 16#77#, 16#20#, 16#59#, 16#6F#, 16#72#, 16#6B#, 16#20#, 16#74#, 16#6F#, 
+16#20#, 16#74#, 16#68#, 16#69#, 16#73#, 16#20#, 16#61#, 16#63#, 16#63#, 16#75#, 
+16#72#, 16#61#, 16#63#, 16#79#, 16#2C#, 16#0A#, 16#69#, 16#74#, 16#20#, 16#77#, 
+16#6F#, 16#75#, 16#6C#, 16#64#, 16#20#, 16#62#, 16#65#, 16#20#, 16#65#, 16#78#, 
+16#61#, 16#63#, 16#74#, 16#20#, 16#74#, 16#6F#, 16#20#, 16#74#, 16#68#, 16#65#, 
+16#20#, 16#74#, 16#68#, 16#69#, 16#63#, 16#6B#, 16#6E#, 16#65#, 16#73#, 16#73#, 
+16#20#, 16#6F#, 16#66#, 16#20#, 16#61#, 16#20#, 16#68#, 16#75#, 16#6D#, 16#61#, 
+16#6E#, 16#20#, 16#68#, 16#61#, 16#69#, 16#72#, 16#2E#, 16#0A#, 16#54#, 16#68#, 
+16#61#, 16#74#, 16#27#, 16#73#, 16#20#, 16#68#, 16#6F#, 16#77#, 16#20#, 16#64#, 
+16#65#, 16#6C#, 16#69#, 16#63#, 16#61#, 16#74#, 16#65#, 16#6C#, 16#79#, 16#20#, 
+16#71#, 16#75#, 16#61#, 16#6E#, 16#74#, 16#75#, 16#6D#, 16#20#, 16#65#, 16#6C#, 
+16#65#, 16#63#, 16#74#, 16#72#, 16#6F#, 16#64#, 16#79#, 16#6E#, 16#61#, 16#6D#, 
+16#69#, 16#63#, 16#73#, 16#20#, 16#68#, 16#61#, 16#73#, 16#2C#, 16#20#, 16#69#, 
+16#6E#, 16#20#, 16#74#, 16#68#, 16#65#, 16#0A#, 16#70#, 16#61#, 16#73#, 16#74#, 
+16#20#, 16#66#, 16#69#, 16#66#, 16#74#, 16#79#, 16#20#, 16#79#, 16#65#, 16#61#, 
+16#72#, 16#73#, 16#2C#, 16#20#, 16#62#, 16#65#, 16#65#, 16#6E#, 16#20#, 16#63#, 
+16#68#, 16#65#, 16#63#, 16#6B#, 16#65#, 16#64#, 16#20#, 16#2D#, 16#2D#, 16#20#, 
+16#62#, 16#6F#, 16#74#, 16#68#, 16#20#, 16#74#, 16#68#, 16#65#, 16#6F#, 16#72#, 
+16#65#, 16#74#, 16#69#, 16#63#, 16#61#, 16#6C#, 16#6C#, 16#79#, 16#20#, 16#61#, 
+16#6E#, 16#64#, 16#0A#, 16#65#, 16#78#, 16#70#, 16#65#, 16#72#, 16#69#, 16#6D#, 
+16#65#, 16#6E#, 16#74#, 16#61#, 16#6C#, 16#6C#, 16#79#, 16#2E#, 16#0A#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000001A88#
+    Obtained bit count            : 16#00000000000000000000000000001A88#
+    Expected hash (String)        : "56AB6BB21A7A07892D62CB03C41DDE6D"
+    Obtained hash (String)        : "56AB6BB21A7A07892D62CB03C41DDE6D"
+[I] Counters match
+[I] Hashes match
+[I] Vector  11 test passed.
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:47
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 5
+Description     : Standard Snefru 256-bit, security level 8 test vectors
+Started         : 2017/06/01 - 18:24:47
+--------------------------------------------------------------------------------
+[I] Using test vectors obtained from http://ftp.vim.org/security/coast/crypto/snefru/
+    Number of vectors to test:  11
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_SNEFRU
+    Vector string                 : "
+"
+    Vector length                 :  1
+    Vector array                  : 
+16#0A#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000000008#
+    Obtained bit count            : 16#00000000000000000000000000000008#
+    Expected hash (String)        : "2E02687F0D45D5B9B50CB68C3F33E6843D618A1ACA2D06893D3EB4E3026B5732"
+    Obtained hash (String)        : "2E02687F0D45D5B9B50CB68C3F33E6843D618A1ACA2D06893D3EB4E3026B5732"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 test passed.
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_SNEFRU
+    Vector string                 : "1
+"
+    Vector length                 :  2
+    Vector array                  : 
+16#31#, 16#0A#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000000010#
+    Obtained bit count            : 16#00000000000000000000000000000010#
+    Expected hash (String)        : "BFEA4A05A2A2EF15C736D114598A20B9D9BD4D66B661E6B05ECF6A7737BDC58C"
+    Obtained hash (String)        : "BFEA4A05A2A2EF15C736D114598A20B9D9BD4D66B661E6B05ECF6A7737BDC58C"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 test passed.
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_SNEFRU
+    Vector string                 : "12
+"
+    Vector length                 :  3
+    Vector array                  : 
+16#31#, 16#32#, 16#0A#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000000018#
+    Obtained bit count            : 16#00000000000000000000000000000018#
+    Expected hash (String)        : "AC677D69761ADE3F189C7AEF106D5FE7392D324E19CC76D5DB4A2C05F2CC2CC5"
+    Obtained hash (String)        : "AC677D69761ADE3F189C7AEF106D5FE7392D324E19CC76D5DB4A2C05F2CC2CC5"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 test passed.
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_SNEFRU
+    Vector string                 : "123
+"
+    Vector length                 :  4
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#0A#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000000020#
+    Obtained bit count            : 16#00000000000000000000000000000020#
+    Expected hash (String)        : "061C76AA1DB4A22C0E42945E26C48499B5400162E08C640BE05D3C007C44793D"
+    Obtained hash (String)        : "061C76AA1DB4A22C0E42945E26C48499B5400162E08C640BE05D3C007C44793D"
+[I] Counters match
+[I] Hashes match
+[I] Vector  4 test passed.
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_SNEFRU
+    Vector string                 : "1234
+"
+    Vector length                 :  5
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#0A#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000000028#
+    Obtained bit count            : 16#00000000000000000000000000000028#
+    Expected hash (String)        : "1E87FE1D9C927E9E24BE85E3CC73359873541640A6261793CE5A974953113F5E"
+    Obtained hash (String)        : "1E87FE1D9C927E9E24BE85E3CC73359873541640A6261793CE5A974953113F5E"
+[I] Counters match
+[I] Hashes match
+[I] Vector  5 test passed.
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_SNEFRU
+    Vector string                 : "12345
+"
+    Vector length                 :  6
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#0A#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000000030#
+    Obtained bit count            : 16#00000000000000000000000000000030#
+    Expected hash (String)        : "1B59927D85A9349A87796620FE2FF401A06A7BA48794498EBAB978EFC3A68912"
+    Obtained hash (String)        : "1B59927D85A9349A87796620FE2FF401A06A7BA48794498EBAB978EFC3A68912"
+[I] Counters match
+[I] Hashes match
+[I] Vector  6 test passed.
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_SNEFRU
+    Vector string                 : "123456
+"
+    Vector length                 :  7
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#0A#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000000038#
+    Obtained bit count            : 16#00000000000000000000000000000038#
+    Expected hash (String)        : "28E9D9BC35032B68FAEDA88101ECB2524317E9DA111B0E3E7094107212D9CF72"
+    Obtained hash (String)        : "28E9D9BC35032B68FAEDA88101ECB2524317E9DA111B0E3E7094107212D9CF72"
+[I] Counters match
+[I] Hashes match
+[I] Vector  7 test passed.
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_SNEFRU
+    Vector string                 : "1234567
+"
+    Vector length                 :  8
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#0A#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000000040#
+    Obtained bit count            : 16#00000000000000000000000000000040#
+    Expected hash (String)        : "F7FFF4EE74FD1B8D6B3267F84E47E007F029D13B8AF7E37E34D13B469B8F248F"
+    Obtained hash (String)        : "F7FFF4EE74FD1B8D6B3267F84E47E007F029D13B8AF7E37E34D13B469B8F248F"
+[I] Counters match
+[I] Hashes match
+[I] Vector  8 test passed.
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_SNEFRU
+    Vector string                 : "12345678
+"
+    Vector length                 :  9
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#0A#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000000048#
+    Obtained bit count            : 16#00000000000000000000000000000048#
+    Expected hash (String)        : "EE7D64B0102B2205E98926613B200185559D08BE6AD787DA717C968744E11AF3"
+    Obtained hash (String)        : "EE7D64B0102B2205E98926613B200185559D08BE6AD787DA717C968744E11AF3"
+[I] Counters match
+[I] Hashes match
+[I] Vector  9 test passed.
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_SNEFRU
+    Vector string                 : "123456789
+"
+    Vector length                 :  10
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#0A#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000000050#
+    Obtained bit count            : 16#00000000000000000000000000000050#
+    Expected hash (String)        : "4CA72639E40E9AB9C0C3F523C4449B3911632D374C124D7702192EC2E4E0B7A3"
+    Obtained hash (String)        : "4CA72639E40E9AB9C0C3F523C4449B3911632D374C124D7702192EC2E4E0B7A3"
+[I] Counters match
+[I] Hashes match
+[I] Vector  10 test passed.
+[I] Computing hash for a test vector:
+    Hash algorithm                : MD_SNEFRU
+    Vector string                 : "The theory of quantum electrodynamics has now lasted for
+more than fifty years, and has been tested more and more
+accurately over a wider and wider range of conditions.
+At the present time I can proudly say that there is no
+significant difference between experiment and theory!
+
+Just to give you an idea of how the theory has been put
+through the wringer, I'll give you some recent numbers:
+experiments have Dirac's number at 1.00115965221 (with
+an uncertainty of about five times as much). To give you
+a feeling for the accuracy of these numbers, it comes
+out something like this:  If you were to measure the
+distance from Los Angeles to New York to this accuracy,
+it would be exact to the thickness of a human hair.
+That's how delicately quantum electrodynamics has, in the
+past fifty years, been checked -- both theoretically and
+experimentally.
+"
+    Vector length                 :  849
+    Vector array                  : 
+16#54#, 16#68#, 16#65#, 16#20#, 16#74#, 16#68#, 16#65#, 16#6F#, 16#72#, 16#79#, 
+16#20#, 16#6F#, 16#66#, 16#20#, 16#71#, 16#75#, 16#61#, 16#6E#, 16#74#, 16#75#, 
+16#6D#, 16#20#, 16#65#, 16#6C#, 16#65#, 16#63#, 16#74#, 16#72#, 16#6F#, 16#64#, 
+16#79#, 16#6E#, 16#61#, 16#6D#, 16#69#, 16#63#, 16#73#, 16#20#, 16#68#, 16#61#, 
+16#73#, 16#20#, 16#6E#, 16#6F#, 16#77#, 16#20#, 16#6C#, 16#61#, 16#73#, 16#74#, 
+16#65#, 16#64#, 16#20#, 16#66#, 16#6F#, 16#72#, 16#0A#, 16#6D#, 16#6F#, 16#72#, 
+16#65#, 16#20#, 16#74#, 16#68#, 16#61#, 16#6E#, 16#20#, 16#66#, 16#69#, 16#66#, 
+16#74#, 16#79#, 16#20#, 16#79#, 16#65#, 16#61#, 16#72#, 16#73#, 16#2C#, 16#20#, 
+16#61#, 16#6E#, 16#64#, 16#20#, 16#68#, 16#61#, 16#73#, 16#20#, 16#62#, 16#65#, 
+16#65#, 16#6E#, 16#20#, 16#74#, 16#65#, 16#73#, 16#74#, 16#65#, 16#64#, 16#20#, 
+16#6D#, 16#6F#, 16#72#, 16#65#, 16#20#, 16#61#, 16#6E#, 16#64#, 16#20#, 16#6D#, 
+16#6F#, 16#72#, 16#65#, 16#0A#, 16#61#, 16#63#, 16#63#, 16#75#, 16#72#, 16#61#, 
+16#74#, 16#65#, 16#6C#, 16#79#, 16#20#, 16#6F#, 16#76#, 16#65#, 16#72#, 16#20#, 
+16#61#, 16#20#, 16#77#, 16#69#, 16#64#, 16#65#, 16#72#, 16#20#, 16#61#, 16#6E#, 
+16#64#, 16#20#, 16#77#, 16#69#, 16#64#, 16#65#, 16#72#, 16#20#, 16#72#, 16#61#, 
+16#6E#, 16#67#, 16#65#, 16#20#, 16#6F#, 16#66#, 16#20#, 16#63#, 16#6F#, 16#6E#, 
+16#64#, 16#69#, 16#74#, 16#69#, 16#6F#, 16#6E#, 16#73#, 16#2E#, 16#0A#, 16#41#, 
+16#74#, 16#20#, 16#74#, 16#68#, 16#65#, 16#20#, 16#70#, 16#72#, 16#65#, 16#73#, 
+16#65#, 16#6E#, 16#74#, 16#20#, 16#74#, 16#69#, 16#6D#, 16#65#, 16#20#, 16#49#, 
+16#20#, 16#63#, 16#61#, 16#6E#, 16#20#, 16#70#, 16#72#, 16#6F#, 16#75#, 16#64#, 
+16#6C#, 16#79#, 16#20#, 16#73#, 16#61#, 16#79#, 16#20#, 16#74#, 16#68#, 16#61#, 
+16#74#, 16#20#, 16#74#, 16#68#, 16#65#, 16#72#, 16#65#, 16#20#, 16#69#, 16#73#, 
+16#20#, 16#6E#, 16#6F#, 16#0A#, 16#73#, 16#69#, 16#67#, 16#6E#, 16#69#, 16#66#, 
+16#69#, 16#63#, 16#61#, 16#6E#, 16#74#, 16#20#, 16#64#, 16#69#, 16#66#, 16#66#, 
+16#65#, 16#72#, 16#65#, 16#6E#, 16#63#, 16#65#, 16#20#, 16#62#, 16#65#, 16#74#, 
+16#77#, 16#65#, 16#65#, 16#6E#, 16#20#, 16#65#, 16#78#, 16#70#, 16#65#, 16#72#, 
+16#69#, 16#6D#, 16#65#, 16#6E#, 16#74#, 16#20#, 16#61#, 16#6E#, 16#64#, 16#20#, 
+16#74#, 16#68#, 16#65#, 16#6F#, 16#72#, 16#79#, 16#21#, 16#0A#, 16#0A#, 16#4A#, 
+16#75#, 16#73#, 16#74#, 16#20#, 16#74#, 16#6F#, 16#20#, 16#67#, 16#69#, 16#76#, 
+16#65#, 16#20#, 16#79#, 16#6F#, 16#75#, 16#20#, 16#61#, 16#6E#, 16#20#, 16#69#, 
+16#64#, 16#65#, 16#61#, 16#20#, 16#6F#, 16#66#, 16#20#, 16#68#, 16#6F#, 16#77#, 
+16#20#, 16#74#, 16#68#, 16#65#, 16#20#, 16#74#, 16#68#, 16#65#, 16#6F#, 16#72#, 
+16#79#, 16#20#, 16#68#, 16#61#, 16#73#, 16#20#, 16#62#, 16#65#, 16#65#, 16#6E#, 
+16#20#, 16#70#, 16#75#, 16#74#, 16#0A#, 16#74#, 16#68#, 16#72#, 16#6F#, 16#75#, 
+16#67#, 16#68#, 16#20#, 16#74#, 16#68#, 16#65#, 16#20#, 16#77#, 16#72#, 16#69#, 
+16#6E#, 16#67#, 16#65#, 16#72#, 16#2C#, 16#20#, 16#49#, 16#27#, 16#6C#, 16#6C#, 
+16#20#, 16#67#, 16#69#, 16#76#, 16#65#, 16#20#, 16#79#, 16#6F#, 16#75#, 16#20#, 
+16#73#, 16#6F#, 16#6D#, 16#65#, 16#20#, 16#72#, 16#65#, 16#63#, 16#65#, 16#6E#, 
+16#74#, 16#20#, 16#6E#, 16#75#, 16#6D#, 16#62#, 16#65#, 16#72#, 16#73#, 16#3A#, 
+16#0A#, 16#65#, 16#78#, 16#70#, 16#65#, 16#72#, 16#69#, 16#6D#, 16#65#, 16#6E#, 
+16#74#, 16#73#, 16#20#, 16#68#, 16#61#, 16#76#, 16#65#, 16#20#, 16#44#, 16#69#, 
+16#72#, 16#61#, 16#63#, 16#27#, 16#73#, 16#20#, 16#6E#, 16#75#, 16#6D#, 16#62#, 
+16#65#, 16#72#, 16#20#, 16#61#, 16#74#, 16#20#, 16#31#, 16#2E#, 16#30#, 16#30#, 
+16#31#, 16#31#, 16#35#, 16#39#, 16#36#, 16#35#, 16#32#, 16#32#, 16#31#, 16#20#, 
+16#28#, 16#77#, 16#69#, 16#74#, 16#68#, 16#0A#, 16#61#, 16#6E#, 16#20#, 16#75#, 
+16#6E#, 16#63#, 16#65#, 16#72#, 16#74#, 16#61#, 16#69#, 16#6E#, 16#74#, 16#79#, 
+16#20#, 16#6F#, 16#66#, 16#20#, 16#61#, 16#62#, 16#6F#, 16#75#, 16#74#, 16#20#, 
+16#66#, 16#69#, 16#76#, 16#65#, 16#20#, 16#74#, 16#69#, 16#6D#, 16#65#, 16#73#, 
+16#20#, 16#61#, 16#73#, 16#20#, 16#6D#, 16#75#, 16#63#, 16#68#, 16#29#, 16#2E#, 
+16#20#, 16#54#, 16#6F#, 16#20#, 16#67#, 16#69#, 16#76#, 16#65#, 16#20#, 16#79#, 
+16#6F#, 16#75#, 16#0A#, 16#61#, 16#20#, 16#66#, 16#65#, 16#65#, 16#6C#, 16#69#, 
+16#6E#, 16#67#, 16#20#, 16#66#, 16#6F#, 16#72#, 16#20#, 16#74#, 16#68#, 16#65#, 
+16#20#, 16#61#, 16#63#, 16#63#, 16#75#, 16#72#, 16#61#, 16#63#, 16#79#, 16#20#, 
+16#6F#, 16#66#, 16#20#, 16#74#, 16#68#, 16#65#, 16#73#, 16#65#, 16#20#, 16#6E#, 
+16#75#, 16#6D#, 16#62#, 16#65#, 16#72#, 16#73#, 16#2C#, 16#20#, 16#69#, 16#74#, 
+16#20#, 16#63#, 16#6F#, 16#6D#, 16#65#, 16#73#, 16#0A#, 16#6F#, 16#75#, 16#74#, 
+16#20#, 16#73#, 16#6F#, 16#6D#, 16#65#, 16#74#, 16#68#, 16#69#, 16#6E#, 16#67#, 
+16#20#, 16#6C#, 16#69#, 16#6B#, 16#65#, 16#20#, 16#74#, 16#68#, 16#69#, 16#73#, 
+16#3A#, 16#20#, 16#20#, 16#49#, 16#66#, 16#20#, 16#79#, 16#6F#, 16#75#, 16#20#, 
+16#77#, 16#65#, 16#72#, 16#65#, 16#20#, 16#74#, 16#6F#, 16#20#, 16#6D#, 16#65#, 
+16#61#, 16#73#, 16#75#, 16#72#, 16#65#, 16#20#, 16#74#, 16#68#, 16#65#, 16#0A#, 
+16#64#, 16#69#, 16#73#, 16#74#, 16#61#, 16#6E#, 16#63#, 16#65#, 16#20#, 16#66#, 
+16#72#, 16#6F#, 16#6D#, 16#20#, 16#4C#, 16#6F#, 16#73#, 16#20#, 16#41#, 16#6E#, 
+16#67#, 16#65#, 16#6C#, 16#65#, 16#73#, 16#20#, 16#74#, 16#6F#, 16#20#, 16#4E#, 
+16#65#, 16#77#, 16#20#, 16#59#, 16#6F#, 16#72#, 16#6B#, 16#20#, 16#74#, 16#6F#, 
+16#20#, 16#74#, 16#68#, 16#69#, 16#73#, 16#20#, 16#61#, 16#63#, 16#63#, 16#75#, 
+16#72#, 16#61#, 16#63#, 16#79#, 16#2C#, 16#0A#, 16#69#, 16#74#, 16#20#, 16#77#, 
+16#6F#, 16#75#, 16#6C#, 16#64#, 16#20#, 16#62#, 16#65#, 16#20#, 16#65#, 16#78#, 
+16#61#, 16#63#, 16#74#, 16#20#, 16#74#, 16#6F#, 16#20#, 16#74#, 16#68#, 16#65#, 
+16#20#, 16#74#, 16#68#, 16#69#, 16#63#, 16#6B#, 16#6E#, 16#65#, 16#73#, 16#73#, 
+16#20#, 16#6F#, 16#66#, 16#20#, 16#61#, 16#20#, 16#68#, 16#75#, 16#6D#, 16#61#, 
+16#6E#, 16#20#, 16#68#, 16#61#, 16#69#, 16#72#, 16#2E#, 16#0A#, 16#54#, 16#68#, 
+16#61#, 16#74#, 16#27#, 16#73#, 16#20#, 16#68#, 16#6F#, 16#77#, 16#20#, 16#64#, 
+16#65#, 16#6C#, 16#69#, 16#63#, 16#61#, 16#74#, 16#65#, 16#6C#, 16#79#, 16#20#, 
+16#71#, 16#75#, 16#61#, 16#6E#, 16#74#, 16#75#, 16#6D#, 16#20#, 16#65#, 16#6C#, 
+16#65#, 16#63#, 16#74#, 16#72#, 16#6F#, 16#64#, 16#79#, 16#6E#, 16#61#, 16#6D#, 
+16#69#, 16#63#, 16#73#, 16#20#, 16#68#, 16#61#, 16#73#, 16#2C#, 16#20#, 16#69#, 
+16#6E#, 16#20#, 16#74#, 16#68#, 16#65#, 16#0A#, 16#70#, 16#61#, 16#73#, 16#74#, 
+16#20#, 16#66#, 16#69#, 16#66#, 16#74#, 16#79#, 16#20#, 16#79#, 16#65#, 16#61#, 
+16#72#, 16#73#, 16#2C#, 16#20#, 16#62#, 16#65#, 16#65#, 16#6E#, 16#20#, 16#63#, 
+16#68#, 16#65#, 16#63#, 16#6B#, 16#65#, 16#64#, 16#20#, 16#2D#, 16#2D#, 16#20#, 
+16#62#, 16#6F#, 16#74#, 16#68#, 16#20#, 16#74#, 16#68#, 16#65#, 16#6F#, 16#72#, 
+16#65#, 16#74#, 16#69#, 16#63#, 16#61#, 16#6C#, 16#6C#, 16#79#, 16#20#, 16#61#, 
+16#6E#, 16#64#, 16#0A#, 16#65#, 16#78#, 16#70#, 16#65#, 16#72#, 16#69#, 16#6D#, 
+16#65#, 16#6E#, 16#74#, 16#61#, 16#6C#, 16#6C#, 16#79#, 16#2E#, 16#0A#
+[I] Digest results
+    Expected bit count            : 16#00000000000000000000000000001A88#
+    Obtained bit count            : 16#00000000000000000000000000001A88#
+    Expected hash (String)        : "5E8A32ED1998B611F5F096960C65E820DA93A9A424D2715130C1E45483F1839C"
+    Obtained hash (String)        : "5E8A32ED1998B611F5F096960C65E820DA93A9A424D2715130C1E45483F1839C"
+[I] Counters match
+[I] Hashes match
+[I] Vector  11 test passed.
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 5
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:47
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 6
+Description     : CryptAda Snefru 128-bit, security level 8 test vectors
+Started         : 2017/06/01 - 18:24:47
+--------------------------------------------------------------------------------
+[I] Obtained hashes are checked against values obtained by using several online tools
+    Number of vectors to test:  9
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_SNEFRU
+    Test vector index             :  1
+    Vector string                 : ""
+    Vector length                 :  0
+    Vector array                  : 
+
+[I] Digest results for vector     :  1
+    Expected bit count            : 16#00000000000000000000000000000000#
+    Obtained bit count            : 16#00000000000000000000000000000000#
+    Expected hash (String)        : "8617F366566A011837F4FB4BA5BEDEA2"
+    Obtained hash (String)        : "8617F366566A011837F4FB4BA5BEDEA2"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_SNEFRU
+    Test vector index             :  2
+    Vector string                 : "a"
+    Vector length                 :  1
+    Vector array                  : 
+16#61#
+[I] Digest results for vector     :  2
+    Expected bit count            : 16#00000000000000000000000000000008#
+    Obtained bit count            : 16#00000000000000000000000000000008#
+    Expected hash (String)        : "BF5CE540AE51BC50399F96746C5A15BD"
+    Obtained hash (String)        : "BF5CE540AE51BC50399F96746C5A15BD"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_SNEFRU
+    Test vector index             :  3
+    Vector string                 : "abc"
+    Vector length                 :  3
+    Vector array                  : 
+16#61#, 16#62#, 16#63#
+[I] Digest results for vector     :  3
+    Expected bit count            : 16#00000000000000000000000000000018#
+    Obtained bit count            : 16#00000000000000000000000000000018#
+    Expected hash (String)        : "553D0648928299A0F22A275A02C83B10"
+    Obtained hash (String)        : "553D0648928299A0F22A275A02C83B10"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_SNEFRU
+    Test vector index             :  4
+    Vector string                 : "message digest"
+    Vector length                 :  14
+    Vector array                  : 
+16#6D#, 16#65#, 16#73#, 16#73#, 16#61#, 16#67#, 16#65#, 16#20#, 16#64#, 16#69#, 
+16#67#, 16#65#, 16#73#, 16#74#
+[I] Digest results for vector     :  4
+    Expected bit count            : 16#00000000000000000000000000000070#
+    Obtained bit count            : 16#00000000000000000000000000000070#
+    Expected hash (String)        : "96D6F2F4112C4BAF29F653F1594E2D5D"
+    Obtained hash (String)        : "96D6F2F4112C4BAF29F653F1594E2D5D"
+[I] Counters match
+[I] Hashes match
+[I] Vector  4 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_SNEFRU
+    Test vector index             :  5
+    Vector string                 : "abcdefghijklmnopqrstuvwxyz"
+    Vector length                 :  26
+    Vector array                  : 
+16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 
+16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 
+16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#
+[I] Digest results for vector     :  5
+    Expected bit count            : 16#000000000000000000000000000000D0#
+    Obtained bit count            : 16#000000000000000000000000000000D0#
+    Expected hash (String)        : "7840148A66B91C219C36F127A0929606"
+    Obtained hash (String)        : "7840148A66B91C219C36F127A0929606"
+[I] Counters match
+[I] Hashes match
+[I] Vector  5 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_SNEFRU
+    Test vector index             :  6
+    Vector string                 : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    Vector length                 :  62
+    Vector array                  : 
+16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 
+16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 
+16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#61#, 16#62#, 16#63#, 16#64#, 
+16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 
+16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 
+16#79#, 16#7A#, 16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 
+16#38#, 16#39#
+[I] Digest results for vector     :  6
+    Expected bit count            : 16#000000000000000000000000000001F0#
+    Obtained bit count            : 16#000000000000000000000000000001F0#
+    Expected hash (String)        : "0EFD7F93A549F023B79781090458923E"
+    Obtained hash (String)        : "0EFD7F93A549F023B79781090458923E"
+[I] Counters match
+[I] Hashes match
+[I] Vector  6 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_SNEFRU
+    Test vector index             :  7
+    Vector string                 : "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
+    Vector length                 :  80
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#
+[I] Digest results for vector     :  7
+    Expected bit count            : 16#00000000000000000000000000000280#
+    Obtained bit count            : 16#00000000000000000000000000000280#
+    Expected hash (String)        : "D9204ED80BB8430C0B9C244FE485814A"
+    Obtained hash (String)        : "D9204ED80BB8430C0B9C244FE485814A"
+[I] Counters match
+[I] Hashes match
+[I] Vector  7 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_SNEFRU
+    Test vector index             :  8
+    Vector string                 : "The quick brown fox jumps over the lazy dog"
+    Vector length                 :  43
+    Vector array                  : 
+16#54#, 16#68#, 16#65#, 16#20#, 16#71#, 16#75#, 16#69#, 16#63#, 16#6B#, 16#20#, 
+16#62#, 16#72#, 16#6F#, 16#77#, 16#6E#, 16#20#, 16#66#, 16#6F#, 16#78#, 16#20#, 
+16#6A#, 16#75#, 16#6D#, 16#70#, 16#73#, 16#20#, 16#6F#, 16#76#, 16#65#, 16#72#, 
+16#20#, 16#74#, 16#68#, 16#65#, 16#20#, 16#6C#, 16#61#, 16#7A#, 16#79#, 16#20#, 
+16#64#, 16#6F#, 16#67#
+[I] Digest results for vector     :  8
+    Expected bit count            : 16#00000000000000000000000000000158#
+    Obtained bit count            : 16#00000000000000000000000000000158#
+    Expected hash (String)        : "59D9539D0DD96D635B5BDBD1395BB86C"
+    Obtained hash (String)        : "59D9539D0DD96D635B5BDBD1395BB86C"
+[I] Counters match
+[I] Hashes match
+[I] Vector  8 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_SNEFRU
+    Test vector index             :  9
+    Vector string                 : "CryptAda By TCantos Software"
+    Vector length                 :  28
+    Vector array                  : 
+16#43#, 16#72#, 16#79#, 16#70#, 16#74#, 16#41#, 16#64#, 16#61#, 16#20#, 16#42#, 
+16#79#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 16#73#, 16#20#, 
+16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+[I] Digest results for vector     :  9
+    Expected bit count            : 16#000000000000000000000000000000E0#
+    Obtained bit count            : 16#000000000000000000000000000000E0#
+    Expected hash (String)        : "0549A6D1835E4C1BF38806E2E4EFE19C"
+    Obtained hash (String)        : "0549A6D1835E4C1BF38806E2E4EFE19C"
+[I] Counters match
+[I] Hashes match
+[I] Vector  9 test passed.
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 6
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:47
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 7
+Description     : CryptAda Snefru 256-bit, security level 8 test vectors
+Started         : 2017/06/01 - 18:24:47
+--------------------------------------------------------------------------------
+[I] Obtained hashes are checked against values obtained by using several online tools
+    Number of vectors to test:  9
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_SNEFRU
+    Test vector index             :  1
+    Vector string                 : ""
+    Vector length                 :  0
+    Vector array                  : 
+
+[I] Digest results for vector     :  1
+    Expected bit count            : 16#00000000000000000000000000000000#
+    Obtained bit count            : 16#00000000000000000000000000000000#
+    Expected hash (String)        : "8617F366566A011837F4FB4BA5BEDEA2B892F3ED8B894023D16AE344B2BE5881"
+    Obtained hash (String)        : "8617F366566A011837F4FB4BA5BEDEA2B892F3ED8B894023D16AE344B2BE5881"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_SNEFRU
+    Test vector index             :  2
+    Vector string                 : "a"
+    Vector length                 :  1
+    Vector array                  : 
+16#61#
+[I] Digest results for vector     :  2
+    Expected bit count            : 16#00000000000000000000000000000008#
+    Obtained bit count            : 16#00000000000000000000000000000008#
+    Expected hash (String)        : "45161589AC317BE0CEBA70DB2573DDDA6E668A31984B39BF65E4B664B584C63D"
+    Obtained hash (String)        : "45161589AC317BE0CEBA70DB2573DDDA6E668A31984B39BF65E4B664B584C63D"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_SNEFRU
+    Test vector index             :  3
+    Vector string                 : "abc"
+    Vector length                 :  3
+    Vector array                  : 
+16#61#, 16#62#, 16#63#
+[I] Digest results for vector     :  3
+    Expected bit count            : 16#00000000000000000000000000000018#
+    Obtained bit count            : 16#00000000000000000000000000000018#
+    Expected hash (String)        : "7D033205647A2AF3DC8339F6CB25643C33EBC622D32979C4B612B02C4903031B"
+    Obtained hash (String)        : "7D033205647A2AF3DC8339F6CB25643C33EBC622D32979C4B612B02C4903031B"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_SNEFRU
+    Test vector index             :  4
+    Vector string                 : "message digest"
+    Vector length                 :  14
+    Vector array                  : 
+16#6D#, 16#65#, 16#73#, 16#73#, 16#61#, 16#67#, 16#65#, 16#20#, 16#64#, 16#69#, 
+16#67#, 16#65#, 16#73#, 16#74#
+[I] Digest results for vector     :  4
+    Expected bit count            : 16#00000000000000000000000000000070#
+    Obtained bit count            : 16#00000000000000000000000000000070#
+    Expected hash (String)        : "C5D4CE38DAA043BDD59ED15DB577500C071B917C1A46CD7B4D30B44A44C86DF8"
+    Obtained hash (String)        : "C5D4CE38DAA043BDD59ED15DB577500C071B917C1A46CD7B4D30B44A44C86DF8"
+[I] Counters match
+[I] Hashes match
+[I] Vector  4 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_SNEFRU
+    Test vector index             :  5
+    Vector string                 : "abcdefghijklmnopqrstuvwxyz"
+    Vector length                 :  26
+    Vector array                  : 
+16#61#, 16#62#, 16#63#, 16#64#, 16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 
+16#6B#, 16#6C#, 16#6D#, 16#6E#, 16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 
+16#75#, 16#76#, 16#77#, 16#78#, 16#79#, 16#7A#
+[I] Digest results for vector     :  5
+    Expected bit count            : 16#000000000000000000000000000000D0#
+    Obtained bit count            : 16#000000000000000000000000000000D0#
+    Expected hash (String)        : "9304BB2F876D9C4F54546CF7EC59E0A006BEAD745F08C642F25A7C808E0BF86E"
+    Obtained hash (String)        : "9304BB2F876D9C4F54546CF7EC59E0A006BEAD745F08C642F25A7C808E0BF86E"
+[I] Counters match
+[I] Hashes match
+[I] Vector  5 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_SNEFRU
+    Test vector index             :  6
+    Vector string                 : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    Vector length                 :  62
+    Vector array                  : 
+16#41#, 16#42#, 16#43#, 16#44#, 16#45#, 16#46#, 16#47#, 16#48#, 16#49#, 16#4A#, 
+16#4B#, 16#4C#, 16#4D#, 16#4E#, 16#4F#, 16#50#, 16#51#, 16#52#, 16#53#, 16#54#, 
+16#55#, 16#56#, 16#57#, 16#58#, 16#59#, 16#5A#, 16#61#, 16#62#, 16#63#, 16#64#, 
+16#65#, 16#66#, 16#67#, 16#68#, 16#69#, 16#6A#, 16#6B#, 16#6C#, 16#6D#, 16#6E#, 
+16#6F#, 16#70#, 16#71#, 16#72#, 16#73#, 16#74#, 16#75#, 16#76#, 16#77#, 16#78#, 
+16#79#, 16#7A#, 16#30#, 16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 
+16#38#, 16#39#
+[I] Digest results for vector     :  6
+    Expected bit count            : 16#000000000000000000000000000001F0#
+    Obtained bit count            : 16#000000000000000000000000000001F0#
+    Expected hash (String)        : "83AA9193B62FFD269FAA43D31E6AC2678B340E2A85849470328BE9773A9E5728"
+    Obtained hash (String)        : "83AA9193B62FFD269FAA43D31E6AC2678B340E2A85849470328BE9773A9E5728"
+[I] Counters match
+[I] Hashes match
+[I] Vector  6 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_SNEFRU
+    Test vector index             :  7
+    Vector string                 : "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
+    Vector length                 :  80
+    Vector array                  : 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#, 
+16#31#, 16#32#, 16#33#, 16#34#, 16#35#, 16#36#, 16#37#, 16#38#, 16#39#, 16#30#
+[I] Digest results for vector     :  7
+    Expected bit count            : 16#00000000000000000000000000000280#
+    Obtained bit count            : 16#00000000000000000000000000000280#
+    Expected hash (String)        : "D5FCE38A152A2D9B83AB44C29306EE45AB0AED0E38C957EC431DAB6ED6BB71B8"
+    Obtained hash (String)        : "D5FCE38A152A2D9B83AB44C29306EE45AB0AED0E38C957EC431DAB6ED6BB71B8"
+[I] Counters match
+[I] Hashes match
+[I] Vector  7 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_SNEFRU
+    Test vector index             :  8
+    Vector string                 : "The quick brown fox jumps over the lazy dog"
+    Vector length                 :  43
+    Vector array                  : 
+16#54#, 16#68#, 16#65#, 16#20#, 16#71#, 16#75#, 16#69#, 16#63#, 16#6B#, 16#20#, 
+16#62#, 16#72#, 16#6F#, 16#77#, 16#6E#, 16#20#, 16#66#, 16#6F#, 16#78#, 16#20#, 
+16#6A#, 16#75#, 16#6D#, 16#70#, 16#73#, 16#20#, 16#6F#, 16#76#, 16#65#, 16#72#, 
+16#20#, 16#74#, 16#68#, 16#65#, 16#20#, 16#6C#, 16#61#, 16#7A#, 16#79#, 16#20#, 
+16#64#, 16#6F#, 16#67#
+[I] Digest results for vector     :  8
+    Expected bit count            : 16#00000000000000000000000000000158#
+    Obtained bit count            : 16#00000000000000000000000000000158#
+    Expected hash (String)        : "674CAA75F9D8FD2089856B95E93A4FB42FA6C8702F8980E11D97A142D76CB358"
+    Obtained hash (String)        : "674CAA75F9D8FD2089856B95E93A4FB42FA6C8702F8980E11D97A142D76CB358"
+[I] Counters match
+[I] Hashes match
+[I] Vector  8 test passed.
+[I] Computing hash for an CryptAda standard test vector.
+    Hash algorithm                : MD_SNEFRU
+    Test vector index             :  9
+    Vector string                 : "CryptAda By TCantos Software"
+    Vector length                 :  28
+    Vector array                  : 
+16#43#, 16#72#, 16#79#, 16#70#, 16#74#, 16#41#, 16#64#, 16#61#, 16#20#, 16#42#, 
+16#79#, 16#20#, 16#54#, 16#43#, 16#61#, 16#6E#, 16#74#, 16#6F#, 16#73#, 16#20#, 
+16#53#, 16#6F#, 16#66#, 16#74#, 16#77#, 16#61#, 16#72#, 16#65#
+[I] Digest results for vector     :  9
+    Expected bit count            : 16#000000000000000000000000000000E0#
+    Obtained bit count            : 16#000000000000000000000000000000E0#
+    Expected hash (String)        : "D9740BCFF53B5DCFADDE4D01530FF4EF5321E6B41C4AB2F3E327AA045E068B76"
+    Obtained hash (String)        : "D9740BCFF53B5DCFADDE4D01530FF4EF5321E6B41C4AB2F3E327AA045E068B76"
+[I] Counters match
+[I] Hashes match
+[I] Vector  9 test passed.
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 7
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:47
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 8
+Description     : Testing Snefru 128-bit, security level 8 operation at block boundary.
+Started         : 2017/06/01 - 18:24:47
+--------------------------------------------------------------------------------
+[I] Obtained hashes are checked against values obtained by using several online tools
+[I] Checking at block boundary.
+    Number of vectors to test:  3
+[I] Vector   :  1
+Vector length:  47
+[I] Digest result for test vector:  1
+    Expected bit count            : 16#00000000000000000000000000000178#
+    Obtained bit count            : 16#00000000000000000000000000000178#
+    Expected hash (String)        : "69C786F67C0AD37DF59D6C8F06B327F2"
+    Obtained hash (String)        : "69C786F67C0AD37DF59D6C8F06B327F2"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 results match
+[I] Vector   :  2
+Vector length:  48
+[I] Digest result for test vector:  2
+    Expected bit count            : 16#00000000000000000000000000000180#
+    Obtained bit count            : 16#00000000000000000000000000000180#
+    Expected hash (String)        : "EEF38987A435351AB540E0BD15296C6A"
+    Obtained hash (String)        : "EEF38987A435351AB540E0BD15296C6A"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 results match
+[I] Vector   :  3
+Vector length:  49
+[I] Digest result for test vector:  3
+    Expected bit count            : 16#00000000000000000000000000000188#
+    Obtained bit count            : 16#00000000000000000000000000000188#
+    Expected hash (String)        : "3A12AA920DF53CE683B7133F5E0D2DFF"
+    Obtained hash (String)        : "3A12AA920DF53CE683B7133F5E0D2DFF"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 results match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 8
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:47
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 9
+Description     : Testing Snefru 256-bit, security level 8 operation at block boundary.
+Started         : 2017/06/01 - 18:24:47
+--------------------------------------------------------------------------------
+[I] Obtained hashes are checked against values obtained by using several online tools
+[I] Checking at block boundary.
+    Number of vectors to test:  3
+[I] Vector   :  1
+Vector length:  31
+[I] Digest result for test vector:  1
+    Expected bit count            : 16#000000000000000000000000000000F8#
+    Obtained bit count            : 16#000000000000000000000000000000F8#
+    Expected hash (String)        : "96BB2B81B3AFF11A4D672B23F600F6965C138276EAD7D089369DEAA9258988E7"
+    Obtained hash (String)        : "96BB2B81B3AFF11A4D672B23F600F6965C138276EAD7D089369DEAA9258988E7"
+[I] Counters match
+[I] Hashes match
+[I] Vector  1 results match
+[I] Vector   :  2
+Vector length:  32
+[I] Digest result for test vector:  2
+    Expected bit count            : 16#00000000000000000000000000000100#
+    Obtained bit count            : 16#00000000000000000000000000000100#
+    Expected hash (String)        : "DBC6238CC321AECBA8F057213C3A605D74F21EC352E2183BC3B3853064FFA732"
+    Obtained hash (String)        : "DBC6238CC321AECBA8F057213C3A605D74F21EC352E2183BC3B3853064FFA732"
+[I] Counters match
+[I] Hashes match
+[I] Vector  2 results match
+[I] Vector   :  3
+Vector length:  33
+[I] Digest result for test vector:  3
+    Expected bit count            : 16#00000000000000000000000000000108#
+    Obtained bit count            : 16#00000000000000000000000000000108#
+    Expected hash (String)        : "7A1133846080DD68D6842DF39C86F961925605679BAD4FFAE07118482B6031FA"
+    Obtained hash (String)        : "7A1133846080DD68D6842DF39C86F961925605679BAD4FFAE07118482B6031FA"
+[I] Counters match
+[I] Hashes match
+[I] Vector  3 results match
+[I] Test case OK
+--------------------------------------------------------------------------------
+Test Case Number: 9
+Test Case Result: PASSED
+Finished        : 2017/06/01 - 18:24:47
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.MD_Snefru
+Finished                 : 2017/06/01 - 18:24:47
+================================================================================

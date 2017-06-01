@@ -37,6 +37,8 @@ with CryptAda.Tests.Utils;                      use CryptAda.Tests.Utils;
 with CryptAda.Tests.Utils.Ciphers;              use CryptAda.Tests.Utils.Ciphers;
 
 with CryptAda.Pragmatics;                       use CryptAda.Pragmatics;
+with CryptAda.Exceptions;                       use CryptAda.Exceptions;
+with CryptAda.Lists;                            use CryptAda.Lists;
 with CryptAda.Ciphers;                          use CryptAda.Ciphers;
 with CryptAda.Ciphers.Keys;                     use CryptAda.Ciphers.Keys;
 with CryptAda.Ciphers.Symmetric;                use CryptAda.Ciphers.Symmetric;
@@ -233,6 +235,22 @@ package body CryptAda.Tests.Unit.Blowfish is
          )
       );
 
+   --[Invalid Parameter Lists]--------------------------------------------------
+   -- Next are invalid parameter lists for Start_Cipher
+   -----------------------------------------------------------------------------
+   
+   Inv_Par_List_Count         : constant Positive := 7;
+   Inv_Par_Lists              : constant array(1 .. Inv_Par_List_Count) of String_Ptr := 
+      (
+         new String'("()"),                                 -- Empty list
+         new String'("(Encrypt, ""0102030405060708"")"),    -- Unnamed list.
+         new String'("(Op => Encrypt, Key => ""0102030405060708"")"),    -- Invalid Operation name
+         new String'("(Operation => Encrypt, K => ""0102030405060708"")"),    -- Invalid Key name
+         new String'("(Operation => Encrypting, Key => ""0102030405060708"")"),    -- Invalid Operation Identifier
+         new String'("(Operation => Encrypt, Key => ""01020304_05060708"")"),    -- Syntax incorrect key value
+         new String'("(Operation => Encrypt, Key => ""010203"")")    -- Invalid Key length
+      );
+      
    -----------------------------------------------------------------------------
    --[Internal procedure specs]-------------------------------------------------
    -----------------------------------------------------------------------------
@@ -245,6 +263,8 @@ package body CryptAda.Tests.Unit.Blowfish is
    procedure   Case_2;
    procedure   Case_3;
    procedure   Case_4;
+   procedure   Case_5;
+   procedure   Case_6;
 
    -----------------------------------------------------------------------------
    --[Internal procedure bodies]------------------------------------------------
@@ -258,10 +278,136 @@ package body CryptAda.Tests.Unit.Blowfish is
 
    procedure Case_1
    is
-      C                    : Blowfish_Cipher;
+      SCH         : Symmetric_Cipher_Handle;
+      SCP         : Symmetric_Cipher_Ptr;
+      KB          : constant Byte_Array(1 .. Blowfish_Key_Length'Last) := (others => 16#11#);
+      K           : Key;
    begin
-      Begin_Test_Case(1, "Running Blowfish_Cipher basic tests");
-      Run_Block_Cipher_Basic_Tests(C, "Basic tests for Blowfish_Cipher");
+      Begin_Test_Case(1, "Getting a handle for cipher objects");
+      Print_Information_Message("Subprograms tested: ");
+      Print_Message("- Get_Symmetric_Cipher_Handle", "    ");
+      Print_Message("- Is_Valid_Handle", "    ");
+      Print_Message("- Invalidate_Handle", "    ");
+      Print_Message("- Get_Symmetric_Cipher_Ptr", "    ");
+      
+      Print_Information_Message("Before Get_Symmetric_Cipher_Handle the handle is invalid:");
+      
+      if Is_Valid_Handle(SCH) then
+         Print_Error_Message("Handle is valid");
+         raise CryptAda_Test_Error;
+      else
+         Print_Information_Message("Handle is invalid");
+      end if;
+      
+      Print_Information_Message("Getting a pointer from an invalid handle will return null");
+      
+      SCP := Get_Symmetric_Cipher_Ptr(SCH);
+      
+      if SCP = null then
+         Print_Information_Message("Pointer is null");
+      else
+         Print_Error_Message("Pointer is not null");
+         raise CryptAda_Test_Error;
+      end if;
+      
+      Print_Information_Message("Trying any operation with a null pointer will raise Constraint_Error");
+      Set_Key(K, KB);
+      
+      declare
+      begin
+         Print_Message("Trying Start_Cipher", "    ");
+         Start_Cipher(SCP, Encrypt, K);
+         Print_Error_Message("No exception was raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+           
+         when X: Constraint_Error =>
+            Print_Information_Message("Caught Constraint_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+            
+         when X: others =>
+            Print_Error_Message("Unexpected exception raised");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+            raise CryptAda_Test_Error;
+      end;
+            
+      Print_Information_Message("Getting a symmetric cipher handle");
+      Print_Information_Message("Information on handle BEFORE calling Get_Symmetric_Cipher_Handle");
+      Print_Cipher_Info(SCH);
+      SCH := Get_Symmetric_Cipher_Handle;
+      Print_Information_Message("Information on handle AFTER calling Get_Symmetric_Cipher_Handle");
+      Print_Cipher_Info(SCH);
+      
+      Print_Information_Message("Now the handle must be valid:");
+      
+      if Is_Valid_Handle(SCH) then
+         Print_Information_Message("Handle is valid");
+      else
+         Print_Error_Message("Handle is invalid");
+         raise CryptAda_Test_Error;
+      end if;
+      
+      Print_Information_Message("Getting a pointer from an valid handle will return a not null value");
+      
+      SCP := Get_Symmetric_Cipher_Ptr(SCH);
+      
+      if SCP = null then
+         Print_Error_Message("Pointer is null");
+         raise CryptAda_Test_Error;         
+      else
+         Print_Information_Message("Pointer is not null");
+      end if;
+      
+      Print_Information_Message("Starting cipher must succeed now");
+      Start_Cipher(SCP, Encrypt, K);
+      Print_Information_Message("Information on handle AFTER Start_Cipher");
+      Print_Cipher_Info(SCH);
+      Print_Information_Message("Calling Stop_Cipher");
+      Stop_Cipher(SCP);
+      Print_Information_Message("Information on handle AFTER Stop_Cipher");
+      Print_Cipher_Info(SCH);
+
+      Print_Information_Message("Invalidating handle");
+      Invalidate_Handle(SCH);
+      Print_Information_Message("Information on handle AFTER invalidating handle");
+      Print_Cipher_Info(SCH);
+
+      if Is_Valid_Handle(SCH) then
+         Print_Error_Message("Handle is valid");
+         raise CryptAda_Test_Error;
+      else
+         Print_Information_Message("Handle is invalid");
+      end if;            
+      
+      Print_Information_Message("Using a pointer from an invalid handle must result in an exception");
+      SCP := Get_Symmetric_Cipher_Ptr(SCH);
+      
+      declare
+      begin
+         Print_Message("Trying Start_Cipher", "    ");
+         Start_Cipher(SCP, Encrypt, K);
+         Print_Error_Message("No exception was raised");
+         raise CryptAda_Test_Error;
+      exception
+         when CryptAda_Test_Error =>
+            raise;
+           
+         when X: Constraint_Error =>
+            Print_Information_Message("Caught Constraint_Error");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+            
+         when X: others =>
+            Print_Error_Message("Unexpected exception raised");
+            Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+            Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+            raise CryptAda_Test_Error;
+      end;
+      
       Print_Information_Message("Test case OK");
       End_Test_Case(1, Passed);
    exception
@@ -281,22 +427,138 @@ package body CryptAda.Tests.Unit.Blowfish is
 
    procedure Case_2
    is
-      C                    : Blowfish_Cipher;
-      K                    : Key;
-      Min_KL               : constant Positive := Get_Minimum_Key_Length(C);
-      Max_KL               : constant Positive := Get_Maximum_Key_Length(C);
-      KB                   : constant Byte_Array(1 .. 1 + Max_KL) := (others => 16#33#);
+      SCH         : Symmetric_Cipher_Handle := Get_Symmetric_Cipher_Handle;
    begin
-      Begin_Test_Case(2, "Testing Blowfish_Cipher non dispatching operations");
-      Print_Information_Message("Interfaces to test:");
-      Print_Message("Is_Valid_Blowfish_Key", "    ");
+      Begin_Test_Case(2, "Running Blowfish_Cipher basic tests");
+      Run_Block_Cipher_Basic_Tests(SCH, "Basic test for Blowfish_Cipher");
+      Invalidate_Handle(SCH);
+      Print_Information_Message("Test case OK");
+      End_Test_Case(2, Passed);
+   exception
+      when CryptAda_Test_Error =>
+         End_Test_Case(2, Failed);
+         raise;
+      when X: others =>
+         Print_Error_Message(
+            "Exception: """ & Exception_Name(X) & """");
+         Print_Message(
+            "Message  : """ & Exception_Message(X) & """");
+         End_Test_Case(2, Failed);
+         raise CryptAda_Test_Error;
+   end Case_2;
 
-      Print_Information_Message("Null Key must not be valid");
-      Print_Key(K, "Null key");
+  --[Case_3]--------------------------------------------------------------------
+
+   procedure Case_3
+   is
+      SCH         : Symmetric_Cipher_Handle := Get_Symmetric_Cipher_Handle;
+      SCP         : constant Symmetric_Cipher_Ptr := Get_Symmetric_Cipher_Ptr(SCH);
+      L           : List;
+      LTS_E       : constant String := "(Operation => Encrypt, Key => ""0001020304050607101112131415"")";
+      LTS_D       : constant String := "(Operation => Decrypt, Key => ""0001020304050607101112131415"")";
+      B           : constant Blowfish_Block := (others => 16#FF#);
+      CTB         : Blowfish_Block;
+      PTB         : Blowfish_Block;
+   begin
+      Begin_Test_Case(3, "Start_Cipher(Parameter List)");
+      Print_Information_Message("Trying Start_Cipher with some invalid lists");
       
-      if Is_Valid_Blowfish_Key(K) then
+      for I in Inv_Par_Lists'Range loop
+         Text_2_List(Inv_Par_Lists(I).all, L);
+         Print_Information_Message("List " & Integer'Image(I) & ": """ & List_2_Text(L) & """");
+         
+         declare
+         begin
+            Start_Cipher(SCP, L);
+            Print_Error_Message("No exception raised");
+            raise CryptAda_Test_Error;
+         exception
+            when CryptAda_Test_Error =>
+               raise;
+              
+            when X: CryptAda_Bad_Argument_Error =>
+               Print_Information_Message("Caught CryptAda_Bad_Argument_Error");
+               Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+               Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+
+            when X: CryptAda_Invalid_Key_Error =>
+               Print_Information_Message("Caught CryptAda_Invalid_Key_Error");
+               Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+               Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+               
+            when X: others =>
+               Print_Error_Message("Unexpected exception raised");
+               Print_Message("Exception: """ & Exception_Name(X) & """", "    ");
+               Print_Message("Message  : """ & Exception_Message(X) & """", "    ");
+               raise CryptAda_Test_Error;
+         end;      
+      end loop;
+      
+      Print_Information_Message("Encrypting with valid parameter lists");
+      
+      Text_2_List(LTS_E, L);
+      Print_Information_Message("Parameter list: """ & List_2_Text(L) & """");
+      Print_Block(B, "Block to encrypt");
+      Start_Cipher(SCP, L);
+      Do_Process(SCP, B, CTB);
+      Stop_Cipher(SCP);
+      Print_Block(CTB, "Ciphered block");
+
+      Print_Information_Message("Decrypting with valid parameter list");
+      Text_2_List(LTS_D, L);
+      Print_Information_Message("Parameter list: """ & List_2_Text(L) & """");
+      Print_Block(CTB, "Block to decrypt");
+      Start_Cipher(SCP, L);
+      Do_Process(SCP, CTB, PTB);
+      Stop_Cipher(SCP);
+      Print_Block(PTB, "Decrypted block");
+      
+      if PTB = B then
+         Print_Information_Message("Results match");
+      else
          Print_Error_Message("Results don't match");
          raise CryptAda_Test_Error;
+      end if;
+      
+      Invalidate_Handle(SCH);
+      Print_Information_Message("Test case OK");
+      End_Test_Case(3, Passed);
+   exception
+      when CryptAda_Test_Error =>
+         End_Test_Case(3, Failed);
+         raise;
+      when X: others =>
+         Print_Error_Message(
+            "Exception: """ & Exception_Name(X) & """");
+         Print_Message(
+            "Message  : """ & Exception_Message(X) & """");
+         End_Test_Case(3, Failed);
+         raise CryptAda_Test_Error;
+   end Case_3;
+   
+  --[Case_4]--------------------------------------------------------------------
+
+   procedure Case_4
+   is
+      SCH                  : Symmetric_Cipher_Handle := Get_Symmetric_Cipher_Handle;
+      SCP                  : constant Symmetric_Cipher_Ptr := Get_Symmetric_Cipher_Ptr(SCH);      
+      K                    : Key;
+      Min_KL               : constant Positive := Get_Minimum_Key_Length(SCP);
+      Max_KL               : constant Positive := Get_Maximum_Key_Length(SCP);
+      KB                   : constant Byte_Array(1 .. 1 + Max_KL) := (others => 16#33#);
+   begin
+      Begin_Test_Case(4, "Testing Blowfish_Cipher non dispatching operations");
+      Print_Information_Message("Interfaces to test:");
+      Print_Message("Is_Valid_Blowfish_Key");
+      
+      Print_Information_Message("Checking validity of null key");
+      Print_Key(K, "Null key");
+
+      if Is_Valid_Blowfish_Key(K) then
+         Print_Error_Message("Key must not be valid");
+         raise CryptAda_Test_Error;
+      else
+         Print_Message("Key is not valid: OK");
       end if;
 
       Print_Information_Message("A key of " & Positive'Image(Min_KL - 1) & " bytes must not be valid");
@@ -331,74 +593,7 @@ package body CryptAda.Tests.Unit.Blowfish is
          raise CryptAda_Test_Error;
       end if;
 
-      Print_Information_Message("Test case OK");
-      End_Test_Case(2, Passed);
-   exception
-      when CryptAda_Test_Error =>
-         End_Test_Case(2, Failed);
-         raise;
-      when X: others =>
-         Print_Error_Message(
-            "Exception: """ & Exception_Name(X) & """");
-         Print_Message(
-            "Message  : """ & Exception_Message(X) & """");
-         End_Test_Case(2, Failed);
-         raise CryptAda_Test_Error;
-   end Case_2;
-
-  --[Case_3]-------------------------------------------------------------------
-
-   procedure Case_3
-   is
-      C                    : Blowfish_Cipher;
-      R                    : Boolean;
-   begin
-      Begin_Test_Case(3, "Blowfish standard test vectors");
-      Print_Information_Message("Using test vectors obtained from: https://www.schneier.com/code/vectors.txt");
-
-      for I in Blowfish_Schneier_TVs'Range loop
-         Run_Block_Cipher_Test_Vector(
-            "Blowfish Schneier Test Vector: " & Integer'Image(I),
-            C,
-            Blowfish_Schneier_TVs(I),
-            R);
-
-         if not R then
-            Print_Error_Message("Test failed");
-            raise CryptAda_Test_Error;
-         end if;
-      end loop;
-      
-      Print_Information_Message("Test case OK");
-      End_Test_Case(3, Passed);
-   exception
-      when CryptAda_Test_Error =>
-         End_Test_Case(3, Failed);
-         raise;
-      when X: others =>
-         Print_Error_Message(
-            "Exception: """ & Exception_Name(X) & """");
-         Print_Message(
-            "Message  : """ & Exception_Message(X) & """");
-         End_Test_Case(3, Failed);
-         raise CryptAda_Test_Error;
-   end Case_3;
-
-  --[Case_4]--------------------------------------------------------------------
-
-   procedure Case_4
-   is
-      C                    : Blowfish_Cipher;
-      I                    : Positive := Blowfish_Key_Length'First;
-   begin
-      Begin_Test_Case(4, "Blowfish Bulk test");
-      
-      while I <= Blowfish_Key_Length'Last loop
-         Print_Information_Message("Using key size: " & Integer'Image(I));
-         Run_Block_Cipher_Bulk_Tests(C, I);
-         I := I + 10;
-      end loop;
-      
+      Invalidate_Handle(SCH);
       Print_Information_Message("Test case OK");
       End_Test_Case(4, Passed);
    exception
@@ -414,6 +609,76 @@ package body CryptAda.Tests.Unit.Blowfish is
          raise CryptAda_Test_Error;
    end Case_4;
    
+  --[Case_5]--------------------------------------------------------------------
+
+   procedure Case_5
+   is
+      SCH                  : Symmetric_Cipher_Handle := Get_Symmetric_Cipher_Handle;
+      R                    : Boolean;
+   begin
+      Begin_Test_Case(5, "Blowfish standard test vectors");
+      Print_Information_Message("Using test vectors obtained from: https://www.schneier.com/code/vectors.txt");
+
+      for I in Blowfish_Schneier_TVs'Range loop
+         Run_Block_Cipher_Test_Vector(
+            "Blowfish Schneier Test Vector: " & Integer'Image(I),
+            SCH,
+            Blowfish_Schneier_TVs(I),
+            R);
+
+         if not R then
+            Print_Error_Message("Test failed");
+            raise CryptAda_Test_Error;
+         end if;
+      end loop;
+      
+      Invalidate_Handle(SCH);
+      Print_Information_Message("Test case OK");
+      End_Test_Case(5, Passed);
+   exception
+      when CryptAda_Test_Error =>
+         End_Test_Case(5, Failed);
+         raise;
+      when X: others =>
+         Print_Error_Message(
+            "Exception: """ & Exception_Name(X) & """");
+         Print_Message(
+            "Message  : """ & Exception_Message(X) & """");
+         End_Test_Case(5, Failed);
+         raise CryptAda_Test_Error;
+   end Case_5;
+
+  --[Case_6]--------------------------------------------------------------------
+
+   procedure Case_6
+   is
+      SCH                  : Symmetric_Cipher_Handle := Get_Symmetric_Cipher_Handle;
+      I                    : Positive := Blowfish_Key_Length'First;
+   begin
+      Begin_Test_Case(6, "Blowfish Bulk test");
+      
+      while I <= Blowfish_Key_Length'Last loop
+         Print_Information_Message("Using key size: " & Integer'Image(I));
+         Run_Block_Cipher_Bulk_Tests(SCH, I);
+         I := I + 10;
+      end loop;
+      
+      Invalidate_Handle(SCH);
+      Print_Information_Message("Test case OK");
+      End_Test_Case(6, Passed);
+   exception
+      when CryptAda_Test_Error =>
+         End_Test_Case(6, Failed);
+         raise;
+      when X: others =>
+         Print_Error_Message(
+            "Exception: """ & Exception_Name(X) & """");
+         Print_Message(
+            "Message  : """ & Exception_Message(X) & """");
+         End_Test_Case(6, Failed);
+         raise CryptAda_Test_Error;
+   end Case_6;
+      
    -----------------------------------------------------------------------------
    --[Spec Declared Subprogram Bodies]------------------------------------------
    -----------------------------------------------------------------------------
@@ -429,6 +694,8 @@ package body CryptAda.Tests.Unit.Blowfish is
       Case_2;
       Case_3;
       Case_4;
+      Case_5;
+      Case_6;
       
       End_Test_Driver(Driver_Name);
    exception

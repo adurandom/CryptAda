@@ -6,13 +6,13 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.DESX
 Description              : Unit test driver for CryptAda.Ciphers.Symmetric.Block.DESX functionality.
-Started                  : 2017/05/30 - 14:03:55
+Started                  : 2017/06/01 - 18:25:37
 ================================================================================
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Getting a handle for cipher objects
-Started         : 2017/05/30 - 14:03:55
+Started         : 2017/06/01 - 18:25:37
 --------------------------------------------------------------------------------
 [I] Subprograms tested: 
     - Get_Symmetric_Cipher_Handle
@@ -83,13 +83,13 @@ Started         : 2017/05/30 - 14:03:55
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/05/30 - 14:03:55
+Finished        : 2017/06/01 - 18:25:37
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Running DESX_Cipher basic tests
-Started         : 2017/05/30 - 14:03:55
+Started         : 2017/06/01 - 18:25:37
 --------------------------------------------------------------------------------
 [I] Basic test for DESX_Cipher
     This test case is a 10 step test that will exercise Block_Cipher dispatching operations
@@ -293,13 +293,13 @@ Block data  :
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/05/30 - 14:03:55
+Finished        : 2017/06/01 - 18:25:37
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Start_Cipher(Parameter List)
-Started         : 2017/05/30 - 14:03:55
+Started         : 2017/06/01 - 18:25:37
 --------------------------------------------------------------------------------
 [I] Trying Start_Cipher with some invalid lists
 [I] List  1: "()"
@@ -355,13 +355,13 @@ Block data  :
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/05/30 - 14:03:55
+Finished        : 2017/06/01 - 18:25:37
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Testing DESX_Cipher non dispatching operations
-Started         : 2017/05/30 - 14:03:55
+Started         : 2017/06/01 - 18:25:37
 --------------------------------------------------------------------------------
 [I] Interfaces to test:
 Is_Valid_DESX_Key
@@ -393,13 +393,13 @@ Key is valid: OK
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/05/30 - 14:03:55
+Finished        : 2017/06/01 - 18:25:37
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : DESX standard test vectors
-Started         : 2017/05/30 - 14:03:55
+Started         : 2017/06/01 - 18:25:37
 --------------------------------------------------------------------------------
 [I] Poor, just found 1 vector
 [I] DESX Test vector:  1
@@ -416,13 +416,13 @@ Started         : 2017/05/30 - 14:03:55
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/05/30 - 14:03:55
+Finished        : 2017/06/01 - 18:25:37
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : DESX Bulk test
-Started         : 2017/05/30 - 14:03:55
+Started         : 2017/06/01 - 18:25:37
 --------------------------------------------------------------------------------
 [I] Block cipher bulk test
     Performing  10000 iterations of decrypt(encrypt(plain_text)), checking that
@@ -444,11 +444,11 @@ Started         : 2017/05/30 - 14:03:55
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/05/30 - 14:03:56
+Finished        : 2017/06/01 - 18:25:38
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.DESX
-Finished                 : 2017/05/30 - 14:03:56
+Finished                 : 2017/06/01 - 18:25:38
 ================================================================================
