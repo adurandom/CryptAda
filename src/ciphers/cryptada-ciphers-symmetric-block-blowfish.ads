@@ -133,7 +133,15 @@ package CryptAda.Ciphers.Symmetric.Block.Blowfish is
    overriding
    procedure   Stop_Cipher(
                   The_Cipher     : access Blowfish_Cipher);
-      
+
+   --[Is_Valid_Key]-------------------------------------------------------------
+
+   overriding
+   function    Is_Valid_Key(
+                  For_Cipher     : access Blowfish_Cipher;
+                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
+      return Boolean;
+                  
    -----------------------------------------------------------------------------
    --[Non-dispatching operations]-----------------------------------------------
    -----------------------------------------------------------------------------

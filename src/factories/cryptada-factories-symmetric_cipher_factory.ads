@@ -16,82 +16,82 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-factories-message_digest_factory.ads
+--    Filename          :  cryptada-factories-symmetric_cipher_factory.ads
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
---    Creation date     :  May 24th, 2017
+--    Creation date     :  June 2nd, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    This package implements a factory for message digests.
+--    This package implements a factory for symmetric ciphers.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
---    1.0   20170524 ADD   Initial implementation.
+--    1.0   20170602 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
 with CryptAda.Names;
 with CryptAda.Lists;
-with CryptAda.Digests.Message_Digests;
+with CryptAda.Ciphers.Symmetric;
 
-package CryptAda.Factories.Message_Digest_Factory is
+package CryptAda.Factories.Symmetric_Cipher_Factory is
    
    -----------------------------------------------------------------------------
    --[Subprogram Specs]---------------------------------------------------------
    -----------------------------------------------------------------------------
    
-   --[Create_Message_Digest]----------------------------------------------------
+   --[Create_Symmetric_Cipher]--------------------------------------------------
    -- Purpose:
-   -- Creates and returns a handle to a particular message digest given its 
+   -- Creates and returns a handle to a particular symmetric cipher given its 
    -- identifier.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Id                      Digest_Algorithm_Id that identifies the message
-   --                         digest to create.
+   -- Id                      Symmetric_Cipher_Id that identifies the symmetric
+   --                         cipher to create.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Message_Digest_Handle that allows the caller to handle the particular 
-   -- message digest object.
+   -- Symmetrric_Cipher_Handle that allows the caller to handle the particular 
+   -- symmetric cipher object.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- CryptAda_Storage_Error if an error is raised when creating the 
-   --    Message_Digest_Handle.
+   --    Symmetric_Cipher_Handle.
    -----------------------------------------------------------------------------
 
-   function    Create_Message_Digest(
-                  Id             : in     CryptAda.Names.Digest_Algorithm_Id)
-      return   CryptAda.Digests.Message_Digests.Message_Digest_Handle;
+   function    Create_Symmetric_Cipher(
+                  Id             : in     CryptAda.Names.Symmetric_Cipher_Id)
+      return   CryptAda.Ciphers.Symmetric.Symmetric_Cipher_Handle;
 
-   --[Create_Message_Digest_And_Start]------------------------------------------
+   --[Create_Symmetric_Cipher_And_Start]----------------------------------------
    -- Purpose:
-   -- Creates a Message_Digest objects, starts it according to a parameter list
-   -- and returns a handle to the started object.
+   -- Creates a Symmetric_Cipher objects, starts it according to a parameter 
+   -- list and returns a handle to the started object.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- Id                      Digest_Algorithm_Id that identifies the message
-   --                         digest to create.
+   -- Id                      Symmetric_Cipher_Id that identifies the symmetric
+   --                         cipher to create.
    -- Parameters              Parameter list with the start parameters for the
-   --                         particular algorithm.
+   --                         particular symmetric cipher.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Message_Digest_Handle that allows the caller to handle the particular 
-   -- message digest object.
+   -- Symmetrric_Cipher_Handle that allows the caller to handle the particular 
+   -- symmetric cipher object.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- CryptAda_Storage_Error if an error is raised when creating the 
-   --    Message_Digest_Handle.
+   --    Symmetric_Cipher_Handle.
    -- CryptAda_Bad_Argument_Error if Parameters is not valid.
    -----------------------------------------------------------------------------
 
-   function    Create_Message_Digest_And_Start(
-                  Id             : in     CryptAda.Names.Digest_Algorithm_Id;
+   function    Create_Symmetric_Cipher_And_Start(
+                  Id             : in     CryptAda.Names.Symmetric_Cipher_Id;
                   Parameters     : in     CryptAda.Lists.List)
-      return   CryptAda.Digests.Message_Digests.Message_Digest_Handle;
+      return   CryptAda.Ciphers.Symmetric.Symmetric_Cipher_Handle;
 
-   --[Create_Message_Digest_And_Start]------------------------------------------
+   --[Create_Symmetric_Cipher_And_Start]----------------------------------------
    -- Purpose:
-   -- Creates a Message_Digest objects and starts it. Both, the digest to
+   -- Creates a Symmetric_Cipher object and starts it. Both, the cipher to
    -- create and the parameters are provided through a list.
    -----------------------------------------------------------------------------
    -- Arguments:
@@ -99,27 +99,27 @@ package CryptAda.Factories.Message_Digest_Factory is
    --                         for creation. The syntax for the Info list is 
    --                         as follows:
    -- (
-   --    Digest_Id => <message_digest_id>,
+   --    Cipher_Id => <symmetric_cipher_id>,
    --    Parameters => <parameters_list>
    -- )
    --
-   -- <message_digest_id>     Mandatory. Message_Digest identificator
-   --                         (Digest algorithm Id).
-   -- <parameters_list>       Optional. List containing the parameters to
-   --                         start the message digest object. If empty or 
-   --                         ommited, the digest will be started with the 
-   --                         default parameters.
+   -- <symmetric_cipher_id>   Mandatory. Symmetric cipher identificator
+   --                         (Symmetric_Cipher_Id).
+   -- <parameters_list>       Mandatory. List containing the parameters to
+   --                         start the symmetric cipher object.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- Message_Digest_Handle that allows the caller to handle the particular 
-   -- message digest object.
+   -- Symmetrric_Cipher_Handle that allows the caller to handle the particular 
+   -- symmetric cipher object.
    -----------------------------------------------------------------------------
    -- Exceptions:
+   -- CryptAda_Storage_Error if an error is raised when creating the 
+   --    Symmetric_Cipher_Handle.
    -- CryptAda_Bad_Argument_Error if Info is not valid.
    -----------------------------------------------------------------------------
 
-   function    Create_Message_Digest_And_Start(
+   function    Create_Symmetric_Cipher_And_Start(
                   Info           : in     CryptAda.Lists.List)
-      return   CryptAda.Digests.Message_Digests.Message_Digest_Handle;
+      return   CryptAda.Ciphers.Symmetric.Symmetric_Cipher_Handle;
       
-end CryptAda.Factories.Message_Digest_Factory;
+end CryptAda.Factories.Symmetric_Cipher_Factory;

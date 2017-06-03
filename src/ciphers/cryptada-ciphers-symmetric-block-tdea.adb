@@ -338,6 +338,22 @@ package body CryptAda.Ciphers.Symmetric.Block.TDEA is
       Initialize_Object(The_Cipher);
    end Stop_Cipher;
 
+   --[Is_Valid_Key]-------------------------------------------------------------
+
+   overriding
+   function    Is_Valid_Key(
+                  For_Cipher     : access TDEA_Cipher;
+                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
+      return Boolean
+   is
+   begin
+      if Is_Null(The_Key) then
+         return False;
+      else
+         return Is_Valid_Key_Length(For_Cipher, Get_Key_Length(The_Key));
+      end if;
+   end Is_Valid_Key;
+   
    --[Other public subprograms]-------------------------------------------------
 
    --[Get_TDEA_Keying_Option]---------------------------------------------------

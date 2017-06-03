@@ -311,6 +311,20 @@ package body CryptAda.Ciphers.Symmetric.Stream.RC4 is
    begin
       Initialize_Object(The_Cipher);
    end Stop_Cipher;
+
+   --[Is_Valid_Key]-------------------------------------------------------------
+
+   pragma Warnings (Off, "formal parameter ""For_Cipher"" is not referenced");
+   overriding
+   function    Is_Valid_Key(
+                  For_Cipher     : access RC4_Cipher;
+                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
+      return Boolean
+   is
+   pragma Warnings (On, "formal parameter ""For_Cipher"" is not referenced");
+   begin
+      return Is_Valid_RC4_Key(The_Key);
+   end Is_Valid_Key;
    
    --[Other public subprograms]-------------------------------------------------
       

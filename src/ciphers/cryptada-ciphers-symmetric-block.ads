@@ -96,6 +96,7 @@ package CryptAda.Ciphers.Symmetric.Block is
    -- CryptAda_Invalid_Key_Error if With_Key is not a valid key.
    -----------------------------------------------------------------------------
 
+   overriding
    procedure   Start_Cipher(
                   The_Cipher     : access Block_Cipher;
                   For_Operation  : in     Cipher_Operation;
@@ -133,6 +134,7 @@ package CryptAda.Ciphers.Symmetric.Block is
    --    cipher.
    -----------------------------------------------------------------------------
 
+   overriding
    procedure   Start_Cipher(
                   The_Cipher     : access Block_Cipher;
                   Parameters     : in     CryptAda.Lists.List)
@@ -159,6 +161,7 @@ package CryptAda.Ciphers.Symmetric.Block is
    -- lengths are invalid for the particular algorithm.
    -----------------------------------------------------------------------------
 
+   overriding
    procedure   Do_Process(
                   With_Cipher    : access Block_Cipher;
                   Input          : in     CryptAda.Pragmatics.Byte_Array;
@@ -180,8 +183,31 @@ package CryptAda.Ciphers.Symmetric.Block is
    -- None.
    -----------------------------------------------------------------------------
       
+   overriding
    procedure   Stop_Cipher(
                   The_Cipher     : access Block_Cipher)
+         is abstract;
+
+   --[Is_Valid_Key]-------------------------------------------------------------
+   -- Purpose:
+   -- Checks the validity of a key for an specific cipher.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- For_Cipher        Symmetric_Cipher object.
+   -- The_Key           Key to check.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Boolean value indicating if The_Key is a valid key For_Cipher.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   overriding
+   function    Is_Valid_Key(
+                  For_Cipher     : access Block_Cipher;
+                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
+      return Boolean
          is abstract;
          
    -----------------------------------------------------------------------------

@@ -180,6 +180,11 @@ package body CryptAda.Factories.Message_Digest_Factory is
       Digest_Start(Get_Message_Digest_Ptr(MDH), Parameters);
       
       return MDH;
+      
+   exception
+      when others =>
+         Invalidate_Handle(MDH);
+         raise;
    end Create_Message_Digest_And_Start;
 
    --[Create_Message_Digest_And_Start]------------------------------------------

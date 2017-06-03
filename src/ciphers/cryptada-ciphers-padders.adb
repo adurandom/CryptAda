@@ -16,49 +16,80 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-factories-text_encoder_factory.ads
---    File kind         :  Ada package specification.
+--    Filename          :  cryptada-ciphers-padders.adb
+--    File kind         :  Ada package body.
 --    Author            :  A. Duran
---    Creation date     :  May 5th, 2017
+--    Creation date     :  June 2nd, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    This package implements a factory for text encoders.
+--    Package body for padder root class.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
 --    ----- -------- ----- -----------------------------------------------------
---    1.0   20170505 ADD   Initial implementation.
+--    1.0   20170602 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-with CryptAda.Names;
-with CryptAda.Text_Encoders;
+with CryptAda.Names;                      use CryptAda.Names;
 
-package CryptAda.Factories.Text_Encoder_Factory is
+package body CryptAda.Ciphers.Padders is
+
+   -----------------------------------------------------------------------------
+   --[Symmetric_Cipher_Handle Operations]---------------------------------------
+   -----------------------------------------------------------------------------
+
+   --[Is_Valid_Handle]----------------------------------------------------------
+
+   function    Is_Valid_Handle(
+                  The_Handle     : in     Padder_Handle)
+      return   Boolean
+   is
+   begin
+      return Padder_Handles.Is_Valid(Padder_Handles.Handle(The_Handle));
+   end Is_Valid_Handle;
+
+   --[Invalidate_Handle]--------------------------------------------------------
+
+   procedure   Invalidate_Handle(
+                  The_Handle     : in out Padder_Handle)
+   is
+   begin
+      Padder_Handles.Invalidate(Padder_Handles.Handle(The_Handle));
+   end Invalidate_Handle;
+      
+   --[Get_Padder_Ptr]-----------------------------------------------------------
+
+   function    Get_Padder_Ptr(
+                  From_Handle    : in     Padder_Handle)
+      return   Padder_Ptr
+   is
+   begin
+      return Padder_Handles.Ptr(Padder_Handles.Handle(From_Handle));
+   end Get_Padder_Ptr;
+
+   --[Ref]----------------------------------------------------------------------
+
+   function    Ref(
+                  Thing          : in     Padder_Ptr)
+      return   Padder_Handle
+   is
+   begin
+      return (Padder_Handles.Ref(Thing) with null record);   
+   end Ref;       
    
    -----------------------------------------------------------------------------
-   --[Subprogram Specs]---------------------------------------------------------
+   --[Non-dispatching Operations]-----------------------------------------------
    -----------------------------------------------------------------------------
+
+   --[Get_Pad_Schema_Id]--------------------------------------------------------
    
-   --[Create_Text_Encoder]------------------------------------------------------
-   -- Purpose:
-   -- Creates and returns a reference to a particular text encoder given its 
-   -- identifier.
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- Id                      Encoder_Id that identifies the encoder to create.
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- Encoder_Handle that allows the caller to handle the particular encoder.
-   -- The encoder is in State_Idle state.
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- CryptAda_Storage_Error if an error is raised when creating the encoder
-   --    handle.
-   -----------------------------------------------------------------------------
-
-   function    Create_Text_Encoder(
-                  Id             : in     CryptAda.Names.Encoder_Id)
-      return   CryptAda.Text_Encoders.Encoder_Handle;
-
-end CryptAda.Factories.Text_Encoder_Factory;
+   function    Get_Pad_Schema_Id(
+                  Of_Padder      : access Padder'Class)
+      return   Pad_Schema_Id
+   is
+   begin
+      return Of_Padder.all.Id;
+   end Get_Pad_Schema_Id;
+   
+end CryptAda.Ciphers.Padders;

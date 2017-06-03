@@ -162,6 +162,14 @@ package CryptAda.Ciphers.Symmetric.Block.DES is
    procedure   Stop_Cipher(
                   The_Cipher     : access DES_Cipher);
 
+   --[Is_Valid_Key]-------------------------------------------------------------
+
+   overriding
+   function    Is_Valid_Key(
+                  For_Cipher     : access DES_Cipher;
+                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
+      return Boolean;
+
    -----------------------------------------------------------------------------
    --[DES Specific Subprograms]-------------------------------------------------
    -----------------------------------------------------------------------------

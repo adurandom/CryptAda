@@ -135,7 +135,15 @@ package CryptAda.Ciphers.Symmetric.Block.CAST_128 is
    overriding
    procedure   Stop_Cipher(
                   The_Cipher     : access CAST_128_Cipher);
-         
+
+   --[Is_Valid_Key]-------------------------------------------------------------
+
+   overriding
+   function    Is_Valid_Key(
+                  For_Cipher     : access CAST_128_Cipher;
+                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
+      return Boolean;
+                  
    -----------------------------------------------------------------------------
    --[Non-dispatching operations]-----------------------------------------------
    -----------------------------------------------------------------------------

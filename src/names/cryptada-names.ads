@@ -20,7 +20,7 @@
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  March 13th, 2017
---    Current version   :  1.5
+--    Current version   :  1.6
 --------------------------------------------------------------------------------
 -- 2. Purpose:
 --    This package contains type definitions used to identify object and classes
@@ -38,6 +38,7 @@
 --                         encoders.
 --    1.4   20170429 ADD   Added pragma Pure
 --    1.5   20170524 ADD   Removed naming schemas.
+--    1.6   20170601 ADD   Added block cipher modes of operation identifiers.
 --------------------------------------------------------------------------------
 
 package CryptAda.Names is
@@ -138,4 +139,31 @@ package CryptAda.Names is
 
    subtype Stream_Cipher_Id is Symmetric_Cipher_Id range SC_RC4 .. SC_RC4;
 
+   --[Block_Cipher_Mode_Id]-----------------------------------------------------
+   -- Enumerated type identifies the different modes of operation for block
+   -- ciphers.
+   -----------------------------------------------------------------------------
+
+   type Block_Cipher_Mode_Id is
+      (
+         MO_ECB,                 -- Electronic Codebook (ECB) mode
+         MO_CBC,                 -- Cipher Block Chaining (CBC)
+         MO_CFB,                 -- Cipher Feedback (CFB)
+         MO_OFB                  -- Output Feedback (OFB)
+      );
+
+   --[Pad_Schema_Id]------------------------------------------------------------
+   -- Enumerated type identifies the different padding schemas.
+   -----------------------------------------------------------------------------
+
+   type Pad_Schema_Id is
+      (
+         PS_No_Padding,          -- No padding.
+         PS_Zero_Padding,        -- Zero padding.
+         PS_ANSI_X923,           -- ANSI X.923 padding.
+         PS_PKCS_7,              -- PKCS7 - PKCS5 padding.
+         PS_ISO_7816_4,          -- ISO 7816-4 padding (a one bit followed by zeros)
+         PS_ISO_10126_2          -- ISO 10126-2 padding (pad with random bytes)
+      );
+      
 end CryptAda.Names;

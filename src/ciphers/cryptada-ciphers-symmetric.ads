@@ -25,24 +25,24 @@
 -- 2. Purpose:
 --    This is the root package for CryptAda symmetric-key cipher algorithms.
 --
---    Symmetric-key algorithms use the same cryptographic keys for both 
---    encryption of plaintext and decryption of ciphertext. The keys may be 
---    identical or there may be a simple transformation to go between the two 
---    keys. Those keys, in practice, represent a shared secret between two or 
---    more parties that can be used to maintain a private information link. 
---    This requirement that both parties have access to the secret key is one of 
---    the main drawbacks of symmetric key encryption, in comparison to 
+--    Symmetric-key algorithms use the same cryptographic keys for both
+--    encryption of plaintext and decryption of ciphertext. The keys may be
+--    identical or there may be a simple transformation to go between the two
+--    keys. Those keys, in practice, represent a shared secret between two or
+--    more parties that can be used to maintain a private information link.
+--    This requirement that both parties have access to the secret key is one of
+--    the main drawbacks of symmetric key encryption, in comparison to
 --    public-key encryption (also known as asymmetric key encryption).
 --
 --    There are two types of symmetric key ciphers:
---    
---    o  Stream ciphers encrypt the digits (typically bytes) of a message one 
---       at a time.
---    o  Block ciphers take a fixed length block of bits and encrypt them as a 
---       single unit, padding the plaintext so that it is a multiple of the 
---       block size. 
 --
---    This package provides an abstract base type (Symmetric_Cipher) and basic 
+--    o  Stream ciphers encrypt the digits (typically bytes) of a message one
+--       at a time.
+--    o  Block ciphers take a fixed length block of bits and encrypt them as a
+--       single unit, padding the plaintext so that it is a multiple of the
+--       block size.
+--
+--    This package provides an abstract base type (Symmetric_Cipher) and basic
 --    set of operations for both Stream and Block ciphers.
 --------------------------------------------------------------------------------
 -- 3. Revision history
@@ -67,17 +67,17 @@ package CryptAda.Ciphers.Symmetric is
    -----------------------------------------------------------------------------
 
    --[Symmetric_Cipher]---------------------------------------------------------
-   -- Abstract tagged type that is the base class for symmetric ciphers. 
+   -- Abstract tagged type that is the base class for symmetric ciphers.
    -- Symmetric_Cipher objects maintain the necessary state information for the
    -- encrypting/decrypting operations.
    -----------------------------------------------------------------------------
-   
+
    type Symmetric_Cipher (<>) is abstract new Object.Entity with private;
 
    --[Symmetric_Cipher_Ptr]-----------------------------------------------------
    -- Class wide access type to Symmetric_Cipher objects.
    -----------------------------------------------------------------------------
-   
+
    type Symmetric_Cipher_Ptr is access all Symmetric_Cipher'Class;
 
    --[Symmetric_Cipher_Handle]--------------------------------------------------
@@ -142,7 +142,7 @@ package CryptAda.Ciphers.Symmetric is
    function    Get_Symmetric_Cipher_Ptr(
                   From_Handle    : in     Symmetric_Cipher_Handle)
       return   Symmetric_Cipher_Ptr;
-   
+
    -----------------------------------------------------------------------------
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
@@ -151,7 +151,7 @@ package CryptAda.Ciphers.Symmetric is
    -- Purpose:
    -- Initializes a Symmetric_Cipher object for a specific operation (Encrypt or
    -- Decrypt) with a specific key. If the cipher object is already started, all
-   -- state information is lost and the object is left ready for a new 
+   -- state information is lost and the object is left ready for a new
    -- encryption/decryption process.
    -----------------------------------------------------------------------------
    -- Arguments:
@@ -177,22 +177,22 @@ package CryptAda.Ciphers.Symmetric is
    -- Purpose:
    -- Initializes a Symmetric_Cipher object for a specific operation (Encrypt or
    -- Decrypt) with a specific key. If the cipher object is already started, all
-   -- state information is lost and the object is left ready for a new 
+   -- state information is lost and the object is left ready for a new
    -- encryption/decryption process.
    -- Operation and Key are passed as a parameter list.
    -----------------------------------------------------------------------------
    -- Arguments:
    -- The_Cipher           Access ti Symmetric_Cipher object to start.
-   -- Parameters           List containing the parameter list. It must be a 
+   -- Parameters           List containing the parameter list. It must be a
    --                      named list with the following syntax:
    --
    -- (
    --    Operation => <cipher_operation>,
    --    Key => "<hex_key>"
    -- )
-   -- <cipher_operation>   Mandatory, Identifier of the operation to perform 
+   -- <cipher_operation>   Mandatory, Identifier of the operation to perform
    --                      (either Encrypt or Decrypt)
-   -- <hex_key>            Mandatory, string item with the key to use in 
+   -- <hex_key>            Mandatory, string item with the key to use in
    --                      hexadecimal notation.
    -----------------------------------------------------------------------------
    -- Returned value:
@@ -200,7 +200,7 @@ package CryptAda.Ciphers.Symmetric is
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- CryptAda_Bad_Argument_Error if Parameters is not a valid parameter list.
-   -- CryptAda_Invalid_Key_Error if the key provided is not a valid key for the 
+   -- CryptAda_Invalid_Key_Error if the key provided is not a valid key for the
    --    cipher.
    -----------------------------------------------------------------------------
 
@@ -208,13 +208,13 @@ package CryptAda.Ciphers.Symmetric is
                   The_Cipher     : access Symmetric_Cipher;
                   Parameters     : in     CryptAda.Lists.List)
       is abstract;
-      
+
    --[Do_Process]---------------------------------------------------------------
    -- Purpose:
    -- Processes (ecrypts or decrypts) a chunk of input data.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- With_Cipher          Symmetric_Cipher object that is going to process the 
+   -- With_Cipher          Symmetric_Cipher object that is going to process the
    --                      block.
    -- Input                Byte_Array containing the data to process (plain text
    --                      for encryption, ciphered text for decryption).
@@ -237,7 +237,7 @@ package CryptAda.Ciphers.Symmetric is
 
    --[Stop_Cipher]--------------------------------------------------------------
    -- Purpose:
-   -- Ends cipher processing clearing any sensitive information the object 
+   -- Ends cipher processing clearing any sensitive information the object
    -- contains.
    -----------------------------------------------------------------------------
    -- Arguments:
@@ -249,11 +249,32 @@ package CryptAda.Ciphers.Symmetric is
    -- Exceptions:
    -- None.
    -----------------------------------------------------------------------------
-      
+
    procedure   Stop_Cipher(
                   The_Cipher     : access Symmetric_Cipher)
          is abstract;
-         
+
+   --[Is_Valid_Key]-------------------------------------------------------------
+   -- Purpose:
+   -- Checks the validity of a key for an specific cipher.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- For_Cipher        Symmetric_Cipher object.
+   -- The_Key           Key to check.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Boolean value indicating if The_Key is a valid key For_Cipher.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+   
+   function    Is_Valid_Key(
+                  For_Cipher     : access Symmetric_Cipher;
+                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
+      return Boolean
+         is abstract;
+
    -----------------------------------------------------------------------------
    --[Non-dispatching Operations]-----------------------------------------------
    -----------------------------------------------------------------------------
@@ -276,7 +297,7 @@ package CryptAda.Ciphers.Symmetric is
    function    Is_Started(
                   The_Cipher     : access Symmetric_Cipher'Class)
       return   Boolean;
-      
+
    --[Get_Symmetric_Cipher_Type]------------------------------------------------
    -- Purpose:
    -- Returns the type of the symmetric cipher (either stream or block cipher).
@@ -294,7 +315,7 @@ package CryptAda.Ciphers.Symmetric is
    function    Get_Symmetric_Cipher_Type(
                   Of_Cipher         : access Symmetric_Cipher'Class)
       return   Cipher_Type;
-      
+
    --[Get_Symmetric_Cipher_State]-----------------------------------------------
    -- Purpose:
    -- Returns the state a cipher object is in.
@@ -315,7 +336,7 @@ package CryptAda.Ciphers.Symmetric is
 
    --[Get_Symmetric_Cipher_Id]--------------------------------------------------
    -- Purpose:
-   -- Returns the symmetric cipher id that identifies a particular symmetric 
+   -- Returns the symmetric cipher id that identifies a particular symmetric
    -- cipher.
    -----------------------------------------------------------------------------
    -- Arguments:
@@ -331,7 +352,7 @@ package CryptAda.Ciphers.Symmetric is
    function    Get_Symmetric_Cipher_Id(
                   Of_Cipher         : access Symmetric_Cipher'Class)
       return   CryptAda.Names.Symmetric_Cipher_Id;
-            
+
    --[Is_Valid_Key_Length]------------------------------------------------------
    -- Purpose:
    -- Check the validity of the key length for a particular symmetric cipher.
@@ -366,11 +387,11 @@ package CryptAda.Ciphers.Symmetric is
    -- Exceptions:
    -- None.
    -----------------------------------------------------------------------------
-   
+
    function    Get_Cipher_Key_Info(
                   For_Cipher     : access Symmetric_Cipher'Class)
       return   Cipher_Key_Info;
-      
+
    --[Get_Minimum_Key_Length]---------------------------------------------------
    -- Purpose:
    -- Returns the minimum length for keys for a particular symmetric cipher.
@@ -427,7 +448,7 @@ package CryptAda.Ciphers.Symmetric is
 
    --[Get_Key_Length_Increment_Step]--------------------------------------------
    -- Purpose:
-   -- Since some symmetric cipher algorithms allow multiple key lengths, this 
+   -- Since some symmetric cipher algorithms allow multiple key lengths, this
    -- function returns the valid key increment length step between the minimum
    -- and maximum allowed key lengths.
    --
@@ -435,7 +456,7 @@ package CryptAda.Ciphers.Symmetric is
    --
    --             KL := Minimum_KL + N * (Increment_Step)
    --
-   -- where KL is the valid key length and N is a natural number in the range: 
+   -- where KL is the valid key length and N is a natural number in the range:
    --
    --          0 <= N <= (Maximum_KL - Minimum_KL) / Increment_Step
    -----------------------------------------------------------------------------
@@ -448,11 +469,11 @@ package CryptAda.Ciphers.Symmetric is
    -- Exceptions:
    -- None.
    -----------------------------------------------------------------------------
-   
+
    function    Get_Key_Length_Increment_Step(
                   For_Cipher     : access Symmetric_Cipher'Class)
       return   Natural;
-      
+
    -----------------------------------------------------------------------------
    --[Private Part]-------------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -462,12 +483,12 @@ private
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
-         
+
    --[Symmetric_Cipher]---------------------------------------------------------
    -- Full definition of the Symmetric_Cipher tagged type. It extends the
    --  with the followitng fields.
    --
-   -- Cipher_Id            Discriminant. Enumerated value that identifies the 
+   -- Cipher_Id            Discriminant. Enumerated value that identifies the
    --                      particular symmetric cipher algorithm.
    -- Ciph_Type            Symmetric_Cipher_Type that identifies the cipher
    --                      type.
@@ -507,12 +528,12 @@ private
    -----------------------------------------------------------------------------
    --[Private Operations]-------------------------------------------------------
    -----------------------------------------------------------------------------
-   
+
    --[Get_Parameters]-----------------------------------------------------------
-   
+
    procedure   Get_Parameters(
                   Parameters     : in     CryptAda.Lists.List;
                   The_Operation  :    out Cipher_Operation;
                   The_Key        : in out CryptAda.Ciphers.Keys.Key);
-      
+
 end CryptAda.Ciphers.Symmetric;

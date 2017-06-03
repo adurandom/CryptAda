@@ -181,7 +181,15 @@ package CryptAda.Ciphers.Symmetric.Block.Twofish is
    overriding
    procedure   Stop_Cipher(
                   The_Cipher     : access Twofish_Cipher);
-         
+
+   --[Is_Valid_Key]-------------------------------------------------------------
+
+   overriding
+   function    Is_Valid_Key(
+                  For_Cipher     : access Twofish_Cipher;
+                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
+      return Boolean;
+                  
    -----------------------------------------------------------------------------
    --[Non-dispatching operations]-----------------------------------------------
    -----------------------------------------------------------------------------

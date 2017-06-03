@@ -141,6 +141,14 @@ package CryptAda.Ciphers.Symmetric.Block.DES2X is
    overriding
    procedure   Stop_Cipher(
                   The_Cipher     : access DES2X_Cipher);
+
+   --[Is_Valid_Key]-------------------------------------------------------------
+
+   overriding
+   function    Is_Valid_Key(
+                  For_Cipher     : access DES2X_Cipher;
+                  The_Key        : in     CryptAda.Ciphers.Keys.Key)
+      return Boolean;
    
    -----------------------------------------------------------------------------
    --[Non-dispatching operations]-----------------------------------------------

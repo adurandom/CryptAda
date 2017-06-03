@@ -72,4 +72,8 @@ package CryptAda.Exceptions is
    CryptAda_Invalid_Key_Error             : exception;   -- Cipher key is not valid.
    CryptAda_Invalid_Block_Length_Error    : exception;   -- Invalid block length.
 
+   --[Padder specific exceptions]-----------------------------------------------
+
+   CryptAda_Invalid_Padding_Error         : exception;   -- Invalid or corrupt padding.
+   
 end CryptAda.Exceptions;
