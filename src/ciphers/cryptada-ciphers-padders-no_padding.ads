@@ -16,7 +16,7 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-padders-null_padders.ads
+--    Filename          :  cryptada-ciphers-padders-no_padding.ads
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  June 2nd, 2017
@@ -32,7 +32,7 @@
 --    1.0   20170602 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-package CryptAda.Ciphers.Padders.Null_Padders is
+package CryptAda.Ciphers.Padders.No_Padding is
 
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
@@ -42,13 +42,13 @@ package CryptAda.Ciphers.Padders.Null_Padders is
    -- The null padder.
    -----------------------------------------------------------------------------
    
-   type Null_Padder is new Padder with private;
+   type No_Padding_Padder is new Padder with private;
 
    --[Null_Padder_Ptr]----------------------------------------------------------
    -- Class wide access type to Null_Padder objects.
    -----------------------------------------------------------------------------
    
-   type Null_Padder_Ptr is access all Null_Padder'Class;
+   type No_Padding_Padder_Ptr is access all No_Padding_Padder'Class;
 
    -----------------------------------------------------------------------------
    --[Subprograms]--------------------------------------------------------------
@@ -84,16 +84,19 @@ package CryptAda.Ciphers.Padders.Null_Padders is
    
    overriding
    procedure   Pad_Block(
-                  With_Padder    : access Null_Padder;
-                  Block          : in out CryptAda.Pragmatics.Byte_Array;
-                  Offset         : in     Positive;
+                  With_Padder    : access No_Padding_Padder;
+                  Block          : in     CryptAda.Pragmatics.Byte_Array;
+                  Block_Last     : in     Positive;
+                  RNG            : in     CryptAda.Random.Generators.Random_Generator_Handle;
+                  Padded_Block   :    out CryptAda.Pragmatics.Byte_Array;
+                  Padded_Last    :    out Natural;
                   Pad_Count      :    out Natural);
 
    --[Get_Pad_Count]------------------------------------------------------------
    
    overriding
    function    Pad_Count(
-                  With_Padder    : access Null_Padder;
+                  With_Padder    : access No_Padding_Padder;
                   Block          : in     CryptAda.Pragmatics.Byte_Array)
       return   Natural;
                
@@ -109,6 +112,6 @@ private
          
    --[Null_Padder]--------------------------------------------------------------
 
-   type Null_Padder is new Padder with null record;
+   type No_Padding_Padder is new Padder with null record;
    
-end CryptAda.Ciphers.Padders.Null_Padders;
+end CryptAda.Ciphers.Padders.No_Padding;

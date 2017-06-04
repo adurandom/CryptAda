@@ -63,6 +63,9 @@
 --
 --    -  Byte oriented modes of operation on the other hand, process one
 --       byte at a time so no padding schema is necessary.
+--
+--    Implementation of block cipher modes of operation is based on 
+--    NIST Special Publication 800-38A.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
@@ -76,6 +79,7 @@ with Object.Handle;
 with CryptAda.Names;
 with CryptAda.Pragmatics;
 with CryptAda.Lists;
+with CryptAda.Random.Generators;
 with CryptAda.Ciphers;
 with CryptAda.Ciphers.Keys;
 with CryptAda.Ciphers.Symmetric;
@@ -105,22 +109,6 @@ package CryptAda.Ciphers.Modes is
    
    type Mode_Handle is private;
    
-   --[Initialization_Vector]----------------------------------------------------
-   -- Type for initialization vectors.
-   -----------------------------------------------------------------------------
-
-   subtype Initialization_Vector is CryptAda.Pragmatics.Byte_Array;
-
-   -----------------------------------------------------------------------------
-   --[Constants]----------------------------------------------------------------
-   -----------------------------------------------------------------------------
-
-   --[Empty_IV]-----------------------------------------------------------------
-   -- Empty initialization vector.
-   -----------------------------------------------------------------------------
-
-   Empty_IV                      : aliased constant Initialization_Vector(1 .. 0) := (others => 16#00#);
-
    -----------------------------------------------------------------------------
    --[Mode_Handle Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
@@ -188,13 +176,16 @@ package CryptAda.Ciphers.Modes is
    -----------------------------------------------------------------------------
    -- Arguments:
    -- The_Mode             Mode object to initialize.
+   -- Block_Cipher         Identifier of the underlying block cipher to use.
+   -- Operation            Cipher operation to perform.
+   -- Key                  The key to use for the operation.
+   -- Padding              Padding schema to use.
    -----------------------------------------------------------------------------
    -- Returned value:
    -- N/A.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- CryptAda_Invalid_Key_Error if With_Key is not a valid key.
-   -- CryptAda_Invalid_IV_Error if IV is not a valid initialization vector.
    -----------------------------------------------------------------------------
    
    procedure   Mode_Start(
@@ -202,8 +193,7 @@ package CryptAda.Ciphers.Modes is
                   Block_Cipher   : in     CryptAda.Names.Block_Cipher_Id;
                   Operation      : in     CryptAda.Ciphers.Cipher_Operation;
                   Key            : in     CryptAda.Ciphers.Keys.Key;
-                  Padding        : in     CryptAda.Names.Pad_Schema_Id := CryptAda.Names.PS_No_Padding;
-                  IV             : in     Initialization_Vector := Empty_IV)
+                  Padding        : in     CryptAda.Names.Pad_Schema_Id := CryptAda.Names.PS_No_Padding)
             is abstract;
 
    --[Mode_Start]---------------------------------------------------------------
@@ -225,9 +215,6 @@ package CryptAda.Ciphers.Modes is
    --                      c. Padding. Optional, identifier value containing the
    --                         Padding_Schema (see above) enumeration to use 
    --                         (defaults to No_Padding).
-   --                      d. IV. Initialization vector, string value containing
-   --                         the initialization vector to use encoded in 
-   --                         hexadecimal (optional defaults to Empty_IV).
    --                      
    --                      For example, a text form of a parameters list would
    --                      be:
@@ -236,8 +223,7 @@ package CryptAda.Ciphers.Modes is
    --                       Cipher_Params => (
    --                            Operation => Encrypt, 
    --                            Key => "00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff"),
-   --                       Padding => PS_PKCS_7,
-   --                       IV => "00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff")
+   --                       Padding => PS_PKCS_7)
    -----------------------------------------------------------------------------
    -- Returned value:
    -- N/A.
@@ -253,17 +239,22 @@ package CryptAda.Ciphers.Modes is
 
    --[Mode_Process]-------------------------------------------------------------
    -- Purpose:
-   -- Processes (ecrypts or decrypts) a chunk of data.
+   -- Processes (encrypts or decrypts) a chunk of data. Two overloaded forms are
+   -- provided:
+   -- a. A procedure form.
+   -- b. A function form.
    -----------------------------------------------------------------------------
    -- Arguments:
    -- The_Mode             Accesss to the mode object.
    -- Input                Input data to process either a plain text 
    --                      (encryption) or ciphered text (decryption)
-   -- Output               Buffer for output data resulting from processing.
-   -- Output_Length        Number of bytes in Output.
+   -- Output               Byte_Array that, at return of the procedure, will 
+   --                      contain the bytes resulting from processing.
+   -- Output_Count         Number of processed bytes in Output.
    -----------------------------------------------------------------------------
    -- Returned value:
-   -- N/A.
+   -- (Function form) Byte_Array containing the bytes resulting from mode 
+   -- processing.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- CryptAda_Unitialized_Cipher_Error if The_Mode is not initialized.
@@ -275,7 +266,7 @@ package CryptAda.Ciphers.Modes is
                   The_Mode       : access Mode;
                   Input          : in     CryptAda.Pragmatics.Byte_Array;
                   Output         :    out CryptAda.Pragmatics.Byte_Array;
-                  Output_Length  :    out Natural)
+                  Output_Count   :    out Natural)
          is abstract;
 
    function    Mode_Process(
@@ -286,11 +277,14 @@ package CryptAda.Ciphers.Modes is
          
    --[Mode_Stop]----------------------------------------------------------------
    -- Purpose:
-   -- Ends cipher process performing padding and returning the result of
-   -- the process of any buffered data.
+   -- Ends mode processing, performing the necessary padding/unpadding according 
+   -- to the padding schema set in Start and returns the last chunk of processed 
+   -- data.
    -----------------------------------------------------------------------------
    -- Arguments:
    -- The_Mode             Accesss to the mode object.
+   -- RNG                  Random generator handle to use in padding (depending
+   --                      on the padding schema)
    -- Output               Block resulting from processing.
    -- Output_Length        Decrypted bytes copied to Output.
    -----------------------------------------------------------------------------
@@ -299,10 +293,12 @@ package CryptAda.Ciphers.Modes is
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- CryptAda_Unitialized_Cipher_Error if The_Mode is not initialized.
+   -- TBD.
    -----------------------------------------------------------------------------
       
    procedure   Mode_Stop(
                   The_Mode       : access Mode;
+                  RNG            : in     CryptAda.Random.Generators.Random_Generator_Handle;
                   Output         :    out CryptAda.Pragmatics.Byte_Array;
                   Last           :    out Natural;
                   Pad_Bytes      :    out Natural)
@@ -341,7 +337,15 @@ private
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
-         
+
+   type Block_Buffer(Size : Positive) is
+      record
+         BIB                     : Natural := 0;
+         The_Buffer              : CryptAda.Pragmatics.Byte_Array(1 .. Size) := (others => 16#00#);
+      end record;
+      
+   type Block_Buffer_Ptr is access all Block_Buffer;
+   
    --[Mode]---------------------------------------------------------------------
    -- Full definition of the Symmetric_Cipher tagged type. It extends 
    -- Object.Entity with the followitng fields.
@@ -351,20 +355,16 @@ private
    -- Started              Boolean flag that indicates whether or not the
    --                      mode is started.
    -- Cipher               Handle of the cipher to use.
-   -- BIB                  Number of bytes kept on internal buffer.
    -- Buffer               The internal buffer.
    -- Padding              Padding schema to use (if any).
-   -- IV                   Initialization vector.
    -----------------------------------------------------------------------------
 
    type Mode(Id : CryptAda.Names.Block_Cipher_Mode_Id) is abstract new Object.Entity with
       record
          Started                 : Boolean := False;
          Cipher                  : CryptAda.Ciphers.Symmetric.Symmetric_Cipher_Handle;
-         BIB                     : Natural := 0;
-         Buffer                  : CryptAda.Pragmatics.Byte_Array_Ptr := null;
+         Buffer                  : Block_Buffer_Ptr := null;
          Padding                 : CryptAda.Names.Pad_Schema_Id := CryptAda.Names.PS_No_Padding;
-         IV                      : CryptAda.Pragmatics.Byte_Array_Ptr := null;
       end record;
 
    -----------------------------------------------------------------------------
@@ -400,8 +400,7 @@ private
                   Block_Cipher   : in     CryptAda.Names.Block_Cipher_Id;
                   Operation      : in     CryptAda.Ciphers.Cipher_Operation;
                   The_Key        : in     CryptAda.Ciphers.Keys.Key;
-                  Padding        : in     CryptAda.Names.Pad_Schema_Id := CryptAda.Names.PS_No_Padding;
-                  IV             : in     Initialization_Vector := Empty_IV);
+                  Padding        : in     CryptAda.Names.Pad_Schema_Id := CryptAda.Names.PS_No_Padding);
 
    --[Private_Start_Mode]-------------------------------------------------------
 

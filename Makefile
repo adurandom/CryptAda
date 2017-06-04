@@ -130,8 +130,12 @@ OBJS     =  cryptada.o \
             cryptada-ciphers-key_generators.o \
             cryptada-ciphers-key_generators-tdea.o \
             cryptada-ciphers-padders.o \
-            cryptada-ciphers-padders-null_padders.o \
+            cryptada-ciphers-padders-no_padding.o \
+            cryptada-ciphers-padders-zero.o \
+            cryptada-ciphers-padders-x_923.o \
             cryptada-ciphers-padders-pkcs_7.o \
+            cryptada-ciphers-padders-iso_7816_4.o \
+            cryptada-ciphers-padders-iso_10126_2.o \
             cryptada-ciphers-modes.o \
             cryptada-factories.o \
             cryptada-factories-text_encoder_factory.o \
@@ -430,14 +434,30 @@ cryptada-ciphers-padders.o: $(CIPHDIR)/cryptada-ciphers-padders.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
-cryptada-ciphers-padders-null_padders.o: $(CIPHDIR)/cryptada-ciphers-padders-null_padders.adb
+cryptada-ciphers-padders-no_padding.o: $(CIPHDIR)/cryptada-ciphers-padders-no_padding.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
+cryptada-ciphers-padders-zero.o: $(CIPHDIR)/cryptada-ciphers-padders-zero.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-ciphers-padders-x_923.o: $(CIPHDIR)/cryptada-ciphers-padders-x_923.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+    
 cryptada-ciphers-padders-pkcs_7.o: $(CIPHDIR)/cryptada-ciphers-padders-pkcs_7.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
+cryptada-ciphers-padders-iso_7816_4.o: $(CIPHDIR)/cryptada-ciphers-padders-iso_7816_4.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-ciphers-padders-iso_10126_2.o: $(CIPHDIR)/cryptada-ciphers-padders-iso_10126_2.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+    
 cryptada-ciphers-modes.o: $(CIPHDIR)/cryptada-ciphers-modes.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<

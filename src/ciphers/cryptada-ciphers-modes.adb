@@ -44,10 +44,7 @@ with CryptAda.Ciphers.Symmetric.Block;          use CryptAda.Ciphers.Symmetric.B
 with CryptAda.Ciphers.Keys;                     use CryptAda.Ciphers.Keys;
 with CryptAda.Lists;                            use CryptAda.Lists;
 with CryptAda.Lists.Identifier_Item;            use CryptAda.Lists.Identifier_Item;
-with CryptAda.Lists.String_Item;                use CryptAda.Lists.String_Item;
 with CryptAda.Lists.List_Item;                  use CryptAda.Lists.List_Item;
-with CryptAda.Text_Encoders;                    use CryptAda.Text_Encoders;
-with CryptAda.Text_Encoders.Hex;                use CryptAda.Text_Encoders.Hex;
 with CryptAda.Factories.Symmetric_Cipher_Factory;  use CryptAda.Factories.Symmetric_Cipher_Factory;
 
 package body CryptAda.Ciphers.Modes is
@@ -56,7 +53,7 @@ package body CryptAda.Ciphers.Modes is
    --[Generic Instantiations]---------------------------------------------------
    -----------------------------------------------------------------------------
 
-   procedure Free is new Ada.Unchecked_Deallocation(Byte_Array, Byte_Array_Ptr);
+   procedure Block_Buffer_Free is new Ada.Unchecked_Deallocation(Block_Buffer, Block_Buffer_Ptr);
    
    -----------------------------------------------------------------------------
    --[Constants]----------------------------------------------------------------
@@ -69,18 +66,22 @@ package body CryptAda.Ciphers.Modes is
    Cipher_Name                   : aliased constant String := "Cipher";
    Cipher_Params_Name            : aliased constant String := "Cipher_Params";
    Padding_Name                  : aliased constant String := "Padding";   
-   IV_Name                       : aliased constant String := "IV";
    
    -----------------------------------------------------------------------------
    --[Subprogram Specifications]------------------------------------------------
    -----------------------------------------------------------------------------
+      
+   --[Allocate_Block_Buffer]----------------------------------------------------
+   
+   function    Allocate_Block_Buffer(
+                  Size           : in     Positive)
+      return   Block_Buffer_Ptr;
 
-   --[Allocate_Byte_Array]------------------------------------------------------
+   --[Deallocate_Block_Buffer]--------------------------------------------------
    
-   function    Allocate_Byte_Array(
-                  Size           : in     Natural)
-      return   Byte_Array_Ptr;
-   
+   procedure   Deallocate_Block_Buffer(
+                  BBP            : in out Block_Buffer_Ptr);
+         
    --[Get_Cipher_Id]------------------------------------------------------------
    
    function    Get_Cipher_Id(
@@ -99,37 +100,31 @@ package body CryptAda.Ciphers.Modes is
                   From_List      : in     List)
       return   Pad_Schema_Id;
 
-   --[Get_IV]-------------------------------------------------------------------
-   
-   procedure   Get_IV(
-                  From_List      : in     List;
-                  IV             : in out Key);
-
    --[Get_Parameters]-----------------------------------------------------------
    
    procedure   Get_Parameters(
                   From_List      : in     List;
                   Cipher_Id      :    out Block_Cipher_Id;
                   Cipher_Params  : in out List;
-                  Padding        :    out Pad_Schema_Id;
-                  IV             : in out Key);
+                  Padding        :    out Pad_Schema_Id);
                   
    -----------------------------------------------------------------------------
    --[Subprogram bodies]--------------------------------------------------------
    -----------------------------------------------------------------------------
-
-   --[Allocate_Byte_Array]------------------------------------------------------
-   
-   function    Allocate_Byte_Array(
-                  Size           : in     Natural)
-      return   Byte_Array_Ptr
-   is
-      R              : Byte_Array_Ptr := null;
-   begin
-      R := new Byte_Array(1 .. Size);
-      R.all := (others => 16#00#);
       
-      return R;
+   --[Allocate_Block_Buffer]----------------------------------------------------
+   
+   function    Allocate_Block_Buffer(
+                  Size           : in     Positive)
+      return   Block_Buffer_Ptr
+   is
+      BBP            : Block_Buffer_Ptr;
+   begin
+      BBP := new Block_Buffer'(
+                     Size        => Size,
+                     BIB         => 0,
+                     The_Buffer  => (others => 16#00#));
+      return BBP;
    exception
       when X: others =>
          Raise_Exception(
@@ -139,7 +134,21 @@ package body CryptAda.Ciphers.Modes is
                "', with message: '" &
                Exception_Message(X) &
                "', when allocating memory");
-   end Allocate_Byte_Array;
+   end Allocate_Block_Buffer;
+
+   --[Deallocate_Block_Buffer]--------------------------------------------------
+   
+   procedure   Deallocate_Block_Buffer(
+                  BBP            : in out Block_Buffer_Ptr)
+   is
+   begin
+      if BBP /= null then
+         BBP.all.BIB          := 0;
+         BBP.all.The_Buffer   := (others => 16#00#);
+         Block_Buffer_Free(BBP);
+         BBP := null;
+      end if;
+   end Deallocate_Block_Buffer;
    
    --[Get_Cipher_Id]------------------------------------------------------------
    
@@ -218,52 +227,13 @@ package body CryptAda.Ciphers.Modes is
                "', when obtaining '" & Padding_Name & "' parameter");
    end Get_Padding;
    
-   --[Get_IV]-------------------------------------------------------------------
-   
-   procedure   Get_IV(
-                  From_List      : in     List;
-                  IV             : in out Key)
-   is
-      TEH            : Encoder_Handle := Get_Encoder_Handle;
-      TEP            : constant Encoder_Ptr := Get_Encoder_Ptr(TEH);
-      IVS            : constant String := Get_Value(From_List, IV_Name);
-      BA             : Byte_Array(1 .. IVS'Length) := (others => 16#00#);
-      L              : Natural;
-      K              : Natural;
-   begin
-      -- Decode IV.
-      
-      Start_Decoding(TEP);
-      Decode(TEP, IVS, BA, K);
-      L := K;
-      End_Decoding(TEP, BA(L + 1 .. IVS'Last), K);
-      L := L + K;
-      
-      -- Set IV as key and end processing invalidating encoder handle.
-      
-      Set_Key(IV, BA(1 .. L));
-      Invalidate_Handle(TEH);
-      
-   exception
-      when X: others => 
-         Invalidate_Handle(TEH);
-         Raise_Exception(
-            CryptAda_Bad_Argument_Error'Identity,
-            "Caught exception: '" &
-               Exception_Name(X) &
-               "', with message: '" &
-               Exception_Message(X) &
-               "', when obtaining '" & IV_Name & "' parameter");
-   end Get_IV;
-
    --[Get_Parameters]-----------------------------------------------------------
    
    procedure   Get_Parameters(
                   From_List      : in     List;
                   Cipher_Id      :    out Block_Cipher_Id;
                   Cipher_Params  : in out List;
-                  Padding        :    out Pad_Schema_Id;
-                  IV             : in out Key)
+                  Padding        :    out Pad_Schema_Id)
    is
    begin
       -- Cipher id is mandatory.
@@ -285,19 +255,15 @@ package body CryptAda.Ciphers.Modes is
             CryptAda_Bad_Argument_Error'Identity,
             "Missing mandatory '" & Cipher_Params_Name & "' parameter");
       end if;
+   
+      -- Get padding if any.
       
       if Contains_Item(From_List, Padding_Name) then
          Padding := Get_Padding(From_List);
       else
          Padding := PS_No_Padding;
       end if;
-
-      if Contains_Item(From_List, IV_Name) then
-         Get_IV(From_List, IV);
-      else
-         Set_Null(IV);
-      end if;
-
+      
    exception
       when CryptAda_Bad_Argument_Error =>
          raise;
@@ -442,14 +408,11 @@ package body CryptAda.Ciphers.Modes is
                   Block_Cipher   : in     Block_Cipher_Id;
                   Operation      : in     Cipher_Operation;
                   The_Key        : in     Key;
-                  Padding        : in     Pad_Schema_Id := PS_No_Padding;
-                  IV             : in     Initialization_Vector := Empty_IV)
+                  Padding        : in     Pad_Schema_Id := PS_No_Padding)
    is
       SCH            : Symmetric_Cipher_Handle;
       SCP            : Symmetric_Cipher_Ptr;
-      Buffer         : Byte_Array_Ptr;
-      IV_Ptr         : Byte_Array_Ptr;
-      BS             : Cipher_Block_Size;
+      Buffer         : Block_Buffer_Ptr;
    begin
       -- Clean mode.
       
@@ -469,27 +432,9 @@ package body CryptAda.Ciphers.Modes is
             "Supplied key is invalid for the cipher algorithm");
       end if;
 
-      -- Check initialization vector.
+      -- Allocate block buffer.
       
-      BS := Get_Block_Size(Block_Cipher_Ptr(SCP));
-      
-      if IV /= Empty_IV then
-         if IV'Length /= BS then
-            Invalidate_Handle(SCH);
-            Raise_Exception(
-               CryptAda_Bad_Argument_Error'Identity,
-               "Invalid initialization vector length");
-         end if;
-      end if;
-
-      -- Allocate IV
-      
-      IV_Ptr := Allocate_Byte_Array(IV'Length);
-      IV_Ptr.all := IV;
-      
-      -- Allocate buffer.
-      
-      Buffer := Allocate_Byte_Array(BS);
+      Buffer := Allocate_Block_Buffer(Get_Block_Size(Block_Cipher_Ptr(SCP)));
             
       -- Start cipher
       
@@ -499,10 +444,8 @@ package body CryptAda.Ciphers.Modes is
 
       The_Mode.all.Started    := True;
       The_Mode.all.Cipher     := SCH;
-      The_Mode.all.BIB        := 0;
       The_Mode.all.Buffer     := Buffer;
       The_Mode.all.Padding    := Padding;
-      The_Mode.all.IV         := IV_Ptr;
    end Private_Start_Mode;
 
    --[Private_Start_Mode]-------------------------------------------------------
@@ -516,10 +459,7 @@ package body CryptAda.Ciphers.Modes is
       BC             : Block_Cipher_Id;
       CPL            : List;
       Padding        : Pad_Schema_Id;
-      IV             : Key;
-      Buffer         : Byte_Array_Ptr;
-      IV_Ptr         : Byte_Array_Ptr;
-      BS             : Cipher_Block_Size;
+      Buffer         : Block_Buffer_Ptr;
    begin
       -- Clean mode.
       
@@ -527,47 +467,23 @@ package body CryptAda.Ciphers.Modes is
       
       -- Get parameters from list.
       
-      Get_Parameters(Parameters, BC, CPL, Padding, IV);
+      Get_Parameters(Parameters, BC, CPL, Padding);
       
       -- Get the cipher handle.
       
       SCH := Create_Symmetric_Cipher_And_Start(BC, CPL);
       SCP := Get_Symmetric_Cipher_Ptr(SCH);
 
-      -- Check initialization vector.
-      
-      BS := Get_Block_Size(Block_Cipher_Ptr(SCP));
-      
-      if not Is_Null(IV) then
-         if Get_Key_Length(IV) /= BS then
-            Invalidate_Handle(SCH);
-            Raise_Exception(
-               CryptAda_Bad_Argument_Error'Identity,
-               "Invalid initialization vector length");
-         end if;
-      end if;
-
-      -- Allocate IV
-
-      if Is_Null(IV) then
-         IV_Ptr := Allocate_Byte_Array(0);
-      else
-         IV_Ptr := Allocate_Byte_Array(Get_Key_Length(IV));
-         IV_Ptr.all := Get_Key_Bytes(IV);
-      end if;
-      
       -- Allocate buffer.
       
-      Buffer := Allocate_Byte_Array(Get_Block_Size(Block_Cipher_Ptr(SCP)));
+      Buffer := Allocate_Block_Buffer(Get_Block_Size(Block_Cipher_Ptr(SCP)));
       
       -- Set mode attributes.
 
       The_Mode.all.Started    := True;
       The_Mode.all.Cipher     := SCH;
-      The_Mode.all.BIB        := 0;
       The_Mode.all.Buffer     := Buffer;
       The_Mode.all.Padding    := Padding;
-      The_Mode.all.IV         := IV_Ptr;   
    end Private_Start_Mode;
 
    --[Private_Clean_Mode]-------------------------------------------------------
@@ -582,19 +498,9 @@ package body CryptAda.Ciphers.Modes is
          Invalidate_Handle(The_Mode.all.Cipher);
       end if;
 
-      The_Mode.all.BIB        := 0;
-      
-      if The_Mode.all.Buffer /= null then
-         Free(The_Mode.all.Buffer);
-         The_Mode.all.Buffer := null;
-      end if;
+      Deallocate_Block_Buffer(The_Mode.all.Buffer);
 
       The_Mode.all.Padding    := PS_No_Padding;
-      
-      if The_Mode.all.IV /= null then
-         Free(The_Mode.all.IV);
-         The_Mode.all.IV := null;
-      end if;
    end Private_Clean_Mode;
    
 end CryptAda.Ciphers.Modes;

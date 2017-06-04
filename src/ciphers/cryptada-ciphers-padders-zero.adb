@@ -16,14 +16,14 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-padders-null_padders.adb
+--    Filename          :  cryptada-ciphers-padders-zero.adb
 --    File kind         :  Ada package body
 --    Author            :  A. Duran
 --    Creation date     :  June 2nd, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Implements the null padder.
+--    Implements the Zero padder.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
@@ -36,8 +36,9 @@ with Ada.Exceptions;                      use Ada.Exceptions;
 with CryptAda.Names;                      use CryptAda.Names;
 with CryptAda.Exceptions;                 use CryptAda.Exceptions;
 with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
+with CryptAda.Random.Generators;          use CryptAda.Random.Generators;
 
-package body CryptAda.Ciphers.Padders.Null_Padders is
+package body CryptAda.Ciphers.Padders.Zero is
 
    -----------------------------------------------------------------------------
    --[Body declared subprogram bodies]------------------------------------------
@@ -52,10 +53,10 @@ package body CryptAda.Ciphers.Padders.Null_Padders is
    function    Get_Padder_Handle
       return   Padder_Handle
    is
-      P           : Null_Padder_Ptr;
+      P           : Zero_Padder_Ptr;
    begin
-      P := new Null_Padder'(Padder with 
-                                 Id          => PS_No_Padding);
+      P := new Zero_Padder'(Padder with 
+                                 Id          => PS_Zero_Padding);
                                  
       return Ref(Padder_Ptr(P));
    exception
@@ -66,7 +67,7 @@ package body CryptAda.Ciphers.Padders.Null_Padders is
                Exception_Name(X) &
                "' with message: '" &
                Exception_Message(X) &
-               "', when allocating Null_Padder object");
+               "', when allocating Zero_Padder object");
    end Get_Padder_Handle;
       
    -----------------------------------------------------------------------------
@@ -76,40 +77,138 @@ package body CryptAda.Ciphers.Padders.Null_Padders is
    --[Pad_Block]----------------------------------------------------------------
 
    pragma Warnings (Off, "formal parameter ""With_Padder"" is not referenced");
-   pragma Warnings (Off, "formal parameter ""Block"" is not referenced");
-   pragma Warnings (Off, "formal parameter ""Offset"" is not referenced");   
+   pragma Warnings (Off, "formal parameter ""RNG"" is not referenced");
    
    overriding
    procedure   Pad_Block(
-                  With_Padder    : access Null_Padder;
-                  Block          : in out Byte_Array;
-                  Offset         : in     Positive;
+                  With_Padder    : access Zero_Padder;
+                  Block          : in     Byte_Array;
+                  Block_Last     : in     Positive;
+                  RNG            : in     Random_Generator_Handle;
+                  Padded_Block   :    out Byte_Array;
+                  Padded_Last    :    out Natural;
                   Pad_Count      :    out Natural)
    is
+      IL             : Positive;
+      RL             : Positive;
    begin
-      if Offset < Block'First or Offset > Block'Last then
+      -- Padding process when Block_Last < Block'Last
+      -- 
+      -- Block:
+      --
+      --   1  2  3  4  5  6  7  8
+      -- +--+--+--+--+--+--+--+--+
+      -- |BB|BB|BB|BB|  |  |  |  |   
+      -- +--+--+--+--+--+--+--+--+
+      --            ^
+      --            +------------------- Block_Last
+      --
+      -- Padded_Block:
+      --
+      --   1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  ...
+      -- +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+- //
+      -- |BB|BB|BB|BB|00|00|00|00|  |  |  |  |  |  |  |  |  //
+      -- +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+- //
+      --                        ^
+      --                        +------- Padded_Last
+      --
+      -- Pad_Count   => 4
+      --
+      -- Padding process when Block_Last = Block'Last
+      -- 
+      -- Block:
+      --
+      --   1  2  3  4  5  6  7  8
+      -- +--+--+--+--+--+--+--+--+
+      -- |BB|BB|BB|BB|BB|BB|BB|BB|   
+      -- +--+--+--+--+--+--+--+--+
+      --                        ^
+      --                        +------- Block_Last
+      --
+      -- Padded_Block:
+      --
+      --   1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  ...
+      -- +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+- //
+      -- |BB|BB|BB|BB|BB|BB|BB|BB|00|00|00|00|00|00|00|00|  //
+      -- +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+- //
+      --                                                ^
+      --                                                +------- Padded_Last
+      --
+      -- Pad_Count   => 8
+   
+      -- Check validity of Block_Last.
+      
+      if Block_Last not in Block'Range then
          Raise_Exception(
             CryptAda_Index_Error'Identity,
-            "Invalid Offset value for Block");
-      else
-         Pad_Count := 0;
+            "Invalid Block_Last value");
       end if;
-   end Pad_Block;
-   
+            
+      -- Compute input length.
+      
+      IL := 1 + Block_Last - Block'First;
+      
+      -- Get required output length.
+      
+      if IL = Block'Length then
+         -- Block is full, we need two blocks for padding.
+         
+         RL := 2 * Block'Length;
+      else
+         RL := Block'Length;
+      end if;
 
+      -- Chek that there is enough space in output.
+      
+      if Padded_Block'Length < RL then
+         Raise_Exception(
+            CryptAda_Overflow_Error'Identity,
+            "Invalid Padded_Block size");
+      end if;
+
+      -- Perform padding.
+
+      Pad_Count := Block'Last - Block_Last;
+      
+      if Pad_Count = 0 then
+         Pad_Count := Block'Length;
+      end if;
+            
+      -- Set padded block.
+      
+      Padded_Block := (others => 16#00#);
+      Padded_Last := Padded_Block'First + RL - 1;
+      Padded_Block(Padded_Block'First .. Padded_Block'First + IL - 1) := 
+         Block(Block'First .. Block'First + IL - 1);            
+   end Pad_Block;
+
+   pragma Warnings (On, "formal parameter ""RNG"" is not referenced");
+   
    --[Get_Pad_Count]------------------------------------------------------------
    
    overriding
    function    Pad_Count(
-                  With_Padder    : access Null_Padder;
+                  With_Padder    : access Zero_Padder;
                   Block          : in     Byte_Array)
       return   Natural
    is
-   begin
-      return 0;
+      C              : Natural := 0;
+   begin      
+      for I in reverse Block'Range loop
+         exit when Block(I) /= 16#00#;
+         C := C + 1;
+      end loop;
+
+      if C = 0 then
+         -- Assume that exists, at least, one padding byte.
+         
+         Raise_Exception(
+            CryptAda_Invalid_Padding_Error'Identity,
+            "Expected at least 1 padding byte");
+      else      
+         return C;         
+      end if;
    end Pad_Count;
 
    pragma Warnings (On, "formal parameter ""With_Padder"" is not referenced");
-   pragma Warnings (On, "formal parameter ""Block"" is not referenced");
-   pragma Warnings (On, "formal parameter ""Offset"" is not referenced");      
-end CryptAda.Ciphers.Padders.Null_Padders;
+end CryptAda.Ciphers.Padders.Zero;

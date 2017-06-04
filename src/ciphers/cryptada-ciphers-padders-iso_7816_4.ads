@@ -16,38 +16,50 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-padders-pkcs_7.ads
+--    Filename          :  cryptada-ciphers-padders-iso_7816_4.ads
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  June 2nd, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Implements PKCS#7 padding. PKCS#7 padding schema is defined in RFC 5652
---    section 6.3:
+--    Inplements an ISO 7816-4 padder.
 --
---    "Some content-encryption algorithms assume the input length is a
---    multiple of k octets, where k is greater than one.  For such
---    algorithms, the input shall be padded at the trailing end with
---    k-(lth mod k) octets all having value k-(lth mod k), where lth is
---    the length of the input.  In other words, the input is padded at
---    the trailing end with one of the following strings:
+--    ISO/IEC 7816-4:2005 is identical to the bit padding scheme, applied to a 
+--    plain text of N bytes. This means in practice that the first byte is a 
+--    mandatory byte valued 16#80# (2#1000_0000#) followed, if needed, by 0 to 
+--    N-1 bytes set to 16#00#, until the end of the block is reached. 
 --
---                     01 -- if lth mod k = k-1
---                  02 02 -- if lth mod k = k-2
---                      .
---                      .
---                      .
---            k k ... k k -- if lth mod k = 0
+--    Example: In the following example the block size is 8 bytes and padding is 
+--    required for 4 bytes
 --
---    The padding can be removed unambiguously since all input is padded,
---    including input values that are already a multiple of the block size,
---    and no padding string is a suffix of another.  This padding method is
---    well defined if and only if k is less than 256."
+--    ... | DD DD DD DD DD DD DD DD | DD DD DD DD 80 00 00 00 |
 --
---    So, when using PKCS#7 padding, if input is an integral multiple of block
---    size an additional block entirely fill with padding bytes must be 
---    generated.
+--    The next example shows a padding of just one byte
+--
+--    ... | DD DD DD DD DD DD DD DD | DD DD DD DD DD DD DD 80 |
+--
+--    If we do not known in advance the plaintext length we cannot decide if 
+--    16#80# is the last byte of the plaintext data or the only pad byte added.
+--
+--    To overcome this, this padder will always add an additional block when
+--    the last block is full. So, if padding this block:
+--
+--    ... | DD DD DD DD DD DD DD xx |
+--
+--    The result will be:
+--
+--    ... | DD DD DD DD DD DD DD 80 |
+--
+--    and if padding this block:
+--
+--    ... | DD DD DD DD DD DD DD 80 |
+--
+--    The result will be:
+--
+--    ... | DD DD DD DD DD DD DD 80 | 80 00 00 00 00 00 00 00 |
+--
+--    User must always pass the last block to the padder, even when it is full.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
@@ -55,23 +67,23 @@
 --    1.0   20170602 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-package CryptAda.Ciphers.Padders.PKCS_7 is
+package CryptAda.Ciphers.Padders.ISO_7816_4 is
 
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
    
-   --[PKCS_7_Padder]------------------------------------------------------------
+   --[ISO_7816_4_Padder]--------------------------------------------------------
    -- The padder.
    -----------------------------------------------------------------------------
    
-   type PKCS_7_Padder is new Padder with private;
+   type ISO_7816_4_Padder is new Padder with private;
 
-   --[PKCS_7_Padder_Ptr]--------------------------------------------------------
-   -- Class wide access type to PKCS_7_Padder objects.
+   --[ISO_7816_4_Padder_Ptr]----------------------------------------------------
+   -- Class wide access type to ISO_7816_4_Padder objects.
    -----------------------------------------------------------------------------
    
-   type PKCS_7_Padder_Ptr is access all PKCS_7_Padder'Class;
+   type ISO_7816_4_Padder_Ptr is access all ISO_7816_4_Padder'Class;
 
    -----------------------------------------------------------------------------
    --[Subprograms]--------------------------------------------------------------
@@ -107,7 +119,7 @@ package CryptAda.Ciphers.Padders.PKCS_7 is
    
    overriding
    procedure   Pad_Block(
-                  With_Padder    : access PKCS_7_Padder;
+                  With_Padder    : access ISO_7816_4_Padder;
                   Block          : in     CryptAda.Pragmatics.Byte_Array;
                   Block_Last     : in     Positive;
                   RNG            : in     CryptAda.Random.Generators.Random_Generator_Handle;
@@ -119,7 +131,7 @@ package CryptAda.Ciphers.Padders.PKCS_7 is
    
    overriding
    function    Pad_Count(
-                  With_Padder    : access PKCS_7_Padder;
+                  With_Padder    : access ISO_7816_4_Padder;
                   Block          : in     CryptAda.Pragmatics.Byte_Array)
       return   Natural;
                
@@ -133,8 +145,8 @@ private
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
          
-   --[PKCS_7_Padder]------------------------------------------------------------
+   --[ISO_7816_4_Padder]--------------------------------------------------------
 
-   type PKCS_7_Padder is new Padder with null record;
+   type ISO_7816_4_Padder is new Padder with null record;
    
-end CryptAda.Ciphers.Padders.PKCS_7;
+end CryptAda.Ciphers.Padders.ISO_7816_4;

@@ -43,6 +43,7 @@ with Object.Handle;
 
 with CryptAda.Names;
 with CryptAda.Pragmatics;
+with CryptAda.Random.Generators;
 
 package CryptAda.Ciphers.Padders is
 
@@ -132,33 +133,47 @@ package CryptAda.Ciphers.Padders is
 
    --[Pad_Block]----------------------------------------------------------------
    -- Purpose:
-   -- Adds the pad bytes to the passed Block, returning the number of pad 
-   -- bytes added.
+   -- Padds a block of data according the particular padding schema implemented
+   -- and returns the padded block.
    --
-   -- This procedure assumes that the last block of plain text is always passed
-   -- to it inside Block. Even when Offset is Block'First (indicating that the 
-   -- entire block is to be overwritten with pad byres) the contents of Block 
-   -- shall be the same as the last block of plain text. The reason is that 
-   -- some modes (i.e. trailing bit complement) base the padding in the last
-   -- byte of the plain text.
+   -- It is assumed that Pad_Block will receive always the last plain text block
+   -- without regards whether the block is full (plain text length is an 
+   -- integral multiple of block length). So Block_Last must be in
+   -- the range Block'First .. Block'Last. In general, if a full block is passed
+   -- to the padder, this operation will return two blocks, the passed block and
+   -- an additional padding block.
    -----------------------------------------------------------------------------
    -- Arguments:
    -- With_Padder          Access to the padder object used to pad the block.
    -- Block                Block of data to pad.
-   -- Offset               Index of the first element in block to pad.
-   -- Pad_Count            Number of pad bytes added.
+   -- Block_Last           Index of the last plain text byte in block. 
+   -- RNG                  Random byte generator handle. ISO 10126-2 padding,
+   --                      pads the block with random bytes. Ignored if not
+   --                      required.
+   -- Paded_Block          Block resulting from padding.
+   -- Padded_Last          Index of last padding byte in Padded_Block.
+   -- Pad_Count            Number of padding bytes added.
    -----------------------------------------------------------------------------
    -- Returned value:
    -- N/A.
    -----------------------------------------------------------------------------
    -- Exceptions:
-   -- CryptAda_Index_Error if Offset is not a valid index value for Block.
+   -- CryptAda_Index_Error if Block'Last is not in Block'Range.
+   -- CryptAda_Generator_Not_Started_Error if RNG is required for mode and was
+   --    not started.
+   -- CryptAda_Generator_Need_Seeding_Error if RNG was not seeded and is 
+   --    required for the particular padding schema.
+   -- CryptAda_Overflow_Error if Padded_Block'Length is not enough for the
+   --    results of padding.
    -----------------------------------------------------------------------------
    
    procedure   Pad_Block(
                   With_Padder    : access Padder;
-                  Block          : in out CryptAda.Pragmatics.Byte_Array;
-                  Offset         : in     Positive;
+                  Block          : in     CryptAda.Pragmatics.Byte_Array;
+                  Block_Last     : in     Positive;
+                  RNG            : in     CryptAda.Random.Generators.Random_Generator_Handle;
+                  Padded_Block   :    out CryptAda.Pragmatics.Byte_Array;
+                  Padded_Last    :    out Natural;
                   Pad_Count      :    out Natural)
             is abstract;
 

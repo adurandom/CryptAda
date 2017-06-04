@@ -16,38 +16,44 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-padders-pkcs_7.ads
+--    Filename          :  cryptada-ciphers-padders-zero.ads
 --    File kind         :  Ada package specification.
 --    Author            :  A. Duran
 --    Creation date     :  June 2nd, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Implements PKCS#7 padding. PKCS#7 padding schema is defined in RFC 5652
---    section 6.3:
+--    Zero byte padder.
 --
---    "Some content-encryption algorithms assume the input length is a
---    multiple of k octets, where k is greater than one.  For such
---    algorithms, the input shall be padded at the trailing end with
---    k-(lth mod k) octets all having value k-(lth mod k), where lth is
---    the length of the input.  In other words, the input is padded at
---    the trailing end with one of the following strings:
+--    All the bytes that are required to be padded are padded with zero. The 
+--    zero padding scheme has not been standardized for encryption
+--    although it is specified for hashes and MACs as Padding Method 1 in 
+--    ISO/IEC 10118-1 and ISO/IEC 9797-1.
 --
---                     01 -- if lth mod k = k-1
---                  02 02 -- if lth mod k = k-2
---                      .
---                      .
---                      .
---            k k ... k k -- if lth mod k = 0
+--    Example: In the following example the block size is 8 bytes and padding is 
+--    required for 4 bytes
 --
---    The padding can be removed unambiguously since all input is padded,
---    including input values that are already a multiple of the block size,
---    and no padding string is a suffix of another.  This padding method is
---    well defined if and only if k is less than 256."
+--    ... | DD DD DD DD DD DD DD DD | DD DD DD DD 00 00 00 00 |
 --
---    So, when using PKCS#7 padding, if input is an integral multiple of block
---    size an additional block entirely fill with padding bytes must be 
---    generated.
+--    Zero padding may not be reversible if the original plain text data ends 
+--    with one or more zero bytes, making it impossible to distinguish between 
+--    plaintext data bytes and padding bytes. It may be used when the length of 
+--    the message can be derived out-of-band. It is often applied to binary 
+--    encoded strings as the null character can usually be stripped off as 
+--    whitespace.
+--
+--    Zero padding is sometimes also referred to as "null padding" or 
+--    "zero byte padding".
+--
+--    This implementation will add an additional block of 0 bytes if the 
+--    last cleartext block is full. For example, if the last block (for 8 
+--    byte block) is
+--
+--    ... | DD DD DD DD DD DD DD DD |
+--
+--    This padder will return:
+--
+--    ... | DD DD DD DD DD DD DD DD | 00 00 00 00 00 00 00 00 |
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
@@ -55,23 +61,23 @@
 --    1.0   20170602 ADD   Initial implementation.
 --------------------------------------------------------------------------------
 
-package CryptAda.Ciphers.Padders.PKCS_7 is
+package CryptAda.Ciphers.Padders.Zero is
 
    -----------------------------------------------------------------------------
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
    
-   --[PKCS_7_Padder]------------------------------------------------------------
+   --[Zero_Padder]--------------------------------------------------------------
    -- The padder.
    -----------------------------------------------------------------------------
    
-   type PKCS_7_Padder is new Padder with private;
+   type Zero_Padder is new Padder with private;
 
-   --[PKCS_7_Padder_Ptr]--------------------------------------------------------
-   -- Class wide access type to PKCS_7_Padder objects.
+   --[Zero_Padder_Ptr]----------------------------------------------------------
+   -- Class wide access type to Zero_Padder objects.
    -----------------------------------------------------------------------------
    
-   type PKCS_7_Padder_Ptr is access all PKCS_7_Padder'Class;
+   type Zero_Padder_Ptr is access all Zero_Padder'Class;
 
    -----------------------------------------------------------------------------
    --[Subprograms]--------------------------------------------------------------
@@ -107,7 +113,7 @@ package CryptAda.Ciphers.Padders.PKCS_7 is
    
    overriding
    procedure   Pad_Block(
-                  With_Padder    : access PKCS_7_Padder;
+                  With_Padder    : access Zero_Padder;
                   Block          : in     CryptAda.Pragmatics.Byte_Array;
                   Block_Last     : in     Positive;
                   RNG            : in     CryptAda.Random.Generators.Random_Generator_Handle;
@@ -119,7 +125,7 @@ package CryptAda.Ciphers.Padders.PKCS_7 is
    
    overriding
    function    Pad_Count(
-                  With_Padder    : access PKCS_7_Padder;
+                  With_Padder    : access Zero_Padder;
                   Block          : in     CryptAda.Pragmatics.Byte_Array)
       return   Natural;
                
@@ -133,8 +139,8 @@ private
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
          
-   --[PKCS_7_Padder]------------------------------------------------------------
+   --[Zero_Padder]--------------------------------------------------------------
 
-   type PKCS_7_Padder is new Padder with null record;
+   type Zero_Padder is new Padder with null record;
    
-end CryptAda.Ciphers.Padders.PKCS_7;
+end CryptAda.Ciphers.Padders.Zero;

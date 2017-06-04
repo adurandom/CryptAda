@@ -16,14 +16,14 @@
 --  with this program. If not, see <http://www.gnu.org/licenses/>.            --
 --------------------------------------------------------------------------------
 -- 1. Identification
---    Filename          :  cryptada-ciphers-padders-pkcs_7.adb
+--    Filename          :  cryptada-ciphers-padders-no_padding.adb
 --    File kind         :  Ada package body
 --    Author            :  A. Duran
 --    Creation date     :  June 2nd, 2017
 --    Current version   :  1.0
 --------------------------------------------------------------------------------
 -- 2. Purpose:
---    Implements the PKCS_7 padder.
+--    Implements the no padding padder.
 --------------------------------------------------------------------------------
 -- 3. Revision history
 --    Ver   When     Who   Why
@@ -38,7 +38,7 @@ with CryptAda.Exceptions;                 use CryptAda.Exceptions;
 with CryptAda.Pragmatics;                 use CryptAda.Pragmatics;
 with CryptAda.Random.Generators;          use CryptAda.Random.Generators;
 
-package body CryptAda.Ciphers.Padders.PKCS_7 is
+package body CryptAda.Ciphers.Padders.No_Padding is
 
    -----------------------------------------------------------------------------
    --[Body declared subprogram bodies]------------------------------------------
@@ -53,10 +53,10 @@ package body CryptAda.Ciphers.Padders.PKCS_7 is
    function    Get_Padder_Handle
       return   Padder_Handle
    is
-      P           : PKCS_7_Padder_Ptr;
+      P           : No_Padding_Padder_Ptr;
    begin
-      P := new PKCS_7_Padder'(Padder with 
-                                 Id          => PS_PKCS_7);
+      P := new No_Padding_Padder'(Padder with 
+                                    Id          => PS_No_Padding);
                                  
       return Ref(Padder_Ptr(P));
    exception
@@ -67,7 +67,7 @@ package body CryptAda.Ciphers.Padders.PKCS_7 is
                Exception_Name(X) &
                "' with message: '" &
                Exception_Message(X) &
-               "', when allocating PKCS_7_Padder object");
+               "', when allocating No_Padding_Padder object");
    end Get_Padder_Handle;
       
    -----------------------------------------------------------------------------
@@ -81,7 +81,7 @@ package body CryptAda.Ciphers.Padders.PKCS_7 is
    
    overriding
    procedure   Pad_Block(
-                  With_Padder    : access PKCS_7_Padder;
+                  With_Padder    : access No_Padding_Padder;
                   Block          : in     Byte_Array;
                   Block_Last     : in     Positive;
                   RNG            : in     Random_Generator_Handle;
@@ -89,8 +89,7 @@ package body CryptAda.Ciphers.Padders.PKCS_7 is
                   Padded_Last    :    out Natural;
                   Pad_Count      :    out Natural)
    is
-      IL             : Positive;
-      RL             : Positive;
+      L              : Positive;
    begin
       -- Padding process when Block_Last < Block'Last
       -- 
@@ -107,12 +106,12 @@ package body CryptAda.Ciphers.Padders.PKCS_7 is
       --
       --   1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  ...
       -- +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+- //
-      -- |BB|BB|BB|BB|04|04|04|04|  |  |  |  |  |  |  |  |  //
+      -- |BB|BB|BB|BB|  |  |  |  |  |  |  |  |  |  |  |  |  //
       -- +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+- //
-      --                        ^
-      --                        +------- Padded_Last
+      --            ^            
+      --            +------------------- Padded_Last
       --
-      -- Pad_Count   => 4
+      -- Pad_Count   => 0
       --
       -- Padding process when Block_Last = Block'Last
       -- 
@@ -129,13 +128,13 @@ package body CryptAda.Ciphers.Padders.PKCS_7 is
       --
       --   1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  ...
       -- +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+- //
-      -- |BB|BB|BB|BB|BB|BB|BB|BB|08|08|08|08|08|08|08|08|  //
+      -- |BB|BB|BB|BB|BB|BB|BB|BB|  |  |  |  |  |  |  |  |  //
       -- +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+- //
-      --                                                ^
-      --                                                +------- Padded_Last
+      --                        ^
+      --                        +------- Padded_Last
       --
-      -- Pad_Count   => 8
-   
+      -- Pad_Count   => 0
+      
       -- Check validity of Block_Last.
       
       if Block_Last not in Block'Range then
@@ -144,86 +143,39 @@ package body CryptAda.Ciphers.Padders.PKCS_7 is
             "Invalid Block_Last value");
       end if;
             
-      -- Compute input length.
+      -- Check that there is enough space in Padded_Block.
       
-      IL := 1 + Block_Last - Block'First;
-      
-      -- Get required output length.
-      
-      if IL = Block'Length then
-         -- Block is full, we need two blocks for padding.
-         
-         RL := 2 * Block'Length;
-      else
-         RL := Block'Length;
-      end if;
+      L := 1 + Block_Last - Block'First;
 
-      -- Chek that there is enough space in output.
-      
-      if Padded_Block'Length < RL then
+      if Padded_Block'Length < L then
          Raise_Exception(
             CryptAda_Overflow_Error'Identity,
             "Invalid Padded_Block size");
       end if;
-
-      -- Perform padding.
       
-      declare
-         To_Pad      : Natural := Block'Last - Block_Last;
-         Pad_Byte    : Byte;
-      begin
-         -- If input block is full, we'll add an additional block with padding.
-         
-         if To_Pad = 0 then
-            To_Pad         := Block'Length;
-         end if;
-         
-         Pad_Byte := Byte(To_Pad);
-         
-         -- Set padded block.
-         
-         Padded_Last := Padded_Block'First + RL - 1;
-         Padded_Block := (others => Pad_Byte);
-         Padded_Block(Padded_Block'First .. Padded_Block'First + IL - 1) := 
-            Block(Block'First .. Block'First + IL - 1);            
-         Pad_Count := To_Pad;
-      end;
+      -- Copy.
+      
+      Padded_Block   := (others => 16#00#);
+      Padded_Last    := Padded_Block'First + L - 1;
+      Padded_Block(Padded_Block'First .. Padded_Last) := Block(Block'First .. Block_Last);
+      Pad_Count := 0;
    end Pad_Block;
-
-   pragma Warnings (On, "formal parameter ""RNG"" is not referenced");
    
+   pragma Warnings (On, "formal parameter ""RNG"" is not referenced");
+
    --[Get_Pad_Count]------------------------------------------------------------
    
+   pragma Warnings (Off, "formal parameter ""Block"" is not referenced");
    overriding
    function    Pad_Count(
-                  With_Padder    : access PKCS_7_Padder;
+                  With_Padder    : access No_Padding_Padder;
                   Block          : in     Byte_Array)
       return   Natural
    is
-      Pad_Byte       : constant Byte := Block(Block'Last);
-      Count          : constant Natural := Natural(Pad_Byte);
-      Offset         : constant Integer := 1 + Block'Last - Count;
    begin
-      -- Check pad.
-
-      if Offset < Block'First then
-         Raise_Exception(
-            CryptAda_Invalid_Padding_Error'Identity,
-            "Pad block corrupted or invalid");
-      end if;
-
-      declare 
-         Pad         : constant Byte_Array(1 .. Count) := (others => Pad_Byte);
-      begin
-         if Block(Offset .. Block'Last) /= Pad then
-            Raise_Exception(
-               CryptAda_Invalid_Padding_Error'Identity,
-               "Pad block corrupted or invalid");
-         end if;
-      end;
-         
-      return Count;         
+      return 0;
    end Pad_Count;
 
    pragma Warnings (On, "formal parameter ""With_Padder"" is not referenced");
-end CryptAda.Ciphers.Padders.PKCS_7;
+   pragma Warnings (On, "formal parameter ""Block"" is not referenced");
+end CryptAda.Ciphers.Padders.No_Padding;
