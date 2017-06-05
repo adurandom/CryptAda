@@ -141,7 +141,8 @@ OBJS     =  cryptada.o \
             cryptada-factories-text_encoder_factory.o \
             cryptada-factories-message_digest_factory.o \
             cryptada-factories-random_generator_factory.o \
-            cryptada-factories-symmetric_cipher_factory.o 
+            cryptada-factories-symmetric_cipher_factory.o \
+            cryptada-factories-padder_factory.o 
 
 
 #>>>[Build Rules]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -489,6 +490,10 @@ cryptada-factories-random_generator_factory.o: $(FACTDIR)/cryptada-factories-ran
 	$(ADACC) $(CFLAGS) $<
 
 cryptada-factories-symmetric_cipher_factory.o: $(FACTDIR)/cryptada-factories-symmetric_cipher_factory.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+
+cryptada-factories-padder_factory.o: $(FACTDIR)/cryptada-factories-padder_factory.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
     
