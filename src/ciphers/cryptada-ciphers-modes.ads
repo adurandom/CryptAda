@@ -79,10 +79,12 @@ with Object.Handle;
 with CryptAda.Names;
 with CryptAda.Pragmatics;
 with CryptAda.Lists;
-with CryptAda.Random.Generators;
 with CryptAda.Ciphers;
 with CryptAda.Ciphers.Keys;
 with CryptAda.Ciphers.Symmetric;
+with CryptAda.Ciphers.Symmetric.Block;
+with CryptAda.Ciphers.Padders;
+with CryptAda.Random.Generators;
 
 package CryptAda.Ciphers.Modes is
 
@@ -108,6 +110,29 @@ package CryptAda.Ciphers.Modes is
    -----------------------------------------------------------------------------
    
    type Mode_Handle is private;
+
+   --[Mode_Kind]----------------------------------------------------------------
+   -- Enumeration that identifies the kind of the mode either block oriented or
+   -- byte oriented.
+   -----------------------------------------------------------------------------
+   
+   type Mode_Kind is (Block_Oriented, Byte_Oriented);
+
+   --[Byte_Counter]-------------------------------------------------------------
+   -- Type for processed byte counters.
+   -----------------------------------------------------------------------------
+   
+   subtype Byte_Counter is CryptAda.Pragmatics.Eight_Bytes;
+   
+   -----------------------------------------------------------------------------
+   --[Constants]----------------------------------------------------------------
+   -----------------------------------------------------------------------------
+   
+   --[Empty_IV]-----------------------------------------------------------------
+   -- An empty initialization vector.
+   -----------------------------------------------------------------------------
+
+   Empty_IV                      : aliased constant CryptAda.Pragmatics.Byte_Array(1 .. 0) := (others => 16#00#);
    
    -----------------------------------------------------------------------------
    --[Mode_Handle Operations]---------------------------------------------------
@@ -170,35 +195,40 @@ package CryptAda.Ciphers.Modes is
    --[Dispatching Operations]---------------------------------------------------
    -----------------------------------------------------------------------------
 
-   --[Mode_Start]---------------------------------------------------------------
+   --[Start]--------------------------------------------------------------------
    -- Purpose:
-   -- Initializes a Mode object leaving it ready for operation. 
+   -- Starts an operation (either encryption or decryption) with a Mode object.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- The_Mode             Mode object to initialize.
+   -- The_Mode             Access to the mode object to initialize.
    -- Block_Cipher         Identifier of the underlying block cipher to use.
    -- Operation            Cipher operation to perform.
-   -- Key                  The key to use for the operation.
-   -- Padding              Padding schema to use.
+   -- With_Key             The key to use for the operation.
+   -- IV                   Initialization vector.
    -----------------------------------------------------------------------------
    -- Returned value:
    -- N/A.
    -----------------------------------------------------------------------------
    -- Exceptions:
+   -- CryptAda_Storage_Error if any error is raised when allocating the
+   --    required objects.
    -- CryptAda_Invalid_Key_Error if With_Key is not a valid key.
+   -- CryptAda_Bad_Argument_Error if IV is not a valid initialization vector 
+   --    for the mode and cipher.
    -----------------------------------------------------------------------------
    
-   procedure   Mode_Start(
+   procedure   Start(
                   The_Mode       : access Mode;
                   Block_Cipher   : in     CryptAda.Names.Block_Cipher_Id;
                   Operation      : in     CryptAda.Ciphers.Cipher_Operation;
-                  Key            : in     CryptAda.Ciphers.Keys.Key;
-                  Padding        : in     CryptAda.Names.Pad_Schema_Id := CryptAda.Names.PS_No_Padding)
+                  With_Key       : in     CryptAda.Ciphers.Keys.Key;
+                  IV             : in     CryptAda.Pragmatics.Byte_Array := Empty_IV)
             is abstract;
 
-   --[Mode_Start]---------------------------------------------------------------
+   --[Start]--------------------------------------------------------------------
    -- Purpose:
-   -- Initializes a Block_Cipher_Mode object leaving it ready for operation. 
+   -- Starts an operation (either encryption or decryption) with a Mode object.
+   -- All parameters for the mode are passed through a parameter's list.
    -----------------------------------------------------------------------------
    -- Arguments:
    -- The_Mode             Mode object to initialize.
@@ -212,9 +242,10 @@ package CryptAda.Ciphers.Modes is
    --                      b. Cipher_Params. Mandatory, list value containing 
    --                         the particular parameters for starting the block 
    --                         cipher (operation and key) algorithm.
-   --                      c. Padding. Optional, identifier value containing the
-   --                         Padding_Schema (see above) enumeration to use 
-   --                         (defaults to No_Padding).
+   --                      c. IV. Optional. The initialization vector for the
+   --                         mode. if not provided, Empty_IV is assummed. It 
+   --                         must be a String_Item containing a byte vector
+   --                         hexadecimal encoded.
    --                      
    --                      For example, a text form of a parameters list would
    --                      be:
@@ -223,7 +254,7 @@ package CryptAda.Ciphers.Modes is
    --                       Cipher_Params => (
    --                            Operation => Encrypt, 
    --                            Key => "00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff"),
-   --                       Padding => PS_PKCS_7)
+   --                       IV => "00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff")
    -----------------------------------------------------------------------------
    -- Returned value:
    -- N/A.
@@ -232,25 +263,45 @@ package CryptAda.Ciphers.Modes is
    -- CryptAda_Bad_Argument_Error if Parameters is not valid.
    -----------------------------------------------------------------------------
 
-   procedure   Mode_Start(
+   procedure   Start(
                   The_Mode       : access Mode;
                   Parameters     : in     CryptAda.Lists.List)
          is abstract;
 
-   --[Mode_Process]-------------------------------------------------------------
+   --[Do_Process]---------------------------------------------------------------
    -- Purpose:
-   -- Processes (encrypts or decrypts) a chunk of data. Two overloaded forms are
-   -- provided:
+   -- Processes (encrypts or decrypts) an array of data returning the data 
+   -- resulting of the particular operation (encrypted data for encryption,
+   -- plain text data for decryption)
+   --
+   -- Two overloaded forms are provided.
+   -- 
    -- a. A procedure form.
    -- b. A function form.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- The_Mode             Accesss to the mode object.
+   -- The_Mode             Access to the mode object that governs the process.
    -- Input                Input data to process either a plain text 
    --                      (encryption) or ciphered text (decryption)
-   -- Output               Byte_Array that, at return of the procedure, will 
-   --                      contain the bytes resulting from processing.
-   -- Output_Count         Number of processed bytes in Output.
+   -- Output               (Procedure form) Byte_Array that will contain the 
+   --                      bytes resulting from processing. If Output'Length
+   --                      is not enough to hold the processing results the
+   --                      exception CryptAda_Overflow_Error will be raised, so
+   --                      it is very important to choose an appropriate length.
+   --                      As a general rule: 
+   --
+   --                      Let be UBS the underlying cipher block size (which 
+   --                      could be obtained through a function in this package) 
+   --
+   --                      It is safe to set output length to be:
+   --
+   --                      Output'Length := UBS * (1 + Input'Length / UBS)
+   --
+   --                      As a rule of thumb if Input'Length < UBS set 
+   --                      Output'Length to UBS if Input'Length > UBS set 
+   --                      Output'Length to Input'Length.
+   -- Last                 (Proedure form) Index of the last byte returned in 
+   --                      Output. 
    -----------------------------------------------------------------------------
    -- Returned value:
    -- (Function form) Byte_Array containing the bytes resulting from mode 
@@ -258,76 +309,261 @@ package CryptAda.Ciphers.Modes is
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- CryptAda_Unitialized_Cipher_Error if The_Mode is not initialized.
+   -- 
    -- CryptAda_Overflow_Error if Output'Length is not enough to hold the
    --    process results.
    -----------------------------------------------------------------------------
 
-   procedure   Mode_Process(
+   procedure   Do_Process(
                   The_Mode       : access Mode;
                   Input          : in     CryptAda.Pragmatics.Byte_Array;
                   Output         :    out CryptAda.Pragmatics.Byte_Array;
-                  Output_Count   :    out Natural)
+                  Last           :    out Natural)
          is abstract;
 
-   function    Mode_Process(
+   function    Do_Process(
                   The_Mode       : access Mode;
                   Input          : in     CryptAda.Pragmatics.Byte_Array)
       return   CryptAda.Pragmatics.Byte_Array
          is abstract;
          
-   --[Mode_Stop]----------------------------------------------------------------
+   --[End_Encryption]-----------------------------------------------------------
    -- Purpose:
-   -- Ends mode processing, performing the necessary padding/unpadding according 
-   -- to the padding schema set in Start and returns the last chunk of processed 
-   -- data.
+   -- Finishes encryption processing performing necessary padding (in block
+   -- oriented modes) and returning the result of encrypting any bytes buffered 
+   -- in The_Mode object.
    -----------------------------------------------------------------------------
    -- Arguments:
-   -- The_Mode             Accesss to the mode object.
-   -- RNG                  Random generator handle to use in padding (depending
-   --                      on the padding schema)
-   -- Output               Block resulting from processing.
-   -- Output_Length        Decrypted bytes copied to Output.
+   -- The_Mode             Access to the mode object that governs the process.
+   -- Padder               Padder_Handle object that performs the padder. For
+   --                      block oriented modes, it must be a valid 
+   --                      Padder_Handle otherwise a CryptAda_Bad_Argument_Error
+   --                      be raised.
+   -- RNG                  Random_Geenrator_Handle object necessary to perform
+   --                      random padding if the ISO 10126-2 padder is used.
+   --                      Ignored for other padders and in byte oriented modes.
+   -- Output               Byte_Array that will contain the result of encryption 
+   --                      of any buffered input bytes in The_Mode object.
+   --                      If Output'Length is not enough to hold the processing 
+   --                      results the exception CryptAda_Overflow_Error will be 
+   --                      raised, so it is very important to choose an 
+   --                      appropriate length.
+   --
+   --                      As a general rule: 
+   --
+   --                      Let UBS be the underlying cipher block size (which 
+   --                      could be obtained through a function in this package) 
+   --
+   --                      a. for block oriented modes It is safe to set output 
+   --                         length to be 2 * UBS.
+   --                      b. for byte oriented modes it is safe to set output
+   --                         length to be UBS.
+   -- Last                 Index of the last byte returned in Output. 
+   -- Pad_Bytes            Number of pad bytes added.
    -----------------------------------------------------------------------------
    -- Returned value:
    -- N/A.
    -----------------------------------------------------------------------------
    -- Exceptions:
    -- CryptAda_Unitialized_Cipher_Error if The_Mode is not initialized.
-   -- TBD.
+   -- CryptAda_Bad_Operation_Error if The_Mode is started but not for 
+   --    Encryption.
+   -- CryptAda_Bad_Argument_Error if a block oriented mode AND Padder is an 
+   --    invalid Padder_Handle.
+   -- CryptAda_Overflow_Error if Output'Length is not enough to hold the
+   --    process results.
    -----------------------------------------------------------------------------
       
-   procedure   Mode_Stop(
+   procedure   End_Encryption(
                   The_Mode       : access Mode;
+                  Padder         : in     CryptAda.Ciphers.Padders.Padder_Handle;
                   RNG            : in     CryptAda.Random.Generators.Random_Generator_Handle;
                   Output         :    out CryptAda.Pragmatics.Byte_Array;
                   Last           :    out Natural;
                   Pad_Bytes      :    out Natural)
          is abstract;
    
+   --[End_Decryption]-----------------------------------------------------------
+   -- Purpose:
+   -- Finishes decryption processing performing necessary unpadding (in block
+   -- oriented modes) and returning the result of decrypting any bytes buffered 
+   -- in The_Mode object.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Mode             Access to the mode object that governs the process.
+   -- Pad_Bytes            Number of pad bytes added in encryption. The pad
+   --                      validity will be checked against this value.
+   -- Padder               Padder_Handle object that performs the unpadding. For
+   --                      block oriented modes, it must be a valid 
+   --                      Padder_Handle otherwise a CryptAda_Bad_Argument_Error
+   --                      be raised.
+   -- Output               Byte_Array that will contain the result of decryption 
+   --                      of any buffered input bytes in The_Mode object.
+   --                      If Output'Length is not enough to hold the processing 
+   --                      results the exception CryptAda_Overflow_Error will be 
+   --                      raised, so it is very important to choose an 
+   --                      appropriate length.
+   --
+   --                      As a general rule it will be safe to set output 
+   --                      length to the underlying cipher block size (which 
+   --                      could be obtained through a function in this package)
+   -- Last                 Index of the last byte returned in Output. 
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CryptAda_Unitialized_Cipher_Error if The_Mode is not initialized.
+   -- CryptAda_Bad_Operation_Error if The_Mode is started but not for 
+   --    Encryption.
+   -- CryptAda_Bad_Argument_Error if a block oriented mode AND Padder is an 
+   --    invalid Padder_Handle.
+   -- CryptAda_Overflow_Error if Output'Length is not enough to hold the
+   --    process results.
+   -- CryptAda_Invalid_Padding_Error if the padding is not valid or corrupted.
+   -----------------------------------------------------------------------------
+
+   procedure   End_Decryption(
+                  The_Mode       : access Mode;
+                  Pad_Bytes      : in     Natural;
+                  Padder         : in     CryptAda.Ciphers.Padders.Padder_Handle;
+                  Output         :    out CryptAda.Pragmatics.Byte_Array;
+                  Last           :    out Natural)
+         is abstract;
+
    -----------------------------------------------------------------------------
    --[Non-dispatching Operations]-----------------------------------------------
+   -----------------------------------------------------------------------------
+
+   --[Is_Started]---------------------------------------------------------------
+   -- Purpose:
+   -- Checks if a mode object was started.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Mode             Access to the mode object to check.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Boolean value indicating whether the mode is started or not.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
    -----------------------------------------------------------------------------
 
    function    Is_Started(
                   The_Mode       : access Mode'Class)
       return   Boolean;
 
+   --[Get_Mode_Id]--------------------------------------------------------------
+   -- Purpose:
+   -- Returns the Block_Cipher_Mode_Id of a mode.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Mode             Access to the mode object.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Block_Cipher_Mode_Id that identifies the particular mode.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
    function    Get_Mode_Id(
                   The_Mode       : access Mode'Class)
       return   CryptAda.Names.Block_Cipher_Mode_Id;
+
+   --[Get_Mode_Id]--------------------------------------------------------------
+   -- Purpose:
+   -- Returns the Mode_Kind of a mode.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Mode             Access to the mode object.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Mode_Kind value that identifies the particular mode kind (block or byte
+   -- oriented)
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   function    Get_Mode_Kind(
+                  The_Mode       : access Mode'Class)
+      return   Mode_Kind;
+
+   --[Get_Byte_Counter]---------------------------------------------------------
+   -- Purpose:
+   -- Returns the byte counter.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Mode             Access to the mode object.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Byte_Counter value with the processed byte count.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- None.
+   -----------------------------------------------------------------------------
+
+   function    Get_Byte_Counter(
+                  The_Mode       : access Mode'Class)
+      return   Byte_Counter;
       
+   --[Get_Underlying_Cipher_Id]-------------------------------------------------
+   -- Purpose:
+   -- Returns the Symmetric_Cipher_Id that identifies tha particular block 
+   -- cipher used for encryption/decryption.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Mode             Access to the mode object.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Symmetric_Cipher_Id value that identifies the underlying block cipher.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CryptAda_Uninitialized_Cipher_Error if The_Mode is not started.
+   -----------------------------------------------------------------------------
+
    function    Get_Underlying_Cipher_Id(
                   The_Mode       : access Mode'Class)
       return   CryptAda.Names.Symmetric_Cipher_Id;
 
+   --[Get_Underlying_Cipher_State]----------------------------------------------
+   -- Purpose:
+   -- Returns the state of the underlying block cipher.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Mode             Access to the mode object.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Cipher_State value that identifies the underlying block cipher state.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CryptAda_Uninitialized_Cipher_Error if The_Mode is not started.
+   -----------------------------------------------------------------------------
+      
    function    Get_Underlying_Cipher_State(
                   The_Mode       : access Mode'Class)
       return   CryptAda.Ciphers.Cipher_State;
 
-   function    Get_Padding_Schema(
+   --[Get_Underlying_Cipher_Block_Size]-----------------------------------------
+   -- Purpose:
+   -- Returns the block size of the underlying block cipher of the mode.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- The_Mode             Access to the mode object.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- Cipher_Block_Size value containing the block size of the underlying block
+   -- cipher.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CryptAda_Uninitialized_Cipher_Error if The_Mode is not started.
+   -----------------------------------------------------------------------------
+
+   function    Get_Underlying_Cipher_Block_Size(
                   The_Mode       : access Mode'Class)
-      return   CryptAda.Names.Pad_Schema_Id;
-      
+      return   CryptAda.Ciphers.Symmetric.Block.Cipher_Block_Size;
+            
    -----------------------------------------------------------------------------
    --[Private Part]-------------------------------------------------------------
    -----------------------------------------------------------------------------
@@ -338,12 +574,20 @@ private
    --[Type Definitions]---------------------------------------------------------
    -----------------------------------------------------------------------------
 
+   --[Block_Buffer]-------------------------------------------------------------
+   -- Type for the buffer used internally to hold incomplete blocks.
+   -----------------------------------------------------------------------------
+   
    type Block_Buffer(Size : Positive) is
       record
          BIB                     : Natural := 0;
          The_Buffer              : CryptAda.Pragmatics.Byte_Array(1 .. Size) := (others => 16#00#);
       end record;
       
+   --[Block_Buffer_Ptr]---------------------------------------------------------
+   -- Access type to block buffers.
+   -----------------------------------------------------------------------------
+
    type Block_Buffer_Ptr is access all Block_Buffer;
    
    --[Mode]---------------------------------------------------------------------
@@ -354,17 +598,19 @@ private
    --                      particular mode.
    -- Started              Boolean flag that indicates whether or not the
    --                      mode is started.
+   -- Byte_Counter         Counter of bytes processed in the operation.
+   -- Kind                 Mode_Kind value that identifies the kind of the mode.
    -- Cipher               Handle of the cipher to use.
    -- Buffer               The internal buffer.
-   -- Padding              Padding schema to use (if any).
    -----------------------------------------------------------------------------
 
    type Mode(Id : CryptAda.Names.Block_Cipher_Mode_Id) is abstract new Object.Entity with
       record
          Started                 : Boolean := False;
+         Counter                 : Byte_Counter := 0;
+         Kind                    : Mode_Kind;
          Cipher                  : CryptAda.Ciphers.Symmetric.Symmetric_Cipher_Handle;
          Buffer                  : Block_Buffer_Ptr := null;
-         Padding                 : CryptAda.Names.Pad_Schema_Id := CryptAda.Names.PS_No_Padding;
       end record;
 
    -----------------------------------------------------------------------------
@@ -399,8 +645,7 @@ private
                   The_Mode       : access Mode'Class;
                   Block_Cipher   : in     CryptAda.Names.Block_Cipher_Id;
                   Operation      : in     CryptAda.Ciphers.Cipher_Operation;
-                  The_Key        : in     CryptAda.Ciphers.Keys.Key;
-                  Padding        : in     CryptAda.Names.Pad_Schema_Id := CryptAda.Names.PS_No_Padding);
+                  The_Key        : in     CryptAda.Ciphers.Keys.Key);
 
    --[Private_Start_Mode]-------------------------------------------------------
 
@@ -412,5 +657,16 @@ private
    
    procedure   Private_Clean_Mode(
                   The_Mode       : access Mode'Class);
-                           
+
+   --[Allocate_Block_Buffer]----------------------------------------------------
+   
+   function    Allocate_Block_Buffer(
+                  Size           : in     Positive)
+      return   Block_Buffer_Ptr;
+
+   --[Deallocate_Block_Buffer]--------------------------------------------------
+   
+   procedure   Deallocate_Block_Buffer(
+                  BBP            : in out Block_Buffer_Ptr);
+                  
 end CryptAda.Ciphers.Modes;

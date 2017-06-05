@@ -149,7 +149,8 @@ package CryptAda.Names is
          MO_ECB,                 -- Electronic Codebook (ECB) mode
          MO_CBC,                 -- Cipher Block Chaining (CBC)
          MO_CFB,                 -- Cipher Feedback (CFB)
-         MO_OFB                  -- Output Feedback (OFB)
+         MO_OFB,                 -- Output Feedback (OFB)
+         MO_CTR                  -- Counter
       );
 
    --[Pad_Schema_Id]------------------------------------------------------------

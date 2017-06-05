@@ -137,6 +137,7 @@ OBJS     =  cryptada.o \
             cryptada-ciphers-padders-iso_7816_4.o \
             cryptada-ciphers-padders-iso_10126_2.o \
             cryptada-ciphers-modes.o \
+            cryptada-ciphers-modes-ecb.o \
             cryptada-factories.o \
             cryptada-factories-text_encoder_factory.o \
             cryptada-factories-message_digest_factory.o \
@@ -462,7 +463,11 @@ cryptada-ciphers-padders-iso_10126_2.o: $(CIPHDIR)/cryptada-ciphers-padders-iso_
 cryptada-ciphers-modes.o: $(CIPHDIR)/cryptada-ciphers-modes.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
-    
+
+cryptada-ciphers-modes-ecb.o: $(CIPHDIR)/cryptada-ciphers-modes-ecb.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+        
 cryptada-ciphers-key_generators.o: $(CIPHDIR)/cryptada-ciphers-key_generators.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<

@@ -1,53 +1,51 @@
 Compiling src/base/cryptada.ads
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/base/cryptada.ads
-gcc -c -Isrc/base/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada.o src/base/cryptada.ads
+gnatmake: objects up to date.
 Compiling src/base/cryptada-identification.ads
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/base/cryptada-identification.ads
-gcc -c -Isrc/base/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-identification.o src/base/cryptada-identification.ads
+gnatmake: objects up to date.
 Compiling src/base/cryptada-exceptions.ads
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/base/cryptada-exceptions.ads
-gcc -c -Isrc/base/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-exceptions.o src/base/cryptada-exceptions.ads
+gnatmake: objects up to date.
 Compiling src/base/cryptada-lists.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/base/cryptada-lists.adb
-gcc -c -Isrc/base/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-lists.o src/base/cryptada-lists.adb
+gnatmake: objects up to date.
 Compiling src/base/cryptada-lists-identifier_item.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/base/cryptada-lists-identifier_item.adb
-gcc -c -Isrc/base/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-lists-identifier_item.o src/base/cryptada-lists-identifier_item.adb
+gnatmake: objects up to date.
 Compiling src/base/cryptada-lists-enumeration_item.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/base/cryptada-lists-enumeration_item.adb
-gcc -c -Isrc/base/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-lists-enumeration_item.o src/base/cryptada-lists-enumeration_item.adb
+gnatmake: objects up to date.
 Compiling src/base/cryptada-lists-integer_item.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/base/cryptada-lists-integer_item.adb
-gcc -c -Isrc/base/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-lists-integer_item.o src/base/cryptada-lists-integer_item.adb
+gnatmake: objects up to date.
 Compiling src/base/cryptada-lists-float_item.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/base/cryptada-lists-float_item.adb
-gcc -c -Isrc/base/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-lists-float_item.o src/base/cryptada-lists-float_item.adb
+gnatmake: objects up to date.
 Compiling src/base/cryptada-lists-string_item.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/base/cryptada-lists-string_item.adb
-gcc -c -Isrc/base/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-lists-string_item.o src/base/cryptada-lists-string_item.adb
+gnatmake: objects up to date.
 Compiling src/base/cryptada-lists-list_item.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/base/cryptada-lists-list_item.adb
-gcc -c -Isrc/base/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-lists-list_item.o src/base/cryptada-lists-list_item.adb
+gnatmake: objects up to date.
 Compiling src/names/cryptada-names.ads
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/names/cryptada-names.ads
-gcc -c -Isrc/names/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-names.o src/names/cryptada-names.ads
+gnatmake: objects up to date.
 Compiling src/pragmatics/cryptada-pragmatics.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/pragmatics/cryptada-pragmatics.adb
-gcc -c -Isrc/pragmatics/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-pragmatics.o src/pragmatics/cryptada-pragmatics.adb
+gnatmake: objects up to date.
 Compiling src/utils/cryptada-utils.ads
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/utils/cryptada-utils.ads
-gcc -c -Isrc/utils/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-utils.o src/utils/cryptada-utils.ads
+gnatmake: objects up to date.
 Compiling src/utils/cryptada-utils-format.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/utils/cryptada-utils-format.adb
-gcc -c -Isrc/utils/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-utils-format.o src/utils/cryptada-utils-format.adb
+gnatmake: objects up to date.
 Compiling src/encoders/cryptada-text_encoders.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/encoders/cryptada-text_encoders.adb
-gcc -c -Isrc/encoders/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-text_encoders.o src/encoders/cryptada-text_encoders.adb
-gcc -c -Isrc/encoders/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\object.o D:\Desarrollo\CryptAda\src\3rd_party\object.adb
-gcc -c -Isrc/encoders/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\object-handle.o D:\Desarrollo\CryptAda\src\3rd_party\object-handle.adb
+gnatmake: objects up to date.
 Compiling src/encoders/cryptada-text_encoders-hex.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/encoders/cryptada-text_encoders-hex.adb
-gcc -c -Isrc/encoders/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-text_encoders-hex.o src/encoders/cryptada-text_encoders-hex.adb
+gnatmake: objects up to date.
 Compiling src/encoders/cryptada-text_encoders-base16.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/encoders/cryptada-text_encoders-base16.adb
 gcc -c -Isrc/encoders/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-text_encoders-base16.o src/encoders/cryptada-text_encoders-base16.adb
@@ -59,15 +57,14 @@ gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmat
 gcc -c -Isrc/encoders/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-text_encoders-mime.o src/encoders/cryptada-text_encoders-mime.adb
 Compiling src/digests/cryptada-digests.ads
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/digests/cryptada-digests.ads
-gcc -c -Isrc/digests/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-digests.o src/digests/cryptada-digests.ads
+gnatmake: objects up to date.
 Compiling src/digests/cryptada-digests-hashes.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/digests/cryptada-digests-hashes.adb
 gcc -c -Isrc/digests/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-digests-hashes.o src/digests/cryptada-digests-hashes.adb
-gcc -c -Isrc/digests/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-factories.o D:\Desarrollo\CryptAda\src\factories\cryptada-factories.ads
 gcc -c -Isrc/digests/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-factories-text_encoder_factory.o D:\Desarrollo\CryptAda\src\factories\cryptada-factories-text_encoder_factory.adb
 Compiling src/digests/cryptada-digests-counters.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/digests/cryptada-digests-counters.adb
-gcc -c -Isrc/digests/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-digests-counters.o src/digests/cryptada-digests-counters.adb
+gnatmake: objects up to date.
 Compiling src/digests/cryptada-digests-message_digests.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/digests/cryptada-digests-message_digests.adb
 gcc -c -Isrc/digests/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-digests-message_digests.o src/digests/cryptada-digests-message_digests.adb
@@ -142,10 +139,10 @@ gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmat
 gcc -c -Isrc/digests/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-digests-message_digests-blake2b.o src/digests/cryptada-digests-message_digests-blake2b.adb
 Compiling src/random/cryptada-random.ads
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/random/cryptada-random.ads
-gcc -c -Isrc/random/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-random.o src/random/cryptada-random.ads
+gnatmake: objects up to date.
 Compiling src/random/cryptada-random-generators.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/random/cryptada-random-generators.adb
-gcc -c -Isrc/random/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-random-generators.o src/random/cryptada-random-generators.adb
+gnatmake: objects up to date.
 Compiling src/random/cryptada-random-generators-rsaref.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/random/cryptada-random-generators-rsaref.adb
 gcc -c -Isrc/random/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-random-generators-rsaref.o src/random/cryptada-random-generators-rsaref.adb
@@ -154,58 +151,85 @@ gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmat
 gcc -c -Isrc/random/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-random-generators-caprng.o src/random/cryptada-random-generators-caprng.adb
 Compiling src/ciphers/cryptada-ciphers.ads
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers.ads
-gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers.o src/ciphers/cryptada-ciphers.ads
+gnatmake: objects up to date.
 Compiling src/ciphers/cryptada-ciphers-keys.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-keys.adb
-gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-keys.o src/ciphers/cryptada-ciphers-keys.adb
+gnatmake: objects up to date.
 Compiling src/ciphers/cryptada-ciphers-symmetric.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-symmetric.adb
-gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-symmetric.o src/ciphers/cryptada-ciphers-symmetric.adb
+gnatmake: objects up to date.
 Compiling src/ciphers/cryptada-ciphers-symmetric-block.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-symmetric-block.adb
-gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-symmetric-block.o src/ciphers/cryptada-ciphers-symmetric-block.adb
+gnatmake: objects up to date.
 Compiling src/ciphers/cryptada-ciphers-symmetric-block-des.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-symmetric-block-des.adb
-gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-symmetric-block-des.o src/ciphers/cryptada-ciphers-symmetric-block-des.adb
+gnatmake: objects up to date.
 Compiling src/ciphers/cryptada-ciphers-symmetric-block-desx.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-symmetric-block-desx.adb
-gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-symmetric-block-desx.o src/ciphers/cryptada-ciphers-symmetric-block-desx.adb
+gnatmake: objects up to date.
 Compiling src/ciphers/cryptada-ciphers-symmetric-block-des2x.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-symmetric-block-des2x.adb
-gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-symmetric-block-des2x.o src/ciphers/cryptada-ciphers-symmetric-block-des2x.adb
+gnatmake: objects up to date.
 Compiling src/ciphers/cryptada-ciphers-symmetric-block-tdea.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-symmetric-block-tdea.adb
-gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-symmetric-block-tdea.o src/ciphers/cryptada-ciphers-symmetric-block-tdea.adb
+gnatmake: objects up to date.
 Compiling src/ciphers/cryptada-ciphers-symmetric-block-blowfish.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-symmetric-block-blowfish.adb
-gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-symmetric-block-blowfish.o src/ciphers/cryptada-ciphers-symmetric-block-blowfish.adb
+gnatmake: objects up to date.
 Compiling src/ciphers/cryptada-ciphers-symmetric-block-aes.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-symmetric-block-aes.adb
-gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-symmetric-block-aes.o src/ciphers/cryptada-ciphers-symmetric-block-aes.adb
+gnatmake: objects up to date.
 Compiling src/ciphers/cryptada-ciphers-symmetric-block-rc2.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-symmetric-block-rc2.adb
-gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-symmetric-block-rc2.o src/ciphers/cryptada-ciphers-symmetric-block-rc2.adb
+gnatmake: objects up to date.
 Compiling src/ciphers/cryptada-ciphers-symmetric-block-idea.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-symmetric-block-idea.adb
-gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-symmetric-block-idea.o src/ciphers/cryptada-ciphers-symmetric-block-idea.adb
+gnatmake: objects up to date.
 Compiling src/ciphers/cryptada-ciphers-symmetric-block-cast_128.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-symmetric-block-cast_128.adb
-gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-symmetric-block-cast_128.o src/ciphers/cryptada-ciphers-symmetric-block-cast_128.adb
+gnatmake: objects up to date.
 Compiling src/ciphers/cryptada-ciphers-symmetric-block-twofish.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-symmetric-block-twofish.adb
-gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-symmetric-block-twofish.o src/ciphers/cryptada-ciphers-symmetric-block-twofish.adb
+gnatmake: objects up to date.
 Compiling src/ciphers/cryptada-ciphers-symmetric-stream.ads
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-symmetric-stream.ads
-gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-symmetric-stream.o src/ciphers/cryptada-ciphers-symmetric-stream.ads
+gnatmake: objects up to date.
 Compiling src/ciphers/cryptada-ciphers-symmetric-stream-rc4.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-symmetric-stream-rc4.adb
-gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-symmetric-stream-rc4.o src/ciphers/cryptada-ciphers-symmetric-stream-rc4.adb
+gnatmake: objects up to date.
 Compiling src/ciphers/cryptada-ciphers-key_generators.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-key_generators.adb
 gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-key_generators.o src/ciphers/cryptada-ciphers-key_generators.adb
 Compiling src/ciphers/cryptada-ciphers-key_generators-tdea.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-key_generators-tdea.adb
 gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-key_generators-tdea.o src/ciphers/cryptada-ciphers-key_generators-tdea.adb
+Compiling src/ciphers/cryptada-ciphers-padders.adb
+gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-padders.adb
+gnatmake: objects up to date.
+Compiling src/ciphers/cryptada-ciphers-padders-no_padding.adb
+gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-padders-no_padding.adb
+gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-padders-no_padding.o src/ciphers/cryptada-ciphers-padders-no_padding.adb
+Compiling src/ciphers/cryptada-ciphers-padders-zero.adb
+gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-padders-zero.adb
+gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-padders-zero.o src/ciphers/cryptada-ciphers-padders-zero.adb
+Compiling src/ciphers/cryptada-ciphers-padders-x_923.adb
+gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-padders-x_923.adb
+gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-padders-x_923.o src/ciphers/cryptada-ciphers-padders-x_923.adb
+Compiling src/ciphers/cryptada-ciphers-padders-pkcs_7.adb
+gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-padders-pkcs_7.adb
+gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-padders-pkcs_7.o src/ciphers/cryptada-ciphers-padders-pkcs_7.adb
+Compiling src/ciphers/cryptada-ciphers-padders-iso_7816_4.adb
+gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-padders-iso_7816_4.adb
+gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-padders-iso_7816_4.o src/ciphers/cryptada-ciphers-padders-iso_7816_4.adb
+Compiling src/ciphers/cryptada-ciphers-padders-iso_10126_2.adb
+gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-padders-iso_10126_2.adb
+gcc -c -Isrc/ciphers/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-ciphers-padders-iso_10126_2.o src/ciphers/cryptada-ciphers-padders-iso_10126_2.adb
+Compiling src/ciphers/cryptada-ciphers-modes.adb
+gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-modes.adb
+gnatmake: objects up to date.
+Compiling src/ciphers/cryptada-ciphers-modes-ecb.adb
+gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/ciphers/cryptada-ciphers-modes-ecb.adb
+gnatmake: objects up to date.
 Compiling src/factories/cryptada-factories.ads
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/factories/cryptada-factories.ads
 gnatmake: objects up to date.
@@ -218,3 +242,9 @@ gcc -c -Isrc/factories/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -
 Compiling src/factories/cryptada-factories-random_generator_factory.adb
 gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/factories/cryptada-factories-random_generator_factory.adb
 gcc -c -Isrc/factories/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-factories-random_generator_factory.o src/factories/cryptada-factories-random_generator_factory.adb
+Compiling src/factories/cryptada-factories-symmetric_cipher_factory.adb
+gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/factories/cryptada-factories-symmetric_cipher_factory.adb
+gnatmake: objects up to date.
+Compiling src/factories/cryptada-factories-padder_factory.adb
+gnatmake -c -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -D ./obj -O3 -gnat05 -gnata -gnatn -gnatwa src/factories/cryptada-factories-padder_factory.adb
+gcc -c -Isrc/factories/ -Isrc/3rd_party/ -Isrc/base/ -Isrc/utils/ -Isrc/names/ -Isrc/pragmatics/ -Isrc/encoders/ -Isrc/digests/ -Isrc/random/ -I/ -Isrc/ciphers/ -Isrc/factories/ -O3 -gnat05 -gnata -gnatn -gnatwa -I- -o D:\Desarrollo\CryptAda\obj\cryptada-factories-padder_factory.o src/factories/cryptada-factories-padder_factory.adb

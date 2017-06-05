@@ -65,23 +65,11 @@ package body CryptAda.Ciphers.Modes is
 
    Cipher_Name                   : aliased constant String := "Cipher";
    Cipher_Params_Name            : aliased constant String := "Cipher_Params";
-   Padding_Name                  : aliased constant String := "Padding";   
    
    -----------------------------------------------------------------------------
    --[Subprogram Specifications]------------------------------------------------
    -----------------------------------------------------------------------------
-      
-   --[Allocate_Block_Buffer]----------------------------------------------------
-   
-   function    Allocate_Block_Buffer(
-                  Size           : in     Positive)
-      return   Block_Buffer_Ptr;
-
-   --[Deallocate_Block_Buffer]--------------------------------------------------
-   
-   procedure   Deallocate_Block_Buffer(
-                  BBP            : in out Block_Buffer_Ptr);
-         
+               
    --[Get_Cipher_Id]------------------------------------------------------------
    
    function    Get_Cipher_Id(
@@ -94,62 +82,17 @@ package body CryptAda.Ciphers.Modes is
                   From_List      : in     List;
                   Params         : in out List);
 
-   --[Get_Padding]--------------------------------------------------------------
-   
-   function    Get_Padding(
-                  From_List      : in     List)
-      return   Pad_Schema_Id;
-
    --[Get_Parameters]-----------------------------------------------------------
    
    procedure   Get_Parameters(
                   From_List      : in     List;
                   Cipher_Id      :    out Block_Cipher_Id;
-                  Cipher_Params  : in out List;
-                  Padding        :    out Pad_Schema_Id);
+                  Cipher_Params  : in out List);
                   
    -----------------------------------------------------------------------------
    --[Subprogram bodies]--------------------------------------------------------
    -----------------------------------------------------------------------------
-      
-   --[Allocate_Block_Buffer]----------------------------------------------------
-   
-   function    Allocate_Block_Buffer(
-                  Size           : in     Positive)
-      return   Block_Buffer_Ptr
-   is
-      BBP            : Block_Buffer_Ptr;
-   begin
-      BBP := new Block_Buffer'(
-                     Size        => Size,
-                     BIB         => 0,
-                     The_Buffer  => (others => 16#00#));
-      return BBP;
-   exception
-      when X: others =>
-         Raise_Exception(
-            CryptAda_Storage_Error'Identity,
-            "Caught exception: '" &
-               Exception_Name(X) &
-               "', with message: '" &
-               Exception_Message(X) &
-               "', when allocating memory");
-   end Allocate_Block_Buffer;
-
-   --[Deallocate_Block_Buffer]--------------------------------------------------
-   
-   procedure   Deallocate_Block_Buffer(
-                  BBP            : in out Block_Buffer_Ptr)
-   is
-   begin
-      if BBP /= null then
-         BBP.all.BIB          := 0;
-         BBP.all.The_Buffer   := (others => 16#00#);
-         Block_Buffer_Free(BBP);
-         BBP := null;
-      end if;
-   end Deallocate_Block_Buffer;
-   
+         
    --[Get_Cipher_Id]------------------------------------------------------------
    
    function    Get_Cipher_Id(
@@ -198,42 +141,13 @@ package body CryptAda.Ciphers.Modes is
                Exception_Message(X) &
                "', when obtaining '" & Cipher_Params_Name & "' parameter");
    end Get_Cipher_Params;
-
-   --[Get_Padding]--------------------------------------------------------------
-   
-   function    Get_Padding(
-                  From_List      : in     List)
-      return   Pad_Schema_Id
-   is
-      Pad_Id         : Pad_Schema_Id;
-      P_Id           : Identifier;
-   begin
-      -- Get value from list.
-      
-      Get_Value(From_List, Padding_Name, P_Id);
-      Pad_Id := Pad_Schema_Id'Value(Identifier_2_Text(P_Id));
-      
-      -- Return value.
-      
-      return Pad_Id;
-   exception
-      when X: others =>
-         Raise_Exception(
-            CryptAda_Bad_Argument_Error'Identity,
-            "Caught exception: '" &
-               Exception_Name(X) &
-               "', with message: '" &
-               Exception_Message(X) &
-               "', when obtaining '" & Padding_Name & "' parameter");
-   end Get_Padding;
    
    --[Get_Parameters]-----------------------------------------------------------
    
    procedure   Get_Parameters(
                   From_List      : in     List;
                   Cipher_Id      :    out Block_Cipher_Id;
-                  Cipher_Params  : in out List;
-                  Padding        :    out Pad_Schema_Id)
+                  Cipher_Params  : in out List)
    is
    begin
       -- Cipher id is mandatory.
@@ -255,15 +169,6 @@ package body CryptAda.Ciphers.Modes is
             CryptAda_Bad_Argument_Error'Identity,
             "Missing mandatory '" & Cipher_Params_Name & "' parameter");
       end if;
-   
-      -- Get padding if any.
-      
-      if Contains_Item(From_List, Padding_Name) then
-         Padding := Get_Padding(From_List);
-      else
-         Padding := PS_No_Padding;
-      end if;
-      
    exception
       when CryptAda_Bad_Argument_Error =>
          raise;
@@ -348,6 +253,26 @@ package body CryptAda.Ciphers.Modes is
    begin
       return The_Mode.all.Id;
    end Get_Mode_Id;
+
+   --[Get_Mode_Kind]------------------------------------------------------------
+
+   function    Get_Mode_Kind(
+                  The_Mode       : access Mode'Class)
+      return   Mode_Kind
+   is
+   begin
+      return The_Mode.all.Kind;
+   end Get_Mode_Kind;
+
+   --[Get_Byte_Counter]---------------------------------------------------------
+
+   function    Get_Byte_Counter(
+                  The_Mode       : access Mode'Class)
+      return   Byte_Counter
+   is
+   begin
+      return The_Mode.all.Counter;
+   end Get_Byte_Counter;
    
    --[Get_Underlying_Cipher_Id]-------------------------------------------------
 
@@ -381,22 +306,22 @@ package body CryptAda.Ciphers.Modes is
       end if;
    end Get_Underlying_Cipher_State;
 
-   --[Get_Padding_Schema]-------------------------------------------------------
+   --[Get_Underlying_Cipher_Block_Size]-----------------------------------------
 
-   function    Get_Padding_Schema(
+   function    Get_Underlying_Cipher_Block_Size(
                   The_Mode       : access Mode'Class)
-      return   Pad_Schema_Id
+      return   Cipher_Block_Size
    is
    begin
       if Is_Started(The_Mode) then
-         return The_Mode.all.Padding;
+         return Get_Block_Size(Block_Cipher_Ptr(Get_Symmetric_Cipher_Ptr(The_Mode.all.Cipher)));
       else
          Raise_Exception(
             CryptAda_Uninitialized_Cipher_Error'Identity,
             "Mode is not started");
-      end if;
-   end Get_Padding_Schema;
-   
+      end if;   
+   end Get_Underlying_Cipher_Block_Size;
+      
    -----------------------------------------------------------------------------
    --[Utility methods for derived classes]--------------------------------------
    -----------------------------------------------------------------------------
@@ -407,8 +332,7 @@ package body CryptAda.Ciphers.Modes is
                   The_Mode       : access Mode'Class;
                   Block_Cipher   : in     Block_Cipher_Id;
                   Operation      : in     Cipher_Operation;
-                  The_Key        : in     Key;
-                  Padding        : in     Pad_Schema_Id := PS_No_Padding)
+                  The_Key        : in     Key)
    is
       SCH            : Symmetric_Cipher_Handle;
       SCP            : Symmetric_Cipher_Ptr;
@@ -443,9 +367,15 @@ package body CryptAda.Ciphers.Modes is
       -- Set mode attributes.
 
       The_Mode.all.Started    := True;
+      The_Mode.all.Counter    := 0;
       The_Mode.all.Cipher     := SCH;
       The_Mode.all.Buffer     := Buffer;
-      The_Mode.all.Padding    := Padding;
+   exception
+      when others =>
+         Invalidate_Handle(SCH);
+         Deallocate_Block_Buffer(Buffer);
+         
+         raise;
    end Private_Start_Mode;
 
    --[Private_Start_Mode]-------------------------------------------------------
@@ -458,7 +388,6 @@ package body CryptAda.Ciphers.Modes is
       SCP            : Symmetric_Cipher_Ptr;
       BC             : Block_Cipher_Id;
       CPL            : List;
-      Padding        : Pad_Schema_Id;
       Buffer         : Block_Buffer_Ptr;
    begin
       -- Clean mode.
@@ -467,7 +396,7 @@ package body CryptAda.Ciphers.Modes is
       
       -- Get parameters from list.
       
-      Get_Parameters(Parameters, BC, CPL, Padding);
+      Get_Parameters(Parameters, BC, CPL);
       
       -- Get the cipher handle.
       
@@ -481,9 +410,15 @@ package body CryptAda.Ciphers.Modes is
       -- Set mode attributes.
 
       The_Mode.all.Started    := True;
+      The_Mode.all.Counter    := 0;
       The_Mode.all.Cipher     := SCH;
       The_Mode.all.Buffer     := Buffer;
-      The_Mode.all.Padding    := Padding;
+   exception
+      when others =>
+         Invalidate_Handle(SCH);
+         Deallocate_Block_Buffer(Buffer);
+         
+         raise;
    end Private_Start_Mode;
 
    --[Private_Clean_Mode]-------------------------------------------------------
@@ -495,12 +430,49 @@ package body CryptAda.Ciphers.Modes is
       The_Mode.all.Started    := False;
       
       if Is_Valid_Handle(The_Mode.all.Cipher) then
+         Stop_Cipher(Get_Symmetric_Cipher_Ptr(The_Mode.all.Cipher));
          Invalidate_Handle(The_Mode.all.Cipher);
       end if;
 
       Deallocate_Block_Buffer(The_Mode.all.Buffer);
-
-      The_Mode.all.Padding    := PS_No_Padding;
    end Private_Clean_Mode;
+
+   --[Allocate_Block_Buffer]----------------------------------------------------
+   
+   function    Allocate_Block_Buffer(
+                  Size           : in     Positive)
+      return   Block_Buffer_Ptr
+   is
+      BBP            : Block_Buffer_Ptr;
+   begin
+      BBP := new Block_Buffer'(
+                     Size        => Size,
+                     BIB         => 0,
+                     The_Buffer  => (others => 16#00#));
+      return BBP;
+   exception
+      when X: others =>
+         Raise_Exception(
+            CryptAda_Storage_Error'Identity,
+            "Caught exception: '" &
+               Exception_Name(X) &
+               "', with message: '" &
+               Exception_Message(X) &
+               "', when allocating memory");
+   end Allocate_Block_Buffer;
+
+   --[Deallocate_Block_Buffer]--------------------------------------------------
+   
+   procedure   Deallocate_Block_Buffer(
+                  BBP            : in out Block_Buffer_Ptr)
+   is
+   begin
+      if BBP /= null then
+         BBP.all.BIB          := 0;
+         BBP.all.The_Buffer   := (others => 16#00#);
+         Block_Buffer_Free(BBP);
+         BBP := null;
+      end if;
+   end Deallocate_Block_Buffer;
    
 end CryptAda.Ciphers.Modes;
