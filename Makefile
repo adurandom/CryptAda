@@ -35,6 +35,7 @@ BINDIR      =  ./bin
 
 3RDPARTY    =  $(SRCDIR)/3rd_party
 BASEDIR     =  $(SRCDIR)/base
+BNDIR       =  $(SRCDIR)/bn
 NAMESDIR    =  $(SRCDIR)/names
 PRAGMADIR   =  $(SRCDIR)/pragmatics
 UTILSDIR    =  $(SRCDIR)/utils
@@ -48,7 +49,7 @@ FACTDIR     =  $(SRCDIR)/factories
 #>>>[Compilation]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 ADACC       =  gnatmake -c
-SOURCEDIRS  =  -I$(3RDPARTY)/ -I$(BASEDIR)/ -I$(UTILSDIR)/ -I$(NAMESDIR)/ -I$(PRAGMADIR)/ -I$(ENCSDIR)/ -I$(DIGDIR)/ -I$(RNDDIR)/ -I$(BNDIR)/ -I$(CIPHDIR)/ -I$(FACTDIR)/
+SOURCEDIRS  =  -I$(3RDPARTY)/ -I$(BASEDIR)/ -I$(BNDIR)/ -I$(UTILSDIR)/ -I$(NAMESDIR)/ -I$(PRAGMADIR)/ -I$(ENCSDIR)/ -I$(DIGDIR)/ -I$(RNDDIR)/ -I$(BNDIR)/ -I$(CIPHDIR)/ -I$(FACTDIR)/
 CFLAGS      =  $(SOURCEDIRS) -D $(OBJDIR) -O3 -gnat05 -gnata -gnatn -gnatwa
 ADAMAKER    = gnatmake
 ADAFLAGS    = -O3 -gnat05 -gnata -gnatn -gnatwa -D $(OBJDIR)
@@ -73,6 +74,7 @@ OBJS     =  cryptada.o \
             cryptada-lists-list_item.o \
             cryptada-names.o \
             cryptada-pragmatics.o \
+            cryptada-big_naturals.o \
             cryptada-utils.o \
             cryptada-utils-format.o \
             cryptada-text_encoders.o \
@@ -206,6 +208,12 @@ cryptada-pragmatics.o: $(PRAGMADIR)/cryptada-pragmatics.adb
 	@echo Compiling $<
 	$(ADACC) $(CFLAGS) $<
 
+# Big naturals packages
+
+cryptada-big_naturals.o: $(BNDIR)/cryptada-big_naturals.adb
+	@echo Compiling $<
+	$(ADACC) $(CFLAGS) $<
+    
 # Utils packages
 
 cryptada-utils.o: $(UTILSDIR)/cryptada-utils.ads
