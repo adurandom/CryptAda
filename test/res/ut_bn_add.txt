@@ -1,0 +1,555 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.2.a (2017/05/30)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.BN_Add
+Description              : Unit test driver for CryptAda.Big_Naturals addition functionality.
+Started                  : 2017/06/14 - 09:04:11
+================================================================================
+[I] This test driver will validate Big_Natural addition
+Next elements will be tested:
+    - Add(Big_Natural, Big_Natural, Big_Natural)
+    - Add(Big_Natural, Digit, Big_Natural)
+    - "+"(Big_Natural, Big_Natural)
+    - "+"(Big_Natural, Digit)
+    - "+"(Digit, Big_Natural)
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Overflow conditions in addition
+Started         : 2017/06/14 - 09:04:11
+--------------------------------------------------------------------------------
+[I] Big_Natural addition. Adding One to Last shall raise CryptAda_Overflow_Error
+[I] Add(Big_Natural, Big_Natural, Big_Natural)
+[I] First summand: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  32
+Significant Bits     :  1024
+The number (from most to least significant digit):
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+[I] Second summand: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  1
+Significant Bits     :  1
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001 
+[I] Caught CryptAda_Overflow_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_OVERFLOW_ERROR"
+Message  : "Amount could not be represented with a Big_Natural"
+[I] Add(Big_Natural, Digit, Big_Natural)
+[I] First summand: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  32
+Significant Bits     :  1024
+The number (from most to least significant digit):
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+Second summand:  1
+[I] Caught CryptAda_Overflow_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_OVERFLOW_ERROR"
+Message  : "Amount could not be represented with a Big_Natural"
+[I] "+"(Big_Natural, Big_Natural)
+[I] First summand: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  1
+Significant Bits     :  1
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001 
+[I] Second summand: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  32
+Significant Bits     :  1024
+The number (from most to least significant digit):
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+[I] Caught CryptAda_Overflow_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_OVERFLOW_ERROR"
+Message  : "Amount could not be represented with a Big_Natural"
+[I] "+"(Digit, Big_Natural)
+First summand:  1
+[I] Second summand: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  32
+Significant Bits     :  1024
+The number (from most to least significant digit):
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+[I] Caught CryptAda_Overflow_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_OVERFLOW_ERROR"
+Message  : "Amount could not be represented with a Big_Natural"
+[I] "+"(Big_Natural, Digit)
+[I] First summand: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  32
+Significant Bits     :  1024
+The number (from most to least significant digit):
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+Second summand:  1
+[I] Caught CryptAda_Overflow_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_OVERFLOW_ERROR"
+Message  : "Amount could not be represented with a Big_Natural"
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/06/14 - 09:04:11
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Basic addition operations
+Started         : 2017/06/14 - 09:04:11
+--------------------------------------------------------------------------------
+[I] Adding One to One
+[I] Add(Big_Natural, Big_Natural, Big_Natural)
+[I] Expected result
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  1
+Significant Bits     :  2
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000002 
+[I] Obtained result
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  1
+Significant Bits     :  2
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000002 
+[I] Results match
+[I] Add(Big_Natural, Digit, Big_Natural)
+[I] Expected result
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  1
+Significant Bits     :  2
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000002 
+[I] Obtained result
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  1
+Significant Bits     :  2
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000002 
+[I] Results match
+[I] "+"(Big_Natural, Big_Natural)
+[I] Expected result
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  1
+Significant Bits     :  2
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000002 
+[I] Obtained result
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  1
+Significant Bits     :  2
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000002 
+[I] Results match
+[I] "+"(Digit, Big_Natural)
+[I] Expected result
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  1
+Significant Bits     :  2
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000002 
+[I] Obtained result
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  1
+Significant Bits     :  2
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000002 
+[I] Results match
+[I] "+"(Big_Natural, Digit)
+[I] Expected result
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  1
+Significant Bits     :  2
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000002 
+[I] Obtained result
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  1
+Significant Bits     :  2
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000002 
+[I] Results match
+[I] Testing addition carry
+[I] Summand 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  31
+Significant Bits     :  992
+The number (from most to least significant digit):
+00000000 FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+[I] Add(Big_Natural, Big_Natural, Big_Natural)
+[I] Expected result
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  32
+Significant Bits     :  993
+The number (from most to least significant digit):
+00000001 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+[I] Obtained result
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  32
+Significant Bits     :  993
+The number (from most to least significant digit):
+00000001 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+[I] Results match
+[I] Add(Big_Natural, Digit, Big_Natural)
+[I] Expected result
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  32
+Significant Bits     :  993
+The number (from most to least significant digit):
+00000001 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+[I] Obtained result
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  32
+Significant Bits     :  993
+The number (from most to least significant digit):
+00000001 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+[I] Results match
+[I] "+"(Big_Natural, Big_Natural)
+[I] Expected result
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  32
+Significant Bits     :  993
+The number (from most to least significant digit):
+00000001 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+[I] Obtained result
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  32
+Significant Bits     :  993
+The number (from most to least significant digit):
+00000001 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+[I] Results match
+[I] "+"(Digit, Big_Natural)
+[I] Expected result
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  32
+Significant Bits     :  993
+The number (from most to least significant digit):
+00000001 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+[I] Obtained result
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  32
+Significant Bits     :  993
+The number (from most to least significant digit):
+00000001 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+[I] Results match
+[I] "+"(Big_Natural, Digit)
+[I] Expected result
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  32
+Significant Bits     :  993
+The number (from most to least significant digit):
+00000001 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+[I] Obtained result
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  32
+Significant Bits     :  993
+The number (from most to least significant digit):
+00000001 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+[I] Results match
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/06/14 - 09:04:11
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Testing additive identity
+Started         : 2017/06/14 - 09:04:11
+--------------------------------------------------------------------------------
+[I] Add(Big_Natural, Big_Natural, Big_Natural)
+Performing  100000 iterations, adding Zero to random digit sequences
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Add(Big_Natural, Digit, Big_Natural)
+Performing  100000 iterations, adding 0 to random digit sequences
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Add(Big_Natural, Digit, Big_Natural)
+Performing  100000 iterations, adding Zero to random digit
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] "+"(Big_Natural, Big_Natural)
+Performing  100000 iterations, adding Zero to random big natural
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] "+"(Big_Natural, Digit)
+Performing  100000 iterations, adding Zero to random digit
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] "+"(Digit, Big_Natural)
+Performing  100000 iterations, adding 0 to random big natural
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/06/14 - 09:04:11
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : Testing addition conmutative property
+Started         : 2017/06/14 - 09:04:11
+--------------------------------------------------------------------------------
+[I] Add(Big_Natural, Big_Natural, Big_Natural)
+Performing  100000 iterations using random big naturals
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] "+"(Big_Natural, Big_Natural)
+Performing  100000 iterations using random big naturals
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Add(Big_Natural, Digit, Big_Natural)
+[I] "+"(Big_Natural, Digit)
+[I] "+"(Digit, Big_Natural)
+Performing  100000 iterations, adding a random big natural to random digit
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/06/14 - 09:04:12
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 5
+Description     : Testing addition associative property
+Started         : 2017/06/14 - 09:04:12
+--------------------------------------------------------------------------------
+[I] Add(Big_Natural, Big_Natural, Big_Natural)
+Performing  100000 iterations using random big naturals
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] "+"(Big_Natural, Big_Natural, Big_Natural)
+Performing  100000 iterations using random big naturals
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Digit addition
+Performing  100000 iterations, adding a random big natural to random digit
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 5
+Test Case Result: PASSED
+Finished        : 2017/06/14 - 09:04:13
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.BN_Add
+Finished                 : 2017/06/14 - 09:04:13
+================================================================================

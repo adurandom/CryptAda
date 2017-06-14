@@ -305,7 +305,37 @@ package CryptAda.Big_Naturals is
    -----------------------------------------------------------------------------
    --[5. Arithmetic Operations]-------------------------------------------------
    -----------------------------------------------------------------------------
+
+   --[5.1. Addition]------------------------------------------------------------
    
+   --[Add]----------------------------------------------------------------------
+   -- Purpose:
+   -- Performs Big_Natural addition.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- Left                 First summand a Big_Natural value.
+   -- Right                Second summand either a Big_Natural value or a 
+   --                      Digit value.
+   -- Sum                  Result of addition.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CryptAda_Overflow_Error if the result of addition could not be represented 
+   --    with a Big_Natural value.
+   -----------------------------------------------------------------------------
+   
+   procedure   Add(
+                  Left           : in     Big_Natural;
+                  Right          : in     Big_Natural;
+                  Sum            :    out Big_Natural);
+
+   procedure   Add(
+                  Left           : in     Big_Natural;
+                  Right          : in     Digit;
+                  Sum            :    out Big_Natural);
+                  
    --["+"]----------------------------------------------------------------------
    -- Purpose:
    -- Addition of big naturals.
@@ -336,6 +366,35 @@ package CryptAda.Big_Naturals is
                   Right          : in     Digit)
       return   Big_Natural;
 
+   --[5.2. Subtraction]---------------------------------------------------------
+   
+   --[Subtract]-----------------------------------------------------------------
+   -- Purpose:
+   -- Performs Big_Natural subtraction.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- Left                 Minuend a Big_Natural value.
+   -- Right                Subtrahend either a Big_Natural value or a Digit 
+   --                      value.
+   -- Subt                 Result of subtraction.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CryptAda_Underflow_Error if Right > Left.
+   -----------------------------------------------------------------------------
+   
+   procedure   Subtract(
+                  Left           : in     Big_Natural;
+                  Right          : in     Big_Natural;
+                  Subt           :    out Big_Natural);
+
+   procedure   Subtract(
+                  Left           : in     Big_Natural;
+                  Right          : in     Digit;
+                  Subt           :    out Big_Natural);
+      
    --["-"]----------------------------------------------------------------------
    -- Purpose:
    -- Subtraction of big naturals.

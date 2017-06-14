@@ -382,6 +382,88 @@ package body CryptAda.Big_Naturals is
                   Q              :    out Digit);
    pragma Inline(Div_Digits);
 
+   --[Digit_Array Arithmetic Operations]----------------------------------------
+
+   --[Digit_Array_Add]----------------------------------------------------------
+   
+   procedure   Digit_Array_Add(
+                  L              : in     Digit_Array;
+                  R              : in     Digit_Array;
+                  Sum            :     out Digit_Array);
+
+   --[Digit_Array_Add_Digit]----------------------------------------------------
+   
+   procedure   Digit_Array_Add_Digit(
+                  L              : in     Digit_Array;
+                  R              : in     Digit;
+                  Sum            :    out Digit_Array);
+                  
+   --[Digit_Array_Subtract]-----------------------------------------------------
+   
+   procedure   Digit_Array_Subtract(
+                  L              : in     Digit_Array;
+                  R              : in     Digit_Array;
+                  Subt           :    out Digit_Array);
+
+   --[Digit_Array_Subtract_Digit]-----------------------------------------------
+   
+   procedure   Digit_Array_Subtract_Digit(
+                  L              : in     Digit_Array;
+                  R              : in     Digit;
+                  Subt           :    out Digit_Array);
+                  
+   --[Digit_Array_Multiply]-----------------------------------------------------
+   
+   procedure   Digit_Array_Multiply(
+                  L              : in     Digit_Array;
+                  R              : in     Digit_Array;
+                  Mult           :    out Digit_Array);
+
+   --[Digit_Array_Digit_Multiply]-----------------------------------------------
+
+   procedure   Digit_Array_Digit_Multiply(
+                  L              : in     Digit_Array;
+                  R              : in     Digit;
+                  Mult           :    out Digit_Array);
+                  
+   --[Digit_Array_Square]-------------------------------------------------------
+   
+   procedure   Digit_Array_Square(
+                  L              : in     Digit_Array;
+                  Square         :    out Digit_Array);
+
+   --[Digit_Array_Shift_Left_Digit]---------------------------------------------
+
+   procedure   Digit_Array_Shift_Left_Digit(
+                  L              : in     Digit_Array;
+                  A              : in     Digit_Shift_Amount;
+                  R              :    out Digit_Array;
+                  C              :    out Digit);
+
+   --[Digit_Array_Shift_Right_Digit]--------------------------------------------
+
+   procedure   Digit_Array_Shift_Right_Digit(
+                  L              : in     Digit_Array;
+                  A              : in     Digit_Shift_Amount;
+                  R              :    out Digit_Array;
+                  C               :    out Digit);
+                  
+   --[Digit_Array_Divide_And_Remainder]-----------------------------------------
+
+   procedure   Digit_Array_Divide_And_Remainder(
+                  DL             : in     Digit_Array;
+                  DR             : in     Digit_Array;
+                  Q              :    out Digit_Array;
+                  R              :    out Digit_Array);
+
+   --[Digit_Array_Divide_Digit_And_Remainder]-----------------------------------
+
+   procedure   Digit_Array_Divide_Digit_And_Remainder(
+                  DL             : in     Digit_Array;
+                  DR             : in     Digit;
+                  Q              :    out Digit_Array;
+                  R              :    out Digit);
+                  
    -----------------------------------------------------------------------------
    --[Body Declared Subprogram Bodies]------------------------------------------
    -----------------------------------------------------------------------------
@@ -430,7 +512,7 @@ package body CryptAda.Big_Naturals is
       if SD > Max_Digits then
          Raise_Exception(
             CryptAda_Overflow_Error'Identity,
-            "Exceed maximum Big_Natural");
+            "Amount could not be represented with a Big_Natural");
       end if;
       
       BN.Sig_Digits := SD;
@@ -560,7 +642,7 @@ package body CryptAda.Big_Naturals is
    is
    begin
       if X = 0 and B = 1 then
-         R := Digit_Last - B;
+         R := Digit_Last - Y;
       else
          R := X - B;
          R := R - Y;
@@ -617,6 +699,560 @@ package body CryptAda.Big_Naturals is
       R  := Lo_Digit(T mod Double_Digit(Y));
    end Div_Digits;   
 
+   --[Digit_Array Arithmetic Operations]----------------------------------------
+
+   --[Digit_Array_Add]----------------------------------------------------------
+   
+   procedure   Digit_Array_Add(
+                  L              : in     Digit_Array;
+                  R              : in     Digit_Array;
+                  Sum            :    out Digit_Array)
+   is
+      L_SD           : constant Natural := Get_Significant_Digits(L);
+      R_SD           : constant Natural := Get_Significant_Digits(R);
+      Max_SD         : constant Natural := Natural'Max(L_SD, R_SD);
+      T              : Digit_Array(1 .. Max_SD + 1) := (others => 0);
+      J              : Positive := T'First;
+      C              : Digit := 0;
+   begin
+      -- Assumes Sum'Length >= Max_SD + 1
+      
+      if Max_SD = L_SD then
+         T(1 .. L_SD) := L(L'First .. L'First + L_SD - 1);
+
+         for I in R'First .. R'First + R_SD - 1 loop
+            Add_Digits(C, T(J), R(I), T(J), C);
+            J := J + 1;
+         end loop;
+      else
+         T(1 .. R_SD) := R(R'First .. R'First + R_SD - 1);
+
+         for I in L'First .. L'First + L_SD - 1 loop
+            Add_Digits(C, T(J), L(I), T(J), C);
+            J := J + 1;
+         end loop;
+      end if;
+      
+      -- Deal with carry.
+      
+      while C > 0 and J <= T'Last loop
+         Add_Digits(T(J), C, T(J), C);
+         J := J + 1;
+      end loop;         
+      
+      -- Set Result.
+      
+      Sum := (others => 0);
+      Sum(Sum'First .. Sum'First + T'Last - 1) := T;
+   end Digit_Array_Add;
+
+   --[Digit_Array_Add_Digit]----------------------------------------------------
+   
+   procedure   Digit_Array_Add_Digit(
+                  L              : in     Digit_Array;
+                  R              : in     Digit;
+                  Sum            :    out Digit_Array)
+   is
+      L_SD           : constant Natural := Get_Significant_Digits(L);
+      T              : Digit_Array(1 .. L_SD + 1) := (others => 0);
+      I              : Positive;
+      C              : Digit := 0;
+   begin
+      T(1 .. L_SD) := L(L'First .. L'First + L_SD - 1);
+         
+      -- Add digit to least significant digit in T.
+
+      Add_Digits(T(1), R, T(1), C);
+      
+      -- Deal with carry.
+      
+      I := 2;
+      
+      while C > 0 and then I <= L_SD loop
+         Add_Digits(T(I), C, T(I), C);
+         I := I + 1;
+      end loop;
+      
+      if C /= 0 then
+         T(T'Last) := C;
+      end if;
+      
+      -- Set Result.
+      
+      Sum := (others => 0);
+      Sum(Sum'First .. Sum'First + T'Last - 1) := T;
+   end Digit_Array_Add_Digit;
+   
+   --[Digit_Array_Subtract]-----------------------------------------------------
+   
+   procedure   Digit_Array_Subtract(
+                  L              : in     Digit_Array;
+                  R              : in     Digit_Array;
+                  Subt           :    out Digit_Array)
+   is
+      L_SD           : constant Natural := Get_Significant_Digits(L);
+      R_SD           : constant Natural := Get_Significant_Digits(R);
+      T              : Digit_Array(1 .. L_SD) := L(L'First .. L'First + L_SD - 1);
+      J              : Positive := T'First;
+      B              : Digit := 0;
+   begin
+      -- Assumes L > R && Subt'Length >= L_SD.
+            
+      -- Subtract
+      
+      for I in R'First .. R'First + R_SD - 1 loop
+         Subt_Digits(T(J), R(I), B, T(J)); 
+         J := J + 1;
+      end loop;
+
+      -- Deal with borrow.
+
+      while B > 0 and J <= T'Last loop
+         Subt_Digits(T(J), 0, B, T(J));
+         J := J + 1;
+      end loop;
+      
+      -- Set result.
+      
+      Subt := (others => 0);
+      Subt(Subt'First .. Subt'First + T'Last - 1) := T;
+   end Digit_Array_Subtract;
+
+   --[Digit_Array_Subtract_Digit]-----------------------------------------------
+   
+   procedure   Digit_Array_Subtract_Digit(
+                  L              : in     Digit_Array;
+                  R              : in     Digit;
+                  Subt           :    out Digit_Array)
+   is
+      L_SD           : constant Natural := Get_Significant_Digits(L);
+      T              : Digit_Array(1 .. L_SD) := L(L'First .. L'First + L_SD - 1);
+      I              : Positive := T'First;
+      B              : Digit := 0;
+   begin
+      Subt := (others => 0);
+      
+      if L_SD = 0 then
+         if R = 0 then
+            return;
+         else
+            Raise_Exception(
+               CryptAda_Underflow_Error'Identity,
+               "Subtrahend is greater than minuend");
+         end if;
+      elsif L_SD = 1 then
+         if L(L'First) >= R then
+            Subt(Subt'First) := L(L'First) - R;
+            return;
+         else
+            Raise_Exception(
+               CryptAda_Underflow_Error'Identity,
+               "Subtrahend is greater than minuend");
+         end if;
+      end if;
+
+      -- Subtract Right from T's least significant digit.
+      
+      Subt_Digits(T(1), R, B, T(1));
+
+      -- Deal with borrow.
+
+      I := 2;
+      
+      while B > 0 and then I <= T'Last loop
+         Subt_Digits(T(I), 0, B, T(I));
+         I := I + 1;
+      end loop;
+      
+      -- Set result.
+      
+      Subt(Subt'First .. Subt'First + T'Last - 1) := T;
+   end Digit_Array_Subtract_Digit;
+   
+   --[Digit_Array_Multiply]-----------------------------------------------------
+   
+   procedure   Digit_Array_Multiply(
+                  L              : in     Digit_Array;
+                  R              : in     Digit_Array;
+                  Mult           :    out Digit_Array)
+   is
+      L_SD           : constant Natural := Get_Significant_Digits(L);
+      R_SD           : constant Natural := Get_Significant_Digits(R);
+      T              : Digit_Array(1 .. L_SD + R_SD) := (others => 0);
+      K              : Positive := T'First;      
+      C              : Digit := 0;
+      I              : Positive := L'First;
+      J              : Positive := R'First;
+   begin
+      -- Assumes Mult'Length >= (L_SD + R_SD)
+
+      -- Perform Multiplication. This is similar to the grade school method.
+      -- Traverse Left.
+      
+      for M in 1 .. L_SD loop
+         -- Initialize carry.
+         
+         C := 0;
+
+         -- Only multiply if current digit in L is greater than 0.
+
+         if L(I) > 0 then         
+            -- Perform digit multiplications with the digits in Right.
+            
+            K := M;
+
+            for N in 1 .. R_SD loop
+               Mult_Sum_Digits(L(I), R(J), T(K), C, T(K), C);
+               J := J + 1;
+               K := K + 1;
+            end loop;
+
+            -- Update product digit with the carry.
+
+            T(K) := C;
+         end if;
+         
+         I := I + 1;
+      end loop;
+      
+      -- Set result.
+      
+      Mult := (others => 0);
+      Mult(Mult'First .. Mult'First + T'Last - 1) := T;      
+   end Digit_Array_Multiply;
+
+   --[Digit_Array_Digit_Multiply]-----------------------------------------------
+
+   procedure   Digit_Array_Digit_Multiply(
+                  L              : in     Digit_Array;
+                  R              : in     Digit;
+                  Mult           :    out Digit_Array)
+   is
+      L_SD           : constant Natural := Get_Significant_Digits(L);
+      T              : Digit_Array(1 .. L_SD + 1) := (others => 0);
+      J              : Positive := T'First;
+      C              : Digit := 0;
+   begin      
+      -- Perform multiplication.
+
+      for I in L'First .. L'First + L_SD - 1 loop
+         Mult_Sum_Digits(L(I), R, T(J), C, T(J), C);
+         J := J + 1;
+      end loop;
+
+      T(J) := C;
+      
+      -- Set result.
+      
+      Mult := (others => 0);
+      Mult(Mult'First .. Mult'First + T'Last - 1) := T;      
+   end Digit_Array_Digit_Multiply;
+   
+   --[Digit_Array_Square]-------------------------------------------------------
+   
+   procedure   Digit_Array_Square(
+                  L              : in     Digit_Array;
+                  Square         :    out Digit_Array)
+   is
+      L_SD           : constant Natural := Get_Significant_Digits(L);
+      T              : Digit_Array(1 .. 2 * L_SD) := (others => 0);
+      K              : Positive := T'First;
+      I              : Positive;
+      J              : Positive;
+      C              : Digit := 0;
+   begin
+      -- Assumes Square'Length >= 2 * L_SD
+      
+      -- Step 1. Calculate product of digits of unequal index.
+
+      for M in 1 .. L_SD - 1 loop
+         C := 0;
+         I := L'First + M - 1;
+         
+         -- Only multiply if current digit is greater than 0.
+
+         if L(I) > 0 then
+
+            -- Set index for result digit.
+
+            K := 2 * M;
+
+            -- Perform digit multiplications.
+
+            for N in M + 1 .. L_SD loop
+               J := L'First + N - 1;
+               Mult_Sum_Digits(L(I), L(J), T(K), C, T(K), C);
+               K := K + 1;
+            end loop;
+
+            -- Update with the carry the next index in Product.
+
+            T(K) := C;
+         end if;
+      end loop;
+
+      -- Step 2. Multiply inner products by 2.
+
+      C := 0;
+
+      for M in 2 .. T'Last - 1 loop
+         Mult_Sum_Digits(T(M), 2, 0, C, T(M), C);
+      end loop;
+
+      -- Update Square's most significant digit with carry.
+
+      T(T'Last) := T(T'Last) + C;
+
+      -- Step 3. Compute main diagonal.
+
+      C := 0;
+      K := T'First;
+
+      for M in 1 .. L_SD loop
+         I := L'First + M - 1;
+         Mult_Sum_Digits(L(I), L(I), T(K), C, T(K), C);
+
+         -- Increment Square's next digit with the carry.
+
+         K := K + 1;
+
+         Add_Digits(T(K), C, T(K), C);
+
+         -- Increment square's index.
+
+         K := K + 1;
+      end loop;
+      
+      -- Set result.
+      
+      Square := (others => 0);
+      Square(Square'First .. Square'First + T'Last - 1) := T;                  
+   end Digit_Array_Square;
+
+   --[Digit_Array_Shift_Left_Digit]---------------------------------------------
+
+   procedure   Digit_Array_Shift_Left_Digit(
+                  L              : in     Digit_Array;
+                  A              : in     Digit_Shift_Amount;
+                  R              :    out Digit_Array;
+                  C              :    out Digit)   
+   is      
+      T              : Digit;
+      C1             : Digit := 0;
+      RS             : constant Digit_Shift_Amount := Digit_Bits - A;
+      J              : Positive := R'First;
+   begin
+      R := (others => 0);
+      
+      if A = 0 then
+         R(J .. J + L'Last - 1) := L;
+         C := 0;
+      else
+         -- Do the shifting.
+
+         for I in L'Range loop
+            T     := Shift_Left(L(I), A) or C1;
+            C1    := Shift_Right(L(I), RS);
+            R(J)  := T;
+            J     := J + 1;
+         end loop;
+
+         -- Update carry.
+
+         C := C1;
+      end if;
+   end Digit_Array_Shift_Left_Digit;
+
+   --[Digit_Array_Shift_Right_Digit]--------------------------------------------
+
+   procedure   Digit_Array_Shift_Right_Digit(
+                  L              : in     Digit_Array;
+                  A              : in     Digit_Shift_Amount;
+                  R              :    out Digit_Array;
+                  C              :    out Digit)
+   is
+      T              : Digit;
+      C1             : Digit := 0;
+      LS             : constant Digit_Shift_Amount := Digit_Bits - A;
+      J              : Positive := R'First + L'Last - 1;
+   begin
+      R := (others => 0);
+      
+      if A = 0 then
+         R(J .. J + L'Last - 1) := L;
+         C := 0;
+      else
+         -- Do the shifting.
+
+         for I in reverse L'Range loop
+            T     := Shift_Right(L(I), A) or C1;
+            C1    := Shift_Left(L(I), LS);
+            R(J)  := T;
+            J     := J - 1;
+         end loop;
+
+         -- Update carry.
+
+         C := C1;
+      end if;
+   end Digit_Array_Shift_Right_Digit;
+         
+   --[Digit_Array_Divide_And_Remainder]-----------------------------------------
+
+   procedure   Digit_Array_Divide_And_Remainder(
+                  DL             : in     Digit_Array;
+                  DR             : in     Digit_Array;
+                  Q              :    out Digit_Array;
+                  R              :    out Digit_Array)
+   is
+      DL_SD          : constant Natural := Get_Significant_Digits(DL);
+      DR_SD          : constant Natural := Get_Significant_Digits(DR);
+      S              : Digit_Shift_Amount;
+      LL             : Digit_Array(1 .. DL_SD + 1)    := (others => 0);
+      RR             : Digit_Array(1 .. DR_SD)        := (others => 0);
+      SC             : Digit;
+      T              : Digit;
+      DD             : Double_Digit;
+      QQ             : Digit_Array(1 .. DL_SD)        := (others => 0);
+      MM             : Digit_Array(1 .. DL_SD)        := (others => 0);
+      Tmp            : Digit_Array(1 .. DR_SD + 1)    := (others => 0);
+   begin
+      -- This should not happen but ...
+      
+      if DR_SD = 0 then
+         Raise_Exception(
+            CryptAda_Division_By_Zero_Error'Identity,
+            "Divisor is Zero");
+      end if;
+
+      -- This procedure implements the Knuth Algorithm D.
+      
+      -- Step 1. Normalize operands
+      --    Left shift both, dividend and divisor so that the most significant 
+      --    bit of the most significant digit of the divisor be 1.
+      --
+      --    This normalization step is, according to Knuth, necessary to make 
+      --    it easy to guess the quotient digit with accuracy in each division 
+      --    step.
+      --
+      --    We perform the same left shift in both, dividend and divisor, so
+      --    quotient will not be affected (we are multiplying both factors by
+      --    2 ** S) but remainder needs to be de-normalized in a later step.
+      --
+      --    When we left shift the dividend it is possible that we need to 
+      --    add a new significant digit to the dividend (the carry of the 
+      --    left shift).
+      --
+      --    We'll store the normalized dividend in LL and the normalized 
+      --    divisor in RR.
+      
+      S := Digit_Bits - Get_Digit_Significant_Bits(DR(DR'First + DR_SD - 1));
+      
+      if S = 0 then
+         LL(1 .. DL_SD) := DL(DL'First .. DL'First + DL_SD - 1);
+         RR             := DR(DR'First .. DR'First + DR_SD - 1);
+      else
+         Digit_Array_Shift_Left_Digit(
+            DL(DL'First .. DL'First + DL_SD - 1), 
+            S, 
+            LL(1 .. DL_SD), 
+            LL(DL_SD + 1));
+         Digit_Array_Shift_Left_Digit(
+            DR(DR'First .. DR'First + DR_SD - 1), 
+            S, 
+            RR, 
+            SC);
+      end if;
+
+      -- Step 2. Main division loop
+
+      -- Let T be the most significant digit of the normaized divisor.
+      
+      T := RR(DR_SD);
+
+      for I in reverse 1 .. 1 + DL_SD - DR_SD loop
+         -- 3.1.  Underestimate quotient digit and subtract:
+         --       If we've got a T such as T + 1 is 0, estimate is the first
+         --       significant digit of the normalized dividend.
+         --       Otherwise estimate is the quotient of the two first digits of
+         --       the normalized dividend and (T + 1).
+
+         if T = Digit_Last then
+            QQ(I)  := LL(I + DR_SD);
+         else
+            DD    := Make_Double_Digit(LL(I + DR_SD - 1), LL(I + DR_SD));
+            QQ(I) := Lo_Digit(DD / Double_Digit(T + 1));
+         end if;
+
+         -- 3.2.  Multiply estimated quotient digit by normalized divisor and
+         --       store the product in Tmp.
+      
+         Digit_Array_Digit_Multiply(RR, QQ(I), Tmp);
+
+         -- 3.3.  Subtract from divisor the result of previous multiplication.
+
+         Digit_Array_Subtract(LL(I .. I + DR_SD), Tmp, Tmp);
+         LL(I .. I + DR_SD) := Tmp;
+
+         -- 3.4.  Correct initial estimate (if necessary) increasing quotient
+         --       digit and subtracting divisor.
+
+         while ((LL(I + DR_SD) /= 0) or else (Digit_Array_Compare(LL(I .. I + DR_SD), RR(1 .. DR_SD)) /= Lower)) loop
+            QQ(I) := QQ(I) + 1;
+            Digit_Array_Subtract(LL(I .. I + DR_SD), RR(1 .. DR_SD), Tmp);
+            LL(I .. I + DR_SD) := Tmp;
+         end loop;
+      end loop;
+
+      -- 4. What we've got in LL is the remainder. We must divide it by the
+      --    factor using in normalization (2 ** S) this is performed through 
+      --    a right shift.
+
+      Digit_Array_Shift_Right_Digit(LL(1 .. DL_SD), S, MM, SC);
+
+      -- 5. Set result.
+      
+      Q := (others => 0);
+      R := (others => 0);
+      
+      Q(Q'First .. Q'First + QQ'Last - 1) := QQ;
+      R(R'First .. R'First + MM'Last - 1) := MM;
+   end Digit_Array_Divide_And_Remainder;
+
+   --[Digit_Array_Divide_Digit_And_Remainder]-----------------------------------
+
+   procedure   Digit_Array_Divide_Digit_And_Remainder(
+                  DL             : in     Digit_Array;
+                  DR             : in     Digit;
+                  Q              :    out Digit_Array;
+                  R              :    out Digit)
+   is
+      DL_SD          : constant Natural := Get_Significant_Digits(DL);
+      T              : Digit_Array(1 .. DL_SD) := (others => 0);
+      RR             : Digit := 0;
+      J              : Positive := T'Last;
+   begin
+      -- This should not happen but ...
+      
+      if DR = 0 then
+         Raise_Exception(
+            CryptAda_Division_By_Zero_Error'Identity,
+            "Divisor is 0");
+      end if;
+   
+      -- Divide.
+      
+      for I in reverse DL'First .. DL'First + DL_SD - 1 loop
+         Div_Digits(DL(I), DR, RR, T(J));
+         J := J - 1;
+      end loop;
+
+      -- Set result.
+      
+      R := RR;
+      Q(Q'First .. Q'First + T'Last - 1) := T;
+   end Digit_Array_Divide_Digit_And_Remainder;
+   
    -----------------------------------------------------------------------------
    --[Spec Declared Subprogram Bodies]------------------------------------------
    -----------------------------------------------------------------------------
@@ -641,13 +1277,11 @@ package body CryptAda.Big_Naturals is
       
       declare
          DD          : constant Positive := 1 + (From'Length / Digit_Bytes);
-         T           : Four_Bytes_Array(1 .. DD) := (others => 0);
+         T           : Digit_Array(1 .. DD) := (others => 0);
          J           : Positive := T'First;
          S           : Natural := 0;
-         SD          : Natural := 0;
-         BN          : Big_Natural := Zero;
       begin
-         -- Pack bytes into digits epending on the order, if little endian 
+         -- Pack bytes into digits depending on the order, if little endian 
          -- least significant byte is From'First, if big endian, least 
          -- significant byte is From'Last.
          
@@ -672,30 +1306,10 @@ package body CryptAda.Big_Naturals is
                end if;
             end loop;
          end if;
-            
-         -- Compute the number of significant digits.
+
+         -- Return the result.
          
-         for I in reverse T'Range loop
-            if T(I) /= 0 then
-               SD := I;
-               exit;
-            end if;
-         end loop;
-         
-         -- Check for overflow condition.
-         
-         if SD > Max_Digits then
-            Raise_Exception(
-               CryptAda_Overflow_Error'Identity,
-               "Byte array is too greater for a Big_Natural value");
-         end if;
-         
-         -- Set result and return.
-         
-         BN.Sig_Digits  := SD;
-         BN.The_Digits(1 .. SD) := T(1 .. SD);
-         
-         return BN;
+         return Digit_Array_2_Big_Natural(T);
       end;      
    end To_Big_Natural;
       
@@ -752,10 +1366,9 @@ package body CryptAda.Big_Naturals is
                   Order          : in     Byte_Order := Little_Endian)
       return   Byte_Array
    is
-      BAL            : constant Positive := 1 + (From.Sig_Digits / Digit_Bytes);
+      BAL            : constant Positive := 1 + (From.Sig_Digits * Digit_Bytes);
       BA             : Byte_Array(1 .. BAL) := (others => 0);
       J              : Positive;
-      MSB            : Positive;
    begin
       -- If From is Zero return a single zero byte array.
       
@@ -767,8 +1380,7 @@ package body CryptAda.Big_Naturals is
       -- byte order.
       
       if Order = Little_Endian then
-         MSB   := BA'First;
-         J     := 1;
+         J     := BA'First;
 
          -- Unpack digits.
          
@@ -781,16 +1393,10 @@ package body CryptAda.Big_Naturals is
          
          for I in reverse BA'Range loop
             if BA(I) /= 0 then
-               MSB := I;
-               exit;
+               return BA(1 .. I);
             end if;
          end loop;
-         
-         -- Return the byte array.
-         
-         return BA(1 .. MSB);
       else
-         MSB   := BA'Last;
          J     := BA'Last;
          
          -- Unpack digits.
@@ -804,15 +1410,14 @@ package body CryptAda.Big_Naturals is
          
          for I in BA'Range loop
             if BA(I) /= 0 then
-               MSB := I;
-               exit;
+               return BA(I .. BA'Last);
             end if;
-         end loop;
-         
-         -- Return the byte array.
-         
-         return BA(MSB .. BA'Last);
+         end loop;         
       end if;
+      
+      -- Shouldn't get that far.
+      
+      return BA(1 .. 1);
    end Get_Bytes;
 
    -----------------------------------------------------------------------------
@@ -903,21 +1508,7 @@ package body CryptAda.Big_Naturals is
       return   Boolean
    is
    begin
-      if Left.Sig_Digits > Right.Sig_Digits then
-         return True;
-      elsif Left.Sig_Digits = Right.Sig_Digits then
-         for I in reverse 1 .. Left.Sig_Digits loop
-            if Left.The_Digits(I) > Right.The_Digits(I) then
-               return True;
-            elsif Left.The_Digits(I) < Right.The_Digits(I) then
-               return False;
-            end if;
-         end loop;
-         
-         return True;
-      else
-         return False;
-      end if;
+      return not "<"(Left, Right);
    end ">=";
 
    --["<"]----------------------------------------------------------------------
@@ -953,26 +1544,90 @@ package body CryptAda.Big_Naturals is
       return   Boolean
    is
    begin
-      if Left.Sig_Digits > Right.Sig_Digits then
-         return False;
-      elsif Left.Sig_Digits = Right.Sig_Digits then
-         for I in reverse 1 .. Left.Sig_Digits loop
-            if Left.The_Digits(I) > Right.The_Digits(I) then
-               return False;
-            elsif Left.The_Digits(I) < Right.The_Digits(I) then
-               return True;
-            end if;
-         end loop;
-         
-         return True;
-      else
-         return True;
-      end if;
+      return not ">"(Left, Right);
    end "<=";
 
    -----------------------------------------------------------------------------
    --[5. Arithmetic Operations]-------------------------------------------------
    -----------------------------------------------------------------------------
+
+   --[5.1. Addition]------------------------------------------------------------
+   
+   --[Add]----------------------------------------------------------------------
+   
+   procedure   Add(
+                  Left           : in     Big_Natural;
+                  Right          : in     Big_Natural;
+                  Sum            :    out Big_Natural)
+   is
+   begin
+      -- Check if any summand is 0.
+      
+      if Left = Zero then
+         Sum := Right;
+         return;
+      end if;
+      
+      if Right = Zero then
+         Sum := Left;
+         return;
+      end if;
+
+      -- Perform addition.
+      
+      declare
+         T           : Digit_Array(1 .. 1 + Max_Digits) := (others => 0);
+      begin
+         -- Perform addition.
+         
+         Digit_Array_Add(
+            Left.The_Digits(1 .. Left.Sig_Digits),
+            Right.The_Digits(1 .. Right.Sig_Digits),
+            T);
+
+         -- Return result.
+         
+         Sum := Digit_Array_2_Big_Natural(T);
+      end;
+   end Add;
+   
+   --[Add]----------------------------------------------------------------------
+   
+   procedure   Add(
+                  Left           : in     Big_Natural;
+                  Right          : in     Digit;
+                  Sum            :    out Big_Natural)
+   is
+   begin
+      -- Check if any summand is 0.
+      
+      if Left = Zero then
+         Sum := To_Big_Natural(Right);
+         return;
+      end if;
+      
+      if Right = 0 then
+         Sum := Left;
+         return;
+      end if;
+
+      -- Perform addition.
+      
+      declare
+         T           : Digit_Array(1 .. 1 + Left.Sig_Digits) := (others => 0);
+      begin
+         -- Perform addition.
+         
+         Digit_Array_Add_Digit(
+            Left.The_Digits(1 .. Left.Sig_Digits),
+            Right,
+            T);
+
+         -- Return result.
+         
+         Sum := Digit_Array_2_Big_Natural(T);
+      end;
+   end Add;
    
    --["+"]----------------------------------------------------------------------
    
@@ -995,83 +1650,19 @@ package body CryptAda.Big_Naturals is
       -- No luck, perform addition.
       
       declare
-         Max_SD      : constant Significant_Digits := Significant_Digits'Max(Left.Sig_Digits, Right.Sig_Digits);
-         Min_SD      : constant Significant_Digits := Significant_Digits'Min(Left.Sig_Digits, Right.Sig_Digits);
-         T           : Digit_Array(1 .. 1 + Max_SD) := (others => 0);
-         C           : Digit := 0;
-         J           : Positive;
+         T           : Digit_Array(1 .. 1 + Max_Digits) := (others => 0);
       begin
-         -- Operands are not zero. Copy the longest to T and add digit by 
-         -- digit.
-
-         if Min_SD = Left.Sig_Digits then
-            T(1 .. Right.Sig_Digits) := Right.The_Digits(1 .. Right.Sig_Digits);
-         else
-            T(1 .. Left.Sig_Digits) := Left.The_Digits(1 .. Left.Sig_Digits);
-         end if;
+         -- Perform addition.
          
-         for I in 1 .. Min_SD loop
-            Add_Digits(C, Left.The_Digits(I), Right.The_Digits(I), T(I), C);
-         end loop;
+         Digit_Array_Add(
+            Left.The_Digits(1 .. Left.Sig_Digits),
+            Right.The_Digits(1 .. Right.Sig_Digits),
+            T);
 
-         -- Deal with carry.
-
-         J := Min_SD + 1;
-      
-         while C > 0 and then J <= T'Last loop
-            Add_Digits(T(J), C, T(J), C);
-            J := J + 1;
-         end loop;
-      
-         -- Check overflow condition.
-               
-         if C > 0 then
-            Raise_Exception(
-               CryptAda_Overflow_Error'Identity,
-               "Addition result could not be represented by Big_Natural");
-         end if;
-      
          -- Return result.
          
-         return Digit_Array_2_Big_Natural(T);      
+         return Digit_Array_2_Big_Natural(T);
       end;
-   end "+";
-
-   --["+"]----------------------------------------------------------------------
-
-   function    "+"(
-                  Left           : in     Digit;
-                  Right          : in     Big_Natural)
-      return   Big_Natural
-   is
-      T              : Digit_Array(1 .. Right.Sig_Digits + 1) := (others => 0);
-      C              : Digit := 0;
-   begin
-      -- Check for 0 summands.
-      
-      if Left = 0 then
-         return Right;
-      end if;
-      
-      if Right = Zero then
-         return To_Big_Natural(Left);
-      end if;
-      
-      -- Add digit to least significant digit in Right.
-
-      Add_Digits(Right.The_Digits(1), Left, T(1), C);
-      
-      -- Set remaining digits
-      
-      for I in 2 .. Right.Sig_Digits loop
-         Add_Digits(Right.The_Digits(I), C, T(I), C);
-      end loop;
-
-      T(T'Last) := C;
-      
-      -- Return result.
-      
-      return Digit_Array_2_Big_Natural(T);
    end "+";
 
    --["+"]----------------------------------------------------------------------
@@ -1082,18 +1673,54 @@ package body CryptAda.Big_Naturals is
       return   Big_Natural
    is
    begin
-      return "+"(Right, Left);
-   end "+";
+      -- Check for 0 summands.
+      
+      if Left = Zero then
+         return To_Big_Natural(Right);
+      end if;
+      
+      if Right = 0 then
+         return Left;
+      end if;
 
-   --["-"]----------------------------------------------------------------------
+      -- Perform addition.
+
+      declare
+         T           : Digit_Array(1 .. 1 + Left.Sig_Digits) := (others => 0);
+      begin
+         -- Perform addition.
+         
+         Digit_Array_Add_Digit(
+            Left.The_Digits(1 .. Left.Sig_Digits),
+            Right,
+            T);
+
+         -- Return result.
+         
+         return Digit_Array_2_Big_Natural(T);
+      end;
+   end "+";
    
-   function    "-"(
-                  Left           : in     Big_Natural;
+   --["+"]----------------------------------------------------------------------
+
+   function    "+"(
+                  Left           : in     Digit;
                   Right          : in     Big_Natural)
       return   Big_Natural
    is
-      T              : Digit_Array(1 .. Left.Sig_Digits) := (others => 0);
-      B              : Digit := 0;
+   begin
+      return "+"(Right, Left);
+   end "+";
+
+   --[5.2. Subtraction]---------------------------------------------------------
+   
+   --[Subtract]-----------------------------------------------------------------
+   
+   procedure   Subtract(
+                  Left           : in     Big_Natural;
+                  Right          : in     Big_Natural;
+                  Subt           :    out Big_Natural)
+   is
    begin
       -- If left is lower than right raise underflow.
       
@@ -1103,29 +1730,127 @@ package body CryptAda.Big_Naturals is
             "Subtrahend is greater than minuend");
       end if;
 
+      -- If Left = Right return Zero.
+      
+      if Left = Right then
+         Subt := Zero;
+         return;
+      end if;
+      
+      -- If right is 0 return left.
+      
+      if Right = Zero then
+         Subt := Left;
+         return;
+      end if;
+
+      -- Subtract.
+      
+      declare
+         T           : Digit_Array(1 .. Left.Sig_Digits) := (others => 0);
+      begin
+         -- Subtraction.
+         
+         Digit_Array_Subtract(
+            Left.The_Digits(1 .. Left.Sig_Digits),
+            Right.The_Digits(1 .. Right.Sig_Digits),
+            T);
+            
+         -- Return result.
+
+         Subt := Digit_Array_2_Big_Natural(T);
+      end;   
+   end Subtract;
+
+   --[Subtract]-----------------------------------------------------------------
+                  
+   procedure   Subtract(
+                  Left           : in     Big_Natural;
+                  Right          : in     Digit;
+                  Subt           :    out Big_Natural)
+   is
+   begin
+      -- If Subtrahend is 0 then Difference becomes Minuend.
+
+      if Right = 0 then
+         Subt := Left;
+         return;
+      end if;
+
+      -- Check for 0 minuend.
+
+      if Left = Zero then
+         Raise_Exception(
+            CryptAda_Underflow_Error'Identity,
+            "Subtrahend is greater than minuend");      
+      end if;
+
+      -- Check for underflow condition.
+
+      if Left.Sig_Digits = 1 and then Left.The_Digits(1) < Right then
+         Raise_Exception(
+            CryptAda_Underflow_Error'Identity,
+            "Subtrahend is greater than minuend");
+      end if;
+
+      -- Perform subtraction.
+      
+      declare
+         T           : Digit_Array(1 .. Left.Sig_Digits) := Left.The_Digits(1 .. Left.Sig_Digits);
+      begin
+         Digit_Array_Subtract_Digit(
+            Left.The_Digits(1 .. Left.Sig_Digits),
+            Right,
+            T);
+      
+         Subt := Digit_Array_2_Big_Natural(T);
+      end;   
+   end Subtract;
+   
+   --["-"]----------------------------------------------------------------------
+   
+   function    "-"(
+                  Left           : in     Big_Natural;
+                  Right          : in     Big_Natural)
+      return   Big_Natural
+   is
+   begin
+      -- If left is lower than right raise underflow.
+      
+      if Left < Right then
+         Raise_Exception(
+            CryptAda_Underflow_Error'Identity,
+            "Subtrahend is greater than minuend");
+      end if;
+
+      -- If Left = Right return Zero.
+      
+      if Left = Right then
+         return Zero;
+      end if;
+      
       -- If right is 0 return left.
       
       if Right = Zero then
          return Left;
       end if;
 
-      -- Copy minuend to temporary and subtract digits from subtrahend.
-
-      T := Left.The_Digits(1 .. Left.Sig_Digits);
+      -- Subtract.
       
-      for I in 1 .. Right.Sig_Digits loop
-         Subt_Digits(T(I), Right.The_Digits(I), B, T(I)); 
-      end loop;
+      declare
+         T           : Digit_Array(1 .. Left.Sig_Digits) := (others => 0);
+      begin
+         -- Subtraction.
+         
+         Digit_Array_Subtract(
+            Left.The_Digits(1 .. Left.Sig_Digits),
+            Right.The_Digits(1 .. Right.Sig_Digits),
+            T);
+            
+         -- Return result.
 
-      -- Deal with borrow.
-
-      for I in Right.Sig_Digits + 1 .. T'Last loop
-         Subt_Digits(T(I), 0, B, T(I));
-      end loop;
-
-      -- Return result.
-
-      return Digit_Array_2_Big_Natural(T);
+         return Digit_Array_2_Big_Natural(T);
+      end;
    end "-";
 
    --["-"]----------------------------------------------------------------------
@@ -1135,8 +1860,6 @@ package body CryptAda.Big_Naturals is
                   Right          : in     Digit)
       return   Big_Natural
    is
-      T              : Digit_Array(1 .. Left.Sig_Digits) := (others => 0);
-      B              : Digit := 0;
    begin
       -- If Subtrahend is 0 then Difference becomes Minuend.
 
@@ -1160,20 +1883,20 @@ package body CryptAda.Big_Naturals is
             "Subtrahend is greater than minuend");
       end if;
 
-      -- Set temporary T to Minuend and perform least significant digit subtraction.
-
-      T := Left.The_Digits(1 .. Left.Sig_Digits);      
-      Subt_Digits(T(1), Right, B, T(1));
-
-      -- Deal with borrow.
-
-      for I in 2 .. T'Last loop
-         Subt_Digits(T(I), 0, B, T(I));
-      end loop;
+      -- Perform subtraction.
       
-      -- Return result.
-
-      return Digit_Array_2_Big_Natural(T);
+      -- Perform subtraction.
+      
+      declare
+         T           : Digit_Array(1 .. Left.Sig_Digits) := Left.The_Digits(1 .. Left.Sig_Digits);
+      begin
+         Digit_Array_Subtract_Digit(
+            Left.The_Digits(1 .. Left.Sig_Digits),
+            Right,
+            T);
+      
+         return Digit_Array_2_Big_Natural(T);
+      end;   
    end "-";
 
    --["*"]----------------------------------------------------------------------
@@ -1183,9 +1906,6 @@ package body CryptAda.Big_Naturals is
                   Right          : in     Big_Natural)
       return   Big_Natural
    is
-      T              : Digit_Array(1 .. Left.Sig_Digits + Right.Sig_Digits) := (others => 0);
-      C              : Digit := 0;
-      K              : Positive := T'First;
    begin
       -- Check for 0 factors.
 
@@ -1203,36 +1923,22 @@ package body CryptAda.Big_Naturals is
          return Left;
       end if;
       
-      -- Perform Multiplication. This is similar to the grade school method.
-
-      -- Traverse Left.
+      -- Perform Multiplication.
       
-      for I in 1 .. Left.Sig_Digits loop
-         -- Initialize carry.
+      declare
+         T           : Digit_Array(1 .. Left.Sig_Digits + Right.Sig_Digits) := (others => 0);
+      begin
+         -- Multiply.
          
-         C := 0;
+         Digit_Array_Multiply(
+            Left.The_Digits(1 .. Left.Sig_Digits),
+            Right.The_Digits(1 .. Right.Sig_Digits),
+            T);
+            
+         -- Return result,
 
-         -- Only multiply if current digit in Left digit sequence is greater
-         -- than 0.
-
-         if Left.The_Digits(I) > 0 then
-         
-            -- Perform digit multiplications with the digits in Right.
-
-            for J in 1 .. Right.Sig_Digits loop
-               K := I + J - 1;
-               Mult_Sum_Digits(Left.The_Digits(I), Right.The_Digits(J), T(K), C, T(K), C);
-            end loop;
-
-            -- Update product digit with the carry.
-
-            T(I + Right.Sig_Digits) := C;
-         end if;
-      end loop;
-
-      -- Return result,
-
-      return Digit_Array_2_Big_Natural(T);
+         return Digit_Array_2_Big_Natural(T);
+      end;
    end "*";
 
    --["*"]----------------------------------------------------------------------
@@ -1242,8 +1948,6 @@ package body CryptAda.Big_Naturals is
                   Right          : in     Digit)
       return   Big_Natural
    is
-      T              : Digit_Array(1 .. 1 + Left.Sig_Digits) := (others => 0);
-      C              : Digit := 0;
    begin
       -- Check for 0 factors.
 
@@ -1263,17 +1967,22 @@ package body CryptAda.Big_Naturals is
 
       -- Perform multiplication.
 
-      for I in 1 .. Left.Sig_Digits loop
-         Mult_Sum_Digits(Left.The_Digits(I), Right, T(I), C, T(I), C);
-      end loop;
+      declare
+         T           : Digit_Array(1 .. 1 + Left.Sig_Digits) := (others => 0);
+         C           : Digit := 0;
+      begin
+         for I in 1 .. Left.Sig_Digits loop
+            Mult_Sum_Digits(Left.The_Digits(I), Right, T(I), C, T(I), C);
+         end loop;
 
-      -- Set most significant product digit
+         -- Set most significant product digit
 
-      T(Left.Sig_Digits + 1) := C;
+         T(Left.Sig_Digits + 1) := C;
 
-      -- Return result,
+         -- Return result,
 
-      return Digit_Array_2_Big_Natural(T);
+         return Digit_Array_2_Big_Natural(T);
+      end;
    end "*";
 
    --["*"]----------------------------------------------------------------------
@@ -1295,8 +2004,6 @@ package body CryptAda.Big_Naturals is
    is
       SD             : constant Natural := BN.Sig_Digits;
       T              : Digit_Array(1 .. 2 * SD) := (others => 0);
-      C              : Digit := 0;
-      K              : Positive := T'First;
    begin
       -- Check for 0 factor.
 
@@ -1310,65 +2017,11 @@ package body CryptAda.Big_Naturals is
          Mult_Digits(BN.The_Digits(1), BN.The_Digits(1), T(1), T(2));
          return Digit_Array_2_Big_Natural(T);
       end if;
-
+      
       -- Perform the squaring.
-      -- Step #1. Calculate product of digits of unequal index.
-
-      for I in 1 .. SD - 1 loop
-         C := 0;
-
-         -- Only multiply if current digit is greater than 0.
-
-         if BN.The_Digits(I) > 0 then
-
-            -- Set index for result digit.
-
-            K := 2 * I;
-
-            -- Perform digit multiplications.
-
-            for J in I + 1 .. SD loop
-               Mult_Sum_Digits(BN.The_Digits(I), BN.The_Digits(J), T(K), C, T(K), C);
-               K := K + 1;
-            end loop;
-
-            -- Update with the carry the next index in Product.
-
-            T(K) := C;
-         end if;
-      end loop;
-
-      -- Step #2. Multiply inner products by 2.
-
-      C := 0;
-
-      for I in 2 .. T'Last - 1 loop
-         Mult_Sum_Digits(T(I), 2, 0, C, T(I), C);
-      end loop;
-
-      -- Update Square's most significant digit with carry.
-
-      T(T'Last) := T(T'Last) + C;
-
-      -- Step #3. Compute main diagonal.
-
-      C := 0;
-      K := T'First;
-
-      for I in 1 .. BN.Sig_Digits loop
-         Mult_Sum_Digits(BN.The_Digits(I), BN.The_Digits(I), T(K), C, T(K), C);
-
-         -- Increment Square's next digit with the carry.
-
-         K := K + 1;
-
-         Add_Digits(T(K), C, T(K), C);
-
-         -- Increment square's index.
-
-         K := K + 1;
-      end loop;
-
+             
+      Digit_Array_Square(BN.The_Digits(1 .. SD), T);
+         
       -- Return result,
 
       return Digit_Array_2_Big_Natural(T);
@@ -1382,166 +2035,6 @@ package body CryptAda.Big_Naturals is
                   Quotient       :    out Big_Natural;
                   Remainder      :    out Big_Natural)
    is
-      --[Internal Operations]---------------------------------------------------
-      -- Next internal Digit_Sequence operations are only used in division body.
-      -- The Digit_Sequences that accept as input parameters have always the
-      -- same length.
-      --------------------------------------------------------------------------
-
-      --[Shift_Left_Digit]------------------------------------------------------
-
-      procedure   Shift_Left_Digit(
-                     Left        : in     Digit_Array;
-                     Amount      : in     Digit_Shift_Amount;
-                     Result      :    out Digit_Array;
-                     Carry       :    out Digit)
-      is
-         T              : Digit;
-         C              : Digit := 0;
-         RS             : constant Digit_Shift_Amount := Digit_Bits - Amount;
-         J              : Positive := Result'First;
-      begin
-
-         -- Do the shifting.
-
-         for I in Left'Range loop
-            T           := Shift_Left(Left(I), Amount) or C;
-            C           := Shift_Right(Left(I), RS);
-            Result(J)   := T;
-            J := J + 1;
-         end loop;
-
-         -- Update carry.
-
-         Carry := C;
-      end Shift_Left_Digit;
-      pragma Inline(Shift_Left_Digit);
-
-      --[Shift_Right_Digit]-----------------------------------------------------
-
-      procedure   Shift_Right_Digit(
-                     Left        : in     Digit_Array;
-                     Amount      : in     Digit_Shift_Amount;
-                     Result      :    out Digit_Array;
-                     Carry       :    out Digit)
-      is
-         C              : Digit := 0;
-         T              : Digit;
-         LS             : constant Digit_Shift_Amount := Digit_Bits - Amount;
-         J              : Natural := Result'Last;
-      begin
-
-         -- Do the shifting.
-
-         for I in reverse Left'Range loop
-            T         := Shift_Right(Left(I), Amount) or C;
-            C         := Shift_Left(Left(I), LS);
-            Result(J) := T;
-            J := J - 1;
-         end loop;
-
-         -- Update carry.
-
-         Carry := C;
-      end Shift_Right_Digit;
-      pragma Inline(Shift_Right_Digit);
-
-      --[Digit_Multiply]--------------------------------------------------------
-
-      procedure   Digit_Multiply(
-                     Left        : in     Digit_Array;
-                     Left_SD     : in     Natural;
-                     Right       : in     Digit;
-                     Result      :    out Digit_Array;
-                     Result_SD   :    out Natural)
-      is
-         C              : Digit := 0;
-      begin
-         Result := (others => 0);
-         
-         -- Check for 0 factors.
-
-         if Right = 0 or else Left_SD = 0 then
-            Result_SD   := 0;
-            return;
-         end if;
-
-         -- Check for 1 factor.
-
-         if Right = 1 then
-            Result(1 .. Left_SD) := Left(1 .. Left_SD);
-            Result_SD := Left_SD;
-            return;
-         end if;
-         
-         -- Perform multiplication.
-
-         for I in 1 .. Left_SD loop
-            Mult_Sum_Digits(Left(I), Right, Result(I), C, Result(I), C);
-         end loop;
-
-         -- Set most significant product digit
-
-         Result(Left_SD + 1) := C;
-
-         -- Get significant digits in product and check for overflow condition.
-         
-         Result_SD := Get_Significant_Digits(Result);
-      end Digit_Multiply;
-      pragma Inline(Digit_Multiply);
-
-      --[Internal_Subtract]-----------------------------------------------------
-      
-      procedure   Internal_Subtract(
-                     L           : in     Digit_Array;
-                     L_SD        : in     Natural;
-                     R           : in     Digit_Array;
-                     R_SD        : in     Natural;
-                     S           :    out Digit_Array;
-                     S_SD        :    out Natural)
-      is
-         T              : Digit_Array(1 .. L_SD) := (others => 0);
-         B              : Digit := 0;
-         J              : Positive;
-         K              : Positive;
-      begin
-         -- If Subtrahend is zero => Difference becomes Minuend.
-
-         if R_SD = 0 then
-            S := (others => 0);
-            S(S'First .. S'First + L_SD - 1) := L(L'First .. L'First + L_SD - 1);
-            S_SD := L_SD;
-            return;
-         end if;
-
-         -- Copy Minuend to temporary T and subtract digits from Subtrahend.
-
-         T := L(L'First .. L'First + L_SD - 1);
-         J := T'First;
-         K := R'First;
-
-         for I in 1 .. R_SD loop
-            Subt_Digits(T(J), R(K), B, T(J));
-            J := J + 1;
-            K := K + 1;
-         end loop;
-
-         -- Deal with borrow.
-
-         while B > 0 loop
-            Subt_Digits(T(J), 0, B, T(J));
-            J := J + 1;
-         end loop;
-
-         -- Set result.
-
-         S := (others => 0);
-         S_SD := Get_Significant_Digits(T);
-         S(S'First .. S'First + S_SD - 1) := T(1 .. S_SD);
-      end Internal_Subtract;
-      
-   -->>>>Begin Divide_And_Remainder<<<<-----------------------------------------
-
    begin
       -- Argument special case:
       -- Divisor  = Zero         => Raise CryptAda_Division_By_Zero_Error
@@ -1581,113 +2074,43 @@ package body CryptAda.Big_Naturals is
          return;
       end if;
       
-      if Divisor.Sig_Digits = 1 then      
-         declare
-            R        : Digit;
-         begin
-            Divide_Digit_And_Remainder(Dividend, Divisor.The_Digits(1), Quotient, R);
-            Remainder := To_Big_Natural(R);
-         end;
-
+      if Divisor.Sig_Digits = 1 then
+         if Dividend.Sig_Digits = 1 then
+            declare
+               Q     : constant Digit := Dividend.The_Digits(1) / Divisor.The_Digits(1);
+               R     : constant Digit := Dividend.The_Digits(1) mod Divisor.The_Digits(1);
+            begin
+               Quotient    := To_Big_Natural(Q);
+               Remainder   := To_Big_Natural(R);
+            end;
+         else
+            declare
+               R        : Digit;
+            begin
+               Divide_Digit_And_Remainder(Dividend, Divisor.The_Digits(1), Quotient, R);
+               Remainder := To_Big_Natural(R);
+            end;
+         end if;
+         
          return;
       end if;
 
-      -- Perform division, this is my own implementation of the Knuth Algorithm
-      -- D.
+      -- Perform division.
       
       declare
-         S              : constant Digit_Shift_Amount := Digit_Bits - Get_Digit_Significant_Bits(Divisor.The_Digits(Divisor.Sig_Digits));
-         Dend_SD        : constant Natural := Dividend.Sig_Digits;
-         Dsor_SD        : constant Natural := Divisor.Sig_Digits;
-         LL             : Digit_Array(1 .. Dend_SD + 1) := (others => 0);
-         LL_SD          : Natural;
-         RR             : Digit_Array(1 .. Dsor_SD) := (others => 0);
-         SC             : Digit;
-         T              : Digit;
-         DD             : Double_Digit;
-         Q              : Digit_Array(1 .. Dend_SD) := (others => 0);
-         R              : Digit_Array(1 .. Dend_SD) := (others => 0);
-         Tmp            : Digit_Array(1 .. Dsor_SD + 1) := (others => 0);
-         Tmp_SD         : Natural;
+         Q              : Digit_Array(1 .. Dividend.Sig_Digits) := (others => 0);
+         R              : Digit_Array(1 .. Dividend.Sig_Digits) := (others => 0);
       begin
-         -- Step 1. Normalize Operands
-         --    Left shift both, dividend and divisor so that the most 
-         --    significant bit of the most significant digit of the divisor be 
-         --    1. The shift amount is the S computed above.
-         --
-         --    This normalization step is, according to Knuth, necessary to make 
-         --    it easy to guess the quotient digit with accuracy in each 
-         --    division step.
-         --
-         --    We perform the same left shift in both, dividend and divisor, so
-         --    quotient will not be affected (we are multiplying both factors by
-         --    2 ** S) but remainder needs to be de-normalized in a later step.
-         --
-         --    When we left shift the dividend it is possible that we need to 
-         --    add a new significant digit to the dividend (the carry of the 
-         --    left shift).
-         --
-         --    We'll store the normalized dividend in LL and the normalized 
-         --    divisor in RR.
-
-         if S = 0 then
-            LL(1 .. Dend_SD) := Dividend.The_Digits(1 .. Dend_SD);
-            RR(1 .. Dsor_SD) := Divisor.The_Digits(1 .. Dsor_SD);
-         else
-            Shift_Left_Digit(Dividend.The_Digits(1 .. Dend_SD), S, LL(1 .. Dend_SD), LL(Dend_SD + 1));
-            Shift_Left_Digit(Divisor.The_Digits(1 .. Dsor_SD), S, RR, SC);
-         end if;
-
-         -- Step 2. Main division loop
-
-         T := RR(Dsor_SD);
-
-         for I in reverse 1 .. 1 + Dend_SD - Dsor_SD loop
-            -- 3.1.  Underestimate quotient digit and subtract:
-            --       If we've got a T such as T + 1 is 0, estimate is the first
-            --       significant digit of the normalized dividend.
-            --       Otherwise estimate is the quotient of the two first digits of
-            --       the normalized dividend and (T + 1).
-
-            if T = Digit_Last then
-               Q(I)  := LL(I + Dsor_SD);
-            else
-               DD    := Make_Double_Digit(LL(I + Dsor_SD - 1), LL(I + Dsor_SD));
-               Q(I)  := Lo_Digit(DD / Double_Digit(T + 1));
-            end if;
-
-            -- 3.2.  Multiply estimated quotient digit by normalized divisor and
-            --       store the product in Tmp.
+         -- Divide
          
-            Digit_Multiply(RR, Dsor_SD, Q(I), Tmp, Tmp_SD);
-
-            -- 3.3.  Subtract from divisor the result of previous multiplication.
-
-            LL_SD := Get_Significant_Digits(LL(I .. I + Dsor_SD));
-            Internal_Subtract(LL(I .. I + Dsor_SD), LL_SD, Tmp, Tmp_SD, Tmp, Tmp_SD);
-            LL(I .. I + Dsor_SD) := Tmp;
-
-            -- 3.4.  Correct initial estimate (if necessary) increasing quotient
-            --       digit and subtracting divisor.
-
-            LL_SD := Get_Significant_Digits(LL(I .. I + Dsor_SD));
-
-            while ((LL(I + Dsor_SD) /= 0) or else (Digit_Array_Compare(LL(I .. I + Dsor_SD), RR(1 .. Dsor_SD)) /= Lower)) loop
-               Q(I) := Q(I) + 1;
-               Internal_Subtract(LL(I .. I + Dsor_SD), LL_SD, RR(1 .. Dsor_SD), Dsor_SD, Tmp, Tmp_SD);
-               LL(I .. I + Dsor_SD) := Tmp;
-               LL_SD := Get_Significant_Digits(LL(I .. I + Dsor_SD));
-            end loop;
-         end loop;
-
-         -- 4. What we've got in LL is the remainder. We must divide it by the
-         --    factor using in normalization (2 ** S) this is performed through 
-         --    a right shift.
-
-         Shift_Right_Digit(LL(1 .. Dend_SD), S, R, SC);
-
+         Digit_Array_Divide_And_Remainder(
+            Dividend.The_Digits(1 .. Dividend.Sig_Digits),
+            Divisor.The_Digits(1 .. Divisor.Sig_Digits),
+            Q,
+            R);
+            
          -- Set result
-
+         
          Quotient    := Digit_Array_2_Big_Natural(Q);
          Remainder   := Digit_Array_2_Big_Natural(R);
       end;
@@ -1781,10 +2204,12 @@ package body CryptAda.Big_Naturals is
          R        : Digit := 0;
          Q        : Digit_Array(1 .. Dividend.Sig_Digits) := (others => 0);
       begin
-         for I in reverse 1 .. Dividend.Sig_Digits loop
-            Div_Digits(Dividend.The_Digits(I), Divisor, R, Q(I));
-         end loop;
-
+         Digit_Array_Divide_Digit_And_Remainder(
+            Dividend.The_Digits(1 .. Dividend.Sig_Digits),
+            Divisor,
+            Q,
+            R);
+            
          Remainder   := R;
          Quotient    := Digit_Array_2_Big_Natural(Q);
       end;

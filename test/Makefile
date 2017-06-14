@@ -53,6 +53,7 @@ CAS_DIGESTS     =  $(CA_SRC)/digests
 CAS_RANDOM      =  $(CA_SRC)/random
 CAS_CIPHERS     =  $(CA_SRC)/ciphers
 CAS_FACTORIES   =  $(CA_SRC)/factories
+CAS_BN          =  $(CA_SRC)/bn
 
 # CryptAda test source directories CTS_
 
@@ -71,6 +72,8 @@ CTS_URN_PKG     =  $(CT_SRC)/urn_pkg/
 CTS_URN_DRV     =  $(CT_SRC)/urn_drv/
 CTS_UBC_PKG     =  $(CT_SRC)/ubc_pkg/
 CTS_UBC_DRV     =  $(CT_SRC)/ubc_drv/
+CTS_UBN_PKG     =  $(CT_SRC)/ubn_pkg/
+CTS_UBN_DRV     =  $(CT_SRC)/ubn_drv/
 
 CTS_TDI_PKG     =  $(CT_SRC)/tdi_pkg/
 CTS_TDI_DRV     =  $(CT_SRC)/tdi_drv/
@@ -83,6 +86,7 @@ CTB_UENC        = $(CT_BIN)/u_enc
 CTB_UDIG        = $(CT_BIN)/u_dig
 CTB_URND        = $(CT_BIN)/u_rnd
 CTB_UBC         = $(CT_BIN)/u_bc
+CTB_UBN         = $(CT_BIN)/u_bn
 
 CTB_TDIG        = $(CT_BIN)/t_dig
 
@@ -96,6 +100,7 @@ IDIR_UPR    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UPR_PKG) -I$(CAS_3PARTY) -I$(
 IDIR_UEN    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UEN_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_ENCODERS) -I$(CAS_FACTORIES)
 IDIR_UDI    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UDI_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_ENCODERS) -I$(CAS_FACTORIES) -I$(CAS_DIGESTS)
 IDIR_URN    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_URN_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_ENCODERS) -I$(CAS_FACTORIES) -I$(CAS_DIGESTS) -I$(CAS_RANDOM)
+IDIR_UBN    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UBN_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_ENCODERS) -I$(CAS_FACTORIES) -I$(CAS_DIGESTS) -I$(CAS_RANDOM) -I$(CAS_BN)
 IDIR_UBC    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_UBC_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_ENCODERS) -I$(CAS_FACTORIES) -I$(CAS_DIGESTS) -I$(CAS_RANDOM) -I$(CAS_CIPHERS)
 
 IDIR_TDI    = -I$(CTS_BASE) -I$(CTS_UTILS) -I$(CTS_TDI_PKG) -I$(CAS_3PARTY) -I$(CAS_BASE) -I$(CAS_NAMES) -I$(CAS_PRAGMA) -I$(CAS_UTILS) -I$(CAS_ENCODERS) -I$(CAS_FACTORIES) -I$(CAS_DIGESTS)
@@ -167,7 +172,13 @@ U_BC        =   $(CTB_UBC)/ut_keys.exe \
                 $(CTB_UBC)/ut_idea.exe \
                 $(CTB_UBC)/ut_cast_128.exe \
                 $(CTB_UBC)/ut_twofish.exe \
-                $(CTB_UBC)/ut_rc4.exe                 
+                $(CTB_UBC)/ut_rc4.exe        
+
+U_BN        =   $(CTB_UBN)/ut_bn_test.exe \
+                $(CTB_UBN)/ut_bn_basic.exe \
+                $(CTB_UBN)/ut_bn_conv.exe \
+                $(CTB_UBN)/ut_bn_add.exe \
+                $(CTB_UBN)/ut_bn_subt.exe 
                 
 T_DIG       =   $(CTB_TDIG)/tt_md2.exe \
                 $(CTB_TDIG)/tt_md4.exe \
@@ -426,7 +437,29 @@ $(CTB_UBC)/ut_twofish.exe: $(CTS_UBC_DRV)ut_twofish.adb
 $(CTB_UBC)/ut_rc4.exe: $(CTS_UBC_DRV)ut_rc4.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UBC) $(ADAFLAGS) -o $@ $<
-        
+
+# Big_Naturals unit test drivers
+
+$(CTB_UBN)/ut_bn_test.exe: $(CTS_UBN_DRV)ut_bn_test.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBN) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBN)/ut_bn_basic.exe: $(CTS_UBN_DRV)ut_bn_basic.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBN) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBN)/ut_bn_conv.exe: $(CTS_UBN_DRV)ut_bn_conv.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBN) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBN)/ut_bn_add.exe: $(CTS_UBN_DRV)ut_bn_add.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBN) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBN)/ut_bn_subt.exe: $(CTS_UBN_DRV)ut_bn_subt.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBN) $(ADAFLAGS) -o $@ $<
+    
 #>>>[Building time trials Drivers]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 # Digests time trials
@@ -527,7 +560,7 @@ $(CTB_TDIG)/tt_whirlpool.exe: $(CTS_TDI_DRV)tt_whirlpool.adb
 
 all: unit time
 
-unit: $(U_UTILS) $(U_PRAG) $(U_ENC) $(U_DIG) $(U_RND) $(U_BC)
+unit: $(U_UTILS) $(U_PRAG) $(U_ENC) $(U_DIG) $(U_RND) $(U_BC) $(U_BN)
 
 time: $(T_DIG)
 
@@ -541,11 +574,12 @@ clean:
 	$(DELCMD) $(CTB_UDIG)/*.exe
 	$(DELCMD) $(CTB_URND)/*.exe
 	$(DELCMD) $(CTB_UBC)/*.exe
+	$(DELCMD) $(CTB_UBN)/*.exe
 	$(DELCMD) $(CTB_TDIG)/*.exe
 
 run: r_unit r_time
 
-r_unit: r_utils r_prag r_enc r_dig r_rnd r_bc
+r_unit: r_utils r_prag r_enc r_dig r_rnd r_bc r_bn
 
 r_utils: $(U_UTILS)
 	for testdriver in $(basename $(notdir $^)); do \
@@ -581,6 +615,12 @@ r_bc: $(U_BC)
 	for testdriver in $(basename $(notdir $^)); do \
 		echo Running block ciphers test driver: $$testdriver ... ; \
 		$(CTB_UBC)/$$testdriver.exe > $(CT_RES)/$$testdriver.txt ;\
+	done
+
+r_bn: $(U_BN)
+	for testdriver in $(basename $(notdir $^)); do \
+		echo Running block ciphers test driver: $$testdriver ... ; \
+		$(CTB_UBN)/$$testdriver.exe > $(CT_RES)/$$testdriver.txt ;\
 	done
     
 r_time: r_t_dig

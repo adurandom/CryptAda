@@ -1,0 +1,295 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.2.a (2017/05/30)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.BN_Basic
+Description              : Unit test driver for CryptAda.Big_Naturals basic functionality.
+Started                  : 2017/06/14 - 09:04:10
+================================================================================
+[I] This test driver will validate basic (non-arithmetic) functionality of CryptAda.Big_Naturals.
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Big_Natural Constants
+Started         : 2017/06/14 - 09:04:10
+--------------------------------------------------------------------------------
+[I] Viewing declared package constants
+    Digit_Bits:  32
+    Max_Bits  :  1024
+[I] Zero:
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  0
+Significant Bits     :  0
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+[I] One:
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  1
+Significant Bits     :  1
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001 
+[I] Two:
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  1
+Significant Bits     :  2
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000002 
+[I] Last:
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  32
+Significant Bits     :  1024
+The number (from most to least significant digit):
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/06/14 - 09:04:10
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Getting significant digits
+Started         : 2017/06/14 - 09:04:10
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Get_Significant_Digits()
+[I] Significant digits of Zero
+Expected:  0
+Obtained:  0
+Values match
+[I] Significant digits of One
+Expected:  1
+Obtained:  1
+Values match
+[I] Significant digits of Two
+Expected:  1
+Obtained:  1
+Values match
+[I] Significant digits of a test big natural: 
+[I] Test BN
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  5
+Significant Bits     :  129
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000001 00000001 00000001 00000001 00000001 
+Expected:  5
+Obtained:  5
+Values match
+[I] Significant digits of Last
+Expected:  32
+Obtained:  32
+Values match
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/06/14 - 09:04:10
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Computing significant bits
+Started         : 2017/06/14 - 09:04:10
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Get_Significant_Bits()
+[I] Significant bits of Zero
+Expected:  0
+Obtained:  0
+Values match
+[I] Significant bits of One
+Expected:  1
+Obtained:  1
+Values match
+[I] Significant bits of Two
+Expected:  2
+Obtained:  2
+Values match
+[I] Significant bits of test big natural:
+[I] Test BN
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  5
+Significant Bits     :  129
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000001 00000001 00000001 00000001 00000001 
+Expected:  129
+Obtained:  129
+Values match
+[I] Significant bits of Last
+Expected:  1024
+Obtained:  1024
+Values match
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/06/14 - 09:04:10
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : Basic comparison
+Started         : 2017/06/14 - 09:04:10
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- "="
+- ">"
+- ">="
+- "<"
+- "<="
+[I] 1. 0 = 0
+True => Ok
+[I] 2. 0 /= 0
+False => Ok
+[I] 3. 0 = 1
+False => Ok
+[I] 4. 0 /= 1
+True => Ok
+[I] 5. 1 > 0
+True => Ok
+[I] 6. 1 > 1
+False => Ok
+[I] 7. 0 > 1
+False => Ok
+[I] 8. 1 >= 0
+True => Ok
+[I] 9. 1 >= 1
+True => Ok
+[I] 10. 0 >= 1
+False => Ok
+[I] 11. 1 < 0
+False => Ok
+[I] 12. 1 < 1
+False => Ok
+[I] 13. 0 < 1
+True => Ok
+[I] 14. 1 <= 0
+False => Ok
+[I] 15. 1 <= 1
+True => Ok
+[I] 16. 0 <= 1
+True => Ok
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/06/14 - 09:04:10
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 5
+Description     : Advanced comparison
+Started         : 2017/06/14 - 09:04:10
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+[I] Subprograms tested:
+- "="
+- ">"
+- ">="
+- "<"
+- "<="
+[I] Comparing two Big_Naturals with different significant digits: 
+[I] A :
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  10
+Significant Bits     :  319
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 5BE06EA3 30CA7E48 
+CB7C6989 3E7F6112 C7D9589D 754CF4E2 BCEDD35C 487A8C6C 0B8C1BE7 416F8150 
+[I] C :
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  7
+Significant Bits     :  223
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 57095C60 60613094 66EE1AD3 7721CF67 5AB1E3AE 7CDEE87F 1F339A21 
+[I] A = A is: TRUE
+[I] A /= A is: FALSE
+[I] A = C is: FALSE
+[I] A /= C is: TRUE
+[I] A > A is: FALSE
+[I] A > C is: TRUE
+[I] A >= A is: TRUE
+[I] A >= C is: TRUE
+[I] A < A is: FALSE
+[I] A < C is: FALSE
+[I] A <= A is: TRUE
+[I] A <= C is: FALSE
+[I] Comparing two Big_Naturals with equal significant digits: 
+[I] C :
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  7
+Significant Bits     :  223
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 57095C60 60613094 66EE1AD3 7721CF67 5AB1E3AE 7CDEE87F 1F339A21 
+[I] D :
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  7
+Significant Bits     :  222
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 3F38EA22 18440CDE 2FF03AD0 87C8DE3A 5345C145 7180D141 EAD35B83 
+[I] C = C is: TRUE
+[I] C /= C is: FALSE
+[I] C = D is: FALSE
+[I] C /= D is: TRUE
+[I] C > C is: FALSE
+[I] C > D is: TRUE
+[I] C >= C is: TRUE
+[I] C >= D is: TRUE
+[I] C < C is: FALSE
+[I] C < D is: FALSE
+[I] C <= C is: TRUE
+[I] C <= D is: FALSE
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 5
+Test Case Result: PASSED
+Finished        : 2017/06/14 - 09:04:10
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.BN_Basic
+Finished                 : 2017/06/14 - 09:04:10
+================================================================================

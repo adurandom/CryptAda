@@ -1,0 +1,166 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.2.a (2017/05/30)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.BN_Conv
+Description              : Unit test driver for CryptAda.Big_Naturals conversion functionality.
+Started                  : 2017/06/14 - 09:04:10
+================================================================================
+[I] This test driver will validate conversion from/to external representations to/from Big_Natural values
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Testing converting To/From digit sequences
+Started         : 2017/06/14 - 09:04:10
+--------------------------------------------------------------------------------
+[I] Interfaces exercised:
+    - To_Big_Natural(Digit_Sequence)
+    - Get_Digit_Sequence()
+[I] Performing  100000 iterations. In each iteration: 
+    a. Create a random Big_Natural
+    b. Get the digit sequence
+    c. Convert back to Big_Natural
+    Both Big_Naturals must be equal
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/06/14 - 09:04:10
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Testing converting To/From Byte_Arrays
+Started         : 2017/06/14 - 09:04:10
+--------------------------------------------------------------------------------
+[I] Interfaces exercised:
+    - To_Big_Natural(Byte_Array, Order)
+    - Get_Bytes()
+[I] To_Big_Natural raises CryptAda_Overflow_Error if the Byte_Array could not be represented with a Big_Natural value
+[I] Trying to convert Byte_Array:
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 
+16#01#
+[I] Caught CryptAda_Overflow_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_OVERFLOW_ERROR"
+Message  : "Amount could not be represented with a Big_Natural"
+[I] Now converting a valid array ...
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 
+16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#, 16#01#
+[I] Obtained Big_Natural
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  32
+Significant Bits     :  1017
+The number (from most to least significant digit):
+01010101 01010101 01010101 01010101 01010101 01010101 01010101 01010101 
+01010101 01010101 01010101 01010101 01010101 01010101 01010101 01010101 
+01010101 01010101 01010101 01010101 01010101 01010101 01010101 01010101 
+01010101 01010101 01010101 01010101 01010101 01010101 01010101 01010101 
+[I] Converting a 0 length Byte_Array will result in Zero Big_Natural
+
+[I] Obtained Big_Natural
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  0
+Significant Bits     :  0
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+[I] Dealing with endianess
+Using Byte_Array: 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#00#
+[I] Little_Endian obtained Big_Natural
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  3
+Significant Bits     :  68
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000008 07060504 03020100 
+[I] Big_Endian obtained Big_Natural
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  3
+Significant Bits     :  65
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000001 02030405 06070800 
+[I] Getting the bytes. Unsignificant bytes, in each ordering, will be lost
+Byte_Array Little_Endian: 
+16#00#, 16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#
+Byte_Array Big_Endian: 
+16#01#, 16#02#, 16#03#, 16#04#, 16#05#, 16#06#, 16#07#, 16#08#, 16#00#
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/06/14 - 09:04:10
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Converting from digits
+Started         : 2017/06/14 - 09:04:10
+--------------------------------------------------------------------------------
+[I] Interfaces exercised:
+    - To_Big_Natural(Digit)
+    - Get_Digit_Sequence()
+[I] Performing  100000 iterations. In each iteration: 
+    a. Create a random Digit
+    b. Calling To_Big_Natural
+    c. Get the digit sequence
+    d. Check that the least significant digit of the digit sequence is equal to the random digit
+    Both Big_Naturals must be equal
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/06/14 - 09:04:10
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.BN_Conv
+Finished                 : 2017/06/14 - 09:04:10
+================================================================================
