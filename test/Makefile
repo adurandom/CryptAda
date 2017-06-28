@@ -178,7 +178,9 @@ U_BN        =   $(CTB_UBN)/ut_bn_test.exe \
                 $(CTB_UBN)/ut_bn_basic.exe \
                 $(CTB_UBN)/ut_bn_conv.exe \
                 $(CTB_UBN)/ut_bn_add.exe \
-                $(CTB_UBN)/ut_bn_subt.exe 
+                $(CTB_UBN)/ut_bn_subt.exe \
+                $(CTB_UBN)/ut_bn_mult.exe \
+                $(CTB_UBN)/ut_bn_div.exe
                 
 T_DIG       =   $(CTB_TDIG)/tt_md2.exe \
                 $(CTB_TDIG)/tt_md4.exe \
@@ -459,7 +461,15 @@ $(CTB_UBN)/ut_bn_add.exe: $(CTS_UBN_DRV)ut_bn_add.adb
 $(CTB_UBN)/ut_bn_subt.exe: $(CTS_UBN_DRV)ut_bn_subt.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UBN) $(ADAFLAGS) -o $@ $<
-    
+
+$(CTB_UBN)/ut_bn_mult.exe: $(CTS_UBN_DRV)ut_bn_mult.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBN) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBN)/ut_bn_div.exe: $(CTS_UBN_DRV)ut_bn_div.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBN) $(ADAFLAGS) -o $@ $<
+        
 #>>>[Building time trials Drivers]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 # Digests time trials

@@ -1,0 +1,1114 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.2.a (2017/05/30)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.BN_Mult
+Description              : Unit test driver for CryptAda.Big_Naturals multiplication functionality.
+Started                  : 2017/06/17 - 08:00:39
+================================================================================
+[I] This test driver will validate Big_Natural multiplication
+Next elements will be tested:
+    - Multiply(Big_Natural, Big_Natural, Big_Natural)
+    - Multiply(Big_Natural, Digit, Big_Natural)
+    - "*"(Big_Natural, Big_Natural)
+    - "*"(Big_Natural, Digit)
+    - "*"(Digit, Big_Natural)
+    - Square(Big_Natural, Big_Natural)
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Testing validity of Big_Natural multiplication by using RSA Numbers
+Started         : 2017/06/17 - 08:00:39
+--------------------------------------------------------------------------------
+[I] RSA Numbers obtained from: https://en.wikipedia.org/wiki/RSA_numbers
+[I] Test:  1, comment: RSA 100 decimal digits (330 bits)
+[I] Subprogram Multiply
+[I] First factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  6
+Significant Bits     :  165
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000019 FBD41D69 AA3D8600 9A967DB3 379C63CD 501F24F7 
+[I] Second factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  6
+Significant Bits     :  165
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 0000001B 6F141F98 EEB619BC 03602201 60A5F75E A07CDF1D 
+[I] Expected result: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  11
+Significant Bits     :  330
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 000002C8 D59AF47C 81AB3725 
+B472BE41 7E3BF7AB 85439AF7 26ED3DFD F66489D1 55DC0B77 1C7A50EF 7C5E58FB 
+[I] Obtained value: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  11
+Significant Bits     :  330
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 000002C8 D59AF47C 81AB3725 
+B472BE41 7E3BF7AB 85439AF7 26ED3DFD F66489D1 55DC0B77 1C7A50EF 7C5E58FB 
+[I] Results match
+[I] Operator "*"
+[I] First factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  6
+Significant Bits     :  165
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000019 FBD41D69 AA3D8600 9A967DB3 379C63CD 501F24F7 
+[I] Second factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  6
+Significant Bits     :  165
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 0000001B 6F141F98 EEB619BC 03602201 60A5F75E A07CDF1D 
+[I] Expected result: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  11
+Significant Bits     :  330
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 000002C8 D59AF47C 81AB3725 
+B472BE41 7E3BF7AB 85439AF7 26ED3DFD F66489D1 55DC0B77 1C7A50EF 7C5E58FB 
+[I] Obtained value: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  11
+Significant Bits     :  330
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 000002C8 D59AF47C 81AB3725 
+B472BE41 7E3BF7AB 85439AF7 26ED3DFD F66489D1 55DC0B77 1C7A50EF 7C5E58FB 
+[I] Results match
+[I] Test:  2, comment: RSA 110 decimal digits (364 bits)
+[I] Subprogram Multiply
+[I] First factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  6
+Significant Bits     :  182
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 003FEBCA 8101DF11 AC67AFB5 42E1A814 060D859A 41071F37 
+[I] Second factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  6
+Significant Bits     :  182
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 003D0A19 AC34BC48 3C5475A5 2B9A1F59 CD5C5CFD B54315BD 
+[I] Expected result: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  12
+Significant Bits     :  364
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000F3D B4DFACD9 CA1D1C77 CDA2C23E 
+8826C929 130886E2 FFFA6E21 271CA6F3 E2A5A57D E621EEC5 B14FF581 A6368E9B 
+[I] Obtained value: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  12
+Significant Bits     :  364
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000F3D B4DFACD9 CA1D1C77 CDA2C23E 
+8826C929 130886E2 FFFA6E21 271CA6F3 E2A5A57D E621EEC5 B14FF581 A6368E9B 
+[I] Results match
+[I] Operator "*"
+[I] First factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  6
+Significant Bits     :  182
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 003FEBCA 8101DF11 AC67AFB5 42E1A814 060D859A 41071F37 
+[I] Second factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  6
+Significant Bits     :  182
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 003D0A19 AC34BC48 3C5475A5 2B9A1F59 CD5C5CFD B54315BD 
+[I] Expected result: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  12
+Significant Bits     :  364
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000F3D B4DFACD9 CA1D1C77 CDA2C23E 
+8826C929 130886E2 FFFA6E21 271CA6F3 E2A5A57D E621EEC5 B14FF581 A6368E9B 
+[I] Obtained value: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  12
+Significant Bits     :  364
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000F3D B4DFACD9 CA1D1C77 CDA2C23E 
+8826C929 130886E2 FFFA6E21 271CA6F3 E2A5A57D E621EEC5 B14FF581 A6368E9B 
+[I] Results match
+[I] Test:  3, comment: RSA 120 decimal digits (397 bits)
+[I] Subprogram Multiply
+[I] First factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  7
+Significant Bits     :  198
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000034 28FF7607 3161F57D F3E24286 AB153158 C9BEBD62 2D667523 
+[I] Second factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  7
+Significant Bits     :  199
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 0000006E 74B334A7 AFE5EB24 BC33197D DF8FE4C1 9811829D 875BCEF5 
+[I] Expected result: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  13
+Significant Bits     :  397
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00001681 64DBDDB0 7AFE12E5 BE8CABEC FC694EFF 
+9643D51F 533915EE 55B21769 7CC78256 503276EE 00AF4DFE 166C0725 FDC1447F 
+[I] Obtained value: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  13
+Significant Bits     :  397
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00001681 64DBDDB0 7AFE12E5 BE8CABEC FC694EFF 
+9643D51F 533915EE 55B21769 7CC78256 503276EE 00AF4DFE 166C0725 FDC1447F 
+[I] Results match
+[I] Operator "*"
+[I] First factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  7
+Significant Bits     :  198
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000034 28FF7607 3161F57D F3E24286 AB153158 C9BEBD62 2D667523 
+[I] Second factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  7
+Significant Bits     :  199
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 0000006E 74B334A7 AFE5EB24 BC33197D DF8FE4C1 9811829D 875BCEF5 
+[I] Expected result: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  13
+Significant Bits     :  397
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00001681 64DBDDB0 7AFE12E5 BE8CABEC FC694EFF 
+9643D51F 533915EE 55B21769 7CC78256 503276EE 00AF4DFE 166C0725 FDC1447F 
+[I] Obtained value: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  13
+Significant Bits     :  397
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00001681 64DBDDB0 7AFE12E5 BE8CABEC FC694EFF 
+9643D51F 533915EE 55B21769 7CC78256 503276EE 00AF4DFE 166C0725 FDC1447F 
+[I] Results match
+[I] Test:  4, comment: RSA 129 decimal digits (426 bits)
+[I] Subprogram Multiply
+[I] First factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  7
+Significant Bits     :  212
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00087C29 6ED480F9 AB17885D ECD31197 D617779C 0DAC70C3 234996E1 
+[I] Second factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  7
+Significant Bits     :  215
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 004FA848 12157119 ACC8ECCA 98C404B2 E5EE24CE 18F60EA8 18091895 
+[I] Expected result: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  14
+Significant Bits     :  426
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 000002A3 E4A7E967 464D174F 174C2825 1D97BD37 5C607ACE 
+8FAE4156 30B45733 C2259D2A FC68DD6F 447AC5BA FB686CA5 A4DC6245 D5E2E8F5 
+[I] Obtained value: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  14
+Significant Bits     :  426
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 000002A3 E4A7E967 464D174F 174C2825 1D97BD37 5C607ACE 
+8FAE4156 30B45733 C2259D2A FC68DD6F 447AC5BA FB686CA5 A4DC6245 D5E2E8F5 
+[I] Results match
+[I] Operator "*"
+[I] First factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  7
+Significant Bits     :  212
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00087C29 6ED480F9 AB17885D ECD31197 D617779C 0DAC70C3 234996E1 
+[I] Second factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  7
+Significant Bits     :  215
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 004FA848 12157119 ACC8ECCA 98C404B2 E5EE24CE 18F60EA8 18091895 
+[I] Expected result: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  14
+Significant Bits     :  426
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 000002A3 E4A7E967 464D174F 174C2825 1D97BD37 5C607ACE 
+8FAE4156 30B45733 C2259D2A FC68DD6F 447AC5BA FB686CA5 A4DC6245 D5E2E8F5 
+[I] Obtained value: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  14
+Significant Bits     :  426
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 000002A3 E4A7E967 464D174F 174C2825 1D97BD37 5C607ACE 
+8FAE4156 30B45733 C2259D2A FC68DD6F 447AC5BA FB686CA5 A4DC6245 D5E2E8F5 
+[I] Results match
+[I] Test:  5, comment: RSA 130 decimal digits (430 bits)
+[I] Subprogram Multiply
+[I] First factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  7
+Significant Bits     :  215
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 006078A8 78F11E05 E3085333 FF1B5B29 C99AEFC2 1420A6C2 87DC86FB 
+[I] Second factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  7
+Significant Bits     :  215
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 006EB030 25AC30BE E4B23E5B AB9A3EC1 3457E80D 83C3860B CFA375F7 
+[I] Expected result: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  14
+Significant Bits     :  430
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 000029B6 3D7C9CAB 219CA873 7A1449BC 8FC7FB00 37DC04EF 
+40868B48 75B1BEA3 E0D9B992 F9E86798 AC66E9A7 0D21E55B 58C1CF20 C647F32D 
+[I] Obtained value: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  14
+Significant Bits     :  430
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 000029B6 3D7C9CAB 219CA873 7A1449BC 8FC7FB00 37DC04EF 
+40868B48 75B1BEA3 E0D9B992 F9E86798 AC66E9A7 0D21E55B 58C1CF20 C647F32D 
+[I] Results match
+[I] Operator "*"
+[I] First factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  7
+Significant Bits     :  215
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 006078A8 78F11E05 E3085333 FF1B5B29 C99AEFC2 1420A6C2 87DC86FB 
+[I] Second factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  7
+Significant Bits     :  215
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 006EB030 25AC30BE E4B23E5B AB9A3EC1 3457E80D 83C3860B CFA375F7 
+[I] Expected result: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  14
+Significant Bits     :  430
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 000029B6 3D7C9CAB 219CA873 7A1449BC 8FC7FB00 37DC04EF 
+40868B48 75B1BEA3 E0D9B992 F9E86798 AC66E9A7 0D21E55B 58C1CF20 C647F32D 
+[I] Obtained value: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  14
+Significant Bits     :  430
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 000029B6 3D7C9CAB 219CA873 7A1449BC 8FC7FB00 37DC04EF 
+40868B48 75B1BEA3 E0D9B992 F9E86798 AC66E9A7 0D21E55B 58C1CF20 C647F32D 
+[I] Results match
+[I] Test:  6, comment: RSA 140 decimal digits (463 bits)
+[I] Subprogram Multiply
+[I] First factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  8
+Significant Bits     :  231
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+0000007E 10C064DD 27625BD1 1547EF43 E5008922 8A4F116D A694D9C4 CD851717 
+[I] Second factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  8
+Significant Bits     :  232
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+000000E8 5A2322FA 56807579 67384160 2492CF7B AE2C24B2 7021853D D38CA4C1 
+[I] Expected result: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  15
+Significant Bits     :  463
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 0000726B 918C8FAF BD62E6EE 45CA374F 5A1428F3 47403944 D0AADD54 
+021CC36F 1556263F A6B26414 D0C520E5 6C6B9ABE 3FAB5031 666BCB53 C9B52457 
+[I] Obtained value: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  15
+Significant Bits     :  463
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 0000726B 918C8FAF BD62E6EE 45CA374F 5A1428F3 47403944 D0AADD54 
+021CC36F 1556263F A6B26414 D0C520E5 6C6B9ABE 3FAB5031 666BCB53 C9B52457 
+[I] Results match
+[I] Operator "*"
+[I] First factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  8
+Significant Bits     :  231
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+0000007E 10C064DD 27625BD1 1547EF43 E5008922 8A4F116D A694D9C4 CD851717 
+[I] Second factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  8
+Significant Bits     :  232
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+000000E8 5A2322FA 56807579 67384160 2492CF7B AE2C24B2 7021853D D38CA4C1 
+[I] Expected result: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  15
+Significant Bits     :  463
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 0000726B 918C8FAF BD62E6EE 45CA374F 5A1428F3 47403944 D0AADD54 
+021CC36F 1556263F A6B26414 D0C520E5 6C6B9ABE 3FAB5031 666BCB53 C9B52457 
+[I] Obtained value: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  15
+Significant Bits     :  463
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 0000726B 918C8FAF BD62E6EE 45CA374F 5A1428F3 47403944 D0AADD54 
+021CC36F 1556263F A6B26414 D0C520E5 6C6B9ABE 3FAB5031 666BCB53 C9B52457 
+[I] Results match
+[I] Test:  7, comment: RSA 150 decimal digits (496 bits)
+[I] Subprogram Multiply
+[I] First factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  8
+Significant Bits     :  248
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00C4F773 654339B2 6C429FDC E5ADA9D5 7D75C22C 02C59945 2C616859 FC5EEDDD 
+[I] Second factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  8
+Significant Bits     :  248
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00FC3A49 907A441B D5CF264C 6ACEBA57 F9D03316 8771AA1F 55A22F33 5C041807 
+[I] Expected result: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  16
+Significant Bits     :  496
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+0000C210 6E418C49 23F9C5D1 4B17DA64 FF3E0664 38E94025 F36DB001 D3A7C5BA 
+4DFE0232 C54AA1FB 20542BF3 E84833E8 812078AA A11B7825 EBFB4F1C F059390B 
+[I] Obtained value: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  16
+Significant Bits     :  496
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+0000C210 6E418C49 23F9C5D1 4B17DA64 FF3E0664 38E94025 F36DB001 D3A7C5BA 
+4DFE0232 C54AA1FB 20542BF3 E84833E8 812078AA A11B7825 EBFB4F1C F059390B 
+[I] Results match
+[I] Operator "*"
+[I] First factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  8
+Significant Bits     :  248
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00C4F773 654339B2 6C429FDC E5ADA9D5 7D75C22C 02C59945 2C616859 FC5EEDDD 
+[I] Second factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  8
+Significant Bits     :  248
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00FC3A49 907A441B D5CF264C 6ACEBA57 F9D03316 8771AA1F 55A22F33 5C041807 
+[I] Expected result: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  16
+Significant Bits     :  496
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+0000C210 6E418C49 23F9C5D1 4B17DA64 FF3E0664 38E94025 F36DB001 D3A7C5BA 
+4DFE0232 C54AA1FB 20542BF3 E84833E8 812078AA A11B7825 EBFB4F1C F059390B 
+[I] Obtained value: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  16
+Significant Bits     :  496
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+0000C210 6E418C49 23F9C5D1 4B17DA64 FF3E0664 38E94025 F36DB001 D3A7C5BA 
+4DFE0232 C54AA1FB 20542BF3 E84833E8 812078AA A11B7825 EBFB4F1C F059390B 
+[I] Results match
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/06/17 - 08:00:39
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : Testing validity of Big_Natural, Digit multiplication
+Started         : 2017/06/17 - 08:00:39
+--------------------------------------------------------------------------------
+[I] Checking results against Big_Natural multiplication
+Performing  100000 iterations.
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/06/17 - 08:00:39
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Testing null element (1)
+Started         : 2017/06/17 - 08:00:39
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Multiply(Big_Natural, Big_Natural, Big_Natural)
+- "*"(Big_Natural, Big_Natural)
+Performing  100000 iterations.
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/06/17 - 08:00:39
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : Testing null element (2)
+Started         : 2017/06/17 - 08:00:39
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Multiply(Big_Natural, Digit, Big_Natural)
+- "*"(Big_Natural, Digit)
+[I] Multiplying by 0 digit
+Performing  100000 iterations.
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Multiplying Zero Big_Natural by random digit
+Performing  100000 iterations.
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/06/17 - 08:00:39
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 5
+Description     : Testing multiplicative identity (1)
+Started         : 2017/06/17 - 08:00:39
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Multiply(Big_Natural, Big_Natural, Big_Natural)
+- "*"(Big_Natural, Big_Natural)
+Performing  100000 iterations.
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 5
+Test Case Result: PASSED
+Finished        : 2017/06/17 - 08:00:39
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 6
+Description     : Testing multiplicative identity (2)
+Started         : 2017/06/17 - 08:00:39
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Multiply(Big_Natural, Digit, Big_Natural)
+- "*"(Big_Natural, Digit)
+[I] Multiplying by 1 digit
+Performing  100000 iterations.
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Multiplying One Big_Natural by random digit
+Performing  100000 iterations.
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 6
+Test Case Result: PASSED
+Finished        : 2017/06/17 - 08:00:39
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 7
+Description     : Testing conmutative property (1)
+Started         : 2017/06/17 - 08:00:39
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Multiply(Big_Natural, Big_Natural, Big_Natural)
+- "*"(Big_Natural, Big_Natural)
+Performing  100000 iterations.
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+Performing  100000 iterations.
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 7
+Test Case Result: PASSED
+Finished        : 2017/06/17 - 08:00:40
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 8
+Description     : Testing conmutative property (2)
+Started         : 2017/06/17 - 08:00:40
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Multiply(Big_Natural, Digit, Big_Natural)
+- "*"(Big_Natural, Digit)
+Performing  100000 iterations.
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 8
+Test Case Result: PASSED
+Finished        : 2017/06/17 - 08:00:40
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 9
+Description     : Testing associative property (1)
+Started         : 2017/06/17 - 08:00:40
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Multiply(Big_Natural, Big_Natural, Big_Natural)
+- "*"(Big_Natural, Big_Natural)
+Performing  100000 iterations.
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+Performing  100000 iterations.
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 9
+Test Case Result: PASSED
+Finished        : 2017/06/17 - 08:00:40
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 10
+Description     : Testing associative property (2)
+Started         : 2017/06/17 - 08:00:40
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Multiply(Big_Natural, Digit, Big_Natural)
+- "*"(Big_Natural, Digit)
+Performing  100000 iterations.
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 10
+Test Case Result: PASSED
+Finished        : 2017/06/17 - 08:00:41
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 11
+Description     : Testing distributibe property (1)
+Started         : 2017/06/17 - 08:00:41
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Multiply(Big_Natural, Big_Natural, Big_Natural)
+- "*"(Big_Natural, Big_Natural)
+Performing  100000 iterations.
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+Performing  100000 iterations.
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 11
+Test Case Result: PASSED
+Finished        : 2017/06/17 - 08:00:41
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 12
+Description     : Testing distributive property (2)
+Started         : 2017/06/17 - 08:00:41
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Multiply(Big_Natural, Digit, Big_Natural)
+- "*"(Big_Natural, Digit)
+Performing  100000 iterations.
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 12
+Test Case Result: PASSED
+Finished        : 2017/06/17 - 08:00:41
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 13
+Description     : Testing overflow conditions
+Started         : 2017/06/17 - 08:00:41
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Multiply(Big_Natural, Big_Natural, Big_Natural)
+- "*"(Big_Natural, Big_Natural)
+- Multiply(Big_Natural, Digit, Big_Natural)
+- "*"(Big_Natural, Digit)
+[I] Big_Natural multiplication. Multiplying Last by Two shall raise CryptAda_Overflow_Error
+[I] Multiply(Big_Natural, Big_Natural, Big_Natural)
+[I] First factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  32
+Significant Bits     :  1024
+The number (from most to least significant digit):
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+[I] Second factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  1
+Significant Bits     :  2
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000002 
+[I] Caught CryptAda_Overflow_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_OVERFLOW_ERROR"
+Message  : "Amount could not be represented with a Big_Natural"
+[I] "*"(Big_Natural, Big_Natural)
+[I] First factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  32
+Significant Bits     :  1024
+The number (from most to least significant digit):
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+[I] Second factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  1
+Significant Bits     :  2
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000002 
+[I] Caught CryptAda_Overflow_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_OVERFLOW_ERROR"
+Message  : "Amount could not be represented with a Big_Natural"
+[I] Multiply(Big_Natural, Digit, Big_Natural)
+[I] First factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  32
+Significant Bits     :  1024
+The number (from most to least significant digit):
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+[I] Second factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  1
+Significant Bits     :  2
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000002 
+[I] Caught CryptAda_Overflow_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_OVERFLOW_ERROR"
+Message  : "Amount could not be represented with a Big_Natural"
+[I] "*"(Big_Natural, Digit)
+[I] First factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  32
+Significant Bits     :  1024
+The number (from most to least significant digit):
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+[I] Second factor: 
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  1
+Significant Bits     :  2
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000002 
+[I] Caught CryptAda_Overflow_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_OVERFLOW_ERROR"
+Message  : "Amount could not be represented with a Big_Natural"
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 13
+Test Case Result: PASSED
+Finished        : 2017/06/17 - 08:00:41
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 14
+Description     : Testing squaring
+Started         : 2017/06/17 - 08:00:41
+--------------------------------------------------------------------------------
+[I] Subprograms tested:
+- Square(Big_Natural)
+Performing  100000 iterations.
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 14
+Test Case Result: PASSED
+Finished        : 2017/06/17 - 08:00:42
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.BN_Mult
+Finished                 : 2017/06/17 - 08:00:42
+================================================================================

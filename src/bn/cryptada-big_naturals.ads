@@ -421,6 +421,36 @@ package CryptAda.Big_Naturals is
                   Right          : in     Digit)
       return   Big_Natural;
 
+   --[5.3. Multiplication and Squaring]-----------------------------------------
+   
+   --[Multiply]-----------------------------------------------------------------
+   -- Purpose:
+   -- Performs Big_Natural multiplication.
+   -----------------------------------------------------------------------------
+   -- Arguments:
+   -- Left                 First multiplication factor, a Big_Natural value.
+   -- Right                Second multiplication factor, either a Big_Natural or
+   --                      a Digit depending on the overloaded form.
+   -- Mult                 Result of multiplication a Big_Natural value.
+   -----------------------------------------------------------------------------
+   -- Returned value:
+   -- N/A.
+   -----------------------------------------------------------------------------
+   -- Exceptions:
+   -- CryptAda_Overflow_Error if the result of multiplication could not be
+   --    represented by a Big_Natural value.
+   -----------------------------------------------------------------------------
+   
+   procedure   Multiply(
+                  Left           : in     Big_Natural;
+                  Right          : in     Big_Natural;
+                  Mult           :    out Big_Natural);
+
+   procedure   Multiply(
+                  Left           : in     Big_Natural;
+                  Right          : in     Digit;
+                  Mult           :    out Big_Natural);
+      
    --["*"]----------------------------------------------------------------------
    -- Purpose:
    -- Multiplication of Big_Naturals.
@@ -468,6 +498,8 @@ package CryptAda.Big_Naturals is
    function    Square(
                   BN             : in     Big_Natural)
       return   Big_Natural;
+
+   --[5.4. Division and Remainder]----------------------------------------------
       
    --[Divide_And_Remainder]-----------------------------------------------------
    -- Purpose:
@@ -477,15 +509,17 @@ package CryptAda.Big_Naturals is
    -----------------------------------------------------------------------------
    -- Arguments:
    -- Dividend             Big_Natural dividend of operation.
-   -- Divisor              Big_Natural divisor of operation.
+   -- Divisor              Either a Big_Natural or Digit depending on the 
+   --                      overloaded form, divisor of operation.
    -- Quotient             Big_Natural that is the obtained quotient.
-   -- Remainder            Big_Natural that is the obtained remainder.
+   -- Remainder            Either a Big_Natural or Digit depending on the 
+   --                      overloaded form, obtained remainder of operation.
    -----------------------------------------------------------------------------
    -- Returned value:
    -- N/A.
    -----------------------------------------------------------------------------
    -- Exceptions:
-   -- CryptAda_Division_By_Zero_Error if Divisor is Zero.
+   -- CryptAda_Division_By_Zero_Error if Divisor is Zero or 0.
    -----------------------------------------------------------------------------
 
    procedure   Divide_And_Remainder(
@@ -494,26 +528,7 @@ package CryptAda.Big_Naturals is
                   Quotient       :    out Big_Natural;
                   Remainder      :    out Big_Natural);
 
-   --[Divide_Digit_And_Remainder]-----------------------------------------------
-   -- Purpose:
-   -- Performs the following operation on Digit_Sequences:
-   --    Quotient    := Dividend / Divisor (Digit)
-   --    Remainder   := Dividend mod Divisor (Digit)
-   -----------------------------------------------------------------------------
-   -- Arguments:
-   -- Dividend             Big_Natural dividend of operation.
-   -- Divisor              Digit divisor of operation.
-   -- Quotient             Big_Natural that is the obtained quotient.
-   -- Remainder            Digit that is the obtained remainder.
-   -----------------------------------------------------------------------------
-   -- Returned value:
-   -- N/A.
-   -----------------------------------------------------------------------------
-   -- Exceptions:
-   -- CryptAda_Division_By_Zero_Error if divisor is zero.
-   -----------------------------------------------------------------------------
-
-   procedure   Divide_Digit_And_Remainder(
+   procedure   Divide_And_Remainder(
                   Dividend       : in     Big_Natural;
                   Divisor        : in     Digit;
                   Quotient       :    out Big_Natural;
@@ -535,7 +550,6 @@ package CryptAda.Big_Naturals is
    -- CryptAda_Division_By_Zero_Error if Right is zero.
    -----------------------------------------------------------------------------
    
-
    function    "/"(
                   Left           : in     Big_Natural;
                   Right          : in     Big_Natural)
