@@ -1,0 +1,253 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.2.a (2017/05/30)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.BN_MSub
+Description              : Unit test driver for CryptAda.Big_Naturals modular subtraction functionality.
+Started                  : 2017/06/29 - 09:32:02
+================================================================================
+[I] This test driver will validate Big_Natural modular subtraction
+Next elements will be tested:
+    - Modular_Subtract(Big_Natural, Big_Natural, Big_Natural)
+    - Modular_Subtract_Digit(Big_Natural, Digit, Big_Natural)
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Zero modulus
+Started         : 2017/06/29 - 09:32:02
+--------------------------------------------------------------------------------
+[I] Zero modulus shall raise CryptAda_Division_By_Zero_Error
+[I] Trying Modular_Subtract
+[I] Caught CryptAda_Division_By_Zero_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_DIVISION_BY_ZERO_ERROR"
+Message  : "Modulus is Zero"
+[I] Trying Modular_Subtract_Digit
+[I] Caught CryptAda_Division_By_Zero_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_DIVISION_BY_ZERO_ERROR"
+Message  : "Modulus is Zero"
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/06/29 - 09:32:02
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : One modulus
+Started         : 2017/06/29 - 09:32:02
+--------------------------------------------------------------------------------
+[I] One modulus shall return zero
+[I] Trying Modular_Subtract
+[I] Minuend
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  7
+Significant Bits     :  224
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 809CDEEF 609EDEE7 E089FFD3 6930ED29 B7400C78 A59820DC D8B1DE8A 
+[I] Subtrahend
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  15
+Significant Bits     :  480
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 E351E563 3AB60F11 6D7A6705 3C290403 256B50AD 292E6E44 28501DFF 
+23DBF04B 52E975EF 75E7F6C7 25FD01A0 D270EBB0 ACBBAAF1 C123688B A697DD60 
+[I] Expected
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  0
+Significant Bits     :  0
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+[I] Obtained
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  0
+Significant Bits     :  0
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+[I] Results match
+[I] Trying Modular_Subtract_Digit
+[I] Minuend
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  7
+Significant Bits     :  224
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 809CDEEF 609EDEE7 E089FFD3 6930ED29 B7400C78 A59820DC D8B1DE8A 
+Subtrahend:  2599708745
+[I] Expected
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  0
+Significant Bits     :  0
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+[I] Obtained
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  0
+Significant Bits     :  0
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+[I] Results match
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/06/29 - 09:32:02
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Testing neutral element
+Started         : 2017/06/29 - 09:32:02
+--------------------------------------------------------------------------------
+[I] Testing: A - Zero mod M = A mod M
+[I] Modular_Subtract(Big_Natural, Big_Natural, Big_Natural)
+Performing  100000 iterations
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Modular_Subtract_Digit(Big_Natural, Digit, Big_Natural)
+Performing  100000 iterations
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/06/29 - 09:32:04
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : Testing associative property
+Started         : 2017/06/29 - 09:32:04
+--------------------------------------------------------------------------------
+[I] Testing: A - B - C mod M = A - (B + C) mod M
+[I] Modular_Subtract(Big_Natural, Big_Natural, Big_Natural)
+Performing  100000 iterations
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Modular_Subtract_Digit(Big_Natural, Digit, Big_Natural)
+Performing  100000 iterations
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/06/29 - 09:32:07
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 5
+Description     : Checking subtraction ...
+Started         : 2017/06/29 - 09:32:07
+--------------------------------------------------------------------------------
+[I] Testing: X := A - B mod M; Y := B - A mod M; Z := X + Y => Z = M
+[I] Modular_Subtract(Big_Natural, Big_Natural, Big_Natural)
+Performing  100000 iterations
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 5
+Test Case Result: PASSED
+Finished        : 2017/06/29 - 09:32:08
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 6
+Description     : Cross checking subtraction with addition:
+Started         : 2017/06/29 - 09:32:08
+--------------------------------------------------------------------------------
+[I] Testing: X := A - B mod M; Y := B + X mod M; Z := A mod M; => Y = Z
+[I] Modular_Subtract(Big_Natural, Big_Natural, Big_Natural)
+Performing  100000 iterations
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 6
+Test Case Result: PASSED
+Finished        : 2017/06/29 - 09:32:09
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.BN_MSub
+Finished                 : 2017/06/29 - 09:32:09
+================================================================================

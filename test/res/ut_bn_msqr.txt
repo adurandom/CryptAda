@@ -1,0 +1,153 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.2.a (2017/05/30)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.BN_MSqr
+Description              : Unit test driver for CryptAda.Big_Naturals modular square functionality.
+Started                  : 2017/06/29 - 13:18:49
+================================================================================
+[I] This test driver will validate Big_Natural modular square
+Next elements will be tested:
+    - Modular_Square(Big_Natural, Big_Natural)
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Zero modulus
+Started         : 2017/06/29 - 13:18:49
+--------------------------------------------------------------------------------
+[I] Zero modulus shall raise CryptAda_Division_By_Zero_Error
+[I] Trying Modular_Square
+[I] Caught CryptAda_Division_By_Zero_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_DIVISION_BY_ZERO_ERROR"
+Message  : "Modulus is Zero"
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/06/29 - 13:18:49
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : One modulus
+Started         : 2017/06/29 - 13:18:49
+--------------------------------------------------------------------------------
+[I] One modulus shall return zero
+[I] Trying Modular_Square
+[I] Number
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  7
+Significant Bits     :  224
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 FF15F29C B9417771 745D6616 83249E7C 82600872 9B6F21B1 6E6E88C7 
+[I] Expected
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  0
+Significant Bits     :  0
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+[I] Obtained
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  0
+Significant Bits     :  0
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+[I] Results match
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/06/29 - 13:18:49
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Squaring zero
+Started         : 2017/06/29 - 13:18:49
+--------------------------------------------------------------------------------
+[I] Modular_Square(Big_Natural, Big_Natural)
+Performing  100000 iterations
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/06/29 - 13:18:49
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : Squaring one
+Started         : 2017/06/29 - 13:18:49
+--------------------------------------------------------------------------------
+[I] Modular_Square(Big_Natural, Big_Natural)
+Performing  100000 iterations
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/06/29 - 13:18:49
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 5
+Description     : Cross checking square with multiplication
+Started         : 2017/06/29 - 13:18:49
+--------------------------------------------------------------------------------
+[I] Modular_Square(Big_Natural, Big_Natural)
+Performing  100000 iterations
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 5
+Test Case Result: PASSED
+Finished        : 2017/06/29 - 13:18:52
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.BN_MSqr
+Finished                 : 2017/06/29 - 13:18:52
+================================================================================

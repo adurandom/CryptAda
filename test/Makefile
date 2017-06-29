@@ -180,7 +180,11 @@ U_BN        =   $(CTB_UBN)/ut_bn_test.exe \
                 $(CTB_UBN)/ut_bn_add.exe \
                 $(CTB_UBN)/ut_bn_subt.exe \
                 $(CTB_UBN)/ut_bn_mult.exe \
-                $(CTB_UBN)/ut_bn_div.exe
+                $(CTB_UBN)/ut_bn_div.exe \
+                $(CTB_UBN)/ut_bn_madd.exe \
+                $(CTB_UBN)/ut_bn_msub.exe \
+                $(CTB_UBN)/ut_bn_mmul.exe \
+                $(CTB_UBN)/ut_bn_msqr.exe
                 
 T_DIG       =   $(CTB_TDIG)/tt_md2.exe \
                 $(CTB_TDIG)/tt_md4.exe \
@@ -469,7 +473,23 @@ $(CTB_UBN)/ut_bn_mult.exe: $(CTS_UBN_DRV)ut_bn_mult.adb
 $(CTB_UBN)/ut_bn_div.exe: $(CTS_UBN_DRV)ut_bn_div.adb
 	@echo Building $<
 	$(ADAMAKER) $(IDIR_UBN) $(ADAFLAGS) -o $@ $<
-        
+
+$(CTB_UBN)/ut_bn_madd.exe: $(CTS_UBN_DRV)ut_bn_madd.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBN) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBN)/ut_bn_msub.exe: $(CTS_UBN_DRV)ut_bn_msub.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBN) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBN)/ut_bn_mmul.exe: $(CTS_UBN_DRV)ut_bn_mmul.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBN) $(ADAFLAGS) -o $@ $<
+
+$(CTB_UBN)/ut_bn_msqr.exe: $(CTS_UBN_DRV)ut_bn_msqr.adb
+	@echo Building $<
+	$(ADAMAKER) $(IDIR_UBN) $(ADAFLAGS) -o $@ $<
+    
 #>>>[Building time trials Drivers]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 # Digests time trials

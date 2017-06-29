@@ -886,6 +886,11 @@ package body CryptAda.Big_Naturals is
    begin
       -- Assumes Mult'Length >= (L_SD + R_SD)
 
+      if L_SD = 0 or else R_SD = 0 then
+         Mult := (others => 0);
+         return;
+      end if;
+      
       -- Perform Multiplication. This is similar to the grade school method.
       -- Traverse Left.
       
@@ -961,6 +966,11 @@ package body CryptAda.Big_Naturals is
       C              : Digit := 0;
    begin
       -- Assumes Square'Length >= 2 * L_SD
+      
+      if L_SD = 0 then
+         Square := (others => 0);
+         return;
+      end if;
       
       -- Step 1. Calculate product of digits of unequal index.
 
@@ -1098,6 +1108,7 @@ package body CryptAda.Big_Naturals is
          
    --[Digit_Array_Divide_And_Remainder]-----------------------------------------
 
+
    procedure   Digit_Array_Divide_And_Remainder(
                   DL             : in     Digit_Array;
                   DR             : in     Digit_Array;
@@ -1106,6 +1117,7 @@ package body CryptAda.Big_Naturals is
    is
       DL_SD          : constant Natural := Get_Significant_Digits(DL);
       DR_SD          : constant Natural := Get_Significant_Digits(DR);
+      CR             : Compare_Result;
       S              : Digit_Shift_Amount;
       LL             : Digit_Array(1 .. DL_SD + 1)    := (others => 0);
       RR             : Digit_Array(1 .. DR_SD)        := (others => 0);
@@ -1124,6 +1136,59 @@ package body CryptAda.Big_Naturals is
             "Divisor is Zero");
       end if;
 
+      -- Check for special values in dividend and divisor to avoid heavy
+      -- computation.
+      
+      -- 1. Dividend = 0
+      --    Quotient    => 0
+      --    Remainder   => 0
+      
+      if DL_SD = 0 then
+         Q := (others => 0);
+         R := (others => 0);
+         return;
+      end if;
+      
+      -- 2. Divisor signigicant digits is 1
+      
+      if DR_SD = 1 then
+         -- Use Digit_Array_Divide_And_Remainder_Digit
+
+         Digit_Array_Divide_And_Remainder_Digit(DL, DR(DR'First), QQ, T);
+         Q := (others => 0);
+         R := (others => 0);
+         Q(Q'First .. Q'First + QQ'Length - 1) := QQ;
+         R(R'First) := T;
+         return;
+      end if;
+      
+      -- 3. Compare dividend and divisor.
+            
+      CR := Digit_Array_Compare(DL, DR);
+      
+      if CR = Equal then
+         -- Dividend = Divisor:
+         --    Quotient       => 1
+         --    Remainder      => 0
+         
+         Q := (others => 0);
+         Q(Q'First) := 1;
+         R := (others => 0);
+         return;
+      end if;
+      
+      if CR = Lower then
+         -- Dividend < Divisor
+         --    Quotient    => 0
+         --    Remainder   => Dividend
+
+         MM(1 .. DL_SD) := DL(DL'First .. DL'First + DL_SD - 1);
+         Q := (others => 0);
+         R := (others => 0);         
+         R(R'First .. R'First + DL_SD - 1) := MM(1 .. DL_SD);
+         return;
+      end if;
+      
       -- This procedure implements the Knuth Algorithm D.
       
       -- Step 1. Normalize operands
@@ -1239,16 +1304,20 @@ package body CryptAda.Big_Naturals is
             "Divisor is 0");
       end if;
    
-      -- Divide.
-      
-      for I in reverse DL'First .. DL'First + DL_SD - 1 loop
-         Div_Digits(DL(I), DR, RR, T(J));
-         J := J - 1;
-      end loop;
+      if DR = 1 then
+         T  := DL(DL'First .. DL'First + DL_SD - 1);
+         RR := 0;
+      else
+         for I in reverse DL'First .. DL'First + DL_SD - 1 loop
+            Div_Digits(DL(I), DR, RR, T(J));
+            J := J - 1;
+         end loop;
+      end if;
 
       -- Set result.
       
       R := RR;
+      Q := (others => 0);
       Q(Q'First .. Q'First + T'Last - 1) := T;
    end Digit_Array_Divide_And_Remainder_Digit;
    
@@ -2129,7 +2198,7 @@ package body CryptAda.Big_Naturals is
    begin
       -- Argument special cases:
 
-      -- 1. Divisor = Zero. Raise CryptAda_Division_By_Zero_Error.
+      -- If divisor is 0 raise division by zero exception.
       
       if Divisor = Zero then
          Raise_Exception(
@@ -2137,47 +2206,7 @@ package body CryptAda.Big_Naturals is
             "Divisor is Zero");
       end if;
 
-      -- 2. Divisor = One:
-      --    Quotient    = Dividend
-      --    Remainder   = Zero
-
-      if Divisor = One then
-         Quotient    := Dividend;
-         Remainder   := Zero;
-         return;
-      end if;
-
-      -- 3. Dividend = Zero:
-      --    Quotient    = Zero
-      --    Remainder   = Zero
-      
-      if Dividend = Zero then
-         Quotient    := Zero;
-         Remainder   := Zero;
-         return;
-      end if;
-      
-      -- 4. Dividend = Divisor:
-      --    Quotient    = One
-      --    Remainder   = Zero
-
-      if Dividend = Divisor then
-         Quotient    := One;
-         Remainder   := Zero;
-         return;
-      end if;
-
-      -- 5. Dividend < Divisor:
-      --    Quotient    = Zero
-      --    Remainder   = Dividend
-
-      if Dividend < Divisor then
-         Quotient    := Zero;
-         Remainder   := Dividend;
-         return;
-      end if;
-
-      -- 6. Divisor significant digits = 1 perform simpler division by digit.
+      -- If divisor significant digits = 1 perform simpler division by digit.
       
       if Divisor.Sig_Digits = 1 then      
          declare
@@ -2186,29 +2215,27 @@ package body CryptAda.Big_Naturals is
             Divide_And_Remainder(Dividend, Divisor.The_Digits(1), Quotient, R);
             Remainder := To_Big_Natural(R);
          end;
-
-         return;
-      end if;
-
-      -- Perform division.
-      
-      declare
-         Q              : Digit_Array(1 .. Dividend.Sig_Digits) := (others => 0);
-         R              : Digit_Array(1 .. Dividend.Sig_Digits) := (others => 0);
-      begin
-         -- Divide
+      else
+         -- Perform division.
          
-         Digit_Array_Divide_And_Remainder(
-            Dividend.The_Digits(1 .. Dividend.Sig_Digits),
-            Divisor.The_Digits(1 .. Divisor.Sig_Digits),
-            Q,
-            R);
+         declare
+            Q              : Digit_Array(1 .. Dividend.Sig_Digits) := (others => 0);
+            R              : Digit_Array(1 .. Dividend.Sig_Digits) := (others => 0);
+         begin
+            -- Divide
             
-         -- Set result
-         
-         Quotient    := Digit_Array_2_Big_Natural(Q);
-         Remainder   := Digit_Array_2_Big_Natural(R);
-      end;
+            Digit_Array_Divide_And_Remainder(
+               Dividend.The_Digits(1 .. Dividend.Sig_Digits),       
+               Divisor.The_Digits(1 .. Divisor.Sig_Digits),
+               Q,
+               R);
+               
+            -- Set result
+            
+            Quotient    := Digit_Array_2_Big_Natural(Q);
+            Remainder   := Digit_Array_2_Big_Natural(R);
+         end;
+      end if;
    end Divide_And_Remainder;
 
    --[Divide_And_Remainder]-----------------------------------------------------
@@ -2376,7 +2403,6 @@ package body CryptAda.Big_Naturals is
                   Modulus        : in     Big_Natural)
       return   Big_Natural
    is
-      Tmp            : Big_Natural;
    begin
       -- Check Zero Modulus.
       
@@ -2386,32 +2412,48 @@ package body CryptAda.Big_Naturals is
             "Modulus is Zero");
       end if;
 
-      -- Add Left and Right
+      -- Check One Modulus.
       
-      Tmp := Left + Right;
-      
-      -- Compare both Left and Right with Modulus.
-
-      if Left < Modulus and then Right < Modulus then
-         -- Both Left and Right are lower than Modulus. It is not necessary to 
-         -- perform division. Compare addition result with modulus.
-
-         if Tmp >= Modulus then
-            -- Addition result is greater or equal than modulus, result will 
-            -- become the result of subtraction of modulus from addition result.
-            
-            return (Tmp - Modulus);
-         else
-            -- Addition result is lower than modulus, result of operation is 
-            -- addition result.
-
-            return Tmp;
-         end if;
-      else
-         -- Return remainder.
-
-         return (Tmp mod Modulus);
+      if Modulus = One then
+         return Zero;
       end if;
+      
+      -- Perform modular addition.
+      
+      declare
+         SD          : constant Significant_Digits := Significant_Digits'Max(Left.Sig_Digits, Right.Sig_Digits);
+         Q           : Digit_Array(1 .. SD + 1) := (others => 0);
+         Tmp         : Digit_Array(1 .. SD + 1) := (others => 0);
+         CR          : Compare_Result;
+      begin
+         -- Add Left and Right ...
+         
+         Digit_Array_Add(Left.The_Digits, Right.The_Digits, Tmp);
+      
+         -- Compare both Left and Right with Modulus.
+
+         if Left < Modulus and then Right < Modulus then
+            -- Both Left and Right are lower than Modulus. It is not necessary 
+            -- to perform division. Compare addition result with modulus.
+            -- If addition result is equal or greater than modulus, result 
+            -- will become the result of subtraction of modulus from addition
+            -- result. Otherwise, ff addition result is lower than modulus the 
+            -- result of modular addutuon is the sum (Tmp)
+
+            CR := Digit_Array_Compare(Tmp, Modulus.The_Digits);
+            
+            if CR = Greater or else CR = Equal then
+               Digit_Array_Subtract(Tmp, Modulus.The_Digits, Tmp);               
+            end if;
+            
+            return Digit_Array_2_Big_Natural(Tmp);
+         else
+            -- We need to perform the division.
+
+            Digit_Array_Divide_And_Remainder(Tmp, Modulus.The_Digits, Q, Tmp);
+            return Digit_Array_2_Big_Natural(Tmp);            
+         end if;
+      end;
    end Modular_Add;
 
    --[Modular_Add_Digit]--------------------------------------------------------
@@ -2423,17 +2465,7 @@ package body CryptAda.Big_Naturals is
       return   Big_Natural
    is
    begin
-      -- Check Zero Modulus.
-      
-      if Modulus = Zero then
-         Raise_Exception(
-            CryptAda_Division_By_Zero_Error'Identity,
-            "Modulus is Zero");
-      end if;
-
-      -- Perform operation.
-      
-      return ((Left + Right) mod Modulus);
+      return Modular_Add(Left, To_Big_Natural(Right), Modulus);
    end Modular_Add_Digit;
 
    --[Modular_Subtract]---------------------------------------------------------
@@ -2451,6 +2483,12 @@ package body CryptAda.Big_Naturals is
          Raise_Exception(
             CryptAda_Division_By_Zero_Error'Identity,
             "Modulus is Zero");
+      end if;
+
+      -- Check One Modulus.
+      
+      if Modulus = One then
+         return Zero;
       end if;
 
       -- Compare Minuend and Subtrahend.
@@ -2474,38 +2512,8 @@ package body CryptAda.Big_Naturals is
                   Modulus        : in     Big_Natural)
       return   Big_Natural
    is
-      Tmp            : Big_Natural;
    begin
-      -- Check Zero Modulus.
-      
-      if Modulus = Zero then
-         Raise_Exception(
-            CryptAda_Division_By_Zero_Error'Identity,
-            "Modulus is Zero");
-      end if;
-      
-      -- Check for Subtrahend > Minuend.
-
-      if Minuend = Zero then
-         if Subtrahend > 0 then
-            Tmp := To_Big_Natural(Subtrahend);
-            return (Modulus - (Tmp mod Modulus));
-         else
-            return Zero;
-         end if;
-      else
-         if Minuend.Sig_Digits = 1 then
-            Tmp := To_Big_Natural(Subtrahend);
-            
-            if Tmp > Minuend then
-               return (Modulus - ((Tmp - Minuend) mod Modulus));
-            else
-               return ((Minuend - Tmp) mod Modulus);
-            end if;
-         else
-            return ((Minuend - Subtrahend) mod Modulus);
-         end if;
-      end if;
+      return Modular_Subtract(Minuend, To_Big_Natural(Subtrahend), Modulus);
    end Modular_Subtract_Digit;
 
    --[Modular_Multiply]---------------------------------------------------------
@@ -2525,9 +2533,25 @@ package body CryptAda.Big_Naturals is
             "Modulus is Zero");
       end if;
 
-      -- Return result.
+      -- Check One Modulus.
       
-      return ((Left * Right) mod Modulus);
+      if Modulus = One then
+         return Zero;
+      end if;
+      
+      -- Perform modular multiplication.
+      
+      declare
+         SD          : constant Natural := Left.Sig_Digits + Right.Sig_Digits;
+         Q           : Digit_Array(1 .. SD) := (others => 0);
+         Tmp         : Digit_Array(1 .. SD) := (others => 0);
+      begin
+         -- Multiply Left and Right ...
+         
+         Digit_Array_Multiply(Left.The_Digits, Right.The_Digits, Tmp);      
+         Digit_Array_Divide_And_Remainder(Tmp, Modulus.The_Digits, Q, Tmp);
+         return Digit_Array_2_Big_Natural(Tmp);            
+      end;
    end Modular_Multiply;
 
    --[Modular_Multiply_Digit]---------------------------------------------------
@@ -2539,17 +2563,7 @@ package body CryptAda.Big_Naturals is
       return   Big_Natural
    is
    begin
-      -- Check Zero Modulus.
-      
-      if Modulus = Zero then
-         Raise_Exception(
-            CryptAda_Division_By_Zero_Error'Identity,
-            "Modulus is Zero");
-      end if;
-
-      -- Return result.
-      
-      return ((Left * Right) mod Modulus);
+      return Modular_Multiply(Left, To_Big_Natural(Right), Modulus);
    end Modular_Multiply_Digit;
 
    --[Modular_Square]-----------------------------------------------------------
@@ -2568,9 +2582,25 @@ package body CryptAda.Big_Naturals is
             "Modulus is Zero");
       end if;
 
-      -- Return result.
+      -- Check One Modulus.
       
-      return (Square(BN) mod Modulus);
+      if Modulus = One then
+         return Zero;
+      end if;
+      
+      -- Perform modular multiplication.
+      
+      declare
+         SD          : constant Natural := 2 * BN.Sig_Digits;
+         Q           : Digit_Array(1 .. SD) := (others => 0);
+         Tmp         : Digit_Array(1 .. SD) := (others => 0);
+      begin
+         -- Square ...
+         
+         Digit_Array_Square(BN.The_Digits, Tmp);      
+         Digit_Array_Divide_And_Remainder(Tmp, Modulus.The_Digits, Q, Tmp);
+         return Digit_Array_2_Big_Natural(Tmp);            
+      end;      
    end Modular_Square;
    
    --[Are_Modular_Equivalent]---------------------------------------------------

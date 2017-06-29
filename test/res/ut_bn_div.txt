@@ -6,7 +6,7 @@ Copyright (c) 2017, Antonio Duran
 CryptAda Test Driver Begin
 CryptAda Test Driver Name: CryptAda.Tests.Unit.BN_Div
 Description              : Unit test driver for CryptAda.Big_Naturals division and remainder functionality.
-Started                  : 2017/06/28 - 08:19:02
+Started                  : 2017/06/29 - 12:22:10
 ================================================================================
 [I] This test driver will validate Big_Natural division
 Next elements will be tested:
@@ -22,7 +22,7 @@ Next elements will be tested:
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 1
 Description     : Testing validity of Big_Natural division by using RSA Numbers
-Started         : 2017/06/28 - 08:19:02
+Started         : 2017/06/29 - 12:22:10
 --------------------------------------------------------------------------------
 [I] RSA Numbers obtained from: https://en.wikipedia.org/wiki/RSA_numbers
 [I] Test:  1, comment: RSA 100 decimal digits (330 bits)
@@ -2080,13 +2080,13 @@ The number (from most to least significant digit):
 --------------------------------------------------------------------------------
 Test Case Number: 1
 Test Case Result: PASSED
-Finished        : 2017/06/28 - 08:19:03
+Finished        : 2017/06/29 - 12:22:10
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 2
 Description     : Validating division using multiplication and addition
-Started         : 2017/06/28 - 08:19:03
+Started         : 2017/06/29 - 12:22:10
 --------------------------------------------------------------------------------
 [I] Divide_And_Remainder
 Performing  100000 iterations.
@@ -2117,13 +2117,13 @@ Performing  100000 iterations.
 --------------------------------------------------------------------------------
 Test Case Number: 2
 Test Case Result: PASSED
-Finished        : 2017/06/28 - 08:19:04
+Finished        : 2017/06/29 - 12:22:12
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 3
 Description     : Validating digit division using multiplication and addition
-Started         : 2017/06/28 - 08:19:04
+Started         : 2017/06/29 - 12:22:12
 --------------------------------------------------------------------------------
 [I] Divide_And_Remainder
 Performing  100000 iterations.
@@ -2154,13 +2154,13 @@ Performing  100000 iterations.
 --------------------------------------------------------------------------------
 Test Case Number: 3
 Test Case Result: PASSED
-Finished        : 2017/06/28 - 08:19:04
+Finished        : 2017/06/29 - 12:22:12
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 4
 Description     : Division by zero
-Started         : 2017/06/28 - 08:19:04
+Started         : 2017/06/29 - 12:22:12
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
      - Divide_And_Remainder(1)
@@ -2184,13 +2184,13 @@ Performing  100000 iterations.
 --------------------------------------------------------------------------------
 Test Case Number: 4
 Test Case Result: PASSED
-Finished        : 2017/06/28 - 08:19:17
+Finished        : 2017/06/29 - 12:22:25
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 5
 Description     : Division by one
-Started         : 2017/06/28 - 08:19:17
+Started         : 2017/06/29 - 12:22:25
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
      - Divide_And_Remainder(1)
@@ -2214,13 +2214,13 @@ Performing  100000 iterations.
 --------------------------------------------------------------------------------
 Test Case Number: 5
 Test Case Result: PASSED
-Finished        : 2017/06/28 - 08:19:17
+Finished        : 2017/06/29 - 12:22:25
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 6
 Description     : Division by self
-Started         : 2017/06/28 - 08:19:17
+Started         : 2017/06/29 - 12:22:25
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
      - Divide_And_Remainder(1)
@@ -2241,13 +2241,13 @@ Performing  100000 iterations.
 --------------------------------------------------------------------------------
 Test Case Number: 6
 Test Case Result: PASSED
-Finished        : 2017/06/28 - 08:19:17
+Finished        : 2017/06/29 - 12:22:25
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 7
 Description     : Division by self
-Started         : 2017/06/28 - 08:19:17
+Started         : 2017/06/29 - 12:22:25
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
      - Divide_And_Remainder(2)
@@ -2268,13 +2268,13 @@ Performing  100000 iterations.
 --------------------------------------------------------------------------------
 Test Case Number: 7
 Test Case Result: PASSED
-Finished        : 2017/06/28 - 08:19:17
+Finished        : 2017/06/29 - 12:22:25
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 8
 Description     : Divisor greater than dividend
-Started         : 2017/06/28 - 08:19:17
+Started         : 2017/06/29 - 12:22:25
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
      - Divide_And_Remainder(1)
@@ -2295,13 +2295,13 @@ Performing  100000 iterations.
 --------------------------------------------------------------------------------
 Test Case Number: 8
 Test Case Result: PASSED
-Finished        : 2017/06/28 - 08:19:17
+Finished        : 2017/06/29 - 12:22:26
 --[End Test Case]---------------------------------------------------------------
 
 --[Begin Test Case]-------------------------------------------------------------
 Test Case Number: 9
 Description     : Divisor greater than dividend
-Started         : 2017/06/28 - 08:19:17
+Started         : 2017/06/29 - 12:22:26
 --------------------------------------------------------------------------------
 [I] Interfaces tested:
      - Divide_And_Remainder(2)
@@ -2322,11 +2322,11 @@ Performing  100000 iterations.
 --------------------------------------------------------------------------------
 Test Case Number: 9
 Test Case Result: PASSED
-Finished        : 2017/06/28 - 08:19:17
+Finished        : 2017/06/29 - 12:22:26
 --[End Test Case]---------------------------------------------------------------
 
 ================================================================================
 CryptAda Test Driver End
 CryptAda Test Driver Name: CryptAda.Tests.Unit.BN_Div
-Finished                 : 2017/06/28 - 08:19:17
+Finished                 : 2017/06/29 - 12:22:26
 ================================================================================

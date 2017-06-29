@@ -1,0 +1,213 @@
+================================================================================
+TCantos Ada Cryptography Library (CryptAda)
+Version: 0.2.a (2017/05/30)
+Copyright (c) 2017, Antonio Duran
+================================================================================
+CryptAda Test Driver Begin
+CryptAda Test Driver Name: CryptAda.Tests.Unit.BN_MAdd
+Description              : Unit test driver for CryptAda.Big_Naturals modular addition functionality.
+Started                  : 2017/06/28 - 13:07:35
+================================================================================
+[I] This test driver will validate Big_Natural modular addition
+Next elements will be tested:
+    - Modular_Add(Big_Natural, Big_Natural, Big_Natural)
+    - Modular_Add_Digit(Big_Natural, Digit, Big_Natural)
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 1
+Description     : Zero modulus
+Started         : 2017/06/28 - 13:07:35
+--------------------------------------------------------------------------------
+[I] Zero modulus shall raise CryptAda_Division_By_Zero_Error
+[I] Trying Modular_Add
+[I] Caught CryptAda_Division_By_Zero_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_DIVISION_BY_ZERO_ERROR"
+Message  : "Modulus is Zero"
+[I] Trying Modular_Add_Digit
+[I] Caught CryptAda_Division_By_Zero_Error
+Exception: "CRYPTADA.EXCEPTIONS.CRYPTADA_DIVISION_BY_ZERO_ERROR"
+Message  : "Modulus is Zero"
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 1
+Test Case Result: PASSED
+Finished        : 2017/06/28 - 13:07:35
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 2
+Description     : One modulus
+Started         : 2017/06/28 - 13:07:35
+--------------------------------------------------------------------------------
+[I] One modulus shall return zero
+[I] Trying Modular_Add
+[I] First summand
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  19
+Significant Bits     :  608
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 C6FC6549 37D0117D 1D2E52F7 
+337BDB28 8E60FDBE A3D113E6 DA256A88 F27E81D6 86A29681 C38114C3 C2EFFF1D 
+A62238B6 DD6888A0 30CC8584 04BC0F60 8C504FDF E2C71432 798023EE AC751084 
+[I] Second summand
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  22
+Significant Bits     :  703
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 7536433F E6682126 0D221F9C 0F7A5E51 5C123102 1CA37A37 
+78492876 21F1A85A 10E3F1E4 1DA327E1 943558A1 5F86FD13 CBD3E0B1 CB94F2F4 
+BEC70EC7 C7E15CE4 06E32576 E99D3223 071D3668 AE5748CD 6FA57861 05C3CB09 
+[I] Expected
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  0
+Significant Bits     :  0
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+[I] Obtained
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  0
+Significant Bits     :  0
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+[I] Results match
+[I] Trying Modular_Add_Digit
+[I] First summand
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  19
+Significant Bits     :  608
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 C6FC6549 37D0117D 1D2E52F7 
+337BDB28 8E60FDBE A3D113E6 DA256A88 F27E81D6 86A29681 C38114C3 C2EFFF1D 
+A62238B6 DD6888A0 30CC8584 04BC0F60 8C504FDF E2C71432 798023EE AC751084 
+Second summand  2301886884
+[I] Expected
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  0
+Significant Bits     :  0
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+[I] Obtained
+Max_Digits           :  32
+Max_Bits             :  1024
+Significant Digits   :  0
+Significant Bits     :  0
+The number (from most to least significant digit):
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+[I] Results match
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 2
+Test Case Result: PASSED
+Finished        : 2017/06/28 - 13:07:35
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 3
+Description     : Testing additive identity
+Started         : 2017/06/28 - 13:07:35
+--------------------------------------------------------------------------------
+[I] Modular_Add(Big_Natural, Big_Natural, Big_Natural)
+Performing  100000 iterations
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Modular_Add_Digit(Big_Natural, Digit, Big_Natural)
+Performing  100000 iterations
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 3
+Test Case Result: PASSED
+Finished        : 2017/06/28 - 13:07:37
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 4
+Description     : Testing conmutative property
+Started         : 2017/06/28 - 13:07:37
+--------------------------------------------------------------------------------
+[I] Modular_Add(Big_Natural, Big_Natural, Big_Natural)
+Performing  100000 iterations
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 4
+Test Case Result: PASSED
+Finished        : 2017/06/28 - 13:07:38
+--[End Test Case]---------------------------------------------------------------
+
+--[Begin Test Case]-------------------------------------------------------------
+Test Case Number: 5
+Description     : Testing associative property
+Started         : 2017/06/28 - 13:07:38
+--------------------------------------------------------------------------------
+[I] Modular_Add(Big_Natural, Big_Natural, Big_Natural)
+Performing  100000 iterations
+[I] Performed  10000 iterations ...
+[I] Performed  20000 iterations ...
+[I] Performed  30000 iterations ...
+[I] Performed  40000 iterations ...
+[I] Performed  50000 iterations ...
+[I] Performed  60000 iterations ...
+[I] Performed  70000 iterations ...
+[I] Performed  80000 iterations ...
+[I] Performed  90000 iterations ...
+[I] Performed  100000 iterations ...
+[I] Test case OK.
+--------------------------------------------------------------------------------
+Test Case Number: 5
+Test Case Result: PASSED
+Finished        : 2017/06/28 - 13:07:40
+--[End Test Case]---------------------------------------------------------------
+
+================================================================================
+CryptAda Test Driver End
+CryptAda Test Driver Name: CryptAda.Tests.Unit.BN_MAdd
+Finished                 : 2017/06/28 - 13:07:40
+================================================================================
